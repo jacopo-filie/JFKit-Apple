@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0927BAD2BC4FC39D2227CB9AA9DB9936AD2C5DA5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0927BAD2BC4FC39D2227CB9AA9DB9936AD2C5DA5" : 0,
+    "9ABEE92E1A81CD175A4BB28F8985AF2778FDBD99" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A2C6DF80-62DF-402D-B1AE-284C0F7757BB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0927BAD2BC4FC39D2227CB9AA9DB9936AD2C5DA5" : "GitHub\/",
+    "9ABEE92E1A81CD175A4BB28F8985AF2778FDBD99" : "JFFramework"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JFFramework",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JFFramework.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Jackfelle\/JFFramework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0927BAD2BC4FC39D2227CB9AA9DB9936AD2C5DA5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/Jackfelle\/jfframework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9ABEE92E1A81CD175A4BB28F8985AF2778FDBD99"
+    }
+  ]
+}
