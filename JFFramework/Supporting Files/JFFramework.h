@@ -27,6 +27,7 @@
 #pragma mark - Common headers
 
 // Data Objects
+#import "JFColor.h"
 #import "JFString.h"
 
 // Utilities

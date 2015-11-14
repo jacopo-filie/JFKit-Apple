@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		6C31C7851B9EEDF400FAF487 /* JFFramework-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C77A1B9EEDF300FAF487 /* JFFramework-iOS.a */; };
 		6C31C7A11B9EF3CF00FAF487 /* JFFramework-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */; };
+		EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5BDED71BF7571100D1DD7C /* JFColor.h */; };
+		EA5BDEDA1BF7571100D1DD7C /* JFColor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5BDED71BF7571100D1DD7C /* JFColor.h */; };
+		EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDED81BF7571100D1DD7C /* JFColor.m */; };
+		EA5BDEDC1BF7571100D1DD7C /* JFColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDED81BF7571100D1DD7C /* JFColor.m */; };
+		EA5BDEDE1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */; };
+		EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */; };
 		EA730C151BF2A7A900968F31 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA730C141BF2A7A900968F31 /* JFString-Tests.m */; };
 		EA730C161BF2A7A900968F31 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA730C141BF2A7A900968F31 /* JFString-Tests.m */; };
 		EAD4F1D11BF413F00031E236 /* JFUtilities-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */; };
@@ -51,6 +57,9 @@
 		6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5BDED71BF7571100D1DD7C /* JFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColor.h; sourceTree = "<group>"; };
+		EA5BDED81BF7571100D1DD7C /* JFColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFColor.m; sourceTree = "<group>"; };
+		EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
 		EA730C141BF2A7A900968F31 /* JFString-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFString-Tests.m"; sourceTree = "<group>"; };
 		EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
 		EAE752351BEBEF91003A2F38 /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
@@ -133,6 +142,7 @@
 		EA730C101BF2A74800968F31 /* Data Objects */ = {
 			isa = PBXGroup;
 			children = (
+				EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */,
 				EA730C141BF2A7A900968F31 /* JFString-Tests.m */,
 			);
 			path = "Data Objects";
@@ -182,6 +192,8 @@
 		EAE7525E1BEC1FFC003A2F38 /* Data Objects */ = {
 			isa = PBXGroup;
 			children = (
+				EA5BDED71BF7571100D1DD7C /* JFColor.h */,
+				EA5BDED81BF7571100D1DD7C /* JFColor.m */,
 				EAE7525F1BEC200D003A2F38 /* JFString.h */,
 				EAE752601BEC200D003A2F38 /* JFString.m */,
 			);
@@ -197,6 +209,7 @@
 			files = (
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
+				EA5BDEDA1BF7571100D1DD7C /* JFColor.h in Headers */,
 				EAE7523A1BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752621BEC200D003A2F38 /* JFString.h in Headers */,
 				EAE752541BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
@@ -209,6 +222,7 @@
 			files = (
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525C1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
+				EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */,
 				EAE752391BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752611BEC200D003A2F38 /* JFString.h in Headers */,
 				EAE752531BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
@@ -355,6 +369,7 @@
 			files = (
 				EAE752551BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
+				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4F1D11BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
+				EA5BDEDE1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
 				EA730C151BF2A7A900968F31 /* JFString-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +389,7 @@
 			files = (
 				EAE752561BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				EAE752641BEC200D003A2F38 /* JFString.m in Sources */,
+				EA5BDEDC1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4F1D21BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
+				EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
 				EA730C161BF2A7A900968F31 /* JFString-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
