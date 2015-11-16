@@ -24,14 +24,18 @@
 
 
 
+#import "JFString.h"
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Macros
 
 #define	ApplicationDelegate		((AppDelegate*)[SharedApplication delegate])
 #define	ClassBundle				[NSBundle bundleForClass:[self class]]
-#define	ClassName				JFStringFromObjectClass(self)
-#define	LogMethod				NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromID(self), MethodName)
+#define	ClassName				NSStringFromClass([self class])
+#define	LogMethod				NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
 #define MainBundle				[NSBundle mainBundle]
 #define MainNotificationCenter	[NSNotificationCenter defaultCenter]
 #define MainOperationQueue		[NSOperationQueue mainQueue]
