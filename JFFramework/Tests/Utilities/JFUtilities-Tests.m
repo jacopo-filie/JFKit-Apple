@@ -74,6 +74,24 @@
 	// JFRadiansFromDegrees
 	JFRadians reconverted = JFRadiansFromDegrees(converted);
 	XCTAssert((reconverted == radians), @"The reconverted radians value is '%@'; it should be '%@'.", JFStringFromDouble(reconverted), JFStringFromDouble(radians));
+	
+	// JFCheckSystemVersion
+	string = JFSystemVersion();
+	XCTAssert(JFCheckSystemVersion(string, JFRelationEqual), @"Failed to validate the current system version; the tested value is '%@'.", string);
+	
+	// JFSystemVersion
+#if TARGET_OS_IPHONE
+	result = SystemVersion;
+	while([[result componentsSeparatedByString:@"."] count] < 3)
+		result = [result stringByAppendingString:@".0"];
+#else
+	SInt32 majorVersion, minorVersion, patchVersion;
+	Gestalt(gestaltSystemVersionMajor, &majorVersion);
+	Gestalt(gestaltSystemVersionMinor, &minorVersion);
+	Gestalt(gestaltSystemVersionBugFix, &patchVersion);
+	result = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(majorVersion), JFStringFromSInt32(minorVersion), JFStringFromSInt32(patchVersion)];
+#endif
+	XCTAssert(JFAreObjectsEqual(string, result), @"The string value is '%@'; it should be '%@'.", string, result);
 }
 
 @end

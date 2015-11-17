@@ -355,4 +355,30 @@ BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
 	return NO;
 }
 
+NSString* JFSystemVersion()
+{
+	static NSString* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		if([NSProcessInfo instancesRespondToSelector:@selector(operatingSystemVersion)])
+		{
+			NSOperatingSystemVersion version = ProcessInfo.operatingSystemVersion;
+			retObj = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromNSInteger(version.majorVersion), JFStringFromNSInteger(version.minorVersion), JFStringFromNSInteger(version.patchVersion)];
+		}
+		else
+		{
+#if TARGET_OS_IPHONE
+			retObj = SystemVersion;
+#else
+			SInt32 majorVersion, minorVersion, patchVersion;
+			Gestalt(gestaltSystemVersionMajor, &majorVersion);
+			Gestalt(gestaltSystemVersionMinor, &minorVersion);
+			Gestalt(gestaltSystemVersionBugFix, &patchVersion);
+			retObj = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(majorVersion), JFStringFromSInt32(minorVersion), JFStringFromSInt32(patchVersion)];
+#endif
+		}
+	});
+	return retObj;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
