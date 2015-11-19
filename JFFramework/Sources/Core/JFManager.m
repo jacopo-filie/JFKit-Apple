@@ -24,23 +24,59 @@
 
 
 
-#pragma mark - Common headers
+#import "JFManager.h"
 
-// Core
-#import	"JFManager.h"
+#import <pthread.h>
 
-// Data Objects
-#import "JFColor.h"
-#import "JFString.h"
+#import "JFShortcuts.h"
 
-// Utilities
-#import "JFTypes.h"
-#import	"JFUtilities.h"
 
-#if TARGET_OS_IPHONE
-#pragma mark - iOS specific headers
 
-#else
-#pragma mark - OS X specific headers
+@implementation JFManager
 
-#endif
+#pragma mark Memory management
+
++ (instancetype)defaultManager
+{
+	return [[self alloc] initWithDefaultSettings];
+}
+
++ (instancetype)sharedManager
+{
+	static NSMutableDictionary* sharedManagers = nil;
+	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		sharedManagers = [NSMutableDictionary new];
+	});
+	
+	id retObj = nil;
+	NSString* key = ClassName;
+	
+	pthread_mutex_lock(&mutex);
+	
+	retObj = sharedManagers[key];
+	if(!retObj)
+	{
+		retObj = [self defaultManager];
+		if(retObj)
+			sharedManagers[key] = retObj;
+	}
+	
+	pthread_mutex_unlock(&mutex);
+	
+	return retObj;
+}
+
+- (instancetype)init
+{
+	return [super init];
+}
+
+- (instancetype)initWithDefaultSettings
+{
+	return [self init];
+}
+
+@end

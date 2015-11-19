@@ -35,6 +35,12 @@
 		EAE752621BEC200D003A2F38 /* JFString.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE7525F1BEC200D003A2F38 /* JFString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE752631BEC200D003A2F38 /* JFString.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE752601BEC200D003A2F38 /* JFString.m */; };
 		EAE752641BEC200D003A2F38 /* JFString.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE752601BEC200D003A2F38 /* JFString.m */; };
+		EAFAFC2F1BFE6A9C00563037 /* JFManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFAFC2D1BFE6A9C00563037 /* JFManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAFAFC301BFE6A9C00563037 /* JFManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFAFC2D1BFE6A9C00563037 /* JFManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC2E1BFE6A9C00563037 /* JFManager.m */; };
+		EAFAFC321BFE6A9C00563037 /* JFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC2E1BFE6A9C00563037 /* JFManager.m */; };
+		EAFAFC351BFE8EBC00563037 /* JFManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */; };
+		EAFAFC361BFE8EBC00563037 /* JFManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +81,9 @@
 		EAE7525B1BEC1B86003A2F38 /* JFShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFShortcuts.h; sourceTree = "<group>"; };
 		EAE7525F1BEC200D003A2F38 /* JFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFString.h; sourceTree = "<group>"; };
 		EAE752601BEC200D003A2F38 /* JFString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFString.m; sourceTree = "<group>"; };
+		EAFAFC2D1BFE6A9C00563037 /* JFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFManager.h; sourceTree = "<group>"; };
+		EAFAFC2E1BFE6A9C00563037 /* JFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFManager.m; sourceTree = "<group>"; };
+		EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFManager-Tests.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +144,7 @@
 		EA730C0F1BF2A38100968F31 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				EAFAFC331BFE8EA200563037 /* Core */,
 				EA730C101BF2A74800968F31 /* Data Objects */,
 				EAD4F1CF1BF413E10031E236 /* Utilities */,
 			);
@@ -175,6 +185,7 @@
 		EAE7523E1BEBF444003A2F38 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				EAFAFC2C1BFE6A5100563037 /* Core */,
 				EAE7525E1BEC1FFC003A2F38 /* Data Objects */,
 				EAE752501BEBFFAE003A2F38 /* Utilities */,
 			);
@@ -204,6 +215,23 @@
 			path = "Data Objects";
 			sourceTree = "<group>";
 		};
+		EAFAFC2C1BFE6A5100563037 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EAFAFC2D1BFE6A9C00563037 /* JFManager.h */,
+				EAFAFC2E1BFE6A9C00563037 /* JFManager.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EAFAFC331BFE8EA200563037 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -214,6 +242,7 @@
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
 				EA5BDEDA1BF7571100D1DD7C /* JFColor.h in Headers */,
+				EAFAFC301BFE6A9C00563037 /* JFManager.h in Headers */,
 				EAE7523A1BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752621BEC200D003A2F38 /* JFString.h in Headers */,
 				EAE752541BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
@@ -227,6 +256,7 @@
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525C1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
 				EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */,
+				EAFAFC2F1BFE6A9C00563037 /* JFManager.h in Headers */,
 				EAE752391BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752611BEC200D003A2F38 /* JFString.h in Headers */,
 				EAE752531BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
@@ -372,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE752551BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
+				EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
@@ -384,6 +415,7 @@
 				EAD4F1D11BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
 				EA0039251BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */,
 				EA5BDEDE1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
+				EAFAFC351BFE8EBC00563037 /* JFManager-Tests.m in Sources */,
 				EA730C151BF2A7A900968F31 /* JFString-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE752561BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
+				EAFAFC321BFE6A9C00563037 /* JFManager.m in Sources */,
 				EAE752641BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDC1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
@@ -405,6 +438,7 @@
 				EAD4F1D21BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
 				EA0039261BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */,
 				EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
+				EAFAFC361BFE8EBC00563037 /* JFManager-Tests.m in Sources */,
 				EA730C161BF2A7A900968F31 /* JFString-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

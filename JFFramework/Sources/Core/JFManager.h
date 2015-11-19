@@ -24,23 +24,14 @@
 
 
 
-#pragma mark - Common headers
+@interface JFManager : NSObject
 
-// Core
-#import	"JFManager.h"
+#pragma mark Methods
 
-// Data Objects
-#import "JFColor.h"
-#import "JFString.h"
+// Memory management
++ (instancetype)	defaultManager;	// Calls '-initWithDefaultSettings'.
++ (instancetype)	sharedManager;	// Creates a singleton with default settings for each subclass.
+- (instancetype)	init NS_DESIGNATED_INITIALIZER;
+- (instancetype)	initWithDefaultSettings;
 
-// Utilities
-#import "JFTypes.h"
-#import	"JFUtilities.h"
-
-#if TARGET_OS_IPHONE
-#pragma mark - iOS specific headers
-
-#else
-#pragma mark - OS X specific headers
-
-#endif
+@end

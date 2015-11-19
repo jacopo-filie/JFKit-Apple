@@ -24,23 +24,42 @@
 
 
 
-#pragma mark - Common headers
+#import <XCTest/XCTest.h>
 
-// Core
-#import	"JFManager.h"
+#import "JFManager.h"
 
-// Data Objects
-#import "JFColor.h"
-#import "JFString.h"
 
-// Utilities
-#import "JFTypes.h"
-#import	"JFUtilities.h"
 
-#if TARGET_OS_IPHONE
-#pragma mark - iOS specific headers
+@interface JFManager_Tests : XCTestCase
 
-#else
-#pragma mark - OS X specific headers
+@end
 
-#endif
+
+
+#pragma mark
+
+
+
+@implementation JFManager_Tests
+
+- (void)testInitialization
+{
+	// +defaultManager
+	JFManager* manager = [JFManager defaultManager];
+	XCTAssert(manager, @"Initializer '+defaultManager' did not return any object.");
+	
+	// +sharedManager
+	manager = [JFManager sharedManager];
+	XCTAssert(manager, @"Initializer '+sharedManager' did not return any object.");
+	XCTAssert((manager == [JFManager sharedManager]), @"Initializer '+defaultManager' did not return a singleton.");
+	
+	// -init
+	manager = [[JFManager alloc] init];
+	XCTAssert(manager, @"Initializer '-init' did not return any object.");
+	
+	// -initWithDefaultSettings
+	manager = [[JFManager alloc] initWithDefaultSettings];
+	XCTAssert(manager, @"Initializer '-initWithDefaultSettings' did not return any object.");
+}
+
+@end
