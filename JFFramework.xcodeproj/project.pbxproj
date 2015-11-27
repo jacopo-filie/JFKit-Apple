@@ -11,6 +11,12 @@
 		6C31C7A11B9EF3CF00FAF487 /* JFFramework-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */; };
 		EA0039251BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		EA0039261BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
+		EA2CE8421C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
+		EA2CE8431C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
+		EA465D781C00A1E300811A80 /* JFConnectionMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA465D761C00A1E300811A80 /* JFConnectionMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA465D791C00A1E300811A80 /* JFConnectionMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA465D761C00A1E300811A80 /* JFConnectionMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA465D7A1C00A1E300811A80 /* JFConnectionMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = EA465D771C00A1E300811A80 /* JFConnectionMachine.m */; };
+		EA465D7B1C00A1E300811A80 /* JFConnectionMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = EA465D771C00A1E300811A80 /* JFConnectionMachine.m */; };
 		EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5BDED71BF7571100D1DD7C /* JFColor.h */; };
 		EA5BDEDA1BF7571100D1DD7C /* JFColor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5BDED71BF7571100D1DD7C /* JFColor.h */; };
 		EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDED81BF7571100D1DD7C /* JFColor.m */; };
@@ -66,6 +72,10 @@
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
+		EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFConnectionMachine-Tests.m"; sourceTree = "<group>"; };
+		EA465D761C00A1E300811A80 /* JFConnectionMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFConnectionMachine.h; sourceTree = "<group>"; };
+		EA465D771C00A1E300811A80 /* JFConnectionMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFConnectionMachine.m; sourceTree = "<group>"; };
+		EA465D7C1C00A69700811A80 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documentation; sourceTree = "<group>"; };
 		EA5BDED71BF7571100D1DD7C /* JFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColor.h; sourceTree = "<group>"; };
 		EA5BDED81BF7571100D1DD7C /* JFColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFColor.m; sourceTree = "<group>"; };
 		EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
@@ -123,6 +133,7 @@
 		EA5F858B1B768E5A00A32291 = {
 			isa = PBXGroup;
 			children = (
+				EA465D7C1C00A69700811A80 /* Documentation */,
 				EA5F85981B769A3700A32291 /* Products */,
 				EAE7523E1BEBF444003A2F38 /* Sources */,
 				EAE752341BEBEF91003A2F38 /* Supporting Files */,
@@ -218,6 +229,8 @@
 		EAFAFC2C1BFE6A5100563037 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EA465D761C00A1E300811A80 /* JFConnectionMachine.h */,
+				EA465D771C00A1E300811A80 /* JFConnectionMachine.m */,
 				EAFAFC2D1BFE6A9C00563037 /* JFManager.h */,
 				EAFAFC2E1BFE6A9C00563037 /* JFManager.m */,
 			);
@@ -227,6 +240,7 @@
 		EAFAFC331BFE8EA200563037 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */,
 				EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */,
 			);
 			path = Core;
@@ -239,6 +253,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA465D791C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
 				EA5BDEDA1BF7571100D1DD7C /* JFColor.h in Headers */,
@@ -253,12 +268,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA465D781C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525C1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
-				EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */,
 				EAFAFC2F1BFE6A9C00563037 /* JFManager.h in Headers */,
 				EAE752391BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752611BEC200D003A2F38 /* JFString.h in Headers */,
+				EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */,
 				EAE752531BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +419,7 @@
 			files = (
 				EAE752551BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */,
+				EA465D7A1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
@@ -412,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2CE8421C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */,
 				EAD4F1D11BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
 				EA0039251BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */,
 				EA5BDEDE1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
@@ -426,6 +444,7 @@
 			files = (
 				EAE752561BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				EAFAFC321BFE6A9C00563037 /* JFManager.m in Sources */,
+				EA465D7B1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752641BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDC1BF7571100D1DD7C /* JFColor.m in Sources */,
 			);
@@ -435,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2CE8431C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */,
 				EAD4F1D21BF413F00031E236 /* JFUtilities-Tests.m in Sources */,
 				EA0039261BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */,
 				EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
