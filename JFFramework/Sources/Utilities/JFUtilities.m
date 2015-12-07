@@ -43,7 +43,7 @@ NSTimeInterval const	JFAnimationDuration	= 0.25;
 
 id JFApplicationInfoForKey(NSString* key)
 {
-	return [[MainBundle infoDictionary] objectForKey:key];
+	return MainBundle.infoDictionary[key];
 }
 
 BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
@@ -104,17 +104,17 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 		NSMutableDictionary* mDicts = [NSMutableDictionary dictionaryWithCapacity:[dicts count]];
 		for(NSDictionary* dict in dicts)
 		{
-			NSString* key = [dict objectForKey:NameKey];
+			NSString* key = dict[NameKey];
 			NSMutableDictionary* mDict = [dict mutableCopy];
 			[mDict removeObjectForKey:NameKey];
-			[mDicts setObject:[mDict copy] forKey:key];
+			mDicts[key] = [mDict copy];
 			
 			NSRange range = [key rangeOfString:searchString];
 			if(range.location != NSNotFound)
 			{
 				key = [key stringByReplacingOccurrencesOfString:searchString withString:JFEmptyString];
 				[mDict removeObjectForKey:MinimumOSVersionKey];
-				[mDicts setObject:[mDict copy] forKey:key];
+				mDicts[key] = [mDict copy];
 			}
 		}
 		LaunchScreens = [mDicts copy];
@@ -141,10 +141,10 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 		NSString* retObjVersion = nil;
 		for(NSString* key in [LaunchScreens allKeys])
 		{
-			NSDictionary* dict = [LaunchScreens objectForKey:key];
+			NSDictionary* dict = LaunchScreens[key];
 			
 			// Checks the orientation and skips to the next if not satisfied.
-			NSString* orientationString = [dict objectForKey:OrientationKey];
+			NSString* orientationString = dict[OrientationKey];
 			if([orientationString isEqualToString:@"Portrait"])
 			{
 				if(isLandscape)
@@ -159,13 +159,13 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 				continue;
 			
 			// Checks the size and skips to the next if not satisfied.
-			NSString* sizeString = [dict objectForKey:SizeKey];
+			NSString* sizeString = dict[SizeKey];
 			CGSize size = CGSizeFromString(sizeString);
 			if(!CGSizeEqualToSize(size, screenSize))
 				continue;
 			
 			// Checks the minimum iOS version and skips to the next if not satisfied.
-			NSString* minVersion = [dict objectForKey:MinimumOSVersionKey];
+			NSString* minVersion = dict[MinimumOSVersionKey];
 			if(minVersion)
 			{
 				if(!iOSPlus(minVersion))

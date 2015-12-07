@@ -97,12 +97,12 @@
 	
 	// CurrentDeviceOrientation
 	UIDeviceOrientation deviceOrientationValue = CurrentDeviceOrientation;
-	UIDeviceOrientation deviceOrientationResult = [[UIDevice currentDevice] orientation];
+	UIDeviceOrientation deviceOrientationResult = [UIDevice currentDevice].orientation;
 	XCTAssert((deviceOrientationValue == deviceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(deviceOrientationValue), JFStringFromNSInteger(deviceOrientationResult));
 	
 	// CurrentStatusBarOrientation
 	UIInterfaceOrientation interfaceOrientationValue = CurrentStatusBarOrientation;
-	UIInterfaceOrientation interfaceOrientationResult = [[UIApplication sharedApplication] statusBarOrientation];
+	UIInterfaceOrientation interfaceOrientationResult = [UIApplication sharedApplication].statusBarOrientation;
 	XCTAssert((interfaceOrientationValue == interfaceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(interfaceOrientationValue), JFStringFromNSInteger(interfaceOrientationResult));
 	
 	// MainScreen
@@ -138,22 +138,22 @@
 	
 	// iPad
 	BOOL boolValue = iPad;
-	BOOL boolResult = ([device userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+	BOOL boolResult = (device.userInterfaceIdiom == UIUserInterfaceIdiomPad);
 	XCTAssert((boolValue == boolResult), @"The 'iPad' value is '%@'; it should be '%@'.", JFStringFromBool(boolValue), JFStringFromBool(boolResult));
 	
 	// iPhone
 	boolValue = iPhone;
-	boolResult = ([device userInterfaceIdiom] == UIUserInterfaceIdiomPhone);
+	boolResult = (device.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
 	XCTAssert((boolValue == boolResult), @"The 'iPhone' value is '%@'; it should be '%@'.", JFStringFromBool(boolValue), JFStringFromBool(boolResult));
 	
 	// SystemVersion
 	NSString* value = SystemVersion;
-	NSString* result = [device systemVersion];
+	NSString* result = device.systemVersion;
 	XCTAssert([value isEqualToString:result], @"The 'SystemVersion' value is '%@'; it should be '%@'.", value, result);
 	
 	// UserInterfaceIdiom
 	UIUserInterfaceIdiom idiomValue = UserInterfaceIdiom;
-	UIUserInterfaceIdiom idiomResult = [[UIDevice currentDevice] userInterfaceIdiom];
+	UIUserInterfaceIdiom idiomResult = device.userInterfaceIdiom;
 	XCTAssert((idiomValue == idiomResult), @"The 'UserInterfaceIdiom' value is '%@'; it should be '%@'.", JFStringFromNSInteger(idiomValue), JFStringFromNSInteger(idiomResult));
 	
 #endif
