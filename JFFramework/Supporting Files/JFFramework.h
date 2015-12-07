@@ -35,6 +35,7 @@
 #import "JFString.h"
 
 // Utilities
+#import "JFLogger.h"
 #import "JFTypes.h"
 #import	"JFUtilities.h"
 

@@ -76,7 +76,7 @@
 
 - (instancetype)initWithDefaultSettings
 {
-	return [self init];
+	return [super init];
 }
 
 @end
