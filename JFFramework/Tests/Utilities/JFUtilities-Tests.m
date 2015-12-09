@@ -44,6 +44,8 @@
 
 @implementation JFUtilities_Tests
 
+#pragma mark Tests
+
 - (void)testConstants
 {
 	// JFAnimationDuration

@@ -42,6 +42,8 @@
 
 @implementation JFString_Tests
 
+#pragma mark Tests
+
 - (void)testConstants
 {
 	// JFEmptyString

@@ -89,6 +89,7 @@ typedef NS_ENUM(UInt8, JFLogPriority)
 
 // Memory management
 - (instancetype)	initWithDefaultSettings NS_DESIGNATED_INITIALIZER;
+- (instancetype)	initWithFileURL:(NSURL*)fileURL;
 - (instancetype)	initWithFileURL:(NSURL*)fileURL priority:(JFLogPriority)priority NS_DESIGNATED_INITIALIZER;
 
 // Service management

@@ -143,13 +143,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 
 - (instancetype)init
 {
-#ifdef DEBUG
-	JFLogPriority priority = JFLogPriority7Debug;
-#else
-	JFLogPriority priority = JFLogPriority6Info;
-#endif
-	
-	return [self initWithFileURL:nil priority:priority];
+	return [self initWithFileURL:nil];
 }
 
 - (instancetype)initWithDefaultSettings
@@ -194,6 +188,17 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		_priority		= priority;
 	}
 	return self;
+}
+
+- (instancetype)initWithFileURL:(NSURL*)fileURL
+{
+#ifdef DEBUG
+	JFLogPriority priority = JFLogPriority7Debug;
+#else
+	JFLogPriority priority = JFLogPriority6Info;
+#endif
+	
+	return [self initWithFileURL:fileURL priority:priority];
 }
 
 - (instancetype)initWithFileURL:(NSURL*)fileURL priority:(JFLogPriority)priority

@@ -42,6 +42,8 @@
 
 @implementation JFManager_Tests
 
+#pragma mark Tests
+
 - (void)testInitialization
 {
 	// +defaultManager
@@ -51,7 +53,7 @@
 	// +sharedManager
 	manager = [JFManager sharedManager];
 	XCTAssert(manager, @"Initializer '+sharedManager' did not return any object.");
-	XCTAssert((manager == [JFManager sharedManager]), @"Initializer '+defaultManager' did not return a singleton.");
+	XCTAssert((manager == [JFManager sharedManager]), @"Initializer '+sharedManager' did not return a singleton.");
 	
 	// -init
 	manager = [[JFManager alloc] init];

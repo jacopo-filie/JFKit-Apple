@@ -46,6 +46,8 @@
 
 @implementation JFShortcuts_Tests
 
+#pragma mark Tests
+
 - (void)testMacros
 {
 	// ApplicationDelegate

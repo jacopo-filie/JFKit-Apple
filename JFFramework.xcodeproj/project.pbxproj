@@ -31,6 +31,8 @@
 		EAB650E51C135C0000064C7D /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB650E11C135C0000064C7D /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAD4F1D11BF413F00031E236 /* JFUtilities-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */; };
 		EAD4F1D21BF413F00031E236 /* JFUtilities-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */; };
+		EAE5B25B1C15E4F900FE0A57 /* JFLogger-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */; };
+		EAE5B25C1C15E4F900FE0A57 /* JFLogger-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */; };
 		EAE752391BEBEF91003A2F38 /* JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752371BEBEF91003A2F38 /* JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE7523A1BEBEF91003A2F38 /* JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752371BEBEF91003A2F38 /* JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE752531BEBFFC1003A2F38 /* JFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752511BEBFFC1003A2F38 /* JFUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,6 +89,7 @@
 		EAB650E01C135C0000064C7D /* JFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		EAB650E11C135C0000064C7D /* JFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLogger.h; sourceTree = "<group>"; };
 		EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
+		EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFLogger-Tests.m"; sourceTree = "<group>"; };
 		EAE752351BEBEF91003A2F38 /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
 		EAE752361BEBEF91003A2F38 /* Info-OSX-Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-OSX-Tests.plist"; sourceTree = "<group>"; };
 		EAE752371BEBEF91003A2F38 /* JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFFramework.h; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 		EAD4F1CF1BF413E10031E236 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */,
 				EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */,
 				EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */,
 			);
@@ -446,6 +450,7 @@
 				EA5BDEDE1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
 				EAFAFC351BFE8EBC00563037 /* JFManager-Tests.m in Sources */,
 				EA730C151BF2A7A900968F31 /* JFString-Tests.m in Sources */,
+				EAE5B25B1C15E4F900FE0A57 /* JFLogger-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +477,7 @@
 				EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */,
 				EAFAFC361BFE8EBC00563037 /* JFManager-Tests.m in Sources */,
 				EA730C161BF2A7A900968F31 /* JFString-Tests.m in Sources */,
+				EAE5B25C1C15E4F900FE0A57 /* JFLogger-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

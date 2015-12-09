@@ -43,6 +43,8 @@
 
 @implementation JFColor_Tests
 
+#pragma mark Tests
+
 - (void)testCategory
 {
 	UInt8 value = JFColorRGBA32ComponentMaxValue;
