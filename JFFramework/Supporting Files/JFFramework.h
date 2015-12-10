@@ -32,6 +32,7 @@
 #import	"JFManager.h"
 
 // Data Objects
+#import "JFByteStream.h"
 #import "JFColor.h"
 #import "JFString.h"
 
