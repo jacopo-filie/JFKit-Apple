@@ -86,8 +86,6 @@
 
 - (void)tearDown
 {
-	[super tearDown];
-	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
 	// Checks if the test log file still exists and deletes it if necessary.
@@ -100,7 +98,10 @@
 		XCTAssert(succeeded, @"Failed to delete the test file at URL '%@'%@.", [fileURL absoluteString], errorString);
 	}
 	
+	// Destroys the logger.
 	self.logger = nil;
+	
+	[super tearDown];
 }
 
 - (void)testHashtagsLogging

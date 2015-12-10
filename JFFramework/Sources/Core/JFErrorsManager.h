@@ -24,26 +24,45 @@
 
 
 
-#pragma mark - Common headers
+#import "JFManager.h"
 
-// Core
-#import	"JFConnectionMachine.h"
-#import "JFErrorsManager.h"
-#import	"JFManager.h"
 
-// Data Objects
-#import "JFColor.h"
-#import "JFString.h"
 
-// Utilities
-#import "JFLogger.h"
-#import "JFTypes.h"
-#import	"JFUtilities.h"
+#pragma mark - Types
 
-#if TARGET_OS_IPHONE
-#pragma mark - iOS specific headers
+typedef NSInteger JFErrorCode;
 
-#else
-#pragma mark - OS X specific headers
 
-#endif
+
+#pragma mark
+
+
+
+@interface JFErrorsManager : JFManager
+
+#pragma mark Properties
+
+// Data
+@property (copy, nonatomic, readonly)	NSString*	domain;
+
+
+#pragma mark Methods
+
+// Memory management
+- (instancetype)	initWithDefaultSettings NS_DESIGNATED_INITIALIZER;
+- (instancetype)	initWithDomain:(NSString*)domain NS_DESIGNATED_INITIALIZER;
+
+// Data management
+- (NSString*)		debugStringForErrorCode:(JFErrorCode)errorCode;
+- (NSString*)		localizedDescriptionForErrorCode:(JFErrorCode)errorCode;
+- (NSString*)		localizedFailureReasonForErrorCode:(JFErrorCode)errorCode;
+- (NSString*)		localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode;
+- (NSDictionary*)	userInfoForErrorCode:(JFErrorCode)errorCode;
+- (NSDictionary*)	userInfoForErrorCode:(JFErrorCode)errorCode underlyingError:(NSError*)error;
+
+// Errors management
+- (NSError*)	debugPlaceholderError;
+- (NSError*)	errorWithCode:(JFErrorCode)errorCode;
+- (NSError*)	errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary*)userInfo;
+
+@end
