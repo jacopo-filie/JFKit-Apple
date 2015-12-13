@@ -26,7 +26,7 @@
 
 #import "JFManager.h"
 
-#import <pthread.h>
+#import <pthread/pthread.h>
 
 #import "JFShortcuts.h"
 

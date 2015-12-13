@@ -103,3 +103,20 @@ typedef NS_ENUM(UInt8, JFLogPriority)
 - (NSString*)	serializeHashtags:(JFLogHashtags)hashtags;	// Calls the class implementation.
 
 @end
+
+
+
+#pragma mark
+
+
+
+@interface NSObject (JFLogger)
+
+#pragma mark Properties
+
+// Logging
+@property (strong, setter = jf_setLogger:)			JFLogger*	jf_logger;
+@property (assign, setter = jf_setShouldDebugLog:)	BOOL		jf_shouldDebugLog;
+@property (assign, setter = jf_setShouldLog:)		BOOL		jf_shouldLog;
+
+@end

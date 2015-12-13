@@ -26,7 +26,8 @@
 
 #import "JFLogger.h"
 
-#import <pthread.h>
+#import <objc/runtime.h>
+#import <pthread/pthread.h>
 
 #import "JFShortcuts.h"
 #import "JFUtilities.h"
@@ -159,7 +160,10 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		NSURL* folderURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
 		if(folderURL)
 		{
-			NSString* fileName = [AppName stringByAppendingPathExtension:@"log"];
+			NSString* applicationName = AppName;
+			if(JFStringIsNullOrEmpty(applicationName))
+				applicationName = @"Application";
+			NSString* fileName = [applicationName stringByAppendingPathExtension:@"log"];
 			fileURL = [folderURL URLByAppendingPathComponent:fileName];
 		}
 		else
@@ -431,6 +435,58 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		}
 	}
 	return retObj;
+}
+
+@end
+
+
+
+#pragma mark
+
+
+
+@implementation NSObject (JFLogger)
+
+#pragma mark Properties accessors (Logging)
+
+- (JFLogger*)jf_logger
+{
+	JFLogger* retObj = objc_getAssociatedObject(self, @selector(jf_logger));
+	if(!retObj)
+		retObj = [JFLogger sharedManager];
+	return retObj;
+}
+
+- (void)jf_setLogger:(JFLogger*)logger
+{
+	objc_setAssociatedObject(self, @selector(jf_logger), logger, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (BOOL)jf_shouldDebugLog
+{
+	NSNumber* number = objc_getAssociatedObject(self, @selector(jf_shouldDebugLog));
+	
+#ifdef DEBUG
+	return (number ? [number boolValue] : YES);
+#else
+	return (number ? [number boolValue] : NO);
+#endif
+}
+
+- (void)jf_setShouldDebugLog:(BOOL)shouldDebugLog
+{
+	objc_setAssociatedObject(self, @selector(jf_shouldDebugLog), @(shouldDebugLog), OBJC_ASSOCIATION_RETAIN);
+}
+
+- (BOOL)jf_shouldLog
+{
+	NSNumber* number = objc_getAssociatedObject(self, @selector(jf_shouldLog));
+	return (number ? [number boolValue] : YES);
+}
+
+- (void)jf_setShouldLog:(BOOL)shouldLog
+{
+	objc_setAssociatedObject(self, @selector(jf_shouldLog), @(shouldLog), OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

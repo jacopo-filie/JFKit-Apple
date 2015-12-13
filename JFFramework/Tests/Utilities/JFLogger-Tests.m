@@ -104,6 +104,37 @@
 	[super tearDown];
 }
 
+- (void)testCategory
+{
+	NSObject* object = [NSObject new];
+	
+	// jf_logger
+	JFLogger* logger = object.jf_logger;
+	XCTAssert((logger == [JFLogger sharedManager]), @"The default object logger is not the singleton.");
+	
+	// jf_shouldDebugLog
+	BOOL flag = object.jf_shouldDebugLog;
+#ifdef DEBUG
+	BOOL expectedValue = YES;
+#else
+	BOOL expectedValue = NO;
+#endif
+	XCTAssert((flag == expectedValue), @"The \"shouldDebugLog\" flag value is '%@'; it should be '%@'.", JFStringFromBool(flag), JFStringFromBool(expectedValue));
+	object.jf_shouldDebugLog = NO;
+	flag = object.jf_shouldDebugLog;
+	expectedValue = NO;
+	XCTAssert((flag == expectedValue), @"The \"shouldDebugLog\" flag value is '%@'; it should be '%@'.", JFStringFromBool(flag), JFStringFromBool(expectedValue));
+	
+	// jf_shouldLog
+	flag = object.jf_shouldLog;
+	expectedValue = YES;
+	XCTAssert((flag == expectedValue), @"The \"shouldLog\" flag value is '%@'; it should be '%@'.", JFStringFromBool(flag), JFStringFromBool(expectedValue));
+	object.jf_shouldLog = NO;
+	flag = object.jf_shouldLog;
+	expectedValue = NO;
+	XCTAssert((flag == expectedValue), @"The \"shouldLog\" flag value is '%@'; it should be '%@'.", JFStringFromBool(flag), JFStringFromBool(expectedValue));
+}
+
 - (void)testHashtagsLogging
 {
 	NSString* logMessage = MethodName;
