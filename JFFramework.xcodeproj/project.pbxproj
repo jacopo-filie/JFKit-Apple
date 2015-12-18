@@ -15,6 +15,35 @@
 		6C0261AA1C19BB32001D52B9 /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A81C19BB32001D52B9 /* JFByteStream-Tests.m */; };
 		6C31C7851B9EEDF400FAF487 /* JFFramework-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C77A1B9EEDF300FAF487 /* JFFramework-iOS.a */; };
 		6C31C7A11B9EF3CF00FAF487 /* JFFramework-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */; };
+		6CE4F4CF1C2456A3008A8ACB /* JFFramework-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */; };
+		6CE4F4D71C245937008A8ACB /* JFConnectionMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = EA465D771C00A1E300811A80 /* JFConnectionMachine.m */; };
+		6CE4F4D81C245937008A8ACB /* JFErrorsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE4A34C1C18BB5B00D7A8A1 /* JFErrorsManager.m */; };
+		6CE4F4D91C245937008A8ACB /* JFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC2E1BFE6A9C00563037 /* JFManager.m */; };
+		6CE4F4DA1C245937008A8ACB /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A31C199FB8001D52B9 /* JFByteStream.m */; };
+		6CE4F4DB1C245937008A8ACB /* JFColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDED81BF7571100D1DD7C /* JFColor.m */; };
+		6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE752601BEC200D003A2F38 /* JFString.m */; };
+		6CE4F4DD1C245937008A8ACB /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB650E01C135C0000064C7D /* JFLogger.m */; };
+		6CE4F4DE1C245937008A8ACB /* JFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE752521BEBFFC1003A2F38 /* JFUtilities.m */; };
+		6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA465D761C00A1E300811A80 /* JFConnectionMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE4A34B1C18BB5B00D7A8A1 /* JFErrorsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E11C245963008A8ACB /* JFManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFAFC2D1BFE6A9C00563037 /* JFManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E21C245963008A8ACB /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C0261A21C199FB8001D52B9 /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E31C245963008A8ACB /* JFColor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5BDED71BF7571100D1DD7C /* JFColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E41C245963008A8ACB /* JFString.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE7525F1BEC200D003A2F38 /* JFString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E51C245963008A8ACB /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB650E11C135C0000064C7D /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E61C245963008A8ACB /* JFShortcuts.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE7525B1BEC1B86003A2F38 /* JFShortcuts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E71C245963008A8ACB /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E81C245963008A8ACB /* JFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752511BEBFFC1003A2F38 /* JFUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4E91C245963008A8ACB /* JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752371BEBEF91003A2F38 /* JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CE4F4EB1C245992008A8ACB /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
+		6CE4F4EC1C245992008A8ACB /* JFErrorsManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE4A3511C18D17800D7A8A1 /* JFErrorsManager-Tests.m */; };
+		6CE4F4ED1C245992008A8ACB /* JFManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */; };
+		6CE4F4EE1C245992008A8ACB /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A81C19BB32001D52B9 /* JFByteStream-Tests.m */; };
+		6CE4F4EF1C245992008A8ACB /* JFColor-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */; };
+		6CE4F4F01C245992008A8ACB /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA730C141BF2A7A900968F31 /* JFString-Tests.m */; };
+		6CE4F4F11C245992008A8ACB /* JFLogger-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */; };
+		6CE4F4F21C245992008A8ACB /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
+		6CE4F4F31C245992008A8ACB /* JFUtilities-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */; };
 		EA0039251BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		EA0039261BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		EA2CE8421C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
@@ -82,6 +111,13 @@
 			remoteGlobalIDString = 6C31C7951B9EF3CE00FAF487;
 			remoteInfo = "JFFramework-OSX";
 		};
+		6CE4F4D01C2456A3008A8ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5F858C1B768E5A00A32291 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE4F4BC1C24567E008A8ACB;
+			remoteInfo = "JFFramework-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +128,11 @@
 		6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4F4CC1C2456A3008A8ACB /* JFFramework_tvOS_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFramework_tvOS_Tests.m; sourceTree = "<group>"; };
+		6CE4F4CE1C2456A3008A8ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Tests.plist"; sourceTree = "<group>"; };
 		EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFConnectionMachine-Tests.m"; sourceTree = "<group>"; };
 		EA465D761C00A1E300811A80 /* JFConnectionMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFConnectionMachine.h; sourceTree = "<group>"; };
@@ -154,13 +195,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CE4F4BA1C24567E008A8ACB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4F4C71C2456A3008A8ACB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4F4CF1C2456A3008A8ACB /* JFFramework-tvOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6CE4F4CB1C2456A3008A8ACB /* JFFramework-tvOS-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4F4CC1C2456A3008A8ACB /* JFFramework_tvOS_Tests.m */,
+				6CE4F4CE1C2456A3008A8ACB /* Info.plist */,
+			);
+			path = "JFFramework-tvOS-Tests";
+			sourceTree = "<group>";
+		};
 		EA5F858B1B768E5A00A32291 = {
 			isa = PBXGroup;
 			children = (
 				EA465D7C1C00A69700811A80 /* Documentation */,
+				6CE4F4CB1C2456A3008A8ACB /* JFFramework-tvOS-Tests */,
 				EA5F85981B769A3700A32291 /* Products */,
 				EAE7523E1BEBF444003A2F38 /* Sources */,
 				EAE752341BEBEF91003A2F38 /* Supporting Files */,
@@ -175,6 +241,8 @@
 				6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */,
 				6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */,
 				6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */,
+				6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */,
+				6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +283,7 @@
 			children = (
 				EAE752351BEBEF91003A2F38 /* Info-iOS-Tests.plist */,
 				EAE752361BEBEF91003A2F38 /* Info-OSX-Tests.plist */,
+				6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */,
 				EAE752371BEBEF91003A2F38 /* JFFramework.h */,
 				EAE752381BEBEF91003A2F38 /* Prefix.pch */,
 			);
@@ -321,6 +390,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CE4F4D51C245805008A8ACB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */,
+				6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */,
+				6CE4F4E11C245963008A8ACB /* JFManager.h in Headers */,
+				6CE4F4E21C245963008A8ACB /* JFByteStream.h in Headers */,
+				6CE4F4E31C245963008A8ACB /* JFColor.h in Headers */,
+				6CE4F4E41C245963008A8ACB /* JFString.h in Headers */,
+				6CE4F4E51C245963008A8ACB /* JFLogger.h in Headers */,
+				6CE4F4E61C245963008A8ACB /* JFShortcuts.h in Headers */,
+				6CE4F4E71C245963008A8ACB /* JFTypes.h in Headers */,
+				6CE4F4E81C245963008A8ACB /* JFUtilities.h in Headers */,
+				6CE4F4E91C245963008A8ACB /* JFFramework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +481,41 @@
 			productReference = 6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6CE4F4BC1C24567E008A8ACB /* JFFramework-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4F4C31C24567E008A8ACB /* Build configuration list for PBXNativeTarget "JFFramework-tvOS" */;
+			buildPhases = (
+				6CE4F4B91C24567E008A8ACB /* Sources */,
+				6CE4F4BA1C24567E008A8ACB /* Frameworks */,
+				6CE4F4D51C245805008A8ACB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JFFramework-tvOS";
+			productName = "JFFramework-tvOS";
+			productReference = 6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6CE4F4C91C2456A3008A8ACB /* JFFramework-tvOS-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4F4D21C2456A3008A8ACB /* Build configuration list for PBXNativeTarget "JFFramework-tvOS-Tests" */;
+			buildPhases = (
+				6CE4F4EA1C245986008A8ACB /* Sources */,
+				6CE4F4C71C2456A3008A8ACB /* Frameworks */,
+				6CE4F4C81C2456A3008A8ACB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CE4F4D11C2456A3008A8ACB /* PBXTargetDependency */,
+			);
+			name = "JFFramework-tvOS-Tests";
+			productName = "JFFramework-tvOS-Tests";
+			productReference = 6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -414,6 +536,12 @@
 					6C31C79F1B9EF3CF00FAF487 = {
 						CreatedOnToolsVersion = 6.4;
 					};
+					6CE4F4BC1C24567E008A8ACB = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					6CE4F4C91C2456A3008A8ACB = {
+						CreatedOnToolsVersion = 7.2;
+					};
 				};
 			};
 			buildConfigurationList = EA5F858F1B768E5A00A32291 /* Build configuration list for PBXProject "JFFramework" */;
@@ -433,6 +561,8 @@
 				6C31C7831B9EEDF400FAF487 /* JFFramework-iOS-Tests */,
 				6C31C7951B9EF3CE00FAF487 /* JFFramework-OSX */,
 				6C31C79F1B9EF3CF00FAF487 /* JFFramework-OSX-Tests */,
+				6CE4F4BC1C24567E008A8ACB /* JFFramework-tvOS */,
+				6CE4F4C91C2456A3008A8ACB /* JFFramework-tvOS-Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -446,6 +576,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6C31C79E1B9EF3CF00FAF487 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4F4C81C2456A3008A8ACB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -517,6 +654,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CE4F4B91C24567E008A8ACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4F4D71C245937008A8ACB /* JFConnectionMachine.m in Sources */,
+				6CE4F4D81C245937008A8ACB /* JFErrorsManager.m in Sources */,
+				6CE4F4D91C245937008A8ACB /* JFManager.m in Sources */,
+				6CE4F4DA1C245937008A8ACB /* JFByteStream.m in Sources */,
+				6CE4F4DB1C245937008A8ACB /* JFColor.m in Sources */,
+				6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */,
+				6CE4F4DD1C245937008A8ACB /* JFLogger.m in Sources */,
+				6CE4F4DE1C245937008A8ACB /* JFUtilities.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4F4EA1C245986008A8ACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4F4EB1C245992008A8ACB /* JFConnectionMachine-Tests.m in Sources */,
+				6CE4F4EC1C245992008A8ACB /* JFErrorsManager-Tests.m in Sources */,
+				6CE4F4ED1C245992008A8ACB /* JFManager-Tests.m in Sources */,
+				6CE4F4EE1C245992008A8ACB /* JFByteStream-Tests.m in Sources */,
+				6CE4F4EF1C245992008A8ACB /* JFColor-Tests.m in Sources */,
+				6CE4F4F01C245992008A8ACB /* JFString-Tests.m in Sources */,
+				6CE4F4F11C245992008A8ACB /* JFLogger-Tests.m in Sources */,
+				6CE4F4F21C245992008A8ACB /* JFShortcuts-Tests.m in Sources */,
+				6CE4F4F31C245992008A8ACB /* JFUtilities-Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -529,6 +697,11 @@
 			isa = PBXTargetDependency;
 			target = 6C31C7951B9EF3CE00FAF487 /* JFFramework-OSX */;
 			targetProxy = 6C31C7A21B9EF3CF00FAF487 /* PBXContainerItemProxy */;
+		};
+		6CE4F4D11C2456A3008A8ACB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE4F4BC1C24567E008A8ACB /* JFFramework-tvOS */;
+			targetProxy = 6CE4F4D01C2456A3008A8ACB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -865,6 +1038,168 @@
 			};
 			name = Release;
 		};
+		6CE4F4C41C24567E008A8ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6CE4F4C51C24567E008A8ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CE4F4D31C2456A3008A8ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		6CE4F4D41C2456A3008A8ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		EA5F85901B768E5A00A32291 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -877,6 +1212,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -890,6 +1226,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -931,6 +1268,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6CE4F4C31C24567E008A8ACB /* Build configuration list for PBXNativeTarget "JFFramework-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4F4C41C24567E008A8ACB /* Debug */,
+				6CE4F4C51C24567E008A8ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6CE4F4D21C2456A3008A8ACB /* Build configuration list for PBXNativeTarget "JFFramework-tvOS-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4F4D31C2456A3008A8ACB /* Debug */,
+				6CE4F4D41C2456A3008A8ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		EA5F858F1B768E5A00A32291 /* Build configuration list for PBXProject "JFFramework" */ = {
 			isa = XCConfigurationList;

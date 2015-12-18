@@ -44,7 +44,7 @@ FOUNDATION_EXPORT BOOL	JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2);
 
 #pragma mark Functions (Images)
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 FOUNDATION_EXPORT NSString*	JFLaunchImageName();
 FOUNDATION_EXPORT NSString*	JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
 #endif

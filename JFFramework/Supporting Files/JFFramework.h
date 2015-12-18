@@ -41,8 +41,11 @@
 #import "JFTypes.h"
 #import	"JFUtilities.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 #pragma mark - iOS specific headers
+
+#elif TARGET_OS_TV
+#pragma mark - tvOS specific headers
 
 #else
 #pragma mark - OS X specific headers

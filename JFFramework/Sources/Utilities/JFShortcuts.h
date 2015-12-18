@@ -44,8 +44,10 @@
 
 #if TARGET_OS_IPHONE
 #define CurrentDevice				[UIDevice currentDevice]
+#if TARGET_OS_IOS
 #define CurrentDeviceOrientation	[CurrentDevice orientation]
 #define CurrentStatusBarOrientation	[SharedApplication statusBarOrientation]
+#endif
 #define MainScreen					[UIScreen mainScreen]
 #define	SharedApplication			[UIApplication sharedApplication]
 #else
@@ -67,6 +69,7 @@
 #pragma mark Macros (System)
 
 #if TARGET_OS_IPHONE
+#define AppleTV				(UserInterfaceIdiom == UIUserInterfaceIdiomTV)
 #define iPad				(UserInterfaceIdiom == UIUserInterfaceIdiomPad)
 #define iPhone				(UserInterfaceIdiom == UIUserInterfaceIdiomPhone)
 #define SystemVersion		[CurrentDevice systemVersion]
@@ -76,7 +79,7 @@
 
 #pragma mark Macros (Version)
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 #define iOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
 #define iOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
 #define iOS6				iOS(@"6")
@@ -87,6 +90,11 @@
 #define iOS8Plus			iOSPlus(@"8")
 #define iOS9				iOS(@"9")
 #define iOS9Plus			iOSPlus(@"9")
+#elif TARGET_OS_TV
+#define tvOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
+#define tvOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
+#define tvOS9				tvOS(@"9")
+#define tvOS9Plus			tvOSPlus(@"9")
 #else
 #define OSX(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
 #define OSXPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)

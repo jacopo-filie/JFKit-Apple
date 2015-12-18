@@ -80,7 +80,7 @@ BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
 
 #pragma mark Functions (Images)
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 NSString* JFLaunchImageName()
 {

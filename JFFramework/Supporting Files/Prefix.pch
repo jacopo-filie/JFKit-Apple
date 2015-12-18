@@ -35,9 +35,15 @@
 #import <Foundation/Foundation.h>
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 #pragma mark - iOS specific system headers
+
+#import <UIKit/UIKit.h>
+
+#elif TARGET_OS_TV
+
+#pragma mark - tvOS specific system headers
 
 #import <UIKit/UIKit.h>
 

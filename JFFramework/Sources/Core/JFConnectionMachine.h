@@ -104,7 +104,7 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 #if __has_feature(objc_arc_weak)
 @property (weak, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
 #else
-@property (assign, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
+@property (unsafe_unretained, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
 #endif
 
 

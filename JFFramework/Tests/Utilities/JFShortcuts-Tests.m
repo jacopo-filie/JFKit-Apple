@@ -97,6 +97,8 @@
 	result = [UIDevice currentDevice];
 	XCTAssert((value == result), @"The 'CurrentDevice' value is '%@'; it should be '%@'.", value, result);
 	
+#if TARGET_OS_IOS
+	
 	// CurrentDeviceOrientation
 	UIDeviceOrientation deviceOrientationValue = CurrentDeviceOrientation;
 	UIDeviceOrientation deviceOrientationResult = [UIDevice currentDevice].orientation;
@@ -106,6 +108,8 @@
 	UIInterfaceOrientation interfaceOrientationValue = CurrentStatusBarOrientation;
 	UIInterfaceOrientation interfaceOrientationResult = [UIApplication sharedApplication].statusBarOrientation;
 	XCTAssert((interfaceOrientationValue == interfaceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(interfaceOrientationValue), JFStringFromNSInteger(interfaceOrientationResult));
+
+#endif
 	
 	// MainScreen
 	value = MainScreen;
