@@ -124,10 +124,10 @@ JFColor* JFColorWithRGBA(UInt8 r, UInt8 g, UInt8 b, UInt8 a)
 	CGFloat blue	= (CGFloat)b / maxValue;
 	CGFloat alpha	= (CGFloat)a / maxValue;
 	
-#if TARGET_OS_IPHONE
-	return [JFColor colorWithRed:red green:green blue:blue alpha:alpha];
-#else
+#if JF_TARGET_OS_OSX
 	return [JFColor colorWithCalibratedRed:red green:green blue:blue alpha:alpha];
+#else
+	return [JFColor colorWithRed:red green:green blue:blue alpha:alpha];
 #endif
 }
 

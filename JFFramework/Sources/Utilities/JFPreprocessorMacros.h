@@ -24,31 +24,13 @@
 
 
 
-#pragma mark - Common headers
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// System
-#import <CoreData/CoreData.h>
-#import <Foundation/Foundation.h>
+#pragma mark - Target conditionals
 
-// User
-#import	"JFPreprocessorMacros.h"
+#define	JF_TARGET_OS_IOS	(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_IOS)
+#define	JF_TARGET_OS_OSX	(TARGET_OS_MAC && !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
+#define	JF_TARGET_OS_TV		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_TV)
+#define	JF_TARGET_OS_WATCH	(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_WATCH)
 
-
-
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_TV
-#pragma mark - iOS/tvOS specific system headers
-
-// System
-#import <UIKit/UIKit.h>
-
-#endif
-
-
-
-#if JF_TARGET_OS_OSX
-#pragma mark - OSX specific system headers
-
-// System
-#import <AppKit/AppKit.h>
-
-#endif
+////////////////////////////////////////////////////////////////////////////////////////////////////

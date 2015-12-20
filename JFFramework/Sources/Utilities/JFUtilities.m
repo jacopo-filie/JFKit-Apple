@@ -80,7 +80,7 @@ BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
 
 #pragma mark Functions (Images)
 
-#if TARGET_OS_IOS
+#if JF_TARGET_OS_IOS
 
 NSString* JFLaunchImageName()
 {
@@ -267,13 +267,7 @@ BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
 		}
 		else
 		{
-#if TARGET_OS_IPHONE
-			NSArray* versionComponents = [SystemVersion componentsSeparatedByString:@"."];
-			NSUInteger count = [versionComponents count];
-			if(count > 0) currentMajorVersion = [versionComponents[0] integerValue];
-			if(count > 1) currentMinorVersion = [versionComponents[1] integerValue];
-			if(count > 2) currentPatchVersion = [versionComponents[2] integerValue];
-#else
+#if JF_TARGET_OS_OSX
 			SInt32 majorVersion, minorVersion, patchVersion;
 			Gestalt(gestaltSystemVersionMajor, &majorVersion);
 			Gestalt(gestaltSystemVersionMinor, &minorVersion);
@@ -281,6 +275,12 @@ BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
 			currentMajorVersion = majorVersion;
 			currentMinorVersion = minorVersion;
 			currentPatchVersion = patchVersion;
+#else
+			NSArray* versionComponents = [SystemVersion componentsSeparatedByString:@"."];
+			NSUInteger count = [versionComponents count];
+			if(count > 0) currentMajorVersion = [versionComponents[0] integerValue];
+			if(count > 1) currentMinorVersion = [versionComponents[1] integerValue];
+			if(count > 2) currentPatchVersion = [versionComponents[2] integerValue];
 #endif
 		}
 	});
@@ -367,14 +367,14 @@ NSString* JFSystemVersion()
 		}
 		else
 		{
-#if TARGET_OS_IPHONE
-			retObj = SystemVersion;
-#else
+#if JF_TARGET_OS_OSX
 			SInt32 majorVersion, minorVersion, patchVersion;
 			Gestalt(gestaltSystemVersionMajor, &majorVersion);
 			Gestalt(gestaltSystemVersionMinor, &minorVersion);
 			Gestalt(gestaltSystemVersionBugFix, &patchVersion);
 			retObj = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(majorVersion), JFStringFromSInt32(minorVersion), JFStringFromSInt32(patchVersion)];
+#else
+			retObj = SystemVersion;
 #endif
 		}
 	});

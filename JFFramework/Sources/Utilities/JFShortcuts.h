@@ -42,17 +42,17 @@
 #define MethodName				NSStringFromSelector(_cmd)
 #define ProcessInfo				[NSProcessInfo processInfo]
 
-#if TARGET_OS_IPHONE
+#if JF_TARGET_OS_OSX
+#define	SharedApplication			NSApp
+#define	SharedWorkspace				[NSWorkspace sharedWorkspace]
+#else
 #define CurrentDevice				[UIDevice currentDevice]
-#if TARGET_OS_IOS
+#if JF_TARGET_OS_IOS
 #define CurrentDeviceOrientation	[CurrentDevice orientation]
 #define CurrentStatusBarOrientation	[SharedApplication statusBarOrientation]
 #endif
 #define MainScreen					[UIScreen mainScreen]
 #define	SharedApplication			[UIApplication sharedApplication]
-#else
-#define	SharedApplication			NSApp
-#define	SharedWorkspace				[NSWorkspace sharedWorkspace]
 #endif
 
 
@@ -68,7 +68,7 @@
 
 #pragma mark Macros (System)
 
-#if TARGET_OS_IPHONE
+#if !JF_TARGET_OS_OSX
 #define AppleTV				(UserInterfaceIdiom == UIUserInterfaceIdiomTV)
 #define iPad				(UserInterfaceIdiom == UIUserInterfaceIdiomPad)
 #define iPhone				(UserInterfaceIdiom == UIUserInterfaceIdiomPhone)
@@ -79,7 +79,7 @@
 
 #pragma mark Macros (Version)
 
-#if TARGET_OS_IOS
+#if JF_TARGET_OS_IOS
 #define iOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
 #define iOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
 #define iOS6				iOS(@"6")
@@ -90,12 +90,9 @@
 #define iOS8Plus			iOSPlus(@"8")
 #define iOS9				iOS(@"9")
 #define iOS9Plus			iOSPlus(@"9")
-#elif TARGET_OS_TV
-#define tvOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
-#define tvOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
-#define tvOS9				tvOS(@"9")
-#define tvOS9Plus			tvOSPlus(@"9")
-#else
+#endif
+
+#if JF_TARGET_OS_OSX
 #define OSX(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
 #define OSXPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
 #define OSX10_6				OSX(@"10.6")
@@ -110,6 +107,13 @@
 #define OSX10_10Plus		OSXPlus(@"10.10")
 #define OSX10_11			OSX(@"10.11")
 #define OSX10_11Plus		OSXPlus(@"10.11")
+#endif
+
+#if JF_TARGET_OS_TV
+#define tvOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
+#define tvOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
+#define tvOS9				tvOS(@"9")
+#define tvOS9Plus			tvOSPlus(@"9")
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

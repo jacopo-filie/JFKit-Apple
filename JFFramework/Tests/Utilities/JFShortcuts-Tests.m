@@ -89,15 +89,27 @@
 	value = ProcessInfo;
 	result = [NSProcessInfo processInfo];
 	XCTAssert((value == result), @"The 'ProcessInfo' value is '%@'; it should be '%@'.", value, result);
-
-#if TARGET_OS_IPHONE
+	
+#if JF_TARGET_OS_OSX
+	
+	// SharedApplication
+	value = SharedApplication;
+	result = NSApp;
+	XCTAssert((value == result), @"The 'SharedApplication' value is '%@'; it should be '%@'.", value, result);
+	
+	// SharedWorkspace
+	value = SharedWorkspace;
+	result = [NSWorkspace sharedWorkspace];
+	XCTAssert((value == result), @"The 'SharedWorkspace' value is '%@'; it should be '%@'.", value, result);
+	
+#else
 	
 	// CurrentDevice
 	value = CurrentDevice;
 	result = [UIDevice currentDevice];
 	XCTAssert((value == result), @"The 'CurrentDevice' value is '%@'; it should be '%@'.", value, result);
 	
-#if TARGET_OS_IOS
+#if JF_TARGET_OS_IOS
 	
 	// CurrentDeviceOrientation
 	UIDeviceOrientation deviceOrientationValue = CurrentDeviceOrientation;
@@ -108,7 +120,7 @@
 	UIInterfaceOrientation interfaceOrientationValue = CurrentStatusBarOrientation;
 	UIInterfaceOrientation interfaceOrientationResult = [UIApplication sharedApplication].statusBarOrientation;
 	XCTAssert((interfaceOrientationValue == interfaceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(interfaceOrientationValue), JFStringFromNSInteger(interfaceOrientationResult));
-
+	
 #endif
 	
 	// MainScreen
@@ -121,24 +133,12 @@
 	result = [UIApplication sharedApplication];
 	XCTAssert((value == result), @"The 'SharedApplication' value is '%@'; it should be '%@'.", value, result);
 	
-#else
-	
-	// SharedApplication
-	value = SharedApplication;
-	result = NSApp;
-	XCTAssert((value == result), @"The 'SharedApplication' value is '%@'; it should be '%@'.", value, result);
-	
-	// SharedWorkspace
-	value = SharedWorkspace;
-	result = [NSWorkspace sharedWorkspace];
-	XCTAssert((value == result), @"The 'SharedWorkspace' value is '%@'; it should be '%@'.", value, result);
-	
 #endif
 }
 
 - (void)testMacrosSystem
 {
-#if TARGET_OS_IPHONE
+#if !JF_TARGET_OS_OSX
 	
 	UIDevice* device = [UIDevice currentDevice];
 	

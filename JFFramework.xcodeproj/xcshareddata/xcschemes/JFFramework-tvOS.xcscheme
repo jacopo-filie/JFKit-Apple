@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-               BuildableName = "libJFFramework-tvOS.a"
-               BlueprintName = "JFFramework-tvOS"
+               BuildableName = "tvOS.a"
+               BlueprintName = "tvOS"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C2A06E81C244B2D001D696B"
-               BuildableName = "JFFramework-tvOS-Tests.xctest"
-               BlueprintName = "JFFramework-tvOS-Tests"
+               BlueprintIdentifier = "6CE4F4C91C2456A3008A8ACB"
+               BuildableName = "tvOS-Tests.xctest"
+               BlueprintName = "tvOS-Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C2A06E81C244B2D001D696B"
-               BuildableName = "JFFramework-tvOS-Tests.xctest"
-               BlueprintName = "JFFramework-tvOS-Tests"
+               BlueprintIdentifier = "6CE4F4C91C2456A3008A8ACB"
+               BuildableName = "tvOS-Tests.xctest"
+               BlueprintName = "tvOS-Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "libJFFramework-tvOS.a"
-            BlueprintName = "JFFramework-tvOS"
+            BuildableName = "tvOS.a"
+            BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,8 +79,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "libJFFramework-tvOS.a"
-            BlueprintName = "JFFramework-tvOS"
+            BuildableName = "tvOS.a"
+            BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "libJFFramework-tvOS.a"
-            BlueprintName = "JFFramework-tvOS"
+            BuildableName = "tvOS.a"
+            BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -37,10 +37,10 @@
 #define JFColorRed(_val)		JFColorWithRGB(_val, 0, 0)
 #define JFColorYellow(_val)		JFColorWithRGB(_val, _val, 0)
 
-#if TARGET_OS_IPHONE
-#define JFColor	UIColor
-#else
+#if JF_TARGET_OS_OSX
 #define JFColor	NSColor
+#else
+#define JFColor	UIColor
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
