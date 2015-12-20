@@ -128,9 +128,9 @@
 		6C0261A31C199FB8001D52B9 /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
 		6C0261A81C19BB32001D52B9 /* JFByteStream-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFByteStream-Tests.m"; sourceTree = "<group>"; };
 		6C31C77A1B9EEDF300FAF487 /* JFFramework-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C31C7841B9EEDF400FAF487 /* iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C31C7A01B9EF3CF00FAF487 /* OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4CA1C2456A3008A8ACB /* tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Tests.plist"; sourceTree = "<group>"; };
@@ -230,9 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				6C31C77A1B9EEDF300FAF487 /* JFFramework-iOS.a */,
-				6C31C7841B9EEDF400FAF487 /* iOS-Tests.xctest */,
+				6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */,
 				6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */,
-				6C31C7A01B9EF3CF00FAF487 /* OSX-Tests.xctest */,
+				6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */,
 				6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */,
 				6CE4F4CA1C2456A3008A8ACB /* tvOS-Tests.xctest */,
 			);
@@ -439,7 +439,7 @@
 			);
 			name = "iOS-Tests";
 			productName = "JFFramework-iOSTests";
-			productReference = 6C31C7841B9EEDF400FAF487 /* iOS-Tests.xctest */;
+			productReference = 6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6C31C7951B9EF3CE00FAF487 /* OSX */ = {
@@ -474,7 +474,7 @@
 			);
 			name = "OSX-Tests";
 			productName = "JFFramework-OSXTests";
-			productReference = 6C31C7A01B9EF3CF00FAF487 /* OSX-Tests.xctest */;
+			productReference = 6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6CE4F4BC1C24567E008A8ACB /* tvOS */ = {
