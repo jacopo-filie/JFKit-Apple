@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-               BuildableName = "tvOS.a"
+               BuildableName = "JFFramework-tvOS.a"
                BlueprintName = "tvOS"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "tvOS.a"
+            BuildableName = "JFFramework-tvOS.a"
             BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "tvOS.a"
+            BuildableName = "JFFramework-tvOS.a"
             BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CE4F4BC1C24567E008A8ACB"
-            BuildableName = "tvOS.a"
+            BuildableName = "JFFramework-tvOS.a"
             BlueprintName = "tvOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>

@@ -26,6 +26,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import	"JFPreprocessorMacros.h"
 #import "JFShortcuts.h"
 
 

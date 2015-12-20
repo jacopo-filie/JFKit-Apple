@@ -24,6 +24,7 @@
 
 
 
+#import	"JFPreprocessorMacros.h"
 #import "JFString.h"
 
 
