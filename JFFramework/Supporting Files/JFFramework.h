@@ -27,6 +27,7 @@
 #pragma mark - Common headers
 
 // Core
+#import "JFAppDelegate.h"
 #import	"JFConnectionMachine.h"
 #import "JFErrorsManager.h"
 #import	"JFManager.h"

@@ -60,6 +60,12 @@
 		EA5BDEDF1BF7B65400D1DD7C /* JFColor-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */; };
 		EA730C151BF2A7A900968F31 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA730C141BF2A7A900968F31 /* JFString-Tests.m */; };
 		EA730C161BF2A7A900968F31 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA730C141BF2A7A900968F31 /* JFString-Tests.m */; };
+		EA7F89641C289F1D002C2E34 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7F89621C289F1D002C2E34 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA7F89651C289F1D002C2E34 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7F89621C289F1D002C2E34 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA7F89661C289F1D002C2E34 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7F89621C289F1D002C2E34 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA7F89671C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
+		EA7F89681C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
+		EA7F89691C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
 		EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
 		EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
 		EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
@@ -143,6 +149,8 @@
 		EA5BDED81BF7571100D1DD7C /* JFColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFColor.m; sourceTree = "<group>"; };
 		EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
 		EA730C141BF2A7A900968F31 /* JFString-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFString-Tests.m"; sourceTree = "<group>"; };
+		EA7F89621C289F1D002C2E34 /* JFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppDelegate.h; sourceTree = "<group>"; };
+		EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppDelegate.m; sourceTree = "<group>"; };
 		EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
 		EAB650E01C135C0000064C7D /* JFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		EAB650E11C135C0000064C7D /* JFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLogger.h; sourceTree = "<group>"; };
@@ -324,6 +332,8 @@
 		EAFAFC2C1BFE6A5100563037 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EA7F89621C289F1D002C2E34 /* JFAppDelegate.h */,
+				EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */,
 				EA465D761C00A1E300811A80 /* JFConnectionMachine.h */,
 				EA465D771C00A1E300811A80 /* JFConnectionMachine.m */,
 				EAE4A34B1C18BB5B00D7A8A1 /* JFErrorsManager.h */,
@@ -352,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
+				EA7F89651C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D791C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
@@ -371,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
+				EA7F89641C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D781C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				EAE7525C1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
@@ -390,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
+				EA7F89661C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */,
 				6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */,
 				6CE4F4E11C245963008A8ACB /* JFManager.h in Headers */,
@@ -595,6 +608,7 @@
 				EAE752551BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				6C0261A61C199FB8001D52B9 /* JFByteStream.m in Sources */,
 				EAE4A34F1C18BB5B00D7A8A1 /* JFErrorsManager.m in Sources */,
+				EA7F89671C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */,
 				EA465D7A1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
@@ -626,6 +640,7 @@
 				EAE752561BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				6C0261A71C199FB8001D52B9 /* JFByteStream.m in Sources */,
 				EAE4A3501C18BB5B00D7A8A1 /* JFErrorsManager.m in Sources */,
+				EA7F89681C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				EAFAFC321BFE6A9C00563037 /* JFManager.m in Sources */,
 				EA465D7B1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752641BEC200D003A2F38 /* JFString.m in Sources */,
@@ -657,6 +672,7 @@
 				6CE4F4D71C245937008A8ACB /* JFConnectionMachine.m in Sources */,
 				6CE4F4D81C245937008A8ACB /* JFErrorsManager.m in Sources */,
 				6CE4F4D91C245937008A8ACB /* JFManager.m in Sources */,
+				EA7F89691C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				6CE4F4DA1C245937008A8ACB /* JFByteStream.m in Sources */,
 				6CE4F4DB1C245937008A8ACB /* JFColor.m in Sources */,
 				6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */,
