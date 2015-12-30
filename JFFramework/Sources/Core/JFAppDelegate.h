@@ -25,10 +25,12 @@
 
 
 #import "JFPreprocessorMacros.h"
+#import "JFTypes.h"
 
 
 
 @class JFErrorsManager;
+@class JFWindowController;
 
 
 
@@ -43,28 +45,19 @@
 // Errors
 @property (strong)	JFErrorsManager*	errorsManager;
 
-#pragma mark Properties
+// Relationships
+@property (strong, nonatomic, readonly)	JFWindowController*	windowController;
 
 // User interface
-#if JF_TARGET_OS_OSX
-@property (strong, nonatomic)	IBOutlet	NSWindow*	window;
-#else
-@property (strong, nonatomic)	IBOutlet	UIWindow*	window;
-#endif
+@property (strong, nonatomic)	IBOutlet	JFWindow*	window;
 
-@end
-
-
-
-#pragma mark
-
-
-
-#if JF_TARGET_OS_OSX
-@interface JFAppDelegate (NSApplicationDelegate)
 
 #pragma mark Methods
 
+// User interface management
+- (JFWindowController*)	createControllerForWindow:(JFWindow*)window;
+
+#if JF_TARGET_OS_OSX
 // Protocol implementation (NSApplicationDelegate)
 - (void)	applicationDidBecomeActive:(NSNotification*)notification;
 - (void)	applicationDidFinishLaunching:(NSNotification*)notification;
@@ -74,23 +67,11 @@
 - (void)	applicationWillBecomeActive:(NSNotification*)notification;
 - (void)	applicationWillHide:(NSNotification*)notification;
 - (void)	applicationWillResignActive:(NSNotification*)notification;
-- (void)	applicationWillTerminate:(NSNotification *)notification;
+- (void)	applicationWillTerminate:(NSNotification*)notification;
 - (void)	applicationWillUnhide:(NSNotification*)notification;
-
-@end
 #endif
 
-
-
-#pragma mark
-
-
-
 #if !JF_TARGET_OS_OSX
-@interface JFAppDelegate (UIApplicationDelegate)
-
-#pragma mark Methods
-
 // Protocol implementation (UIApplicationDelegate)
 - (BOOL)	application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions;
 - (void)	applicationDidBecomeActive:(UIApplication*)application;
@@ -99,6 +80,6 @@
 - (void)	applicationWillEnterForeground:(UIApplication*)application;
 - (void)	applicationWillResignActive:(UIApplication*)application;
 - (void)	applicationWillTerminate:(UIApplication*)application;
+#endif
 
 @end
-#endif

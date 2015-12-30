@@ -28,10 +28,17 @@
 
 #import "JFErrorsManager.h"
 #import "JFLogger.h"
+#import "JFShortcuts.h"
+#import "JFWindowController.h"
 
 
 
 @interface JFAppDelegate ()
+
+#pragma mark Properties
+
+// Relationships
+@property (strong, nonatomic, readwrite)	JFWindowController*	windowController;
 
 @end
 
@@ -48,26 +55,63 @@
 // Errors
 @synthesize errorsManager	= _errorsManager;
 
+// Relationships
+@synthesize windowController	= _windowController;
+
 // User interface
 @synthesize window	= _window;
 
-@end
+
+#pragma mark Properties accessors (User interface)
+
+- (JFWindow*)window
+{
+	if(!_window)
+#if JF_TARGET_OS_OSX
+		self.window = [NSWindow new];
+#else
+		self.window = [[UIWindow alloc] initWithFrame:MainScreen.bounds];
+#endif
+	
+	return _window;
+}
+
+- (void)setWindow:(JFWindow*)window
+{
+	if(_window == window)
+		return;
+	
+	_window = window;
+	
+	// Loads the user interface.
+	JFWindowController* controller = nil;
+	if(_window)
+	{
+		controller = [self createControllerForWindow:_window];
+		if(!controller)
+			controller = [[JFWindowController alloc] initWithWindow:_window];
+	}
+	self.windowController = controller;
+}
 
 
+#pragma mark User interface management
 
-#pragma mark
-
+- (JFWindowController*)createControllerForWindow:(JFWindow*)window
+{
+	return nil;
+}
 
 
 #if JF_TARGET_OS_OSX
-@implementation JFAppDelegate (NSApplicationDelegate)
-
 #pragma mark Protocol implementation (NSApplicationDelegate)
 
 - (void)applicationDidBecomeActive:(NSNotification*)notification
 {
 	if(self.jf_shouldLog)
 		[self.jf_logger logMessage:@"Application did become active." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
+	
+	[self.window makeKeyAndOrderFront:self];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
@@ -124,18 +168,10 @@
 		[self.jf_logger logMessage:@"Application will unhide." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
 }
 
-@end
 #endif
 
 
-
-#pragma mark
-
-
-
 #if !JF_TARGET_OS_OSX
-@implementation JFAppDelegate (UIApplicationDelegate)
-
 #pragma mark Protocol implementation (UIApplicationDelegate)
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
@@ -183,5 +219,6 @@
 		[self.jf_logger logMessage:@"Application will terminate." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
 }
 
-@end
 #endif
+
+@end
