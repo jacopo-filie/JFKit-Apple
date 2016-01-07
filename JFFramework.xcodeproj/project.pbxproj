@@ -13,9 +13,9 @@
 		6C0261A71C199FB8001D52B9 /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A31C199FB8001D52B9 /* JFByteStream.m */; };
 		6C0261A91C19BB32001D52B9 /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A81C19BB32001D52B9 /* JFByteStream-Tests.m */; };
 		6C0261AA1C19BB32001D52B9 /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0261A81C19BB32001D52B9 /* JFByteStream-Tests.m */; };
-		6C1C57F71C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; };
-		6C1C57F81C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; };
-		6C1C57F91C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; };
+		6C1C57F71C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C1C57F81C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C1C57F91C29A517007F08F6 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C1C57F51C29A517007F08F6 /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C1C57FA1C29A517007F08F6 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C57F61C29A517007F08F6 /* JFWindowController.m */; };
 		6C1C57FB1C29A517007F08F6 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C57F61C29A517007F08F6 /* JFWindowController.m */; };
 		6C1C57FC1C29A517007F08F6 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C57F61C29A517007F08F6 /* JFWindowController.m */; };
