@@ -37,6 +37,9 @@
 #import "JFColor.h"
 #import "JFString.h"
 
+// User Interface
+#import "JFWindowController.h"
+
 // Utilities
 #import "JFLogger.h"
 #import	"JFPreprocessorMacros.h"
