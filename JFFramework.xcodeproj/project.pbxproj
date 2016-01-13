@@ -146,7 +146,7 @@
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CE4F4CA1C2456A3008A8ACB /* tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Tests.plist"; sourceTree = "<group>"; };
 		EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFConnectionMachine-Tests.m"; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */,
 				6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */,
 				6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */,
-				6CE4F4CA1C2456A3008A8ACB /* tvOS-Tests.xctest */,
+				6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,7 +543,7 @@
 			);
 			name = "tvOS-Tests";
 			productName = "JFFramework-tvOS-Tests";
-			productReference = 6CE4F4CA1C2456A3008A8ACB /* tvOS-Tests.xctest */;
+			productReference = 6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -552,7 +552,9 @@
 		EA5F858C1B768E5A00A32291 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JF;
 				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Jacopo Filié";
 				TargetAttributes = {
 					6C31C7791B9EEDF300FAF487 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1000,7 +1002,6 @@
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
@@ -1038,7 +1039,6 @@
 				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
 				VALIDATE_PRODUCT = YES;
