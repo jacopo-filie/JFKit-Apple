@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CE4F4C91C2456A3008A8ACB"
-               BuildableName = "tvOS-Tests.xctest"
+               BuildableName = "JFFramework-tvOS-Tests.xctest"
                BlueprintName = "tvOS-Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CE4F4C91C2456A3008A8ACB"
-               BuildableName = "tvOS-Tests.xctest"
+               BuildableName = "JFFramework-tvOS-Tests.xctest"
                BlueprintName = "tvOS-Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>

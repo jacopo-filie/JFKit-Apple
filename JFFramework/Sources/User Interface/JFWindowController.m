@@ -189,26 +189,15 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 #pragma mark Notifications management (Window)
 
-#if !JF_TARGET_OS_OSX
-
-- (void)notifiedWindowDidBecomeHidden:(NSNotification*)notification
-{
-	self.windowHidden = YES;
-}
-
-#endif
+#if JF_TARGET_OS_OSX
 
 - (void)notifiedWindowDidBecomeKey:(NSNotification*)notification
 {
-#if JF_TARGET_OS_OSX
 	if(OSX10_6)
 		self.windowHidden = ![self.window isVisible];
-#endif
 	
 	[self windowDidBecomeKey];
 }
-
-#if JF_TARGET_OS_OSX
 
 - (void)notifiedWindowDidBecomeMain:(NSNotification*)notification
 {
@@ -217,17 +206,6 @@ static void*	JFKVOContext	= &JFKVOContext;
 	
 	[self windowDidBecomeMain];
 }
-
-#else
-
-- (void)notifiedWindowDidBecomeVisible:(NSNotification*)notification
-{
-	self.windowHidden = NO;
-}
-
-#endif
-
-#if JF_TARGET_OS_OSX
 
 - (void)notifiedWindowDidChangeScreen:(NSNotification*)notification
 {
@@ -295,19 +273,13 @@ static void*	JFKVOContext	= &JFKVOContext;
 	[self windowDidMove];
 }
 
-#endif
-
 - (void)notifiedWindowDidResignKey:(NSNotification*)notification
 {
-#if JF_TARGET_OS_OSX
 	if(OSX10_6)
 		self.windowHidden = ![self.window isVisible];
-#endif
 	
 	[self windowDidResignKey];
 }
-
-#if JF_TARGET_OS_OSX
 
 - (void)notifiedWindowDidResignMain:(NSNotification*)notification
 {
@@ -373,11 +345,8 @@ static void*	JFKVOContext	= &JFKVOContext;
 	[self windowWillStartLiveResize];
 }
 
-#endif
-
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary<NSString*,id>*)change context:(void*)context
 {
-#if JF_TARGET_OS_OSX
 	if(context == JFKVOContext)
 	{
 		if((object == self.window) && [keyPath isEqualToString:@"visible"])
@@ -385,11 +354,36 @@ static void*	JFKVOContext	= &JFKVOContext;
 	}
 	else
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-#endif
 }
+
+#else
+
+- (void)notifiedWindowDidBecomeHidden:(NSNotification*)notification
+{
+	self.windowHidden = YES;
+}
+
+- (void)notifiedWindowDidBecomeKey:(NSNotification*)notification
+{
+	[self windowDidBecomeKey];
+}
+
+- (void)notifiedWindowDidBecomeVisible:(NSNotification*)notification
+{
+	self.windowHidden = NO;
+}
+
+- (void)notifiedWindowDidResignKey:(NSNotification*)notification
+{
+	[self windowDidResignKey];
+}
+
+#endif
 
 
 #pragma mark Window management
+
+#if JF_TARGET_OS_OSX
 
 - (void)windowDidBecomeHidden
 {}
@@ -397,17 +391,11 @@ static void*	JFKVOContext	= &JFKVOContext;
 - (void)windowDidBecomeKey
 {}
 
-#if JF_TARGET_OS_OSX
-
 - (void)windowDidBecomeMain
 {}
 
-#endif
-
 - (void)windowDidBecomeVisible
 {}
-
-#if JF_TARGET_OS_OSX
 
 - (void)windowDidChangeScreen
 {}
@@ -433,12 +421,8 @@ static void*	JFKVOContext	= &JFKVOContext;
 - (void)windowDidMove
 {}
 
-#endif
-
 - (void)windowDidResignKey
 {}
-
-#if JF_TARGET_OS_OSX
 
 - (void)windowDidResignMain
 {}
@@ -462,6 +446,20 @@ static void*	JFKVOContext	= &JFKVOContext;
 {}
 
 - (void)windowWillStartLiveResize
+{}
+
+#else
+
+- (void)windowDidBecomeHidden
+{}
+
+- (void)windowDidBecomeKey
+{}
+
+- (void)windowDidBecomeVisible
+{}
+
+- (void)windowDidResignKey
 {}
 
 #endif

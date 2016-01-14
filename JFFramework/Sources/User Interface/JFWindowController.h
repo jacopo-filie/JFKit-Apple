@@ -45,13 +45,11 @@
 - (instancetype)	initWithWindow:(JFWindow*)window NS_DESIGNATED_INITIALIZER;
 
 // Window management
+#if JF_TARGET_OS_OSX
 - (void)	windowDidBecomeHidden;
 - (void)	windowDidBecomeKey;
-#if JF_TARGET_OS_OSX
 - (void)	windowDidBecomeMain;
-#endif
 - (void)	windowDidBecomeVisible;
-#if JF_TARGET_OS_OSX
 - (void)	windowDidChangeScreen;
 - (void)	windowDidChangeScreenProfile;
 - (void)	windowDidDeminiaturize;
@@ -60,9 +58,7 @@
 - (void)	windowDidExpose:(NSRect)exposedRect;
 - (void)	windowDidMiniaturize;
 - (void)	windowDidMove;
-#endif
 - (void)	windowDidResignKey;
-#if JF_TARGET_OS_OSX
 - (void)	windowDidResignMain;
 - (void)	windowDidResize;
 - (void)	windowDidUpdate;
@@ -71,6 +67,11 @@
 - (void)	windowWillMiniaturize;
 - (void)	windowWillMove;
 - (void)	windowWillStartLiveResize;
+#else
+- (void)	windowDidBecomeHidden;
+- (void)	windowDidBecomeKey;
+- (void)	windowDidBecomeVisible;
+- (void)	windowDidResignKey;
 #endif
 
 @end
