@@ -21,6 +21,8 @@
 		6C1C57FC1C29A517007F08F6 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C57F61C29A517007F08F6 /* JFWindowController.m */; };
 		6C31C7851B9EEDF400FAF487 /* JFFramework-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C77A1B9EEDF300FAF487 /* JFFramework-iOS.a */; };
 		6C31C7A11B9EF3CF00FAF487 /* JFFramework-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */; };
+		6C53C06D1C512D0800CDAB09 /* NSStoryboard+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C53C06B1C512D0800CDAB09 /* NSStoryboard+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C53C06E1C512D0800CDAB09 /* NSStoryboard+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C53C06C1C512D0800CDAB09 /* NSStoryboard+JFFramework.m */; };
 		6CE4F4CF1C2456A3008A8ACB /* JFFramework-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */; };
 		6CE4F4D71C245937008A8ACB /* JFConnectionMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = EA465D771C00A1E300811A80 /* JFConnectionMachine.m */; };
 		6CE4F4D81C245937008A8ACB /* JFErrorsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE4A34C1C18BB5B00D7A8A1 /* JFErrorsManager.m */; };
@@ -50,6 +52,16 @@
 		6CE4F4F11C245992008A8ACB /* JFLogger-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5B25A1C15E4F900FE0A57 /* JFLogger-Tests.m */; };
 		6CE4F4F21C245992008A8ACB /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		6CE4F4F31C245992008A8ACB /* JFUtilities-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4F1D01BF413F00031E236 /* JFUtilities-Tests.m */; };
+		6CFBB9EB1C50ED60005F61BD /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9BA1C50ED48005F61BD /* JRSwizzle.m */; };
+		6CFBB9EC1C50ED60005F61BD /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9BA1C50ED48005F61BD /* JRSwizzle.m */; };
+		6CFBB9ED1C50ED61005F61BD /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9BA1C50ED48005F61BD /* JRSwizzle.m */; };
+		6CFBB9EE1C50ED65005F61BD /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9B91C50ED48005F61BD /* JRSwizzle.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6CFBB9EF1C50ED6B005F61BD /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9B91C50ED48005F61BD /* JRSwizzle.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6CFBB9F01C50ED6B005F61BD /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9B91C50ED48005F61BD /* JRSwizzle.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6CFBB9F91C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CFBB9FB1C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CFBB9FC1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */; };
+		6CFBB9FE1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */; };
 		EA0039251BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		EA0039261BFBCDCB003C8AE8 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */; };
 		EA2CE8421C08D72C00713102 /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
@@ -72,9 +84,9 @@
 		EA7F89671C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
 		EA7F89681C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
 		EA7F89691C289F1D002C2E34 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */; };
-		EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
-		EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
-		EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; };
+		EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAB650E21C135C0000064C7D /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB650E01C135C0000064C7D /* JFLogger.m */; };
 		EAB650E31C135C0000064C7D /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB650E01C135C0000064C7D /* JFLogger.m */; };
 		EAB650E41C135C0000064C7D /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB650E11C135C0000064C7D /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,9 +157,16 @@
 		6C31C7841B9EEDF400FAF487 /* JFFramework-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7961B9EF3CE00FAF487 /* JFFramework-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C31C7A01B9EF3CF00FAF487 /* JFFramework-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C53C06B1C512D0800CDAB09 /* NSStoryboard+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStoryboard+JFFramework.h"; sourceTree = "<group>"; };
+		6C53C06C1C512D0800CDAB09 /* NSStoryboard+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStoryboard+JFFramework.m"; sourceTree = "<group>"; };
 		6CE4F4BD1C24567E008A8ACB /* JFFramework-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "JFFramework-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4CA1C2456A3008A8ACB /* JFFramework-tvOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-tvOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Tests.plist"; sourceTree = "<group>"; };
+		6CFBB9B91C50ED48005F61BD /* JRSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		6CFBB9BA1C50ED48005F61BD /* JRSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		6CFBB9D01C50ED48005F61BD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+JFFramework.h"; sourceTree = "<group>"; };
+		6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+JFFramework.m"; sourceTree = "<group>"; };
 		EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFConnectionMachine-Tests.m"; sourceTree = "<group>"; };
 		EA465D761C00A1E300811A80 /* JFConnectionMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFConnectionMachine.h; sourceTree = "<group>"; };
@@ -234,10 +253,42 @@
 		6C1C57F41C29A4D0007F08F6 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				6CFBB9F61C50FC7A005F61BD /* Addons */,
 				6C1C57F51C29A517007F08F6 /* JFWindowController.h */,
 				6C1C57F61C29A517007F08F6 /* JFWindowController.m */,
 			);
 			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		6CFBB94D1C50EB48005F61BD /* Third-Party */ = {
+			isa = PBXGroup;
+			children = (
+				6CFBB9B81C50ED48005F61BD /* JRSwizzle */,
+			);
+			name = "Third-Party";
+			path = "JFFramework/Third-Party";
+			sourceTree = "<group>";
+		};
+		6CFBB9B81C50ED48005F61BD /* JRSwizzle */ = {
+			isa = PBXGroup;
+			children = (
+				6CFBB9B91C50ED48005F61BD /* JRSwizzle.h */,
+				6CFBB9BA1C50ED48005F61BD /* JRSwizzle.m */,
+				6CFBB9D01C50ED48005F61BD /* LICENSE */,
+			);
+			name = JRSwizzle;
+			path = ../../Modules/JRSwizzle;
+			sourceTree = "<group>";
+		};
+		6CFBB9F61C50FC7A005F61BD /* Addons */ = {
+			isa = PBXGroup;
+			children = (
+				6C53C06B1C512D0800CDAB09 /* NSStoryboard+JFFramework.h */,
+				6C53C06C1C512D0800CDAB09 /* NSStoryboard+JFFramework.m */,
+				6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */,
+				6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */,
+			);
+			path = Addons;
 			sourceTree = "<group>";
 		};
 		EA5F858B1B768E5A00A32291 = {
@@ -248,6 +299,7 @@
 				EAE7523E1BEBF444003A2F38 /* Sources */,
 				EAE752341BEBEF91003A2F38 /* Supporting Files */,
 				EA730C0F1BF2A38100968F31 /* Tests */,
+				6CFBB94D1C50EB48005F61BD /* Third-Party */,
 			);
 			sourceTree = "<group>";
 		};
@@ -379,10 +431,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				EA7F89651C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D791C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
+				6C53C06D1C512D0800CDAB09 /* NSStoryboard+JFFramework.h in Headers */,
+				6CFBB9EF1C50ED6B005F61BD /* JRSwizzle.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
 				EAB650E51C135C0000064C7D /* JFLogger.h in Headers */,
 				EAFAFC301BFE6A9C00563037 /* JFManager.h in Headers */,
@@ -391,6 +444,7 @@
 				EAE7523A1BEBEF91003A2F38 /* JFFramework.h in Headers */,
 				EAE752621BEC200D003A2F38 /* JFString.h in Headers */,
 				EAE752541BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
+				EA83A5F71C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				6C1C57F81C29A517007F08F6 /* JFWindowController.h in Headers */,
 				EAE4A34E1C18BB5B00D7A8A1 /* JFErrorsManager.h in Headers */,
 			);
@@ -400,10 +454,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				EA7F89641C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D781C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
+				6CFBB9F91C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */,
+				6CFBB9EE1C50ED65005F61BD /* JRSwizzle.h in Headers */,
 				EAE7525C1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
 				EAFAFC2F1BFE6A9C00563037 /* JFManager.h in Headers */,
 				EAE752391BEBEF91003A2F38 /* JFFramework.h in Headers */,
@@ -413,6 +468,7 @@
 				EA5BDED91BF7571100D1DD7C /* JFColor.h in Headers */,
 				EAE752531BEBFFC1003A2F38 /* JFUtilities.h in Headers */,
 				6C1C57F71C29A517007F08F6 /* JFWindowController.h in Headers */,
+				EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				EAE4A34D1C18BB5B00D7A8A1 /* JFErrorsManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,10 +477,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				EA7F89661C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */,
 				6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */,
+				6CFBB9FB1C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */,
+				6CFBB9F01C50ED6B005F61BD /* JRSwizzle.h in Headers */,
 				6CE4F4E11C245963008A8ACB /* JFManager.h in Headers */,
 				6CE4F4E21C245963008A8ACB /* JFByteStream.h in Headers */,
 				6CE4F4E31C245963008A8ACB /* JFColor.h in Headers */,
@@ -433,6 +490,7 @@
 				6CE4F4E61C245963008A8ACB /* JFShortcuts.h in Headers */,
 				6CE4F4E71C245963008A8ACB /* JFTypes.h in Headers */,
 				6CE4F4E81C245963008A8ACB /* JFUtilities.h in Headers */,
+				EA83A5F81C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				6C1C57F91C29A517007F08F6 /* JFWindowController.h in Headers */,
 				6CE4F4E91C245963008A8ACB /* JFFramework.h in Headers */,
 			);
@@ -632,11 +690,13 @@
 				6C1C57FA1C29A517007F08F6 /* JFWindowController.m in Sources */,
 				6C0261A61C199FB8001D52B9 /* JFByteStream.m in Sources */,
 				EAE4A34F1C18BB5B00D7A8A1 /* JFErrorsManager.m in Sources */,
+				6CFBB9FC1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */,
 				EA7F89671C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */,
 				EA465D7A1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
+				6CFBB9EB1C50ED60005F61BD /* JRSwizzle.m in Sources */,
 				EAB650E21C135C0000064C7D /* JFLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,7 +729,9 @@
 				EAFAFC321BFE6A9C00563037 /* JFManager.m in Sources */,
 				EA465D7B1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752641BEC200D003A2F38 /* JFString.m in Sources */,
+				6C53C06E1C512D0800CDAB09 /* NSStoryboard+JFFramework.m in Sources */,
 				EA5BDEDC1BF7571100D1DD7C /* JFColor.m in Sources */,
+				6CFBB9EC1C50ED60005F61BD /* JRSwizzle.m in Sources */,
 				EAB650E31C135C0000064C7D /* JFLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,11 +760,13 @@
 				6C1C57FC1C29A517007F08F6 /* JFWindowController.m in Sources */,
 				6CE4F4D81C245937008A8ACB /* JFErrorsManager.m in Sources */,
 				6CE4F4D91C245937008A8ACB /* JFManager.m in Sources */,
+				6CFBB9FE1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */,
 				EA7F89691C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				6CE4F4DA1C245937008A8ACB /* JFByteStream.m in Sources */,
 				6CE4F4DB1C245937008A8ACB /* JFColor.m in Sources */,
 				6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */,
 				6CE4F4DD1C245937008A8ACB /* JFLogger.m in Sources */,
+				6CFBB9ED1C50ED61005F61BD /* JRSwizzle.m in Sources */,
 				6CE4F4DE1C245937008A8ACB /* JFUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1087,9 +1151,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
+				PRIVATE_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)/private";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "${PROJECT_NAME}-${TARGET_NAME}";
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)/public";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
@@ -1138,9 +1203,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRIVATE_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)/private";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "${PROJECT_NAME}-${TARGET_NAME}";
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)/public";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";

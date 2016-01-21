@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2016 Jacopo Filié
+//	Copyright © 2016 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,44 +24,28 @@
 
 
 
-#pragma mark - Common headers
+@protocol JFStoryboardObserver <NSObject>
 
-// Core
-#import "JFAppDelegate.h"
-#import	"JFConnectionMachine.h"
-#import "JFErrorsManager.h"
-#import	"JFManager.h"
+@optional
 
-// Data Objects
-#import "JFByteStream.h"
-#import "JFColor.h"
-#import "JFString.h"
+- (void)	jf_storyboard:(UIStoryboard*)storyboard didInstantiateInitialViewController:(__kindof UIViewController*)viewController;
+- (void)	jf_storyboard:(UIStoryboard*)storyboard didInstantiateViewController:(__kindof UIViewController*)viewController withIdentifier:(NSString*)identifier;
+- (void)	jf_storyboard:(UIStoryboard*)storyboard didPerformSegue:(UIStoryboardSegue*)segue;
+- (void)	jf_storyboard:(UIStoryboard*)storyboard willPerformSegue:(UIStoryboardSegue*)segue;
 
-// User Interface
-#import "JFWindowController.h"
-
-// Utilities
-#import "JFLogger.h"
-#import	"JFPreprocessorMacros.h"
-#import "JFTypes.h"
-#import	"JFUtilities.h"
+@end
 
 
 
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_TV
-#pragma mark - iOS/tvOS specific headers
-
-// User interface (Addons)
-#import "UIStoryboard+JFFramework.h"
-
-#endif
+#pragma mark
 
 
 
-#if JF_TARGET_OS_OSX
-#pragma mark - OSX specific headers
+@interface UIStoryboard (JFFramework)
 
-// User interface (Addons)
-#import "NSStoryboard+JFFramework.h"
+#pragma mark Properties
 
-#endif
+// Relationships
+@property (strong, nonatomic, readonly)	NSMutableSet<id<JFStoryboardObserver>>*	jf_observers;
+
+@end
