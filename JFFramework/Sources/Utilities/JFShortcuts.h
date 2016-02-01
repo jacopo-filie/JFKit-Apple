@@ -64,7 +64,9 @@
 #define AppDetailedVersion	[NSString stringWithFormat:@"%@ (%@)", AppVersion, AppBuild]
 #define AppDisplayName		JFApplicationInfoForKey(@"CFBundleDisplayName")
 #define AppIdentifier		JFApplicationInfoForKey(@"CFBundleIdentifier")
+#define AppLaunchStoryboard	JFApplicationInfoForKey(@"UILaunchStoryboardName")
 #define AppName				JFApplicationInfoForKey(@"CFBundleName")
+#define AppMainStoryboard	JFApplicationInfoForKey(@"UIMainStoryboardFile")
 #define AppVersion			JFApplicationInfoForKey(@"CFBundleShortVersionString")
 
 
