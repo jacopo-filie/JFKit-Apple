@@ -26,7 +26,7 @@
 
 #import "UIStoryboard+JFFramework.h"
 
-#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
 
 #import "JFTypes.h"
 #import "JRSwizzle.h"

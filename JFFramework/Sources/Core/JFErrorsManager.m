@@ -54,20 +54,7 @@
 
 - (instancetype)init
 {
-	return [self initWithDomain:nil];
-}
-
-- (instancetype)initWithDefaultSettings
-{
-	NSString* domain = AppIdentifier;
-	
-	self = (JFStringIsNullOrEmpty(domain) ? nil : [super initWithDefaultSettings]);
-	if(self)
-	{
-		// Data
-		_domain = domain;
-	}
-	return self;
+	return [self initWithDomain:AppIdentifier];
 }
 
 - (instancetype)initWithDomain:(NSString*)domain

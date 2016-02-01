@@ -144,54 +144,26 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 
 - (instancetype)init
 {
-	return [self initWithFileURL:nil];
-}
-
-- (instancetype)initWithDefaultSettings
-{
-	self = [super initWithDefaultSettings];
-	if(self)
+	// Prepares the fileURL.
+	NSURL* fileURL = nil;
+	NSError* error = nil;
+	NSURL* folderURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+	if(folderURL)
 	{
-		Class class = [self class];
-		
-		// Prepares the fileURL.
-		NSURL* fileURL = nil;
-		NSError* error = nil;
-		NSURL* folderURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-		if(folderURL)
-		{
-			NSString* applicationName = AppName;
-			if(JFStringIsNullOrEmpty(applicationName))
-				applicationName = @"Application";
-			NSString* fileName = [applicationName stringByAppendingPathExtension:@"log"];
-			fileURL = [folderURL URLByAppendingPathComponent:fileName];
-		}
-		else
-		{
-			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagAttention | JFLogHashtagFileSystem)];
-			NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
-			NSLog(@"%@: unable to locate the 'Application Support' system directory%@. %@", ClassName, errorString, hashtagsString);
-		}
-		
-		// Prepares the priority.
-#ifdef DEBUG
-		JFLogPriority priority = JFLogPriority7Debug;
-#else
-		JFLogPriority priority = JFLogPriority6Info;
-#endif
-		
-		// Concurrency
-		_dateFormatterLockInitialized	= initializeDateFormatterLock(&_dateFormatterLock, class);
-		_destinationsLockInitialized	= initializeDestinationsLock(&_destinationsLock, class);
-		_fileLockInitialized			= initializeFileLock(&_fileLock, class);
-		
-		// Settings
-		_dateFormatter	= createDateFormatter();
-		_destinations	= (fileURL ? JFLogDestinationAll : JFLogDestinationConsole);
-		_fileURL		= fileURL;
-		_priority		= priority;
+		NSString* applicationName = AppName;
+		if(JFStringIsNullOrEmpty(applicationName))
+			applicationName = @"Application";
+		NSString* fileName = [applicationName stringByAppendingPathExtension:@"log"];
+		fileURL = [folderURL URLByAppendingPathComponent:fileName];
 	}
-	return self;
+	else
+	{
+		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagAttention | JFLogHashtagFileSystem)];
+		NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
+		NSLog(@"%@: unable to locate the 'Application Support' system directory%@. %@", ClassName, errorString, hashtagsString);
+	}
+	
+	return [self initWithFileURL:fileURL];
 }
 
 - (instancetype)initWithFileURL:(NSURL*)fileURL

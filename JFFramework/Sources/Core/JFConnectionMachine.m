@@ -92,11 +92,6 @@
 
 #pragma mark Memory management
 
-- (instancetype)init
-{
-	return [self initWithDelegate:nil];
-}
-
 - (instancetype)initWithDelegate:(id<JFConnectionMachineDelegate>)delegate
 {
 	return [self initWithState:JFConnectionStateReady delegate:delegate];
@@ -160,7 +155,7 @@
 	
 	@synchronized(self)
 	{
-		if([self isPerformingCommand] || ![[self class] isTransitionEnabled:transition fromState:state])
+		if([self isPerformingCommand] || ![[self class] isTransitionAllowed:transition fromState:state])
 			return NO;
 		
 		self.performingCommand = YES;
@@ -484,7 +479,7 @@
 	return retObj;
 }
 
-+ (BOOL)isTransitionEnabled:(JFConnectionTransition)transition fromState:(JFConnectionState)state
++ (BOOL)isTransitionAllowed:(JFConnectionTransition)transition fromState:(JFConnectionState)state
 {
 	if(transition == JFConnectionTransitionNone)
 		return NO;

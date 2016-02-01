@@ -38,16 +38,20 @@
 
 + (instancetype)defaultManager
 {
-	return [[self alloc] initWithDefaultSettings];
+	return [[self alloc] init];
 }
 
 + (instancetype)sharedManager
 {
 	static NSMutableDictionary* sharedManagers = nil;
-	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	static pthread_mutex_t mutex;
+	static pthread_mutexattr_t mutexAttributes;
 	
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
+		pthread_mutexattr_init(&mutexAttributes);
+		pthread_mutexattr_settype(&mutexAttributes, PTHREAD_MUTEX_RECURSIVE);
+		pthread_mutex_init(&mutex, &mutexAttributes);
 		sharedManagers = [NSMutableDictionary new];
 	});
 	
@@ -70,11 +74,6 @@
 }
 
 - (instancetype)init
-{
-	return [super init];
-}
-
-- (instancetype)initWithDefaultSettings
 {
 	return [super init];
 }

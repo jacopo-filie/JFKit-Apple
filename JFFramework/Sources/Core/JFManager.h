@@ -29,9 +29,8 @@
 #pragma mark Methods
 
 // Memory management
-+ (instancetype)	defaultManager;										// Calls '-initWithDefaultSettings'.
-+ (instancetype)	sharedManager;										// Creates a singleton with default settings for each subclass.
-- (instancetype)	init NS_DESIGNATED_INITIALIZER;						// Should be used when the cleanest settings are needed.
-- (instancetype)	initWithDefaultSettings NS_DESIGNATED_INITIALIZER;	// Should be used when the default settings are needed; the default settings can differ from the cleanest ones.
++ (instancetype)	defaultManager;					// Creates a new instance and calls '-init' on it.
++ (instancetype)	sharedManager;					// Creates a singleton for each subclass.
+- (instancetype)	init NS_DESIGNATED_INITIALIZER;
 
 @end

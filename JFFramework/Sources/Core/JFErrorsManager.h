@@ -49,7 +49,6 @@ typedef NSInteger JFErrorCode;
 #pragma mark Methods
 
 // Memory management
-- (instancetype)	initWithDefaultSettings NS_DESIGNATED_INITIALIZER;
 - (instancetype)	initWithDomain:(NSString*)domain NS_DESIGNATED_INITIALIZER;
 
 // Data management

@@ -57,32 +57,34 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 @protocol JFConnectionMachineDelegate <NSObject>
 
 @required
+#pragma mark Required methods
 
+// Connection management
 - (void)	connectionMachine:(JFConnectionMachine*)machine performConnect:(NSDictionary*)userInfo;
 - (void)	connectionMachine:(JFConnectionMachine*)machine performDisconnect:(NSDictionary*)userInfo;
 - (void)	connectionMachine:(JFConnectionMachine*)machine performReconnect:(NSDictionary*)userInfo;
 - (void)	connectionMachine:(JFConnectionMachine*)machine performReset:(NSDictionary*)userInfo;
 
+// Events management
 - (void)	connectionMachine:(JFConnectionMachine*)machine didConnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didDisconnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didReconnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didReset:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
 
 @optional
+#pragma mark Optional methods
 
-- (void)	connectionMachine:(JFConnectionMachine*)machine willEnterState:(JFConnectionState)state;
+// State management
+- (void)	connectionMachine:(JFConnectionMachine*)machine didBeginTransition:(JFConnectionTransition)transition;
+- (void)	connectionMachine:(JFConnectionMachine*)machine didEndTransition:(JFConnectionTransition)transition;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didEnterState:(JFConnectionState)state;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didFailToEnterState:(JFConnectionState)state error:(NSError*)error;
-
-- (void)	connectionMachine:(JFConnectionMachine*)machine willLeaveState:(JFConnectionState)state;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didLeaveState:(JFConnectionState)state;
 - (void)	connectionMachine:(JFConnectionMachine*)machine didFailToLeaveState:(JFConnectionState)state error:(NSError*)error;
-
+- (void)	connectionMachine:(JFConnectionMachine*)machine didLeaveState:(JFConnectionState)state;
 - (void)	connectionMachine:(JFConnectionMachine*)machine willBeginTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didBeginTransition:(JFConnectionTransition)transition;
-
 - (void)	connectionMachine:(JFConnectionMachine*)machine willEndTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didEndTransition:(JFConnectionTransition)transition;
+- (void)	connectionMachine:(JFConnectionMachine*)machine willEnterState:(JFConnectionState)state;
+- (void)	connectionMachine:(JFConnectionMachine*)machine willLeaveState:(JFConnectionState)state;
 
 @end
 
@@ -96,10 +98,6 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 
 #pragma mark Properties
 
-// Flags
-@property (assign, readonly)	JFConnectionState		state;
-@property (assign, readonly)	JFConnectionTransition	transition;
-
 // Relationships
 #if __has_feature(objc_arc_weak)
 @property (weak, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
@@ -107,10 +105,15 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 @property (unsafe_unretained, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
 #endif
 
+// State
+@property (assign, readonly)	JFConnectionState		state;
+@property (assign, readonly)	JFConnectionTransition	transition;
+
 
 #pragma mark Methods
 
 // Memory management
+- (instancetype)	init NS_UNAVAILABLE;
 - (instancetype)	initWithDelegate:(id<JFConnectionMachineDelegate>)delegate;	// The starting state is "Ready".
 - (instancetype)	initWithState:(JFConnectionState)state delegate:(id<JFConnectionMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
@@ -134,6 +137,6 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 // Utilities management
 + (NSString*)	debugStringFromState:(JFConnectionState)state;
 + (NSString*)	debugStringFromTransition:(JFConnectionTransition)transition;
-+ (BOOL)		isTransitionEnabled:(JFConnectionTransition)transition fromState:(JFConnectionState)state;
++ (BOOL)		isTransitionAllowed:(JFConnectionTransition)transition fromState:(JFConnectionState)state;
 
 @end
