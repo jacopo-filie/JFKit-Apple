@@ -58,10 +58,6 @@
 	// -init
 	manager = [[JFManager alloc] init];
 	XCTAssert(manager, @"Initializer '-init' did not return any object.");
-	
-	// -initWithDefaultSettings
-	manager = [[JFManager alloc] initWithDefaultSettings];
-	XCTAssert(manager, @"Initializer '-initWithDefaultSettings' did not return any object.");
 }
 
 @end
