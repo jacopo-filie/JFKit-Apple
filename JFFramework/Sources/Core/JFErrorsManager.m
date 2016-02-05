@@ -118,7 +118,14 @@
 
 - (NSError*)debugPlaceholderError
 {
-	return [self errorWithCode:NSIntegerMax];
+	return [self debugPlaceholderErrorWithUnderlyingError:nil];
+}
+
+- (NSError*)debugPlaceholderErrorWithUnderlyingError:(NSError*)error
+{
+	JFErrorCode errorCode = NSIntegerMax;
+	NSDictionary* userInfo = [self userInfoForErrorCode:errorCode underlyingError:error];
+	return [self errorWithCode:errorCode userInfo:userInfo];
 }
 
 - (NSError*)errorWithCode:(JFErrorCode)errorCode
