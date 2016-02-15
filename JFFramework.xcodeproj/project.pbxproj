@@ -61,6 +61,10 @@
 		6CEDFB171C72391A0020B608 /* UIButton+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CEDFB151C72391A0020B608 /* UIButton+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CEDFB181C72391A0020B608 /* UIButton+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFB161C72391A0020B608 /* UIButton+JFFramework.m */; };
 		6CEDFB1D1C723D590020B608 /* UIButton+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CEDFB151C72391A0020B608 /* UIButton+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CEDFB201C7240640020B608 /* UILabel+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CEDFB1E1C7240640020B608 /* UILabel+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CEDFB211C7240640020B608 /* UILabel+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CEDFB1E1C7240640020B608 /* UILabel+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CEDFB221C7240640020B608 /* UILabel+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFB1F1C7240640020B608 /* UILabel+JFFramework.m */; };
+		6CEDFB231C7240640020B608 /* UILabel+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFB1F1C7240640020B608 /* UILabel+JFFramework.m */; };
 		6CFBB9F91C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CFBB9FB1C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CFBB9FC1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */; };
@@ -170,6 +174,8 @@
 		6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Tests.plist"; sourceTree = "<group>"; };
 		6CEDFB151C72391A0020B608 /* UIButton+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JFFramework.h"; sourceTree = "<group>"; };
 		6CEDFB161C72391A0020B608 /* UIButton+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JFFramework.m"; sourceTree = "<group>"; };
+		6CEDFB1E1C7240640020B608 /* UILabel+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JFFramework.h"; sourceTree = "<group>"; };
+		6CEDFB1F1C7240640020B608 /* UILabel+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JFFramework.m"; sourceTree = "<group>"; };
 		6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+JFFramework.h"; sourceTree = "<group>"; };
 		6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+JFFramework.m"; sourceTree = "<group>"; };
 		EA0039241BFBCDCB003C8AE8 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
@@ -291,6 +297,8 @@
 				6C53C06C1C512D0800CDAB09 /* NSStoryboard+JFFramework.m */,
 				6CEDFB151C72391A0020B608 /* UIButton+JFFramework.h */,
 				6CEDFB161C72391A0020B608 /* UIButton+JFFramework.m */,
+				6CEDFB1E1C7240640020B608 /* UILabel+JFFramework.h */,
+				6CEDFB1F1C7240640020B608 /* UILabel+JFFramework.m */,
 				6CFBB9F71C50FCB5005F61BD /* UIStoryboard+JFFramework.h */,
 				6CFBB9F81C50FCB5005F61BD /* UIStoryboard+JFFramework.m */,
 			);
@@ -462,6 +470,7 @@
 			files = (
 				EA7F89641C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D781C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
+				6CEDFB201C7240640020B608 /* UILabel+JFFramework.h in Headers */,
 				EAE752591BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				6CEDFB171C72391A0020B608 /* UIButton+JFFramework.h in Headers */,
 				6CFBB9F91C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */,
@@ -486,6 +495,7 @@
 			files = (
 				EA7F89661C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */,
+				6CEDFB211C7240640020B608 /* UILabel+JFFramework.h in Headers */,
 				6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */,
 				6CEDFB1D1C723D590020B608 /* UIButton+JFFramework.h in Headers */,
 				6CFBB9FB1C50FCB5005F61BD /* UIStoryboard+JFFramework.h in Headers */,
@@ -707,6 +717,7 @@
 				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
 				6CC0B56F1C57ABFB00E2464B /* JRSwizzle.m in Sources */,
 				EAB650E21C135C0000064C7D /* JFLogger.m in Sources */,
+				6CEDFB221C7240640020B608 /* UILabel+JFFramework.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +787,7 @@
 				6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */,
 				6CE4F4DD1C245937008A8ACB /* JFLogger.m in Sources */,
 				6CC0B5711C57ABFB00E2464B /* JRSwizzle.m in Sources */,
+				6CEDFB231C7240640020B608 /* UILabel+JFFramework.m in Sources */,
 				6CE4F4DE1C245937008A8ACB /* JFUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2016 Jacopo Filié
+//	Copyright © 2016 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,46 +24,6 @@
 
 
 
-#pragma mark - Common headers
+@interface UILabel (JFFramework)
 
-// Core
-#import "JFAppDelegate.h"
-#import	"JFConnectionMachine.h"
-#import "JFErrorsManager.h"
-#import	"JFManager.h"
-
-// Data Objects
-#import "JFByteStream.h"
-#import "JFColor.h"
-#import "JFString.h"
-
-// User Interface
-#import "JFWindowController.h"
-
-// Utilities
-#import "JFLogger.h"
-#import	"JFPreprocessorMacros.h"
-#import "JFTypes.h"
-#import	"JFUtilities.h"
-
-
-
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_TV
-#pragma mark - iOS/tvOS specific headers
-
-// User interface (Addons)
-#import	"UIButton+JFFramework.h"
-#import	"UILabel+JFFramework.h"
-#import "UIStoryboard+JFFramework.h"
-
-#endif
-
-
-
-#if JF_TARGET_OS_OSX
-#pragma mark - OSX specific headers
-
-// User interface (Addons)
-#import "NSStoryboard+JFFramework.h"
-
-#endif
+@end
