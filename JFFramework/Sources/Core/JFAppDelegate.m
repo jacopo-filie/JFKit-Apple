@@ -95,6 +95,28 @@
 }
 
 
+#pragma mark Memory management
+
+- (instancetype)init
+{
+	self = [super init];
+	if(self)
+	{
+		// Errors
+		_errorsManager	= [self createErrorsManager];
+	}
+	return self;
+}
+
+
+#pragma mark Errors management
+
+- (JFErrorsManager*)createErrorsManager
+{
+	return [[JFErrorsManager alloc] init];
+}
+
+
 #pragma mark User interface management
 
 - (JFWindowController*)createControllerForWindow:(JFWindow*)window

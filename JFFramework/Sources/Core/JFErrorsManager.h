@@ -49,6 +49,7 @@ typedef NSInteger JFErrorCode;
 #pragma mark Methods
 
 // Memory management
+- (instancetype)	init;	// Sets the domain to the value of the application info property 'CFBundleIdentifier'.
 - (instancetype)	initWithDomain:(NSString*)domain NS_DESIGNATED_INITIALIZER;
 
 // Data management

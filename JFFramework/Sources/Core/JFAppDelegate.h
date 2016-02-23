@@ -43,7 +43,7 @@
 #pragma mark Properties
 
 // Errors
-@property (strong)	JFErrorsManager*	errorsManager;
+@property (strong, nonatomic, readonly)	JFErrorsManager*	errorsManager;
 
 // Relationships
 @property (strong, nonatomic, readonly)	JFWindowController*	windowController;
@@ -53,6 +53,9 @@
 
 
 #pragma mark Methods
+
+// Errors management
+- (JFErrorsManager*)	createErrorsManager;
 
 // User interface management
 - (JFWindowController*)	createControllerForWindow:(JFWindow*)window;
