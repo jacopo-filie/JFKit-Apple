@@ -29,7 +29,9 @@
 
 
 
+#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
 @class JFAlertsController;
+#endif
 @class JFErrorsManager;
 @class JFWindowController;
 
@@ -50,7 +52,9 @@
 @property (strong, nonatomic, readonly)	JFWindowController*	windowController;
 
 // User interface
+#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
 @property (strong, nonatomic, readonly)				JFAlertsController*	alertsController;
+#endif
 @property (strong, nonatomic)			IBOutlet	JFWindow*			window;
 
 

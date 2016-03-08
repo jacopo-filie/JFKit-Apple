@@ -26,8 +26,10 @@
 
 #import "JFAppDelegate.h"
 
-#import "JFErrorsManager.h"
+#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
 #import "JFAlertsController.h"
+#endif
+#import "JFErrorsManager.h"
 #import "JFLogger.h"
 #import "JFShortcuts.h"
 #import "JFWindowController.h"
@@ -60,7 +62,9 @@
 @synthesize windowController	= _windowController;
 
 // User interface
+#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
 @synthesize alertsController	= _alertsController;
+#endif
 @synthesize window				= _window;
 
 
@@ -108,7 +112,9 @@
 		_errorsManager	= [self createErrorsManager];
 		
 		// User interface
+#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
 		_alertsController = [[JFAlertsController alloc] init];
+#endif
 	}
 	return self;
 }

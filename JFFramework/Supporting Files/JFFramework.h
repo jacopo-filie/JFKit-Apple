@@ -58,6 +58,7 @@
 
 // User interface
 #import "JFAlert.h"
+#import "JFAlertsController.h"
 
 #endif
 
@@ -71,6 +72,7 @@
 
 // User interface
 #import "JFAlert.h"
+#import "JFAlertsController.h"
 
 #endif
 
