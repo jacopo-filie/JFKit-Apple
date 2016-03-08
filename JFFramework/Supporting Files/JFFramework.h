@@ -48,13 +48,16 @@
 
 
 
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_TV
-#pragma mark - iOS/tvOS specific headers
+#if JF_TARGET_OS_IOS
+#pragma mark - iOS specific headers
 
 // User interface (Addons)
 #import	"UIButton+JFFramework.h"
 #import	"UILabel+JFFramework.h"
 #import "UIStoryboard+JFFramework.h"
+
+// User interface
+#import "JFAlert.h"
 
 #endif
 
@@ -65,5 +68,20 @@
 
 // User interface (Addons)
 #import "NSStoryboard+JFFramework.h"
+
+// User interface
+#import "JFAlert.h"
+
+#endif
+
+
+
+#if JF_TARGET_OS_TV
+#pragma mark - tvOS specific headers
+
+// User interface (Addons)
+#import	"UIButton+JFFramework.h"
+#import	"UILabel+JFFramework.h"
+#import "UIStoryboard+JFFramework.h"
 
 #endif

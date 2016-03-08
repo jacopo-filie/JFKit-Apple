@@ -27,6 +27,7 @@
 #import "JFAppDelegate.h"
 
 #import "JFErrorsManager.h"
+#import "JFAlertsController.h"
 #import "JFLogger.h"
 #import "JFShortcuts.h"
 #import "JFWindowController.h"
@@ -59,7 +60,8 @@
 @synthesize windowController	= _windowController;
 
 // User interface
-@synthesize window	= _window;
+@synthesize alertsController	= _alertsController;
+@synthesize window				= _window;
 
 
 #pragma mark Properties accessors (User interface)
@@ -104,6 +106,9 @@
 	{
 		// Errors
 		_errorsManager	= [self createErrorsManager];
+		
+		// User interface
+		_alertsController = [[JFAlertsController alloc] init];
 	}
 	return self;
 }

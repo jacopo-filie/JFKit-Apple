@@ -29,6 +29,7 @@
 
 
 
+@class JFAlertsController;
 @class JFErrorsManager;
 @class JFWindowController;
 
@@ -49,7 +50,8 @@
 @property (strong, nonatomic, readonly)	JFWindowController*	windowController;
 
 // User interface
-@property (strong, nonatomic)	IBOutlet	JFWindow*	window;
+@property (strong, nonatomic, readonly)				JFAlertsController*	alertsController;
+@property (strong, nonatomic)			IBOutlet	JFWindow*			window;
 
 
 #pragma mark Methods
