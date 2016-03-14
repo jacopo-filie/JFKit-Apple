@@ -97,18 +97,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Memory management
 - (instancetype)	init NS_UNAVAILABLE;
-- (instancetype)	initWithDelegate:(id<JFStateMachineDelegate>)delegate;
 - (instancetype)	initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 // State management
-- (void)	performTransition:(JFTransition)transition completion:(nullable JFSimpleCompletionBlock)completion;
 - (void)	onTransitionCompleted:(BOOL)succeeded error:(nullable NSError*)error;
+- (void)	performTransition:(JFTransition)transition completion:(nullable JFSimpleCompletionBlock)completion;
 
 // Utilities management
 - (nullable NSString*)	debugStringForState:(JFState)state;
 - (nullable NSString*)	debugStringForTransition:(JFTransition)transition;
+- (JFState)				finalStateForFailedTransition:(JFTransition)transition;
+- (JFState)				finalStateForSucceededTransition:(JFTransition)transition;
 - (JFState)				initialStateForTransition:(JFTransition)transition;
-- (JFState)				finalStateForTransition:(JFTransition)transition;
 - (JFTransition)		transitionFromState:(JFState)initialState toState:(JFState)finalState;
 
 @end
