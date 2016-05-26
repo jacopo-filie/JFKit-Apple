@@ -40,9 +40,9 @@
 
 #pragma mark - Constants
 
-JFState const		JFStateNotAvailable			= NSUIntegerMax;
-JFTransition const	JFTransitionNone			= 0;
-JFTransition const	JFTransitionNotAvailable	= NSUIntegerMax;
+JFState				const	JFStateNotAvailable			= NSUIntegerMax;
+JFStateTransition	const	JFTransitionNone			= 0;
+JFStateTransition	const	JFTransitionNotAvailable	= NSUIntegerMax;
 
 
 
@@ -64,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 // State
-@property (assign, readwrite)	JFState			currentState;
-@property (assign, readwrite)	JFTransition	currentTransition;
+@property (assign, readwrite)	JFState				currentState;
+@property (assign, readwrite)	JFStateTransition	currentTransition;
 
 
 #pragma mark Methods
@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cleanUpCurrentTransition:(BOOL)succeeded error:(nullable NSError*)error
 {
-	JFTransition transition = self.currentTransition;
+	JFStateTransition transition = self.currentTransition;
 	
 	self.currentState = (succeeded ? [self finalStateForSucceededTransition:transition] : [self finalStateForFailedTransition:transition]);
 	self.currentTransition = JFTransitionNone;
@@ -180,7 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
 	dispatch_async(self.serialQueue, block);
 }
 
-- (void)performTransition:(JFTransition)transition completion:(nullable JFSimpleCompletionBlock)completion
+- (void)performTransition:(JFStateTransition)transition completion:(nullable JFSimpleCompletionBlock)completion
 {
 #if __has_feature(objc_arc_weak)
 	typeof(self) __weak weakSelf = self;
@@ -285,7 +285,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (nullable NSString*)debugStringForTransition:(JFTransition)transition
+- (nullable NSString*)debugStringForTransition:(JFStateTransition)transition
 {
 	NSString* retObj = nil;
 	switch(transition)
@@ -297,24 +297,19 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (JFState)finalStateForFailedTransition:(JFTransition)transition
+- (JFState)finalStateForFailedTransition:(JFStateTransition)transition
 {
 	return JFStateNotAvailable;
 }
 
-- (JFState)finalStateForSucceededTransition:(JFTransition)transition
+- (JFState)finalStateForSucceededTransition:(JFStateTransition)transition
 {
 	return JFStateNotAvailable;
 }
 
-- (JFState)initialStateForTransition:(JFTransition)transition
+- (JFState)initialStateForTransition:(JFStateTransition)transition
 {
 	return JFStateNotAvailable;
-}
-
-- (JFTransition)transitionFromState:(JFState)initialState toState:(JFState)finalState
-{
-	return JFTransitionNotAvailable;
 }
 
 @end

@@ -35,15 +35,15 @@
 #pragma mark - Types
 
 typedef NSUInteger JFState;
-typedef NSUInteger JFTransition;
+typedef NSUInteger JFStateTransition;
 
 
 
 #pragma mark - Constants
 
-FOUNDATION_EXPORT JFState const			JFStateNotAvailable;
-FOUNDATION_EXPORT JFTransition const	JFTransitionNone;
-FOUNDATION_EXPORT JFTransition const	JFTransitionNotAvailable;
+FOUNDATION_EXPORT JFState			const	JFStateNotAvailable;
+FOUNDATION_EXPORT JFStateTransition	const	JFTransitionNone;
+FOUNDATION_EXPORT JFStateTransition	const	JFTransitionNotAvailable;
 
 
 
@@ -54,18 +54,12 @@ FOUNDATION_EXPORT JFTransition const	JFTransitionNotAvailable;
 NS_ASSUME_NONNULL_BEGIN
 @protocol JFStateMachineDelegate <NSObject>
 
-@required
-#pragma mark Required methods
+#pragma mark Methods
 
 // State management
-- (void)	stateMachine:(JFStateMachine*)machine performTransition:(JFTransition)transition;
-
-@optional
-#pragma mark Optional methods
-
-// State management
-- (void)	stateMachine:(JFStateMachine*)machine didPerformTransition:(JFTransition)transition;
-- (void)	stateMachine:(JFStateMachine*)machine willPerformTransition:(JFTransition)transition;
+@optional - (void)	stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition;
+@required - (void)	stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition;
+@optional - (void)	stateMachine:(JFStateMachine*)sender willPerformTransition:(JFStateTransition)transition;
 
 @end
 NS_ASSUME_NONNULL_END
@@ -89,8 +83,8 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 // State
-@property (assign, readonly)	JFState			currentState;
-@property (assign, readonly)	JFTransition	currentTransition;
+@property (assign, readonly)	JFState				currentState;
+@property (assign, readonly)	JFStateTransition	currentTransition;
 
 
 #pragma mark Methods
@@ -101,15 +95,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // State management
 - (void)	onTransitionCompleted:(BOOL)succeeded error:(nullable NSError*)error;
-- (void)	performTransition:(JFTransition)transition completion:(nullable JFSimpleCompletionBlock)completion;
+- (void)	performTransition:(JFStateTransition)transition completion:(nullable JFSimpleCompletionBlock)completion;
 
 // Utilities management
 - (nullable NSString*)	debugStringForState:(JFState)state;
-- (nullable NSString*)	debugStringForTransition:(JFTransition)transition;
-- (JFState)				finalStateForFailedTransition:(JFTransition)transition;
-- (JFState)				finalStateForSucceededTransition:(JFTransition)transition;
-- (JFState)				initialStateForTransition:(JFTransition)transition;
-- (JFTransition)		transitionFromState:(JFState)initialState toState:(JFState)finalState;
+- (nullable NSString*)	debugStringForTransition:(JFStateTransition)transition;
+- (JFState)				finalStateForFailedTransition:(JFStateTransition)transition;
+- (JFState)				finalStateForSucceededTransition:(JFStateTransition)transition;
+- (JFState)				initialStateForTransition:(JFStateTransition)transition;
 
 @end
 NS_ASSUME_NONNULL_END
