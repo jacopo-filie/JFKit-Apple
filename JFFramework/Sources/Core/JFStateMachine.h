@@ -32,18 +32,18 @@
 
 
 
+#pragma mark - Macros
+
+#define JFStateNotAvailable				NSUIntegerMax
+#define JFStateTransitionNone			0
+#define JFStateTransitionNotAvailable	NSUIntegerMax
+
+
+
 #pragma mark - Types
 
-typedef NSUInteger JFState;
-typedef NSUInteger JFStateTransition;
-
-
-
-#pragma mark - Constants
-
-FOUNDATION_EXPORT JFState			const	JFStateNotAvailable;
-FOUNDATION_EXPORT JFStateTransition	const	JFTransitionNone;
-FOUNDATION_EXPORT JFStateTransition	const	JFTransitionNotAvailable;
+typedef NSUInteger	JFState;
+typedef NSUInteger	JFStateTransition;
 
 
 

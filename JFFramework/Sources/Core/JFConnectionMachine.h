@@ -24,28 +24,31 @@
 
 
 
-@class JFConnectionMachine;
+#import "JFStateMachine.h"
 
 
 
 #pragma mark - Types
 
-typedef NS_ENUM(NSUInteger, JFConnectionState)
+typedef NS_ENUM(JFState, JFConnectionState)
 {
-	JFConnectionStateReady			= 0,
-	JFConnectionStateConnected		= 1,
-	JFConnectionStateDisconnected	= 2,
-	JFConnectionStateLost			= 3,
-	JFConnectionStateUnknown		= 4,
+	JFConnectionStateReady,
+	JFConnectionStateConnected,
+	JFConnectionStateDisconnected,
+	JFConnectionStateLost,
+	JFConnectionStateDirty,
 };
 
-typedef NS_ENUM(NSUInteger, JFConnectionTransition)
+typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 {
-	JFConnectionTransitionNone			= 0,
-	JFConnectionTransitionConnecting	= 1,
-	JFConnectionTransitionDisconnecting	= 2,
-	JFConnectionTransitionReconnecting	= 3,
-	JFConnectionTransitionResetting		= 4,
+	JFConnectionTransitionNone = JFStateTransitionNone,
+	JFConnectionTransitionConnecting,
+	JFConnectionTransitionDisconnectingFromConnected,
+	JFConnectionTransitionDisconnectingFromLost,
+	JFConnectionTransitionLosingConnection,
+	JFConnectionTransitionReconnecting,
+	JFConnectionTransitionResettingFromDisconnected,
+	JFConnectionTransitionResettingFromDirty,
 };
 
 
@@ -54,89 +57,25 @@ typedef NS_ENUM(NSUInteger, JFConnectionTransition)
 
 
 
-@protocol JFConnectionMachineDelegate <NSObject>
-
-@required
-#pragma mark Required methods
-
-// Connection management
-- (void)	connectionMachine:(JFConnectionMachine*)machine performConnect:(NSDictionary*)userInfo;
-- (void)	connectionMachine:(JFConnectionMachine*)machine performDisconnect:(NSDictionary*)userInfo;
-- (void)	connectionMachine:(JFConnectionMachine*)machine performReconnect:(NSDictionary*)userInfo;
-- (void)	connectionMachine:(JFConnectionMachine*)machine performReset:(NSDictionary*)userInfo;
-
-// Events management
-- (void)	connectionMachine:(JFConnectionMachine*)machine didConnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didDisconnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didReconnect:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didReset:(BOOL)succeeded userInfo:(NSDictionary*)userInfo error:(NSError*)error;
-
-@optional
-#pragma mark Optional methods
-
-// State management
-- (void)	connectionMachine:(JFConnectionMachine*)machine didBeginTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didEndTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didEnterState:(JFConnectionState)state;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didFailToEnterState:(JFConnectionState)state error:(NSError*)error;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didFailToLeaveState:(JFConnectionState)state error:(NSError*)error;
-- (void)	connectionMachine:(JFConnectionMachine*)machine didLeaveState:(JFConnectionState)state;
-- (void)	connectionMachine:(JFConnectionMachine*)machine willBeginTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine willEndTransition:(JFConnectionTransition)transition;
-- (void)	connectionMachine:(JFConnectionMachine*)machine willEnterState:(JFConnectionState)state;
-- (void)	connectionMachine:(JFConnectionMachine*)machine willLeaveState:(JFConnectionState)state;
-
-@end
-
- 
-
-#pragma mark
-
-
-
-@interface JFConnectionMachine : NSObject
-
-#pragma mark Properties
-
-// Relationships
-#if __has_feature(objc_arc_weak)
-@property (weak, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
-#else
-@property (unsafe_unretained, nonatomic, readonly)	id<JFConnectionMachineDelegate>	delegate;
-#endif
-
-// State
-@property (assign, readonly)	JFConnectionState		state;
-@property (assign, readonly)	JFConnectionTransition	transition;
-
+NS_ASSUME_NONNULL_BEGIN
+@interface JFConnectionMachine : JFStateMachine
 
 #pragma mark Methods
 
 // Memory management
-- (instancetype)	init NS_UNAVAILABLE;
-- (instancetype)	initWithDelegate:(id<JFConnectionMachineDelegate>)delegate;	// The starting state is "Ready".
-- (instancetype)	initWithState:(JFConnectionState)state delegate:(id<JFConnectionMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)	initWithDelegate:(id<JFStateMachineDelegate>)delegate;	// The starting state is "Ready".
 
-// Commands management
-- (BOOL)	connect;
-- (BOOL)	connect:(NSDictionary*)userInfo;
-- (BOOL)	disconnect;
-- (BOOL)	disconnect:(NSDictionary*)userInfo;
-- (BOOL)	reconnect;
-- (BOOL)	reconnect:(NSDictionary*)userInfo;
-- (BOOL)	reset;
-- (BOOL)	reset:(NSDictionary*)userInfo;
-
-// Events management
-- (void)	onConnectCompleted:(BOOL)succeeded error:(NSError*)error;
-- (void)	onConnectionLost;
-- (void)	onDisconnectCompleted:(BOOL)succeeded error:(NSError*)error;
-- (void)	onReconnectCompleted:(BOOL)succeeded error:(NSError*)error;
-- (void)	onResetCompleted:(BOOL)succeeded error:(NSError*)error;
-
-// Utilities management
-+ (NSString*)	debugStringFromState:(JFConnectionState)state;
-+ (NSString*)	debugStringFromTransition:(JFConnectionTransition)transition;
-+ (BOOL)		isTransitionAllowed:(JFConnectionTransition)transition fromState:(JFConnectionState)state;
+// State management
+- (void)	connect;
+- (void)	connect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	disconnect;
+- (void)	disconnect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	loseConnection;
+- (void)	loseConnection:(nullable JFSimpleCompletionBlock)completion;
+- (void)	reconnect;
+- (void)	reconnect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	reset;
+- (void)	reset:(nullable JFSimpleCompletionBlock)completion;
 
 @end
+NS_ASSUME_NONNULL_END

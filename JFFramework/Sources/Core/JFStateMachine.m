@@ -34,19 +34,7 @@
 
 #pragma mark - Macros
 
-#define JFStateMachineSerialQueueName	(JFReversedDomain @".stateMachine.queue")
-
-
-
-#pragma mark - Constants
-
-JFState				const	JFStateNotAvailable			= NSUIntegerMax;
-JFStateTransition	const	JFTransitionNone			= 0;
-JFStateTransition	const	JFTransitionNotAvailable	= NSUIntegerMax;
-
-
-
-#pragma mark
+#define JFStateMachineSerialQueueName	JFReversedDomain @".stateMachine.queue"
 
 
 
@@ -125,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		// State
 		_currentState		= state;
-		_currentTransition	= JFTransitionNone;
+		_currentTransition	= JFStateTransitionNone;
 	}
 	return self;
 }
@@ -138,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 	JFStateTransition transition = self.currentTransition;
 	
 	self.currentState = (succeeded ? [self finalStateForSucceededTransition:transition] : [self finalStateForFailedTransition:transition]);
-	self.currentTransition = JFTransitionNone;
+	self.currentTransition = JFStateTransitionNone;
 	
 	id<JFStateMachineDelegate> delegate = self.delegate;
 	if([delegate respondsToSelector:@selector(stateMachine:didPerformTransition:)])
@@ -206,13 +194,13 @@ NS_ASSUME_NONNULL_BEGIN
 			}
 		};
 		
-		if(strongSelf.currentTransition != JFTransitionNone)
+		if(strongSelf.currentTransition != JFStateTransitionNone)
 		{
 			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
 			return;
 		}
 		
-		if((transition == JFTransitionNone) || (transition == JFTransitionNotAvailable))
+		if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
 		{
 			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
 			return;
@@ -290,9 +278,9 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj = nil;
 	switch(transition)
 	{
-		case JFTransitionNone:			retObj = @"JFTransitionNone";			break;
-		case JFTransitionNotAvailable:	retObj = @"JFTransitionNotAvailable";	break;
-		default:																break;
+		case JFStateTransitionNone:			retObj = @"JFTransitionNone";			break;
+		case JFStateTransitionNotAvailable:	retObj = @"JFTransitionNotAvailable";	break;
+		default:																	break;
 	}
 	return retObj;
 }
