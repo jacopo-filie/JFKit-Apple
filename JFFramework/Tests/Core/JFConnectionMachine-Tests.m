@@ -47,13 +47,21 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 #pragma mark Properties
 
 // Expectations
-@property (strong, nonatomic)	XCTestExpectation*		expectation;
+@property (strong, nonatomic)	XCTestExpectation*	expectation;
 
 // Flags
 @property (assign, nonatomic)	BOOL	shouldFail;
 
 // Relationships
 @property (strong, nonatomic)	JFConnectionMachine*	machine;
+
+
+#pragma mark Methods
+
+// Common
+- (void)	setUpWithDescription:(NSString*)description initialState:(JFConnectionState)state failureExpected:(BOOL)shouldFail;
+- (void)	verifyResult:(JFState)expectedResult;
+- (void)	waitExpectingResult:(JFState)expectedResult;
 
 @end
 
@@ -77,246 +85,146 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 @synthesize machine	= _machine;
 
 
+#pragma mark Common
+
+- (void)setUpWithDescription:(NSString*)description initialState:(JFConnectionState)state failureExpected:(BOOL)shouldFail
+{
+	self.expectation = [self expectationWithDescription:description];
+	self.machine = [[JFConnectionMachine alloc] initWithState:state delegate:self];
+	self.shouldFail = shouldFail;
+}
+
+- (void)tearDown
+{
+	[super tearDown];
+	self.expectation = nil;
+	self.machine = nil;
+	self.shouldFail = NO;
+}
+
+- (void)verifyResult:(JFState)expectedResult
+{
+	JFConnectionMachine* machine = self.machine;
+	JFConnectionState state = machine.currentState;
+	JFConnectionState result = expectedResult;
+	XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:result]);
+}
+
+- (void)waitExpectingResult:(JFState)expectedResult
+{
+	JFBlockWithError handler = ^(NSError* error)
+	{
+		if(error)
+		{
+			NSLog(@"Timeout error: %@", error);
+			return;
+		}
+		
+		[self verifyResult:expectedResult];
+	};
+	
+	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+}
+
+
 #pragma mark Tests
 
 - (void)testConnectFailure
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateReady delegate:self];
-	self.shouldFail = YES;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateReady failureExpected:YES];
 	[self.machine connect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateLost;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateLost];
 }
 
 - (void)testConnectSuccess
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateReady delegate:self];
-	self.shouldFail = NO;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateReady failureExpected:NO];
 	[self.machine connect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateConnected;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateConnected];
+}
+
+- (void)testDisconnectFromLostFailure
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateLost failureExpected:YES];
+	[self.machine disconnect];
+	[self waitExpectingResult:JFConnectionStateDirty];
+}
+
+- (void)testDisconnectFromLostSuccess
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateLost failureExpected:NO];
+	[self.machine disconnect];
+	[self waitExpectingResult:JFConnectionStateDisconnected];
+}
+
+- (void)testDisconnectFromConnectedFailure
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateConnected failureExpected:YES];
+	[self.machine disconnect];
+	[self waitExpectingResult:JFConnectionStateDirty];
+}
+
+- (void)testDisconnectFromConnectedSuccess
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateConnected failureExpected:NO];
+	[self.machine disconnect];
+	[self waitExpectingResult:JFConnectionStateDisconnected];
 }
 
 - (void)testLoseConnectionFailure
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateConnected delegate:self];
-	self.shouldFail = YES;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateConnected failureExpected:YES];
 	[self.machine loseConnection];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateConnected;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateLost];
 }
 
 - (void)testLoseConnectionSuccess
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateConnected delegate:self];
-	self.shouldFail = NO;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateConnected failureExpected:NO];
 	[self.machine loseConnection];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateLost;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
-}
-
-- (void)testDisconnectFailure
-{
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateConnected delegate:self];
-	self.shouldFail = YES;
-	
-	[self.machine disconnect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateDirty;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
-}
-
-- (void)testDisconnectSuccess
-{
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateConnected delegate:self];
-	self.shouldFail = NO;
-	
-	[self.machine disconnect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateDisconnected;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateLost];
 }
 
 - (void)testReconnectFailure
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateLost delegate:self];
-	self.shouldFail = YES;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateLost failureExpected:YES];
 	[self.machine reconnect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateLost;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateLost];
 }
 
 - (void)testReconnectSuccess
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateLost delegate:self];
-	self.shouldFail = NO;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateLost failureExpected:NO];
 	[self.machine reconnect];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateConnected;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateConnected];
 }
 
-- (void)testResetFailure
+- (void)testResetFromDirtyFailure
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateDisconnected delegate:self];
-	self.shouldFail = YES;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateDirty failureExpected:YES];
 	[self.machine reset];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateDirty;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateDirty];
 }
 
-- (void)testResetSuccess
+- (void)testResetFromDirtySuccess
 {
-	self.expectation = [self expectationWithDescription:MethodName];
-	self.machine = [[JFConnectionMachine alloc] initWithState:JFConnectionStateDisconnected delegate:self];
-	self.shouldFail = NO;
-	
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateDirty failureExpected:NO];
 	[self.machine reset];
-	
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		JFConnectionState state = self.machine.currentState;
-		JFConnectionState result = JFConnectionStateReady;
-		XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [self.machine debugStringForState:state], [self.machine debugStringForState:result]);
-	};
-	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[self waitExpectingResult:JFConnectionStateReady];
+}
+
+- (void)testResetFromDisconnectedFailure
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateDisconnected failureExpected:YES];
+	[self.machine reset];
+	[self waitExpectingResult:JFConnectionStateDirty];
+}
+
+- (void)testResetFromDisconnectedSuccess
+{
+	[self setUpWithDescription:MethodName initialState:JFConnectionStateDisconnected failureExpected:NO];
+	[self.machine reset];
+	[self waitExpectingResult:JFConnectionStateReady];
 }
 
 
@@ -333,8 +241,5 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 		[sender onTransitionCompleted:!self.shouldFail error:nil];
 	}];
 }
-
-- (void)stateMachine:(JFStateMachine*)sender willPerformTransition:(JFStateTransition)transition
-{}
 
 @end
