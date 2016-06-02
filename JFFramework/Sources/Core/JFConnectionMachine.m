@@ -162,12 +162,12 @@ NS_ASSUME_NONNULL_BEGIN
 	switch(transition)
 	{
 		case JFConnectionTransitionConnecting:
+		case JFConnectionTransitionLosingConnection:
 		case JFConnectionTransitionReconnecting:				retVal = JFConnectionStateLost;			break;
 		case JFConnectionTransitionDisconnectingFromConnected:
 		case JFConnectionTransitionDisconnectingFromLost:
 		case JFConnectionTransitionResettingFromDisconnected:
 		case JFConnectionTransitionResettingFromDirty:			retVal = JFConnectionStateDirty;		break;
-		case JFConnectionTransitionLosingConnection:			retVal = JFConnectionStateConnected;	break;
 		default:
 		{
 			retVal = [super finalStateForFailedTransition:transition];
