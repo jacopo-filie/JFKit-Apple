@@ -31,6 +31,7 @@
 #import	"JFConnectionMachine.h"
 #import "JFErrorsManager.h"
 #import	"JFManager.h"
+#import	"JFStateMachine.h"
 
 // Data Objects
 #import "JFByteStream.h"

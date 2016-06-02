@@ -26,493 +26,198 @@
 
 #import "JFConnectionMachine.h"
 
-#import "JFShortcuts.h"
-#import "JFTypes.h"
 
 
-
-@interface JFConnectionMachine ()
-
-#pragma mark Properties
-
-// Data
-@property (strong, nonatomic)	NSDictionary*	userInfo;
-
-// Flags
-@property (assign, nonatomic, getter = isCompletingCommand)	BOOL					completingCommand;
-@property (assign, nonatomic, getter = isPerformingCommand)	BOOL					performingCommand;
-@property (assign, readwrite)								JFConnectionState		state;
-@property (assign, readwrite)								JFConnectionTransition	transition;
-
-
-#pragma mark Methods
-
-// Commands management
-- (BOOL)	performCommandWithTransition:(JFConnectionTransition)transition userInfo:(NSDictionary*)userInfo;
-
-// Events management
-- (void)	onCommandCompleted:(BOOL)succeeded transition:(JFConnectionTransition)transition error:(NSError*)error;
-
-// Notifications management
-- (void)	notifyDidBeginTransition:(JFConnectionTransition)transition;
-- (void)	notifyDidEndTransition:(JFConnectionTransition)transition;
-- (void)	notifyDidEnterState:(JFConnectionState)state;
-- (void)	notifyDidFailToEnterState:(JFConnectionState)state error:(NSError*)error;
-- (void)	notifyDidFailToLeaveState:(JFConnectionState)state error:(NSError*)error;
-- (void)	notifyDidLeaveState:(JFConnectionState)state;
-- (void)	notifyWillBeginTransition:(JFConnectionTransition)transition;
-- (void)	notifyWillEndTransition:(JFConnectionTransition)transition;
-- (void)	notifyWillEnterState:(JFConnectionState)state;
-- (void)	notifyWillLeaveState:(JFConnectionState)state;
-
-@end
-
-
-
-#pragma mark
-
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFConnectionMachine
-
-#pragma mark Properties
-
-// Data
-@synthesize userInfo	= _userInfo;
-
-// Flags
-@synthesize completingCommand	= _completingCommand;
-@synthesize performingCommand	= _performingCommand;
-@synthesize state				= _state;
-@synthesize transition			= _transition;
-
-// Relationships
-@synthesize delegate	= _delegate;
-
 
 #pragma mark Memory management
 
-- (instancetype)initWithDelegate:(id<JFConnectionMachineDelegate>)delegate
+- (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate
 {
 	return [self initWithState:JFConnectionStateReady delegate:delegate];
 }
 
-- (instancetype)initWithState:(JFConnectionState)state delegate:(id<JFConnectionMachineDelegate>)delegate
+
+#pragma mark State management
+
+- (void)connect
 {
-	self = (delegate ? [super init] : nil);
-	if(self)
+	[self connect:nil];
+}
+
+- (void)connect:(nullable JFSimpleCompletionBlock)completion
+{
+	[self performTransition:JFConnectionTransitionConnecting completion:completion];
+}
+
+- (void)disconnect
+{
+	[self disconnect:nil];
+}
+
+- (void)disconnect:(nullable JFSimpleCompletionBlock)completion
+{
+	JFConnectionTransition transition;
+	switch(self.currentState)
 	{
-		// Flags
-		_completingCommand	= NO;
-		_performingCommand	= NO;
-		_state				= state;
-		_transition			= JFConnectionTransitionNone;
-		
-		// Relationships
-		_delegate	= delegate;
-	}
-	return self;
-}
-
-
-#pragma mark Commands management
-
-- (BOOL)connect
-{
-	return [self connect:nil];
-}
-
-- (BOOL)connect:(NSDictionary*)userInfo
-{
-	return [self performCommandWithTransition:JFConnectionTransitionConnecting userInfo:userInfo];
-}
-
-- (BOOL)disconnect
-{
-	return [self disconnect:nil];
-}
-
-- (BOOL)disconnect:(NSDictionary*)userInfo
-{
-	return [self performCommandWithTransition:JFConnectionTransitionDisconnecting userInfo:userInfo];
-}
-
-- (BOOL)performCommandWithTransition:(JFConnectionTransition)transition userInfo:(NSDictionary*)userInfo
-{
-	JFConnectionState state = self.state;
-	JFConnectionState nextState;
-	
-	switch(transition)
-	{
-		case JFConnectionTransitionConnecting:
-		case JFConnectionTransitionReconnecting:	nextState = JFConnectionStateConnected;		break;
-		case JFConnectionTransitionDisconnecting:	nextState = JFConnectionStateDisconnected;	break;
-		case JFConnectionTransitionResetting:		nextState = JFConnectionStateReady;			break;
-			
+		case JFConnectionStateConnected:	transition = JFConnectionTransitionDisconnectingFromConnected;	break;
+		case JFConnectionStateLost:			transition = JFConnectionTransitionDisconnectingFromLost;		break;
 		default:
-			return NO;
-	}
-	
-	@synchronized(self)
-	{
-		if([self isPerformingCommand] || ![[self class] isTransitionAllowed:transition fromState:state])
-			return NO;
-		
-		self.performingCommand = YES;
-	}
-	
-	self.userInfo = userInfo;
-	
-	[self notifyWillBeginTransition:transition];
-	[self notifyWillLeaveState:state];
-	[self notifyWillEnterState:nextState];
-	
-	JFBlock block = ^(void)
-	{
-		self.transition = transition;
-		[self notifyDidBeginTransition:transition];
-		
-		id<JFConnectionMachineDelegate> delegate = self.delegate;
-		
-		switch(transition)
 		{
-			case JFConnectionTransitionConnecting:		[delegate connectionMachine:self performConnect:userInfo];		break;
-			case JFConnectionTransitionDisconnecting:	[delegate connectionMachine:self performDisconnect:userInfo];	break;
-			case JFConnectionTransitionReconnecting:	[delegate connectionMachine:self performReconnect:userInfo];	break;
-			case JFConnectionTransitionResetting:		[delegate connectionMachine:self performReset:userInfo];		break;
-				
-			default:
-				break;
-		}
-	};
-	
-	[MainOperationQueue addOperationWithBlock:block];
-	
-	return YES;
-}
-
-- (BOOL)reconnect
-{
-	return [self reconnect:nil];
-}
-
-- (BOOL)reconnect:(NSDictionary*)userInfo
-{
-	return [self performCommandWithTransition:JFConnectionTransitionReconnecting userInfo:userInfo];
-}
-
-- (BOOL)reset
-{
-	return [self reset:nil];
-}
-
-- (BOOL)reset:(NSDictionary*)userInfo
-{
-	return [self performCommandWithTransition:JFConnectionTransitionResetting userInfo:userInfo];
-}
-
-
-#pragma mark Events management
-
-- (void)onCommandCompleted:(BOOL)succeeded transition:(JFConnectionTransition)transition error:(NSError*)error
-{
-	JFConnectionTransition currentTransition = self.transition;
-	
-	@synchronized(self)
-	{
-		if(![self isPerformingCommand] || [self isCompletingCommand])
-			return;
-		
-		if(currentTransition != transition)
-			return;
-		
-		self.completingCommand = YES;
-	}
-	
-	JFConnectionState state = self.state;
-	JFConnectionState failureState;
-	JFConnectionState successState;
-	
-	switch(transition)
-	{
-		case JFConnectionTransitionConnecting:
-		case JFConnectionTransitionReconnecting:
-		{
-			failureState = JFConnectionStateLost;
-			successState = JFConnectionStateConnected;
+			transition = JFStateTransitionNotAvailable;
 			break;
 		}
-		case JFConnectionTransitionDisconnecting:
-		{
-			failureState = JFConnectionStateUnknown;
-			successState = JFConnectionStateDisconnected;
-			break;
-		}
-		case JFConnectionTransitionResetting:
-		{
-			failureState = JFConnectionStateUnknown;
-			successState = JFConnectionStateReady;
-			break;
-		}
+	}
+	[self performTransition:transition completion:completion];
+}
+
+- (void)loseConnection
+{
+	[self loseConnection:nil];
+}
+
+- (void)loseConnection:(nullable JFSimpleCompletionBlock)completion
+{
+	[self performTransition:JFConnectionTransitionLosingConnection completion:completion];
+}
+
+- (void)reconnect
+{
+	[self reconnect:nil];
+}
+
+- (void)reconnect:(nullable JFSimpleCompletionBlock)completion
+{
+	[self performTransition:JFConnectionTransitionReconnecting completion:completion];
+}
+
+- (void)reset
+{
+	[self reset:nil];
+}
+
+- (void)reset:(nullable JFSimpleCompletionBlock)completion
+{
+	JFConnectionTransition transition;
+	switch(self.currentState)
+	{
+		case JFConnectionStateDirty:		transition = JFConnectionTransitionResettingFromDirty;			break;
+		case JFConnectionStateDisconnected:	transition = JFConnectionTransitionResettingFromDisconnected;	break;
 		default:
-			return;
-	}
-	
-	JFConnectionState nextState = successState;
-	
-	[self notifyWillEndTransition:transition];
-	
-	BOOL isChangingState = YES;
-	
-	if(!succeeded)
-	{
-		if(state == failureState)
 		{
-			isChangingState = NO;
-			[self notifyDidFailToLeaveState:state error:error];
+			transition = JFStateTransitionNotAvailable;
+			break;
 		}
-		
-		[self notifyDidFailToEnterState:nextState error:error];
-		
-		nextState = failureState;
-		
-		if(isChangingState)
-			[self notifyWillEnterState:nextState];
 	}
-	
-	self.state = nextState;
-	
-	if(isChangingState)
-	{
-		[self notifyDidLeaveState:state];
-		[self notifyDidEnterState:nextState];
-	}
-	
-	NSDictionary* userInfo = self.userInfo;
-	self.userInfo = nil;
-	
-	JFBlock block = ^(void)
-	{
-		self.transition = JFConnectionTransitionNone;
-		[self notifyDidEndTransition:transition];
-		
-		id<JFConnectionMachineDelegate> delegate = self.delegate;
-		
-		switch(transition)
-		{
-			case JFConnectionTransitionConnecting:		[delegate connectionMachine:self didConnect:succeeded userInfo:userInfo error:error];		break;
-			case JFConnectionTransitionDisconnecting:	[delegate connectionMachine:self didDisconnect:succeeded userInfo:userInfo error:error];	break;
-			case JFConnectionTransitionReconnecting:	[delegate connectionMachine:self didReconnect:succeeded userInfo:userInfo error:error];		break;
-			case JFConnectionTransitionResetting:		[delegate connectionMachine:self didReset:succeeded userInfo:userInfo error:error];			break;
-				
-			default:
-				break;
-		}
-	};
-	
-	[MainOperationQueue addOperationWithBlock:block];
-	
-	@synchronized(self)
-	{
-		self.completingCommand = NO;
-		self.performingCommand = NO;
-	}
-}
-
-- (void)onConnectCompleted:(BOOL)succeeded error:(NSError*)error
-{
-	[self onCommandCompleted:succeeded transition:JFConnectionTransitionConnecting error:error];
-}
-
-- (void)onConnectionLost
-{
-	JFConnectionState currentState = self.state;
-	JFConnectionState nextState = JFConnectionStateLost;
-	
-	@synchronized(self)
-	{
-		if([self isPerformingCommand])
-			return;
-		
-		if(currentState != JFConnectionStateConnected)
-			return;
-		
-		self.performingCommand = YES;
-	}
-	
-	[self notifyWillLeaveState:currentState];
-	[self notifyWillEnterState:nextState];
-	
-	self.state = nextState;
-	
-	[self notifyDidLeaveState:currentState];
-	[self notifyDidEnterState:nextState];
-	
-	@synchronized(self)
-	{
-		self.performingCommand = NO;
-	}
-}
-
-- (void)onDisconnectCompleted:(BOOL)succeeded error:(NSError*)error
-{
-	[self onCommandCompleted:succeeded transition:JFConnectionTransitionDisconnecting error:error];
-}
-
-- (void)onReconnectCompleted:(BOOL)succeeded error:(NSError*)error
-{
-	[self onCommandCompleted:succeeded transition:JFConnectionTransitionReconnecting error:error];
-}
-
-- (void)onResetCompleted:(BOOL)succeeded error:(NSError*)error
-{
-	[self onCommandCompleted:succeeded transition:JFConnectionTransitionResetting error:error];
-}
-
-
-#pragma mark Notifications management
-
-- (void)notifyDidBeginTransition:(JFConnectionTransition)transition
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didBeginTransition:)])
-		[delegate connectionMachine:self didBeginTransition:transition];
-}
-
-- (void)notifyDidEndTransition:(JFConnectionTransition)transition
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didEndTransition:)])
-		[delegate connectionMachine:self didEndTransition:transition];
-}
-
-- (void)notifyDidEnterState:(JFConnectionState)state
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didEnterState:)])
-		[delegate connectionMachine:self didEnterState:state];
-}
-
-- (void)notifyDidFailToEnterState:(JFConnectionState)state error:(NSError*)error
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didFailToEnterState:error:)])
-		[delegate connectionMachine:self didFailToEnterState:state error:error];
-}
-
-- (void)notifyDidFailToLeaveState:(JFConnectionState)state error:(NSError*)error
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didFailToLeaveState:error:)])
-		[delegate connectionMachine:self didFailToLeaveState:state error:error];
-}
-
-- (void)notifyDidLeaveState:(JFConnectionState)state
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:didLeaveState:)])
-		[delegate connectionMachine:self didLeaveState:state];
-}
-
-- (void)notifyWillBeginTransition:(JFConnectionTransition)transition
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:willBeginTransition:)])
-		[delegate connectionMachine:self willBeginTransition:transition];
-}
-
-- (void)notifyWillEndTransition:(JFConnectionTransition)transition
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:willEndTransition:)])
-		[delegate connectionMachine:self willEndTransition:transition];
-}
-
-- (void)notifyWillEnterState:(JFConnectionState)state
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:willEnterState:)])
-		[delegate connectionMachine:self willEnterState:state];
-}
-
-- (void)notifyWillLeaveState:(JFConnectionState)state
-{
-	id<JFConnectionMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(connectionMachine:willLeaveState:)])
-		[delegate connectionMachine:self willLeaveState:state];
+	[self performTransition:transition completion:completion];
 }
 
 
 #pragma mark Utilities management
 
-+ (NSString*)debugStringFromState:(JFConnectionState)state
+- (nullable NSString*)debugStringForState:(JFState)state
 {
 	NSString* retObj = nil;
 	switch(state)
 	{
 		case JFConnectionStateConnected:	retObj = @"Connected";		break;
+		case JFConnectionStateDirty:		retObj = @"Dirty";			break;
 		case JFConnectionStateDisconnected:	retObj = @"Disconnected";	break;
 		case JFConnectionStateLost:			retObj = @"Lost";			break;
 		case JFConnectionStateReady:		retObj = @"Ready";			break;
-		case JFConnectionStateUnknown:		retObj = @"Unknown";		break;
-			
 		default:
+		{
+			retObj = [super debugStringForState:state];
 			break;
+		}
 	}
 	return retObj;
 }
 
-+ (NSString*)debugStringFromTransition:(JFConnectionTransition)transition
+- (nullable NSString*)debugStringForTransition:(JFStateTransition)transition
 {
 	NSString* retObj = nil;
 	switch(transition)
 	{
-		case JFConnectionTransitionConnecting:		retObj = @"Connecting";		break;
-		case JFConnectionTransitionDisconnecting:	retObj = @"Disconnecting";	break;
-		case JFConnectionTransitionNone:			retObj = @"None";			break;
-		case JFConnectionTransitionReconnecting:	retObj = @"Reconnecting";	break;
-		case JFConnectionTransitionResetting:		retObj = @"Resetting";		break;
-			
+		case JFConnectionTransitionConnecting:					retObj = @"Connecting";					break;
+		case JFConnectionTransitionDisconnectingFromConnected:	retObj = @"DisconnectingFromConnected";	break;
+		case JFConnectionTransitionDisconnectingFromLost:		retObj = @"DisconnectingFromLost";		break;
+		case JFConnectionTransitionLosingConnection:			retObj = @"LosingConnection";			break;
+		case JFConnectionTransitionReconnecting:				retObj = @"Reconnecting";				break;
+		case JFConnectionTransitionResettingFromDisconnected:	retObj = @"ResettingFromDisconnected";	break;
+		case JFConnectionTransitionResettingFromDirty:			retObj = @"ResettingFromDirty";			break;
 		default:
+		{
+			retObj = [super debugStringForTransition:transition];
 			break;
+		}
 	}
 	return retObj;
 }
 
-+ (BOOL)isTransitionAllowed:(JFConnectionTransition)transition fromState:(JFConnectionState)state
+- (JFState)finalStateForFailedTransition:(JFStateTransition)transition
 {
-	if(transition == JFConnectionTransitionNone)
-		return NO;
-	
-	BOOL connecting		= NO;
-	BOOL disconnecting	= NO;
-	BOOL reconnecting	= NO;
-	BOOL resetting		= NO;
-	
+	JFState retVal;
 	switch(transition)
 	{
-		case JFConnectionTransitionConnecting:		connecting		= YES;	break;
-		case JFConnectionTransitionDisconnecting:	disconnecting	= YES;	break;
-		case JFConnectionTransitionReconnecting:	reconnecting	= YES;	break;
-		case JFConnectionTransitionResetting:		resetting		= YES;	break;
-			
+		case JFConnectionTransitionConnecting:
+		case JFConnectionTransitionReconnecting:				retVal = JFConnectionStateLost;			break;
+		case JFConnectionTransitionDisconnectingFromConnected:
+		case JFConnectionTransitionDisconnectingFromLost:
+		case JFConnectionTransitionResettingFromDisconnected:
+		case JFConnectionTransitionResettingFromDirty:			retVal = JFConnectionStateDirty;		break;
+		case JFConnectionTransitionLosingConnection:			retVal = JFConnectionStateConnected;	break;
 		default:
+		{
+			retVal = [super finalStateForFailedTransition:transition];
 			break;
+		}
 	}
-	
-	BOOL retVal = NO;
-	switch(state)
+	return retVal;
+}
+
+- (JFState)finalStateForSucceededTransition:(JFStateTransition)transition
+{
+	JFState retVal;
+	switch(transition)
 	{
-		case JFConnectionStateConnected:	retVal = disconnecting;						break;
-		case JFConnectionStateDisconnected:	retVal = resetting;							break;
-		case JFConnectionStateLost:			retVal = (disconnecting || reconnecting);	break;
-		case JFConnectionStateReady:		retVal = (connecting || resetting);			break;
-		case JFConnectionStateUnknown:		retVal = resetting;							break;
-			
+		case JFConnectionTransitionConnecting:
+		case JFConnectionTransitionReconnecting:				retVal = JFConnectionStateConnected;	break;
+		case JFConnectionTransitionDisconnectingFromConnected:
+		case JFConnectionTransitionDisconnectingFromLost:		retVal = JFConnectionStateDisconnected;	break;
+		case JFConnectionTransitionLosingConnection:			retVal = JFConnectionStateLost;			break;
+		case JFConnectionTransitionResettingFromDisconnected:
+		case JFConnectionTransitionResettingFromDirty:			retVal = JFConnectionStateReady;		break;
 		default:
+		{
+			retVal = [super finalStateForSucceededTransition:transition];
 			break;
+		}
+	}
+	return retVal;
+}
+
+- (JFState)initialStateForTransition:(JFStateTransition)transition
+{
+	JFState retVal;
+	switch(transition)
+	{
+		case JFConnectionTransitionConnecting:					retVal = JFConnectionStateReady;		break;
+		case JFConnectionTransitionDisconnectingFromConnected:
+		case JFConnectionTransitionLosingConnection:			retVal = JFConnectionStateConnected;	break;
+		case JFConnectionTransitionDisconnectingFromLost:
+		case JFConnectionTransitionReconnecting:				retVal = JFConnectionStateLost;			break;
+		case JFConnectionTransitionResettingFromDisconnected:	retVal = JFConnectionStateDisconnected;	break;
+		case JFConnectionTransitionResettingFromDirty:			retVal = JFConnectionStateDirty;		break;
+		default:
+		{
+			retVal = [super initialStateForTransition:transition];
+			break;
+		}
 	}
 	return retVal;
 }
 
 @end
+NS_ASSUME_NONNULL_END

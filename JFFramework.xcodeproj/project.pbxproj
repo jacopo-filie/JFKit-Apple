@@ -31,6 +31,12 @@
 		6C6C078F1C8EE2B400917EBF /* JFAlertsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C6C078C1C8EE2B400917EBF /* JFAlertsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C6C07901C8EE2B400917EBF /* JFAlertsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C078D1C8EE2B400917EBF /* JFAlertsController.m */; };
 		6C6C07911C8EE2B400917EBF /* JFAlertsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C078D1C8EE2B400917EBF /* JFAlertsController.m */; };
+		6C6C07951C8F33E900917EBF /* JFStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C6C07931C8F33E900917EBF /* JFStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C6C07961C8F33E900917EBF /* JFStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C6C07931C8F33E900917EBF /* JFStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C6C07971C8F33E900917EBF /* JFStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C6C07931C8F33E900917EBF /* JFStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C6C07981C8F33E900917EBF /* JFStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C07941C8F33E900917EBF /* JFStateMachine.m */; };
+		6C6C07991C8F33E900917EBF /* JFStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C07941C8F33E900917EBF /* JFStateMachine.m */; };
+		6C6C079A1C8F33E900917EBF /* JFStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6C07941C8F33E900917EBF /* JFStateMachine.m */; };
 		6CC0B56C1C57ABFB00E2464B /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC0B5531C57ABFB00E2464B /* JRSwizzle.h */; };
 		6CC0B56D1C57ABFB00E2464B /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC0B5531C57ABFB00E2464B /* JRSwizzle.h */; };
 		6CC0B56E1C57ABFB00E2464B /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC0B5531C57ABFB00E2464B /* JRSwizzle.h */; };
@@ -178,6 +184,8 @@
 		6C6C07861C8EDF5C00917EBF /* JFAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlert.m; sourceTree = "<group>"; };
 		6C6C078C1C8EE2B400917EBF /* JFAlertsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
 		6C6C078D1C8EE2B400917EBF /* JFAlertsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlertsController.m; sourceTree = "<group>"; };
+		6C6C07931C8F33E900917EBF /* JFStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStateMachine.h; sourceTree = "<group>"; };
+		6C6C07941C8F33E900917EBF /* JFStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStateMachine.m; sourceTree = "<group>"; };
 		6CC0B5531C57ABFB00E2464B /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		6CC0B5541C57ABFB00E2464B /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		6CC0B56A1C57ABFB00E2464B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -440,6 +448,8 @@
 				EAE4A34C1C18BB5B00D7A8A1 /* JFErrorsManager.m */,
 				EAFAFC2D1BFE6A9C00563037 /* JFManager.h */,
 				EAFAFC2E1BFE6A9C00563037 /* JFManager.m */,
+				6C6C07931C8F33E900917EBF /* JFStateMachine.h */,
+				6C6C07941C8F33E900917EBF /* JFStateMachine.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -463,6 +473,7 @@
 			files = (
 				EA7F89651C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				EA465D791C00A1E300811A80 /* JFConnectionMachine.h in Headers */,
+				6C6C07961C8F33E900917EBF /* JFStateMachine.h in Headers */,
 				EAE7525A1BEC15FF003A2F38 /* JFTypes.h in Headers */,
 				6C53C06D1C512D0800CDAB09 /* NSStoryboard+JFFramework.h in Headers */,
 				EAE7525D1BEC1B86003A2F38 /* JFShortcuts.h in Headers */,
@@ -506,6 +517,7 @@
 				6C6C07871C8EDF5C00917EBF /* JFAlert.h in Headers */,
 				EA83A5F61C257E650057F954 /* JFPreprocessorMacros.h in Headers */,
 				EAE4A34D1C18BB5B00D7A8A1 /* JFErrorsManager.h in Headers */,
+				6C6C07951C8F33E900917EBF /* JFStateMachine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +527,7 @@
 			files = (
 				EA7F89661C289F1D002C2E34 /* JFAppDelegate.h in Headers */,
 				6CE4F4DF1C245963008A8ACB /* JFConnectionMachine.h in Headers */,
+				6C6C07971C8F33E900917EBF /* JFStateMachine.h in Headers */,
 				6CEDFB211C7240640020B608 /* UILabel+JFFramework.h in Headers */,
 				6CE4F4E01C245963008A8ACB /* JFErrorsManager.h in Headers */,
 				6CEDFB1D1C723D590020B608 /* UIButton+JFFramework.h in Headers */,
@@ -733,6 +746,7 @@
 				EA7F89671C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				EAFAFC311BFE6A9C00563037 /* JFManager.m in Sources */,
 				6C6C07891C8EDF5C00917EBF /* JFAlert.m in Sources */,
+				6C6C07981C8F33E900917EBF /* JFStateMachine.m in Sources */,
 				EA465D7A1C00A1E300811A80 /* JFConnectionMachine.m in Sources */,
 				EAE752631BEC200D003A2F38 /* JFString.m in Sources */,
 				EA5BDEDB1BF7571100D1DD7C /* JFColor.m in Sources */,
@@ -763,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C6C07991C8F33E900917EBF /* JFStateMachine.m in Sources */,
 				EAE752561BEBFFC1003A2F38 /* JFUtilities.m in Sources */,
 				6C1C57FB1C29A517007F08F6 /* JFWindowController.m in Sources */,
 				6C6C07911C8EE2B400917EBF /* JFAlertsController.m in Sources */,
@@ -807,6 +822,7 @@
 				6CFBB9FE1C50FCB5005F61BD /* UIStoryboard+JFFramework.m in Sources */,
 				EA7F89691C289F1D002C2E34 /* JFAppDelegate.m in Sources */,
 				6CE4F4DA1C245937008A8ACB /* JFByteStream.m in Sources */,
+				6C6C079A1C8F33E900917EBF /* JFStateMachine.m in Sources */,
 				6CE4F4DB1C245937008A8ACB /* JFColor.m in Sources */,
 				6CE4F4DC1C245937008A8ACB /* JFString.m in Sources */,
 				6CE4F4DD1C245937008A8ACB /* JFLogger.m in Sources */,
