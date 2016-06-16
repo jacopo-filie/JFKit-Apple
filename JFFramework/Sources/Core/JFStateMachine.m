@@ -58,12 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Methods
 
-// Concurrency management
-
-
 // State management
-- (void)	cleanUpCurrentTransition:(BOOL)succeeded error:(nullable NSError*)error;
-- (void)	startCurrentTransition;
+- (void)	startTransition:(JFStateTransition)transition;
 
 @end
 NS_ASSUME_NONNULL_END
@@ -121,9 +117,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark State management
 
-- (void)cleanUpCurrentTransition:(BOOL)succeeded error:(nullable NSError*)error
+- (void)onTransitionCompleted:(BOOL)succeeded error:(nullable NSError*)error
 {
 	JFStateTransition transition = self.currentTransition;
+	if(transition == JFStateTransitionNone)
+		return;
 	
 	self.currentState = (succeeded ? [self finalStateForSucceededTransition:transition] : [self finalStateForFailedTransition:transition]);
 	self.currentTransition = JFStateTransitionNone;
@@ -144,32 +142,51 @@ NS_ASSUME_NONNULL_BEGIN
 			completion(succeeded, error);
 		}];
 	}
-}
-
-- (void)onTransitionCompleted:(BOOL)succeeded error:(nullable NSError*)error
-{
-#if __has_feature(objc_arc_weak)
-	typeof(self) __weak weakSelf = self;
-#endif
 	
-	JFBlock block = ^(void)
-	{
-#if __has_feature(objc_arc_weak)
-		typeof(self) __strong strongSelf = weakSelf;
-		if(!strongSelf)
-			return;
-#else
-		typeof(self) __strong strongSelf = self;
-#endif
-		
-		[strongSelf cleanUpCurrentTransition:succeeded error:error];
-	};
-	
-	dispatch_async(self.serialQueue, block);
+	dispatch_resume(self.serialQueue);
 }
 
 - (void)performTransition:(JFStateTransition)transition completion:(nullable JFSimpleCompletionBlock)completion
 {
+	JFErrorsManager* errorsManager = [JFErrorsManager sharedManager];
+	
+	JFBlockWithError errorBlock = ^(NSError* error)
+	{
+		if(completion)
+		{
+			[MainOperationQueue addOperationWithBlock:^{
+				completion(NO, error);
+			}];
+		}
+	};
+	
+	if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
+	{
+		errorBlock([errorsManager debugPlaceholderError]);
+		return;
+	}
+	
+	JFState initialState = [self initialStateForTransition:transition];
+	if(initialState == JFStateNotAvailable)
+	{
+		errorBlock([errorsManager debugPlaceholderError]);
+		return;
+	}
+	
+	JFState finalState = [self finalStateForSucceededTransition:transition];
+	if(finalState == JFStateNotAvailable)
+	{
+		errorBlock([errorsManager debugPlaceholderError]);
+		return;
+	}
+	
+	finalState = [self finalStateForFailedTransition:transition];
+	if(finalState == JFStateNotAvailable)
+	{
+		errorBlock([errorsManager debugPlaceholderError]);
+		return;
+	}
+	
 #if __has_feature(objc_arc_weak)
 	typeof(self) __weak weakSelf = self;
 #endif
@@ -179,72 +196,31 @@ NS_ASSUME_NONNULL_BEGIN
 #if __has_feature(objc_arc_weak)
 		typeof(self) __strong strongSelf = weakSelf;
 		if(!strongSelf)
+		{
+			errorBlock([errorsManager debugPlaceholderError]);
 			return;
+		}
 #else
 		typeof(self) __strong strongSelf = self;
 #endif
 		
-		JFBlockWithError errorBlock = ^(NSError* error)
+		if(initialState != strongSelf.currentState)
 		{
-			if(completion)
-			{
-				[MainOperationQueue addOperationWithBlock:^{
-					completion(NO, error);
-				}];
-			}
-		};
-		
-		if(strongSelf.currentTransition != JFStateTransitionNone)
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
-			return;
-		}
-		
-		if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
-			return;
-		}
-		
-		JFState state = [strongSelf initialStateForTransition:transition];
-		if(state == JFStateNotAvailable)
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
-			return;
-		}
-		
-		if(state != strongSelf.currentState)
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
-			return;
-		}
-		
-		state = [strongSelf finalStateForSucceededTransition:transition];
-		if(state == JFStateNotAvailable)
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
-			return;
-		}
-		
-		state = [strongSelf finalStateForFailedTransition:transition];
-		if(state == JFStateNotAvailable)
-		{
-			errorBlock([[JFErrorsManager sharedManager] debugPlaceholderError]);	// TODO: replace with proper error.
+			errorBlock([errorsManager debugPlaceholderError]);
 			return;
 		}
 		
 		strongSelf.completion = completion;
-		strongSelf.currentTransition = transition;
 		
-		[strongSelf startCurrentTransition];
+		[strongSelf startTransition:transition];
 	};
 	
 	dispatch_async(self.serialQueue, block);
 }
 
-- (void)startCurrentTransition
+- (void)startTransition:(JFStateTransition)transition
 {
-	JFState transition = self.currentTransition;
+	dispatch_suspend(self.serialQueue);
 	
 	id<JFStateMachineDelegate> delegate = self.delegate;
 	if([delegate respondsToSelector:@selector(stateMachine:willPerformTransition:)])
@@ -253,6 +229,8 @@ NS_ASSUME_NONNULL_BEGIN
 			[delegate stateMachine:self willPerformTransition:transition];
 		}];
 	}
+	
+	self.currentTransition = transition;
 	
 	[MainOperationQueue addOperationWithBlock:^{
 		[delegate stateMachine:self performTransition:transition];
