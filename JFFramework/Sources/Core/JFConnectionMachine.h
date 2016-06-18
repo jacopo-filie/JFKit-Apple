@@ -69,7 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly, getter=isLost)			BOOL	lost;
 @property (assign, nonatomic, readonly, getter=isReady)			BOOL	ready;
 
-
 // Transition
 @property (assign, nonatomic, readonly, getter=isConnecting)		BOOL	connecting;
 @property (assign, nonatomic, readonly, getter=isDisconnecting)		BOOL	disconnecting;
@@ -85,15 +84,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 // State management
 - (void)	connect;
-- (void)	connect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	connect:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	disconnect;
-- (void)	disconnect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	disconnect:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	loseConnection;
-- (void)	loseConnection:(nullable JFSimpleCompletionBlock)completion;
+- (void)	loseConnection:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	reconnect;
-- (void)	reconnect:(nullable JFSimpleCompletionBlock)completion;
+- (void)	reconnect:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	reset;
-- (void)	reset:(nullable JFSimpleCompletionBlock)completion;
+- (void)	reset:(JFSimpleCompletionBlock __nullable)completion;
 
 @end
 NS_ASSUME_NONNULL_END
