@@ -38,6 +38,17 @@
 
 
 
+#pragma mark - Functions (Definitions)
+
+static	void	dispatchAsyncOnMainQueue(JFBlock block);
+static	void	dispatchSyncOnMainQueue(JFBlock block);
+
+
+
+#pragma mark
+
+
+
 NS_ASSUME_NONNULL_BEGIN
 @interface JFStateMachine ()
 
@@ -156,13 +167,17 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	id<JFStateMachineDelegate> delegate = self.delegate;
 	if([delegate respondsToSelector:@selector(stateMachine:didPerformTransition:)])
-		[delegate stateMachine:self didPerformTransition:transition];
+	{
+		dispatchSyncOnMainQueue(^{
+			[delegate stateMachine:self didPerformTransition:transition];
+		});
+	}
 	
 	if(completion)
 	{
-		[MainOperationQueue addOperationWithBlock:^{
+		dispatchAsyncOnMainQueue(^{
 			completion(succeeded, error);
-		}];
+		});
 	}
 	
 	dispatch_resume(self.serialQueue);
@@ -174,9 +189,9 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		if(completion)
 		{
-			[MainOperationQueue addOperationWithBlock:^{
+			dispatchAsyncOnMainQueue(^{
 				completion(NO, error);
-			}];
+			});
 		}
 	};
 	
@@ -224,7 +239,11 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	id<JFStateMachineDelegate> delegate = self.delegate;
 	if([delegate respondsToSelector:@selector(stateMachine:willPerformTransition:)])
-		[delegate stateMachine:self willPerformTransition:transition];
+	{
+		dispatchSyncOnMainQueue(^{
+			[delegate stateMachine:self willPerformTransition:transition];
+		});
+	}
 	
 	[self setCurrentState:self.currentState andTransition:transition];
 	
@@ -234,7 +253,9 @@ NS_ASSUME_NONNULL_BEGIN
 		[self completeTransition:succeeded error:error completion:completion];
 	};
 	
-	[delegate stateMachine:self performTransition:transition completion:transitionCompletion];
+	dispatchSyncOnMainQueue(^{
+		[delegate stateMachine:self performTransition:transition completion:transitionCompletion];
+	});
 }
 
 
@@ -309,3 +330,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 NS_ASSUME_NONNULL_END
+
+
+
+#pragma mark - Functions (Implementations)
+
+static void dispatchAsyncOnMainQueue(JFBlock block)
+{
+	if(!block)
+		return;
+	
+	dispatch_async(dispatch_get_main_queue(), block);
+}
+
+static void dispatchSyncOnMainQueue(JFBlock block)
+{
+	if(!block)
+		return;
+	
+	if([NSThread isMainThread])
+		block();
+	else
+		dispatch_sync(dispatch_get_main_queue(), block);
+}
+
