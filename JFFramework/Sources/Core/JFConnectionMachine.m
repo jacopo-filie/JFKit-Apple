@@ -31,6 +31,64 @@
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFConnectionMachine
 
+#pragma mark Properties accessors (State)
+
+- (BOOL)isConnected
+{
+	return (self.currentState == JFConnectionStateConnected);
+}
+
+- (BOOL)isDirty
+{
+	return (self.currentState == JFConnectionStateDirty);
+}
+
+- (BOOL)isDisconnected
+{
+	return (self.currentState == JFConnectionStateDisconnected);
+}
+
+- (BOOL)isLost
+{
+	return (self.currentState == JFConnectionStateLost);
+}
+
+- (BOOL)isReady
+{
+	return (self.currentState == JFConnectionStateReady);
+}
+
+
+#pragma mark Properties accessors (Transition)
+
+- (BOOL)isConnecting
+{
+	return (self.currentTransition == JFConnectionTransitionConnecting);
+}
+
+- (BOOL)isDisconnecting
+{
+	JFStateTransition transition = self.currentTransition;
+	return ((transition == JFConnectionTransitionDisconnectingFromConnected) || (transition == JFConnectionTransitionDisconnectingFromLost));
+}
+
+- (BOOL)isLosingConnection
+{
+	return (self.currentTransition == JFConnectionTransitionLosingConnection);
+}
+
+- (BOOL)isReconnecting
+{
+	return (self.currentTransition == JFConnectionTransitionReconnecting);
+}
+
+- (BOOL)isResetting
+{
+	JFStateTransition transition = self.currentTransition;
+	return ((transition == JFConnectionTransitionResettingFromDirty) || (transition == JFConnectionTransitionResettingFromDisconnected));
+}
+
+
 #pragma mark Memory management
 
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate

@@ -114,13 +114,9 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 {
 	JFBlockWithError handler = ^(NSError* error)
 	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		[self verifyResult:expectedResult];
+		XCTAssertNil(error, @"Error: %@", error);
+		if(!error)
+			[self verifyResult:expectedResult];
 	};
 	
 	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
@@ -235,10 +231,10 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 	[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition
+- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nonnull)completion
 {
 	[MainOperationQueue addOperationWithBlock:^{
-		[sender onTransitionCompleted:!self.shouldFail error:nil];
+		completion(!self.shouldFail, nil);
 	}];
 }
 

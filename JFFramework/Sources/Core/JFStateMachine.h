@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // State management
 @optional - (void)	stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition;
-@required - (void)	stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition;
+@required - (void)	stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock)completion;
 @optional - (void)	stateMachine:(JFStateMachine*)sender willPerformTransition:(JFStateTransition)transition;
 
 @end
@@ -94,15 +94,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)	initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 // State management
-- (void)	onTransitionCompleted:(BOOL)succeeded error:(nullable NSError*)error;
-- (void)	performTransition:(JFStateTransition)transition completion:(nullable JFSimpleCompletionBlock)completion;
+- (void)	performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion;
 
 // Utilities management
-- (nullable NSString*)	debugStringForState:(JFState)state;
-- (nullable NSString*)	debugStringForTransition:(JFStateTransition)transition;
-- (JFState)				finalStateForFailedTransition:(JFStateTransition)transition;
-- (JFState)				finalStateForSucceededTransition:(JFStateTransition)transition;
-- (JFState)				initialStateForTransition:(JFStateTransition)transition;
+- (NSString* __nullable)	debugStringForState:(JFState)state;
+- (NSString* __nullable)	debugStringForTransition:(JFStateTransition)transition;
+- (JFState)					finalStateForFailedTransition:(JFStateTransition)transition;
+- (JFState)					finalStateForSucceededTransition:(JFStateTransition)transition;
+- (JFState)					initialStateForTransition:(JFStateTransition)transition;
 
 @end
 NS_ASSUME_NONNULL_END
