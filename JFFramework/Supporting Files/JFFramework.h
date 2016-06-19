@@ -33,6 +33,7 @@
 #import	"JFManager.h"
 #import	"JFOpenCloseMachine.h"
 #import	"JFStateMachine.h"
+#import	"JFStateMachineErrors.h"
 
 // Data Objects
 #import "JFByteStream.h"

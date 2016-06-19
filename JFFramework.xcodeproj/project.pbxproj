@@ -134,9 +134,9 @@
 		EACFC94B1D16A749005F3D91 /* JFStateMachineErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94A1D16A744005F3D91 /* JFStateMachineErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EACFC94C1D16A74B005F3D91 /* JFStateMachineErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94A1D16A744005F3D91 /* JFStateMachineErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EACFC94D1D16A74C005F3D91 /* JFStateMachineErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94A1D16A744005F3D91 /* JFStateMachineErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EACFC9511D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; };
-		EACFC9521D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; };
-		EACFC9531D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; };
+		EACFC9511D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EACFC9521D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EACFC9531D16AB40005F3D91 /* NSBundle+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EACFC9541D16AB40005F3D91 /* NSBundle+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = EACFC9501D16AB40005F3D91 /* NSBundle+JFFramework.m */; };
 		EACFC9551D16AB40005F3D91 /* NSBundle+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = EACFC9501D16AB40005F3D91 /* NSBundle+JFFramework.m */; };
 		EACFC9561D16AB40005F3D91 /* NSBundle+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = EACFC9501D16AB40005F3D91 /* NSBundle+JFFramework.m */; };
@@ -1671,6 +1671,7 @@
 				EACFC9251D169928005F3D91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EACFC92F1D16A2B2005F3D91 /* Build configuration list for PBXNativeTarget "OSX-Resources" */ = {
 			isa = XCConfigurationList;
