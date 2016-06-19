@@ -32,6 +32,13 @@
 
 #pragma mark - Macros
 
+#if JF_TARGET_OS_IOS
+#define JFBundleName					@"JFFramework-iOS-Resources"
+#elif JF_TARGET_OS_OSX
+#define JFBundleName					@"JFFramework-OSX-Resources"
+#elif JF_TARGET_OS_TV
+#define JFBundleName					@"JFFramework-tvOS-Resources"
+#endif
 #define JFKVCPropertyName(_property)	[[JFKVCPropertyPath(_property) componentsSeparatedByString:@"."] lastObject]
 #define JFKVCPropertyPath(_property)	(@#_property)
 #define JFReversedDomain				@"com.jackfelle"
@@ -59,6 +66,11 @@ FOUNDATION_EXPORT BOOL	JFStringIsNullOrEmpty(NSString* string);
 
 FOUNDATION_EXPORT NSString*	JFStringMakeRandom(NSUInteger length);
 FOUNDATION_EXPORT NSString*	JFStringMakeRandomWithCharacters(NSUInteger length, NSString* characters);
+
+
+#pragma mark - Functions (Localization)
+
+FOUNDATION_EXPORT NSString*	JFLocalizedString(NSString* key);
 
 
 #pragma mark Functions (Object conversions)

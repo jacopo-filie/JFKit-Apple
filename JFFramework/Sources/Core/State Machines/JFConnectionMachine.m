@@ -31,6 +31,64 @@
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFConnectionMachine
 
+#pragma mark Properties accessors (State)
+
+- (BOOL)isConnected
+{
+	return (self.currentState == JFConnectionStateConnected);
+}
+
+- (BOOL)isDirty
+{
+	return (self.currentState == JFConnectionStateDirty);
+}
+
+- (BOOL)isDisconnected
+{
+	return (self.currentState == JFConnectionStateDisconnected);
+}
+
+- (BOOL)isLost
+{
+	return (self.currentState == JFConnectionStateLost);
+}
+
+- (BOOL)isReady
+{
+	return (self.currentState == JFConnectionStateReady);
+}
+
+
+#pragma mark Properties accessors (Transition)
+
+- (BOOL)isConnecting
+{
+	return (self.currentTransition == JFConnectionTransitionConnecting);
+}
+
+- (BOOL)isDisconnecting
+{
+	JFStateTransition transition = self.currentTransition;
+	return ((transition == JFConnectionTransitionDisconnectingFromConnected) || (transition == JFConnectionTransitionDisconnectingFromLost));
+}
+
+- (BOOL)isLosingConnection
+{
+	return (self.currentTransition == JFConnectionTransitionLosingConnection);
+}
+
+- (BOOL)isReconnecting
+{
+	return (self.currentTransition == JFConnectionTransitionReconnecting);
+}
+
+- (BOOL)isResetting
+{
+	JFStateTransition transition = self.currentTransition;
+	return ((transition == JFConnectionTransitionResettingFromDirty) || (transition == JFConnectionTransitionResettingFromDisconnected));
+}
+
+
 #pragma mark Memory management
 
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate
@@ -46,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self connect:nil];
 }
 
-- (void)connect:(nullable JFSimpleCompletionBlock)completion
+- (void)connect:(JFSimpleCompletionBlock __nullable)completion
 {
 	[self performTransition:JFConnectionTransitionConnecting completion:completion];
 }
@@ -56,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self disconnect:nil];
 }
 
-- (void)disconnect:(nullable JFSimpleCompletionBlock)completion
+- (void)disconnect:(JFSimpleCompletionBlock __nullable)completion
 {
 	JFConnectionTransition transition;
 	switch(self.currentState)
@@ -77,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self loseConnection:nil];
 }
 
-- (void)loseConnection:(nullable JFSimpleCompletionBlock)completion
+- (void)loseConnection:(JFSimpleCompletionBlock __nullable)completion
 {
 	[self performTransition:JFConnectionTransitionLosingConnection completion:completion];
 }
@@ -87,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self reconnect:nil];
 }
 
-- (void)reconnect:(nullable JFSimpleCompletionBlock)completion
+- (void)reconnect:(JFSimpleCompletionBlock __nullable)completion
 {
 	[self performTransition:JFConnectionTransitionReconnecting completion:completion];
 }
@@ -97,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self reset:nil];
 }
 
-- (void)reset:(nullable JFSimpleCompletionBlock)completion
+- (void)reset:(JFSimpleCompletionBlock __nullable)completion
 {
 	JFConnectionTransition transition;
 	switch(self.currentState)
@@ -116,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Utilities management
 
-- (nullable NSString*)debugStringForState:(JFState)state
+- (NSString* __nullable)debugStringForState:(JFState)state
 {
 	NSString* retObj = nil;
 	switch(state)
@@ -135,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (nullable NSString*)debugStringForTransition:(JFStateTransition)transition
+- (NSString* __nullable)debugStringForTransition:(JFStateTransition)transition
 {
 	NSString* retObj = nil;
 	switch(transition)

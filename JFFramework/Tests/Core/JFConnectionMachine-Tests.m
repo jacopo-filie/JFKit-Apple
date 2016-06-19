@@ -60,8 +60,8 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 
 // Common
 - (void)	setUpWithDescription:(NSString*)description initialState:(JFConnectionState)state failureExpected:(BOOL)shouldFail;
-- (void)	verifyResult:(JFState)expectedResult;
-- (void)	waitExpectingResult:(JFState)expectedResult;
+- (void)	verifyResult:(JFConnectionState)expectedResult;
+- (void)	waitExpectingResult:(JFConnectionState)expectedResult;
 
 @end
 
@@ -102,25 +102,20 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 	self.shouldFail = NO;
 }
 
-- (void)verifyResult:(JFState)expectedResult
+- (void)verifyResult:(JFConnectionState)expectedResult
 {
 	JFConnectionMachine* machine = self.machine;
 	JFConnectionState state = machine.currentState;
-	JFConnectionState result = expectedResult;
-	XCTAssert((state == result), @"The current state of the connection machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:result]);
+	XCTAssert((state == expectedResult), @"The current state of the connection machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:expectedResult]);
 }
 
-- (void)waitExpectingResult:(JFState)expectedResult
+- (void)waitExpectingResult:(JFConnectionState)expectedResult
 {
 	JFBlockWithError handler = ^(NSError* error)
 	{
-		if(error)
-		{
-			NSLog(@"Timeout error: %@", error);
-			return;
-		}
-		
-		[self verifyResult:expectedResult];
+		XCTAssertNil(error, @"Error: %@", error);
+		if(!error)
+			[self verifyResult:expectedResult];
 	};
 	
 	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
@@ -235,10 +230,10 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 	[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition
+- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nonnull)completion
 {
 	[MainOperationQueue addOperationWithBlock:^{
-		[sender onTransitionCompleted:!self.shouldFail error:nil];
+		completion(!self.shouldFail, nil);
 	}];
 }
 
