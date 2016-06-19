@@ -93,7 +93,7 @@ NSString* JFStringMakeRandomWithCharacters(NSUInteger length, NSString* characte
 
 NSString* JFLocalizedString(NSString* key)
 {
-	if(!JFStringIsNullOrEmpty(key))
+	if(JFStringIsNullOrEmpty(key))
 		return nil;
 	
 	NSString* retObj = [MainBundle localizedStringForKey:key value:nil table:nil];
