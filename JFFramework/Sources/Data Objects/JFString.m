@@ -26,6 +26,10 @@
 
 #import "JFString.h"
 
+#import "NSBundle+JFFramework.h"
+
+#import "JFShortcuts.h"
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,6 +86,22 @@ NSString* JFStringMakeRandomWithCharacters(NSUInteger length, NSString* characte
 		[retObj appendFormat:@"%C", [characters characterAtIndex:index]];
 	}
 	return [retObj copy];
+}
+
+
+#pragma mark - Functions (Localization)
+
+NSString* JFLocalizedString(NSString* key)
+{
+	if(!JFStringIsNullOrEmpty(key))
+		return nil;
+	
+	NSString* retObj = [MainBundle localizedStringForKey:key value:nil table:nil];
+	if(retObj && ![retObj isEqualToString:key])
+		return retObj;
+	
+	NSBundle* bundle = [NSBundle jf_frameworkResourcesBundle];
+	return [bundle localizedStringForKey:key value:nil table:nil];
 }
 
 

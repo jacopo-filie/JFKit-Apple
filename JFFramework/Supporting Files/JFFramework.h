@@ -31,6 +31,7 @@
 #import	"JFConnectionMachine.h"
 #import "JFErrorsManager.h"
 #import	"JFManager.h"
+#import	"JFOpenCloseMachine.h"
 #import	"JFStateMachine.h"
 
 // Data Objects
@@ -40,6 +41,9 @@
 
 // User Interface
 #import "JFWindowController.h"
+
+// Utilities (Addons)
+#import	"NSBundle+JFFramework.h"
 
 // Utilities
 #import "JFLogger.h"

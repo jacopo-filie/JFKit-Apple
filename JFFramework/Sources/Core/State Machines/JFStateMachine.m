@@ -26,8 +26,8 @@
 
 #import "JFStateMachine.h"
 
-#import "JFErrorsManager.h"
 #import "JFShortcuts.h"
+#import "JFStateMachineErrorsManager.h"
 #import "JFString.h"
 
 
@@ -61,6 +61,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly)	dispatch_queue_t	serialQueue;
 #endif
 
+// Errors
+@property (strong, nonatomic, readonly)	JFStateMachineErrorsManager*	errorsManager;
+
 
 #pragma mark Methods
 
@@ -90,6 +93,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Concurrency
 @synthesize serialQueue	= _serialQueue;
+
+// Errors
+@synthesize errorsManager	= _errorsManager;
 
 // State
 @synthesize currentState		= _currentState;
@@ -143,6 +149,9 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		// Concurrency
 		_serialQueue	= dispatch_queue_create(JFStringToCString(JFStateMachineSerialQueueName), DISPATCH_QUEUE_SERIAL);
+		
+		// Errors
+		_errorsManager	= [JFStateMachineErrorsManager sharedManager];
 		
 		// Relationships
 		_delegate	= delegate;
@@ -202,19 +211,19 @@ NS_ASSUME_NONNULL_BEGIN
 		return;
 	}
 	
+	JFStateMachineErrorsManager* errorsManager = self.errorsManager;
+	
 #if __has_feature(objc_arc_weak)
 	typeof(self) __weak weakSelf = self;
 #endif
 	
 	JFBlock block = ^(void)
 	{
-		JFErrorsManager* errorsManager = [JFErrorsManager sharedManager];
-		
 #if __has_feature(objc_arc_weak)
 		typeof(self) __strong strongSelf = weakSelf;
 		if(!strongSelf)
 		{
-			errorBlock([errorsManager debugPlaceholderError]);
+			errorBlock([errorsManager errorWithCode:JFStateMachineErrorDeallocated]);
 			return;
 		}
 #else
@@ -223,7 +232,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		if([strongSelf initialStateForTransition:transition] != strongSelf.currentState)
 		{
-			errorBlock([errorsManager debugPlaceholderError]);
+			errorBlock([errorsManager errorWithCode:JFStateMachineErrorWrongInitialState]);
 			return;
 		}
 		
@@ -308,22 +317,22 @@ NS_ASSUME_NONNULL_BEGIN
 		return NO;
 	};
 	
-	JFErrorsManager* errorsManager = [JFErrorsManager sharedManager];
+	JFStateMachineErrorsManager* errorsManager = self.errorsManager;
 	
 	if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
-		return errorBlock([errorsManager debugPlaceholderError]);
+		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidTransition]);
 	
 	JFState initialState = [self initialStateForTransition:transition];
 	if(initialState == JFStateNotAvailable)
-		return errorBlock([errorsManager debugPlaceholderError]);
+		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidInitialState]);
 	
 	JFState finalState = [self finalStateForSucceededTransition:transition];
 	if(finalState == JFStateNotAvailable)
-		return errorBlock([errorsManager debugPlaceholderError]);
+		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidFinalStateOnSuccess]);
 	
 	finalState = [self finalStateForFailedTransition:transition];
 	if(finalState == JFStateNotAvailable)
-		return errorBlock([errorsManager debugPlaceholderError]);
+		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidFinalStateOnFailure]);
 	
 	return YES;
 }
