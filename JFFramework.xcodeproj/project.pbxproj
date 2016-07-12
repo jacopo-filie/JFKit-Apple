@@ -268,10 +268,7 @@
 		EAB650E01C135C0000064C7D /* JFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		EAB650E11C135C0000064C7D /* JFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLogger.h; sourceTree = "<group>"; };
 		EACFC9211D169928005F3D91 /* JFFramework-iOS-Resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-iOS-Resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EACFC9271D16998B005F3D91 /* Info-iOS-Resources.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS-Resources.plist"; sourceTree = "<group>"; };
 		EACFC9321D16A2B2005F3D91 /* JFFramework-OSX-Resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-OSX-Resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EACFC9341D16A31A005F3D91 /* Info-OSX-Resources.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-OSX-Resources.plist"; sourceTree = "<group>"; };
-		EACFC9351D16A330005F3D91 /* Info-tvOS-Resources.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-tvOS-Resources.plist"; sourceTree = "<group>"; };
 		EACFC93D1D16A36C005F3D91 /* JFFramework-tvOS-Resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFFramework-tvOS-Resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACFC94A1D16A744005F3D91 /* JFStateMachineErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFStateMachineErrors.h; sourceTree = "<group>"; };
 		EACFC94F1D16AB40005F3D91 /* NSBundle+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+JFFramework.h"; sourceTree = "<group>"; };
@@ -528,11 +525,8 @@
 		EAE752341BEBEF91003A2F38 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EACFC9271D16998B005F3D91 /* Info-iOS-Resources.plist */,
 				EAE752351BEBEF91003A2F38 /* Info-iOS-Tests.plist */,
-				EACFC9341D16A31A005F3D91 /* Info-OSX-Resources.plist */,
 				EAE752361BEBEF91003A2F38 /* Info-OSX-Tests.plist */,
-				EACFC9351D16A330005F3D91 /* Info-tvOS-Resources.plist */,
 				6CE4F4D61C2458EB008A8ACB /* Info-tvOS-Tests.plist */,
 				EAE752371BEBEF91003A2F38 /* JFFramework.h */,
 				EAE752381BEBEF91003A2F38 /* Prefix.pch */,
@@ -1553,7 +1547,6 @@
 		EACFC9241D169928005F3D91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-iOS-Resources.plist";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1561,7 +1554,6 @@
 		EACFC9251D169928005F3D91 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-iOS-Resources.plist";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1569,7 +1561,6 @@
 		EACFC9301D16A2B2005F3D91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-OSX-Resources.plist";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1577,7 +1568,6 @@
 		EACFC9311D16A2B2005F3D91 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-OSX-Resources.plist";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1585,7 +1575,6 @@
 		EACFC93B1D16A36C005F3D91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Resources.plist";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1593,7 +1582,6 @@
 		EACFC93C1D16A36C005F3D91 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info-tvOS-Resources.plist";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
