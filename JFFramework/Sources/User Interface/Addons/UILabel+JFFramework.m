@@ -57,9 +57,9 @@
 - (void)jf_swizzled_setText:(NSString*)text
 {
 #if JF_TARGET_OS_IOS
-	// FIX: Whitespaces and newline characters may corrupt the text drawing up to iOS6.
 	if(!iOS7Plus)
 	{
+		// FIX: Whitespaces and newline characters may corrupt the text drawing up to iOS6.
 		NSCharacterSet* set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
 		text = [text stringByTrimmingCharactersInSet:set];
 	}
@@ -100,10 +100,15 @@
 {
 	CGSize retVal = [self jf_swizzled_intrinsicContentSize];
  
-	// Applies the fix if this is a multiline label.
-	if(self.numberOfLines != 1)
-		retVal.height += 1; // FIX: sometimes the intrinsic content size is 1 point too short.
- 
+#if JF_TARGET_OS_IOS
+	if(!iOS7Plus)
+	{
+		// Applies the fix if this is a multiline label.
+		if(self.numberOfLines != 1)
+			retVal.height += 1; // FIX: sometimes the intrinsic content size is 1 point too short.
+	}
+#endif
+	
 	return retVal;
 }
 
@@ -111,16 +116,21 @@
 {
 	[self jf_swizzled_layoutSubviews];
  
-	// Updates the 'preferredMaxLayoutWidth' property if this is a multiline label.
-	if(self.numberOfLines != 1)
+#if JF_TARGET_OS_IOS
+	if(!iOS8Plus)
 	{
-		CGFloat width = CGRectGetWidth(self.frame);
-		if(self.preferredMaxLayoutWidth != width)
+		// Updates the 'preferredMaxLayoutWidth' property if this is a multiline label.
+		if(self.numberOfLines != 1)
 		{
-			self.preferredMaxLayoutWidth = width; // FIX: if the frame of the label changes, this property is not automatically updated.
-			[self setNeedsUpdateConstraints];
+			CGFloat width = CGRectGetWidth(self.frame);
+			if(self.preferredMaxLayoutWidth != width)
+			{
+				self.preferredMaxLayoutWidth = width; // FIX: if the frame of the label changes, this property is not automatically updated.
+				[self setNeedsUpdateConstraints];
+			}
 		}
 	}
+#endif
 }
 
 @end
