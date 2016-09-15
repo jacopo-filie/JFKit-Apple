@@ -26,7 +26,7 @@
 
 #import "JFAppDelegate.h"
 
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
+#if JF_IOS || JF_MACOS
 #import "JFAlertsController.h"
 #endif
 #import "JFErrorsManager.h"
@@ -62,7 +62,7 @@
 @synthesize windowController	= _windowController;
 
 // User interface
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
+#if JF_IOS || JF_MACOS
 @synthesize alertsController	= _alertsController;
 #endif
 @synthesize window				= _window;
@@ -73,7 +73,7 @@
 - (JFWindow*)window
 {
 	if(!_window)
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 		self.window = [NSWindow new];
 #else
 		self.window = [[UIWindow alloc] initWithFrame:MainScreen.bounds];
@@ -112,7 +112,7 @@
 		_errorsManager	= [self createErrorsManager];
 		
 		// User interface
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
+#if JF_IOS || JF_MACOS
 		_alertsController = [[JFAlertsController alloc] init];
 #endif
 	}
@@ -136,7 +136,7 @@
 }
 
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 #pragma mark Protocol implementation (NSApplicationDelegate)
 
 - (void)applicationDidBecomeActive:(NSNotification*)notification
@@ -204,10 +204,10 @@
 #endif
 
 
-#if !JF_TARGET_OS_OSX
+#if !JF_MACOS
 #pragma mark Protocol implementation (UIApplicationDelegate)
 
-- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary* __nullable)launchOptions
 {
 	if(self.jf_shouldLog)
 		[self.jf_logger logMessage:@"Application did finish launching." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
@@ -231,7 +231,7 @@
 - (void)applicationDidReceiveMemoryWarning:(UIApplication*)application
 {
 	if(self.jf_shouldLog)
-		[self.jf_logger logMessage:@"Application did receive memory warning." priority:JFLogPriority4Warning hashtags:(JFLogHashtagAttention | JFLogHashtagDeveloper)];
+		[self.jf_logger logMessage:@"Application did receive memory warning." priority:JFLogPriority4Warning hashtags:(JFLogHashtags)(JFLogHashtagAttention | JFLogHashtagDeveloper)];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application

@@ -90,7 +90,7 @@
 	
 	// Checks if the test log file still exists and deletes it if necessary.
 	NSURL* fileURL = self.logger.fileURL;
-	if([fileManager fileExistsAtPath:[fileURL path]])
+	if([fileManager fileExistsAtPath:(NSString*)fileURL.path])
 	{
 		NSError* error = nil;
 		BOOL succeeded = [fileManager removeItemAtURL:fileURL error:&error];
@@ -138,11 +138,11 @@
 - (void)testHashtagsLogging
 {
 	NSString* logMessage = MethodName;
-	[self.logger logMessage:logMessage priority:JFLogPriority0Emergency hashtags:(JFLogHashtagDeveloper | JFLogHashtagMarker)];
+	[self.logger logMessage:logMessage priority:JFLogPriority0Emergency hashtags:(JFLogHashtags)(JFLogHashtagDeveloper | JFLogHashtagMarker)];
 	NSArray* lines = [self readTestLogFileLines];
 	NSString* result = [lines firstObject];
 	NSString* expectedMessage = [logMessage stringByAppendingString:@" #Developer #Marker"];
-	NSRange range = [result rangeOfString:expectedMessage options:(NSAnchoredSearch | NSBackwardsSearch)];
+	NSRange range = [result rangeOfString:expectedMessage options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
 	XCTAssert((range.location != NSNotFound), @"The logged text differs from the message passed to the logger.\n");
 }
 
@@ -168,7 +168,7 @@
 	[self.logger logMessage:logMessage priority:JFLogPriority0Emergency];
 	NSArray* lines = [self readTestLogFileLines];
 	NSString* result = [lines firstObject];
-	NSRange range = [result rangeOfString:logMessage options:(NSAnchoredSearch | NSBackwardsSearch)];
+	NSRange range = [result rangeOfString:logMessage options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
 	XCTAssert((range.location != NSNotFound), @"The logged text differs from the message passed to the logger.\n");
 }
 

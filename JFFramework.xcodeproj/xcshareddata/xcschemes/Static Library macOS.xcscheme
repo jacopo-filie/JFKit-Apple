@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C7791B9EEDF300FAF487"
-               BuildableName = "JFFramework-iOS.a"
-               BlueprintName = "iOS"
+               BlueprintIdentifier = "EA2A734A1D4E9D7B00AE6BF7"
+               BuildableName = "JFFramework.a"
+               BlueprintName = "Static Library macOS"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C7831B9EEDF400FAF487"
-               BuildableName = "JFFramework-iOS-Tests.xctest"
-               BlueprintName = "iOS-Tests"
+               BlueprintIdentifier = "EA2A73931D4EA1A300AE6BF7"
+               BuildableName = "JFFramework-Tests.xctest"
+               BlueprintName = "Static Library macOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C7831B9EEDF400FAF487"
-               BuildableName = "JFFramework-iOS-Tests.xctest"
-               BlueprintName = "iOS-Tests"
+               BlueprintIdentifier = "EA2A73931D4EA1A300AE6BF7"
+               BuildableName = "JFFramework-Tests.xctest"
+               BlueprintName = "Static Library macOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7791B9EEDF300FAF487"
-            BuildableName = "JFFramework-iOS.a"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "EA2A734A1D4E9D7B00AE6BF7"
+            BuildableName = "JFFramework.a"
+            BlueprintName = "Static Library macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7791B9EEDF300FAF487"
-            BuildableName = "JFFramework-iOS.a"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "EA2A734A1D4E9D7B00AE6BF7"
+            BuildableName = "JFFramework.a"
+            BlueprintName = "Static Library macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7791B9EEDF300FAF487"
-            BuildableName = "JFFramework-iOS.a"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "EA2A734A1D4E9D7B00AE6BF7"
+            BuildableName = "JFFramework.a"
+            BlueprintName = "Static Library macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

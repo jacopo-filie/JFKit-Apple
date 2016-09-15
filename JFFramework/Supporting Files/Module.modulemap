@@ -1,0 +1,5 @@
+framework module JFFramework {
+    umbrella header "JFFramework.h"
+    export *
+    module * { export * }
+}

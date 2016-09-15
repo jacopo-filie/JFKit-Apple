@@ -32,6 +32,7 @@
 
 
 
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFManager
 
 #pragma mark Memory management
@@ -64,8 +65,7 @@
 	if(!retObj)
 	{
 		retObj = [self defaultManager];
-		if(retObj)
-			sharedManagers[key] = retObj;
+		sharedManagers[key] = retObj;
 	}
 	
 	pthread_mutex_unlock(&mutex);
@@ -79,3 +79,4 @@
 }
 
 @end
+NS_ASSUME_NONNULL_END

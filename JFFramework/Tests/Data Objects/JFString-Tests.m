@@ -215,10 +215,10 @@
 	string = JFStringFromCGFloat(0);
 	result = @"0";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromCGFloat(0.15);
+	string = JFStringFromCGFloat((CGFloat)0.15);
 	result = @"0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromCGFloat(-0.15);
+	string = JFStringFromCGFloat((CGFloat)-0.15);
 	result = @"-0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
 	
@@ -237,10 +237,10 @@
 	string = JFStringFromFloat(0);
 	result = @"0";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFloat(0.15);
+	string = JFStringFromFloat((float)0.15);
 	result = @"0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFloat(-0.15);
+	string = JFStringFromFloat((float)-0.15);
 	result = @"-0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
 	
@@ -248,10 +248,10 @@
 	string = JFStringFromFloat32(0);
 	result = @"0";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFloat32(0.15);
+	string = JFStringFromFloat32((Float32)0.15);
 	result = @"0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFloat32(-0.15);
+	string = JFStringFromFloat32((Float32)-0.15);
 	result = @"-0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
 	
@@ -293,16 +293,16 @@
 	string = JFStringFromFormattedFloat(0, 2, YES);
 	result = @"0.00";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFormattedFloat(0.15, 3, NO);
+	string = JFStringFromFormattedFloat((float)0.15, 3, NO);
 	result = @"0.15";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFormattedFloat(0.16, 1, YES);
+	string = JFStringFromFormattedFloat((float)0.16, 1, YES);
 	result = @"0.2";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFormattedFloat(-0.14, 1, NO);
+	string = JFStringFromFormattedFloat((float)-0.14, 1, NO);
 	result = @"-0.1";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
-	string = JFStringFromFormattedFloat(-0.14, 3, YES);
+	string = JFStringFromFormattedFloat((float)-0.14, 3, YES);
 	result = @"-0.140";
 	XCTAssert([string isEqualToString:result], @"The string value is '%@'; it should be '%@'.", string, result);
 	

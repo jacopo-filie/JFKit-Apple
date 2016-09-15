@@ -45,8 +45,8 @@ FOUNDATION_EXPORT BOOL	JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2);
 
 #pragma mark Functions (Images)
 
-#if JF_TARGET_OS_IOS
-FOUNDATION_EXPORT NSString*	JFLaunchImageName();
+#if JF_IOS
+FOUNDATION_EXPORT NSString*	JFLaunchImageName(void);
 FOUNDATION_EXPORT NSString*	JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
 #endif
 
@@ -73,6 +73,6 @@ FOUNDATION_EXPORT void	JFPerformSelector2(NSObject* target, SEL action, id obj1,
 #pragma mark Functions (Version)
 
 FOUNDATION_EXPORT BOOL		JFCheckSystemVersion(NSString* version, JFRelation relation);
-FOUNDATION_EXPORT NSString*	JFSystemVersion();
+FOUNDATION_EXPORT NSString*	JFSystemVersion(void);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

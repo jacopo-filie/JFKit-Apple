@@ -30,9 +30,9 @@
 
 
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 @interface JFAlert () <UIActionSheetDelegate, UIAlertViewDelegate>
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 @interface JFAlert ()
 #endif
 
@@ -43,7 +43,7 @@
 @property (copy, nonatomic)	JFBlock	presentCompletion;
 
 // Flags
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 @property (assign, nonatomic, getter = isApplicationModal)		BOOL	applicationModal;
 #endif
 @property (assign, nonatomic, readwrite, getter = isVisible)	BOOL	visible;
@@ -52,10 +52,10 @@
 @property (strong, nonatomic)	NSTimer*	timer;
 
 // User interface
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 @property (strong, nonatomic)	UIActionSheet*	actionSheet;
 @property (strong, nonatomic)	UIAlertView*	alertView;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 @property (strong, nonatomic)	NSAlert*		alertView;
 #endif
 @property (strong, nonatomic)	NSArray*		currentButtons;
@@ -73,7 +73,7 @@
 - (void)	notifyWillPresent;
 
 // User interface management
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (BOOL)	prepareActionSheet:(JFBlock)completion;
 #endif
 - (BOOL)	prepareAlertView:(JFBlock)completion;
@@ -82,7 +82,7 @@
 - (void)	alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
 - (void)	alert:(id)alert didDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)	alert:(id)alert willDismissWithButtonIndex:(NSInteger)buttonIndex;
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 - (void)	alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void*)contextInfo;
 #endif
 - (void)	didPresentAlert:(id)alert;
@@ -101,7 +101,7 @@
 #pragma mark Properties
 
 // Attributes
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 @synthesize style	= _style;
 #endif
 
@@ -114,7 +114,7 @@
 @synthesize title	= _title;
 
 // Flags
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 @synthesize applicationModal	= _applicationModal;
 #endif
 @synthesize visible	= _visible;
@@ -126,12 +126,12 @@
 @synthesize timer	= _timer;
 
 // User interface
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 @synthesize actionSheet			= _actionSheet;
 #endif
 @synthesize alertView			= _alertView;
 @synthesize cancelButton		= _cancelButton;
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 @synthesize destructiveButton	= _destructiveButton;
 #endif
 @synthesize currentButtons		= _currentButtons;
@@ -146,7 +146,7 @@
 	if(self)
 	{
 		// Flags
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 		_applicationModal = NO;
 #endif
 		_visible = NO;
@@ -160,10 +160,10 @@
 - (JFAlertButton*)buttonAtIndex:(NSInteger)buttonIndex
 {
 	NSArray* buttons = self.currentButtons;
-	if((buttonIndex < 0) || (buttonIndex >= [buttons count]))
+	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= [buttons count]))
 		return nil;
 	
-	return [buttons objectAtIndex:buttonIndex];
+	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
 }
 
 
@@ -209,7 +209,7 @@
 {
 	BOOL shouldAbort = (![self isVisible] || !self.alertView);
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	if(shouldAbort && self.actionSheet)
 		shouldAbort = NO;
 #endif
@@ -222,7 +222,7 @@
 	{
 		NSArray* buttons = self.currentButtons;
 		if([buttons containsObject:button])
-			index = [buttons indexOfObject:button];
+			index = (NSInteger)[buttons indexOfObject:button];
 		else
 			button = nil;
 	}
@@ -231,12 +231,12 @@
 	
 	if(self.alertView)
 	{
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 		UIAlertView* alertView = self.alertView;
 		NSInteger buttonIndex = (button ? index : [alertView cancelButtonIndex]);
 		[self alert:alertView clickedButtonAtIndex:buttonIndex];
 		[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 		NSWindow* sheet = self.alertView.window;
 		if(button)
 		{
@@ -246,7 +246,7 @@
 				[NSApp stopModalWithCode:returnCode];
 			else
 			{
-				if(OSX10_9Plus)
+				if(macOS10_9Plus)
 					[sheet.sheetParent endSheet:sheet returnCode:returnCode];
 				else
 					[NSApp endSheet:sheet returnCode:returnCode];
@@ -258,7 +258,7 @@
 				[NSApp stopModal];
 			else
 			{
-				if(OSX10_9Plus)
+				if(macOS10_9Plus)
 					[sheet.sheetParent endSheet:sheet];
 				else
 					[NSApp endSheet:sheet];
@@ -266,7 +266,7 @@
 		}
 #endif
 	}
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	else if(self.actionSheet)
 	{
 		UIActionSheet* actionSheet = self.actionSheet;
@@ -279,7 +279,7 @@
 	return YES;
 }
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
 - (BOOL)prepareActionSheet:(JFBlock)completion
 {
@@ -321,7 +321,7 @@
 	if([self isVisible] || self.alertView)
 		return NO;
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	if(self.actionSheet)
 		return NO;
 #endif
@@ -339,9 +339,9 @@
 	
 	self.presentCompletion = completion;
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:self.title message:self.message delegate:self cancelButtonTitle:cancelButton.title otherButtonTitles:nil];
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 	NSAlert* alertView = [NSAlert new];
 	alertView.informativeText = self.message;
 	alertView.messageText = self.title;
@@ -360,7 +360,7 @@
 	return YES;
 }
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
 - (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock)completion
 {
@@ -412,7 +412,7 @@
 	return YES;
 }
 
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 
 - (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock)completion
 {
@@ -425,7 +425,7 @@
 	
 	[self willPresentAlert:alert];
 	
-	if(OSX10_9Plus)
+	if(macOS10_9Plus)
 	{
 		void (^handler)(NSModalResponse) = ^(NSModalResponse returnCode)
 		{
@@ -470,9 +470,9 @@
 		self.timer = [NSTimer timerWithTimeInterval:timeout invocation:invocation repeats:NO];
 	}
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	[self.alertView show];
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 	self.applicationModal = YES;
 	[MainOperationQueue addOperationWithBlock:^{
 		NSAlert* alert = self.alertView;
@@ -502,9 +502,9 @@
 	
 	JFAlertButton* button = [self buttonAtIndex:buttonIndex];
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	self.actionSheet = nil;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 	self.applicationModal = NO;
 #endif
 	
@@ -534,7 +534,7 @@
 	[self notifyWillDismissWithButton:button];
 }
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 
 - (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void*)contextInfo
 {
@@ -545,7 +545,7 @@
 	
 	[self alert:alert clickedButtonAtIndex:buttonIndex];
 	[self alert:alert willDismissWithButtonIndex:buttonIndex];
-	if(!OSX10_9Plus && ![self isApplicationModal])
+	if(!macOS10_9Plus && ![self isApplicationModal])
 		[alert.window orderOut:alert];
 	[self alert:alert didDismissWithButtonIndex:buttonIndex];
 }
@@ -557,9 +557,9 @@
 	NSTimer* timer = self.timer;
 	if(timer)
 	{
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 		NSString* runLoopMode = NSDefaultRunLoopMode;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 		NSString* runLoopMode = NSModalPanelRunLoopMode;
 #endif
 		[[NSRunLoop currentRunLoop] addTimer:timer forMode:runLoopMode];
@@ -583,7 +583,7 @@
 }
 
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
 #pragma mark Protocol implementation (UIActionSheetDelegate)
 
@@ -670,7 +670,7 @@
 
 + (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock)action
 {
-	return [[self alloc] initWithTitle:title action:action];
+	return [(JFAlertButton*)[self alloc] initWithTitle:title action:action];
 }
 
 - (instancetype)initWithTitle:(NSString*)title action:(JFBlock)action

@@ -56,7 +56,7 @@
 
 - (void)jf_swizzled_setText:(NSString*)text
 {
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	if(!iOS7Plus)
 	{
 		// FIX: Whitespaces and newline characters may corrupt the text drawing up to iOS6.
@@ -100,7 +100,7 @@
 {
 	CGSize retVal = [self jf_swizzled_intrinsicContentSize];
  
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	if(!iOS7Plus)
 	{
 		// Applies the fix if this is a multiline label.
@@ -116,7 +116,7 @@
 {
 	[self jf_swizzled_layoutSubviews];
  
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	if(!iOS8Plus)
 	{
 		// Updates the 'preferredMaxLayoutWidth' property if this is a multiline label.

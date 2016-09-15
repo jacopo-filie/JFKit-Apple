@@ -32,13 +32,7 @@
 
 #pragma mark - Macros
 
-#if JF_TARGET_OS_IOS
-#define JFBundleName					@"JFFramework-iOS-Resources"
-#elif JF_TARGET_OS_OSX
-#define JFBundleName					@"JFFramework-OSX-Resources"
-#elif JF_TARGET_OS_TV
-#define JFBundleName					@"JFFramework-tvOS-Resources"
-#endif
+#define JFBundleName					@"JFFramework"
 #define JFKVCPropertyName(_property)	[[JFKVCPropertyPath(_property) componentsSeparatedByString:@"."] lastObject]
 #define JFKVCPropertyPath(_property)	(@#_property)
 #define JFReversedDomain				@"com.jackfelle"

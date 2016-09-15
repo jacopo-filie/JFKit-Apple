@@ -41,10 +41,10 @@
 
 #pragma mark Methods
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 // User interface management (Action sheets)
 - (JFAlert*)	createActionSheetWithTitle:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (JFAlert*)	createActionSheet:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 #endif
 
@@ -86,9 +86,9 @@
 
 #pragma mark User interface management (Action sheets)
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (JFAlert*)createActionSheetWithTitle:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (JFAlert*)createActionSheet:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 #endif
 {
@@ -96,7 +96,7 @@
 	retVal.delegate = self;
 	retVal.title = title;
 	
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 	retVal.message = message;
 	retVal.style = style;
 #endif
@@ -104,14 +104,14 @@
 	retVal.cancelButton = cancelButton;
 	retVal.otherButtons = otherButtons;
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	retVal.destructiveButton = destructiveButton;
 #endif
 	
 	return retVal;
 }
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
 - (void)presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 {
@@ -163,7 +163,7 @@
 	});
 }
 
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 
 - (void)presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 {
@@ -180,9 +180,9 @@
 
 #pragma mark User interface management (Alert views)
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 #endif
 {
@@ -206,14 +206,14 @@
 	
 	NSString* title = [error localizedDescription];
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	[self presentAlertViewWithTitle:title message:message cancelButton:cancelButton otherButtons:otherButtons];
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 	[self presentAlertView:style title:title message:message cancelButton:cancelButton otherButtons:otherButtons];
 #endif
 }
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
 - (void)presentAlertViewWithTitle:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 {
@@ -236,7 +236,7 @@
 	});
 }
 
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 
 - (void)presentAlertView:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
 {

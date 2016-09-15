@@ -41,7 +41,7 @@
 #define JFColorRed(_val)		JFColorWithRGB(_val, 0, 0)
 #define JFColorYellow(_val)		JFColorWithRGB(_val, _val, 0)
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 #define JFColor	NSColor
 #else
 #define JFColor	UIColor

@@ -45,7 +45,7 @@
 - (instancetype)	initWithWindow:(JFWindow*)window NS_DESIGNATED_INITIALIZER;
 
 // Window management
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 - (void)	windowDidBecomeHidden;
 - (void)	windowDidBecomeKey;
 - (void)	windowDidBecomeMain;

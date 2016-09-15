@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C7951B9EF3CE00FAF487"
-               BuildableName = "JFFramework-OSX.a"
-               BlueprintName = "OSX"
-               ReferencedContainer = "container:JFFramework.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C79F1B9EF3CF00FAF487"
-               BuildableName = "JFFramework-OSX-Tests.xctest"
-               BlueprintName = "OSX-Tests"
+               BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
+               BuildableName = "JFFramework.bundle"
+               BlueprintName = "Static Library iOS Resources"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C31C79F1B9EF3CF00FAF487"
-               BuildableName = "JFFramework-OSX-Tests.xctest"
-               BlueprintName = "OSX-Tests"
-               ReferencedContainer = "container:JFFramework.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7951B9EF3CE00FAF487"
-            BuildableName = "JFFramework-OSX.a"
-            BlueprintName = "OSX"
-            ReferencedContainer = "container:JFFramework.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -78,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7951B9EF3CE00FAF487"
-            BuildableName = "JFFramework-OSX.a"
-            BlueprintName = "OSX"
+            BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
+            BuildableName = "JFFramework.bundle"
+            BlueprintName = "Static Library iOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C31C7951B9EF3CE00FAF487"
-            BuildableName = "JFFramework-OSX.a"
-            BlueprintName = "OSX"
+            BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
+            BuildableName = "JFFramework.bundle"
+            BlueprintName = "Static Library iOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

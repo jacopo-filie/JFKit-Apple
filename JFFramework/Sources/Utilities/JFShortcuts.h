@@ -26,98 +26,204 @@
 
 #import	"JFPreprocessorMacros.h"
 #import "JFString.h"
+#import "JFTypes.h"
 #import "JFUtilities.h"
+
+
+
+@class AppDelegate;
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Macros
+#if JF_SHORTCUTS_ENABLED
 
-#define	ApplicationDelegate		((AppDelegate*)[SharedApplication delegate])
-#define	ClassBundle				[NSBundle bundleForClass:[self class]]
-#define	ClassName				NSStringFromClass([self class])
-#define	LogMethod				NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
-#define MainBundle				[NSBundle mainBundle]
-#define MainNotificationCenter	[NSNotificationCenter defaultCenter]
-#define MainOperationQueue		[NSOperationQueue mainQueue]
-#define MethodName				NSStringFromSelector(_cmd)
-#define ProcessInfo				[NSProcessInfo processInfo]
+#pragma mark Macros (Generic)
 
-#if JF_TARGET_OS_OSX
-#define	SharedApplication			NSApp
-#define	SharedWorkspace				[NSWorkspace sharedWorkspace]
-#else
-#define CurrentDevice				[UIDevice currentDevice]
-#if JF_TARGET_OS_IOS
-#define CurrentDeviceOrientation	[CurrentDevice orientation]
-#define CurrentStatusBarOrientation	[SharedApplication statusBarOrientation]
+#define	ApplicationDelegate			JF.applicationDelegate
+#define	ClassBundle					[NSBundle bundleForClass:[self class]]
+#define	ClassName					NSStringFromClass([self class])
+#if !JF_MACOS
+#define CurrentDevice				JF.currentDevice
 #endif
-#define MainScreen					[UIScreen mainScreen]
-#define	SharedApplication			[UIApplication sharedApplication]
+#if JF_IOS
+#define CurrentDeviceOrientation	JF.currentDeviceOrientation
+#define CurrentInterfaceOrientation	JF.currentInterfaceOrientation
+#endif
+#define	LogMethod					NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
+#define MainBundle					JF.mainBundle
+#define MainNotificationCenter		JF.mainNotificationCenter
+#define MainOperationQueue			JF.mainOperationQueue
+#if !JF_MACOS
+#define MainScreen					JF.mainScreen
+#endif
+#define MethodName					NSStringFromSelector(_cmd)
+#define ProcessInfo					JF.processInfo
+#define	SharedApplication			JF.sharedApplication
+#if JF_MACOS
+#define	SharedWorkspace				JF.sharedWorkspace
 #endif
 
 
 #pragma mark Macros (Info)
 
-#define AppBuild			JFApplicationInfoForKey(@"CFBundleVersion")
-#define AppDetailedVersion	[NSString stringWithFormat:@"%@ (%@)", AppVersion, AppBuild]
-#define AppDisplayName		JFApplicationInfoForKey(@"CFBundleDisplayName")
-#define AppIdentifier		JFApplicationInfoForKey(@"CFBundleIdentifier")
-#define AppLaunchStoryboard	JFApplicationInfoForKey(@"UILaunchStoryboardName")
-#define AppName				JFApplicationInfoForKey(@"CFBundleName")
-#define AppMainStoryboard	JFApplicationInfoForKey(@"UIMainStoryboardFile")
-#define AppVersion			JFApplicationInfoForKey(@"CFBundleShortVersionString")
+#define AppBuild			JF.appBuild
+#define AppDetailedVersion	JF.appDetailedVersion
+#define AppDisplayName		JF.appDisplayName
+#define AppIdentifier		JF.appIdentifier
+#define AppLaunchStoryboard	JF.appLaunchStoryboard
+#define AppName				JF.appName
+#define AppMainStoryboard	JF.appMainStoryboard
+#define AppVersion			JF.appVersion
 
 
 #pragma mark Macros (System)
 
-#if !JF_TARGET_OS_OSX
-#define AppleTV				(UserInterfaceIdiom == UIUserInterfaceIdiomTV)
-#define iPad				(UserInterfaceIdiom == UIUserInterfaceIdiomPad)
-#define iPhone				(UserInterfaceIdiom == UIUserInterfaceIdiomPhone)
-#define SystemVersion		[CurrentDevice systemVersion]
-#define UserInterfaceIdiom	[CurrentDevice userInterfaceIdiom]
+#if !JF_MACOS
+#define AppleTV				JF.isAppleTV
+#define iPad				JF.isIPad
+#define iPhone				JF.isIPhone
+#define SystemVersion		JF.systemVersion
+#define UserInterfaceIdiom	JF.userInterfaceIdiom
 #endif
 
 
 #pragma mark Macros (Version)
 
-#if JF_TARGET_OS_IOS
-#define iOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
-#define iOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
-#define iOS6				iOS(@"6")
-#define iOS6Plus			iOSPlus(@"6")
-#define iOS7				iOS(@"7")
-#define iOS7Plus			iOSPlus(@"7")
-#define iOS8				iOS(@"8")
-#define iOS8Plus			iOSPlus(@"8")
-#define iOS9				iOS(@"9")
-#define iOS9Plus			iOSPlus(@"9")
+#if JF_IOS
+#define iOS(_version)		[JF isIOS:_version]
+#define iOSPlus(_version)	[JF isIOSPlus:_version]
+#define iOS6				JF.isIOS6
+#define iOS6Plus			JF.isIOS6Plus
+#define iOS7				JF.isIOS7
+#define iOS7Plus			JF.isIOS7Plus
+#define iOS8				JF.isIOS8
+#define iOS8Plus			JF.isIOS8Plus
+#define iOS9				JF.isIOS9
+#define iOS9Plus			JF.isIOS9Plus
+#define iOS10				JF.isIOS10
+#define iOS10Plus			JF.isIOS10Plus
 #endif
 
-#if JF_TARGET_OS_OSX
-#define OSX(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
-#define OSXPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
-#define OSX10_6				OSX(@"10.6")
-#define OSX10_6Plus			OSXPlus(@"10.6")
-#define OSX10_7				OSX(@"10.7")
-#define OSX10_7Plus			OSXPlus(@"10.7")
-#define OSX10_8				OSX(@"10.8")
-#define OSX10_8Plus			OSXPlus(@"10.8")
-#define OSX10_9				OSX(@"10.9")
-#define OSX10_9Plus			OSXPlus(@"10.9")
-#define OSX10_10			OSX(@"10.10")
-#define OSX10_10Plus		OSXPlus(@"10.10")
-#define OSX10_11			OSX(@"10.11")
-#define OSX10_11Plus		OSXPlus(@"10.11")
+#if JF_MACOS
+#define macOS(_version)		[JF isMacOS:_version]
+#define macOSPlus(_version)	[JF isMacOSPlus:_version]
+#define macOS10_6			JF.isMacOS10_6
+#define macOS10_6Plus		JF.isMacOS10_6Plus
+#define macOS10_7			JF.isMacOS10_7
+#define macOS10_7Plus		JF.isMacOS10_7Plus
+#define macOS10_8			JF.isMacOS10_8
+#define macOS10_8Plus		JF.isMacOS10_8Plus
+#define macOS10_9			JF.isMacOS10_9
+#define macOS10_9Plus		JF.isMacOS10_9Plus
+#define macOS10_10			JF.isMacOS10_10
+#define macOS10_10Plus		JF.isMacOS10_10Plus
+#define macOS10_11			JF.isMacOS10_11
+#define macOS10_11Plus		JF.isMacOS10_11Plus
+#define macOS10_12			JF.isMacOS10_12
+#define macOS10_12Plus		JF.isMacOS10_12Plus
 #endif
 
-#if JF_TARGET_OS_TV
-#define tvOS(_version)		JFCheckSystemVersion(_version, JFRelationEqual)
-#define tvOSPlus(_version)	JFCheckSystemVersion(_version, JFRelationGreaterThanOrEqual)
-#define tvOS9				tvOS(@"9")
-#define tvOS9Plus			tvOSPlus(@"9")
+#if JF_TVOS
+#define tvOS(_version)		[JF isTVOS:_version]
+#define tvOSPlus(_version)	[JF isTVOSPlus:_version]
+#define tvOS9				JF.isTVOS9
+#define tvOS9Plus			JF.isTVOS9Plus
+#define tvOS10				JF.isTVOS10
+#define tvOS10Plus			JF.isTVOS10Plus
 #endif
+
+#endif // JF_SHORTCUTS_ENABLED
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
+
+@interface JF : NSObject
+
+#pragma mark Generic
++ (AppDelegate*)			applicationDelegate;
+#if !JF_MACOS
++ (UIDevice*)				currentDevice;
+#endif
+#if JF_IOS
++ (UIDeviceOrientation)		currentDeviceOrientation;
++ (UIInterfaceOrientation)	currentInterfaceOrientation;
+#endif
++ (NSBundle*)				mainBundle;
++ (NSNotificationCenter*)	mainNotificationCenter;
++ (NSOperationQueue*)		mainOperationQueue;
+#if !JF_MACOS
++ (UIScreen*)				mainScreen;
+#endif
++ (NSProcessInfo*)			processInfo;
++ (JFApplication*)			sharedApplication;
+#if JF_MACOS
++ (NSWorkspace*)			sharedWorkspace;
+#endif
+
+#pragma mark Info
++ (NSString*)	appBuild;
++ (NSString*)	appDetailedVersion;
++ (NSString*)	appDisplayName;
++ (NSString*)	appIdentifier;
++ (NSString*)	appLaunchStoryboard;
++ (NSString*)	appName;
++ (NSString*)	appMainStoryboard;
++ (NSString*)	appVersion;
+
+#pragma mark System
+#if !JF_MACOS
++ (BOOL)					isAppleTV;
++ (BOOL)					isIPad;
++ (BOOL)					isIPhone;
++ (NSString*)				systemVersion;
++ (UIUserInterfaceIdiom)	userInterfaceIdiom;
+#endif
+
+#pragma mark Version
+#if JF_IOS
++ (BOOL)	isIOS:(NSString*)version;
++ (BOOL)	isIOSPlus:(NSString*)version;
++ (BOOL)	isIOS6;
++ (BOOL)	isIOS6Plus;
++ (BOOL)	isIOS7;
++ (BOOL)	isIOS7Plus;
++ (BOOL)	isIOS8;
++ (BOOL)	isIOS8Plus;
++ (BOOL)	isIOS9;
++ (BOOL)	isIOS9Plus;
++ (BOOL)	isIOS10;
++ (BOOL)	isIOS10Plus;
+#endif
+#if JF_MACOS
++ (BOOL)	isMacOS:(NSString*)version;
++ (BOOL)	isMacOSPlus:(NSString*)version;
++ (BOOL)	isMacOS10_6;
++ (BOOL)	isMacOS10_6Plus;
++ (BOOL)	isMacOS10_7;
++ (BOOL)	isMacOS10_7Plus;
++ (BOOL)	isMacOS10_8;
++ (BOOL)	isMacOS10_8Plus;
++ (BOOL)	isMacOS10_9;
++ (BOOL)	isMacOS10_9Plus;
++ (BOOL)	isMacOS10_10;
++ (BOOL)	isMacOS10_10Plus;
++ (BOOL)	isMacOS10_11;
++ (BOOL)	isMacOS10_11Plus;
++ (BOOL)	isMacOS10_12;
++ (BOOL)	isMacOS10_12Plus;
+#endif
+#if JF_TVOS
++ (BOOL)	isTVOS:(NSString*)version;
++ (BOOL)	isTVOSPlus:(NSString*)version;
++ (BOOL)	isTVOS9;
++ (BOOL)	isTVOS9Plus;
++ (BOOL)	isTVOS10;
++ (BOOL)	isTVOS10Plus;
+#endif
+
+@end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -24,6 +24,52 @@
 
 
 
+#if FRAMEWORK
+#pragma mark - Version info
+
+//! Project version number for JFFramework.
+FOUNDATION_EXPORT double JFFrameworkVersionNumber;
+
+//! Project version string for JFFramework.
+FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <JFFramework/PublicHeader.h>
+
+#endif
+
+
+
+#pragma mark - Common headers
+
+// System
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+
+// User
+#import	"JFPreprocessorMacros.h"
+
+
+
+#if JF_IOS || JF_TVOS
+#pragma mark - iOS/tvOS specific system headers
+
+// System
+#import <UIKit/UIKit.h>
+
+#endif
+
+
+
+#if JF_MACOS
+#pragma mark - OSX specific system headers
+
+// System
+#import <AppKit/AppKit.h>
+
+#endif
+
+
+
 #pragma mark - Common headers
 
 // Core
@@ -49,12 +95,13 @@
 // Utilities
 #import "JFLogger.h"
 #import	"JFPreprocessorMacros.h"
+#import	"JFShortcuts.h"
 #import "JFTypes.h"
 #import	"JFUtilities.h"
 
 
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 #pragma mark - iOS specific headers
 
 // User interface (Addons)
@@ -70,7 +117,7 @@
 
 
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 #pragma mark - OSX specific headers
 
 // User interface (Addons)
@@ -84,7 +131,7 @@
 
 
 
-#if JF_TARGET_OS_TV
+#if JF_TVOS
 #pragma mark - tvOS specific headers
 
 // User interface (Addons)

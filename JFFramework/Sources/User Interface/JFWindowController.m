@@ -51,16 +51,16 @@ static void*	JFKVOContext	= &JFKVOContext;
 #pragma mark Methods
 
 // Notifications management (Window)
-#if !JF_TARGET_OS_OSX
+#if !JF_MACOS
 - (void)	notifiedWindowDidBecomeHidden:(NSNotification*)notification;
 #endif
 - (void)	notifiedWindowDidBecomeKey:(NSNotification*)notification;
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 - (void)	notifiedWindowDidBecomeMain:(NSNotification*)notification;
 #else
 - (void)	notifiedWindowDidBecomeVisible:(NSNotification*)notification;
 #endif
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 - (void)	notifiedWindowDidChangeScreen:(NSNotification*)notification;
 - (void)	notifiedWindowDidChangeScreenProfile:(NSNotification*)notification;
 - (void)	notifiedWindowDidDeminiaturize:(NSNotification*)notification;
@@ -71,7 +71,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 - (void)	notifiedWindowDidMove:(NSNotification*)notification;
 #endif
 - (void)	notifiedWindowDidResignKey:(NSNotification*)notification;
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 - (void)	notifiedWindowDidResignMain:(NSNotification*)notification;
 - (void)	notifiedWindowDidResize:(NSNotification*)notification;
 - (void)	notifiedWindowDidUpdate:(NSNotification*)notification;
@@ -123,8 +123,8 @@ static void*	JFKVOContext	= &JFKVOContext;
 {
 	[MainNotificationCenter removeObserver:self];
 	
-#if JF_TARGET_OS_OSX
-	if(OSX10_7Plus)
+#if JF_MACOS
+	if(macOS10_7Plus)
 		[self.window removeObserver:self forKeyPath:@"visible" context:JFKVOContext];
 	else
 		[self.window removeObserver:self forKeyPath:@"visible"];
@@ -141,7 +141,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 	self = (window ? [super init] : nil);
 	if(self)
 	{
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 		BOOL windowHidden = ![window isVisible];
 #else
 		BOOL windowHidden = [window isHidden];
@@ -155,7 +155,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 		
 		// Notifications observing
 		NSNotificationCenter* center = MainNotificationCenter;
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 		[center addObserver:self selector:@selector(notifiedWindowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:window];
 		[center addObserver:self selector:@selector(notifiedWindowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
 		[center addObserver:self selector:@selector(notifiedWindowDidChangeScreen:) name:NSWindowDidChangeScreenNotification object:window];
@@ -189,11 +189,11 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 #pragma mark Notifications management (Window)
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 
 - (void)notifiedWindowDidBecomeKey:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidBecomeKey];
@@ -201,7 +201,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidBecomeMain:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidBecomeMain];
@@ -209,7 +209,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidChangeScreen:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidChangeScreen];
@@ -217,7 +217,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidChangeScreenProfile:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidChangeScreenProfile];
@@ -225,7 +225,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidDeminiaturize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidDeminiaturize];
@@ -233,7 +233,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidEndLiveResize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidEndLiveResize];
@@ -241,7 +241,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidEndSheet:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidEndSheet];
@@ -249,7 +249,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidExpose:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	NSRect exposedRect = [(NSValue*)notification.userInfo[@"NSExposedRect"] rectValue];
@@ -259,7 +259,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidMiniaturize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidMiniaturize];
@@ -267,7 +267,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidMove:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidMove];
@@ -275,7 +275,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidResignKey:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidResignKey];
@@ -283,7 +283,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidResignMain:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidResignMain];
@@ -291,7 +291,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidResize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidResize];
@@ -299,7 +299,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowDidUpdate:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowDidUpdate];
@@ -307,7 +307,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowWillBeginSheet:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowWillBeginSheet];
@@ -315,7 +315,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowWillClose:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowWillClose];
@@ -323,7 +323,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowWillMiniaturize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowWillMiniaturize];
@@ -331,7 +331,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowWillMove:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowWillMove];
@@ -339,7 +339,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 - (void)notifiedWindowWillStartLiveResize:(NSNotification*)notification
 {
-	if(OSX10_6)
+	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 	
 	[self windowWillStartLiveResize];
@@ -383,7 +383,7 @@ static void*	JFKVOContext	= &JFKVOContext;
 
 #pragma mark Window management
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 
 - (void)windowDidBecomeHidden
 {}

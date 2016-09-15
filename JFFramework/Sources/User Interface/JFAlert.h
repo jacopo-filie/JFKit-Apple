@@ -56,7 +56,7 @@
 #pragma mark Properties
 
 // Attributes
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 @property (assign, nonatomic)	NSAlertStyle	style;
 #endif
 
@@ -76,7 +76,7 @@
 
 // User interface
 @property (strong, nonatomic)	JFAlertButton*	cancelButton;
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 @property (strong, nonatomic)	JFAlertButton*	destructiveButton;	// Only used by the iOS action sheet.
 #endif
 @property (copy, nonatomic)		NSArray*		otherButtons;		// Array of "JFAlertButton" objects.
@@ -87,13 +87,13 @@
 // User interface management
 - (BOOL)	dismiss:(JFBlock)completion;
 - (BOOL)	dismissWithClickedButton:(JFAlertButton*)button completion:(JFBlock)completion;
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (BOOL)	presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock)completion;	// Fails if there are no buttons.
 - (BOOL)	presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock)completion;			// Fails if there are no buttons.
 - (BOOL)	presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock)completion;						// Fails if there are no buttons.
 - (BOOL)	presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock)completion;						// Fails if there are no buttons.
 - (BOOL)	presentAsActionSheetInView:(UIView*)view completion:(JFBlock)completion;								// Fails if there are no buttons.
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (BOOL)	presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock)completion;							// Fails if there are no buttons.
 #endif
 - (BOOL)	presentAsAlertView:(JFBlock)completion;																	// Fails if there is not the cancel button.

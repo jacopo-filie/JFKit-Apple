@@ -158,7 +158,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 	}
 	else
 	{
-		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagAttention | JFLogHashtagFileSystem)];
+		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagAttention | JFLogHashtagFileSystem)];
 		NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
 		NSLog(@"%@: unable to locate the 'Application Support' system directory%@. %@", ClassName, errorString, hashtagsString);
 	}
@@ -186,7 +186,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		
 		if(fileURL && ![fileURL isFileURL])
 		{
-			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagAttention | JFLogHashtagFileSystem)];
+			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagAttention | JFLogHashtagFileSystem)];
 			NSLog(@"%@: the provided URL '%@' is not a file URL so it will be ignored. %@", ClassName, [fileURL absoluteString], hashtagsString);
 			fileURL = nil;
 		}
@@ -269,7 +269,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 	NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
 	if(!data)
 	{
-		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagError | JFLogHashtagUser)];
+		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagError | JFLogHashtagUser)];
 		NSLog(@"%@: failed to create data from log message '%@'. %@", ClassName, message, hashtagsString);
 		return;
 	}
@@ -289,7 +289,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		if(!fileHandle)
 		{
 			NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
-			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagError | JFLogHashtagFileSystem)];
+			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagError | JFLogHashtagFileSystem)];
 			NSLog(@"%@: could not open the log file at path '%@'%@. %@", ClassName, [fileURL path], errorString, hashtagsString);
 			return;
 		}
@@ -364,7 +364,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 		if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error])
 		{
 			NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
-			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagError | JFLogHashtagFileSystem)];
+			NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagError | JFLogHashtagFileSystem)];
 			NSLog(@"%@: could not create folder at path '%@'%@. %@", ClassName, folderPath, errorString, hashtagsString);
 			return NO;
 		}
@@ -372,10 +372,10 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 	
 	// Creates the empty log file.
 	NSError* error = nil;
-	if(![[NSData data] writeToFile:filePath options:0 error:&error])
+	if(![[NSData data] writeToFile:filePath options:(NSDataWritingOptions)0 error:&error])
 	{
 		NSString* errorString = (error ? [NSString stringWithFormat:@" for error '%@'", [error description]] : JFEmptyString);
-		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtagError | JFLogHashtagFileSystem)];
+		NSString* hashtagsString = [self serializeHashtags:(JFLogHashtags)(JFLogHashtagError | JFLogHashtagFileSystem)];
 		NSLog(@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, hashtagsString);
 		return NO;
 	}
@@ -487,7 +487,7 @@ static BOOL initializeDateFormatterLock(pthread_mutex_t* lock, Class class)
 	if(errorCode != 0)
 	{
 		NSString* className = NSStringFromClass(class);
-		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
+		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtags)(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
 		NSLog(@"%@: failed to initialize the date formatter lock for error '%@'. %@", className, JFStringFromInt(errorCode), hashtagsString);
 		return NO;
 	}
@@ -504,7 +504,7 @@ static BOOL initializeDestinationsLock(pthread_rwlock_t* lock, Class class)
 	if(errorCode != 0)
 	{
 		NSString* className = NSStringFromClass(class);
-		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
+		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtags)(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
 		NSLog(@"%@: failed to initialize the destinations lock for error '%@'. %@", className, JFStringFromInt(errorCode), hashtagsString);
 		return NO;
 	}
@@ -521,7 +521,7 @@ static BOOL initializeFileLock(pthread_mutex_t* lock, Class class)
 	if(errorCode != 0)
 	{
 		NSString* className = NSStringFromClass(class);
-		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
+		NSString* hashtagsString = [class serializeHashtags:(JFLogHashtags)(JFLogHashtagCritical | JFLogHashtagError | JFLogHashtagUser)];
 		NSLog(@"%@: failed to initialize the file lock for error '%@'. %@", className, JFStringFromInt(errorCode), hashtagsString);
 		return NO;
 	}

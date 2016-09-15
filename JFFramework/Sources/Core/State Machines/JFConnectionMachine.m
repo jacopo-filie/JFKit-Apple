@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 		case JFConnectionStateLost:			transition = JFConnectionTransitionDisconnectingFromLost;		break;
 		default:
 		{
-			transition = JFStateTransitionNotAvailable;
+			transition = JFConnectionTransitionNotAvailable;
 			break;
 		}
 	}

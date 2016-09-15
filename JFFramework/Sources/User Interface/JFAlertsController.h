@@ -34,22 +34,22 @@
 #pragma mark Methods
 
 // User interface management (Action sheets)
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (void)	presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentActionSheetFromRect:(CGRect)rect inView:(UIView*)view title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentActionSheetFromTabBar:(UITabBar*)tabBar title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentActionSheetFromToolbar:(UIToolbar*)toolbar title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentActionSheetInView:(UIView*)view title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (void)	presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 #endif
 
 // User interface management (Alert views)
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 - (void)	presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentAlertViewWithTitle:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentAlertViewWithTitle:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout;
-#elif JF_TARGET_OS_OSX
+#elif JF_MACOS
 - (void)	presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentAlertView:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
 - (void)	presentAlertView:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout;

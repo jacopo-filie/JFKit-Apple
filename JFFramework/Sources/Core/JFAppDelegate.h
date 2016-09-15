@@ -29,7 +29,7 @@
 
 
 
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
+#if JF_IOS || JF_MACOS
 @class JFAlertsController;
 #endif
 @class JFErrorsManager;
@@ -37,7 +37,7 @@
 
 
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 @interface JFAppDelegate : NSObject <NSApplicationDelegate>
 #else
 @interface JFAppDelegate : UIResponder <UIApplicationDelegate>
@@ -52,7 +52,7 @@
 @property (strong, nonatomic, readonly)	JFWindowController*	windowController;
 
 // User interface
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_OSX
+#if JF_IOS || JF_MACOS
 @property (strong, nonatomic, readonly)				JFAlertsController*	alertsController;
 #endif
 @property (strong, nonatomic)			IBOutlet	JFWindow*			window;
@@ -66,7 +66,7 @@
 // User interface management
 - (JFWindowController*)	createControllerForWindow:(JFWindow*)window;
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 // Protocol implementation (NSApplicationDelegate)
 - (void)	applicationDidBecomeActive:(NSNotification*)notification;
 - (void)	applicationDidFinishLaunching:(NSNotification*)notification;
@@ -80,7 +80,7 @@
 - (void)	applicationWillUnhide:(NSNotification*)notification;
 #endif
 
-#if !JF_TARGET_OS_OSX
+#if !JF_MACOS
 // Protocol implementation (UIApplicationDelegate)
 - (BOOL)	application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions;
 - (void)	applicationDidBecomeActive:(UIApplication*)application;

@@ -28,10 +28,14 @@
 
 #pragma mark - Macros
 
-#if JF_TARGET_OS_OSX
-#define JFWindow	NSWindow
+#if JF_MACOS
+#define JFApplication			NSApplication
+#define JFApplicationDelegate	NSApplicationDelegate
+#define JFWindow				NSWindow
 #else
-#define JFWindow	UIWindow
+#define JFApplication			UIApplication
+#define JFApplicationDelegate	UIApplicationDelegate
+#define JFWindow				UIWindow
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

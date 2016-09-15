@@ -91,7 +91,7 @@
 	result = [NSProcessInfo processInfo];
 	XCTAssert((value == result), @"The 'ProcessInfo' value is '%@'; it should be '%@'.", value, result);
 	
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 	
 	// SharedApplication
 	value = SharedApplication;
@@ -110,17 +110,17 @@
 	result = [UIDevice currentDevice];
 	XCTAssert((value == result), @"The 'CurrentDevice' value is '%@'; it should be '%@'.", value, result);
 	
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 	
 	// CurrentDeviceOrientation
 	UIDeviceOrientation deviceOrientationValue = CurrentDeviceOrientation;
 	UIDeviceOrientation deviceOrientationResult = [UIDevice currentDevice].orientation;
 	XCTAssert((deviceOrientationValue == deviceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(deviceOrientationValue), JFStringFromNSInteger(deviceOrientationResult));
 	
-	// CurrentStatusBarOrientation
-	UIInterfaceOrientation interfaceOrientationValue = CurrentStatusBarOrientation;
+	// CurrentInterfaceOrientation
+	UIInterfaceOrientation interfaceOrientationValue = CurrentInterfaceOrientation;
 	UIInterfaceOrientation interfaceOrientationResult = [UIApplication sharedApplication].statusBarOrientation;
-	XCTAssert((interfaceOrientationValue == interfaceOrientationResult), @"The 'CurrentDeviceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(interfaceOrientationValue), JFStringFromNSInteger(interfaceOrientationResult));
+	XCTAssert((interfaceOrientationValue == interfaceOrientationResult), @"The 'CurrentInterfaceOrientation' value is '%@'; it should be '%@'.", JFStringFromNSInteger(interfaceOrientationValue), JFStringFromNSInteger(interfaceOrientationResult));
 	
 #endif
 	
@@ -139,7 +139,7 @@
 
 - (void)testMacrosSystem
 {
-#if !JF_TARGET_OS_OSX
+#if !JF_MACOS
 	
 	UIDevice* device = [UIDevice currentDevice];
 	

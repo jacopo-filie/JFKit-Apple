@@ -27,7 +27,6 @@
 #pragma mark - Common headers
 
 // System
-#import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
 // User
@@ -35,7 +34,7 @@
 
 
 
-#if JF_TARGET_OS_IOS || JF_TARGET_OS_TV
+#if JF_IOS || JF_TVOS
 #pragma mark - iOS/tvOS specific system headers
 
 // System
@@ -45,7 +44,7 @@
 
 
 
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 #pragma mark - OSX specific system headers
 
 // System

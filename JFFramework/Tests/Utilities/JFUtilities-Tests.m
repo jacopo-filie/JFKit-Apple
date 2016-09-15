@@ -83,7 +83,7 @@
 	XCTAssert(JFCheckSystemVersion(string, JFRelationEqual), @"Failed to validate the current system version; the tested value is '%@'.", string);
 	
 	// JFSystemVersion
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 	SInt32 majorVersion, minorVersion, patchVersion;
 	Gestalt(gestaltSystemVersionMajor, &majorVersion);
 	Gestalt(gestaltSystemVersionMinor, &minorVersion);

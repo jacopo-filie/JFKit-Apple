@@ -80,11 +80,11 @@ BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
 
 #pragma mark Functions (Images)
 
-#if JF_TARGET_OS_IOS
+#if JF_IOS
 
-NSString* JFLaunchImageName()
+NSString* JFLaunchImageName(void)
 {
-	return JFLaunchImageNameForOrientation(CurrentStatusBarOrientation);
+	return JFLaunchImageNameForOrientation(CurrentInterfaceOrientation);
 }
 
 NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
@@ -267,7 +267,7 @@ BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
 		}
 		else
 		{
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 			SInt32 majorVersion, minorVersion, patchVersion;
 			Gestalt(gestaltSystemVersionMajor, &majorVersion);
 			Gestalt(gestaltSystemVersionMinor, &minorVersion);
@@ -355,7 +355,7 @@ BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
 	return NO;
 }
 
-NSString* JFSystemVersion()
+NSString* JFSystemVersion(void)
 {
 	static NSString* retObj = nil;
 	static dispatch_once_t onceToken;
@@ -367,7 +367,7 @@ NSString* JFSystemVersion()
 		}
 		else
 		{
-#if JF_TARGET_OS_OSX
+#if JF_MACOS
 			SInt32 majorVersion, minorVersion, patchVersion;
 			Gestalt(gestaltSystemVersionMajor, &majorVersion);
 			Gestalt(gestaltSystemVersionMinor, &minorVersion);
