@@ -30,9 +30,9 @@
 
 @implementation JF
 
-#pragma mark Convenience
+// MARK: Generic
 
-+ (AppDelegate*)applicationDelegate
++ (id<JFApplicationDelegate>)applicationDelegate
 {
 	Class class = NSClassFromString(@"AppDelegate");
 	if(!class)
@@ -42,10 +42,10 @@
 	if(!retObj || ![retObj isKindOfClass:class])
 		return nil;
 	
-	return (AppDelegate*)retObj;
+	return retObj;
 }
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (UIDevice*)currentDevice
 {
 	return [UIDevice currentDevice];
@@ -81,7 +81,7 @@
 	return [NSOperationQueue mainQueue];
 }
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (UIScreen*)mainScreen
 {
 	return [UIScreen mainScreen];
@@ -106,7 +106,7 @@
 #endif
 
 
-#pragma mark Info
+// MARK: Info
 
 + (NSString*)appBuild
 {
@@ -149,52 +149,44 @@
 }
 
 
-#pragma mark System
+// MARK: System
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (BOOL)isAppleTV
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = (self.userInterfaceIdiom == UIUserInterfaceIdiomTV);
-	});
-	return retVal;
+	return (self.userInterfaceIdiom == UIUserInterfaceIdiomTV);
 }
 #endif
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
++ (BOOL)isCarPlay
+{
+	return (self.userInterfaceIdiom == UIUserInterfaceIdiomCarPlay);
+}
+#endif
+
+#if JF_IOS || JF_TVOS
 + (BOOL)isIPad
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = (self.userInterfaceIdiom == UIUserInterfaceIdiomPad);
-	});
-	return retVal;
+	return (self.userInterfaceIdiom == UIUserInterfaceIdiomPad);
 }
 #endif
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (BOOL)isIPhone
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = (self.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
-	});
-	return retVal;
+	return (self.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
 }
 #endif
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (NSString*)systemVersion
 {
 	return self.currentDevice.systemVersion;
 }
 #endif
 
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
 + (UIUserInterfaceIdiom)userInterfaceIdiom
 {
 	return self.currentDevice.userInterfaceIdiom;
@@ -202,7 +194,7 @@
 #endif
 
 
-#pragma mark Version
+// MARK: Version
 
 #if JF_IOS
 + (BOOL)isIOS:(NSString*)version

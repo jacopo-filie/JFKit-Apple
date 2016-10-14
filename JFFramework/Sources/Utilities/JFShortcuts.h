@@ -31,43 +31,43 @@
 
 
 
-@class AppDelegate;
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_SHORTCUTS_ENABLED
 
-#pragma mark Macros (Generic)
+// MARK: Macros (Generic)
+#define	ApplicationDelegate		JF.applicationDelegate
+#define	ClassBundle				[NSBundle bundleForClass:[self class]]
+#define	ClassName				NSStringFromClass([self class])
+#define	LogMethod				NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
+#define MainBundle				JF.mainBundle
+#define MainNotificationCenter	JF.mainNotificationCenter
+#define MainOperationQueue		JF.mainOperationQueue
+#define MethodName				NSStringFromSelector(_cmd)
+#define ProcessInfo				JF.processInfo
+#define	SharedApplication		JF.sharedApplication
 
-#define	ApplicationDelegate			JF.applicationDelegate
-#define	ClassBundle					[NSBundle bundleForClass:[self class]]
-#define	ClassName					NSStringFromClass([self class])
-#if !JF_MACOS
-#define CurrentDevice				JF.currentDevice
-#endif
 #if JF_IOS
+// MARK: Macros (Generic - iOS)
+#define CurrentDevice				JF.currentDevice
 #define CurrentDeviceOrientation	JF.currentDeviceOrientation
 #define CurrentInterfaceOrientation	JF.currentInterfaceOrientation
-#endif
-#define	LogMethod					NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
-#define MainBundle					JF.mainBundle
-#define MainNotificationCenter		JF.mainNotificationCenter
-#define MainOperationQueue			JF.mainOperationQueue
-#if !JF_MACOS
 #define MainScreen					JF.mainScreen
 #endif
-#define MethodName					NSStringFromSelector(_cmd)
-#define ProcessInfo					JF.processInfo
-#define	SharedApplication			JF.sharedApplication
-#if JF_MACOS
-#define	SharedWorkspace				JF.sharedWorkspace
+
+#if JF_TVOS
+// MARK: Macros (Generic - macOS)
+#define SharedWorkspace	JF.sharedWorkspace
+#endif
+
+#if JF_TVOS
+// MARK: Macros (Generic - tvOS)
+#define CurrentDevice	JF.currentDevice
+#define MainScreen		JF.mainScreen
 #endif
 
 
-#pragma mark Macros (Info)
-
+// MARK: Macros (Info)
 #define AppBuild			JF.appBuild
 #define AppDetailedVersion	JF.appDetailedVersion
 #define AppDisplayName		JF.appDisplayName
@@ -78,10 +78,10 @@
 #define AppVersion			JF.appVersion
 
 
-#pragma mark Macros (System)
-
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
+// MARK: Macros (System)
 #define AppleTV				JF.isAppleTV
+#define CarPlay				JF.isCarPlay
 #define iPad				JF.isIPad
 #define iPhone				JF.isIPhone
 #define SystemVersion		JF.systemVersion
@@ -89,9 +89,8 @@
 #endif
 
 
-#pragma mark Macros (Version)
-
 #if JF_IOS
+// MARK: Macros (Version - iOS)
 #define iOS(_version)		[JF isIOS:_version]
 #define iOSPlus(_version)	[JF isIOSPlus:_version]
 #define iOS6				JF.isIOS6
@@ -107,6 +106,7 @@
 #endif
 
 #if JF_MACOS
+// MARK: Macros (Version - macOS)
 #define macOS(_version)		[JF isMacOS:_version]
 #define macOSPlus(_version)	[JF isMacOSPlus:_version]
 #define macOS10_6			JF.isMacOS10_6
@@ -126,6 +126,7 @@
 #endif
 
 #if JF_TVOS
+// MARK: Macros (Version - tvOS)
 #define tvOS(_version)		[JF isTVOS:_version]
 #define tvOSPlus(_version)	[JF isTVOSPlus:_version]
 #define tvOS9				JF.isTVOS9
@@ -142,28 +143,34 @@
 
 @interface JF : NSObject
 
-#pragma mark Generic
-+ (AppDelegate*)			applicationDelegate;
-#if !JF_MACOS
-+ (UIDevice*)				currentDevice;
-#endif
+// MARK: Generic
++ (id<JFApplicationDelegate>)	applicationDelegate;
++ (NSBundle*)					mainBundle;
++ (NSNotificationCenter*)		mainNotificationCenter;
++ (NSOperationQueue*)			mainOperationQueue;
++ (NSProcessInfo*)				processInfo;
++ (JFApplication*)				sharedApplication;
+
 #if JF_IOS
+// MARK: Generic (iOS)
++ (UIDevice*)				currentDevice;
 + (UIDeviceOrientation)		currentDeviceOrientation;
 + (UIInterfaceOrientation)	currentInterfaceOrientation;
-#endif
-+ (NSBundle*)				mainBundle;
-+ (NSNotificationCenter*)	mainNotificationCenter;
-+ (NSOperationQueue*)		mainOperationQueue;
-#if !JF_MACOS
 + (UIScreen*)				mainScreen;
 #endif
-+ (NSProcessInfo*)			processInfo;
-+ (JFApplication*)			sharedApplication;
+
 #if JF_MACOS
-+ (NSWorkspace*)			sharedWorkspace;
+// MARK: Generic (macOS)
++ (NSWorkspace*)	sharedWorkspace;
 #endif
 
-#pragma mark Info
+#if JF_TVOS
+// MARK: Generic (tvOS)
++ (UIDevice*)	currentDevice;
++ (UIScreen*)	mainScreen;
+#endif
+
+// MARK: Info
 + (NSString*)	appBuild;
 + (NSString*)	appDetailedVersion;
 + (NSString*)	appDisplayName;
@@ -173,17 +180,18 @@
 + (NSString*)	appMainStoryboard;
 + (NSString*)	appVersion;
 
-#pragma mark System
-#if !JF_MACOS
+#if JF_IOS || JF_TVOS
+// MARK: System
 + (BOOL)					isAppleTV;
++ (BOOL)					isCarPlay;
 + (BOOL)					isIPad;
 + (BOOL)					isIPhone;
 + (NSString*)				systemVersion;
 + (UIUserInterfaceIdiom)	userInterfaceIdiom;
 #endif
 
-#pragma mark Version
 #if JF_IOS
+// MARK: Version (iOS)
 + (BOOL)	isIOS:(NSString*)version;
 + (BOOL)	isIOSPlus:(NSString*)version;
 + (BOOL)	isIOS6;
@@ -197,7 +205,9 @@
 + (BOOL)	isIOS10;
 + (BOOL)	isIOS10Plus;
 #endif
+
 #if JF_MACOS
+// MARK: Version (macOS)
 + (BOOL)	isMacOS:(NSString*)version;
 + (BOOL)	isMacOSPlus:(NSString*)version;
 + (BOOL)	isMacOS10_6;
@@ -215,7 +225,9 @@
 + (BOOL)	isMacOS10_12;
 + (BOOL)	isMacOS10_12Plus;
 #endif
+
 #if JF_TVOS
+// MARK: Version (tvOS)
 + (BOOL)	isTVOS:(NSString*)version;
 + (BOOL)	isTVOSPlus:(NSString*)version;
 + (BOOL)	isTVOS9;
