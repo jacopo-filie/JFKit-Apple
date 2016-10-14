@@ -19,6 +19,8 @@
 		4EEC62B31D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B41D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B51D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
+		6C617C0F1DB0EDC600D942D6 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C617C101DB0EDC700D942D6 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CEC7EB71D52080B00A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A72F11D4E9CD100AE6BF7 /* JFFramework.framework */; };
 		6CEC7EBA1D52081800A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A733F1D4E9D5D00AE6BF7 /* JFFramework.framework */; };
 		6CEC7EBD1D52082300A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A73251D4E9D2E00AE6BF7 /* JFFramework.framework */; };
@@ -894,6 +896,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C617C0F1DB0EDC600D942D6 /* JFPreprocessorMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1056,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C617C101DB0EDC700D942D6 /* JFPreprocessorMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
