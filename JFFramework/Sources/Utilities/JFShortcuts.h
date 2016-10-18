@@ -55,7 +55,7 @@
 #define MainScreen					JF.mainScreen
 #endif
 
-#if JF_TVOS
+#if JF_MACOS
 // MARK: Macros (Generic - macOS)
 #define SharedWorkspace	JF.sharedWorkspace
 #endif

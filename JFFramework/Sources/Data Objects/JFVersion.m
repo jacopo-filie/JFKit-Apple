@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties accessors - Info
 // =================================================================================================
 
-- (NSOperatingSystemVersion)operatingSystemVersion  OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
+- (NSOperatingSystemVersion)operatingSystemVersion OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
 {
 	NSOperatingSystemVersion retVal;
 	retVal.majorVersion = self.majorVersion;
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
 {
-	return [self initWithMajorVersion:version.majorVersion minor:version.minorVersion patch:version.patchVersion];
+	return [self initWithOperatingSystemVersion:version build:nil];
 }
 
 - (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version build:(NSString* __nullable)build OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
@@ -137,32 +137,43 @@ NS_ASSUME_NONNULL_BEGIN
 	NSInteger minor = -1;
 	NSInteger patch = -1;
 	
-	/*
 	if(!JFStringIsEmpty(versionString))
 	{
+		BOOL buildVersionComponentParsed = NO;
+		BOOL displayVersionComponentParsed = NO;
 		NSArray<NSString*>* components = [versionString componentsSeparatedByString:@" "];
-		
-		if(components.count > 1)
+		for(NSUInteger i = 0; (i < components.count) && (i < 2); i++)
 		{
-			NSString* component = components[1];
-			if([component hasPrefix:@"("] && [component hasSuffix:@")"])
+			NSString* component = components[i];
+			if(!buildVersionComponentParsed && [component hasPrefix:@"("] && [component hasSuffix:@")"])
+			{
+				// This is the build version component.
 				build = [component substringWithRange:NSMakeRange(1, (component.length - 2))];
-		}
-		
-		if(!JFStringIsEmpty(components[0]))
-		{
-			NSArray<NSString*>* components = [components[0] componentsSeparatedByString:@"."];
-			if(!JFStringIsEmpty(components[0]))
-				major = [components[0] integerValue];
-			if((components.count > 1) && !JFStringIsEmpty(components[1]))
-				minor = [components[1] integerValue];
-			if((components.count > 2) && !JFStringIsEmpty(components[2]))
-				patch = [components[2] integerValue];
+				buildVersionComponentParsed = YES;
+			}
+			else if(!displayVersionComponentParsed)
+			{
+				// This is the display version component.
+				NSScanner* scanner = [NSScanner scannerWithString:component];
+				scanner.charactersToBeSkipped = [NSCharacterSet characterSetWithCharactersInString:@"."];
+				[scanner scanInteger:&major];
+				[scanner scanInteger:&minor];
+				[scanner scanInteger:&patch];
+				displayVersionComponentParsed = YES;
+			}
 		}
 	}
-	*/
 	
 	return [self initWithMajorVersion:major minor:minor patch:patch build:build];
+}
+
+// =================================================================================================
+// MARK: Protocols - NSCopying
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* __nullable)zone
+{
+	return [[JFVersion alloc] initWithMajorVersion:_majorVersion minor:_minorVersion patch:_patchVersion build:_buildVersion];
 }
 
 @end

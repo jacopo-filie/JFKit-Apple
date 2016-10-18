@@ -25,7 +25,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-@interface JFVersion : NSObject
+@interface JFVersion : NSObject <NSCopying>
 
 // MARK: Properties - Data
 @property (strong, nonatomic, readonly, nullable)	NSString*	buildVersion; // Valid if not 'nil' nor empty.
