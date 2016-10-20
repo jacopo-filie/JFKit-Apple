@@ -25,6 +25,18 @@
 		6C32091F1DB5230F0060CCFB /* JFVersion-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C32091B1DB5230F0060CCFB /* JFVersion-Tests.m */; };
 		6C3209201DB5230F0060CCFB /* JFVersion-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C32091B1DB5230F0060CCFB /* JFVersion-Tests.m */; };
 		6C3209211DB5230F0060CCFB /* JFVersion-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C32091B1DB5230F0060CCFB /* JFVersion-Tests.m */; };
+		6C5B04AC1DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04AD1DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04AE1DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04AF1DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04B01DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04B11DB8F2F400B128C7 /* JFWeakHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */; };
+		6C5B04B21DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
+		6C5B04B31DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
+		6C5B04B41DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
+		6C5B04B51DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
+		6C5B04B61DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
+		6C5B04B71DB8F2F400B128C7 /* JFWeakHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */; };
 		6C617C0F1DB0EDC600D942D6 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C617C101DB0EDC700D942D6 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C640FEB1DB4D5BA0060DE0B /* JFVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C640FE91DB4D5BA0060DE0B /* JFVersion.h */; };
@@ -417,6 +429,8 @@
 		6C32091B1DB5230F0060CCFB /* JFVersion-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFVersion-Tests.m"; sourceTree = "<group>"; };
 		6C53C06B1C512D0800CDAB09 /* NSStoryboard+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStoryboard+JFFramework.h"; sourceTree = "<group>"; };
 		6C53C06C1C512D0800CDAB09 /* NSStoryboard+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStoryboard+JFFramework.m"; sourceTree = "<group>"; };
+		6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFWeakHook.h; sourceTree = "<group>"; };
+		6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFWeakHook.m; sourceTree = "<group>"; };
 		6C640FE91DB4D5BA0060DE0B /* JFVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersion.h; sourceTree = "<group>"; };
 		6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersion.m; sourceTree = "<group>"; };
 		6C668B811D4FA75D009E62E5 /* JFFramework.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -853,6 +867,8 @@
 				EAE752601BEC200D003A2F38 /* JFString.m */,
 				6C640FE91DB4D5BA0060DE0B /* JFVersion.h */,
 				6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */,
+				6C5B04AA1DB8F2F400B128C7 /* JFWeakHook.h */,
+				6C5B04AB1DB8F2F400B128C7 /* JFWeakHook.m */,
 			);
 			path = "Data Objects";
 			sourceTree = "<group>";
@@ -888,6 +904,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5B04AC1DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D01F21D57360C008CEF73 /* JFErrorsManager.h in Headers */,
 				EA2D01F51D57360C008CEF73 /* JFAppDelegate.h in Headers */,
 				EA2D01FA1D57360C008CEF73 /* JFByteStream.h in Headers */,
@@ -945,6 +962,7 @@
 				EA2D022B1D57360D008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D02281D57360D008CEF73 /* JFManager.h in Headers */,
 				EA2D02291D57360D008CEF73 /* JFConnectionMachine.h in Headers */,
+				6C5B04AE1DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D02311D57360D008CEF73 /* UILabel+JFFramework.h in Headers */,
 				EA2D022D1D57360D008CEF73 /* JFColor.h in Headers */,
 				EA2D02381D57360D008CEF73 /* JFPreprocessorMacros.h in Headers */,
@@ -976,6 +994,7 @@
 				EA2D021B1D57360D008CEF73 /* JFAlertsController.h in Headers */,
 				EA2D02121D57360D008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D02161D57360D008CEF73 /* NSStoryboard+JFFramework.h in Headers */,
+				6C5B04AD1DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D020F1D57360D008CEF73 /* JFManager.h in Headers */,
 				EA2D02101D57360D008CEF73 /* JFConnectionMachine.h in Headers */,
 				EA2D02141D57360D008CEF73 /* JFColor.h in Headers */,
@@ -1007,6 +1026,7 @@
 				EA2D024D1D57360E008CEF73 /* JFAlertsController.h in Headers */,
 				EA2D02441D57360E008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D02481D57360E008CEF73 /* NSStoryboard+JFFramework.h in Headers */,
+				6C5B04B01DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D02411D57360E008CEF73 /* JFManager.h in Headers */,
 				EA2D02421D57360E008CEF73 /* JFConnectionMachine.h in Headers */,
 				EA2D02461D57360E008CEF73 /* JFColor.h in Headers */,
@@ -1022,6 +1042,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5B04AF1DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D02561D57360F008CEF73 /* JFErrorsManager.h in Headers */,
 				EA2D02591D57360F008CEF73 /* JFAppDelegate.h in Headers */,
 				EA2D025E1D57360F008CEF73 /* JFByteStream.h in Headers */,
@@ -1071,6 +1092,7 @@
 				EA2D02761D57360F008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D02731D57360F008CEF73 /* JFManager.h in Headers */,
 				EA2D02741D57360F008CEF73 /* JFConnectionMachine.h in Headers */,
+				6C5B04B11DB8F2F400B128C7 /* JFWeakHook.h in Headers */,
 				EA2D027C1D57360F008CEF73 /* UILabel+JFFramework.h in Headers */,
 				EA2D02781D57360F008CEF73 /* JFColor.h in Headers */,
 				EA2D02831D57360F008CEF73 /* JFPreprocessorMacros.h in Headers */,
@@ -1708,6 +1730,7 @@
 				EA2D014E1D57352A008CEF73 /* JFWindowController.m in Sources */,
 				EA2D014C1D57352A008CEF73 /* JFAlert.m in Sources */,
 				EA2D014F1D57352A008CEF73 /* NSBundle+JFFramework.m in Sources */,
+				6C5B04B21DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01501D57352A008CEF73 /* JFLogger.m in Sources */,
 				EA2D01491D57352A008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D02881D5736C7008CEF73 /* JRSwizzle.m in Sources */,
@@ -1737,6 +1760,7 @@
 				EA2D019E1D57352D008CEF73 /* JFWindowController.m in Sources */,
 				EA2D019C1D57352D008CEF73 /* JFAlert.m in Sources */,
 				EA2D019F1D57352D008CEF73 /* NSBundle+JFFramework.m in Sources */,
+				6C5B04B51DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01A01D57352D008CEF73 /* JFLogger.m in Sources */,
 				EA2D01991D57352D008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D028B1D5736C9008CEF73 /* JRSwizzle.m in Sources */,
@@ -1781,6 +1805,7 @@
 				EA2D016A1D57352C008CEF73 /* JFConnectionMachine.m in Sources */,
 				EA2D01761D57352C008CEF73 /* JFWindowController.m in Sources */,
 				EA2D01771D57352C008CEF73 /* NSBundle+JFFramework.m in Sources */,
+				6C5B04B41DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01781D57352C008CEF73 /* JFLogger.m in Sources */,
 				EA2D01711D57352C008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D01671D57352C008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
@@ -1808,6 +1833,7 @@
 				EA2D01BA1D57352E008CEF73 /* JFConnectionMachine.m in Sources */,
 				EA2D01C61D57352E008CEF73 /* JFWindowController.m in Sources */,
 				EA2D01C71D57352E008CEF73 /* NSBundle+JFFramework.m in Sources */,
+				6C5B04B71DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01C81D57352E008CEF73 /* JFLogger.m in Sources */,
 				EA2D01C11D57352E008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D01B71D57352E008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
@@ -1835,6 +1861,7 @@
 				EA2D01621D57352B008CEF73 /* JFWindowController.m in Sources */,
 				EA2D01601D57352B008CEF73 /* JFAlert.m in Sources */,
 				EA2D015C1D57352B008CEF73 /* NSStoryboard+JFFramework.m in Sources */,
+				6C5B04B31DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01631D57352B008CEF73 /* NSBundle+JFFramework.m in Sources */,
 				EA2D01641D57352B008CEF73 /* JFLogger.m in Sources */,
 				EA2D01531D57352B008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
@@ -1862,6 +1889,7 @@
 				EA2D01B21D57352D008CEF73 /* JFWindowController.m in Sources */,
 				EA2D01B01D57352D008CEF73 /* JFAlert.m in Sources */,
 				EA2D01AC1D57352D008CEF73 /* NSStoryboard+JFFramework.m in Sources */,
+				6C5B04B61DB8F2F400B128C7 /* JFWeakHook.m in Sources */,
 				EA2D01B31D57352D008CEF73 /* NSBundle+JFFramework.m in Sources */,
 				EA2D01B41D57352D008CEF73 /* JFLogger.m in Sources */,
 				EA2D01A31D57352D008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
