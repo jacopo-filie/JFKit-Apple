@@ -59,9 +59,7 @@
 {
 	return self.currentDevice.orientation;
 }
-#endif
 
-#if JF_IOS
 + (UIInterfaceOrientation)currentInterfaceOrientation
 {
 	return self.sharedApplication.statusBarOrientation;
@@ -162,37 +160,27 @@
 {
 	return (self.userInterfaceIdiom == UIUserInterfaceIdiomTV);
 }
-#endif
 
-#if JF_IOS || JF_TVOS
 + (BOOL)isCarPlay
 {
 	return (self.userInterfaceIdiom == UIUserInterfaceIdiomCarPlay);
 }
-#endif
 
-#if JF_IOS || JF_TVOS
 + (BOOL)isIPad
 {
 	return (self.userInterfaceIdiom == UIUserInterfaceIdiomPad);
 }
-#endif
 
-#if JF_IOS || JF_TVOS
 + (BOOL)isIPhone
 {
 	return (self.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
 }
-#endif
 
-#if JF_IOS || JF_TVOS
 + (NSString*)systemVersion
 {
 	return self.currentDevice.systemVersion;
 }
-#endif
 
-#if JF_IOS || JF_TVOS
 + (UIUserInterfaceIdiom)userInterfaceIdiom
 {
 	return self.currentDevice.userInterfaceIdiom;
@@ -209,16 +197,12 @@
 {
 	return JFCheckSystemVersion(version, JFRelationEqual);
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOSPlus:(NSString*)version
 {
 	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS6
 {
 	static BOOL retVal;
@@ -228,9 +212,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS6Plus
 {
 	static BOOL retVal;
@@ -240,9 +222,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS7
 {
 	static BOOL retVal;
@@ -252,9 +232,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS7Plus
 {
 	static BOOL retVal;
@@ -264,9 +242,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS8
 {
 	static BOOL retVal;
@@ -276,9 +252,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS8Plus
 {
 	static BOOL retVal;
@@ -288,9 +262,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS9
 {
 	static BOOL retVal;
@@ -300,9 +272,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS9Plus
 {
 	static BOOL retVal;
@@ -312,9 +282,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS10
 {
 	static BOOL retVal;
@@ -324,9 +292,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_IOS
 + (BOOL)isIOS10Plus
 {
 	static BOOL retVal;
@@ -343,16 +309,12 @@
 {
 	return JFCheckSystemVersion(version, JFRelationEqual);
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOSPlus:(NSString*)version
 {
 	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_6
 {
 	static BOOL retVal;
@@ -362,9 +324,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_6Plus
 {
 	static BOOL retVal;
@@ -374,9 +334,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_7
 {
 	static BOOL retVal;
@@ -386,9 +344,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_7Plus
 {
 	static BOOL retVal;
@@ -398,9 +354,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_8
 {
 	static BOOL retVal;
@@ -410,9 +364,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_8Plus
 {
 	static BOOL retVal;
@@ -422,9 +374,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_9
 {
 	static BOOL retVal;
@@ -434,9 +384,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_9Plus
 {
 	static BOOL retVal;
@@ -446,9 +394,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_10
 {
 	static BOOL retVal;
@@ -458,9 +404,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_10Plus
 {
 	static BOOL retVal;
@@ -470,9 +414,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_11
 {
 	static BOOL retVal;
@@ -482,9 +424,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_11Plus
 {
 	static BOOL retVal;
@@ -494,9 +434,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_12
 {
 	static BOOL retVal;
@@ -506,9 +444,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_MACOS
 + (BOOL)isMacOS10_12Plus
 {
 	static BOOL retVal;
@@ -525,16 +461,12 @@
 {
 	return JFCheckSystemVersion(version, JFRelationEqual);
 }
-#endif
 
-#if JF_TVOS
 + (BOOL)isTVOSPlus:(NSString*)version
 {
 	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
 }
-#endif
 
-#if JF_TVOS
 + (BOOL)isTVOS9
 {
 	static BOOL retVal;
@@ -544,9 +476,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_TVOS
 + (BOOL)isTVOS9Plus
 {
 	static BOOL retVal;
@@ -556,9 +486,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_TVOS
 + (BOOL)isTVOS10
 {
 	static BOOL retVal;
@@ -568,9 +496,7 @@
 	});
 	return retVal;
 }
-#endif
 
-#if JF_TVOS
 + (BOOL)isTVOS10Plus
 {
 	static BOOL retVal;
