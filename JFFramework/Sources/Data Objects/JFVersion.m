@@ -26,10 +26,18 @@
 
 #import "JFVersion.h"
 
+#import "JFShortcuts.h"
 #import "JFString.h"
 #import "JFUtilities.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// MARK: Constants - Data
+NSInteger const	JFVersionNotValid	= -1;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFVersion
@@ -101,6 +109,29 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Memory management
 // =================================================================================================
 
++ (JFVersion*)currentOperatingSystemVersion
+{
+	static JFVersion* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		if([NSProcessInfo instancesRespondToSelector:@selector(operatingSystemVersion)])
+			retObj = [[JFVersion alloc] initWithOperatingSystemVersion:ProcessInfo.operatingSystemVersion];
+		else
+		{
+#if JF_MACOS
+			SInt32 majorVersion, minorVersion, patchVersion;
+			Gestalt(gestaltSystemVersionMajor, &majorVersion);
+			Gestalt(gestaltSystemVersionMinor, &minorVersion);
+			Gestalt(gestaltSystemVersionBugFix, &patchVersion);
+			retObj = [[JFVersion alloc] initWithMajorVersion:majorVersion minor:minorVersion patch:patchVersion];
+#else
+			retObj = [[JFVersion alloc] initWithVersionString:SystemVersion];
+#endif
+		}
+	});
+	return retObj;
+}
+
 - (instancetype)initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch
 {
 	return [self initWithMajorVersion:major minor:minor patch:patch build:nil];
@@ -113,9 +144,9 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		// Initializes the datamembers.
 		_buildVersion	= [build copy];
-		_majorVersion	= major;
-		_minorVersion	= minor;
-		_patchVersion	= patch;
+		_majorVersion	= ((major >= 0) ? major : JFVersionNotValid);
+		_minorVersion	= ((minor >= 0) ? minor : JFVersionNotValid);
+		_patchVersion	= ((patch >= 0) ? patch : JFVersionNotValid);
 	}
 	return self;
 }
@@ -133,9 +164,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithVersionString:(NSString*)versionString
 {
 	NSString* build = nil;
-	NSInteger major = -1;
-	NSInteger minor = -1;
-	NSInteger patch = -1;
+	NSInteger major = JFVersionNotValid;
+	NSInteger minor = JFVersionNotValid;
+	NSInteger patch = JFVersionNotValid;
 	
 	if(!JFStringIsEmpty(versionString))
 	{
@@ -165,6 +196,84 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	return [self initWithMajorVersion:major minor:minor patch:patch build:build];
+}
+
+// =================================================================================================
+// MARK: Methods - Equality management
+// =================================================================================================
+
+- (BOOL)compareToCurrentOperatingSystemVersion:(JFRelation)relation
+{
+	return [self compareToVersion:[JFVersion currentOperatingSystemVersion] relation:relation];
+}
+
+- (BOOL)compareToVersion:(JFVersion*)version relation:(JFRelation)relation
+{
+	NSInteger comps1[3] = {self.majorVersion, self.minorVersion, self.patchVersion};
+	NSInteger comps2[3] = {version.majorVersion, version.minorVersion, version.patchVersion};
+	
+	NSComparisonResult result = NSOrderedSame;
+	for(NSUInteger i = 0; i < 3; i++)
+	{
+		NSInteger comp1 = comps1[i];
+		NSInteger comp2 = comps2[i];
+		
+		if(comp1 == comp2)		result = NSOrderedSame;
+		else if(comp1 < comp2)	result = NSOrderedAscending;
+		else if(comp1 > comp2)	result = NSOrderedDescending;
+		
+		if(result != NSOrderedSame)
+			break;
+	}
+	
+	BOOL ascending	= (result == NSOrderedAscending);
+	BOOL descending	= (result == NSOrderedDescending);
+	
+	BOOL retVal = NO;
+	
+	switch(relation)
+	{
+		case JFRelationLessThan:			retVal = ascending;						break;
+		case JFRelationLessThanOrEqual:		retVal = (ascending || !descending);	break;
+		case JFRelationEqual:				retVal = (!ascending && !descending);	break;
+		case JFRelationGreaterThanOrEqual:	retVal = (descending || !ascending);	break;
+		case JFRelationGreaterThan:			retVal = descending;					break;
+		default:
+			break;
+	}
+	
+	if(retVal && (relation == JFRelationEqual))
+		retVal = JFAreObjectsEqual(self.buildVersion, version.buildVersion);
+	
+	return retVal;
+}
+
+- (NSUInteger)hash
+{
+	return self.versionString.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+	if(!object && ![object isKindOfClass:self.class])
+		return NO;
+	
+	return [self isEqualToVersion:object];
+}
+
+- (BOOL)isEqualToVersion:(JFVersion*)version
+{
+	return [self compareToVersion:version relation:JFRelationEqual];
+}
+
+- (BOOL)isGreaterThanVersion:(JFVersion*)version
+{
+	return [self compareToVersion:version relation:JFRelationGreaterThan];
+}
+
+- (BOOL)isLessThanVersion:(JFVersion*)version
+{
+	return [self compareToVersion:version relation:JFRelationLessThan];
 }
 
 // =================================================================================================

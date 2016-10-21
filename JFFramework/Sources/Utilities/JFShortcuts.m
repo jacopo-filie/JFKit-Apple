@@ -26,7 +26,9 @@
 
 #import "JFShortcuts.h"
 
+#import "JFVersion.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation JF
 
@@ -193,14 +195,14 @@
 // =================================================================================================
 
 #if JF_IOS
-+ (BOOL)isIOS:(NSString*)version
++ (BOOL)isIOS:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
 }
 
-+ (BOOL)isIOSPlus:(NSString*)version
++ (BOOL)isIOSPlus:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationGreaterThanOrEqual];
 }
 
 + (BOOL)isIOS6
@@ -208,7 +210,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS(@"6");
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -218,7 +220,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus(@"6");
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -228,7 +230,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS(@"7");
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -238,7 +240,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus(@"7");
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -248,7 +250,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS(@"8");
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -258,7 +260,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus(@"8");
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -268,7 +270,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS(@"9");
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -278,7 +280,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus(@"9");
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -288,7 +290,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS(@"10");
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -298,21 +300,21 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus(@"10");
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
 #endif
 
 #if JF_MACOS
-+ (BOOL)isMacOS:(NSString*)version
++ (BOOL)isMacOS:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
 }
 
-+ (BOOL)isMacOSPlus:(NSString*)version
++ (BOOL)isMacOSPlus:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationGreaterThanOrEqual];
 }
 
 + (BOOL)isMacOS10_6
@@ -320,7 +322,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.6");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -330,7 +332,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.6");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -340,7 +342,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.7");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -350,7 +352,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.7");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -360,7 +362,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.8");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -370,7 +372,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.8");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -380,7 +382,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.9");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -390,7 +392,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.9");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -400,7 +402,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.10");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -410,7 +412,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.10");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -420,7 +422,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.11");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -430,7 +432,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.11");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -440,7 +442,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS(@"10.12");
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -450,21 +452,21 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus(@"10.12");
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
 #endif
 
 #if JF_TVOS
-+ (BOOL)isTVOS:(NSString*)version
++ (BOOL)isTVOS:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
 }
 
-+ (BOOL)isTVOSPlus:(NSString*)version
++ (BOOL)isTVOSPlus:(JFVersion*)version
 {
-	return JFCheckSystemVersion(version, JFRelationGreaterThanOrEqual);
+	return [version compareToCurrentOperatingSystemVersion:JFRelationGreaterThanOrEqual];
 }
 
 + (BOOL)isTVOS9
@@ -472,7 +474,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOS(@"9");
+		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -482,7 +484,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus(@"9");
+		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -492,7 +494,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOS(@"10");
+		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }
@@ -502,7 +504,7 @@
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus(@"10");
+		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
 	});
 	return retVal;
 }

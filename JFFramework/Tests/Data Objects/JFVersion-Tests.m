@@ -49,6 +49,26 @@
 // MARK: Methods - Tests management
 // =================================================================================================
 
+- (void)testCreateWithCurrentOperatingSystemVersion
+{
+	JFVersion* version = [JFVersion currentOperatingSystemVersion];
+	NSString* string = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromNSInteger(version.majorVersion), JFStringFromNSInteger(version.minorVersion), JFStringFromNSInteger(version.patchVersion)];
+	
+	NSString* result = nil;
+#if JF_MACOS
+	SInt32 majorVersion, minorVersion, patchVersion;
+	Gestalt(gestaltSystemVersionMajor, &majorVersion);
+	Gestalt(gestaltSystemVersionMinor, &minorVersion);
+	Gestalt(gestaltSystemVersionBugFix, &patchVersion);
+	result = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(majorVersion), JFStringFromSInt32(minorVersion), JFStringFromSInt32(patchVersion)];
+#else
+	result = SystemVersion;
+	while([result componentsSeparatedByString:@"."].count < 3)
+		result = [result stringByAppendingString:@".0"];
+#endif
+	XCTAssert(JFAreObjectsEqual(string, result), @"The string value is '%@'; it should be '%@'.", string, result);
+}
+
 - (void)testCreateWithString
 {
 	NSString* versionString = @"1.0.9 (ABCDEF12)";
@@ -125,6 +145,25 @@
 		XCTAssert((version.patchVersion == 9), @"The patch version is '%@'; it should be '9'.", JFStringFromNSInteger(version.patchVersion));
 		XCTAssert(JFAreObjectsEqual(version.buildVersion, @"ABCDEF12"), @"The build version is '%@'; it should be 'ABCDEF12'.", version.buildVersion);
 	}
+}
+
+- (void)testEquality
+{
+	NSInteger major = 1;
+	NSInteger minor = 0;
+	NSInteger patch = 9;
+	NSString* build = @"ABCDEF12";
+	
+	JFVersion* version = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:build];
+	JFVersion* equalVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:build];
+	JFVersion* almostEqualVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:nil];
+	JFVersion* greaterVersion = [[JFVersion alloc] initWithMajorVersion:(major + 1) minor:minor patch:patch build:build];
+	JFVersion* lesserVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:(patch - 1) build:build];
+	
+	XCTAssert([version isEqualToVersion:equalVersion], @"Version '%@' should be equal to version '%@'.", version.versionString, equalVersion.versionString);
+	XCTAssert(![version isEqualToVersion:almostEqualVersion], @"Version '%@' should not be equal to version '%@'.", version.versionString, almostEqualVersion.versionString);
+	XCTAssert([version isLessThanVersion:greaterVersion], @"Version '%@' should be less than version '%@'.", version.versionString, greaterVersion.versionString);
+	XCTAssert([version isGreaterThanVersion:lesserVersion], @"Version '%@' should be greater than version '%@'.", version.versionString, lesserVersion.versionString);
 }
 
 - (void)testVersionString

@@ -24,11 +24,15 @@
 
 
 
+#import <TargetConditionals.h>
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // MARK: Target conditionals
 #define	JF_IOS		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_IOS)
-#define	JF_MACOS	(TARGET_OS_MAC && !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
+#define	JF_MACOS	(TARGET_OS_MAC && TARGET_OS_OSX)
 #define	JF_TVOS		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_TV)
 #define	JF_WATCHOS	(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_WATCH)
 

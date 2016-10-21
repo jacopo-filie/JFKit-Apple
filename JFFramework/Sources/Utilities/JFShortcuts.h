@@ -31,6 +31,10 @@
 
 
 
+@class JFVersion;
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_SHORTCUTS_ENABLED
@@ -192,8 +196,8 @@
 
 #if JF_IOS
 // MARK: Version (iOS)
-+ (BOOL)	isIOS:(NSString*)version;
-+ (BOOL)	isIOSPlus:(NSString*)version;
++ (BOOL)	isIOS:(JFVersion*)majorVersion;
++ (BOOL)	isIOSPlus:(JFVersion*)majorVersion;
 + (BOOL)	isIOS6;
 + (BOOL)	isIOS6Plus;
 + (BOOL)	isIOS7;
@@ -208,8 +212,8 @@
 
 #if JF_MACOS
 // MARK: Version (macOS)
-+ (BOOL)	isMacOS:(NSString*)version;
-+ (BOOL)	isMacOSPlus:(NSString*)version;
++ (BOOL)	isMacOS:(JFVersion*)majorVersion;
++ (BOOL)	isMacOSPlus:(JFVersion*)majorVersion;
 + (BOOL)	isMacOS10_6;
 + (BOOL)	isMacOS10_6Plus;
 + (BOOL)	isMacOS10_7;
@@ -228,8 +232,8 @@
 
 #if JF_TVOS
 // MARK: Version (tvOS)
-+ (BOOL)	isTVOS:(NSString*)version;
-+ (BOOL)	isTVOSPlus:(NSString*)version;
++ (BOOL)	isTVOS:(JFVersion*)majorVersion;
++ (BOOL)	isTVOSPlus:(JFVersion*)majorVersion;
 + (BOOL)	isTVOS9;
 + (BOOL)	isTVOS9Plus;
 + (BOOL)	isTVOS10;

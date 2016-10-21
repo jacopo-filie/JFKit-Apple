@@ -28,6 +28,7 @@
 
 #import "JFShortcuts.h"
 #import "JFString.h"
+#import "JFVersion.h"
 
 
 
@@ -138,7 +139,7 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 	
 	if(!retObj)
 	{
-		NSString* retObjVersion = nil;
+		JFVersion* retObjVersion = nil;
 		for(NSString* key in [LaunchScreens allKeys])
 		{
 			NSDictionary* dict = LaunchScreens[key];
@@ -165,14 +166,15 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 				continue;
 			
 			// Checks the minimum iOS version and skips to the next if not satisfied.
-			NSString* minVersion = dict[MinimumOSVersionKey];
+			NSString* minVersionString = dict[MinimumOSVersionKey];
+			JFVersion* minVersion = (minVersionString ? [[JFVersion alloc] initWithVersionString:minVersionString] : nil);
 			if(minVersion)
 			{
 				if(!iOSPlus(minVersion))
 					continue;
 				
 				// Checks if the current image minVersion is better than the last used image version.
-				if(retObjVersion && [minVersion compare:retObjVersion options:NSNumericSearch] != NSOrderedDescending)
+				if(retObjVersion && [minVersion isLessThanVersion:retObjVersion])
 					continue;
 			}
 			else if(retObjVersion)
@@ -245,140 +247,6 @@ void JFPerformSelector2(NSObject* target, SEL action, id obj1, id obj2)
 	IMP implementation = [target methodForSelector:action];
 	void (*performMethod)(id, SEL, id, id) = (void*)implementation;
 	performMethod(target, action, obj1, obj2);
-}
-
-
-#pragma mark Functions (Version)
-
-BOOL JFCheckSystemVersion(NSString* version, JFRelation relation)
-{
-	static NSInteger currentMajorVersion = 0;
-	static NSInteger currentMinorVersion = 0;
-	static NSInteger currentPatchVersion = 0;
-	
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		if([NSProcessInfo instancesRespondToSelector:@selector(operatingSystemVersion)])
-		{
-			NSOperatingSystemVersion currentVersion = ProcessInfo.operatingSystemVersion;
-			currentMajorVersion = currentVersion.majorVersion;
-			currentMinorVersion = currentVersion.minorVersion;
-			currentPatchVersion = currentVersion.patchVersion;
-		}
-		else
-		{
-#if JF_MACOS
-			SInt32 majorVersion, minorVersion, patchVersion;
-			Gestalt(gestaltSystemVersionMajor, &majorVersion);
-			Gestalt(gestaltSystemVersionMinor, &minorVersion);
-			Gestalt(gestaltSystemVersionBugFix, &patchVersion);
-			currentMajorVersion = majorVersion;
-			currentMinorVersion = minorVersion;
-			currentPatchVersion = patchVersion;
-#else
-			NSArray* versionComponents = [SystemVersion componentsSeparatedByString:@"."];
-			NSUInteger count = [versionComponents count];
-			if(count > 0) currentMajorVersion = [versionComponents[0] integerValue];
-			if(count > 1) currentMinorVersion = [versionComponents[1] integerValue];
-			if(count > 2) currentPatchVersion = [versionComponents[2] integerValue];
-#endif
-		}
-	});
-	
-	if(JFStringIsNullOrEmpty(version))
-		return NO;
-	
-	NSArray* versionComponents = [version componentsSeparatedByString:@"."];
-	NSUInteger count = [versionComponents count];
-	
-	NSInteger majorVersion = -1;
-	NSInteger minorVersion = -1;
-	NSInteger patchVersion = -1;
-	
-	if(count > 0)
-	{
-		NSInteger value = [versionComponents[0] integerValue];
-		if(value >= 0)
-			majorVersion = value;
-	}
-	
-	if(majorVersion == -1)
-		return NO;
-	
-	if(count > 1)
-	{
-		NSInteger value = [versionComponents[1] integerValue];
-		if(value >= 0)
-			minorVersion = value;
-	}
-	if(count > 2)
-	{
-		NSInteger value = [versionComponents[2] integerValue];
-		if(value >= 0)
-			patchVersion = value;
-	}
-	
-	NSInteger comps1[3] = {majorVersion, minorVersion, patchVersion};
-	NSInteger comps2[3] = {currentMajorVersion, currentMinorVersion, currentPatchVersion};
-	
-	NSComparisonResult result = NSOrderedSame;
-	for(NSUInteger i = 0; i < 3; i++)
-	{
-		NSInteger comp1 = comps1[i];
-		if(comp1 == -1)
-			break;
-		
-		NSInteger comp2 = comps2[i];
-		
-		if(comp2 == comp1)		result = NSOrderedSame;
-		else if(comp2 < comp1)	result = NSOrderedAscending;
-		else if(comp2 > comp1)	result = NSOrderedDescending;
-		
-		if(result != NSOrderedSame)
-			break;
-	}
-	
-	BOOL ascending	= (result == NSOrderedAscending);
-	BOOL descending	= (result == NSOrderedDescending);
-	
-	switch(relation)
-	{
-		case JFRelationLessThan:			return ascending;
-		case JFRelationLessThanOrEqual:		return (ascending || !descending);
-		case JFRelationEqual:				return (!ascending && !descending);
-		case JFRelationGreaterThanOrEqual:	return (descending || !ascending);
-		case JFRelationGreaterThan:			return descending;
-		default:
-			break;
-	}
-	
-	return NO;
-}
-
-NSString* JFSystemVersion(void)
-{
-	static NSString* retObj = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		if([NSProcessInfo instancesRespondToSelector:@selector(operatingSystemVersion)])
-		{
-			NSOperatingSystemVersion version = ProcessInfo.operatingSystemVersion;
-			retObj = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromNSInteger(version.majorVersion), JFStringFromNSInteger(version.minorVersion), JFStringFromNSInteger(version.patchVersion)];
-		}
-		else
-		{
-#if JF_MACOS
-			SInt32 majorVersion, minorVersion, patchVersion;
-			Gestalt(gestaltSystemVersionMajor, &majorVersion);
-			Gestalt(gestaltSystemVersionMinor, &minorVersion);
-			Gestalt(gestaltSystemVersionBugFix, &patchVersion);
-			retObj = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(majorVersion), JFStringFromSInt32(minorVersion), JFStringFromSInt32(patchVersion)];
-#else
-			retObj = SystemVersion;
-#endif
-		}
-	});
-	return retObj;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
