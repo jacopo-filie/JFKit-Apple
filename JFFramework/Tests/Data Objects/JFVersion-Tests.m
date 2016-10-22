@@ -156,7 +156,7 @@
 	
 	JFVersion* version = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:build];
 	JFVersion* equalVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:build];
-	JFVersion* almostEqualVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:nil];
+	JFVersion* almostEqualVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:patch build:JFEmptyString];
 	JFVersion* greaterVersion = [[JFVersion alloc] initWithMajorVersion:(major + 1) minor:minor patch:patch build:build];
 	JFVersion* lesserVersion = [[JFVersion alloc] initWithMajorVersion:major minor:minor patch:(patch - 1) build:build];
 	

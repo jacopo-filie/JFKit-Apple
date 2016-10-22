@@ -186,7 +186,7 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 			retObj = key;
 			retObjVersion = minVersion;
 			
-			if(iOS(minVersion))
+			if(minVersion && iOS(minVersion))
 				break;
 		}
 	}

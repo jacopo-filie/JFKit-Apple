@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFVersion.h"
 
@@ -171,7 +171,7 @@ NS_ASSUME_NONNULL_BEGIN
 	if(!JFStringIsEmpty(versionString))
 	{
 		BOOL buildVersionComponentParsed = NO;
-		BOOL displayVersionComponentParsed = NO;
+		BOOL releaseVersionComponentParsed = NO;
 		NSArray<NSString*>* components = [versionString componentsSeparatedByString:@" "];
 		for(NSUInteger i = 0; (i < components.count) && (i < 2); i++)
 		{
@@ -182,15 +182,15 @@ NS_ASSUME_NONNULL_BEGIN
 				build = [component substringWithRange:NSMakeRange(1, (component.length - 2))];
 				buildVersionComponentParsed = YES;
 			}
-			else if(!displayVersionComponentParsed)
+			else if(!releaseVersionComponentParsed)
 			{
-				// This is the display version component.
+				// This is the release version component.
 				NSScanner* scanner = [NSScanner scannerWithString:component];
 				scanner.charactersToBeSkipped = [NSCharacterSet characterSetWithCharactersInString:@"."];
 				[scanner scanInteger:&major];
 				[scanner scanInteger:&minor];
 				[scanner scanInteger:&patch];
-				displayVersionComponentParsed = YES;
+				releaseVersionComponentParsed = YES;
 			}
 		}
 	}
@@ -213,17 +213,17 @@ NS_ASSUME_NONNULL_BEGIN
 	NSInteger comps2[3] = {version.majorVersion, version.minorVersion, version.patchVersion};
 	
 	NSComparisonResult result = NSOrderedSame;
-	for(NSUInteger i = 0; i < 3; i++)
+	for(NSUInteger i = 0; (i < 3) && (result == NSOrderedSame); i++)
 	{
 		NSInteger comp1 = comps1[i];
 		NSInteger comp2 = comps2[i];
 		
+		if((comp1 == JFVersionNotValid) || (comp2 == JFVersionNotValid))
+			continue;
+		
 		if(comp1 == comp2)		result = NSOrderedSame;
 		else if(comp1 < comp2)	result = NSOrderedAscending;
 		else if(comp1 > comp2)	result = NSOrderedDescending;
-		
-		if(result != NSOrderedSame)
-			break;
 	}
 	
 	BOOL ascending	= (result == NSOrderedAscending);
@@ -243,7 +243,13 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	if(retVal && (relation == JFRelationEqual))
-		retVal = JFAreObjectsEqual(self.buildVersion, version.buildVersion);
+	{
+		NSString* build1 = self.buildVersion;
+		NSString* build2 = version.buildVersion;
+		
+		if(build1 && build2)
+			retVal = JFAreObjectsEqual(build1, build2);
+	}
 	
 	return retVal;
 }
@@ -275,6 +281,334 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	return [self compareToVersion:version relation:JFRelationLessThan];
 }
+
+// =================================================================================================
+// MARK: Methods - Equality management (iOS)
+// =================================================================================================
+
+#if JF_IOS
++ (BOOL)isIOS:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
+}
+
++ (BOOL)isIOSPlus:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationLessThanOrEqual];
+}
+
++ (BOOL)isIOS6
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS6Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS7
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS7Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS8
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS8Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS9
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS9Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS10
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isIOS10Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+#endif
+
+// =================================================================================================
+// MARK: Methods - Equality management (macOS)
+// =================================================================================================
+
+#if JF_MACOS
++ (BOOL)isMacOS:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
+}
+
++ (BOOL)isMacOSPlus:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationLessThanOrEqual];
+}
+
++ (BOOL)isMacOS10_6
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_6Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_7
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_7Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_8
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_8Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_9
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_9Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_10
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_10Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_11
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_11Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_12
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isMacOS10_12Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+#endif
+
+// =================================================================================================
+// MARK: Methods - Equality management (tvOS)
+// =================================================================================================
+
+#if JF_TVOS
++ (BOOL)isTVOS:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
+}
+
++ (BOOL)isTVOSPlus:(JFVersion*)version
+{
+	return [version compareToCurrentOperatingSystemVersion:JFRelationLessThanOrEqual];
+}
+
++ (BOOL)isTVOS9
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isTVOS9Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isTVOS10
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+
++ (BOOL)isTVOS10Plus
+{
+	static BOOL retVal;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+	});
+	return retVal;
+}
+#endif
 
 // =================================================================================================
 // MARK: Protocols - NSCopying
