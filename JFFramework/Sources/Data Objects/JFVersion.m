@@ -132,6 +132,16 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
++ (instancetype)versionWithMajorVersion:(NSInteger)major
+{
+	return [self versionWithMajorVersion:major minor:JFVersionNotValid];
+}
+
++ (instancetype)versionWithMajorVersion:(NSInteger)major minor:(NSInteger)minor
+{
+	return [[self alloc] initWithMajorVersion:major minor:minor patch:JFVersionNotValid build:nil];
+}
+
 - (instancetype)initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch
 {
 	return [self initWithMajorVersion:major minor:minor patch:patch build:nil];
@@ -302,7 +312,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOS([JFVersion versionWithMajorVersion:6]);
 	});
 	return retVal;
 }
@@ -312,7 +322,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:6 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOSPlus([JFVersion versionWithMajorVersion:6]);
 	});
 	return retVal;
 }
@@ -322,7 +332,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOS([JFVersion versionWithMajorVersion:7]);
 	});
 	return retVal;
 }
@@ -332,7 +342,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:7 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOSPlus([JFVersion versionWithMajorVersion:7]);
 	});
 	return retVal;
 }
@@ -342,7 +352,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOS([JFVersion versionWithMajorVersion:8]);
 	});
 	return retVal;
 }
@@ -352,7 +362,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:8 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOSPlus([JFVersion versionWithMajorVersion:8]);
 	});
 	return retVal;
 }
@@ -362,7 +372,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOS([JFVersion versionWithMajorVersion:9]);
 	});
 	return retVal;
 }
@@ -372,7 +382,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOSPlus([JFVersion versionWithMajorVersion:9]);
 	});
 	return retVal;
 }
@@ -382,7 +392,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOS([JFVersion versionWithMajorVersion:10]);
 	});
 	return retVal;
 }
@@ -392,7 +402,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = iOSPlus([JFVersion versionWithMajorVersion:10]);
 	});
 	return retVal;
 }
@@ -418,7 +428,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:6]);
 	});
 	return retVal;
 }
@@ -428,7 +438,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:6 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:6]);
 	});
 	return retVal;
 }
@@ -438,7 +448,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:7]);
 	});
 	return retVal;
 }
@@ -448,7 +458,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:7 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:7]);
 	});
 	return retVal;
 }
@@ -458,7 +468,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:8]);
 	});
 	return retVal;
 }
@@ -468,7 +478,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:8 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:8]);
 	});
 	return retVal;
 }
@@ -478,7 +488,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:9]);
 	});
 	return retVal;
 }
@@ -488,7 +498,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:9 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:9]);
 	});
 	return retVal;
 }
@@ -498,7 +508,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:10]);
 	});
 	return retVal;
 }
@@ -508,7 +518,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:10 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:10]);
 	});
 	return retVal;
 }
@@ -518,7 +528,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:11]);
 	});
 	return retVal;
 }
@@ -528,7 +538,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:11 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:11]);
 	});
 	return retVal;
 }
@@ -538,7 +548,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOS([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
+		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:12]);
 	});
 	return retVal;
 }
@@ -548,7 +558,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:12 patch:JFVersionNotValid build:nil]);
+		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:12]);
 	});
 	return retVal;
 }
@@ -574,7 +584,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = tvOS([JFVersion versionWithMajorVersion:9]);
 	});
 	return retVal;
 }
@@ -584,7 +594,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:9 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = tvOSPlus([JFVersion versionWithMajorVersion:9]);
 	});
 	return retVal;
 }
@@ -594,7 +604,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOS([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = tvOS([JFVersion versionWithMajorVersion:10]);
 	});
 	return retVal;
 }
@@ -604,7 +614,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static BOOL retVal;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus([[JFVersion alloc] initWithMajorVersion:10 minor:JFVersionNotValid patch:JFVersionNotValid build:nil]);
+		retVal = tvOSPlus([JFVersion versionWithMajorVersion:10]);
 	});
 	return retVal;
 }
@@ -621,3 +631,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

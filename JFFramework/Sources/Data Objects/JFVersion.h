@@ -22,11 +22,9 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFTypes.h"
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -106,6 +104,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Methods - Memory management
 + (JFVersion*)		currentOperatingSystemVersion;
++ (instancetype)	versionWithMajorVersion:(NSInteger)major;
++ (instancetype)	versionWithMajorVersion:(NSInteger)major minor:(NSInteger)minor;
 - (instancetype)	init NS_UNAVAILABLE;
 - (instancetype)	initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch;
 - (instancetype)	initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* __nullable)build NS_DESIGNATED_INITIALIZER;
@@ -166,6 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)	isTVOS10Plus;
 #endif
 
-
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
