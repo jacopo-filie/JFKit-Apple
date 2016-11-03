@@ -30,6 +30,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// MARK: Compatibility addons
+#ifndef OBJC_AVAILABLE
+#define OBJC_AVAILABLE(_macos, _ios, _tvos, _watchos) NS_AVAILABLE(_mac, _ios)
+#endif
+#ifndef TARGET_OS_OSX
+#define TARGET_OS_OSX (!TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // MARK: Target conditionals
 #define	JF_IOS		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_IOS)
 #define	JF_MACOS	(TARGET_OS_MAC && TARGET_OS_OSX)
