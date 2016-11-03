@@ -662,12 +662,12 @@
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
-		6CC0B5511C57ABDD00E2464B /* Third-Party */ = {
+		6CC0B5511C57ABDD00E2464B /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				6CC0B5521C57ABFB00E2464B /* JRSwizzle */,
 			);
-			name = "Third-Party";
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		6CC0B5521C57ABFB00E2464B /* JRSwizzle */ = {
@@ -678,7 +678,7 @@
 				6CC0B56A1C57ABFB00E2464B /* LICENSE */,
 			);
 			name = JRSwizzle;
-			path = Modules/JRSwizzle;
+			path = Dependencies/JRSwizzle;
 			sourceTree = SOURCE_ROOT;
 		};
 		6CFBB9F61C50FC7A005F61BD /* Addons */ = {
@@ -706,7 +706,7 @@
 				EA09C6741D4FC50700F8807D /* Prefix.pch */,
 			);
 			name = "Supporting Files";
-			path = "JFFramework/Supporting Files";
+			path = "Project/Supporting Files";
 			sourceTree = "<group>";
 		};
 		EA354D8D1D160E6000997276 /* Errors Managers */ = {
@@ -737,13 +737,13 @@
 		EA5F858B1B768E5A00A32291 = {
 			isa = PBXGroup;
 			children = (
+				6CC0B5511C57ABDD00E2464B /* Dependencies */,
 				EA465D7C1C00A69700811A80 /* Documentation */,
 				EA5F85981B769A3700A32291 /* Products */,
 				EACFC9281D1699AC005F3D91 /* Resources */,
 				EAE7523E1BEBF444003A2F38 /* Sources */,
 				EA09C65D1D4FC50700F8807D /* Supporting Files */,
 				EA730C0F1BF2A38100968F31 /* Tests */,
-				6CC0B5511C57ABDD00E2464B /* Third-Party */,
 			);
 			sourceTree = "<group>";
 		};
@@ -780,7 +780,7 @@
 				EAD4F1CF1BF413E10031E236 /* Utilities */,
 			);
 			name = Tests;
-			path = JFFramework/Tests;
+			path = Project/Tests;
 			sourceTree = "<group>";
 		};
 		EA730C101BF2A74800968F31 /* Data Objects */ = {
@@ -800,7 +800,7 @@
 				EACFC9451D16A3ED005F3D91 /* Strings */,
 			);
 			name = Resources;
-			path = JFFramework/Resources;
+			path = Project/Resources;
 			sourceTree = "<group>";
 		};
 		EACFC9451D16A3ED005F3D91 /* Strings */ = {
@@ -839,7 +839,7 @@
 				EAE752501BEBFFAE003A2F38 /* Utilities */,
 			);
 			name = Sources;
-			path = JFFramework/Sources;
+			path = Project/Sources;
 			sourceTree = "<group>";
 		};
 		EAE752501BEBFFAE003A2F38 /* Utilities */ = {
@@ -2085,7 +2085,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
@@ -2100,7 +2100,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
@@ -2115,7 +2115,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = macosx;
@@ -2129,7 +2129,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = macosx;
@@ -2143,7 +2143,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = appletvos;
@@ -2157,7 +2157,7 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = appletvos;
@@ -2173,11 +2173,11 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2192,11 +2192,11 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2232,10 +2232,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2251,10 +2251,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2287,9 +2287,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2304,9 +2305,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2339,10 +2341,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2356,10 +2358,10 @@
 					"$(inherited)",
 					"FRAMEWORK=1",
 				);
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Framework.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_NAME)/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2383,7 +2385,7 @@
 		EA2A73611D4E9FA100AE6BF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = iphoneos;
@@ -2393,7 +2395,7 @@
 		EA2A73621D4E9FA100AE6BF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = iphoneos;
@@ -2403,7 +2405,7 @@
 		EA2A737F1D4EA15000AE6BF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = appletvos;
@@ -2413,7 +2415,7 @@
 		EA2A73801D4EA15000AE6BF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = appletvos;
@@ -2423,7 +2425,7 @@
 		EA2A739D1D4EA1A300AE6BF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = macosx;
@@ -2433,7 +2435,7 @@
 		EA2A739E1D4EA1A300AE6BF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(PROJECT_NAME)/Supporting Files/Info Tests.plist";
+				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(PROJECT_NAME)-Tests";
 				SDKROOT = macosx;
@@ -2507,7 +2509,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/Prefix.pch";
+				GCC_PREFIX_HEADER = "Project/Supporting Files/Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"JF_SHORTCUTS_ENABLED=1",
@@ -2616,7 +2618,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/Prefix.pch";
+				GCC_PREFIX_HEADER = "Project/Supporting Files/Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "JF_SHORTCUTS_ENABLED=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;

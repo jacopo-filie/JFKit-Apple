@@ -1,3 +1,3 @@
-[submodule "Modules/JRSwizzle"]
-	path = Modules/JRSwizzle
+[submodule "JRSwizzle"]
+	path = Dependencies/JRSwizzle
 	url = git://github.com/rentzsch/jrswizzle.git
