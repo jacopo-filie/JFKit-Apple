@@ -26,16 +26,18 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Macros
-
-#if JF_MACOS
-#define JFApplication			NSApplication
-#define JFApplicationDelegate	NSApplicationDelegate
-#define JFWindow				NSWindow
-#else
+#if JF_IOS || JF_TVOS
+// MARK: Macros (SDK types - iOS / tvOS)
 #define JFApplication			UIApplication
 #define JFApplicationDelegate	UIApplicationDelegate
 #define JFWindow				UIWindow
+#endif
+
+#if JF_MACOS
+// MARK: Macros (SDK types - macOS)
+#define JFApplication			NSApplication
+#define JFApplicationDelegate	NSApplicationDelegate
+#define JFWindow				NSWindow
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

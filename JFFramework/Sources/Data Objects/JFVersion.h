@@ -31,7 +31,7 @@
 #if JF_SHORTCUTS_ENABLED
 
 #if JF_IOS
-// MARK: Macros (Equality management - iOS)
+// MARK: Macros - Equality management (iOS)
 #define iOS(_version)		[JFVersion isIOS:_version]
 #define iOSPlus(_version)	[JFVersion isIOSPlus:_version]
 #define iOS6				JFVersion.isIOS6
@@ -47,7 +47,7 @@
 #endif
 
 #if JF_MACOS
-// MARK: Macros (Equality management - macOS)
+// MARK: Macros - Equality management (macOS)
 #define macOS(_version)		[JFVersion isMacOS:_version]
 #define macOSPlus(_version)	[JFVersion isMacOSPlus:_version]
 #define macOS10_6			JFVersion.isMacOS10_6
@@ -67,7 +67,7 @@
 #endif
 
 #if JF_TVOS
-// MARK: Macros (Equality management - tvOS)
+// MARK: Macros - Equality management (tvOS)
 #define tvOS(_version)		[JFVersion isTVOS:_version]
 #define tvOSPlus(_version)	[JFVersion isTVOSPlus:_version]
 #define tvOS9				JFVersion.isTVOS9

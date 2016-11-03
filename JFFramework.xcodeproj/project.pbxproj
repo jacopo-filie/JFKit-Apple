@@ -13,6 +13,8 @@
 		4E4C6CDB1D6C941800871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E4C6CDC1D6C941800871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E4C6CDD1D6C941900871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
+		4E5592991DCB4A400086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EEC62B01D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B11D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B21D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
@@ -938,6 +940,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5592991DCB4A400086D25E /* JFTypes.h in Headers */,
 				6C617C0F1DB0EDC600D942D6 /* JFPreprocessorMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1108,6 +1111,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */,
 				6C617C101DB0EDC700D942D6 /* JFPreprocessorMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
