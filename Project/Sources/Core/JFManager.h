@@ -22,17 +22,17 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JFManager : NSObject
 
-#pragma mark Methods
-
-// Memory management
+// MARK: Methods - Memory management
 + (instancetype)	defaultManager;	// Creates a new instance and calls 'init' on it.
 + (instancetype)	sharedManager;	// Creates a singleton for each subclass.
 - (instancetype)	init NS_DESIGNATED_INITIALIZER;
 
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

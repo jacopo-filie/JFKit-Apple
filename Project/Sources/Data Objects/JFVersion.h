@@ -122,8 +122,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 // MARK: Methods - Equality management (iOS)
-+ (BOOL)	isIOS:(JFVersion*)majorVersion;
-+ (BOOL)	isIOSPlus:(JFVersion*)majorVersion;
++ (BOOL)	isIOS:(JFVersion*)version;
++ (BOOL)	isIOSPlus:(JFVersion*)version;
 + (BOOL)	isIOS6;
 + (BOOL)	isIOS6Plus;
 + (BOOL)	isIOS7;
@@ -138,8 +138,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_MACOS
 // MARK: Methods - Equality management (macOS)
-+ (BOOL)	isMacOS:(JFVersion*)majorVersion;
-+ (BOOL)	isMacOSPlus:(JFVersion*)majorVersion;
++ (BOOL)	isMacOS:(JFVersion*)version;
++ (BOOL)	isMacOSPlus:(JFVersion*)version;
 + (BOOL)	isMacOS10_6;
 + (BOOL)	isMacOS10_6Plus;
 + (BOOL)	isMacOS10_7;
@@ -158,8 +158,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_TVOS
 // MARK: Methods - Equality management (tvOS)
-+ (BOOL)	isTVOS:(JFVersion*)majorVersion;
-+ (BOOL)	isTVOSPlus:(JFVersion*)majorVersion;
++ (BOOL)	isTVOS:(JFVersion*)version;
++ (BOOL)	isTVOSPlus:(JFVersion*)version;
 + (BOOL)	isTVOS9;
 + (BOOL)	isTVOS9Plus;
 + (BOOL)	isTVOS10;

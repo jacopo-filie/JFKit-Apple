@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E15D2E51DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E15D2E61DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E15D2E71DE33E1C00FC2440 /* JFActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */; };
+		4E15D2E81DE33E1C00FC2440 /* JFActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */; };
 		4E4C6CD81D6C941500871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E4C6CD91D6C941500871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E4C6CDA1D6C941600871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
@@ -421,6 +425,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
+		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
 		4EB9CDC11D64D6DE00536B47 /* Module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Module.modulemap; sourceTree = "<group>"; };
 		4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFShortcuts.m; sourceTree = "<group>"; };
 		6C0261A21C199FB8001D52B9 /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
@@ -652,6 +658,8 @@
 			isa = PBXGroup;
 			children = (
 				6CFBB9F61C50FC7A005F61BD /* Addons */,
+				4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */,
+				4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */,
 				6C6C07851C8EDF5C00917EBF /* JFAlert.h */,
 				6C6C07861C8EDF5C00917EBF /* JFAlert.m */,
 				6C6C078C1C8EE2B400917EBF /* JFAlertsController.h */,
@@ -926,6 +934,7 @@
 				EA2D01F91D57360C008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D01F61D57360C008CEF73 /* JFManager.h in Headers */,
 				EA2D01F71D57360C008CEF73 /* JFConnectionMachine.h in Headers */,
+				4E15D2E51DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */,
 				EA2D01FF1D57360C008CEF73 /* UILabel+JFFramework.h in Headers */,
 				EA2D01FB1D57360C008CEF73 /* JFColor.h in Headers */,
 				EA2D02061D57360C008CEF73 /* JFPreprocessorMacros.h in Headers */,
@@ -1065,6 +1074,7 @@
 				EA2D025D1D57360F008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D025A1D57360F008CEF73 /* JFManager.h in Headers */,
 				EA2D025B1D57360F008CEF73 /* JFConnectionMachine.h in Headers */,
+				4E15D2E61DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */,
 				EA2D02631D57360F008CEF73 /* UILabel+JFFramework.h in Headers */,
 				EA2D025F1D57360F008CEF73 /* JFColor.h in Headers */,
 				EA2D026A1D57360F008CEF73 /* JFPreprocessorMacros.h in Headers */,
@@ -1739,6 +1749,7 @@
 				EA2D01491D57352A008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D02881D5736C7008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D013F1D57352A008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E15D2E71DE33E1C00FC2440 /* JFActivityIndicatorView.m in Sources */,
 				EA2D01431D57352A008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D014A1D57352A008CEF73 /* UILabel+JFFramework.m in Sources */,
 				6C640FF11DB4D5BA0060DE0B /* JFVersion.m in Sources */,
@@ -1769,6 +1780,7 @@
 				EA2D01991D57352D008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D028B1D5736C9008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D018F1D57352D008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E15D2E81DE33E1C00FC2440 /* JFActivityIndicatorView.m in Sources */,
 				EA2D01931D57352D008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D019A1D57352D008CEF73 /* UILabel+JFFramework.m in Sources */,
 				6C640FF41DB4D5BA0060DE0B /* JFVersion.m in Sources */,
