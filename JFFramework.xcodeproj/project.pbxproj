@@ -488,7 +488,7 @@
 		EA354D961D160E6000997276 /* JFStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStateMachine.m; sourceTree = "<group>"; };
 		EA354DAF1D160F1200997276 /* JFStateMachineErrorsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStateMachineErrorsManager.h; sourceTree = "<group>"; };
 		EA354DB01D160F1200997276 /* JFStateMachineErrorsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStateMachineErrorsManager.m; sourceTree = "<group>"; };
-		EA465D7C1C00A69700811A80 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documentation; sourceTree = "<group>"; };
+		EA465D7C1C00A69700811A80 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Documentation; path = ../../Documentation; sourceTree = "<group>"; };
 		EA5BDED71BF7571100D1DD7C /* JFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColor.h; sourceTree = "<group>"; };
 		EA5BDED81BF7571100D1DD7C /* JFColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFColor.m; sourceTree = "<group>"; };
 		EA5BDEDD1BF7B65400D1DD7C /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
@@ -746,7 +746,6 @@
 			isa = PBXGroup;
 			children = (
 				6CC0B5511C57ABDD00E2464B /* Dependencies */,
-				EA465D7C1C00A69700811A80 /* Documentation */,
 				EA5F85981B769A3700A32291 /* Products */,
 				EACFC9281D1699AC005F3D91 /* Resources */,
 				EAE7523E1BEBF444003A2F38 /* Sources */,
@@ -783,6 +782,7 @@
 		EA730C0F1BF2A38100968F31 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				EA465D7C1C00A69700811A80 /* Documentation */,
 				EAFAFC331BFE8EA200563037 /* Core */,
 				EA730C101BF2A74800968F31 /* Data Objects */,
 				EAD4F1CF1BF413E10031E236 /* Utilities */,

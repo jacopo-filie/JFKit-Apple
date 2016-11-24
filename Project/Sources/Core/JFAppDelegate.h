@@ -82,7 +82,7 @@
 
 #if !JF_MACOS
 // Protocol implementation (UIApplicationDelegate)
-- (BOOL)	application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions;
+- (BOOL)	application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id>*)launchOptions;
 - (void)	applicationDidBecomeActive:(UIApplication*)application;
 - (void)	applicationDidEnterBackground:(UIApplication*)application;
 - (void)	applicationDidReceiveMemoryWarning:(UIApplication*)application;

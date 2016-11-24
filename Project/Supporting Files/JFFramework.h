@@ -42,8 +42,8 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #pragma mark - Common headers
 
 // System
-#import <CoreData/CoreData.h>
-#import <Foundation/Foundation.h>
+#import	<CoreData/CoreData.h>
+#import	<Foundation/Foundation.h>
 
 // User
 #import	"JFPreprocessorMacros.h"
@@ -54,7 +54,7 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #pragma mark - iOS/tvOS specific system headers
 
 // System
-#import <UIKit/UIKit.h>
+#import	<UIKit/UIKit.h>
 
 #endif
 
@@ -64,7 +64,7 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #pragma mark - OSX specific system headers
 
 // System
-#import <AppKit/AppKit.h>
+#import	<AppKit/AppKit.h>
 
 #endif
 
@@ -73,30 +73,32 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #pragma mark - Common headers
 
 // Core
-#import "JFAppDelegate.h"
+#import	"JFAppDelegate.h"
 #import	"JFConnectionMachine.h"
-#import "JFErrorsManager.h"
+#import	"JFErrorsManager.h"
 #import	"JFManager.h"
 #import	"JFOpenCloseMachine.h"
 #import	"JFStateMachine.h"
 #import	"JFStateMachineErrors.h"
 
 // Data Objects
-#import "JFByteStream.h"
-#import "JFColor.h"
-#import "JFString.h"
+#import	"JFByteStream.h"
+#import	"JFColor.h"
+#import	"JFString.h"
+#import	"JFVersion.h"
+#import	"JFWeakHook.h"
 
 // User Interface
-#import "JFWindowController.h"
+#import	"JFWindowController.h"
 
 // Utilities (Addons)
 #import	"NSBundle+JFFramework.h"
 
 // Utilities
-#import "JFLogger.h"
+#import	"JFLogger.h"
 #import	"JFPreprocessorMacros.h"
 #import	"JFShortcuts.h"
-#import "JFTypes.h"
+#import	"JFTypes.h"
 #import	"JFUtilities.h"
 
 
@@ -107,11 +109,12 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 // User interface (Addons)
 #import	"UIButton+JFFramework.h"
 #import	"UILabel+JFFramework.h"
-#import "UIStoryboard+JFFramework.h"
+#import	"UIStoryboard+JFFramework.h"
 
 // User interface
-#import "JFAlert.h"
-#import "JFAlertsController.h"
+#import	"JFActivityIndicatorView.h"
+#import	"JFAlert.h"
+#import	"JFAlertsController.h"
 
 #endif
 
@@ -121,11 +124,11 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #pragma mark - OSX specific headers
 
 // User interface (Addons)
-#import "NSStoryboard+JFFramework.h"
+#import	"NSStoryboard+JFFramework.h"
 
 // User interface
-#import "JFAlert.h"
-#import "JFAlertsController.h"
+#import	"JFAlert.h"
+#import	"JFAlertsController.h"
 
 #endif
 
@@ -137,6 +140,6 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 // User interface (Addons)
 #import	"UIButton+JFFramework.h"
 #import	"UILabel+JFFramework.h"
-#import "UIStoryboard+JFFramework.h"
+#import	"UIStoryboard+JFFramework.h"
 
 #endif
