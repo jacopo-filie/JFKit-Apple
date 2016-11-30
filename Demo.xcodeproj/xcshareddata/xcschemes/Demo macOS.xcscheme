@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EF5C6881DED811E00A6C8C2"
-               BuildableName = "Demo-iOS.app"
-               BlueprintName = "iOS"
+               BlueprintIdentifier = "4EF5C6B11DED813800A6C8C2"
+               BuildableName = "Demo-macOS.app"
+               BlueprintName = "macOS"
                ReferencedContainer = "container:Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5C6881DED811E00A6C8C2"
-            BuildableName = "Demo-iOS.app"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "4EF5C6B11DED813800A6C8C2"
+            BuildableName = "Demo-macOS.app"
+            BlueprintName = "macOS"
             ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5C6881DED811E00A6C8C2"
-            BuildableName = "Demo-iOS.app"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "4EF5C6B11DED813800A6C8C2"
+            BuildableName = "Demo-macOS.app"
+            BlueprintName = "macOS"
             ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5C6881DED811E00A6C8C2"
-            BuildableName = "Demo-iOS.app"
-            BlueprintName = "iOS"
+            BlueprintIdentifier = "4EF5C6B11DED813800A6C8C2"
+            BuildableName = "Demo-macOS.app"
+            BlueprintName = "macOS"
             ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
