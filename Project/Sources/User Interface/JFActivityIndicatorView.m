@@ -594,7 +594,8 @@ NS_ASSUME_NONNULL_BEGIN
 		[self removeConstraints:constraints];
 		[constraints removeAllObjects];
 		
-		if(![self isContainerHidden])
+		UIView* containerView = self.containerView;
+		if(containerView && ![self isContainerHidden])
 		{
 			BOOL buttonHidden = [self isButtonHidden];
 			BOOL containerImageHidden = [self isContainerImageHidden];
@@ -605,7 +606,6 @@ NS_ASSUME_NONNULL_BEGIN
 			
 			UIView* button = self.button;
 			UIView* containerImageView = self.containerImageView;
-			UIView* containerView = self.containerView;
 			UIView* indicatorView = (indicatorViewHidden ? self.imageView : self.indicatorView);
 			UIView* textLabel = self.textLabel;
 			
