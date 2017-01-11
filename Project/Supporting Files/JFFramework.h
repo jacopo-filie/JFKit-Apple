@@ -95,6 +95,7 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #import	"NSBundle+JFFramework.h"
 
 // Utilities
+#import	"JFAsynchronousOperation.h"
 #import	"JFLogger.h"
 #import	"JFPreprocessorMacros.h"
 #import	"JFShortcuts.h"

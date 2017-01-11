@@ -19,6 +19,18 @@
 		4E4C6CDD1D6C941900871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E5592991DCB4A400086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36A81E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36A91E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36AA1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36AB1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36AC1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36AD1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EDE36AE1E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
+		4EDE36AF1E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
+		4EDE36B01E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
+		4EDE36B11E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
+		4EDE36B21E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
+		4EDE36B31E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */; };
 		4EEC62B01D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B11D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
 		4EEC62B21D69FC8B0073296D /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */; };
@@ -428,6 +440,8 @@
 		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
 		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
 		4EB9CDC11D64D6DE00536B47 /* Module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Module.modulemap; sourceTree = "<group>"; };
+		4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
+		4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
 		4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFShortcuts.m; sourceTree = "<group>"; };
 		6C0261A21C199FB8001D52B9 /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		6C0261A31C199FB8001D52B9 /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
@@ -854,6 +868,8 @@
 			isa = PBXGroup;
 			children = (
 				EACFC94E1D16AAC4005F3D91 /* Addons */,
+				4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */,
+				4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */,
 				EAB650E11C135C0000064C7D /* JFLogger.h */,
 				EAB650E01C135C0000064C7D /* JFLogger.m */,
 				EA83A5F51C257E650057F954 /* JFPreprocessorMacros.h */,
@@ -918,6 +934,7 @@
 				EA2D01F21D57360C008CEF73 /* JFErrorsManager.h in Headers */,
 				EA2D01F51D57360C008CEF73 /* JFAppDelegate.h in Headers */,
 				EA2D01FA1D57360C008CEF73 /* JFByteStream.h in Headers */,
+				4EDE36A81E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02081D57360C008CEF73 /* JFTypes.h in Headers */,
 				EA2D01F41D57360C008CEF73 /* JFStateMachineErrorsManager.h in Headers */,
 				EA2D02051D57360C008CEF73 /* JFLogger.h in Headers */,
@@ -966,6 +983,7 @@
 				EA2D02371D57360D008CEF73 /* JFLogger.h in Headers */,
 				EA2D02321D57360D008CEF73 /* UIStoryboard+JFFramework.h in Headers */,
 				EA2D022E1D57360D008CEF73 /* JFString.h in Headers */,
+				4EDE36AA1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02361D57360D008CEF73 /* NSBundle+JFFramework.h in Headers */,
 				EA2D023C1D57360D008CEF73 /* JFFramework.h in Headers */,
 				EA2D022A1D57360D008CEF73 /* JFOpenCloseMachine.h in Headers */,
@@ -998,6 +1016,7 @@
 				EA2D021E1D57360D008CEF73 /* JFLogger.h in Headers */,
 				EA2D02151D57360D008CEF73 /* JFString.h in Headers */,
 				EA2D021D1D57360D008CEF73 /* NSBundle+JFFramework.h in Headers */,
+				4EDE36A91E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02231D57360D008CEF73 /* JFFramework.h in Headers */,
 				EA2D02111D57360D008CEF73 /* JFOpenCloseMachine.h in Headers */,
 				EA2D021A1D57360D008CEF73 /* JFAlert.h in Headers */,
@@ -1030,6 +1049,7 @@
 				EA2D02501D57360E008CEF73 /* JFLogger.h in Headers */,
 				EA2D02471D57360E008CEF73 /* JFString.h in Headers */,
 				EA2D024F1D57360E008CEF73 /* NSBundle+JFFramework.h in Headers */,
+				4EDE36AC1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02551D57360E008CEF73 /* JFFramework.h in Headers */,
 				EA2D02431D57360E008CEF73 /* JFOpenCloseMachine.h in Headers */,
 				EA2D024C1D57360E008CEF73 /* JFAlert.h in Headers */,
@@ -1058,6 +1078,7 @@
 				EA2D02561D57360F008CEF73 /* JFErrorsManager.h in Headers */,
 				EA2D02591D57360F008CEF73 /* JFAppDelegate.h in Headers */,
 				EA2D025E1D57360F008CEF73 /* JFByteStream.h in Headers */,
+				4EDE36AB1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D026C1D57360F008CEF73 /* JFTypes.h in Headers */,
 				EA2D02581D57360F008CEF73 /* JFStateMachineErrorsManager.h in Headers */,
 				EA2D02691D57360F008CEF73 /* JFLogger.h in Headers */,
@@ -1097,6 +1118,7 @@
 				EA2D02821D57360F008CEF73 /* JFLogger.h in Headers */,
 				EA2D027D1D57360F008CEF73 /* UIStoryboard+JFFramework.h in Headers */,
 				EA2D02791D57360F008CEF73 /* JFString.h in Headers */,
+				4EDE36AD1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02811D57360F008CEF73 /* NSBundle+JFFramework.h in Headers */,
 				EA2D02871D57360F008CEF73 /* JFFramework.h in Headers */,
 				EA2D02751D57360F008CEF73 /* JFOpenCloseMachine.h in Headers */,
@@ -1753,6 +1775,7 @@
 				EA2D01431D57352A008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D014A1D57352A008CEF73 /* UILabel+JFFramework.m in Sources */,
 				6C640FF11DB4D5BA0060DE0B /* JFVersion.m in Sources */,
+				4EDE36AE1E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D014D1D57352A008CEF73 /* JFAlertsController.m in Sources */,
 				4EEC62B01D69FC8B0073296D /* JFShortcuts.m in Sources */,
 				EA2D013E1D57352A008CEF73 /* JFErrorsManager.m in Sources */,
@@ -1784,6 +1807,7 @@
 				EA2D01931D57352D008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D019A1D57352D008CEF73 /* UILabel+JFFramework.m in Sources */,
 				6C640FF41DB4D5BA0060DE0B /* JFVersion.m in Sources */,
+				4EDE36B11E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D019D1D57352D008CEF73 /* JFAlertsController.m in Sources */,
 				4EEC62B31D69FC8B0073296D /* JFShortcuts.m in Sources */,
 				EA2D018E1D57352D008CEF73 /* JFErrorsManager.m in Sources */,
@@ -1827,6 +1851,7 @@
 				EA2D01671D57352C008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
 				EA2D016B1D57352C008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D01721D57352C008CEF73 /* UILabel+JFFramework.m in Sources */,
+				4EDE36B01E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D028A1D5736C8008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D01661D57352C008CEF73 /* JFErrorsManager.m in Sources */,
 			);
@@ -1855,6 +1880,7 @@
 				EA2D01B71D57352E008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
 				EA2D01BB1D57352E008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D01C21D57352E008CEF73 /* UILabel+JFFramework.m in Sources */,
+				4EDE36B31E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D028D1D5736CA008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D01B61D57352E008CEF73 /* JFErrorsManager.m in Sources */,
 			);
@@ -1883,6 +1909,7 @@
 				EA2D01531D57352B008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
 				EA2D01571D57352B008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D01611D57352B008CEF73 /* JFAlertsController.m in Sources */,
+				4EDE36AF1E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D02891D5736C8008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D01521D57352B008CEF73 /* JFErrorsManager.m in Sources */,
 			);
@@ -1911,6 +1938,7 @@
 				EA2D01A31D57352D008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
 				EA2D01A71D57352D008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				EA2D01B11D57352D008CEF73 /* JFAlertsController.m in Sources */,
+				4EDE36B21E266C1700E9D42A /* JFAsynchronousOperation.m in Sources */,
 				EA2D028C1D5736CA008CEF73 /* JRSwizzle.m in Sources */,
 				EA2D01A21D57352D008CEF73 /* JFErrorsManager.m in Sources */,
 			);
