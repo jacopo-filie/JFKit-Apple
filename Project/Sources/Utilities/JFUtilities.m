@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFUtilities.h"
 
@@ -30,24 +30,35 @@
 #import "JFString.h"
 #import "JFVersion.h"
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Constants
+NS_ASSUME_NONNULL_BEGIN
 
+// MARK: Constants - Time
 NSTimeInterval const	JFAnimationDuration	= 0.25;
 
+NS_ASSUME_NONNULL_END
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Functions
+#pragma mark
 
-id JFApplicationInfoForKey(NSString* key)
+NS_ASSUME_NONNULL_BEGIN
+
+// =================================================================================================
+// MARK: Functions - Application management
+// =================================================================================================
+
+id __nullable JFApplicationInfoForKey(NSString* key)
 {
 	return MainBundle.infoDictionary[key];
 }
 
-BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
+// =================================================================================================
+// MARK: Functions - Equality management
+// =================================================================================================
+
+BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2)
 {
 	// If both are 'nil', they are equal.
 	if(!obj1 && !obj2)
@@ -80,16 +91,17 @@ BOOL JFAreObjectsEqual(id<NSObject> obj1, id<NSObject> obj2)
 }
 
 
-#pragma mark Functions (Images)
+// =================================================================================================
+// MARK: Functions - Images management (iOS)
+// =================================================================================================
 
 #if JF_IOS
-
-NSString* JFLaunchImageName(void)
+NSString* __nullable JFLaunchImageName(void)
 {
 	return JFLaunchImageNameForOrientation(CurrentInterfaceOrientation);
 }
 
-NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
+NSString* __nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 {
 	static NSString* const NameKey				= @"UILaunchImageName";
 	static NSString* const MinimumOSVersionKey	= @"UILaunchImageMinimumOSVersion";
@@ -194,11 +206,11 @@ NSString* JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 	
 	return retObj;
 }
-
 #endif
 
-
-#pragma mark Functions (Math)
+// =================================================================================================
+// MARK: Functions - Math management
+// =================================================================================================
 
 JFDegrees JFDegreesFromRadians(JFRadians radians)
 {
@@ -210,24 +222,23 @@ JFRadians JFRadiansFromDegrees(JFDegrees degrees)
 	return degrees * M_PI / 180.0;
 }
 
+// =================================================================================================
+// MARK: Functions - Resources management
+// =================================================================================================
 
-#pragma mark Functions (Resources)
-
-NSURL* JFBundleResourceURLForFile(NSBundle* bundle, NSString* filename)
+NSURL* __nullable JFBundleResourceURLForFile(NSBundle* bundle, NSString* __nullable filename)
 {
-	return JFBundleResourceURLForFileWithType(bundle, [filename stringByDeletingPathExtension], [filename pathExtension]);
+	return JFBundleResourceURLForFileWithExtension(bundle, [filename stringByDeletingPathExtension], [filename pathExtension]);
 }
 
-NSURL* JFBundleResourceURLForFileWithType(NSBundle* bundle, NSString* filename, NSString* type)
+NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* __nullable filename, NSString* __nullable type)
 {
-	if(!bundle || JFStringIsNullOrEmpty(filename))
-		return nil;
-	
 	return [bundle URLForResource:filename withExtension:type];
 }
 
-
-#pragma mark Functions (Runtime)
+// =================================================================================================
+// MARK: Functions - Runtime management
+// =================================================================================================
 
 void JFPerformSelector(NSObject* target, SEL action)
 {
@@ -249,5 +260,7 @@ void JFPerformSelector2(NSObject* target, SEL action, id obj1, id obj2)
 	void (*performMethod)(id, SEL, id, id) = (void*)implementation;
 	performMethod(target, action, obj1, obj2);
 }
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
