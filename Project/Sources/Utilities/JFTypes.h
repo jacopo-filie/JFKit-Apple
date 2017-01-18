@@ -25,14 +25,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS || JF_TVOS
-// MARK: Macros (SDK types - iOS / tvOS)
+// MARK: Macros - Aliases (iOS / tvOS)
 #define JFApplication			UIApplication
 #define JFApplicationDelegate	UIApplicationDelegate
 #define JFWindow				UIWindow
 #endif
 
 #if JF_MACOS
-// MARK: Macros (SDK types - macOS)
+// MARK: Macros - Aliases (macOS)
 #define JFApplication			NSApplication
 #define JFApplicationDelegate	NSApplicationDelegate
 #define JFWindow				NSWindow
@@ -40,7 +40,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Blocks
+#pragma mark
+
+// =================================================================================================
+// MARK: Types - Blocks
+// =================================================================================================
 
 typedef void	(^JFBlock)					(void);
 typedef void	(^JFBlockWithArray)			(NSArray* array);
@@ -54,9 +58,9 @@ typedef void	(^JFBlockWithSet)			(NSSet* set);
 typedef void	(^JFCompletionBlock)		(BOOL succeeded, id object, NSError* error);
 typedef void	(^JFSimpleCompletionBlock)	(BOOL succeeded, NSError* error);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark - Enumerations
+// =================================================================================================
+// MARK: Types - Enumerations
+// =================================================================================================
 
 typedef NS_ENUM(UInt8, JFRelation) {
 	JFRelationLessThan,
@@ -66,16 +70,16 @@ typedef NS_ENUM(UInt8, JFRelation) {
 	JFRelationGreaterThan,
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark - Math
+// =================================================================================================
+// MARK: Types - Math
+// =================================================================================================
 
 typedef double	JFDegrees;
 typedef double	JFRadians;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark - Metrics
+// =================================================================================================
+// MARK: Types - Metrics
+// =================================================================================================
 
 typedef NS_ENUM(UInt64, JFMetrics) {
 	
