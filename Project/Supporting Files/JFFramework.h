@@ -84,9 +84,9 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 // Data Objects
 #import	"JFByteStream.h"
 #import	"JFColor.h"
+#import	"JFReferences.h"
 #import	"JFString.h"
 #import	"JFVersion.h"
-#import	"JFWeakHook.h"
 
 // User Interface
 #import	"JFWindowController.h"

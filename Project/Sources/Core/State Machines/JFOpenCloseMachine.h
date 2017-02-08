@@ -22,13 +22,15 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFStateMachine.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types - State
+// =================================================================================================
 
 typedef NS_ENUM(JFState, JFOpenCloseState)
 {
@@ -43,32 +45,25 @@ typedef NS_ENUM(JFStateTransition, JFOpenCloseTransition)
 	JFOpenCloseTransitionOpening,
 };
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JFOpenCloseMachine : JFStateMachine
 
-#pragma mark Properties
-
-// State
+// MARK: Properties - State
 @property (assign, nonatomic, readonly, getter=isClosed)	BOOL	closed;
 @property (assign, nonatomic, readonly, getter=isOpened)	BOOL	opened;
 
-// Transition
+// MARK: Properties - State (Transitions)
 @property (assign, nonatomic, readonly, getter=isClosing)	BOOL	closing;
 @property (assign, nonatomic, readonly, getter=isOpening)	BOOL	opening;
 
-
-#pragma mark Methods
-
-// Memory management
+// MARK: Methods - Memory management
 - (instancetype)	initWithDelegate:(id<JFStateMachineDelegate>)delegate;	// The starting state is "Closed".
 
-// State management
+// MARK: Methods - State management
 - (void)	close;
 - (void)	close:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	open;
@@ -76,3 +71,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

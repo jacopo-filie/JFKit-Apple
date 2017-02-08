@@ -22,20 +22,38 @@
 //	SOFTWARE.
 //
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#if JF_IOS || JF_TVOS
+NS_ASSUME_NONNULL_BEGIN
+@interface JFSoftReference : NSObject
 
-#import "JFWeakHook.h"
-
-
-
-#if __has_feature(objc_arc_weak)
-@implementation JFWeakHook
-
-// =================================================================================================
 // MARK: Properties - Data
-// =================================================================================================
+@property (strong, nullable)	id	object;
 
-@synthesize object	= _object;
+// MARK: Methods - Memory management
++ (instancetype)	initWithObject:(id __nullable)object;
 
 @end
+NS_ASSUME_NONNULL_END
 #endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
+
+#if __has_feature(objc_arc_weak)
+NS_ASSUME_NONNULL_BEGIN
+@interface JFWeakReference : NSObject
+
+// MARK: Properties - Data
+@property (weak, nonatomic, nullable)	id	object;
+
+// MARK: Methods - Memory management
++ (instancetype)	initWithObject:(id __nullable)object;
+
+@end
+NS_ASSUME_NONNULL_END
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

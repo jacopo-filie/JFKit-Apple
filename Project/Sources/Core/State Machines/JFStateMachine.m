@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFStateMachine.h"
 
@@ -30,82 +30,96 @@
 #import "JFStateMachineErrorsManager.h"
 #import "JFString.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Macros
+// =================================================================================================
+// MARK: Macros - String constants
+// =================================================================================================
 
 #define JFStateMachineSerialQueueName	JFReversedDomain @".stateMachine.queue"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark
 
-#pragma mark - Functions (Definitions)
+NS_ASSUME_NONNULL_BEGIN
+
+// =================================================================================================
+// MARK: Functions (Definition) - Concurrency management
+// =================================================================================================
 
 static	void	dispatchAsyncOnMainQueue(JFBlock block);
 static	void	dispatchSyncOnMainQueue(JFBlock block);
 
+NS_ASSUME_NONNULL_END
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JFStateMachine ()
 
 #pragma mark Properties
 
-// Concurrency
+// MARK: Properties - Concurrency
 #if OS_OBJECT_USE_OBJC
 @property (strong, nonatomic, readonly)	dispatch_queue_t	serialQueue;
 #else
 @property (assign, nonatomic, readonly)	dispatch_queue_t	serialQueue;
 #endif
 
-// Errors
+// MARK: Properties - Errors
 @property (strong, nonatomic, readonly)	JFStateMachineErrorsManager*	errorsManager;
 
-
-#pragma mark Methods
-
-// Properties accessors (State)
+// MARK: Properties accessors - State
 - (void)	setCurrentState:(JFState)currentState andTransition:(JFStateTransition)currentTransition;
 
-// State management
-- (void)	completeTransition:(BOOL)succeeded error:(NSError* __nullable)error completion:(JFSimpleCompletionBlock __nullable)completion;
-- (void)	performTransitionOnQueue:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion;
-
-// Utilities management
+// MARK: Methods - State management
+- (void)	completeTransition:(BOOL)succeeded error:(NSError* __nullable)error context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (BOOL)	isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing __nullable *)outError;
+- (void)	performTransitionOnQueue:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 
 @end
 NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFStateMachine
 
 #pragma mark Properties
 
-// Concurrency
+// =================================================================================================
+// MARK: Properties - Concurrency
+// =================================================================================================
+
 @synthesize serialQueue	= _serialQueue;
 
-// Errors
+// =================================================================================================
+// MARK: Properties - Errors
+// =================================================================================================
+
 @synthesize errorsManager	= _errorsManager;
 
-// State
+// =================================================================================================
+// MARK: Properties - State
+// =================================================================================================
+
 @synthesize currentState		= _currentState;
 @synthesize currentTransition	= _currentTransition;
 
-// Relationships
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
 @synthesize delegate	= _delegate;
 
-
-#pragma mark Properties accessors (State)
+// =================================================================================================
+// MARK: Properties accessors - State
+// =================================================================================================
 
 - (JFState)currentState
 {
@@ -132,8 +146,9 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (void)dealloc
 {
@@ -163,10 +178,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
+// =================================================================================================
+// MARK: Methods - State management
+// =================================================================================================
 
-#pragma mark State management
-
-- (void)completeTransition:(BOOL)succeeded error:(NSError* __nullable)error completion:(JFSimpleCompletionBlock __nullable)completion
+- (void)completeTransition:(BOOL)succeeded error:(NSError* __nullable)error context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
 	JFStateTransition transition = self.currentTransition;
 	
@@ -175,10 +191,10 @@ NS_ASSUME_NONNULL_BEGIN
 	[self setCurrentState:finalState andTransition:JFStateTransitionNone];
 	
 	id<JFStateMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(stateMachine:didPerformTransition:)])
+	if([delegate respondsToSelector:@selector(stateMachine:didPerformTransition:context:)])
 	{
 		dispatchSyncOnMainQueue(^{
-			[delegate stateMachine:self didPerformTransition:transition];
+			[delegate stateMachine:self didPerformTransition:transition context:context];
 		});
 	}
 	
@@ -190,107 +206,6 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	dispatch_resume(self.serialQueue);
-}
-
-- (void)performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion
-{
-	JFBlockWithError errorBlock = ^(NSError* error)
-	{
-		if(completion)
-		{
-			dispatchAsyncOnMainQueue(^{
-				completion(NO, error);
-			});
-		}
-	};
-	
-	NSError* error = nil;
-	if(![self isValidTransition:transition error:&error])
-	{
-		errorBlock(error);
-		return;
-	}
-	
-	JFStateMachineErrorsManager* errorsManager = self.errorsManager;
-	
-#if __has_feature(objc_arc_weak)
-	typeof(self) __weak weakSelf = self;
-#endif
-	
-	JFBlock block = ^(void)
-	{
-#if __has_feature(objc_arc_weak)
-		typeof(self) __strong strongSelf = weakSelf;
-		if(!strongSelf)
-		{
-			errorBlock([errorsManager errorWithCode:JFStateMachineErrorDeallocated]);
-			return;
-		}
-#else
-		typeof(self) __strong strongSelf = self;
-#endif
-		
-		if([strongSelf initialStateForTransition:transition] != strongSelf.currentState)
-		{
-			errorBlock([errorsManager errorWithCode:JFStateMachineErrorWrongInitialState]);
-			return;
-		}
-		
-		[strongSelf performTransitionOnQueue:transition completion:completion];
-	};
-	
-	dispatch_async(self.serialQueue, block);
-}
-
-- (void)performTransitionOnQueue:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion
-{
-	dispatch_suspend(self.serialQueue);
-	
-	id<JFStateMachineDelegate> delegate = self.delegate;
-	if([delegate respondsToSelector:@selector(stateMachine:willPerformTransition:)])
-	{
-		dispatchSyncOnMainQueue(^{
-			[delegate stateMachine:self willPerformTransition:transition];
-		});
-	}
-	
-	[self setCurrentState:self.currentState andTransition:transition];
-	
-	JFSimpleCompletionBlock transitionCompletion = ^(BOOL succeeded, NSError* error)
-	{
-		// It's easier to force the machine to stay alive by keeping a strong reference to it while a transition is performed.
-		[self completeTransition:succeeded error:error completion:completion];
-	};
-	
-	dispatchSyncOnMainQueue(^{
-		[delegate stateMachine:self performTransition:transition completion:transitionCompletion];
-	});
-}
-
-
-#pragma mark Utilities management
-
-- (NSString* __nullable)debugStringForState:(JFState)state
-{
-	NSString* retObj = nil;
-	switch(state)
-	{
-		case JFStateNotAvailable:	retObj = @"JFStateNotAvailable";	break;
-		default:														break;
-	}
-	return retObj;
-}
-
-- (NSString* __nullable)debugStringForTransition:(JFStateTransition)transition
-{
-	NSString* retObj = nil;
-	switch(transition)
-	{
-		case JFStateTransitionNone:			retObj = @"JFTransitionNone";			break;
-		case JFStateTransitionNotAvailable:	retObj = @"JFTransitionNotAvailable";	break;
-		default:																	break;
-	}
-	return retObj;
 }
 
 - (JFState)finalStateForFailedTransition:(JFStateTransition)transition
@@ -337,12 +252,125 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
+- (void)performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion
+{
+	[self performTransition:transition context:nil completion:completion];
+}
+
+- (void)performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
+{
+	JFBlockWithError errorBlock = ^(NSError* error)
+	{
+		if(completion)
+		{
+			dispatchAsyncOnMainQueue(^{
+				completion(NO, error);
+			});
+		}
+	};
+	
+	NSError* error = nil;
+	if(![self isValidTransition:transition error:&error])
+	{
+		errorBlock(error);
+		return;
+	}
+	
+	JFStateMachineErrorsManager* errorsManager = self.errorsManager;
+	
+#if __has_feature(objc_arc_weak)
+	typeof(self) __weak weakSelf = self;
+#endif
+	
+	JFBlock block = ^(void)
+	{
+#if __has_feature(objc_arc_weak)
+		typeof(self) __strong strongSelf = weakSelf;
+		if(!strongSelf)
+		{
+			errorBlock([errorsManager errorWithCode:JFStateMachineErrorDeallocated]);
+			return;
+		}
+#else
+		typeof(self) __strong strongSelf = self;
+#endif
+		
+		if([strongSelf initialStateForTransition:transition] != strongSelf.currentState)
+		{
+			errorBlock([errorsManager errorWithCode:JFStateMachineErrorWrongInitialState]);
+			return;
+		}
+		
+		[strongSelf performTransitionOnQueue:transition context:context completion:completion];
+	};
+	
+	dispatch_async(self.serialQueue, block);
+}
+
+- (void)performTransitionOnQueue:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
+{
+	dispatch_suspend(self.serialQueue);
+	
+	id<JFStateMachineDelegate> delegate = self.delegate;
+	if([delegate respondsToSelector:@selector(stateMachine:willPerformTransition:context:)])
+	{
+		dispatchSyncOnMainQueue(^{
+			[delegate stateMachine:self willPerformTransition:transition context:context];
+		});
+	}
+	
+	[self setCurrentState:self.currentState andTransition:transition];
+	
+	JFSimpleCompletionBlock transitionCompletion = ^(BOOL succeeded, NSError* error)
+	{
+		// It's easier to force the machine to stay alive by keeping a strong reference to itself while a transition is performed.
+		[self completeTransition:succeeded error:error context:context completion:completion];
+	};
+	
+	dispatchSyncOnMainQueue(^{
+		[delegate stateMachine:self performTransition:transition context:context completion:transitionCompletion];
+	});
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities management
+// =================================================================================================
+
+- (NSString* __nullable)debugStringForState:(JFState)state
+{
+	NSString* retObj = nil;
+	switch(state)
+	{
+		case JFStateNotAvailable:	retObj = @"JFStateNotAvailable";	break;
+		default:														break;
+	}
+	return retObj;
+}
+
+- (NSString* __nullable)debugStringForTransition:(JFStateTransition)transition
+{
+	NSString* retObj = nil;
+	switch(transition)
+	{
+		case JFStateTransitionNone:			retObj = @"JFTransitionNone";			break;
+		case JFStateTransitionNotAvailable:	retObj = @"JFTransitionNotAvailable";	break;
+		default:																	break;
+	}
+	return retObj;
+}
+
 @end
 NS_ASSUME_NONNULL_END
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark
 
-#pragma mark - Functions (Implementations)
+NS_ASSUME_NONNULL_BEGIN
+
+// =================================================================================================
+// MARK: Functions (Implementation) - Concurrency management
+// =================================================================================================
 
 static void dispatchAsyncOnMainQueue(JFBlock block)
 {
@@ -363,3 +391,6 @@ static void dispatchSyncOnMainQueue(JFBlock block)
 		dispatch_sync(dispatch_get_main_queue(), block);
 }
 
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

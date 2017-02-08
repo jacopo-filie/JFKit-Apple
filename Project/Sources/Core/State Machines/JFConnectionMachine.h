@@ -22,13 +22,15 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFStateMachine.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types - State
+// =================================================================================================
 
 typedef NS_ENUM(JFState, JFConnectionState)
 {
@@ -52,38 +54,31 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 	JFConnectionTransitionResettingFromDirty,
 };
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JFConnectionMachine : JFStateMachine
 
-#pragma mark Properties
-
-// State
+// MARK: Properties - State
 @property (assign, nonatomic, readonly, getter=isConnected)		BOOL	connected;
 @property (assign, nonatomic, readonly, getter=isDirty)			BOOL	dirty;
 @property (assign, nonatomic, readonly, getter=isDisconnected)	BOOL	disconnected;
 @property (assign, nonatomic, readonly, getter=isLost)			BOOL	lost;
 @property (assign, nonatomic, readonly, getter=isReady)			BOOL	ready;
 
-// Transition
+// MARK: Properties - State (Transitions)
 @property (assign, nonatomic, readonly, getter=isConnecting)		BOOL	connecting;
 @property (assign, nonatomic, readonly, getter=isDisconnecting)		BOOL	disconnecting;
 @property (assign, nonatomic, readonly, getter=isLosingConnection)	BOOL	losingConnection;
 @property (assign, nonatomic, readonly, getter=isReconnecting)		BOOL	reconnecting;
 @property (assign, nonatomic, readonly, getter=isResetting)			BOOL	resetting;
 
-
-#pragma mark Methods
-
-// Memory management
+// MARK: Methods - Memory management
 - (instancetype)	initWithDelegate:(id<JFStateMachineDelegate>)delegate;	// The starting state is "Ready".
 
-// State management
+// MARK: Methods - State management
 - (void)	connect;
 - (void)	connect:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	disconnect;
@@ -97,3 +92,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

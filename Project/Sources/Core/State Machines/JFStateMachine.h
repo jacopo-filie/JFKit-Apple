@@ -22,86 +22,87 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFTypes.h"
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @class JFStateMachine;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Macros
+// =================================================================================================
+// MARK: Macros - State constants
+// =================================================================================================
 
 #define JFStateNotAvailable				NSUIntegerMax
 #define JFStateTransitionNone			0
 #define JFStateTransitionNotAvailable	NSUIntegerMax
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark
 
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types - State
+// =================================================================================================
 
 typedef NSUInteger	JFState;
 typedef NSUInteger	JFStateTransition;
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol JFStateMachineDelegate <NSObject>
 
-#pragma mark Methods
+// =================================================================================================
+// MARK: Protocol - State management
+// =================================================================================================
 
-// State management
-@optional - (void)	stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition;
-@required - (void)	stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock)completion;
-@optional - (void)	stateMachine:(JFStateMachine*)sender willPerformTransition:(JFStateTransition)transition;
+@optional - (void)	stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id __nullable)context;
+@required - (void)	stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock)completion;
+@optional - (void)	stateMachine:(JFStateMachine*)sender willPerformTransition:(JFStateTransition)transition context:(id __nullable)context;
 
 @end
 NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
-
-
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JFStateMachine : NSObject
 
-#pragma mark Properties
-
-// Relationships
+// MARK: Properties - Observers
 #if __has_feature(objc_arc_weak)
 @property (weak, nonatomic, readonly)	id<JFStateMachineDelegate>	delegate;
 #else
 @property (unsafe_unretained, nonatomic, readonly)	id<JFStateMachineDelegate>	delegate;
 #endif
 
-// State
+// MARK: Properties - State
 @property (assign, readonly)	JFState				currentState;
 @property (assign, readonly)	JFStateTransition	currentTransition;
 
-
-#pragma mark Methods
-
-// Memory management
+// MARK: Methods - Memory management
 - (instancetype)	init NS_UNAVAILABLE;
 - (instancetype)	initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
-// State management
+// MARK: Methods - State management
+- (JFState)	finalStateForFailedTransition:(JFStateTransition)transition;
+- (JFState)	finalStateForSucceededTransition:(JFStateTransition)transition;
+- (JFState)	initialStateForTransition:(JFStateTransition)transition;
 - (void)	performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 
-// Utilities management
+// MARK: Methods - Utilities management
 - (NSString* __nullable)	debugStringForState:(JFState)state;
 - (NSString* __nullable)	debugStringForTransition:(JFStateTransition)transition;
-- (JFState)					finalStateForFailedTransition:(JFStateTransition)transition;
-- (JFState)					finalStateForSucceededTransition:(JFStateTransition)transition;
-- (JFState)					initialStateForTransition:(JFStateTransition)transition;
 
 @end
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

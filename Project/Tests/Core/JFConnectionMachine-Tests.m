@@ -225,12 +225,12 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 
 #pragma mark Protocol implementation (JFStateMachineDelegate)
 
-- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition
+- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id _Nullable)context
 {
 	[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nonnull)completion
+- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletionBlock __nonnull)completion
 {
 	[MainOperationQueue addOperationWithBlock:^{
 		completion(!self.shouldFail, nil);

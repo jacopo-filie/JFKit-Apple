@@ -22,16 +22,18 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFOpenCloseMachine.h"
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFOpenCloseMachine
 
-#pragma mark Properties accessors (State)
+// =================================================================================================
+// MARK: Properties accessors - State
+// =================================================================================================
 
 - (BOOL)isClosed
 {
@@ -43,8 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 	return (self.currentState == JFOpenCloseStateOpened);
 }
 
-
-#pragma mark Properties accessors (Transition)
+// =================================================================================================
+// MARK: Properties accessors - State (Transitions)
+// =================================================================================================
 
 - (BOOL)isClosing
 {
@@ -56,16 +59,18 @@ NS_ASSUME_NONNULL_BEGIN
 	return (self.currentTransition == JFOpenCloseTransitionOpening);
 }
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate
 {
 	return [self initWithState:JFOpenCloseStateClosed delegate:delegate];
 }
 
-
-#pragma mark State management
+// =================================================================================================
+// MARK: Methods - State management
+// =================================================================================================
 
 - (void)close
 {
@@ -75,51 +80,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)close:(JFSimpleCompletionBlock __nullable)completion
 {
 	[self performTransition:JFOpenCloseTransitionClosing completion:completion];
-}
-
-- (void)open
-{
-	[self open:nil];
-}
-
-- (void)open:(JFSimpleCompletionBlock __nullable)completion
-{
-	[self performTransition:JFOpenCloseTransitionOpening completion:completion];
-}
-
-
-#pragma mark Utilities management
-
-- (NSString* __nullable)debugStringForState:(JFState)state
-{
-	NSString* retObj = nil;
-	switch(state)
-	{
-		case JFOpenCloseStateClosed:	retObj = @"Closed";	break;
-		case JFOpenCloseStateOpened:	retObj = @"Opened";	break;
-		default:
-		{
-			retObj = [super debugStringForState:state];
-			break;
-		}
-	}
-	return retObj;
-}
-
-- (NSString* __nullable)debugStringForTransition:(JFStateTransition)transition
-{
-	NSString* retObj = nil;
-	switch(transition)
-	{
-		case JFOpenCloseTransitionClosing:	retObj = @"Closing";	break;
-		case JFOpenCloseTransitionOpening:	retObj = @"Opening";	break;
-		default:
-		{
-			retObj = [super debugStringForTransition:transition];
-			break;
-		}
-	}
-	return retObj;
 }
 
 - (JFState)finalStateForFailedTransition:(JFStateTransition)transition
@@ -168,6 +128,52 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 	}
 	return retVal;
+}
+
+- (void)open
+{
+	[self open:nil];
+}
+
+- (void)open:(JFSimpleCompletionBlock __nullable)completion
+{
+	[self performTransition:JFOpenCloseTransitionOpening completion:completion];
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities management
+// =================================================================================================
+
+- (NSString* __nullable)debugStringForState:(JFState)state
+{
+	NSString* retObj = nil;
+	switch(state)
+	{
+		case JFOpenCloseStateClosed:	retObj = @"Closed";	break;
+		case JFOpenCloseStateOpened:	retObj = @"Opened";	break;
+		default:
+		{
+			retObj = [super debugStringForState:state];
+			break;
+		}
+	}
+	return retObj;
+}
+
+- (NSString* __nullable)debugStringForTransition:(JFStateTransition)transition
+{
+	NSString* retObj = nil;
+	switch(transition)
+	{
+		case JFOpenCloseTransitionClosing:	retObj = @"Closing";	break;
+		case JFOpenCloseTransitionOpening:	retObj = @"Opening";	break;
+		default:
+		{
+			retObj = [super debugStringForTransition:transition];
+			break;
+		}
+	}
+	return retObj;
 }
 
 @end
