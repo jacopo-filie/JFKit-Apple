@@ -81,14 +81,19 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - State management
 - (void)	connect;
 - (void)	connect:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	connect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	disconnect;
 - (void)	disconnect:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	disconnect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	loseConnection;
 - (void)	loseConnection:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	loseConnection:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	reconnect;
 - (void)	reconnect:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	reconnect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	reset;
 - (void)	reset:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	reset:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 
 @end
 NS_ASSUME_NONNULL_END

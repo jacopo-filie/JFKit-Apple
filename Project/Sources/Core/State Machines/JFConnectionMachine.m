@@ -111,6 +111,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)connect:(JFSimpleCompletionBlock __nullable)completion
 {
+	[self connect:nil completion:completion];
+}
+
+- (void)connect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
+{
 	[self performTransition:JFConnectionTransitionConnecting completion:completion];
 }
 
@@ -120,6 +125,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)disconnect:(JFSimpleCompletionBlock __nullable)completion
+{
+	[self disconnect:nil completion:completion];
+}
+
+- (void)disconnect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
 	JFConnectionTransition transition;
 	switch(self.currentState)
@@ -205,6 +215,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loseConnection:(JFSimpleCompletionBlock __nullable)completion
 {
+	[self loseConnection:nil completion:completion];
+}
+
+- (void)loseConnection:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
+{
 	[self performTransition:JFConnectionTransitionLosingConnection completion:completion];
 }
 
@@ -215,6 +230,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reconnect:(JFSimpleCompletionBlock __nullable)completion
 {
+	[self reconnect:nil completion:completion];
+}
+
+- (void)reconnect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
+{
 	[self performTransition:JFConnectionTransitionReconnecting completion:completion];
 }
 
@@ -224,6 +244,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)reset:(JFSimpleCompletionBlock __nullable)completion
+{
+	[self reset:nil completion:completion];
+}
+
+- (void)reset:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
 	JFConnectionTransition transition;
 	switch(self.currentState)

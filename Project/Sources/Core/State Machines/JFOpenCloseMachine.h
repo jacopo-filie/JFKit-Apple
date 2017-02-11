@@ -66,8 +66,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - State management
 - (void)	close;
 - (void)	close:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	close:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 - (void)	open;
 - (void)	open:(JFSimpleCompletionBlock __nullable)completion;
+- (void)	open:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 
 @end
 NS_ASSUME_NONNULL_END
