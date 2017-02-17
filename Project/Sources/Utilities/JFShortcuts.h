@@ -31,6 +31,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@class AppDelegate;
 @class JFVersion;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,12 +98,12 @@
 @interface JF : NSObject
 
 // MARK: Generic
-+ (id<JFApplicationDelegate>)	applicationDelegate;
-+ (NSBundle*)					mainBundle;
-+ (NSNotificationCenter*)		mainNotificationCenter;
-+ (NSOperationQueue*)			mainOperationQueue;
-+ (NSProcessInfo*)				processInfo;
-+ (JFApplication*)				sharedApplication;
++ (AppDelegate*)			applicationDelegate;
++ (NSBundle*)				mainBundle;
++ (NSNotificationCenter*)	mainNotificationCenter;
++ (NSOperationQueue*)		mainOperationQueue;
++ (NSProcessInfo*)			processInfo;
++ (JFApplication*)			sharedApplication;
 
 #if JF_IOS
 // MARK: Generic (iOS)

@@ -36,7 +36,7 @@
 // MARK: Generic
 // =================================================================================================
 
-+ (id<JFApplicationDelegate>)applicationDelegate
++ (AppDelegate*)applicationDelegate
 {
 	Class class = NSClassFromString(@"AppDelegate");
 	if(!class)
@@ -46,7 +46,7 @@
 	if(!retObj || ![retObj isKindOfClass:class])
 		return nil;
 	
-	return retObj;
+	return (AppDelegate*)retObj;
 }
 
 #if JF_IOS || JF_TVOS
