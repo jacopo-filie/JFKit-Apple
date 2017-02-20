@@ -48,7 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Functions (Definition) - Concurrency management
 // =================================================================================================
 
-static	void	dispatchAsyncOnMainQueue(JFBlock block);
 static	void	dispatchSyncOnMainQueue(JFBlock block);
 
 NS_ASSUME_NONNULL_END
@@ -200,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	if(completion)
 	{
-		dispatchAsyncOnMainQueue(^{
+		dispatchSyncOnMainQueue(^{
 			completion(succeeded, error);
 		});
 	}
@@ -263,7 +262,7 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		if(completion)
 		{
-			dispatchAsyncOnMainQueue(^{
+			dispatchSyncOnMainQueue(^{
 				completion(NO, error);
 			});
 		}
@@ -372,19 +371,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Functions (Implementation) - Concurrency management
 // =================================================================================================
 
-static void dispatchAsyncOnMainQueue(JFBlock block)
-{
-	if(!block)
-		return;
-	
-	dispatch_async(dispatch_get_main_queue(), block);
-}
-
 static void dispatchSyncOnMainQueue(JFBlock block)
 {
-	if(!block)
-		return;
-	
 	if([NSThread isMainThread])
 		block();
 	else
