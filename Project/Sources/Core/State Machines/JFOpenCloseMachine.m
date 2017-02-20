@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)close:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
-	[self performTransition:JFOpenCloseTransitionClosing completion:completion];
+	[self performTransition:JFOpenCloseTransitionClosing context:context completion:completion];
 }
 
 - (JFState)finalStateForFailedTransition:(JFStateTransition)transition
@@ -147,7 +147,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)open:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
-	[self performTransition:JFOpenCloseTransitionOpening completion:completion];
+	[self performTransition:JFOpenCloseTransitionOpening context:context completion:completion];
 }
 
 // =================================================================================================

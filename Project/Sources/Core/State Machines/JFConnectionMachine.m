@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)connect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
-	[self performTransition:JFConnectionTransitionConnecting completion:completion];
+	[self performTransition:JFConnectionTransitionConnecting context:context completion:completion];
 }
 
 - (void)disconnect
@@ -142,7 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
 			break;
 		}
 	}
-	[self performTransition:transition completion:completion];
+	[self performTransition:transition context:context completion:completion];
 }
 
 - (JFState)finalStateForFailedTransition:(JFStateTransition)transition
@@ -220,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loseConnection:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
-	[self performTransition:JFConnectionTransitionLosingConnection completion:completion];
+	[self performTransition:JFConnectionTransitionLosingConnection context:context completion:completion];
 }
 
 - (void)reconnect
@@ -235,7 +235,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reconnect:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion
 {
-	[self performTransition:JFConnectionTransitionReconnecting completion:completion];
+	[self performTransition:JFConnectionTransitionReconnecting context:context completion:completion];
 }
 
 - (void)reset
@@ -261,7 +261,7 @@ NS_ASSUME_NONNULL_BEGIN
 			break;
 		}
 	}
-	[self performTransition:transition completion:completion];
+	[self performTransition:transition context:context completion:completion];
 }
 
 // =================================================================================================
