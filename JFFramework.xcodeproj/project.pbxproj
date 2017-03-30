@@ -439,7 +439,7 @@
 /* Begin PBXFileReference section */
 		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
 		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
-		4EB9CDC11D64D6DE00536B47 /* Module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Module.modulemap; sourceTree = "<group>"; };
+		4EB9CDC11D64D6DE00536B47 /* JFFramework.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = JFFramework.modulemap; sourceTree = "<group>"; };
 		4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
 		4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
 		4EEC62AF1D69FC8B0073296D /* JFShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFShortcuts.m; sourceTree = "<group>"; };
@@ -723,7 +723,7 @@
 				EA09C6681D4FC50700F8807D /* Info Framework.plist */,
 				EA09C66D1D4FC50700F8807D /* Info Tests.plist */,
 				EA09C6731D4FC50700F8807D /* JFFramework.h */,
-				4EB9CDC11D64D6DE00536B47 /* Module.modulemap */,
+				4EB9CDC11D64D6DE00536B47 /* JFFramework.modulemap */,
 				EA09C6741D4FC50700F8807D /* Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -2215,7 +2215,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2234,7 +2234,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
