@@ -2329,7 +2329,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2348,7 +2348,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2384,7 +2384,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2402,7 +2402,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2438,7 +2438,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2455,7 +2455,7 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Framework.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Project/Supporting Files/Module.modulemap";
+				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
 				SDKROOT = macosx;
 			};
 			name = Release;
