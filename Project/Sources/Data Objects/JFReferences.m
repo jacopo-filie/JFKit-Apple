@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Memory management
 // =================================================================================================
 
-+ (instancetype)initWithObject:(id __nullable)object
++ (instancetype)referenceWithObject:(id __nullable)object
 {
 	JFSoftReference* retObj = [[JFSoftReference alloc] init];
 	retObj.object = object;
@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Memory management
 // =================================================================================================
 
-+ (instancetype)initWithObject:(id __nullable)object
++ (instancetype)referenceWithObject:(id __nullable)object
 {
 	JFWeakReference* retObj = [[JFWeakReference alloc] init];
 	retObj.object = object;

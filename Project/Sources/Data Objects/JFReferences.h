@@ -26,13 +26,13 @@
 
 #if JF_IOS || JF_TVOS
 NS_ASSUME_NONNULL_BEGIN
-@interface JFSoftReference : NSObject
+@interface JFSoftReference<ObjectType> : NSObject
 
 // MARK: Properties - Data
-@property (strong, nullable)	id	object;
+@property (strong, nullable)	ObjectType	object;
 
 // MARK: Methods - Memory management
-+ (instancetype)	initWithObject:(id __nullable)object;
++ (instancetype)	referenceWithObject:(ObjectType __nullable)object;
 
 @end
 NS_ASSUME_NONNULL_END
@@ -44,13 +44,13 @@ NS_ASSUME_NONNULL_END
 
 #if __has_feature(objc_arc_weak)
 NS_ASSUME_NONNULL_BEGIN
-@interface JFWeakReference : NSObject
+@interface JFWeakReference<ObjectType> : NSObject
 
 // MARK: Properties - Data
-@property (weak, nonatomic, nullable)	id	object;
+@property (weak, nonatomic, nullable)	ObjectType	object;
 
 // MARK: Methods - Memory management
-+ (instancetype)	initWithObject:(id __nullable)object;
++ (instancetype)	referenceWithObject:(ObjectType __nullable)object;
 
 @end
 NS_ASSUME_NONNULL_END
