@@ -182,8 +182,20 @@
 
 #if JF_IOS
 - (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+{
+	[self presentAlertViewForError:error cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
+}
 #elif JF_MACOS
 - (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+{
+	[self presentAlertView:style forError:error cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
+}
+#endif
+
+#if JF_IOS
+- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
+#elif JF_MACOS
+- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
 #endif
 {
 	if(!error)
@@ -207,9 +219,9 @@
 	NSString* title = [error localizedDescription];
 	
 #if JF_IOS
-	[self presentAlertViewWithTitle:title message:message cancelButton:cancelButton otherButtons:otherButtons];
+	[self presentAlertViewWithTitle:title message:message cancelButton:cancelButton otherButtons:otherButtons timeout:timeout];
 #elif JF_MACOS
-	[self presentAlertView:style title:title message:message cancelButton:cancelButton otherButtons:otherButtons];
+	[self presentAlertView:style title:title message:message cancelButton:cancelButton otherButtons:otherButtons timeout:timeout];
 #endif
 }
 
