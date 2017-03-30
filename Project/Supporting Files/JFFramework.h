@@ -24,21 +24,6 @@
 
 
 
-#if FRAMEWORK
-#pragma mark - Version info
-
-//! Project version number for JFFramework.
-FOUNDATION_EXPORT double JFFrameworkVersionNumber;
-
-//! Project version string for JFFramework.
-FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <JFFramework/PublicHeader.h>
-
-#endif
-
-
-
 #pragma mark - Common headers
 
 // System
