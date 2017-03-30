@@ -77,6 +77,7 @@ FOUNDATION_EXPORT const unsigned char JFFrameworkVersionString[];
 #import	"JFConnectionMachine.h"
 #import	"JFErrorsManager.h"
 #import	"JFManager.h"
+#import	"JFObserversController.h"
 #import	"JFOpenCloseMachine.h"
 #import	"JFStateMachine.h"
 #import	"JFStateMachineErrors.h"

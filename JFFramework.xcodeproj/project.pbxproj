@@ -19,6 +19,18 @@
 		4E0007CE1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007C41E8CFF02000B367C /* JFAsynchronousBlockOperation.m */; };
 		4E0007CF1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007C41E8CFF02000B367C /* JFAsynchronousBlockOperation.m */; };
 		4E0007D01E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007C41E8CFF02000B367C /* JFAsynchronousBlockOperation.m */; };
+		4E0007D31E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D41E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D51E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D61E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D71E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D81E8CFF36000B367C /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0007D11E8CFF36000B367C /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0007D91E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
+		4E0007DA1E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
+		4E0007DB1E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
+		4E0007DC1E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
+		4E0007DD1E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
+		4E0007DE1E8CFF36000B367C /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0007D21E8CFF36000B367C /* JFObserversController.m */; };
 		4E15D2E51DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E15D2E61DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E15D2E71DE33E1C00FC2440 /* JFActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */; };
@@ -451,6 +463,8 @@
 /* Begin PBXFileReference section */
 		4E0007C31E8CFF02000B367C /* JFAsynchronousBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousBlockOperation.h; sourceTree = "<group>"; };
 		4E0007C41E8CFF02000B367C /* JFAsynchronousBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousBlockOperation.m; sourceTree = "<group>"; };
+		4E0007D11E8CFF36000B367C /* JFObserversController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFObserversController.h; sourceTree = "<group>"; };
+		4E0007D21E8CFF36000B367C /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
 		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
 		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
 		4EB9CDC11D64D6DE00536B47 /* JFFramework.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = JFFramework.modulemap; sourceTree = "<group>"; };
@@ -921,6 +935,8 @@
 				EA7F89631C289F1D002C2E34 /* JFAppDelegate.m */,
 				EAFAFC2D1BFE6A9C00563037 /* JFManager.h */,
 				EAFAFC2E1BFE6A9C00563037 /* JFManager.m */,
+				4E0007D11E8CFF36000B367C /* JFObserversController.h */,
+				4E0007D21E8CFF36000B367C /* JFObserversController.m */,
 				EA354D901D160E6000997276 /* State Machines */,
 			);
 			path = Core;
@@ -964,6 +980,7 @@
 				6C640FEB1DB4D5BA0060DE0B /* JFVersion.h in Headers */,
 				EA2D01F91D57360C008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D01F61D57360C008CEF73 /* JFManager.h in Headers */,
+				4E0007D31E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D01F71D57360C008CEF73 /* JFConnectionMachine.h in Headers */,
 				4E15D2E51DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */,
 				EA2D01FF1D57360C008CEF73 /* UILabel+JFFramework.h in Headers */,
@@ -998,6 +1015,7 @@
 				4E0007C71E8CFF02000B367C /* JFAsynchronousBlockOperation.h in Headers */,
 				EA2D02371D57360D008CEF73 /* JFLogger.h in Headers */,
 				EA2D02321D57360D008CEF73 /* UIStoryboard+JFFramework.h in Headers */,
+				4E0007D51E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D022E1D57360D008CEF73 /* JFString.h in Headers */,
 				4EDE36AA1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02361D57360D008CEF73 /* NSBundle+JFFramework.h in Headers */,
@@ -1032,6 +1050,7 @@
 				4E0007C61E8CFF02000B367C /* JFAsynchronousBlockOperation.h in Headers */,
 				EA2D021E1D57360D008CEF73 /* JFLogger.h in Headers */,
 				EA2D02151D57360D008CEF73 /* JFString.h in Headers */,
+				4E0007D41E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D021D1D57360D008CEF73 /* NSBundle+JFFramework.h in Headers */,
 				4EDE36A91E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02231D57360D008CEF73 /* JFFramework.h in Headers */,
@@ -1066,6 +1085,7 @@
 				4E0007C91E8CFF02000B367C /* JFAsynchronousBlockOperation.h in Headers */,
 				EA2D02501D57360E008CEF73 /* JFLogger.h in Headers */,
 				EA2D02471D57360E008CEF73 /* JFString.h in Headers */,
+				4E0007D71E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D024F1D57360E008CEF73 /* NSBundle+JFFramework.h in Headers */,
 				4EDE36AC1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02551D57360E008CEF73 /* JFFramework.h in Headers */,
@@ -1112,6 +1132,7 @@
 				6C640FEE1DB4D5BA0060DE0B /* JFVersion.h in Headers */,
 				EA2D025D1D57360F008CEF73 /* JFStateMachine.h in Headers */,
 				EA2D025A1D57360F008CEF73 /* JFManager.h in Headers */,
+				4E0007D61E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D025B1D57360F008CEF73 /* JFConnectionMachine.h in Headers */,
 				4E15D2E61DE33E1C00FC2440 /* JFActivityIndicatorView.h in Headers */,
 				EA2D02631D57360F008CEF73 /* UILabel+JFFramework.h in Headers */,
@@ -1137,6 +1158,7 @@
 				4E0007CA1E8CFF02000B367C /* JFAsynchronousBlockOperation.h in Headers */,
 				EA2D02821D57360F008CEF73 /* JFLogger.h in Headers */,
 				EA2D027D1D57360F008CEF73 /* UIStoryboard+JFFramework.h in Headers */,
+				4E0007D81E8CFF36000B367C /* JFObserversController.h in Headers */,
 				EA2D02791D57360F008CEF73 /* JFString.h in Headers */,
 				4EDE36AD1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */,
 				EA2D02811D57360F008CEF73 /* NSBundle+JFFramework.h in Headers */,
@@ -1779,6 +1801,7 @@
 				EA2D01451D57352A008CEF73 /* JFByteStream.m in Sources */,
 				EA2D01461D57352A008CEF73 /* JFColor.m in Sources */,
 				EA2D01401D57352A008CEF73 /* JFAppDelegate.m in Sources */,
+				4E0007D91E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D01471D57352A008CEF73 /* JFString.m in Sources */,
 				EA2D014B1D57352A008CEF73 /* UIStoryboard+JFFramework.m in Sources */,
 				EA2D01411D57352A008CEF73 /* JFManager.m in Sources */,
@@ -1812,6 +1835,7 @@
 				EA2D01951D57352D008CEF73 /* JFByteStream.m in Sources */,
 				EA2D01961D57352D008CEF73 /* JFColor.m in Sources */,
 				EA2D01901D57352D008CEF73 /* JFAppDelegate.m in Sources */,
+				4E0007DC1E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D01971D57352D008CEF73 /* JFString.m in Sources */,
 				EA2D019B1D57352D008CEF73 /* UIStoryboard+JFFramework.m in Sources */,
 				EA2D01911D57352D008CEF73 /* JFManager.m in Sources */,
@@ -1871,6 +1895,7 @@
 				EA2D01781D57352C008CEF73 /* JFLogger.m in Sources */,
 				EA2D01711D57352C008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D01671D57352C008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E0007DB1E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D016B1D57352C008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				4E0007CD1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */,
 				EA2D01721D57352C008CEF73 /* UILabel+JFFramework.m in Sources */,
@@ -1901,6 +1926,7 @@
 				EA2D01C81D57352E008CEF73 /* JFLogger.m in Sources */,
 				EA2D01C11D57352E008CEF73 /* UIButton+JFFramework.m in Sources */,
 				EA2D01B71D57352E008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E0007DE1E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D01BB1D57352E008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				4E0007D01E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */,
 				EA2D01C21D57352E008CEF73 /* UILabel+JFFramework.m in Sources */,
@@ -1931,6 +1957,7 @@
 				EA2D01631D57352B008CEF73 /* NSBundle+JFFramework.m in Sources */,
 				EA2D01641D57352B008CEF73 /* JFLogger.m in Sources */,
 				EA2D01531D57352B008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E0007DA1E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D01571D57352B008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				4E0007CC1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */,
 				EA2D01611D57352B008CEF73 /* JFAlertsController.m in Sources */,
@@ -1961,6 +1988,7 @@
 				EA2D01B31D57352D008CEF73 /* NSBundle+JFFramework.m in Sources */,
 				EA2D01B41D57352D008CEF73 /* JFLogger.m in Sources */,
 				EA2D01A31D57352D008CEF73 /* JFStateMachineErrorsManager.m in Sources */,
+				4E0007DD1E8CFF36000B367C /* JFObserversController.m in Sources */,
 				EA2D01A71D57352D008CEF73 /* JFOpenCloseMachine.m in Sources */,
 				4E0007CF1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */,
 				EA2D01B11D57352D008CEF73 /* JFAlertsController.m in Sources */,
