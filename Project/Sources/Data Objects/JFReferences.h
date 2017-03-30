@@ -42,6 +42,24 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark
 
+#if !__has_feature(objc_arc_weak)
+NS_ASSUME_NONNULL_BEGIN
+@interface JFUnsafeReference<ObjectType> : NSObject
+
+// MARK: Properties - Data
+@property (unsafe_unretained, nonatomic, nullable)	ObjectType	object;
+
+// MARK: Methods - Memory management
++ (instancetype)	referenceWithObject:(ObjectType __nullable)object;
+
+@end
+NS_ASSUME_NONNULL_END
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
+
 #if __has_feature(objc_arc_weak)
 NS_ASSUME_NONNULL_BEGIN
 @interface JFWeakReference<ObjectType> : NSObject

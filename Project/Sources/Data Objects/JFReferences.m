@@ -125,6 +125,35 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark
 
+#if !__has_feature(objc_arc_weak)
+NS_ASSUME_NONNULL_BEGIN
+@implementation JFUnsafeReference
+
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
+
+@synthesize object	= _object;
+
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
+
++ (instancetype)referenceWithObject:(id __nullable)object
+{
+	JFUnsafeReference* retObj = [[JFUnsafeReference alloc] init];
+	retObj.object = object;
+	return retObj;
+}
+
+@end
+NS_ASSUME_NONNULL_END
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
+
 #if __has_feature(objc_arc_weak)
 NS_ASSUME_NONNULL_BEGIN
 @implementation JFWeakReference
