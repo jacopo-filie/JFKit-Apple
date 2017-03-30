@@ -64,6 +64,7 @@ typedef NSInteger JFErrorCode;
 - (NSError*)	debugPlaceholderError;
 - (NSError*)	debugPlaceholderErrorWithUnderlyingError:(NSError*)error;
 - (NSError*)	errorWithCode:(JFErrorCode)errorCode;
+- (NSError*)	errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError*)error;
 - (NSError*)	errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary*)userInfo;
 
 @end

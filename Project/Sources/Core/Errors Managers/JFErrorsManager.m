@@ -134,6 +134,12 @@
 	return [self errorWithCode:errorCode userInfo:userInfo];
 }
 
+- (NSError*)errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError*)error
+{
+	NSDictionary* userInfo = [self userInfoForErrorCode:errorCode underlyingError:error];
+	return [self errorWithCode:errorCode userInfo:userInfo];
+}
+
 - (NSError*)errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary*)userInfo
 {
 	return [NSError errorWithDomain:self.domain code:errorCode userInfo:userInfo];
