@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: Methods - Notifications management
 - (void)	notifyObservers:(void(^)(ObjectType observer))notificationBlock; // Same as calling 'notifyObserversOnQueue:notificationBlock:' on the main operation queue; it will not wait until finished.
-- (void)	notifyObserversOnQueue:(NSOperationQueue*)queue notificationBlock:(void(^)(ObjectType observer))notificationBlock waitUntilFinished:(BOOL)waitUntilFinished;
+- (void)	notifyObserversNow:(void(^)(ObjectType observer))notificationBlock; // Notifies observers synchronously without queues.
+- (void)	notifyObserversOnQueue:(NSOperationQueue*)queue notificationBlock:(void(^)(ObjectType observer))notificationBlock waitUntilFinished:(BOOL)waitUntilFinished; // Notifies observers asynchronously using the given queue.
 
 // MARK: Methods - Observers management
 - (void)	addObserver:(ObjectType)observer;

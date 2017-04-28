@@ -126,6 +126,24 @@ NS_ASSUME_NONNULL_BEGIN
 	[self notifyObserversOnQueue:MainOperationQueue notificationBlock:notificationBlock waitUntilFinished:NO];
 }
 
+- (void)notifyObserversNow:(void(^)(id observer))notificationBlock
+{
+	NSArray<Reference<id>*>* references = self.references;
+	@synchronized(references)
+	{
+		references = [references copy];
+	}
+	
+	for(Reference<id>* reference in references)
+	{
+		id observer = reference.object;
+		if(observer)
+			notificationBlock(observer);
+		else
+			self.needsCleanUp = YES;
+	}
+}
+
 - (void)notifyObserversOnQueue:(NSOperationQueue*)queue notificationBlock:(void(^)(id observer))notificationBlock waitUntilFinished:(BOOL)waitUntilFinished
 {
 	NSArray<Reference<id>*>* references = self.references;
