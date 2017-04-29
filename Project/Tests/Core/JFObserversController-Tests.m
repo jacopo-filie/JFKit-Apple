@@ -85,10 +85,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)tearDown
 {
-	[super tearDown];
-	
 	self.observerController = nil;
 	self.observers = nil;
+	
+	[super tearDown];
 }
 
 - (void)testAsynchronousNotifications

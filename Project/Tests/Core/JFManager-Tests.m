@@ -22,42 +22,49 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <XCTest/XCTest.h>
 
 #import "JFManager.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFManager_Tests : XCTestCase
 
+// MARK: Methods - Tests management
+- (void)	testInitialization;
+
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFManager_Tests
 
-#pragma mark Tests
+// =================================================================================================
+// MARK: Methods - Tests management
+// =================================================================================================
 
 - (void)testInitialization
 {
 	// +defaultManager
-	JFManager* manager = [JFManager defaultManager];
-	XCTAssert(manager, @"Initializer '+defaultManager' did not return any object.");
+	XCTAssert([JFManager defaultManager], @"Initializer '+defaultManager' did not return any object.");
 	
 	// +sharedManager
-	manager = [JFManager sharedManager];
+	JFManager* manager = [JFManager sharedManager];
 	XCTAssert(manager, @"Initializer '+sharedManager' did not return any object.");
 	XCTAssert((manager == [JFManager sharedManager]), @"Initializer '+sharedManager' did not return a singleton.");
 	
 	// -init
-	manager = [[JFManager alloc] init];
-	XCTAssert(manager, @"Initializer '-init' did not return any object.");
+	XCTAssert([[JFManager alloc] init], @"Initializer '-init' did not return any object.");
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

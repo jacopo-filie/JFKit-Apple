@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <XCTest/XCTest.h>
 
@@ -30,62 +30,46 @@
 #import "JFShortcuts.h"
 #import "JFTypes.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Constants
-
-static	NSTimeInterval	ExpectationTimeOut	= 2.5;
-
-
-
-#pragma mark
-
-
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFOpenCloseMachine_Tests : XCTestCase <JFStateMachineDelegate>
 
-#pragma mark Properties
+// MARK: Properties - Tests
+@property (strong, nonatomic, nullable)	XCTestExpectation*	expectation;
+@property (strong, nonatomic, nullable)	JFOpenCloseMachine*	machine;
+@property (assign, nonatomic)			BOOL				shouldFail;
 
-// Expectations
-@property (strong, nonatomic)	XCTestExpectation*	expectation;
-
-// Flags
-@property (assign, nonatomic)	BOOL	shouldFail;
-
-// Relationships
-@property (strong, nonatomic)	JFOpenCloseMachine*	machine;
-
-
-#pragma mark Methods
-
-// Common
+// MARK: Methods - Tests management
 - (void)	setUpWithDescription:(NSString*)description initialState:(JFOpenCloseState)state failureExpected:(BOOL)shouldFail;
+- (void)	testCloseFailure;
+- (void)	testCloseSuccess;
+- (void)	testOpenFailure;
+- (void)	testOpenSuccess;
 - (void)	verifyResult:(JFOpenCloseState)expectedResult;
 - (void)	waitExpectingResult:(JFOpenCloseState)expectedResult;
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFOpenCloseMachine_Tests
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Tests
+// =================================================================================================
 
-// Expectations
 @synthesize expectation	= _expectation;
-
-// Flags
+@synthesize machine		= _machine;
 @synthesize shouldFail	= _shouldFail;
 
-// Relationships
-@synthesize machine	= _machine;
-
-
-#pragma mark Common
+// =================================================================================================
+// MARK: Methods - Tests management
+// =================================================================================================
 
 - (void)setUpWithDescription:(NSString*)description initialState:(JFOpenCloseState)state failureExpected:(BOOL)shouldFail
 {
@@ -96,33 +80,12 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 
 - (void)tearDown
 {
-	[super tearDown];
 	self.expectation = nil;
 	self.machine = nil;
 	self.shouldFail = NO;
-}
-
-- (void)verifyResult:(JFOpenCloseState)expectedResult
-{
-	JFOpenCloseMachine* machine = self.machine;
-	JFOpenCloseState state = machine.currentState;
-	XCTAssert((state == expectedResult), @"The current state of the open/close machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:expectedResult]);
-}
-
-- (void)waitExpectingResult:(JFOpenCloseState)expectedResult
-{
-	JFBlockWithError handler = ^(NSError* error)
-	{
-		XCTAssertNil(error, @"Error: %@", error);
-		if(!error)
-			[self verifyResult:expectedResult];
-	};
 	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[super tearDown];
 }
-
-
-#pragma mark Tests
 
 - (void)testCloseFailure
 {
@@ -152,15 +115,35 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 	[self waitExpectingResult:JFOpenCloseStateOpened];
 }
 
+- (void)verifyResult:(JFOpenCloseState)expectedResult
+{
+	JFOpenCloseMachine* machine = self.machine;
+	JFOpenCloseState state = machine.currentState;
+	XCTAssert((state == expectedResult), @"The current state of the open/close machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:expectedResult]);
+}
 
-#pragma mark Protocol implementation (JFStateMachineDelegate)
+- (void)waitExpectingResult:(JFOpenCloseState)expectedResult
+{
+	JFBlockWithError handler = ^(NSError* error)
+	{
+		XCTAssertNil(error, @"Error: %@", error);
+		if(!error)
+			[self verifyResult:expectedResult];
+	};
+	
+	[self waitForExpectationsWithTimeout:1 handler:handler];
+}
 
-- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id _Nullable)context
+// =================================================================================================
+// MARK: Protocols (JFStateMachineDelegate) - State management
+// =================================================================================================
+
+- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id __nullable)context
 {
 	[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletionBlock __nonnull)completion
+- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock)completion
 {
 	[MainOperationQueue addOperationWithBlock:^{
 		completion(!self.shouldFail, nil);
@@ -168,3 +151,6 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

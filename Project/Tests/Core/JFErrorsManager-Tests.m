@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <XCTest/XCTest.h>
 
@@ -30,13 +30,11 @@
 #import "JFString.h"
 #import "JFUtilities.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-@class JFTestErrorsManager;
-
-
-
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types - Errors
+// =================================================================================================
 
 typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 {
@@ -45,52 +43,54 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 	JFTestErrorCode3	= 3,
 };
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFTestErrorsManager : JFErrorsManager
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFErrorsManager_Tests : XCTestCase
 
-#pragma mark Properties
+// MARK: Properties - Tests
+@property (strong, nonatomic, nullable)	JFTestErrorsManager*	manager;
 
-// Relationships
-@property (strong, nonatomic)	JFTestErrorsManager*	manager;
+// MARK: Methods - Tests management
+- (void)	testDataManagement;
+- (void)	testErrorsManagement;
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFErrorsManager_Tests
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Tests
+// =================================================================================================
 
-// Relationships
 @synthesize manager	= _manager;
 
-
-#pragma mark Tests
+// =================================================================================================
+// MARK: Methods - Tests management
+// =================================================================================================
 
 - (void)setUp
 {
 	[super setUp];
 	
-	// Creates the errors manager.
 	NSString* domain = @"Tests";
 	JFTestErrorsManager* manager = [[JFTestErrorsManager alloc] initWithDomain:domain];
 	XCTAssert(manager, @"Failed to create the errors manager.");
@@ -100,7 +100,6 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 
 - (void)tearDown
 {
-	// Destroys the errors management.
 	self.manager = nil;
 	
 	[super tearDown];
@@ -167,18 +166,20 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 }
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFTestErrorsManager
 
-#pragma mark Data management
+// =================================================================================================
+// MARK: Methods - Data management
+// =================================================================================================
 
-- (NSString*)debugStringForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)debugStringForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch (errorCode)
@@ -193,7 +194,7 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 	return retObj;
 }
 
-- (NSString*)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch (errorCode)
@@ -208,7 +209,7 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 	return retObj;
 }
 
-- (NSString*)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch (errorCode)
@@ -223,7 +224,7 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 	return retObj;
 }
 
-- (NSString*)localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch (errorCode)
@@ -239,3 +240,6 @@ typedef NS_ENUM(JFErrorCode, JFTestErrorCode)
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

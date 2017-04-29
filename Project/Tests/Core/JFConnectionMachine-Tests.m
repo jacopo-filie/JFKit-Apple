@@ -22,69 +22,63 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <XCTest/XCTest.h>
 
 #import "JFConnectionMachine.h"
 #import "JFShortcuts.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Constants
-
-static	NSTimeInterval	ExpectationTimeOut	= 2.5;
-
-
-
-#pragma mark
-
-
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFConnectionMachine_Tests : XCTestCase <JFStateMachineDelegate>
 
-#pragma mark Properties
+// MARK: Properties - Tests
+@property (strong, nonatomic, nullable)	XCTestExpectation*		expectation;
+@property (strong, nonatomic, nullable)	JFConnectionMachine*	machine;
+@property (assign, nonatomic)			BOOL					shouldFail;
 
-// Expectations
-@property (strong, nonatomic)	XCTestExpectation*	expectation;
-
-// Flags
-@property (assign, nonatomic)	BOOL	shouldFail;
-
-// Relationships
-@property (strong, nonatomic)	JFConnectionMachine*	machine;
-
-
-#pragma mark Methods
-
-// Common
+// MARK: Methods - Tests management
 - (void)	setUpWithDescription:(NSString*)description initialState:(JFConnectionState)state failureExpected:(BOOL)shouldFail;
+- (void)	testConnectFailure;
+- (void)	testConnectSuccess;
+- (void)	testDisconnectFromLostFailure;
+- (void)	testDisconnectFromLostSuccess;
+- (void)	testDisconnectFromConnectedFailure;
+- (void)	testDisconnectFromConnectedSuccess;
+- (void)	testLoseConnectionFailure;
+- (void)	testLoseConnectionSuccess;
+- (void)	testReconnectFailure;
+- (void)	testReconnectSuccess;
+- (void)	testResetFromDirtyFailure;
+- (void)	testResetFromDirtySuccess;
+- (void)	testResetFromDisconnectedFailure;
+- (void)	testResetFromDisconnectedSuccess;
 - (void)	verifyResult:(JFConnectionState)expectedResult;
 - (void)	waitExpectingResult:(JFConnectionState)expectedResult;
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFConnectionMachine_Tests
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Tests
+// =================================================================================================
 
-// Expectations
 @synthesize expectation	= _expectation;
-
-// Flags
+@synthesize machine		= _machine;
 @synthesize shouldFail	= _shouldFail;
 
-// Relationships
-@synthesize machine	= _machine;
-
-
-#pragma mark Common
+// =================================================================================================
+// MARK: Methods - Tests management
+// =================================================================================================
 
 - (void)setUpWithDescription:(NSString*)description initialState:(JFConnectionState)state failureExpected:(BOOL)shouldFail
 {
@@ -95,33 +89,12 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 
 - (void)tearDown
 {
-	[super tearDown];
 	self.expectation = nil;
 	self.machine = nil;
 	self.shouldFail = NO;
-}
-
-- (void)verifyResult:(JFConnectionState)expectedResult
-{
-	JFConnectionMachine* machine = self.machine;
-	JFConnectionState state = machine.currentState;
-	XCTAssert((state == expectedResult), @"The current state of the connection machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:expectedResult]);
-}
-
-- (void)waitExpectingResult:(JFConnectionState)expectedResult
-{
-	XCWaitCompletionHandler handler = ^(NSError* error)
-	{
-		XCTAssertNil(error, @"Error: %@", error);
-		if(!error)
-			[self verifyResult:expectedResult];
-	};
 	
-	[self waitForExpectationsWithTimeout:ExpectationTimeOut handler:handler];
+	[super tearDown];
 }
-
-
-#pragma mark Tests
 
 - (void)testConnectFailure
 {
@@ -221,15 +194,34 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 	[self waitExpectingResult:JFConnectionStateReady];
 }
 
+- (void)verifyResult:(JFConnectionState)expectedResult
+{
+	JFConnectionMachine* machine = self.machine;
+	JFConnectionState state = machine.currentState;
+	XCTAssert((state == expectedResult), @"The current state of the connection machine is '%@'; it should be '%@'.", [machine debugStringForState:state], [machine debugStringForState:expectedResult]);
+}
 
-#pragma mark Protocol implementation (JFStateMachineDelegate)
+- (void)waitExpectingResult:(JFConnectionState)expectedResult
+{
+	XCWaitCompletionHandler handler = ^(NSError* error)
+	{
+		XCTAssertNil(error, @"Error: %@", error);
+		[self verifyResult:expectedResult];
+	};
+	
+	[self waitForExpectationsWithTimeout:1 handler:handler];
+}
 
-- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id _Nullable)context
+// =================================================================================================
+// MARK: Protocols (JFStateMachineDelegate) - State management
+// =================================================================================================
+
+- (void)stateMachine:(JFStateMachine*)sender didPerformTransition:(JFStateTransition)transition context:(id __nullable)context
 {
 	[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletionBlock __nonnull)completion
+- (void)stateMachine:(JFStateMachine*)sender performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock)completion
 {
 	[MainOperationQueue addOperationWithBlock:^{
 		completion(!self.shouldFail, nil);
@@ -237,3 +229,6 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
