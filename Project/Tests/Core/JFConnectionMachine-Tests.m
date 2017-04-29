@@ -28,7 +28,6 @@
 
 #import "JFConnectionMachine.h"
 #import "JFShortcuts.h"
-#import "JFTypes.h"
 
 
 
@@ -111,7 +110,7 @@ static	NSTimeInterval	ExpectationTimeOut	= 2.5;
 
 - (void)waitExpectingResult:(JFConnectionState)expectedResult
 {
-	JFBlockWithError handler = ^(NSError* error)
+	XCWaitCompletionHandler handler = ^(NSError* error)
 	{
 		XCTAssertNil(error, @"Error: %@", error);
 		if(!error)
