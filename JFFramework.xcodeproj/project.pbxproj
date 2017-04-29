@@ -43,6 +43,12 @@
 		4E4C6CDD1D6C941900871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E5592991DCB4A400086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E974DCA1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
+		4E974DCB1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
+		4E974DCC1EB404B600B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
+		4E974DCD1EB404B600B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
+		4E974DCE1EB404B700B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
+		4E974DCF1EB404B700B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
 		4EDE36A81E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EDE36A91E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EDE36AA1E266C1700E9D42A /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -467,6 +473,7 @@
 		4E0007D21E8CFF36000B367C /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
 		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
 		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
+		4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JFObserversController-Tests.m"; sourceTree = "<group>"; };
 		4EB9CDC11D64D6DE00536B47 /* JFFramework.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = JFFramework.modulemap; sourceTree = "<group>"; };
 		4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
 		4EDE36A71E266C1700E9D42A /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
@@ -948,6 +955,7 @@
 				EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */,
 				EAE4A3511C18D17800D7A8A1 /* JFErrorsManager-Tests.m */,
 				EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */,
+				4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */,
 				EAB29B8E1D1570950006D342 /* JFOpenCloseMachine-Tests.m */,
 			);
 			path = Core;
@@ -1745,6 +1753,7 @@
 				EA2D01021D573341008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D01061D573341008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D01011D573341008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCA1EB404B500B0844B /* JFObserversController-Tests.m in Sources */,
 				6C32091C1DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D01091D573341008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D010A1D573341008CEF73 /* JFUtilities-Tests.m in Sources */,
@@ -1763,6 +1772,7 @@
 				EA2D010C1D573342008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D01101D573342008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D010B1D573342008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCB1EB404B500B0844B /* JFObserversController-Tests.m in Sources */,
 				6C32091D1DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D01131D573342008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D01141D573342008CEF73 /* JFUtilities-Tests.m in Sources */,
@@ -1781,6 +1791,7 @@
 				EA2D01161D573342008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D011A1D573342008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D01151D573342008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCC1EB404B600B0844B /* JFObserversController-Tests.m in Sources */,
 				6C32091E1DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D011D1D573342008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D011E1D573342008CEF73 /* JFUtilities-Tests.m in Sources */,
@@ -2005,6 +2016,7 @@
 				EA2D01201D573343008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D01241D573343008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D011F1D573343008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCD1EB404B600B0844B /* JFObserversController-Tests.m in Sources */,
 				6C32091F1DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D01271D573343008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D01281D573343008CEF73 /* JFUtilities-Tests.m in Sources */,
@@ -2023,6 +2035,7 @@
 				EA2D01341D573344008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D01381D573344008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D01331D573344008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCE1EB404B700B0844B /* JFObserversController-Tests.m in Sources */,
 				6C3209211DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D013B1D573344008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D013C1D573344008CEF73 /* JFUtilities-Tests.m in Sources */,
@@ -2041,6 +2054,7 @@
 				EA2D012A1D573343008CEF73 /* JFErrorsManager-Tests.m in Sources */,
 				EA2D012E1D573343008CEF73 /* JFColor-Tests.m in Sources */,
 				EA2D01291D573343008CEF73 /* JFConnectionMachine-Tests.m in Sources */,
+				4E974DCF1EB404B700B0844B /* JFObserversController-Tests.m in Sources */,
 				6C3209201DB5230F0060CCFB /* JFVersion-Tests.m in Sources */,
 				EA2D01311D573343008CEF73 /* JFShortcuts-Tests.m in Sources */,
 				EA2D01321D573343008CEF73 /* JFUtilities-Tests.m in Sources */,
