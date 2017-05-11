@@ -87,12 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		_needsCleanUp = needsCleanUp;
 		
-#if __has_feature(objc_arc_weak)
-        __typeof(self) __weak weakSelf = self;
-#else
-        __typeof(self) __strong weakSelf = self;
-#endif
-        
+		WeakifySelf;
+		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 			[weakSelf cleanUpIfNeeded];
 		});
@@ -152,11 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 		references = [references copy];
 	}
 	
-#if __has_feature(objc_arc_weak)
-    __typeof(self) __weak weakSelf = self;
-#else
-    __typeof(self) __strong weakSelf = self;
-#endif
+	WeakifySelf;
 	
 	NSMutableArray<NSBlockOperation*>* operations = [NSMutableArray<NSBlockOperation*> arrayWithCapacity:references.count];
 	for(Reference<id>* reference in references)

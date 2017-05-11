@@ -32,10 +32,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// MARK: Constants - Time
+// =================================================================================================
+// MARK: Constants
+// =================================================================================================
+
 FOUNDATION_EXPORT NSTimeInterval const	JFAnimationDuration;
 
 NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// =================================================================================================
+// MARK: Macros
+// =================================================================================================
+
+#define Strongify(_var, _suffix)	__typeof(_var) __strong strong ## _suffix = _var
+#define StrongifySelf				Strongify(weakSelf, Self)
+#if __has_feature(objc_arc_weak)
+#define Weakify(_var, _suffix)		__typeof(_var) __weak weak ## _suffix = _var
+#else
+#define Weakify(_var, _suffix)		__typeof(_var) weak ## _suffix = _var
+#endif
+#define WeakifySelf					Weakify(self, Self)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,27 +61,45 @@ NS_ASSUME_NONNULL_END
 
 NS_ASSUME_NONNULL_BEGIN
 
+// =================================================================================================
 // MARK: Functions - Application management
+// =================================================================================================
+
 FOUNDATION_EXPORT id __nullable	JFApplicationInfoForKey(NSString* key);
 
+// =================================================================================================
 // MARK: Functions - Equality management
+// =================================================================================================
+
 FOUNDATION_EXPORT BOOL	JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2);
 
-#if JF_IOS
+// =================================================================================================
 // MARK: Functions - Images management (iOS)
+// =================================================================================================
+#if JF_IOS
+
 FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageName(void);
 FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
-#endif
 
+#endif
+// =================================================================================================
 // MARK: Functions - Math management
+// =================================================================================================
+
 FOUNDATION_EXPORT JFDegrees	JFDegreesFromRadians(JFRadians radians);
 FOUNDATION_EXPORT JFRadians	JFRadiansFromDegrees(JFDegrees degrees);
 
+// =================================================================================================
 // MARK: Functions - Resources management
+// =================================================================================================
+
 FOUNDATION_EXPORT NSURL* __nullable	JFBundleResourceURLForFile(NSBundle* bundle, NSString* __nullable filename);
 FOUNDATION_EXPORT NSURL* __nullable	JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* __nullable filename, NSString* __nullable type);
 
+// =================================================================================================
 // MARK: Functions - Runtime management
+// =================================================================================================
+
 FOUNDATION_EXPORT void	JFPerformSelector(NSObject* target, SEL action);
 FOUNDATION_EXPORT void	JFPerformSelector1(NSObject* target, SEL action, id object);
 FOUNDATION_EXPORT void	JFPerformSelector2(NSObject* target, SEL action, id obj1, id obj2);

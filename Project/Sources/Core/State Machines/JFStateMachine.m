@@ -277,22 +277,16 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	JFStateMachineErrorsManager* errorsManager = self.errorsManager;
 	
-#if __has_feature(objc_arc_weak)
-	typeof(self) __weak weakSelf = self;
-#endif
+	WeakifySelf;
 	
 	JFBlock block = ^(void)
 	{
-#if __has_feature(objc_arc_weak)
-		typeof(self) __strong strongSelf = weakSelf;
+		StrongifySelf;
 		if(!strongSelf)
 		{
 			errorBlock([errorsManager errorWithCode:JFStateMachineErrorDeallocated]);
 			return;
 		}
-#else
-		typeof(self) __strong strongSelf = self;
-#endif
 		
 		if([strongSelf initialStateForTransition:transition] != strongSelf.currentState)
 		{
