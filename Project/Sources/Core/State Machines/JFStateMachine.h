@@ -92,11 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)	initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 // MARK: Methods - State management
-- (JFState)	finalStateForFailedTransition:(JFStateTransition)transition;
-- (JFState)	finalStateForSucceededTransition:(JFStateTransition)transition;
-- (JFState)	initialStateForTransition:(JFStateTransition)transition;
-- (void)	performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion;
-- (void)	performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
+- (JFState)				finalStateForFailedTransition:(JFStateTransition)transition;
+- (JFState)				finalStateForSucceededTransition:(JFStateTransition)transition;
+- (NSArray<NSNumber*>*)	initialStatesForTransition:(JFStateTransition)transition;
+- (void)				performTransition:(JFStateTransition)transition completion:(JFSimpleCompletionBlock __nullable)completion;
+- (void)				performTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletionBlock __nullable)completion;
 
 // MARK: Methods - Utilities management
 - (NSString* __nullable)	debugStringForState:(JFState)state;

@@ -217,9 +217,9 @@ NS_ASSUME_NONNULL_BEGIN
 	return JFStateNotAvailable;
 }
 
-- (JFState)initialStateForTransition:(JFStateTransition)transition
+- (NSArray<NSNumber*>*)initialStatesForTransition:(JFStateTransition)transition
 {
-	return JFStateNotAvailable;
+	return @[];
 }
 
 - (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing __nullable *)outError
@@ -236,8 +236,8 @@ NS_ASSUME_NONNULL_BEGIN
 	if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
 		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidTransition]);
 	
-	JFState initialState = [self initialStateForTransition:transition];
-	if(initialState == JFStateNotAvailable)
+	NSArray<NSNumber*>* initialStates = [self initialStatesForTransition:transition];
+	if(initialStates.count == 0)
 		return errorBlock([errorsManager errorWithCode:JFStateMachineErrorInvalidInitialState]);
 	
 	JFState finalState = [self finalStateForSucceededTransition:transition];
@@ -288,7 +288,20 @@ NS_ASSUME_NONNULL_BEGIN
 			return;
 		}
 		
-		if([strongSelf initialStateForTransition:transition] != strongSelf.currentState)
+		JFState currentState = strongSelf.currentState;
+		NSArray<NSNumber*>* initialStates = [strongSelf initialStatesForTransition:transition];
+		BOOL isInitialStateWrong = YES;
+		
+		for(NSNumber* initialState in initialStates)
+		{
+			if(initialState.unsignedIntegerValue == currentState)
+			{
+				isInitialStateWrong = NO;
+				break;
+			}
+		}
+		
+		if(isInitialStateWrong)
 		{
 			errorBlock([errorsManager errorWithCode:JFStateMachineErrorWrongInitialState]);
 			return;

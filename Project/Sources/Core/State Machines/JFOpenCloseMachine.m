@@ -119,20 +119,20 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-- (JFState)initialStateForTransition:(JFStateTransition)transition
+- (NSArray<NSNumber*>*)initialStatesForTransition:(JFStateTransition)transition
 {
-	JFState retVal;
+	NSArray<NSNumber*>* retObj;
 	switch(transition)
 	{
-		case JFOpenCloseTransitionClosing:	retVal = JFOpenCloseStateOpened;	break;
-		case JFOpenCloseTransitionOpening:	retVal = JFOpenCloseStateClosed;	break;
+		case JFOpenCloseTransitionClosing:	retObj = @[@(JFOpenCloseStateOpened)];	break;
+		case JFOpenCloseTransitionOpening:	retObj = @[@(JFOpenCloseStateClosed)];	break;
 		default:
 		{
-			retVal = [super initialStateForTransition:transition];
+			retObj = [super initialStatesForTransition:transition];
 			break;
 		}
 	}
-	return retVal;
+	return retObj;
 }
 
 - (void)open

@@ -46,12 +46,10 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 	JFConnectionTransitionNotAvailable = JFStateTransitionNotAvailable,
 	JFConnectionTransitionNone = JFStateTransitionNone,
 	JFConnectionTransitionConnecting,
-	JFConnectionTransitionDisconnectingFromConnected,
-	JFConnectionTransitionDisconnectingFromLost,
+	JFConnectionTransitionDisconnecting,
 	JFConnectionTransitionLosingConnection,
 	JFConnectionTransitionReconnecting,
-	JFConnectionTransitionResettingFromDisconnected,
-	JFConnectionTransitionResettingFromDirty,
+	JFConnectionTransitionResetting,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
