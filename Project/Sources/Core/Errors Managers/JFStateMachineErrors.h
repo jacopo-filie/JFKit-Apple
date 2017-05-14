@@ -31,7 +31,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types
+// =================================================================================================
 
 typedef NS_ENUM(JFErrorCode, JFStateMachineErrorCode)
 {
@@ -45,7 +47,9 @@ typedef NS_ENUM(JFErrorCode, JFStateMachineErrorCode)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Localized Strings
+// =================================================================================================
+// MARK: Macros - Strings
+// =================================================================================================
 
 #define JFStateMachineErrorStringDeallocatedDescription										JFLocalizedString(@"jf_state_machine_error_deallocated_description")
 #define JFStateMachineErrorStringDeallocatedFailureReason									JFLocalizedString(@"jf_state_machine_error_deallocated_failure_reason")

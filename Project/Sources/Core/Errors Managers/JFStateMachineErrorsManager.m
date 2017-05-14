@@ -22,37 +22,41 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFStateMachineErrorsManager.h"
 
 #import "JFString.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Constants
+// =================================================================================================
+// MARK: Constants
+// =================================================================================================
 
 static	NSString*	const	JFDomain	= JFReversedDomain	@".errorsManager.stateMachine";
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFStateMachineErrorsManager
 
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (instancetype)init
 {
 	return [self initWithDomain:JFDomain];
 }
 
+// =================================================================================================
+// MARK: Methods - Data management
+// =================================================================================================
 
-#pragma mark Data management
-
-- (NSString*)debugStringForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)debugStringForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch(errorCode)
@@ -70,7 +74,7 @@ static	NSString*	const	JFDomain	= JFReversedDomain	@".errorsManager.stateMachine
 	return retObj;
 }
 
-- (NSString*)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch(errorCode)
@@ -88,7 +92,7 @@ static	NSString*	const	JFDomain	= JFReversedDomain	@".errorsManager.stateMachine
 	return retObj;
 }
 
-- (NSString*)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
 {
 	NSString* retObj = nil;
 	switch(errorCode)
@@ -107,3 +111,6 @@ static	NSString*	const	JFDomain	= JFReversedDomain	@".errorsManager.stateMachine
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

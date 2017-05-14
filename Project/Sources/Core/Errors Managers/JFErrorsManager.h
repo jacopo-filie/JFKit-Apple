@@ -22,49 +22,48 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFManager.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark - Types
+// =================================================================================================
+// MARK: Types
+// =================================================================================================
 
 typedef NSInteger JFErrorCode;
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFErrorsManager : JFManager
 
-#pragma mark Properties
-
-// Data
+// MARK: Properties - Data
 @property (copy, nonatomic, readonly)	NSString*	domain;
 
-
-#pragma mark Methods
-
-// Memory management
+// MARK: Methods - Memory management
 - (instancetype)	init;	// Sets the domain to the value of the application info property 'CFBundleIdentifier'.
 - (instancetype)	initWithDomain:(NSString*)domain NS_DESIGNATED_INITIALIZER;
 
-// Data management
-- (NSString*)		debugStringForErrorCode:(JFErrorCode)errorCode;
-- (NSString*)		localizedDescriptionForErrorCode:(JFErrorCode)errorCode;
-- (NSString*)		localizedFailureReasonForErrorCode:(JFErrorCode)errorCode;
-- (NSString*)		localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode;
-- (NSDictionary*)	userInfoForErrorCode:(JFErrorCode)errorCode;
-- (NSDictionary*)	userInfoForErrorCode:(JFErrorCode)errorCode underlyingError:(NSError*)error;
+// MARK: Methods - Data management
+- (NSString* __nullable)		debugStringForErrorCode:(JFErrorCode)errorCode;
+- (NSString* __nullable)		localizedDescriptionForErrorCode:(JFErrorCode)errorCode;
+- (NSString* __nullable)		localizedFailureReasonForErrorCode:(JFErrorCode)errorCode;
+- (NSString* __nullable)		localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode;
+- (NSDictionary* __nullable)	userInfoForErrorCode:(JFErrorCode)errorCode;
+- (NSDictionary* __nullable)	userInfoForErrorCode:(JFErrorCode)errorCode underlyingError:(NSError* __nullable)error;
 
-// Errors management
+// MARK: Methods - Errors management
 - (NSError*)	debugPlaceholderError;
-- (NSError*)	debugPlaceholderErrorWithUnderlyingError:(NSError*)error;
+- (NSError*)	debugPlaceholderErrorWithUnderlyingError:(NSError* __nullable)error;
 - (NSError*)	errorWithCode:(JFErrorCode)errorCode;
-- (NSError*)	errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError*)error;
-- (NSError*)	errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary*)userInfo;
+- (NSError*)	errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError* __nullable)error;
+- (NSError*)	errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary* __nullable)userInfo;
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFErrorsManager.h"
 
@@ -30,27 +30,22 @@
 #import "JFString.h"
 #import "JFUtilities.h"
 
-
-
-@interface JFErrorsManager ()
-
-@end
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFErrorsManager
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
 
-// Data
 @synthesize domain	= _domain;
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (instancetype)init
 {
@@ -59,7 +54,7 @@
 
 - (instancetype)initWithDomain:(NSString*)domain
 {
-	self = (JFStringIsNullOrEmpty(domain) ? nil : [super init]);
+	self = [super init];
 	if(self)
 	{
 		// Data
@@ -68,35 +63,36 @@
 	return self;
 }
 
+// =================================================================================================
+// MARK: Methods - Data management
+// =================================================================================================
 
-#pragma mark Data management
-
-- (NSString*)debugStringForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)debugStringForErrorCode:(JFErrorCode)errorCode
 {
 	return nil;
 }
 
-- (NSString*)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedDescriptionForErrorCode:(JFErrorCode)errorCode
 {
 	return nil;
 }
 
-- (NSString*)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedFailureReasonForErrorCode:(JFErrorCode)errorCode
 {
 	return nil;
 }
 
-- (NSString*)localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode
+- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(JFErrorCode)errorCode
 {
 	return nil;
 }
 
-- (NSDictionary*)userInfoForErrorCode:(JFErrorCode)errorCode
+- (NSDictionary* __nullable)userInfoForErrorCode:(JFErrorCode)errorCode
 {
 	return [self userInfoForErrorCode:errorCode underlyingError:nil];
 }
 
-- (NSDictionary*)userInfoForErrorCode:(JFErrorCode)errorCode underlyingError:(NSError*)error
+- (NSDictionary* __nullable)userInfoForErrorCode:(JFErrorCode)errorCode underlyingError:(NSError* __nullable)error
 {
 	NSString* description = [self localizedDescriptionForErrorCode:errorCode];
 	NSString* failureReason = [self localizedFailureReasonForErrorCode:errorCode];
@@ -113,15 +109,16 @@
 	return [retObj copy];
 }
 
-
-#pragma mark Errors management
+// =================================================================================================
+// MARK: Methods - Errors management
+// =================================================================================================
 
 - (NSError*)debugPlaceholderError
 {
 	return [self debugPlaceholderErrorWithUnderlyingError:nil];
 }
 
-- (NSError*)debugPlaceholderErrorWithUnderlyingError:(NSError*)error
+- (NSError*)debugPlaceholderErrorWithUnderlyingError:(NSError* __nullable)error
 {
 	JFErrorCode errorCode = NSIntegerMax;
 	NSDictionary* userInfo = [self userInfoForErrorCode:errorCode underlyingError:error];
@@ -134,15 +131,18 @@
 	return [self errorWithCode:errorCode userInfo:userInfo];
 }
 
-- (NSError*)errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError*)error
+- (NSError*)errorWithCode:(JFErrorCode)errorCode underlyingError:(NSError* __nullable)error
 {
 	NSDictionary* userInfo = [self userInfoForErrorCode:errorCode underlyingError:error];
 	return [self errorWithCode:errorCode userInfo:userInfo];
 }
 
-- (NSError*)errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary*)userInfo
+- (NSError*)errorWithCode:(JFErrorCode)errorCode userInfo:(NSDictionary* __nullable)userInfo
 {
 	return [NSError errorWithDomain:self.domain code:errorCode userInfo:userInfo];
 }
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
