@@ -43,6 +43,10 @@
 		4E4C6CDD1D6C941900871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E5592991DCB4A400086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E7E06BC1EC9A426002EF301 /* JFOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06B81EC9A426002EF301 /* JFOverlayController.h */; };
+		4E7E06BD1EC9A426002EF301 /* JFOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E06B91EC9A426002EF301 /* JFOverlayController.m */; };
+		4E7E06BE1EC9A426002EF301 /* JFSliderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06BA1EC9A426002EF301 /* JFSliderController.h */; };
+		4E7E06BF1EC9A426002EF301 /* JFSliderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E06BB1EC9A426002EF301 /* JFSliderController.m */; };
 		4E974DCA1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
 		4E974DCB1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
 		4E974DCC1EB404B600B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
@@ -473,6 +477,10 @@
 		4E0007D21E8CFF36000B367C /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
 		4E15D2E31DE33E1C00FC2440 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
 		4E15D2E41DE33E1C00FC2440 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
+		4E7E06B81EC9A426002EF301 /* JFOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFOverlayController.h; sourceTree = "<group>"; };
+		4E7E06B91EC9A426002EF301 /* JFOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFOverlayController.m; sourceTree = "<group>"; };
+		4E7E06BA1EC9A426002EF301 /* JFSliderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFSliderController.h; sourceTree = "<group>"; };
+		4E7E06BB1EC9A426002EF301 /* JFSliderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFSliderController.m; sourceTree = "<group>"; };
 		4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JFObserversController-Tests.m"; sourceTree = "<group>"; };
 		4EB9CDC11D64D6DE00536B47 /* JFFramework.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = JFFramework.modulemap; sourceTree = "<group>"; };
 		4EDE36A61E266C1700E9D42A /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
@@ -712,6 +720,10 @@
 				6C6C07861C8EDF5C00917EBF /* JFAlert.m */,
 				6C6C078C1C8EE2B400917EBF /* JFAlertsController.h */,
 				6C6C078D1C8EE2B400917EBF /* JFAlertsController.m */,
+				4E7E06B81EC9A426002EF301 /* JFOverlayController.h */,
+				4E7E06B91EC9A426002EF301 /* JFOverlayController.m */,
+				4E7E06BA1EC9A426002EF301 /* JFSliderController.h */,
+				4E7E06BB1EC9A426002EF301 /* JFSliderController.m */,
 				6C1C57F51C29A517007F08F6 /* JFWindowController.h */,
 				6C1C57F61C29A517007F08F6 /* JFWindowController.m */,
 			);
@@ -969,6 +981,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C5B04AC1DB8F2F400B128C7 /* JFReferences.h in Headers */,
+				4E7E06BC1EC9A426002EF301 /* JFOverlayController.h in Headers */,
 				EA2D01F21D57360C008CEF73 /* JFErrorsManager.h in Headers */,
 				EA2D01F51D57360C008CEF73 /* JFAppDelegate.h in Headers */,
 				EA2D01FA1D57360C008CEF73 /* JFByteStream.h in Headers */,
@@ -995,6 +1008,7 @@
 				EA2D01FB1D57360C008CEF73 /* JFColor.h in Headers */,
 				EA2D02061D57360C008CEF73 /* JFPreprocessorMacros.h in Headers */,
 				EA2D01FE1D57360C008CEF73 /* UIButton+JFFramework.h in Headers */,
+				4E7E06BE1EC9A426002EF301 /* JFSliderController.h in Headers */,
 				4E0007C51E8CFF02000B367C /* JFAsynchronousBlockOperation.h in Headers */,
 				EA2D01F31D57360C008CEF73 /* JFStateMachineErrors.h in Headers */,
 				EA2D028E1D5736CF008CEF73 /* JRSwizzle.h in Headers */,
@@ -1809,6 +1823,7 @@
 			files = (
 				EA2D01511D57352A008CEF73 /* JFUtilities.m in Sources */,
 				EA2D01441D57352A008CEF73 /* JFStateMachine.m in Sources */,
+				4E7E06BD1EC9A426002EF301 /* JFOverlayController.m in Sources */,
 				EA2D01451D57352A008CEF73 /* JFByteStream.m in Sources */,
 				EA2D01461D57352A008CEF73 /* JFColor.m in Sources */,
 				EA2D01401D57352A008CEF73 /* JFAppDelegate.m in Sources */,
@@ -1820,6 +1835,7 @@
 				4E0007CB1E8CFF02000B367C /* JFAsynchronousBlockOperation.m in Sources */,
 				EA2D014E1D57352A008CEF73 /* JFWindowController.m in Sources */,
 				EA2D014C1D57352A008CEF73 /* JFAlert.m in Sources */,
+				4E7E06BF1EC9A426002EF301 /* JFSliderController.m in Sources */,
 				EA2D014F1D57352A008CEF73 /* NSBundle+JFFramework.m in Sources */,
 				6C5B04B21DB8F2F400B128C7 /* JFReferences.m in Sources */,
 				EA2D01501D57352A008CEF73 /* JFLogger.m in Sources */,
