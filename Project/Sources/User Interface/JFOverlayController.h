@@ -24,6 +24,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#import "JFTypes.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 @class JFOverlayController;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFOverlayController : UIViewController
 
 // MARK: Properties - User interface
-@property (assign, nonatomic, readonly, getter=isOverlayOpaque)		BOOL				overlayOpaque;
+@property (assign, nonatomic, getter=isOverlayOpaque)				BOOL				overlayOpaque;
 @property (strong, nonatomic, nullable)								UIViewController*	overlayViewController;
 @property (assign, nonatomic, readonly, getter=isOverlayVisible)	BOOL				overlayVisible;
 @property (strong, nonatomic, nullable)								UIViewController*	rootViewController;

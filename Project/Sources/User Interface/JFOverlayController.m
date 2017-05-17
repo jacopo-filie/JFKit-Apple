@@ -26,6 +26,9 @@
 
 #import "JFOverlayController.h"
 
+#import "JFObserversController.h"
+#import "JFShortcuts.h"
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -35,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly)	JFObserversController<id<JFOverlayControllerObserver>>*	observersController;
 
 // MARK: Properties - User interface
-@property (assign, nonatomic, readwrite, getter=isOverlayOpaque)	BOOL	overlayOpaque;
 @property (strong, nonatomic, nullable)								UIView*	overlayViewContainer;
 @property (assign, nonatomic, readwrite, getter=isOverlayVisible)	BOOL	overlayVisible;
 @property (strong, nonatomic, nullable)								UIView*	rootViewContainer;
@@ -268,7 +270,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	UIView* view = self.view;
 	
-	UIViewAutoresizing autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+	UIViewAutoresizing autoresizingMask = ViewAutoresizingFlexibleSize;
 	CGRect frame = view.bounds;
 	UIColor* backgroundColor = UIColor.clearColor;
 	

@@ -26,6 +26,9 @@
 
 #import "JFSliderController.h"
 
+#import "JFShortcuts.h"
+#import "JFUtilities.h"
+
 
 
 @interface JFSliderController () <UIGestureRecognizerDelegate>
@@ -986,13 +989,13 @@
 	[self.view addSubview:self.rightPanelContainer];
 	[self.view addSubview:self.rootPanelContainer];
 	
-	UIViewAutoresizing autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+	UIViewAutoresizing autoresizingMask = ViewAutoresizingFlexibleSize;
 	self.leftPanelContainer.autoresizingMask = autoresizingMask;
 	self.rightPanelContainer.autoresizingMask = autoresizingMask;
 	self.rootPanelContainer.autoresizingMask = autoresizingMask;
 	
 	UIButton* button = self.activateRootPanelButton;
-	button.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+	button.autoresizingMask = autoresizingMask;
 	[button addTarget:self action:@selector(activateRootPanelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[self updatePanelContainersFrames];

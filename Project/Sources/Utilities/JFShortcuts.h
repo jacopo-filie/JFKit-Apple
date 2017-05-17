@@ -52,10 +52,12 @@
 
 #if JF_IOS
 // MARK: Macros (Generic - iOS)
-#define CurrentDevice				JF.currentDevice
-#define CurrentDeviceOrientation	JF.currentDeviceOrientation
-#define CurrentInterfaceOrientation	JF.currentInterfaceOrientation
-#define MainScreen					JF.mainScreen
+#define CurrentDevice					JF.currentDevice
+#define CurrentDeviceOrientation		JF.currentDeviceOrientation
+#define CurrentInterfaceOrientation		JF.currentInterfaceOrientation
+#define MainScreen						JF.mainScreen
+#define ViewAutoresizingFlexibleMargins	JF.viewAutoresizingFlexibleMargins
+#define ViewAutoresizingFlexibleSize	JF.viewAutoresizingFlexibleSize
 #endif
 
 #if JF_MACOS
@@ -65,8 +67,10 @@
 
 #if JF_TVOS
 // MARK: Macros (Generic - tvOS)
-#define CurrentDevice	JF.currentDevice
-#define MainScreen		JF.mainScreen
+#define CurrentDevice					JF.currentDevice
+#define MainScreen						JF.mainScreen
+#define ViewAutoresizingFlexibleMargins	JF.viewAutoresizingFlexibleMargins
+#define ViewAutoresizingFlexibleSize	JF.viewAutoresizingFlexibleSize
 #endif
 
 // MARK: Macros (Info)
@@ -111,6 +115,8 @@
 + (UIDeviceOrientation)		currentDeviceOrientation;
 + (UIInterfaceOrientation)	currentInterfaceOrientation;
 + (UIScreen*)				mainScreen;
++ (UIViewAutoresizing)		viewAutoresizingFlexibleMargins;
++ (UIViewAutoresizing)		viewAutoresizingFlexibleSize;
 #endif
 
 #if JF_MACOS
@@ -120,8 +126,10 @@
 
 #if JF_TVOS
 // MARK: Generic (tvOS)
-+ (UIDevice*)	currentDevice;
-+ (UIScreen*)	mainScreen;
++ (UIDevice*)			currentDevice;
++ (UIScreen*)			mainScreen;
++ (UIViewAutoresizing)	viewAutoresizingFlexibleMargins;
++ (UIViewAutoresizing)	viewAutoresizingFlexibleSize;
 #endif
 
 // MARK: Info

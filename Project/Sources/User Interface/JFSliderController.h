@@ -24,6 +24,10 @@
 
 
 
+#import "JFTypes.h"
+
+
+
 @class JFSliderController;
 
 

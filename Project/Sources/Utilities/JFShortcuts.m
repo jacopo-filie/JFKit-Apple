@@ -107,6 +107,17 @@
 }
 #endif
 
+#if JF_IOS || JF_TVOS
++ (UIViewAutoresizing)viewAutoresizingFlexibleMargins
+{
+	return (UIViewAutoresizing)(UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin);
+}
+
++ (UIViewAutoresizing)viewAutoresizingFlexibleSize
+{
+	return (UIViewAutoresizing)(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+}
+#endif
 
 // =================================================================================================
 // MARK: Info
