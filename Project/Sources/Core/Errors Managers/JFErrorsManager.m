@@ -49,7 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init
 {
-	return [self initWithDomain:AppIdentifier];
+	NSString* domain = AppIdentifier;
+	NSAssert(domain, @"There is no app identifier to initialize the default errors manager!");
+	return [self initWithDomain:domain];
 }
 
 - (instancetype)initWithDomain:(NSString*)domain

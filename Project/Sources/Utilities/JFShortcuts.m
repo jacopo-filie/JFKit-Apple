@@ -30,13 +30,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+NS_ASSUME_NONNULL_BEGIN
 @implementation JF
 
 // =================================================================================================
 // MARK: Generic
 // =================================================================================================
 
-+ (AppDelegate*)applicationDelegate
++ (AppDelegate* __nullable)applicationDelegate
 {
 	Class class = NSClassFromString(@"AppDelegate");
 	if(!class)
@@ -123,42 +124,53 @@
 // MARK: Info
 // =================================================================================================
 
-+ (NSString*)appBuild
++ (NSString* __nullable)appBuild
 {
 	return JFApplicationInfoForKey(@"CFBundleVersion");
 }
 
-+ (NSString*)appDetailedVersion
++ (NSString* __nullable)appDetailedVersion
 {
-	return [NSString stringWithFormat:@"%@ (%@)", self.appVersion, self.appBuild];
+	NSString* appVersion = self.appVersion;
+	NSString* appBuild = self.appBuild;
+	
+	BOOL isAppVersionValid = !JFStringIsNullOrEmpty(appVersion);
+	BOOL isAppBuildValid = !JFStringIsNullOrEmpty(appBuild);
+	
+	if(isAppBuildValid)
+		return [NSString stringWithFormat:@"%@ (%@)", (isAppVersionValid ? appVersion : @"0.0"), appBuild];
+	else if(isAppVersionValid)
+		return appVersion;
+	
+	return nil;
 }
 
-+ (NSString*)appDisplayName
++ (NSString* __nullable)appDisplayName
 {
 	return JFApplicationInfoForKey(@"CFBundleDisplayName");
 }
 
-+ (NSString*)appIdentifier
++ (NSString* __nullable)appIdentifier
 {
 	return JFApplicationInfoForKey(@"CFBundleIdentifier");
 }
 
-+ (NSString*)appLaunchStoryboard
++ (NSString* __nullable)appLaunchStoryboard
 {
 	return JFApplicationInfoForKey(@"UILaunchStoryboardName");
 }
 
-+ (NSString*)appName
++ (NSString* __nullable)appName
 {
 	return JFApplicationInfoForKey(@"CFBundleName");
 }
 
-+ (NSString*)appMainStoryboard
++ (NSString* __nullable)appMainStoryboard
 {
 	return JFApplicationInfoForKey(@"UIMainStoryboardFile");
 }
 
-+ (NSString*)appVersion
++ (NSString* __nullable)appVersion
 {
 	return JFApplicationInfoForKey(@"CFBundleShortVersionString");
 }
@@ -201,3 +213,4 @@
 #endif
 
 @end
+NS_ASSUME_NONNULL_END

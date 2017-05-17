@@ -99,10 +99,11 @@
 
 #pragma mark
 
+NS_ASSUME_NONNULL_BEGIN
 @interface JF : NSObject
 
 // MARK: Generic
-+ (AppDelegate*)			applicationDelegate;
++ (AppDelegate* __nullable)			applicationDelegate;
 + (NSBundle*)				mainBundle;
 + (NSNotificationCenter*)	mainNotificationCenter;
 + (NSOperationQueue*)		mainOperationQueue;
@@ -133,14 +134,14 @@
 #endif
 
 // MARK: Info
-+ (NSString*)	appBuild;
-+ (NSString*)	appDetailedVersion;
-+ (NSString*)	appDisplayName;
-+ (NSString*)	appIdentifier;
-+ (NSString*)	appLaunchStoryboard;
-+ (NSString*)	appName;
-+ (NSString*)	appMainStoryboard;
-+ (NSString*)	appVersion;
++ (NSString* __nullable)	appBuild;
++ (NSString* __nullable)	appDetailedVersion;
++ (NSString* __nullable)	appDisplayName;
++ (NSString* __nullable)	appIdentifier;
++ (NSString* __nullable)	appLaunchStoryboard;
++ (NSString* __nullable)	appName;
++ (NSString* __nullable)	appMainStoryboard;
++ (NSString* __nullable)	appVersion;
 
 #if JF_IOS || JF_TVOS
 // MARK: System
@@ -153,5 +154,6 @@
 #endif
 
 @end
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
