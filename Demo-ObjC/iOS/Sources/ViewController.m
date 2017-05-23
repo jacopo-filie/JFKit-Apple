@@ -22,24 +22,38 @@
 //	SOFTWARE.
 //
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #import "ViewController.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_BEGIN
 @interface ViewController ()
 
 @end
+NS_ASSUME_NONNULL_END
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark
+
+NS_ASSUME_NONNULL_BEGIN
 @implementation ViewController
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+}
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
