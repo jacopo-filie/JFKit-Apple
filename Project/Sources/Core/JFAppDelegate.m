@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFAppDelegate.h"
 
@@ -34,43 +34,50 @@
 #import "JFShortcuts.h"
 #import "JFWindowController.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+NS_ASSUME_NONNULL_BEGIN
 @interface JFAppDelegate ()
 
-#pragma mark Properties
-
-// Relationships
-@property (strong, nonatomic, readwrite)	JFWindowController*	windowController;
+// MARK: Properties - User interface
+@property (strong, nonatomic, readwrite, nullable)	JFWindowController*	windowController;
 
 @end
+NS_ASSUME_NONNULL_END
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark
 
-
-
+NS_ASSUME_NONNULL_BEGIN
 @implementation JFAppDelegate
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Errors
+// =================================================================================================
 
-// Errors
 @synthesize errorsManager	= _errorsManager;
 
-// Relationships
-@synthesize windowController	= _windowController;
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
 
-// User interface
 #if JF_IOS || JF_MACOS
 @synthesize alertsController	= _alertsController;
 #endif
-@synthesize window				= _window;
+@synthesize windowController	= _windowController;
 
+// =================================================================================================
+// MARK: Properties - User interface (Outlets)
+// =================================================================================================
 
-#pragma mark Properties accessors (User interface)
+@synthesize window	= _window;
 
-- (JFWindow*)window
+// =================================================================================================
+// MARK: Properties accessors - User interface (Outlets)
+// =================================================================================================
+
+- (JFWindow* __nullable)window
 {
 	if(!_window)
 #if JF_MACOS
@@ -82,7 +89,7 @@
 	return _window;
 }
 
-- (void)setWindow:(JFWindow*)window
+- (void)setWindow:(JFWindow* __nullable)window
 {
 	if(_window == window)
 		return;
@@ -91,17 +98,18 @@
 	
 	// Loads the user interface.
 	JFWindowController* controller = nil;
-	if(_window)
+	if(window)
 	{
-		controller = [self createControllerForWindow:_window];
+		controller = [self createControllerForWindow:window];
 		if(!controller)
-			controller = [[JFWindowController alloc] initWithWindow:_window];
+			controller = [[JFWindowController alloc] initWithWindow:window];
 	}
 	self.windowController = controller;
 }
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (instancetype)init
 {
@@ -119,26 +127,29 @@
 	return self;
 }
 
-
-#pragma mark Errors management
+// =================================================================================================
+// MARK: Methods - Errors management
+// =================================================================================================
 
 - (JFErrorsManager*)createErrorsManager
 {
 	return [[JFErrorsManager alloc] init];
 }
 
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
 
-#pragma mark User interface management
-
-- (JFWindowController*)createControllerForWindow:(JFWindow*)window
+- (JFWindowController* __nullable)createControllerForWindow:(JFWindow*)window
 {
 	return nil;
 }
 
+// =================================================================================================
+// MARK: Protocols (NSApplicationDelegate)
+// =================================================================================================
 
 #if JF_MACOS
-#pragma mark Protocol implementation (NSApplicationDelegate)
-
 - (void)applicationDidBecomeActive:(NSNotification*)notification
 {
 	if(self.jf_shouldLog)
@@ -200,13 +211,13 @@
 	if(self.jf_shouldLog)
 		[self.jf_logger logMessage:@"Application will unhide." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
 }
-
 #endif
 
+// =================================================================================================
+// MARK: Protocols (UIApplicationDelegate)
+// =================================================================================================
 
 #if !JF_MACOS
-#pragma mark Protocol implementation (UIApplicationDelegate)
-
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary* __nullable)launchOptions
 {
 	if(self.jf_shouldLog)
@@ -251,7 +262,9 @@
 	if(self.jf_shouldLog)
 		[self.jf_logger logMessage:@"Application will terminate." priority:JFLogPriority6Info hashtags:JFLogHashtagDeveloper];
 }
-
 #endif
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

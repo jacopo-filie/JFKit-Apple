@@ -22,12 +22,12 @@
 //	SOFTWARE.
 //
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import "JFPreprocessorMacros.h"
 #import "JFTypes.h"
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS || JF_MACOS
 @class JFAlertsController;
@@ -35,60 +35,34 @@
 @class JFErrorsManager;
 @class JFWindowController;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+NS_ASSUME_NONNULL_BEGIN
 #if JF_MACOS
 @interface JFAppDelegate : NSObject <NSApplicationDelegate>
 #else
 @interface JFAppDelegate : UIResponder <UIApplicationDelegate>
 #endif
 
-#pragma mark Properties
-
-// Errors
+// MARK: Properties - Errors
 @property (strong, nonatomic, readonly)	JFErrorsManager*	errorsManager;
 
-// Relationships
-@property (strong, nonatomic, readonly)	JFWindowController*	windowController;
-
-// User interface
+// MARK: Properties - User interface
 #if JF_IOS || JF_MACOS
 @property (strong, nonatomic, readonly)				JFAlertsController*	alertsController;
 #endif
-@property (strong, nonatomic)			IBOutlet	JFWindow*			window;
+@property (strong, nonatomic, readonly, nullable)	JFWindowController*	windowController;
 
+// MARK: Properties - User interface (Outlets)
+@property (strong, nonatomic, nullable)	IBOutlet	JFWindow*	window;
 
-#pragma mark Methods
-
-// Errors management
+// MARK: Properties - Errors management
 - (JFErrorsManager*)	createErrorsManager;
 
-// User interface management
-- (JFWindowController*)	createControllerForWindow:(JFWindow*)window;
-
-#if JF_MACOS
-// Protocol implementation (NSApplicationDelegate)
-- (void)	applicationDidBecomeActive:(NSNotification*)notification;
-- (void)	applicationDidFinishLaunching:(NSNotification*)notification;
-- (void)	applicationDidHide:(NSNotification*)notification;
-- (void)	applicationDidResignActive:(NSNotification*)notification;
-- (void)	applicationDidUnhide:(NSNotification*)notification;
-- (void)	applicationWillBecomeActive:(NSNotification*)notification;
-- (void)	applicationWillHide:(NSNotification*)notification;
-- (void)	applicationWillResignActive:(NSNotification*)notification;
-- (void)	applicationWillTerminate:(NSNotification*)notification;
-- (void)	applicationWillUnhide:(NSNotification*)notification;
-#endif
-
-#if !JF_MACOS
-// Protocol implementation (UIApplicationDelegate)
-- (BOOL)	application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id>*)launchOptions;
-- (void)	applicationDidBecomeActive:(UIApplication*)application;
-- (void)	applicationDidEnterBackground:(UIApplication*)application;
-- (void)	applicationDidReceiveMemoryWarning:(UIApplication*)application;
-- (void)	applicationWillEnterForeground:(UIApplication*)application;
-- (void)	applicationWillResignActive:(UIApplication*)application;
-- (void)	applicationWillTerminate:(UIApplication*)application;
-#endif
+// MARK: Properties - User interface management
+- (JFWindowController* __nullable)	createControllerForWindow:(JFWindow*)window;
 
 @end
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
