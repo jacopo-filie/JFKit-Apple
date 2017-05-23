@@ -5,7 +5,10 @@
       location = "group:Documentation">
    </FileRef>
    <FileRef
-      location = "group:Demo.xcodeproj">
+      location = "group:Demo-ObjC.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Demo-Swift.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:JFFramework.xcodeproj">
