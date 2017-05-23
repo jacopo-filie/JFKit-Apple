@@ -30,8 +30,11 @@
 
 #if JF_SHORTCUTS_ENABLED
 
-#if JF_IOS
+// =================================================================================================
 // MARK: Macros - Equality management (iOS)
+// =================================================================================================
+#if JF_IOS
+
 #define iOS(_version)		[JFVersion isIOS:_version]
 #define iOSPlus(_version)	[JFVersion isIOSPlus:_version]
 #define iOS6				JFVersion.isIOS6
@@ -44,10 +47,13 @@
 #define iOS9Plus			JFVersion.isIOS9Plus
 #define iOS10				JFVersion.isIOS10
 #define iOS10Plus			JFVersion.isIOS10Plus
-#endif
 
-#if JF_MACOS
+#endif
+// =================================================================================================
 // MARK: Macros - Equality management (macOS)
+// =================================================================================================
+#if JF_MACOS
+
 #define macOS(_version)		[JFVersion isMacOS:_version]
 #define macOSPlus(_version)	[JFVersion isMacOSPlus:_version]
 #define macOS10_6			JFVersion.isMacOS10_6
@@ -64,16 +70,20 @@
 #define macOS10_11Plus		JFVersion.isMacOS10_11Plus
 #define macOS10_12			JFVersion.isMacOS10_12
 #define macOS10_12Plus		JFVersion.isMacOS10_12Plus
-#endif
 
-#if JF_TVOS
+#endif
+// =================================================================================================
 // MARK: Macros - Equality management (tvOS)
+// =================================================================================================
+#if JF_TVOS
+
 #define tvOS(_version)		[JFVersion isTVOS:_version]
 #define tvOSPlus(_version)	[JFVersion isTVOSPlus:_version]
 #define tvOS9				JFVersion.isTVOS9
 #define tvOS9Plus			JFVersion.isTVOS9Plus
 #define tvOS10				JFVersion.isTVOS10
 #define tvOS10Plus			JFVersion.isTVOS10Plus
+
 #endif
 
 #endif // JF_SHORTCUTS_ENABLED
@@ -82,7 +92,10 @@
 
 #pragma mark
 
+// =================================================================================================
 // MARK: Constants - Data
+// =================================================================================================
+
 FOUNDATION_EXPORT NSInteger const	JFVersionNotValid;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

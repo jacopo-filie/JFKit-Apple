@@ -39,16 +39,17 @@
 #if JF_SHORTCUTS_ENABLED
 
 // MARK: Macros (Generic)
-#define	ApplicationDelegate		JF.applicationDelegate
-#define	ClassBundle				[NSBundle bundleForClass:[self class]]
-#define	ClassName				NSStringFromClass([self class])
-#define	LogMethod				NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
-#define MainBundle				JF.mainBundle
-#define MainNotificationCenter	JF.mainNotificationCenter
-#define MainOperationQueue		JF.mainOperationQueue
-#define MethodName				NSStringFromSelector(_cmd)
-#define ProcessInfo				JF.processInfo
-#define	SharedApplication		JF.sharedApplication
+#define	ApplicationDelegate						JF.applicationDelegate
+#define	ClassBundle								[NSBundle bundleForClass:[self class]]
+#define	ClassName								NSStringFromClass([self class])
+#define IsOverridingSuperclassImplementation	[self.class.superclass instancesRespondToSelector:_cmd]
+#define	LogMethod								NSLog(@"%@ (%@): executing '%@'.", ClassName, JFStringFromPointerOfObject(self), MethodName)
+#define MainBundle								JF.mainBundle
+#define MainNotificationCenter					JF.mainNotificationCenter
+#define MainOperationQueue						JF.mainOperationQueue
+#define MethodName								NSStringFromSelector(_cmd)
+#define ProcessInfo								JF.processInfo
+#define	SharedApplication						JF.sharedApplication
 
 #if JF_IOS
 // MARK: Macros (Generic - iOS)

@@ -32,7 +32,37 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// =================================================================================================
+// MARK: Macros
+// =================================================================================================
+
+#define RETURN_IS_MAJOR(_macro, _version)														\
+static BOOL retVal; static dispatch_once_t onceToken;											\
+dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorVersion:_version]); });	\
+return retVal
+
+#define RETURN_IS_MAJOR_MINOR(_macro, _majorVersion, _minorVersion)															\
+static BOOL retVal; static dispatch_once_t onceToken;																		\
+dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorVersion:_majorVersion minor:_minorVersion]); });	\
+return retVal
+
+// =================================================================================================
+// MARK: Macros - Shortcuts
+// =================================================================================================
+
+#define RETURN_IS_IOS(_version)								RETURN_IS_MAJOR(iOS, _version)
+#define RETURN_IS_IOS_PLUS(_version)						RETURN_IS_MAJOR(iOSPlus, _version)
+#define RETURN_IS_MACOS(_majorVersion, _minorVersion)		RETURN_IS_MAJOR_MINOR(macOS, _majorVersion, _minorVersion)
+#define RETURN_IS_MACOS_PLUS(_majorVersion, _minorVersion)	RETURN_IS_MAJOR_MINOR(macOSPlus, _majorVersion, _minorVersion)
+#define RETURN_IS_TVOS(_version)							RETURN_IS_MAJOR(tvOS, _version)
+#define RETURN_IS_TVOS_PLUS(_version)						RETURN_IS_MAJOR(tvOSPlus, _version)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// =================================================================================================
 // MARK: Constants - Data
+// =================================================================================================
+
 NSInteger const	JFVersionNotValid	= -1;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,102 +339,52 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isIOS6
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOS([JFVersion versionWithMajorVersion:6]);
-	});
-	return retVal;
+	RETURN_IS_IOS(6);
 }
 
 + (BOOL)isIOS6Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([JFVersion versionWithMajorVersion:6]);
-	});
-	return retVal;
+	RETURN_IS_IOS_PLUS(6);
 }
 
 + (BOOL)isIOS7
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOS([JFVersion versionWithMajorVersion:7]);
-	});
-	return retVal;
+	RETURN_IS_IOS(7);
 }
 
 + (BOOL)isIOS7Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([JFVersion versionWithMajorVersion:7]);
-	});
-	return retVal;
+	RETURN_IS_IOS_PLUS(7);
 }
 
 + (BOOL)isIOS8
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOS([JFVersion versionWithMajorVersion:8]);
-	});
-	return retVal;
+	RETURN_IS_IOS(8);
 }
 
 + (BOOL)isIOS8Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([JFVersion versionWithMajorVersion:8]);
-	});
-	return retVal;
+	RETURN_IS_IOS_PLUS(8);
 }
 
 + (BOOL)isIOS9
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOS([JFVersion versionWithMajorVersion:9]);
-	});
-	return retVal;
+	RETURN_IS_IOS(9);
 }
 
 + (BOOL)isIOS9Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([JFVersion versionWithMajorVersion:9]);
-	});
-	return retVal;
+	RETURN_IS_IOS_PLUS(9);
 }
 
 + (BOOL)isIOS10
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOS([JFVersion versionWithMajorVersion:10]);
-	});
-	return retVal;
+	RETURN_IS_IOS(10);
 }
 
 + (BOOL)isIOS10Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = iOSPlus([JFVersion versionWithMajorVersion:10]);
-	});
-	return retVal;
+	RETURN_IS_IOS_PLUS(10);
 }
 #endif
 
@@ -425,142 +405,72 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isMacOS10_6
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:6]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 6);
 }
 
 + (BOOL)isMacOS10_6Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:6]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 6);
 }
 
 + (BOOL)isMacOS10_7
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:7]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 7);
 }
 
 + (BOOL)isMacOS10_7Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:7]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 7);
 }
 
 + (BOOL)isMacOS10_8
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:8]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 8);
 }
 
 + (BOOL)isMacOS10_8Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:8]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 8);
 }
 
 + (BOOL)isMacOS10_9
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:9]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 9);
 }
 
 + (BOOL)isMacOS10_9Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:9]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 9);
 }
 
 + (BOOL)isMacOS10_10
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:10]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 10);
 }
 
 + (BOOL)isMacOS10_10Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:10]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 10);
 }
 
 + (BOOL)isMacOS10_11
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:11]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 11);
 }
 
 + (BOOL)isMacOS10_11Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:11]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 11);
 }
 
 + (BOOL)isMacOS10_12
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOS([JFVersion versionWithMajorVersion:10 minor:12]);
-	});
-	return retVal;
+	RETURN_IS_MACOS(10, 12);
 }
 
 + (BOOL)isMacOS10_12Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = macOSPlus([JFVersion versionWithMajorVersion:10 minor:12]);
-	});
-	return retVal;
+	RETURN_IS_MACOS_PLUS(10, 12);
 }
 #endif
 
@@ -581,42 +491,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTVOS9
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = tvOS([JFVersion versionWithMajorVersion:9]);
-	});
-	return retVal;
+	RETURN_IS_TVOS(9);
 }
 
 + (BOOL)isTVOS9Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus([JFVersion versionWithMajorVersion:9]);
-	});
-	return retVal;
+	RETURN_IS_TVOS_PLUS(9);
 }
 
 + (BOOL)isTVOS10
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = tvOS([JFVersion versionWithMajorVersion:10]);
-	});
-	return retVal;
+	RETURN_IS_TVOS(10);
 }
 
 + (BOOL)isTVOS10Plus
 {
-	static BOOL retVal;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retVal = tvOSPlus([JFVersion versionWithMajorVersion:10]);
-	});
-	return retVal;
+	RETURN_IS_TVOS_PLUS(10);
 }
 #endif
 
