@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EA2A733E1D4E9D5D00AE6BF7"
-               BuildableName = "JFFramework.framework"
+               BuildableName = "Framework_macOS.framework"
                BlueprintName = "Framework macOS"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CEC7E8C1D52060500A3C87A"
-               BuildableName = "JFFramework-Tests.xctest"
+               BuildableName = "Framework_macOS_Tests.xctest"
                BlueprintName = "Framework macOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CEC7E8C1D52060500A3C87A"
-               BuildableName = "JFFramework-Tests.xctest"
+               BuildableName = "Framework_macOS_Tests.xctest"
                BlueprintName = "Framework macOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A733E1D4E9D5D00AE6BF7"
-            BuildableName = "JFFramework.framework"
+            BuildableName = "Framework_macOS.framework"
             BlueprintName = "Framework macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A733E1D4E9D5D00AE6BF7"
-            BuildableName = "JFFramework.framework"
+            BuildableName = "Framework_macOS.framework"
             BlueprintName = "Framework macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A733E1D4E9D5D00AE6BF7"
-            BuildableName = "JFFramework.framework"
+            BuildableName = "Framework_macOS.framework"
             BlueprintName = "Framework macOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>

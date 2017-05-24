@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EA2A72FC1D4E9CE000AE6BF7"
-               BuildableName = "JFFramework.a"
+               BuildableName = "Static_Library_iOS.a"
                BlueprintName = "Static Library iOS"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EA2A73571D4E9FA100AE6BF7"
-               BuildableName = "JFFramework-Tests.xctest"
+               BuildableName = "Static_Library_iOS_Tests.xctest"
                BlueprintName = "Static Library iOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EA2A73571D4E9FA100AE6BF7"
-               BuildableName = "JFFramework-Tests.xctest"
+               BuildableName = "Static_Library_iOS_Tests.xctest"
                BlueprintName = "Static Library iOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A72FC1D4E9CE000AE6BF7"
-            BuildableName = "JFFramework.a"
+            BuildableName = "Static_Library_iOS.a"
             BlueprintName = "Static Library iOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A72FC1D4E9CE000AE6BF7"
-            BuildableName = "JFFramework.a"
+            BuildableName = "Static_Library_iOS.a"
             BlueprintName = "Static Library iOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EA2A72FC1D4E9CE000AE6BF7"
-            BuildableName = "JFFramework.a"
+            BuildableName = "Static_Library_iOS.a"
             BlueprintName = "Static Library iOS"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>

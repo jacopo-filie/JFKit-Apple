@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C668B9E1D4FA782009E62E5"
-               BuildableName = "JFFramework.bundle"
-               BlueprintName = "Static Library watchOS Resources"
+               BlueprintIdentifier = "6C668B8A1D4FA773009E62E5"
+               BuildableName = "Static_Library_macOS_Resources.bundle"
+               BlueprintName = "Static Library macOS Resources"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C668B9E1D4FA782009E62E5"
-            BuildableName = "JFFramework.bundle"
-            BlueprintName = "Static Library watchOS Resources"
+            BlueprintIdentifier = "6C668B8A1D4FA773009E62E5"
+            BuildableName = "Static_Library_macOS_Resources.bundle"
+            BlueprintName = "Static Library macOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C668B9E1D4FA782009E62E5"
-            BuildableName = "JFFramework.bundle"
-            BlueprintName = "Static Library watchOS Resources"
+            BlueprintIdentifier = "6C668B8A1D4FA773009E62E5"
+            BuildableName = "Static_Library_macOS_Resources.bundle"
+            BlueprintName = "Static Library macOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

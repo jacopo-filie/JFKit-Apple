@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
-               BuildableName = "JFFramework.bundle"
-               BlueprintName = "Static Library iOS Resources"
+               BlueprintIdentifier = "6C668B941D4FA77A009E62E5"
+               BuildableName = "Static_Library_tvOS_Resources.bundle"
+               BlueprintName = "Static Library tvOS Resources"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
-            BuildableName = "JFFramework.bundle"
-            BlueprintName = "Static Library iOS Resources"
+            BlueprintIdentifier = "6C668B941D4FA77A009E62E5"
+            BuildableName = "Static_Library_tvOS_Resources.bundle"
+            BlueprintName = "Static Library tvOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6C668B801D4FA75D009E62E5"
-            BuildableName = "JFFramework.bundle"
-            BlueprintName = "Static Library iOS Resources"
+            BlueprintIdentifier = "6C668B941D4FA77A009E62E5"
+            BuildableName = "Static_Library_tvOS_Resources.bundle"
+            BlueprintName = "Static Library tvOS Resources"
             ReferencedContainer = "container:JFFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
