@@ -29,12 +29,26 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // MARK: Compatibility addons
-#ifndef OBJC_AVAILABLE
-#define OBJC_AVAILABLE(_macos, _ios, _tvos, _watchos) NS_AVAILABLE(_mac, _ios)
+#ifndef __IOS_AVAILABLE
+#	define __IOS_AVAILABLE(_ios)
+#endif
+#ifndef __OSX_AVAILABLE
+#	define __OSX_AVAILABLE(_macos)
+#endif
+#ifndef __TVOS_AVAILABLE
+#	define __TVOS_AVAILABLE(_tvos)
+#endif
+#ifndef __WATCHOS_AVAILABLE
+#	define __WATCHOS_AVAILABLE(_watchos)
 #endif
 #ifndef TARGET_OS_OSX
-#define TARGET_OS_OSX (!TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
+#	define TARGET_OS_OSX (!TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
 #endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// MARK: Availability
+#define JF_AVAILABLE(_macos, _ios, _tvos, _watchos)	__OSX_AVAILABLE(_macos) __IOS_AVAILABLE(_ios) __TVOS_AVAILABLE(_tvos) __WATCHOS_AVAILABLE(_watchos)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

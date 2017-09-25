@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties accessors - Info
 // =================================================================================================
 
-- (NSOperatingSystemVersion)operatingSystemVersion OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
+- (NSOperatingSystemVersion)operatingSystemVersion JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
 {
 	NSOperatingSystemVersion retVal;
 	retVal.majorVersion = self.majorVersion;
@@ -191,12 +191,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
+- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
 {
 	return [self initWithOperatingSystemVersion:version build:nil];
 }
 
-- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version build:(NSString* __nullable)build OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
+- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)version build:(NSString* __nullable)build JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0)
 {
 	return [self initWithMajorVersion:version.majorVersion minor:version.minorVersion patch:version.patchVersion build:build];
 }

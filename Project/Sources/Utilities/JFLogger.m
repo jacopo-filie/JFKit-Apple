@@ -36,7 +36,7 @@
 
 #pragma mark - Functions (Definitions)
 
-static	NSDateFormatter*	createDateFormatter();
+static	NSDateFormatter*	createDateFormatter(void);
 static	BOOL				initializeDateFormatterLock(pthread_mutex_t* lock, Class class);
 static	BOOL				initializeDestinationsLock(pthread_rwlock_t* lock, Class class);
 static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
@@ -467,7 +467,7 @@ static	BOOL				initializeFileLock(pthread_mutex_t* lock, Class class);
 
 #pragma mark - Functions (Implementations)
 
-static NSDateFormatter* createDateFormatter()
+static NSDateFormatter* createDateFormatter(void)
 {
 	NSDateFormatter* retObj = [NSDateFormatter new];
 	

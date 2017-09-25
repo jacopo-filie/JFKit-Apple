@@ -112,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly)				NSInteger	patchVersion; // Invalid if equal to 'JFVersionNotValid'.
 
 // MARK: Properties - Info
-@property (assign, nonatomic, readonly)	NSOperatingSystemVersion	operatingSystemVersion OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
+@property (assign, nonatomic, readonly)	NSOperatingSystemVersion	operatingSystemVersion JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
 @property (strong, nonatomic, readonly)	NSString*					versionString; // Returns a string with format "<major>.<minor>.<patch> (<build>)"; only the valid components will be used (patch version will be used only if strictly positive).
 
 // MARK: Methods - Memory management
@@ -122,8 +122,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)	init NS_UNAVAILABLE;
 - (instancetype)	initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch;
 - (instancetype)	initWithMajorVersion:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* __nullable)build NS_DESIGNATED_INITIALIZER;
-- (instancetype)	initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
-- (instancetype)	initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion build:(NSString* __nullable)build OBJC_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
+- (instancetype)	initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
+- (instancetype)	initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion build:(NSString* __nullable)build JF_AVAILABLE(__MAC_10_10, __IPHONE_8_0, __TVOS_9_0, __WATCHOS_2_0);
 - (instancetype)	initWithVersionString:(NSString*)versionString; // Uses the same string format as "versionString".
 
 // MARK: Methods - Equality management
