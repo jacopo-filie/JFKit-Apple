@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E8EDB3E1ED49D2500207783 /* Demo_Swift-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Demo_Swift-iOS.app"; path = "Demo-Swift-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E8EDB3E1ED49D2500207783 /* Demo-Swift-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8EDB531ED49D6D00207783 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E8EDB551ED49D6D00207783 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E8EDB561ED49D6D00207783 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		4EA1C8DD1DE6ED170050A895 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4E8EDB3E1ED49D2500207783 /* Demo_Swift-iOS.app */,
+				4E8EDB3E1ED49D2500207783 /* Demo-Swift-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,7 +130,7 @@
 			);
 			name = iOS;
 			productName = iOS;
-			productReference = 4E8EDB3E1ED49D2500207783 /* Demo_Swift-iOS.app */;
+			productReference = 4E8EDB3E1ED49D2500207783 /* Demo-Swift-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -146,6 +146,7 @@
 				TargetAttributes = {
 					4E8EDB3D1ED49D2500207783 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -201,6 +202,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -210,6 +212,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
