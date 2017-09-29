@@ -103,12 +103,12 @@
 		6C640FF41DB4D5BA0060DE0B /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */; };
 		6C640FF51DB4D5BA0060DE0B /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */; };
 		6C640FF61DB4D5BA0060DE0B /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */; };
-		6CEC7EB71D52080B00A3C87A /* JFFramework_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A72F11D4E9CD100AE6BF7 /* JFFramework_iOS.framework */; };
-		6CEC7EBA1D52081800A3C87A /* JFFramework_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A733F1D4E9D5D00AE6BF7 /* JFFramework_macOS.framework */; };
-		6CEC7EBD1D52082300A3C87A /* JFFramework_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A73251D4E9D2E00AE6BF7 /* JFFramework_tvOS.framework */; };
-		6CEC7EC01D52083100A3C87A /* JFFramework_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A72FD1D4E9CE000AE6BF7 /* JFFramework_iOS.a */; };
-		6CEC7EC31D52083D00A3C87A /* JFFramework_macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A734B1D4E9D7B00AE6BF7 /* JFFramework_macOS.a */; };
-		6CEC7EC61D52084900A3C87A /* JFFramework_tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A73311D4E9D3C00AE6BF7 /* JFFramework_tvOS.a */; };
+		6CEC7EB71D52080B00A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A72F11D4E9CD100AE6BF7 /* JFFramework.framework */; };
+		6CEC7EBA1D52081800A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A733F1D4E9D5D00AE6BF7 /* JFFramework.framework */; };
+		6CEC7EBD1D52082300A3C87A /* JFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A73251D4E9D2E00AE6BF7 /* JFFramework.framework */; };
+		6CEC7EC01D52083100A3C87A /* JFFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A72FD1D4E9CE000AE6BF7 /* JFFramework.a */; };
+		6CEC7EC31D52083D00A3C87A /* JFFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A734B1D4E9D7B00AE6BF7 /* JFFramework.a */; };
+		6CEC7EC61D52084900A3C87A /* JFFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2A73311D4E9D3C00AE6BF7 /* JFFramework.a */; };
 		EA2D01011D573341008CEF73 /* JFConnectionMachine-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */; };
 		EA2D01021D573341008CEF73 /* JFErrorsManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE4A3511C18D17800D7A8A1 /* JFErrorsManager-Tests.m */; };
 		EA2D01031D573341008CEF73 /* JFManager-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFAFC341BFE8EBC00563037 /* JFManager-Tests.m */; };
@@ -498,10 +498,10 @@
 		6C5B04AB1DB8F2F400B128C7 /* JFReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFReferences.m; sourceTree = "<group>"; };
 		6C640FE91DB4D5BA0060DE0B /* JFVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersion.h; sourceTree = "<group>"; };
 		6C640FEA1DB4D5BA0060DE0B /* JFVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersion.m; sourceTree = "<group>"; };
-		6C668B811D4FA75D009E62E5 /* JFFramework_iOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_iOS.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C668B8B1D4FA773009E62E5 /* JFFramework_macOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_macOS.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C668B951D4FA77A009E62E5 /* JFFramework_tvOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_tvOS.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C668B9F1D4FA782009E62E5 /* JFFramework_watchOS.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_watchOS.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C668B811D4FA75D009E62E5 /* JFFramework.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C668B8B1D4FA773009E62E5 /* JFFramework.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C668B951D4FA77A009E62E5 /* JFFramework.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C668B9F1D4FA782009E62E5 /* JFFramework.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6C07851C8EDF5C00917EBF /* JFAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlert.h; sourceTree = "<group>"; };
 		6C6C07861C8EDF5C00917EBF /* JFAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlert.m; sourceTree = "<group>"; };
 		6C6C078C1C8EE2B400917EBF /* JFAlertsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
@@ -509,9 +509,9 @@
 		6CC0B5531C57ABFB00E2464B /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		6CC0B5541C57ABFB00E2464B /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		6CC0B56A1C57ABFB00E2464B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		6CEC7E8A1D52060300A3C87A /* JFFramework_Framework_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Framework_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CEC7E9E1D52060500A3C87A /* JFFramework_Framework_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Framework_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CEC7EB21D52060700A3C87A /* JFFramework_Framework_tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Framework_tvOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CEC7E8A1D52060300A3C87A /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CEC7E9E1D52060500A3C87A /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CEC7EB21D52060700A3C87A /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEDFB151C72391A0020B608 /* UIButton+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JFFramework.h"; sourceTree = "<group>"; };
 		6CEDFB161C72391A0020B608 /* UIButton+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JFFramework.m"; sourceTree = "<group>"; };
 		6CEDFB1E1C7240640020B608 /* UILabel+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JFFramework.h"; sourceTree = "<group>"; };
@@ -523,17 +523,17 @@
 		EA09C66D1D4FC50700F8807D /* Info Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Tests.plist"; sourceTree = "<group>"; };
 		EA09C6731D4FC50700F8807D /* JFFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFramework.h; sourceTree = "<group>"; };
 		EA09C6741D4FC50700F8807D /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		EA2A72F11D4E9CD100AE6BF7 /* JFFramework_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A72FD1D4E9CE000AE6BF7 /* JFFramework_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A730B1D4E9CF400AE6BF7 /* JFFramework_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73171D4E9D0100AE6BF7 /* JFFramework_watchOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework_watchOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73251D4E9D2E00AE6BF7 /* JFFramework_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73311D4E9D3C00AE6BF7 /* JFFramework_tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework_tvOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A733F1D4E9D5D00AE6BF7 /* JFFramework_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A734B1D4E9D7B00AE6BF7 /* JFFramework_macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework_macOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73581D4E9FA100AE6BF7 /* JFFramework_Library_iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Library_iOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73761D4EA15000AE6BF7 /* JFFramework_Library_tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Library_tvOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA2A73941D4EA1A300AE6BF7 /* JFFramework_Library_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_Library_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A72F11D4E9CD100AE6BF7 /* JFFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A72FD1D4E9CE000AE6BF7 /* JFFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A730B1D4E9CF400AE6BF7 /* JFFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73171D4E9D0100AE6BF7 /* JFFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73251D4E9D2E00AE6BF7 /* JFFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73311D4E9D3C00AE6BF7 /* JFFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A733F1D4E9D5D00AE6BF7 /* JFFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A734B1D4E9D7B00AE6BF7 /* JFFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = JFFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73581D4E9FA100AE6BF7 /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73761D4EA15000AE6BF7 /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2A73941D4EA1A300AE6BF7 /* JFFramework.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2CE8411C08D72C00713102 /* JFConnectionMachine-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFConnectionMachine-Tests.m"; sourceTree = "<group>"; };
 		EA354D8E1D160E6000997276 /* JFErrorsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFErrorsManager.h; sourceTree = "<group>"; };
 		EA354D8F1D160E6000997276 /* JFErrorsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFErrorsManager.m; sourceTree = "<group>"; };
@@ -607,7 +607,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EB71D52080B00A3C87A /* JFFramework_iOS.framework in Frameworks */,
+				6CEC7EB71D52080B00A3C87A /* JFFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,7 +615,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EBA1D52081800A3C87A /* JFFramework_macOS.framework in Frameworks */,
+				6CEC7EBA1D52081800A3C87A /* JFFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,7 +623,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EBD1D52082300A3C87A /* JFFramework_tvOS.framework in Frameworks */,
+				6CEC7EBD1D52082300A3C87A /* JFFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,7 +687,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EC01D52083100A3C87A /* JFFramework_iOS.a in Frameworks */,
+				6CEC7EC01D52083100A3C87A /* JFFramework.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,7 +695,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EC61D52084900A3C87A /* JFFramework_tvOS.a in Frameworks */,
+				6CEC7EC61D52084900A3C87A /* JFFramework.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,7 +703,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CEC7EC31D52083D00A3C87A /* JFFramework_macOS.a in Frameworks */,
+				6CEC7EC31D52083D00A3C87A /* JFFramework.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,24 +817,24 @@
 		EA5F85981B769A3700A32291 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA2A72F11D4E9CD100AE6BF7 /* JFFramework_iOS.framework */,
-				EA2A72FD1D4E9CE000AE6BF7 /* JFFramework_iOS.a */,
-				EA2A730B1D4E9CF400AE6BF7 /* JFFramework_watchOS.framework */,
-				EA2A73171D4E9D0100AE6BF7 /* JFFramework_watchOS.a */,
-				EA2A73251D4E9D2E00AE6BF7 /* JFFramework_tvOS.framework */,
-				EA2A73311D4E9D3C00AE6BF7 /* JFFramework_tvOS.a */,
-				EA2A733F1D4E9D5D00AE6BF7 /* JFFramework_macOS.framework */,
-				EA2A734B1D4E9D7B00AE6BF7 /* JFFramework_macOS.a */,
-				EA2A73581D4E9FA100AE6BF7 /* JFFramework_Library_iOS.xctest */,
-				EA2A73761D4EA15000AE6BF7 /* JFFramework_Library_tvOS.xctest */,
-				EA2A73941D4EA1A300AE6BF7 /* JFFramework_Library_macOS.xctest */,
-				6C668B811D4FA75D009E62E5 /* JFFramework_iOS.bundle */,
-				6C668B8B1D4FA773009E62E5 /* JFFramework_macOS.bundle */,
-				6C668B951D4FA77A009E62E5 /* JFFramework_tvOS.bundle */,
-				6C668B9F1D4FA782009E62E5 /* JFFramework_watchOS.bundle */,
-				6CEC7E8A1D52060300A3C87A /* JFFramework_Framework_iOS.xctest */,
-				6CEC7E9E1D52060500A3C87A /* JFFramework_Framework_macOS.xctest */,
-				6CEC7EB21D52060700A3C87A /* JFFramework_Framework_tvOS.xctest */,
+				EA2A72F11D4E9CD100AE6BF7 /* JFFramework.framework */,
+				EA2A72FD1D4E9CE000AE6BF7 /* JFFramework.a */,
+				EA2A730B1D4E9CF400AE6BF7 /* JFFramework.framework */,
+				EA2A73171D4E9D0100AE6BF7 /* JFFramework.a */,
+				EA2A73251D4E9D2E00AE6BF7 /* JFFramework.framework */,
+				EA2A73311D4E9D3C00AE6BF7 /* JFFramework.a */,
+				EA2A733F1D4E9D5D00AE6BF7 /* JFFramework.framework */,
+				EA2A734B1D4E9D7B00AE6BF7 /* JFFramework.a */,
+				EA2A73581D4E9FA100AE6BF7 /* JFFramework.xctest */,
+				EA2A73761D4EA15000AE6BF7 /* JFFramework.xctest */,
+				EA2A73941D4EA1A300AE6BF7 /* JFFramework.xctest */,
+				6C668B811D4FA75D009E62E5 /* JFFramework.bundle */,
+				6C668B8B1D4FA773009E62E5 /* JFFramework.bundle */,
+				6C668B951D4FA77A009E62E5 /* JFFramework.bundle */,
+				6C668B9F1D4FA782009E62E5 /* JFFramework.bundle */,
+				6CEC7E8A1D52060300A3C87A /* JFFramework.xctest */,
+				6CEC7E9E1D52060500A3C87A /* JFFramework.xctest */,
+				6CEC7EB21D52060700A3C87A /* JFFramework.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1229,7 +1229,7 @@
 			);
 			name = "Static Library iOS Resources";
 			productName = "Static Library iOS Resources";
-			productReference = 6C668B811D4FA75D009E62E5 /* JFFramework_iOS.bundle */;
+			productReference = 6C668B811D4FA75D009E62E5 /* JFFramework.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6C668B8A1D4FA773009E62E5 /* Static Library macOS Resources */ = {
@@ -1246,7 +1246,7 @@
 			);
 			name = "Static Library macOS Resources";
 			productName = "Static Library macOS Resources";
-			productReference = 6C668B8B1D4FA773009E62E5 /* JFFramework_macOS.bundle */;
+			productReference = 6C668B8B1D4FA773009E62E5 /* JFFramework.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6C668B941D4FA77A009E62E5 /* Static Library tvOS Resources */ = {
@@ -1263,7 +1263,7 @@
 			);
 			name = "Static Library tvOS Resources";
 			productName = "Static Library tvOS Resources";
-			productReference = 6C668B951D4FA77A009E62E5 /* JFFramework_tvOS.bundle */;
+			productReference = 6C668B951D4FA77A009E62E5 /* JFFramework.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6C668B9E1D4FA782009E62E5 /* Static Library watchOS Resources */ = {
@@ -1280,7 +1280,7 @@
 			);
 			name = "Static Library watchOS Resources";
 			productName = "Static Library watchOS Resources";
-			productReference = 6C668B9F1D4FA782009E62E5 /* JFFramework_watchOS.bundle */;
+			productReference = 6C668B9F1D4FA782009E62E5 /* JFFramework.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6CEC7E781D52060300A3C87A /* Framework iOS Tests */ = {
@@ -1298,7 +1298,7 @@
 			);
 			name = "Framework iOS Tests";
 			productName = "Framework iOS Tests";
-			productReference = 6CEC7E8A1D52060300A3C87A /* JFFramework_Framework_iOS.xctest */;
+			productReference = 6CEC7E8A1D52060300A3C87A /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6CEC7E8C1D52060500A3C87A /* Framework macOS Tests */ = {
@@ -1316,7 +1316,7 @@
 			);
 			name = "Framework macOS Tests";
 			productName = "Framework macOS Tests";
-			productReference = 6CEC7E9E1D52060500A3C87A /* JFFramework_Framework_macOS.xctest */;
+			productReference = 6CEC7E9E1D52060500A3C87A /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6CEC7EA01D52060700A3C87A /* Framework tvOS Tests */ = {
@@ -1334,7 +1334,7 @@
 			);
 			name = "Framework tvOS Tests";
 			productName = "Framework tvOS Tests";
-			productReference = 6CEC7EB21D52060700A3C87A /* JFFramework_Framework_tvOS.xctest */;
+			productReference = 6CEC7EB21D52060700A3C87A /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EA2A72F01D4E9CD100AE6BF7 /* Framework iOS */ = {
@@ -1352,7 +1352,7 @@
 			);
 			name = "Framework iOS";
 			productName = "Framework iOS";
-			productReference = EA2A72F11D4E9CD100AE6BF7 /* JFFramework_iOS.framework */;
+			productReference = EA2A72F11D4E9CD100AE6BF7 /* JFFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA2A72FC1D4E9CE000AE6BF7 /* Static Library iOS */ = {
@@ -1369,7 +1369,7 @@
 			);
 			name = "Static Library iOS";
 			productName = "Static Library iOS";
-			productReference = EA2A72FD1D4E9CE000AE6BF7 /* JFFramework_iOS.a */;
+			productReference = EA2A72FD1D4E9CE000AE6BF7 /* JFFramework.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		EA2A730A1D4E9CF400AE6BF7 /* Framework watchOS */ = {
@@ -1387,7 +1387,7 @@
 			);
 			name = "Framework watchOS";
 			productName = "Framework watchOS";
-			productReference = EA2A730B1D4E9CF400AE6BF7 /* JFFramework_watchOS.framework */;
+			productReference = EA2A730B1D4E9CF400AE6BF7 /* JFFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA2A73161D4E9D0100AE6BF7 /* Static Library watchOS */ = {
@@ -1404,7 +1404,7 @@
 			);
 			name = "Static Library watchOS";
 			productName = "Static Library watchOS";
-			productReference = EA2A73171D4E9D0100AE6BF7 /* JFFramework_watchOS.a */;
+			productReference = EA2A73171D4E9D0100AE6BF7 /* JFFramework.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		EA2A73241D4E9D2E00AE6BF7 /* Framework tvOS */ = {
@@ -1422,7 +1422,7 @@
 			);
 			name = "Framework tvOS";
 			productName = "Framework tvOS";
-			productReference = EA2A73251D4E9D2E00AE6BF7 /* JFFramework_tvOS.framework */;
+			productReference = EA2A73251D4E9D2E00AE6BF7 /* JFFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA2A73301D4E9D3C00AE6BF7 /* Static Library tvOS */ = {
@@ -1439,7 +1439,7 @@
 			);
 			name = "Static Library tvOS";
 			productName = "Static Library tvOS";
-			productReference = EA2A73311D4E9D3C00AE6BF7 /* JFFramework_tvOS.a */;
+			productReference = EA2A73311D4E9D3C00AE6BF7 /* JFFramework.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		EA2A733E1D4E9D5D00AE6BF7 /* Framework macOS */ = {
@@ -1457,7 +1457,7 @@
 			);
 			name = "Framework macOS";
 			productName = "Framework macOS";
-			productReference = EA2A733F1D4E9D5D00AE6BF7 /* JFFramework_macOS.framework */;
+			productReference = EA2A733F1D4E9D5D00AE6BF7 /* JFFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA2A734A1D4E9D7B00AE6BF7 /* Static Library macOS */ = {
@@ -1474,7 +1474,7 @@
 			);
 			name = "Static Library macOS";
 			productName = "Static Library macOS";
-			productReference = EA2A734B1D4E9D7B00AE6BF7 /* JFFramework_macOS.a */;
+			productReference = EA2A734B1D4E9D7B00AE6BF7 /* JFFramework.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		EA2A73571D4E9FA100AE6BF7 /* Static Library iOS Tests */ = {
@@ -1492,7 +1492,7 @@
 			);
 			name = "Static Library iOS Tests";
 			productName = "Framework iOS Tests";
-			productReference = EA2A73581D4E9FA100AE6BF7 /* JFFramework_Library_iOS.xctest */;
+			productReference = EA2A73581D4E9FA100AE6BF7 /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EA2A73751D4EA15000AE6BF7 /* Static Library tvOS Tests */ = {
@@ -1510,7 +1510,7 @@
 			);
 			name = "Static Library tvOS Tests";
 			productName = "Framework tvOS Tests";
-			productReference = EA2A73761D4EA15000AE6BF7 /* JFFramework_Library_tvOS.xctest */;
+			productReference = EA2A73761D4EA15000AE6BF7 /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EA2A73931D4EA1A300AE6BF7 /* Static Library macOS Tests */ = {
@@ -1528,7 +1528,7 @@
 			);
 			name = "Static Library macOS Tests";
 			productName = "Framework macOS Tests";
-			productReference = EA2A73941D4EA1A300AE6BF7 /* JFFramework_Library_macOS.xctest */;
+			productReference = EA2A73941D4EA1A300AE6BF7 /* JFFramework.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -2134,7 +2134,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2144,7 +2143,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2154,7 +2152,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2164,7 +2161,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2174,7 +2170,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2184,7 +2179,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2194,7 +2188,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2204,7 +2197,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2220,7 +2212,6 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_iOS";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2235,7 +2226,6 @@
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_iOS";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -2249,7 +2239,6 @@
 				);
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_macOS";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2263,7 +2252,6 @@
 				);
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_macOS";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2277,7 +2265,6 @@
 				);
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Debug;
@@ -2291,7 +2278,6 @@
 				);
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Framework_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Release;
@@ -2310,7 +2296,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2330,7 +2315,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2341,7 +2325,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2352,7 +2335,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_iOS";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2372,7 +2354,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2392,7 +2373,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
@@ -2403,7 +2383,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = watchos;
 			};
 			name = Debug;
@@ -2413,7 +2392,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_watchOS";
 				SDKROOT = watchos;
 			};
 			name = Release;
@@ -2431,7 +2409,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2450,7 +2427,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -2461,7 +2437,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Debug;
@@ -2471,7 +2446,6 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(inherited)_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Release;
@@ -2489,7 +2463,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2507,7 +2480,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Project/Supporting Files/JFFramework.modulemap";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2516,7 +2488,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2525,7 +2496,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
-				PRODUCT_NAME = "$(inherited)_macOS";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2535,7 +2505,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_iOS";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2545,7 +2514,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_iOS";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -2555,7 +2523,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Debug;
@@ -2565,7 +2532,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_tvOS";
 				SDKROOT = appletvos;
 			};
 			name = Release;
@@ -2575,7 +2541,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_macOS";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2585,7 +2550,6 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Project/Supporting Files/Info Tests.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(inherited)_Library_macOS";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2617,8 +2581,6 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_VFORK = YES;
 				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_STATIC_ANALYZER_MODE = shallow;
@@ -2655,7 +2617,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "Project/Supporting Files/Prefix.pch";
@@ -2727,8 +2688,6 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_VFORK = YES;
 				CLANG_ANALYZER_SECURITY_KEYCHAIN_API = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_STATIC_ANALYZER_MODE = deep;
@@ -2765,7 +2724,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Project/Supporting Files/Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "JF_SHORTCUTS_ENABLED=1";
