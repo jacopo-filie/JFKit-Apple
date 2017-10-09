@@ -43,9 +43,9 @@
 		4E4C6CDD1D6C941900871D92 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACFC95B1D16B0F3005F3D91 /* Localizable.strings */; };
 		4E5592991DCB4A400086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E55929A1DCB4A410086D25E /* JFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE752581BEC15FF003A2F38 /* JFTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E7E06BC1EC9A426002EF301 /* JFOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06B81EC9A426002EF301 /* JFOverlayController.h */; };
+		4E7E06BC1EC9A426002EF301 /* JFOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06B81EC9A426002EF301 /* JFOverlayController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7E06BD1EC9A426002EF301 /* JFOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E06B91EC9A426002EF301 /* JFOverlayController.m */; };
-		4E7E06BE1EC9A426002EF301 /* JFSliderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06BA1EC9A426002EF301 /* JFSliderController.h */; };
+		4E7E06BE1EC9A426002EF301 /* JFSliderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06BA1EC9A426002EF301 /* JFSliderController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7E06BF1EC9A426002EF301 /* JFSliderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E06BB1EC9A426002EF301 /* JFSliderController.m */; };
 		4E974DCA1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };
 		4E974DCB1EB404B500B0844B /* JFObserversController-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E974DC91EB3FEDC00B0844B /* JFObserversController-Tests.m */; };

@@ -103,6 +103,8 @@
 #import	"JFActivityIndicatorView.h"
 #import	"JFAlert.h"
 #import	"JFAlertsController.h"
+#import	"JFOverlayController.h"
+#import	"JFSliderController.h"
 
 #endif
 
