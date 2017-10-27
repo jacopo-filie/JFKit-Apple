@@ -32,7 +32,12 @@
 
 #if JF_IOS || JF_TVOS
 NS_ASSUME_NONNULL_BEGIN
-@interface JFSoftReference ()
+@interface JFSoftReference<ObjectType> ()
+
+// MARK: Properties - Data
+#if __has_feature(objc_arc_weak)
+@property (weak, nonatomic, nullable)	ObjectType	weakObject;
+#endif
 
 // MARK: Methods - Notifications management
 - (void)	notifiedDidReceiveMemoryWarning:(NSNotification*)notification;
@@ -53,7 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize object	= _object;
+@synthesize object		= _object;
+#if __has_feature(objc_arc_weak)
+@synthesize weakObject	= _weakObject;
+#endif
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -63,6 +71,10 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	@synchronized(self)
 	{
+#if __has_feature(objc_arc_weak)
+		if(!_object)
+			_object = self.weakObject;
+#endif
 		return _object;
 	}
 }
@@ -75,6 +87,10 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		_object = object;
 		
+#if __has_feature(objc_arc_weak)
+		self.weakObject = object;
+#endif
+		
 		if(shouldUpdateNotification)
 		{
 			BOOL shouldRemoveObserver = !object;
@@ -82,9 +98,9 @@ NS_ASSUME_NONNULL_BEGIN
 			JFBlock block = ^(void)
 			{
 				if(shouldRemoveObserver)
-					[MainNotificationCenter addObserver:self selector:@selector(notifiedDidReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-				else
 					[MainNotificationCenter removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+				else
+					[MainNotificationCenter addObserver:self selector:@selector(notifiedDidReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 			};
 			
 			[MainOperationQueue addOperationWithBlock:block];
@@ -114,7 +130,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifiedDidReceiveMemoryWarning:(NSNotification*)notification
 {
+#if __has_feature(objc_arc_weak)
+	id object = self.object;
 	self.object = nil;
+	self.weakObject = object;
+#else
+	self.object = nil;
+#endif
 }
 
 @end
