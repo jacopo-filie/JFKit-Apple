@@ -27,6 +27,7 @@
 #import "JFActivityIndicatorView.h"
 
 #import "JFColor.h"
+#import "JFShortcuts.h"
 #import "JFString.h"
 #import "JFUtilities.h"
 
@@ -50,12 +51,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, getter=isButtonHidden)			BOOL	buttonHidden;
 @property (assign, nonatomic, getter=isContainerImageHidden)	BOOL	containerImageHidden;
 @property (assign, nonatomic, getter=isIndicatorViewHidden)		BOOL	indicatorViewHidden;
+@property (assign, nonatomic)									BOOL	needsRebuildLayout;
 @property (assign, nonatomic, getter=isTextLabelHidden)			BOOL	textLabelHidden;
+
+// MARK: Properties accessors - User interface (Flags)
+- (void)	setNeedsRebuildLayout;
 
 // MARK: Methods - Memory management
 + (void)	initializeProperties:(JFActivityIndicatorView*)object;
 
 // MARK: Methods - User interface management
+- (void)	rebuildLayout;
 - (void)	toggleAnimation;
 
 @end
@@ -123,6 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize containerImageHidden	= _containerImageHidden;
 @synthesize containerHidden			= _containerHidden;
 @synthesize indicatorViewHidden		= _indicatorViewHidden;
+@synthesize needsRebuildLayout		= _needsRebuildLayout;
 @synthesize textLabelHidden			= _textLabelHidden;
 
 // =================================================================================================
@@ -293,7 +300,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_indicatorStyle = indicatorStyle;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
 }
 
 - (void)setTextColor:(UIColor* __nullable)textColor
@@ -319,7 +326,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_buttonHidden = buttonHidden;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
 }
 
 - (void)setContainerHidden:(BOOL)containerHidden
@@ -330,7 +337,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_containerHidden = containerHidden;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
 }
 
 - (void)setContainerImageHidden:(BOOL)containerImageHidden
@@ -341,7 +348,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_containerImageHidden = containerImageHidden;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
 }
 
 - (void)setHidden:(BOOL)hidden
@@ -358,7 +365,33 @@ NS_ASSUME_NONNULL_BEGIN
 	_indicatorViewHidden = indicatorViewHidden;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
+}
+
+- (void)setNeedsRebuildLayout
+{
+	self.needsRebuildLayout = YES;
+}
+
+- (void)setNeedsRebuildLayout:(BOOL)needsRebuildLayout
+{
+	if(_needsRebuildLayout == needsRebuildLayout)
+		return;
+	
+	_needsRebuildLayout = needsRebuildLayout;
+	
+	if(needsRebuildLayout)
+	{
+		WeakifySelf;
+		[MainOperationQueue addOperationWithBlock:^{
+			StrongifySelf;
+			if(strongSelf && strongSelf.needsRebuildLayout)
+			{
+				strongSelf.needsRebuildLayout = NO;
+				[strongSelf rebuildLayout];
+			}
+		}];
+	}
 }
 
 - (void)setTextLabelHidden:(BOOL)textLabelHidden
@@ -369,7 +402,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_textLabelHidden = textLabelHidden;
 	
 	if(self.window)
-		[self setNeedsLayout];
+		[self setNeedsRebuildLayout];
 }
 
 // =================================================================================================
@@ -429,10 +462,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - User interface management
 // =================================================================================================
 
-- (void)layoutSubviews
+- (void)rebuildLayout
 {
-	[super layoutSubviews];
-	
 	UIButton* button = self.button;
 	UIView* containerView = self.containerView;
 	UIImageView* containerImageView = self.containerImageView;
@@ -694,6 +725,18 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	[super updateConstraints];
+}
+
+// =================================================================================================
+// MARK: Methods - User interface management (Hierarchy)
+// =================================================================================================
+
+- (void)didMoveToWindow
+{
+	[super didMoveToWindow];
+	
+	if(self.window)
+		[self setNeedsRebuildLayout];
 }
 
 @end
