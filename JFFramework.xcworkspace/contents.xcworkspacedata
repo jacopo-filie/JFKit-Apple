@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Documentation">
-   </FileRef>
-   <FileRef
       location = "group:Demo-ObjC.xcodeproj">
    </FileRef>
    <FileRef
@@ -12,5 +9,8 @@
    </FileRef>
    <FileRef
       location = "group:JFFramework.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE">
    </FileRef>
 </Workspace>
