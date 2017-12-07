@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EC77D6B1FD95962004E5C99 /* JFFramework_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3761FD8BE2D004EEACE /* JFFramework_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4EC77D6D1FD95993004E5C99 /* JFFramework_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ECFE3961FD8C041004EEACE /* JFFramework_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3761FD8BE2D004EEACE /* JFFramework_iOS.framework */; };
 		4ECFE3991FD8C049004EEACE /* JFFramework_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */; };
 		4ED5D2521FD8DA72009C1EDD /* Demo-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D2461FD8DA2B009C1EDD /* Demo-Tests.swift */; };
@@ -99,6 +101,31 @@
 			remoteInfo = "JFFramework macOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4EC77D681FD95958004E5C99 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4EC77D6B1FD95962004E5C99 /* JFFramework_iOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EC77D6C1FD95968004E5C99 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4EC77D6D1FD95993004E5C99 /* JFFramework_macOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4ECFE2931FD8BD8E004EEACE /* Demo iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +347,7 @@
 				4ECFE28F1FD8BD8E004EEACE /* Sources */,
 				4ECFE2901FD8BD8E004EEACE /* Frameworks */,
 				4ECFE2911FD8BD8E004EEACE /* Resources */,
+				4EC77D681FD95958004E5C99 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -374,6 +402,7 @@
 				4ECFE2C71FD8BDA3004EEACE /* Sources */,
 				4ECFE2C81FD8BDA3004EEACE /* Frameworks */,
 				4ECFE2C91FD8BDA3004EEACE /* Resources */,
+				4EC77D6C1FD95968004E5C99 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

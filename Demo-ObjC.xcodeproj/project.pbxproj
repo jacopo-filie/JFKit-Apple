@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EC77D651FD958F6004E5C99 /* JFFramework_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3851FD8BE32004EEACE /* JFFramework_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4EC77D671FD95937004E5C99 /* JFFramework_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3871FD8BE32004EEACE /* JFFramework_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ECFE38F1FD8C01A004EEACE /* JFFramework_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3851FD8BE32004EEACE /* JFFramework_iOS.framework */; };
 		4ECFE3921FD8C024004EEACE /* JFFramework_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3871FD8BE32004EEACE /* JFFramework_macOS.framework */; };
 		4ED5D24E1FD8DA6B009C1EDD /* Demo-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D24C1FD8DA31009C1EDD /* Demo-Tests.m */; };
@@ -103,12 +105,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4EC77D661FD9592A004E5C99 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4EC77D671FD95937004E5C99 /* JFFramework_macOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4ECFE3CB1FD8C828004EEACE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4EC77D651FD958F6004E5C99 /* JFFramework_iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +418,7 @@
 				4ECFE3371FD8BDE2004EEACE /* Sources */,
 				4ECFE3381FD8BDE2004EEACE /* Frameworks */,
 				4ECFE3391FD8BDE2004EEACE /* Resources */,
+				4EC77D661FD9592A004E5C99 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
