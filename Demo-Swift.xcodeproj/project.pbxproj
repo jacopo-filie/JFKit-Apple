@@ -128,12 +128,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4ECFE2931FD8BD8E004EEACE /* Demo iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2AC1FD8BD8F004EEACE /* Demo iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2B71FD8BD8F004EEACE /* Demo iOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo iOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2CB1FD8BDA3004EEACE /* Demo macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2DF1FD8BDA3004EEACE /* Demo macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2EA1FD8BDA3004EEACE /* Demo macOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo macOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE36E1FD8BE2D004EEACE /* JFFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = JFFramework.xcodeproj; sourceTree = "<group>"; };
 		4ED5D2061FD8D21F009C1EDD /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		4ED5D2071FD8D21F009C1EDD /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
@@ -220,12 +220,12 @@
 		4ECFE2941FD8BD8E004EEACE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4ECFE2931FD8BD8E004EEACE /* Demo iOS.app */,
-				4ECFE2AC1FD8BD8F004EEACE /* Demo iOS Tests.xctest */,
-				4ECFE2B71FD8BD8F004EEACE /* Demo iOS UITests.xctest */,
-				4ECFE2CB1FD8BDA3004EEACE /* Demo macOS.app */,
-				4ECFE2DF1FD8BDA3004EEACE /* Demo macOS Tests.xctest */,
-				4ECFE2EA1FD8BDA3004EEACE /* Demo macOS UITests.xctest */,
+				4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */,
+				4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */,
+				4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */,
+				4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */,
+				4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */,
+				4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,9 +340,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4ECFE2921FD8BD8E004EEACE /* Demo iOS */ = {
+		4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2C41FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS" */;
+			buildConfigurationList = 4ECFE2C41FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS" */;
 			buildPhases = (
 				4ECFE28F1FD8BD8E004EEACE /* Sources */,
 				4ECFE2901FD8BD8E004EEACE /* Frameworks */,
@@ -354,14 +354,14 @@
 			dependencies = (
 				4ECFE3941FD8C03E004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo iOS";
+			name = "Demo-Swift iOS";
 			productName = "Demo iOS";
-			productReference = 4ECFE2931FD8BD8E004EEACE /* Demo iOS.app */;
+			productReference = 4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4ECFE2AB1FD8BD8F004EEACE /* Demo iOS Tests */ = {
+		4ECFE2AB1FD8BD8F004EEACE /* Demo-Swift iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2C51FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS Tests" */;
+			buildConfigurationList = 4ECFE2C51FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS Tests" */;
 			buildPhases = (
 				4ECFE2A81FD8BD8F004EEACE /* Sources */,
 				4ECFE2A91FD8BD8F004EEACE /* Frameworks */,
@@ -372,14 +372,14 @@
 			dependencies = (
 				4ECFE2AE1FD8BD8F004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo iOS Tests";
+			name = "Demo-Swift iOS Tests";
 			productName = "Demo iOSTests";
-			productReference = 4ECFE2AC1FD8BD8F004EEACE /* Demo iOS Tests.xctest */;
+			productReference = 4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4ECFE2B61FD8BD8F004EEACE /* Demo iOS UITests */ = {
+		4ECFE2B61FD8BD8F004EEACE /* Demo-Swift iOS UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2C61FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS UITests" */;
+			buildConfigurationList = 4ECFE2C61FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS UITests" */;
 			buildPhases = (
 				4ECFE2B31FD8BD8F004EEACE /* Sources */,
 				4ECFE2B41FD8BD8F004EEACE /* Frameworks */,
@@ -390,14 +390,14 @@
 			dependencies = (
 				4ECFE2B91FD8BD8F004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo iOS UITests";
+			name = "Demo-Swift iOS UITests";
 			productName = "Demo iOSUITests";
-			productReference = 4ECFE2B71FD8BD8F004EEACE /* Demo iOS UITests.xctest */;
+			productReference = 4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		4ECFE2CA1FD8BDA3004EEACE /* Demo macOS */ = {
+		4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS" */;
+			buildConfigurationList = 4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS" */;
 			buildPhases = (
 				4ECFE2C71FD8BDA3004EEACE /* Sources */,
 				4ECFE2C81FD8BDA3004EEACE /* Frameworks */,
@@ -409,14 +409,14 @@
 			dependencies = (
 				4ECFE3981FD8C046004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo macOS";
+			name = "Demo-Swift macOS";
 			productName = "Demo macOS";
-			productReference = 4ECFE2CB1FD8BDA3004EEACE /* Demo macOS.app */;
+			productReference = 4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4ECFE2DE1FD8BDA3004EEACE /* Demo macOS Tests */ = {
+		4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS Tests" */;
+			buildConfigurationList = 4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Tests" */;
 			buildPhases = (
 				4ECFE2DB1FD8BDA3004EEACE /* Sources */,
 				4ECFE2DC1FD8BDA3004EEACE /* Frameworks */,
@@ -427,14 +427,14 @@
 			dependencies = (
 				4ECFE2E11FD8BDA3004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo macOS Tests";
+			name = "Demo-Swift macOS Tests";
 			productName = "Demo macOSTests";
-			productReference = 4ECFE2DF1FD8BDA3004EEACE /* Demo macOS Tests.xctest */;
+			productReference = 4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4ECFE2E91FD8BDA3004EEACE /* Demo macOS UITests */ = {
+		4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS UITests" */;
+			buildConfigurationList = 4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS UITests" */;
 			buildPhases = (
 				4ECFE2E61FD8BDA3004EEACE /* Sources */,
 				4ECFE2E71FD8BDA3004EEACE /* Frameworks */,
@@ -445,9 +445,9 @@
 			dependencies = (
 				4ECFE2EC1FD8BDA3004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo macOS UITests";
+			name = "Demo-Swift macOS UITests";
 			productName = "Demo macOSUITests";
-			productReference = 4ECFE2EA1FD8BDA3004EEACE /* Demo macOS UITests.xctest */;
+			productReference = 4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -503,12 +503,12 @@
 			);
 			projectRoot = "";
 			targets = (
-				4ECFE2921FD8BD8E004EEACE /* Demo iOS */,
-				4ECFE2AB1FD8BD8F004EEACE /* Demo iOS Tests */,
-				4ECFE2B61FD8BD8F004EEACE /* Demo iOS UITests */,
-				4ECFE2CA1FD8BDA3004EEACE /* Demo macOS */,
-				4ECFE2DE1FD8BDA3004EEACE /* Demo macOS Tests */,
-				4ECFE2E91FD8BDA3004EEACE /* Demo macOS UITests */,
+				4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */,
+				4ECFE2AB1FD8BD8F004EEACE /* Demo-Swift iOS Tests */,
+				4ECFE2B61FD8BD8F004EEACE /* Demo-Swift iOS UITests */,
+				4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */,
+				4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Tests */,
+				4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -653,22 +653,22 @@
 /* Begin PBXTargetDependency section */
 		4ECFE2AE1FD8BD8F004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2921FD8BD8E004EEACE /* Demo iOS */;
+			target = 4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */;
 			targetProxy = 4ECFE2AD1FD8BD8F004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE2B91FD8BD8F004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2921FD8BD8E004EEACE /* Demo iOS */;
+			target = 4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */;
 			targetProxy = 4ECFE2B81FD8BD8F004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE2E11FD8BDA3004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo macOS */;
+			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */;
 			targetProxy = 4ECFE2E01FD8BDA3004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE2EC1FD8BDA3004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo macOS */;
+			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */;
 			targetProxy = 4ECFE2EB1FD8BDA3004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE3941FD8C03E004EEACE /* PBXTargetDependency */ = {
@@ -960,7 +960,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo iOS.app/Demo iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift iOS.app/Demo-Swift iOS";
 			};
 			name = Debug;
 		};
@@ -1016,7 +1016,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo iOS.app/Demo iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift iOS.app/Demo-Swift iOS";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1080,7 +1080,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Demo iOS";
+				TEST_TARGET_NAME = "Demo-Swift iOS";
 			};
 			name = Debug;
 		};
@@ -1135,7 +1135,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Demo iOS";
+				TEST_TARGET_NAME = "Demo-Swift iOS";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1320,7 +1320,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo macOS.app/Contents/MacOS/Demo macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS.app/Contents/MacOS/Demo-Swift macOS";
 			};
 			name = Debug;
 		};
@@ -1376,7 +1376,7 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo macOS.app/Contents/MacOS/Demo macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS.app/Contents/MacOS/Demo-Swift macOS";
 			};
 			name = Release;
 		};
@@ -1439,7 +1439,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = "Demo macOS";
+				TEST_TARGET_NAME = "Demo-Swift macOS";
 			};
 			name = Debug;
 		};
@@ -1494,7 +1494,7 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = "Demo macOS";
+				TEST_TARGET_NAME = "Demo-Swift macOS";
 			};
 			name = Release;
 		};
@@ -1510,7 +1510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2C41FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS" */ = {
+		4ECFE2C41FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2BE1FD8BD8F004EEACE /* Debug */,
@@ -1519,7 +1519,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2C51FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS Tests" */ = {
+		4ECFE2C51FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2C01FD8BD8F004EEACE /* Debug */,
@@ -1528,7 +1528,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2C61FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo iOS UITests" */ = {
+		4ECFE2C61FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2C21FD8BD8F004EEACE /* Debug */,
@@ -1537,7 +1537,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS" */ = {
+		4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F21FD8BDA4004EEACE /* Debug */,
@@ -1546,7 +1546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS Tests" */ = {
+		4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F51FD8BDA4004EEACE /* Debug */,
@@ -1555,7 +1555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo macOS UITests" */ = {
+		4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F81FD8BDA4004EEACE /* Debug */,

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-               BuildableName = "Demo macOS.app"
-               BlueprintName = "Demo macOS"
+               BuildableName = "Demo-Swift macOS.app"
+               BlueprintName = "Demo-Swift macOS"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2DE1FD8BDA3004EEACE"
-               BuildableName = "Demo macOS Tests.xctest"
-               BlueprintName = "Demo macOS Tests"
+               BuildableName = "Demo-Swift macOS Tests.xctest"
+               BlueprintName = "Demo-Swift macOS Tests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2E91FD8BDA3004EEACE"
-               BuildableName = "Demo macOS UITests.xctest"
-               BlueprintName = "Demo macOS UITests"
+               BuildableName = "Demo-Swift macOS UITests.xctest"
+               BlueprintName = "Demo-Swift macOS UITests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2DE1FD8BDA3004EEACE"
-               BuildableName = "Demo macOS Tests.xctest"
-               BlueprintName = "Demo macOS Tests"
+               BuildableName = "Demo-Swift macOS Tests.xctest"
+               BlueprintName = "Demo-Swift macOS Tests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -72,8 +72,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2E91FD8BDA3004EEACE"
-               BuildableName = "Demo macOS UITests.xctest"
-               BlueprintName = "Demo macOS UITests"
+               BuildableName = "Demo-Swift macOS UITests.xctest"
+               BlueprintName = "Demo-Swift macOS UITests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -82,8 +82,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo macOS.app"
-            BlueprintName = "Demo macOS"
+            BuildableName = "Demo-Swift macOS.app"
+            BlueprintName = "Demo-Swift macOS"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -106,8 +106,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo macOS.app"
-            BlueprintName = "Demo macOS"
+            BuildableName = "Demo-Swift macOS.app"
+            BlueprintName = "Demo-Swift macOS"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -125,8 +125,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo macOS.app"
-            BlueprintName = "Demo macOS"
+            BuildableName = "Demo-Swift macOS.app"
+            BlueprintName = "Demo-Swift macOS"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
