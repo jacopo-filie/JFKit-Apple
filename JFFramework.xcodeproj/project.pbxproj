@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BF8A21FE08ED20050114D /* JFBlocks.m */; };
+		4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BF8A21FE08ED20050114D /* JFBlocks.m */; };
 		4ECFE2651FD8BCD9004EEACE /* JFFramework_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE25B1FD8BCD9004EEACE /* JFFramework_iOS.framework */; };
 		4ECFE2811FD8BCF1004EEACE /* JFFramework_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE2781FD8BCF1004EEACE /* JFFramework_macOS.framework */; };
 		4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECFE39C1FD8C78D004EEACE /* JFFramework_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +41,8 @@
 /* Begin PBXFileReference section */
 		4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
 		4E0BF89E1FE08B400050114D /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
+		4E0BF8A11FE08ED20050114D /* JFBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFBlocks.h; sourceTree = "<group>"; };
+		4E0BF8A21FE08ED20050114D /* JFBlocks.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFBlocks.m; sourceTree = "<group>"; };
 		4ECFE25B1FD8BCD9004EEACE /* JFFramework_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2641FD8BCD9004EEACE /* JFFramework_iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2781FD8BCF1004EEACE /* JFFramework_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,9 +87,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E0BF89F1FE08E970050114D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4E0BF8A11FE08ED20050114D /* JFBlocks.h */,
+				4E0BF8A21FE08ED20050114D /* JFBlocks.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		4EA80C791FDCCE790086EBE2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4E0BF89F1FE08E970050114D /* Data */,
 			);
 			name = Sources;
 			path = Framework/Sources;
@@ -144,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
+				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
+				4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
