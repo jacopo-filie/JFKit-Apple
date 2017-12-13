@@ -36,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
+		4E0BF89E1FE08B400050114D /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
 		4ECFE25B1FD8BCD9004EEACE /* JFFramework_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2641FD8BCD9004EEACE /* JFFramework_iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JFFramework_iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2781FD8BCF1004EEACE /* JFFramework_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +117,7 @@
 		4ECFE39A1FD8C78D004EEACE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E0BF89E1FE08B400050114D /* Info-Tests.plist */,
 				4ECFE39D1FD8C78D004EEACE /* Info.plist */,
 				4ECFE39C1FD8C78D004EEACE /* JFFramework_iOS.h */,
 				4ECFE39B1FD8C78D004EEACE /* JFFramework_macOS.h */,
