@@ -33,41 +33,186 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // =================================================================================================
-// MARK: Types - Common blocks
+// MARK: Types
 // =================================================================================================
 
-typedef void	(^JFBlock)					(void);
-typedef void	(^JFBlockWithArray)			(NSArray* array);
-typedef void	(^JFBlockWithBOOL)			(BOOL value);
-typedef void	(^JFBlockWithDictionary)	(NSDictionary* dictionary);
-typedef void	(^JFBlockWithError)			(NSError* error);
-typedef void	(^JFBlockWithInteger)		(NSInteger value);
-typedef void	(^JFBlockWithNotification)	(NSNotification* notification);
-typedef void	(^JFBlockWithSet)			(NSSet* set);
-typedef void	(^JFCompletionBlock)		(BOOL succeeded, id __nullable object, NSError* __nullable error);
-typedef void	(^JFSimpleCompletionBlock)	(BOOL succeeded, NSError* __nullable error);
+/**
+ * A block of code to be executed.
+ */
+typedef void (^JFBlock) (void);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param array A generic array.
+ */
+typedef void (^JFBlockWithArray) (NSArray* array);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param value A boolean value.
+ */
+typedef void (^JFBlockWithBOOL) (BOOL value);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param dictionary A generic dictionary.
+ */
+typedef void (^JFBlockWithDictionary) (NSDictionary* dictionary);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param error An error.
+ */
+typedef void (^JFBlockWithError) (NSError* error);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param value An integer value.
+ */
+typedef void (^JFBlockWithInteger) (NSInteger value);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param notification A notification.
+ */
+typedef void (^JFBlockWithNotification) (NSNotification* notification);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param set A generic set.
+ */
+typedef void (^JFBlockWithSet) (NSSet* set);
+
+/**
+ * A block of code to be executed as completion of an operation.
+ * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
+ * @param result The result of the succeeded completed operation; `nil` if the operation failed.
+ * @param error The error of the failed completed operation; `nil` if the operation succeeded.
+ */
+typedef void (^JFCompletionBlock) (BOOL succeeded, id __nullable result, NSError* __nullable error);
+
+/**
+ * A block of code to be executed as completion of an operation.
+ * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
+ * @param error The error of the failed completed operation; `nil` if the operation succeeded.
+ */
+typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable error);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark -
 
-@interface JFCompletion<ObjectType> : NSObject
+/**
+ * A wrapper for the `JFCompletionBlock` block with support for type generics and convenience methods to execute the block asynchronously, if needed.
+ * `ResultType` defines the type of the parameter `result` of the wrapped `JFCompletionBlock` block.
+ */
+@interface JFCompletion<__covariant ResultType> : NSObject
 
+// =================================================================================================
 // MARK: Properties - Execution
-@property (strong, nonatomic, readonly)	void (^block)(BOOL succeeded, ObjectType __nullable result, NSError* __nullable error)	;
+// =================================================================================================
 
+/**
+ * The block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly) void (^block)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error);
+
+// =================================================================================================
 // MARK: Methods - Memory management
-+ (instancetype)	completionWithBlock:(void (^)(BOOL succeeded, ObjectType __nullable result, NSError* __nullable error))block;
-- (instancetype)	init NS_UNAVAILABLE;
-- (instancetype)	initWithBlock:(void (^)(BOOL succeeded, ObjectType __nullable result, NSError* __nullable error))block NS_DESIGNATED_INITIALIZER;
+// =================================================================================================
 
+/**
+ * A convenient constructor that initializes a new instance of this class with the given block.
+ * @param block The block to use.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block;
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes this instance with the given block.
+ * @param block The block to use.
+ * @return This instance.
+ */
+- (instancetype)initWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block NS_DESIGNATED_INITIALIZER;
+
+// =================================================================================================
 // MARK: Methods - Execution management
-- (void)	executeWithError:(NSError*)error;
-- (void)	executeWithError:(NSError*)error async:(BOOL)async;
-- (void)	executeWithError:(NSError*)error queue:(NSOperationQueue*)queue;
-- (void)	executeWithResult:(ObjectType)result;
-- (void)	executeWithResult:(ObjectType)result async:(BOOL)async;
-- (void)	executeWithResult:(ObjectType)result queue:(NSOperationQueue*)queue;
+// =================================================================================================
+
+/**
+ * Synchronously executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `result`    = nil;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ */
+- (void)executeWithError:(NSError*)error;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `result`    = nil;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ * @param async `YES` if the block should be executed asynchronously, `NO` otherwise.
+ */
+- (void)executeWithError:(NSError*)error async:(BOOL)async;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `result`    = nil;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ * @param queue The queue to use to execute the block.
+ */
+- (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue;
+
+/**
+ * Synchronously executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `result`    = result;
+ *   `error`     = nil;
+ * @endcode
+ * @param result The result object of the completed operation.
+ */
+- (void)executeWithResult:(ResultType)result;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `result`    = result;
+ *   `error`     = nil;
+ * @endcode
+ * @param result The result object of the completed operation.
+ * @param async `YES` if the block should be executed asynchronously, `NO` otherwise.
+ */
+- (void)executeWithResult:(ResultType)result async:(BOOL)async;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `result`    = result;
+ *   `error`     = nil;
+ * @endcode
+ * @param result The result object of the completed operation.
+ * @param queue The queue to use to execute the block.
+ */
+- (void)executeWithResult:(ResultType)result queue:(NSOperationQueue*)queue;
 
 @end
 
@@ -75,23 +220,107 @@ typedef void	(^JFSimpleCompletionBlock)	(BOOL succeeded, NSError* __nullable err
 
 #pragma mark -
 
+/**
+ * A wrapper for the `JFSimpleCompletionBlock` block with convenience methods to execute the block asynchronously, if needed.
+ */
 @interface JFSimpleCompletion : NSObject
 
+// =================================================================================================
 // MARK: Properties - Execution
-@property (strong, nonatomic, readonly)	JFSimpleCompletionBlock	block;
+// =================================================================================================
 
+/**
+ * The block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly) JFSimpleCompletionBlock block;
+
+// =================================================================================================
 // MARK: Methods - Memory management
-+ (instancetype)	completionWithBlock:(JFSimpleCompletionBlock)block;
-- (instancetype)	init NS_UNAVAILABLE;
-- (instancetype)	initWithBlock:(JFSimpleCompletionBlock)block NS_DESIGNATED_INITIALIZER;
+// =================================================================================================
 
+/**
+ * A convenient constructor that initializes a new instance of this class using the given block.
+ * @param block The block to use.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithBlock:(JFSimpleCompletionBlock)block;
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes this instance with the given block.
+ * @param block The block to use.
+ * @return This instance.
+ */
+- (instancetype)initWithBlock:(JFSimpleCompletionBlock)block NS_DESIGNATED_INITIALIZER;
+
+// =================================================================================================
 // MARK: Methods - Execution management
-- (void)	execute;
-- (void)	execute:(BOOL)async;
-- (void)	executeOnQueue:(NSOperationQueue*)queue;
-- (void)	executeWithError:(NSError*)error;
-- (void)	executeWithError:(NSError*)error async:(BOOL)async;
-- (void)	executeWithError:(NSError*)error queue:(NSOperationQueue*)queue;
+// =================================================================================================
+
+/**
+ * Synchronously executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `error`     = nil;
+ * @endcode
+ */
+- (void)execute;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `error`     = nil;
+ * @endcode
+ * @param async `YES` if the block should be executed asynchronously, `NO` otherwise.
+ */
+- (void)execute:(BOOL)async;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = YES;
+ *   `error`     = nil;
+ * @endcode
+ * @param queue The queue to use to execute the block.
+ */
+- (void)executeOnQueue:(NSOperationQueue*)queue;
+
+/**
+ * Synchronously executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ */
+- (void)executeWithError:(NSError*)error;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ * @param async `YES` if the block should be executed asynchronously, `NO` otherwise.
+ */
+- (void)executeWithError:(NSError*)error async:(BOOL)async;
+
+/**
+ * Executes the wrapped block using the following values:
+ * @code
+ *   `succeeded` = NO;
+ *   `error`     = error;
+ * @endcode
+ * @param error The failure reason of the completed operation.
+ * @param queue The queue to use to execute the block.
+ */
+- (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue;
 
 @end
 
@@ -100,3 +329,4 @@ typedef void	(^JFSimpleCompletionBlock)	(BOOL succeeded, NSError* __nullable err
 NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
