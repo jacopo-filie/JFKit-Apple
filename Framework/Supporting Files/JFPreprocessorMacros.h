@@ -65,6 +65,8 @@
 // MARK: Target conditionals
 // =================================================================================================
 
+#define	JF_ARCH32	!__LP64__
+#define	JF_ARCH64	__LP64__
 #define	JF_IOS		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_IOS)
 #define	JF_MACOS	(TARGET_OS_MAC && TARGET_OS_OSX)
 #define	JF_TVOS		(TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_TV)
