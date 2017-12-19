@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE27F1FD8BCF1004EEACE"
-               BuildableName = "JFFramework macOS Tests.xctest"
+               BuildableName = "JFFramework_macOS_Tests.xctest"
                BlueprintName = "JFFramework macOS Tests"
                ReferencedContainer = "container:JFFramework.xcodeproj">
             </BuildableReference>
