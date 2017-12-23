@@ -31,6 +31,8 @@
 		4ED607DC1FEE720000292837 /* JFColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607D91FEE720000292837 /* JFColors.m */; };
 		4ED607DD1FEE720000292837 /* JFColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DA1FEE720000292837 /* JFColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED607DE1FEE720000292837 /* JFColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DA1FEE720000292837 /* JFColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ED607E11FEEA42700292837 /* JFMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DF1FEEA42700292837 /* JFMath.h */; };
+		4ED607E21FEEA42700292837 /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		4ECFE3CD1FD8CC65004EEACE /* JFFramework-Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JFFramework-Tests.m"; sourceTree = "<group>"; };
 		4ED607D91FEE720000292837 /* JFColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFColors.m; sourceTree = "<group>"; };
 		4ED607DA1FEE720000292837 /* JFColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColors.h; sourceTree = "<group>"; };
+		4ED607DF1FEEA42700292837 /* JFMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFMath.h; sourceTree = "<group>"; };
+		4ED607E01FEEA42700292837 /* JFMath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 				4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */,
 				4ED607DA1FEE720000292837 /* JFColors.h */,
 				4ED607D91FEE720000292837 /* JFColors.m */,
+				4ED607DF1FEEA42700292837 /* JFMath.h */,
+				4ED607E01FEEA42700292837 /* JFMath.m */,
 				4E50039D1FE5B3D1002710B9 /* JFStrings.h */,
 				4E50039C1FE5B3D1002710B9 /* JFStrings.m */,
 			);
@@ -187,6 +193,7 @@
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DD1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
+				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
 			);
@@ -365,6 +372,7 @@
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
+				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
