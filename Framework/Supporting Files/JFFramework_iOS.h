@@ -37,6 +37,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <JFFramework_iOS/JFBlocks.h>
+#import <JFFramework_iOS/JFByteStream.h>
 #import <JFFramework_iOS/JFPreprocessorMacros.h>
 #import <JFFramework_iOS/JFStrings.h>
 
