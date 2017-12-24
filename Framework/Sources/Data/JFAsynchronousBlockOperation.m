@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2017 Jacopo Filié
+//	Copyright © 2017 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,26 +24,53 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+#import "JFAsynchronousBlockOperation.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_iOS.
-FOUNDATION_EXPORT double JFFramework_iOSVersionNumber;
-
-//! Project version string for JFFramework_iOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_iOS/JFAsynchronousOperation.h>
-#import <JFFramework_iOS/JFBlocks.h>
-#import <JFFramework_iOS/JFByteStream.h>
-#import <JFFramework_iOS/JFColors.h>
-#import <JFFramework_iOS/JFMath.h>
-#import <JFFramework_iOS/JFPreprocessorMacros.h>
-#import <JFFramework_iOS/JFReferences.h>
-#import <JFFramework_iOS/JFStrings.h>
+@implementation JFAsynchronousBlockOperation
+
+// =================================================================================================
+// MARK: Properties - Execution
+// =================================================================================================
+
+@synthesize executionBlock	= _executionBlock;
+
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
+
+- (instancetype)initWithExecutionBlock:(JFBlock)executionBlock
+{
+	self = [super init];
+	if(self)
+	{
+		// Execution
+		_executionBlock	= executionBlock;
+	}
+	return self;
+}
+
+// =================================================================================================
+// MARK: Methods - Execution management
+// =================================================================================================
+
+- (void)main
+{
+	if([self isCancelled])
+		[self finish];
+	else
+		self.executionBlock();
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

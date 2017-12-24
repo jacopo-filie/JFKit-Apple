@@ -36,6 +36,8 @@ FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#import <JFFramework_macOS/JFAsynchronousBlockOperation.h>
+#import <JFFramework_macOS/JFAsynchronousOperation.h>
 #import <JFFramework_macOS/JFBlocks.h>
 #import <JFFramework_macOS/JFByteStream.h>
 #import <JFFramework_macOS/JFColors.h>

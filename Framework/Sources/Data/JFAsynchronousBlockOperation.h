@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2017 Jacopo Filié
+//	Copyright © 2017 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,26 +24,50 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+#import "JFAsynchronousOperation.h"
+
+#import "JFBlocks.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_iOS.
-FOUNDATION_EXPORT double JFFramework_iOSVersionNumber;
-
-//! Project version string for JFFramework_iOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_iOS/JFAsynchronousOperation.h>
-#import <JFFramework_iOS/JFBlocks.h>
-#import <JFFramework_iOS/JFByteStream.h>
-#import <JFFramework_iOS/JFColors.h>
-#import <JFFramework_iOS/JFMath.h>
-#import <JFFramework_iOS/JFPreprocessorMacros.h>
-#import <JFFramework_iOS/JFReferences.h>
-#import <JFFramework_iOS/JFStrings.h>
+/**
+ * An asynchronous block operation is a block operation object that is not automatically finished at the end of its execution. To finish the operation, the method `finish` must be called.
+ */
+@interface JFAsynchronousBlockOperation : JFAsynchronousOperation
+
+// =================================================================================================
+// MARK: Properties - Execution
+// =================================================================================================
+
+/**
+ * The block to execute when the operation is started.
+ */
+@property (strong, nonatomic, readonly)	JFBlock	executionBlock;
+
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Creates a new operation with the given execution block.
+ * @param executionBlock The block to execute.
+ * @return A new operation containing the given execution block.
+ */
+- (instancetype)initWithExecutionBlock:(JFBlock)executionBlock NS_DESIGNATED_INITIALIZER;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
