@@ -29,6 +29,7 @@
 		4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
 		4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
 		4EC258701FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
 		4EC258711FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -428,6 +429,7 @@
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
+				4E99B94E1FF0A7720026724A /* JFMath.m in Sources */,
 				4ED607DC1FEE720000292837 /* JFColors.m in Sources */,
 				4EC258701FEF294600179CC7 /* JFReferences.m in Sources */,
 			);
