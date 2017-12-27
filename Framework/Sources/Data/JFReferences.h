@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-#if !__has_feature(objc_arc_weak)
+#if !JF_WEAK_ENABLED
 /**
  * An unsafe reference is a wrapper that weakly holds in memory the contained object. Be careful when using it because the wrapped object can become a dangling pointer if that object is released without resetting the property `object`. `ObjectType` is the type of object that the reference can wrap.
  */
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-#if __has_feature(objc_arc_weak)
+#if JF_WEAK_ENABLED
 /**
  * A weak reference is a wrapper that weakly holds in memory the contained object. If the wrapped object is released, the property `object` is automatically reset. `ObjectType` is the type of object that the reference can wrap.
  */

@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@property (readwrite, getter=isExecuting) BOOL executing;
-@property (readwrite, getter=isFinished) BOOL finished;
+@property (readwrite, getter=isExecuting)	BOOL	executing;
+@property (readwrite, getter=isFinished)	BOOL	finished;
 
 @end
 
@@ -53,8 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize executing = _executing;
-@synthesize finished = _finished;
+@synthesize executing	= _executing;
+@synthesize finished	= _finished;
 
 // =================================================================================================
 // MARK: Properties accessors - Execution

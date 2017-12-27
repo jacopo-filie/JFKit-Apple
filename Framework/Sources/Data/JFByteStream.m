@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-JFByteStream const JFByteStreamZero = {NULL, 0};
+JFByteStream const JFByteStreamZero	= {NULL, 0};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

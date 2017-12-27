@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-#	if __has_feature(objc_arc_weak)
-@property (weak, nonatomic, nullable) ObjectType weakObject;
+#	if JF_WEAK_ENABLED
+@property (weak, nonatomic, nullable)	ObjectType	weakObject;
 #	endif
 
 // =================================================================================================
@@ -69,9 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object = _object;
-#	if __has_feature(objc_arc_weak)
-@synthesize weakObject = _weakObject;
+@synthesize object		= _object;
+#	if JF_WEAK_ENABLED
+@synthesize weakObject	= _weakObject;
 #	endif
 
 // =================================================================================================
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	@synchronized(self)
 	{
-#	if __has_feature(objc_arc_weak)
+#	if JF_WEAK_ENABLED
 		if(!_object)
 			_object = self.weakObject;
 #	endif
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		_object = object;
 		
-#	if __has_feature(objc_arc_weak)
+#	if JF_WEAK_ENABLED
 		self.weakObject = object;
 #	endif
 		
@@ -140,14 +140,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifiedDidReceiveMemoryWarning:(NSNotification*)notification
 {
-#	if __has_feature(objc_arc_weak)
+#	if JF_WEAK_ENABLED
 	// `weakObject` is set to `object` in the `setObject:` method, so we must hold the object here in a local variable before resetting the instance properties, otherwise the object will be lost before having a chance to restore it on the next call to the `object` method.
 	id object = self.object;
 #	endif
 	
 	self.object = nil;
 	
-#	if __has_feature(objc_arc_weak)
+#	if JF_WEAK_ENABLED
 	self.weakObject = object;
 #	endif
 }
@@ -159,14 +159,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-#if !__has_feature(objc_arc_weak)
+#if !JF_WEAK_ENABLED
 @implementation JFUnsafeReference
 
 // =================================================================================================
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object = _object;
+@synthesize object	= _object;
 
 // =================================================================================================
 // MARK: Methods - Memory management
@@ -186,14 +186,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-#if __has_feature(objc_arc_weak)
+#if JF_WEAK_ENABLED
 @implementation JFWeakReference
 
 // =================================================================================================
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object = _object;
+@synthesize object	= _object;
 
 // =================================================================================================
 // MARK: Methods - Memory management
