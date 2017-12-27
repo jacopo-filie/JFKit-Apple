@@ -47,6 +47,18 @@
 		4ED607DE1FEE720000292837 /* JFColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DA1FEE720000292837 /* JFColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED607E11FEEA42700292837 /* JFMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DF1FEEA42700292837 /* JFMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED607E21FEEA42700292837 /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
+		4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */; };
+		4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */; };
+		4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7BB1FF1178300311EB5 /* JFShortcuts.m */; };
+		4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7BB1FF1178300311EB5 /* JFShortcuts.m */; };
+		4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7BC1FF1178300311EB5 /* JFUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7BC1FF1178300311EB5 /* JFUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7C71FF11DE200311EB5 /* JFVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7C51FF11DE200311EB5 /* JFVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7C51FF11DE200311EB5 /* JFVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF2C7C91FF11DE200311EB5 /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7C61FF11DE200311EB5 /* JFVersion.m */; };
+		4EF2C7CA1FF11DE200311EB5 /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7C61FF11DE200311EB5 /* JFVersion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +105,12 @@
 		4ED607DA1FEE720000292837 /* JFColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColors.h; sourceTree = "<group>"; };
 		4ED607DF1FEEA42700292837 /* JFMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFMath.h; sourceTree = "<group>"; };
 		4ED607E01FEEA42700292837 /* JFMath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMath.m; sourceTree = "<group>"; };
+		4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFShortcuts.h; sourceTree = "<group>"; };
+		4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFUtilities.m; sourceTree = "<group>"; };
+		4EF2C7BB1FF1178300311EB5 /* JFShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFShortcuts.m; sourceTree = "<group>"; };
+		4EF2C7BC1FF1178300311EB5 /* JFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFUtilities.h; sourceTree = "<group>"; };
+		4EF2C7C51FF11DE200311EB5 /* JFVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersion.h; sourceTree = "<group>"; };
+		4EF2C7C61FF11DE200311EB5 /* JFVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +166,8 @@
 				4EC2586D1FEF294600179CC7 /* JFReferences.m */,
 				4E50039D1FE5B3D1002710B9 /* JFStrings.h */,
 				4E50039C1FE5B3D1002710B9 /* JFStrings.m */,
+				4EF2C7C51FF11DE200311EB5 /* JFVersion.h */,
+				4EF2C7C61FF11DE200311EB5 /* JFVersion.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -156,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				4E0BF89F1FE08E970050114D /* Data */,
+				4EF2C7B81FF1178300311EB5 /* Utilities */,
 			);
 			name = Sources;
 			path = Framework/Sources;
@@ -208,6 +229,17 @@
 			path = Framework/Tests;
 			sourceTree = "<group>";
 		};
+		4EF2C7B81FF1178300311EB5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */,
+				4EF2C7BB1FF1178300311EB5 /* JFShortcuts.m */,
+				4EF2C7BC1FF1178300311EB5 /* JFUtilities.h */,
+				4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -217,6 +249,7 @@
 			files = (
 				4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
+				4EF2C7C71FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4ED607DD1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
@@ -225,6 +258,8 @@
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
+				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
+				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +269,7 @@
 			files = (
 				4EC258731FEF295100179CC7 /* JFMath.h in Headers */,
 				4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
+				4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DE1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */,
@@ -242,6 +278,8 @@
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
 				4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */,
+				4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */,
+				4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,8 +439,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF2C7C91FF11DE200311EB5 /* JFVersion.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
+				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
+				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
@@ -424,8 +465,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF2C7CA1FF11DE200311EB5 /* JFVersion.m in Sources */,
 				4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
+				4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
+				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
@@ -482,6 +526,11 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+					"JF_SHORTCUTS_ENABLED=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -519,6 +568,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"JF_SHORTCUTS_ENABLED=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -574,10 +627,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -691,10 +740,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -804,10 +849,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -921,10 +962,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
