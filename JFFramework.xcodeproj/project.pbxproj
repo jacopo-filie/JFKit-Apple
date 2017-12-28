@@ -29,6 +29,10 @@
 		4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E84906F1FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
+		4E8490701FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
+		4E8490721FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8490731FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
 		4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
 		4EC258701FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
@@ -91,6 +95,8 @@
 		4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
 		4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
+		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
+		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
 		4EC2586D1FEF294600179CC7 /* JFReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFReferences.m; sourceTree = "<group>"; };
 		4EC2586E1FEF294600179CC7 /* JFReferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFReferences.h; sourceTree = "<group>"; };
 		4ECFE25B1FD8BCD9004EEACE /* JFFramework_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +166,8 @@
 				4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */,
 				4ED607DA1FEE720000292837 /* JFColors.h */,
 				4ED607D91FEE720000292837 /* JFColors.m */,
+				4E8490711FF4889200B029E6 /* JFImages.h */,
+				4E84906E1FF4887300B029E6 /* JFImages.m */,
 				4ED607DF1FEEA42700292837 /* JFMath.h */,
 				4ED607E01FEEA42700292837 /* JFMath.m */,
 				4EC2586E1FEF294600179CC7 /* JFReferences.h */,
@@ -253,6 +261,7 @@
 				4ED607DD1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
+				4E8490721FF4889200B029E6 /* JFImages.h in Headers */,
 				4E5DD4061FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
 				4E5DD40A1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
@@ -273,6 +282,7 @@
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DE1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */,
+				4E8490731FF4889200B029E6 /* JFImages.h in Headers */,
 				4E5DD4071FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
 				4E5DD40B1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
@@ -446,6 +456,7 @@
 				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
+				4E84906F1FF4887300B029E6 /* JFImages.m in Sources */,
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
@@ -472,6 +483,7 @@
 				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
+				4E8490701FF4887300B029E6 /* JFImages.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4E99B94E1FF0A7720026724A /* JFMath.m in Sources */,
 				4ED607DC1FEE720000292837 /* JFColors.m in Sources */,

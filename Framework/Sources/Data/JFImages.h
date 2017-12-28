@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2017 Jacopo Filié
+//	Copyright © 2017 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,30 +24,35 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <Cocoa/Cocoa.h>
+#import	"JFPreprocessorMacros.h"
+
+@import Foundation;
+
+#if JF_MACOS
+@import Cocoa;
+#else
+@import UIKit;
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_macOS.
-FOUNDATION_EXPORT double JFFramework_macOSVersionNumber;
-
-//! Project version string for JFFramework_macOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_macOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_macOS/JFAsynchronousOperation.h>
-#import <JFFramework_macOS/JFBlocks.h>
-#import <JFFramework_macOS/JFByteStream.h>
-#import <JFFramework_macOS/JFColors.h>
-#import <JFFramework_macOS/JFImages.h>
-#import <JFFramework_macOS/JFMath.h>
-#import <JFFramework_macOS/JFPreprocessorMacros.h>
-#import <JFFramework_macOS/JFReferences.h>
-#import <JFFramework_macOS/JFShortcuts.h>
-#import <JFFramework_macOS/JFStrings.h>
-#import <JFFramework_macOS/JFUtilities.h>
-#import <JFFramework_macOS/JFVersion.h>
+// =================================================================================================
+// MARK: Functions - Bundle
+// =================================================================================================
+
+#if JF_IOS
+
+FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageName(void);
+FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
+
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
