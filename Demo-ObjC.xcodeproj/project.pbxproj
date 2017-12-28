@@ -244,8 +244,8 @@
 			children = (
 				4ECFE3851FD8BE32004EEACE /* JFFramework_iOS.framework */,
 				4ECFE3871FD8BE32004EEACE /* JFFramework_macOS.framework */,
-				4ECFE3891FD8BE32004EEACE /* JFFramework iOS Tests.xctest */,
-				4ECFE38B1FD8BE32004EEACE /* JFFramework macOS Tests.xctest */,
+				4ECFE3891FD8BE32004EEACE /* JFFramework_iOS_Tests.xctest */,
+				4ECFE38B1FD8BE32004EEACE /* JFFramework_macOS_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -544,17 +544,17 @@
 			remoteRef = 4ECFE3861FD8BE32004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECFE3891FD8BE32004EEACE /* JFFramework iOS Tests.xctest */ = {
+		4ECFE3891FD8BE32004EEACE /* JFFramework_iOS_Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "JFFramework iOS Tests.xctest";
+			path = JFFramework_iOS_Tests.xctest;
 			remoteRef = 4ECFE3881FD8BE32004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECFE38B1FD8BE32004EEACE /* JFFramework macOS Tests.xctest */ = {
+		4ECFE38B1FD8BE32004EEACE /* JFFramework_macOS_Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "JFFramework macOS Tests.xctest";
+			path = JFFramework_macOS_Tests.xctest;
 			remoteRef = 4ECFE38A1FD8BE32004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
