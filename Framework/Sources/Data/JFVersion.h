@@ -287,7 +287,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 /**
  * This instance represented as the `NSOperatingSystemVersion` struct. The patch component is ignored.
  */
-@property (assign, nonatomic, readonly) NSOperatingSystemVersion operatingSystemVersion API_AVAILABLE(macos(10.10), ios(8.0));
+@property (assign, nonatomic, readonly) NSOperatingSystemVersion operatingSystemVersion API_AVAILABLE(ios(8.0), macos(10.10));
 
 /**
  * This instance represented as a string with the following format:
@@ -355,7 +355,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
  * @param operatingSystemVersion The version struct to use.
  * @return A version object containing the given version struct values.
  */
-- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion API_AVAILABLE(macos(10.10), ios(8.0));
+- (instancetype)initWithOperatingSystemVersion:(NSOperatingSystemVersion)operatingSystemVersion API_AVAILABLE(ios(8.0), macos(10.10));
 
 /**
  * Initializes a version object by parsing the given version string. The parser expects a string with the following format:
