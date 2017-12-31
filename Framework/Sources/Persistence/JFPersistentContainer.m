@@ -26,7 +26,6 @@
 
 #import "JFPersistentContainer.h"
 
-#import "JFBlocks.h"
 #import	"JFPreprocessorMacros.h"
 #import "JFShortcuts.h"
 #import "JFVersion.h"
@@ -34,26 +33,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 @interface JFPersistentContainer ()
 
 // MARK: Properties - Concurrency
 @property (strong, nonatomic, readonly) NSOperationQueue* serialQueue;
 
 // MARK: Properties - Stack
-@property (strong, nonatomic, readonly, nullable) NSPersistentContainer* container API_AVAILABLE(ios(10.0), macos(10.12));
+@property (strong, nonatomic, readonly, nullable) NSPersistentContainer* persistentContainer API_AVAILABLE(ios(10.0), macos(10.12));
 
 // MARK: Methods - Stack management
-- (NSManagedObjectContext*)createManagedObjectContext;
-- (NSManagedObjectContext*)createManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType API_AVAILABLE(ios(5.0), macos(10.7));
+- (NSManagedObjectContext*)newManagedObjectContext API_DEPRECATED_WITH_REPLACEMENT("-newManagedObjectContextWithConcurrencyType:", ios(3.0, 5.0), macos(10.6, 10.7));
+- (NSManagedObjectContext*)newManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType API_AVAILABLE(ios(5.0), macos(10.7));
 
 @end
-NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark
+#pragma mark -
 
-NS_ASSUME_NONNULL_BEGIN
 @implementation JFPersistentContainer
 
 // =================================================================================================
@@ -66,17 +66,17 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize model	= _model;
-@synthesize name	= _name;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize name = _name;
 
 // =================================================================================================
 // MARK: Properties - Stack
 // =================================================================================================
 
-@synthesize container		= _container;
-@synthesize coordinator		= _coordinator;
-//@synthesize descriptions	= _descriptions;
-@synthesize viewContext		= _viewContext;
+@synthesize persistentContainer = _persistentContainer;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize persistentStoreDescriptions = _persistentStoreDescriptions;
+@synthesize viewContext = _viewContext;
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -84,31 +84,60 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSURL*)defaultDirectoryURL
 {
+	if(@available(iOS 10.0, macOS 10.12, *))
+		return NSPersistentContainer.defaultDirectoryURL;
+	
 	NSError* error = nil;
 	NSURL* retObj = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
 	NSAssert(retObj, @"Failed to load application support directory for error '%@'", error.description);
 	return [retObj URLByAppendingPathComponent:@"Databases"];
 }
 
+- (NSManagedObjectModel*)managedObjectModel
+{
+	if(@available(iOS 10.0, macOS 10.12, *))
+		return self.persistentContainer.managedObjectModel;
+	
+	return _managedObjectModel;
+}
+
+- (NSString*)name
+{
+	if(@available(iOS 10.0, macOS 10.12, *))
+		return self.persistentContainer.name;
+	
+	return [_name copy];
+}
+
 // =================================================================================================
 // MARK: Properties accessors - Stack
 // =================================================================================================
 
-- (NSPersistentStoreCoordinator*)coordinator
+- (NSPersistentStoreCoordinator*)persistentStoreCoordinator
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
-		return self.container.persistentStoreCoordinator;
+		return self.persistentContainer.persistentStoreCoordinator;
 	
 	@synchronized(self)
 	{
-		return _coordinator;
+		return _persistentStoreCoordinator;
 	}
+}
+
+- (NSArray<NSPersistentStoreDescription*>*)persistentStoreDescriptions
+{
+	return self.persistentContainer.persistentStoreDescriptions;
+}
+
+- (void)setPersistentStoreDescriptions:(NSArray<NSPersistentStoreDescription*>*)persistentStoreDescriptions
+{
+	self.persistentContainer.persistentStoreDescriptions = persistentStoreDescriptions;
 }
 
 - (NSManagedObjectContext*)viewContext
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
-		return self.container.viewContext;
+		return self.persistentContainer.viewContext;
 	
 	@synchronized(self)
 	{
@@ -116,9 +145,9 @@ NS_ASSUME_NONNULL_BEGIN
 		{
 			JFBlock block = ^(void) {
 				if(@available(macOS 10.7, *))
-					_viewContext = [self createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+					_viewContext = [self newManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
 				else
-					_viewContext = [self createManagedObjectContext];
+					_viewContext = [self newManagedObjectContext];
 			};
 			
 			if([NSThread isMainThread])
@@ -146,6 +175,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithName:(NSString*)name
 {
+	if(@available(iOS 10.0, macOS 10.12, *))
+	{
+		
+	}
+	
 	NSURL* modelURL = JFBundleResourceURLForFile(MainBundle, name);
 	NSAssert(modelURL, @"Missing the model URL! The given name is '%@'.", name);
 	
@@ -164,15 +198,15 @@ NS_ASSUME_NONNULL_BEGIN
 		queue.maxConcurrentOperationCount = 1;
 		
 		// Concurrency
-		_serialQueue	= queue;
+		_serialQueue = queue;
 		
 		// Data
-		_model	= model;
-		_name	= [name copy];
+		_managedObjectModel = model;
+		_name = [name copy];
 		
 		// Stack
 		if(@available(iOS 10.0, macOS 10.12, *))
-			_container = [[NSPersistentContainer alloc] initWithName:name managedObjectModel:model];
+			_persistentContainer = [[NSPersistentContainer alloc] initWithName:name managedObjectModel:model];
 	}
 	return self;
 }
@@ -181,25 +215,25 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Stack management
 // =================================================================================================
 
-- (NSManagedObjectContext*)createManagedObjectContext
+- (NSManagedObjectContext*)newManagedObjectContext
 {
 	NSManagedObjectContext* retVal = [NSManagedObjectContext new];
-	retVal.persistentStoreCoordinator = self.coordinator;
+	retVal.persistentStoreCoordinator = self.persistentStoreCoordinator;
 	return retVal;
 }
 
-- (NSManagedObjectContext*)createManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
+- (NSManagedObjectContext*)newManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
 {
 	NSManagedObjectContext* retVal = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
-	retVal.persistentStoreCoordinator = self.coordinator;
+	retVal.persistentStoreCoordinator = self.persistentStoreCoordinator;
 	return retVal;
 }
 
-- (void)loadPersistentStoresWithCompletionHandler:(JFSimpleCompletion*)completion
+- (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
 	{
-		[self.container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* description, NSError* __nullable error) {
+		[self.persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* description, NSError* __nullable error) {
 			if(error)
 				[completion executeWithError:error];
 			else
@@ -229,7 +263,7 @@ NS_ASSUME_NONNULL_BEGIN
 		tempSelf = nil;
 #endif
 
-		if(strongSelf.coordinator)
+		if(strongSelf.persistentStoreCoordinator)
 		{
 			[completion execute];
 			return;
@@ -263,7 +297,7 @@ NS_ASSUME_NONNULL_BEGIN
 			}
 		}
 		
-		NSPersistentStoreCoordinator* coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:strongSelf.model];
+		NSPersistentStoreCoordinator* coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:strongSelf.managedObjectModel];
 		
 		NSError* error = nil;
 		if(![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error])
@@ -274,7 +308,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		@synchronized(strongSelf)
 		{
-			_coordinator = coordinator;
+			_persistentStoreCoordinator = coordinator;
 		}
 		
 		[completion execute];
@@ -283,48 +317,56 @@ NS_ASSUME_NONNULL_BEGIN
 	[self.serialQueue addOperationWithBlock:block];
 }
 
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* __nullable error))completion
+{
+	[self.persistentContainer loadPersistentStoresWithCompletionHandler:completion];
+}
+
 - (NSManagedObjectContext*)newBackgroundContext
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
-		return [self.container newBackgroundContext];
+		return [self.persistentContainer newBackgroundContext];
 	
 	if(@available(macOS 10.7, *))
-		return [self createManagedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+		return [self newManagedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
 	
-	return [self createManagedObjectContext];
+	return [self newManagedObjectContext];
 }
 
-- (void)performBackgroundTask:(void (^)(NSManagedObjectContext*))task
+- (void)performBackgroundTask:(void (^)(NSManagedObjectContext*))block
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
 	{
-		[self.container performBackgroundTask:task];
+		[self.persistentContainer performBackgroundTask:block];
 		return;
 	}
 	
 	NSManagedObjectContext* __block context = nil;
 	
-	JFBlock block = ^(void)
+	JFBlock innerBlock = ^(void)
 	{
-		task(context);
+		block(context);
 		context = nil;
 	};
 	
 	if(@available(macOS 10.7, *))
 	{
 		context = [self newBackgroundContext];
-		[context performBlock:block];
+		[context performBlock:innerBlock];
 	}
 	else
 	{
 		[self.serialQueue addOperationWithBlock:^{
 			context = [self newBackgroundContext];
-			block();
+			innerBlock();
 		}];
 	}
 }
 
 @end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
