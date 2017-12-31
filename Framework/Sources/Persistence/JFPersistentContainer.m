@@ -147,7 +147,10 @@ NS_ASSUME_NONNULL_BEGIN
 				if(@available(macOS 10.7, *))
 					_viewContext = [self newManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
 				else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 					_viewContext = [self newManagedObjectContext];
+#pragma clang diagnostic pop
 			};
 			
 			if([NSThread isMainThread])
@@ -330,7 +333,10 @@ NS_ASSUME_NONNULL_BEGIN
 	if(@available(macOS 10.7, *))
 		return [self newManagedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
 	
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self newManagedObjectContext];
+#pragma clang diagnostic pop
 }
 
 - (void)performBackgroundTask:(void (^)(NSManagedObjectContext*))block
