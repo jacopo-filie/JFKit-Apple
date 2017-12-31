@@ -27,6 +27,8 @@
 @import CoreData;
 @import UIKit;
 
+@import JFFramework_iOS;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Stores
 // =================================================================================================
 
-@property (strong, readonly) NSPersistentContainer* persistentContainer;
+@property (strong, readonly) JFPersistentContainer* persistentContainer;
 
 // =================================================================================================
 // MARK: Properties (Inherited) - User interface

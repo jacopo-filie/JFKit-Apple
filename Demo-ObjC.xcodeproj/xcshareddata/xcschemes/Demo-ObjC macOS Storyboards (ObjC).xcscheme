@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE33A1FD8BDE2004EEACE"
-               BuildableName = "Demo-ObjC macOS.app"
-               BlueprintName = "Demo-ObjC macOS"
+               BlueprintIdentifier = "4E58BB401FF90E320029CE8D"
+               BuildableName = "Demo-ObjC macOS Storyboards.app"
+               BlueprintName = "Demo-ObjC macOS Storyboards"
                ReferencedContainer = "container:Demo-ObjC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE3521FD8BDE2004EEACE"
-               BuildableName = "Demo-ObjC macOS Tests.xctest"
-               BlueprintName = "Demo-ObjC macOS Tests"
+               BlueprintIdentifier = "4E58BB551FF90E5B0029CE8D"
+               BuildableName = "Demo-ObjC macOS Storyboards Tests.xctest"
+               BlueprintName = "Demo-ObjC macOS Storyboards Tests"
                ReferencedContainer = "container:Demo-ObjC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE35D1FD8BDE3004EEACE"
-               BuildableName = "Demo-ObjC macOS UITests.xctest"
-               BlueprintName = "Demo-ObjC macOS UITests"
+               BlueprintIdentifier = "4E58BB611FF90E650029CE8D"
+               BuildableName = "Demo-ObjC macOS Storyboards UITests.xctest"
+               BlueprintName = "Demo-ObjC macOS Storyboards UITests"
                ReferencedContainer = "container:Demo-ObjC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,9 +61,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE3521FD8BDE2004EEACE"
-               BuildableName = "Demo-ObjC macOS Tests.xctest"
-               BlueprintName = "Demo-ObjC macOS Tests"
+               BlueprintIdentifier = "4E58BB551FF90E5B0029CE8D"
+               BuildableName = "Demo-ObjC macOS Storyboards Tests.xctest"
+               BlueprintName = "Demo-ObjC macOS Storyboards Tests"
                ReferencedContainer = "container:Demo-ObjC.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -71,9 +71,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE35D1FD8BDE3004EEACE"
-               BuildableName = "Demo-ObjC macOS UITests.xctest"
-               BlueprintName = "Demo-ObjC macOS UITests"
+               BlueprintIdentifier = "4E58BB611FF90E650029CE8D"
+               BuildableName = "Demo-ObjC macOS Storyboards UITests.xctest"
+               BlueprintName = "Demo-ObjC macOS Storyboards UITests"
                ReferencedContainer = "container:Demo-ObjC.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -81,9 +81,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE33A1FD8BDE2004EEACE"
-            BuildableName = "Demo-ObjC macOS.app"
-            BlueprintName = "Demo-ObjC macOS"
+            BlueprintIdentifier = "4E58BB401FF90E320029CE8D"
+            BuildableName = "Demo-ObjC macOS Storyboards.app"
+            BlueprintName = "Demo-ObjC macOS Storyboards"
             ReferencedContainer = "container:Demo-ObjC.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -105,9 +105,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE33A1FD8BDE2004EEACE"
-            BuildableName = "Demo-ObjC macOS.app"
-            BlueprintName = "Demo-ObjC macOS"
+            BlueprintIdentifier = "4E58BB401FF90E320029CE8D"
+            BuildableName = "Demo-ObjC macOS Storyboards.app"
+            BlueprintName = "Demo-ObjC macOS Storyboards"
             ReferencedContainer = "container:Demo-ObjC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -124,9 +124,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE33A1FD8BDE2004EEACE"
-            BuildableName = "Demo-ObjC macOS.app"
-            BlueprintName = "Demo-ObjC macOS"
+            BlueprintIdentifier = "4E58BB401FF90E320029CE8D"
+            BuildableName = "Demo-ObjC macOS Storyboards.app"
+            BlueprintName = "Demo-ObjC macOS Storyboards"
             ReferencedContainer = "container:Demo-ObjC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

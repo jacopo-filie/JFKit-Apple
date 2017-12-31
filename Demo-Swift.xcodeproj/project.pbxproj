@@ -531,14 +531,14 @@
 		4ECFE37A1FD8BE2D004EEACE /* JFFramework iOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "JFFramework iOS Tests.xctest";
+			path = JFFramework_iOS_Tests.xctest;
 			remoteRef = 4ECFE3791FD8BE2D004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4ECFE37C1FD8BE2D004EEACE /* JFFramework macOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "JFFramework macOS Tests.xctest";
+			path = JFFramework_macOS_Tests.xctest;
 			remoteRef = 4ECFE37B1FD8BE2D004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1189,7 +1189,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS.plist";
+				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-Storyboards.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1247,7 +1247,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS.plist";
+				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-Storyboards.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;

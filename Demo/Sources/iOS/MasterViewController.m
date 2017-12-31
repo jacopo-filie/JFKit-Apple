@@ -77,7 +77,11 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	if(!_fetchedResultsController)
 	{
-		NSFetchRequest<Event*>* fetchRequest = Event.fetchRequest;
+		NSFetchRequest<Event*>* fetchRequest;
+		if(@available(iOS 10.0, *))
+			fetchRequest = Event.fetchRequest;
+		else
+			fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
 		
 		// Set the batch size to a suitable number.
 		[fetchRequest setFetchBatchSize:20];
@@ -112,7 +116,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)insertNewObject:(id)sender
 {
 	NSManagedObjectContext* context = [self.fetchedResultsController managedObjectContext];
-	Event* newEvent = [[Event alloc] initWithContext:context];
+	
+	Event* newEvent;
+	if(@available(iOS 10.0, *))
+		newEvent = [[Event alloc] initWithContext:context];
+	else
+		newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
 	
 	// If appropriate, configure the new managed object.
 	newEvent.timestamp = [NSDate date];

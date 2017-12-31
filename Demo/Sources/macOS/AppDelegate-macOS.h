@@ -27,6 +27,8 @@
 @import CoreData;
 @import Cocoa;
 
+@import JFFramework_macOS;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,10 +38,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 // =================================================================================================
+// MARK: Properties - User interface (Outlets)
+// =================================================================================================
+
+#if JF_WEAK_ENABLED
+@property (weak, nonatomic, nullable) IBOutlet NSWindow* window;
+#else
+@property (strong, nonatomic, nullable) IBOutlet NSWindow* window;
+#endif
+
+// =================================================================================================
 // MARK: Properties - Stores
 // =================================================================================================
 
-@property (strong, readonly) NSPersistentContainer* persistentContainer;
+@property (strong, readonly) JFPersistentContainer* persistentContainer;
 
 @end
 
