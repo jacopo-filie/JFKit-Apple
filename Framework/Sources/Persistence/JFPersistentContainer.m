@@ -120,6 +120,8 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	@synchronized(self)
 	{
+		if(!_persistentStoreCoordinator)
+			_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
 		return _persistentStoreCoordinator;
 	}
 }
@@ -178,12 +180,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithName:(NSString*)name
 {
-	if(@available(iOS 10.0, macOS 10.12, *))
-	{
-		
-	}
-	
 	NSURL* modelURL = JFBundleResourceURLForFile(MainBundle, name);
+	if(!modelURL && JFStringIsNullOrEmpty(name.pathExtension))
+		modelURL = JFBundleResourceURLForFile(MainBundle, [name stringByAppendingPathExtension:@"momd"]);
 	NSAssert(modelURL, @"Missing the model URL! The given name is '%@'.", name);
 	
 	NSManagedObjectModel* model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
@@ -266,12 +265,6 @@ NS_ASSUME_NONNULL_BEGIN
 		tempSelf = nil;
 #endif
 
-		if(strongSelf.persistentStoreCoordinator)
-		{
-			[completion execute];
-			return;
-		}
-		
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
 		if(!url)
 		{
@@ -300,18 +293,13 @@ NS_ASSUME_NONNULL_BEGIN
 			}
 		}
 		
-		NSPersistentStoreCoordinator* coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:strongSelf.managedObjectModel];
+		NSPersistentStoreCoordinator* coordinator = strongSelf.persistentStoreCoordinator;
 		
 		NSError* error = nil;
 		if(![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error])
 		{
 			[completion executeWithError:error];
 			return;
-		}
-		
-		@synchronized(strongSelf)
-		{
-			_persistentStoreCoordinator = coordinator;
 		}
 		
 		[completion execute];
