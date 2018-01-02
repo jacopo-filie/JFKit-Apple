@@ -48,110 +48,98 @@ NSString* __nullable JFLaunchImageName(void)
 
 NSString* __nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 {
-	/*
-	static NSString* const NameKey				= @"UILaunchImageName";
-	static NSString* const MinimumOSVersionKey	= @"UILaunchImageMinimumOSVersion";
-	static NSString* const OrientationKey		= @"UILaunchImageOrientation";
-	static NSString* const SizeKey				= @"UILaunchImageSize";
-	
-	static NSDictionary* LaunchScreens = nil;
-	if(!LaunchScreens)
-	{
-		NSArray* dicts = JFApplicationInfoForKey(@"UILaunchImages");
-		
-		NSString* searchString = @"-700";
-		
-		NSMutableDictionary* mDicts = [NSMutableDictionary dictionaryWithCapacity:[dicts count]];
-		for(NSDictionary* dict in dicts)
-		{
-			NSString* key = dict[NameKey];
-			NSMutableDictionary* mDict = [dict mutableCopy];
-			[mDict removeObjectForKey:NameKey];
-			mDicts[key] = [mDict copy];
-			
-			NSRange range = [key rangeOfString:searchString];
-			if(range.location != NSNotFound)
-			{
-				key = [key stringByReplacingOccurrencesOfString:searchString withString:JFEmptyString];
-				[mDict removeObjectForKey:MinimumOSVersionKey];
-				mDicts[key] = [mDict copy];
-			}
-		}
-		LaunchScreens = [mDicts copy];
-	}
-	
-	static CGSize screenSize = {0.0, 0.0};
-	if(CGSizeEqualToSize(screenSize, CGSizeZero))
-	{
-		UIScreen* screen = MainScreen;
-		CGRect screenBounds = (iOS8Plus ? [screen.coordinateSpace convertRect:screen.bounds toCoordinateSpace:screen.fixedCoordinateSpace] : screen.bounds);
-		screenSize = screenBounds.size;
-	}
-	
 	static NSString* landscapeRetObj = nil;
 	static NSString* portraitRetObj = nil;
 	
-	BOOL isLandscape = UIInterfaceOrientationIsLandscape(orientation);
-	BOOL isPortrait = UIInterfaceOrientationIsPortrait(orientation);
-	
-	NSString* retObj = (isLandscape ? landscapeRetObj : (isPortrait ? portraitRetObj : nil));
-	
-	if(!retObj)
-	{
-		JFVersion* retObjVersion = nil;
-		for(NSString* key in [LaunchScreens allKeys])
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSString* const launchImagesKey	= @"UILaunchImages";
+		NSString* const minOSVersionKey	= @"UILaunchImageMinimumOSVersion";
+		NSString* const nameKey			= @"UILaunchImageName";
+		NSString* const orientationKey	= @"UILaunchImageOrientation";
+		NSString* const sizeKey			= @"UILaunchImageSize";
+		
+		NSMutableArray<NSDictionary<NSString*, NSString*>*>* launchScreens = [NSMutableArray<NSDictionary<NSString*, NSString*>*> array];
+		@autoreleasepool
 		{
-			NSDictionary* dict = LaunchScreens[key];
+			// Retrieves the main screen size in portrait-up orientation.
+			UIScreen* screen = MainScreen;
+			CGSize screenSize = [screen.coordinateSpace convertRect:screen.bounds toCoordinateSpace:screen.fixedCoordinateSpace].size;
 			
-			// Checks the orientation and skips to the next if not satisfied.
-			NSString* orientationString = dict[OrientationKey];
+			// Retrieves the info of all the available launch images inside the bundle.
+			NSArray<NSDictionary<NSString*, NSString*>*>* dicts = JFApplicationInfoForKey(launchImagesKey);
+			for(NSDictionary<NSString*, NSString*>* dict in dicts)
+			{
+				// Filters by size.
+				NSString* sizeString = dict[sizeKey];
+				if(!JFStringIsNullOrEmpty(sizeString) && !CGSizeEqualToSize(CGSizeFromString(sizeString), screenSize))
+					continue;
+				
+				// Filters by minimum OS version.
+				NSString* minOSVersionString = dict[minOSVersionKey];
+				if(!JFStringIsNullOrEmpty(minOSVersionString))
+				{
+					JFVersion* minOSVersion = [[JFVersion alloc] initWithVersionString:minOSVersionString];
+					if(!iOSPlus(minOSVersion))
+						continue;
+				}
+				
+				// All filters passed: adds it to the array.
+				[launchScreens addObject:dict];
+			}
+		}
+		
+		JFVersion* landscapeRetObjVersion = nil;
+		JFVersion* portraitRetObjVersion = nil;
+		for(NSDictionary<NSString*, NSString*>* dict in launchScreens)
+		{
+			NSString* name = dict[nameKey];
+			if(JFStringIsNullOrEmpty(name))
+				continue;
+			
+			NSString* orientationString = dict[orientationKey];
+			if(!orientationString)
+				continue;
+			
+			NSString* versionString = dict[minOSVersionKey];
+			if(!versionString)
+				continue;
+			
+			// Retrieves the variables to use based on the current launch screen orientation.
+			NSString* __strong* retObj;
+			JFVersion* __strong* retObjVersion;
 			if([orientationString isEqualToString:@"Portrait"])
 			{
-				if(isLandscape)
-					continue;
+				retObj = &portraitRetObj;
+				retObjVersion = &portraitRetObjVersion;
 			}
 			else if([orientationString isEqualToString:@"Landscape"])
 			{
-				if(isPortrait)
-					continue;
+				retObj = &landscapeRetObj;
+				retObjVersion = &landscapeRetObjVersion;
 			}
 			else
 				continue;
 			
-			// Checks the size and skips to the next if not satisfied.
-			NSString* sizeString = dict[SizeKey];
-			CGSize size = CGSizeFromString(sizeString);
-			if(!CGSizeEqualToSize(size, screenSize))
+			// Retrieves the current launch screen version.
+			JFVersion* version = [[JFVersion alloc] initWithVersionString:versionString];
+			if(!version)
 				continue;
 			
-			// Checks the minimum iOS version and skips to the next if not satisfied.
-			NSString* minVersionString = dict[MinimumOSVersionKey];
-			JFVersion* minVersion = (minVersionString ? [[JFVersion alloc] initWithVersionString:minVersionString] : nil);
-			if(minVersion)
-			{
-				if(!iOSPlus(minVersion))
-					continue;
-				
-				// Checks if the current image minVersion is better than the last used image version.
-				if(retObjVersion && [minVersion isLessThanVersion:retObjVersion])
-					continue;
-			}
-			else if(retObjVersion)
+			// Checks if the last saved version is greater than the current version.
+			if([*retObjVersion isGreaterThanVersion:version])
 				continue;
 			
-			if(isLandscape)	landscapeRetObj = key;
-			if(isPortrait)	portraitRetObj = key;
-			
-			retObj = key;
-			retObjVersion = minVersion;
-			
-			if(minVersion && iOS(minVersion))
-				break;
+			*retObj = name;
+			*retObjVersion = version;
 		}
-	}
+	});
 	
-	return retObj;
-	 */
+	if(UIInterfaceOrientationIsPortrait(orientation))
+		return portraitRetObj;
+	
+	if(UIInterfaceOrientationIsLandscape(orientation))
+		return landscapeRetObj;
 	
 	return nil;
 }
