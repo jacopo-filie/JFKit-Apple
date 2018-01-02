@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E225BB01FF9516C0053183E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D27C1FD8DC40009C1EDD /* ViewController.swift */; };
+		4E225BB11FF9516C0053183E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D2801FD8DC40009C1EDD /* AppDelegate.swift */; };
+		4E225BB21FF9516C0053183E /* Database-Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D2221FD8D5B1009C1EDD /* Database-Swift.xcdatamodeld */; };
+		4E225BB41FF9516C0053183E /* JFFramework_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */; };
+		4E225BB61FF9516C0053183E /* Assets-macOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5D2201FD8D5B1009C1EDD /* Assets-macOS.xcassets */; };
+		4E225BB91FF9516C0053183E /* JFFramework_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E225BC51FF9516E0053183E /* Demo-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D2461FD8DA2B009C1EDD /* Demo-Tests.swift */; };
+		4E225BD11FF951700053183E /* Demo-UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5D2441FD8DA2B009C1EDD /* Demo-UITests.swift */; };
+		4E225BDF1FF953F10053183E /* Main-macOS-Swift.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E225BDD1FF953F00053183E /* Main-macOS-Swift.xib */; };
 		4EC77D6B1FD95962004E5C99 /* JFFramework_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3761FD8BE2D004EEACE /* JFFramework_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4EC77D6D1FD95993004E5C99 /* JFFramework_macOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4ECFE3961FD8C041004EEACE /* JFFramework_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE3761FD8BE2D004EEACE /* JFFramework_iOS.framework */; };
@@ -30,6 +39,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4E225BAE1FF9516C0053183E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECFE36E1FD8BE2D004EEACE /* JFFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4ECFE2771FD8BCF1004EEACE;
+			remoteInfo = "JFFramework macOS";
+		};
+		4E225BD91FF952B90053183E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECFE24C1FD8BA20004EEACE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E225BAC1FF9516C0053183E;
+			remoteInfo = "Demo-Swift macOS XIBs";
+		};
+		4E225BDB1FF952BF0053183E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4ECFE24C1FD8BA20004EEACE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E225BAC1FF9516C0053183E;
+			remoteInfo = "Demo-Swift macOS XIBs";
+		};
 		4ECFE2AD1FD8BD8F004EEACE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4ECFE24C1FD8BA20004EEACE /* Project object */;
@@ -103,6 +133,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4E225BB81FF9516C0053183E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4E225BB91FF9516C0053183E /* JFFramework_macOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4EC77D681FD95958004E5C99 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,12 +169,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E225BBD1FF9516C0053183E /* Demo-Swift macOS XIBs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift macOS XIBs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E225BCB1FF9516E0053183E /* Demo-Swift macOS XIBs Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS XIBs Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E225BD71FF951700053183E /* Demo-Swift macOS XIBs UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS XIBs UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E225BDE1FF953F00053183E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Main-macOS-Swift.xib"; sourceTree = "<group>"; };
 		4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift macOS Storyboards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS Storyboards Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS Storyboards UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE36E1FD8BE2D004EEACE /* JFFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = JFFramework.xcodeproj; sourceTree = "<group>"; };
 		4ED5D2061FD8D21F009C1EDD /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		4ED5D2071FD8D21F009C1EDD /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
@@ -154,6 +199,28 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4E225BB31FF9516C0053183E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E225BB41FF9516C0053183E /* JFFramework_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BC61FF9516E0053183E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BD21FF951700053183E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4ECFE2901FD8BD8E004EEACE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -223,9 +290,12 @@
 				4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */,
 				4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */,
 				4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */,
-				4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */,
-				4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */,
-				4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */,
+				4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards.app */,
+				4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards Tests.xctest */,
+				4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards UITests.xctest */,
+				4E225BBD1FF9516C0053183E /* Demo-Swift macOS XIBs.app */,
+				4E225BCB1FF9516E0053183E /* Demo-Swift macOS XIBs Tests.xctest */,
+				4E225BD71FF951700053183E /* Demo-Swift macOS XIBs UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,8 +305,8 @@
 			children = (
 				4ECFE3761FD8BE2D004EEACE /* JFFramework_iOS.framework */,
 				4ECFE3781FD8BE2D004EEACE /* JFFramework_macOS.framework */,
-				4ECFE37A1FD8BE2D004EEACE /* JFFramework iOS Tests.xctest */,
-				4ECFE37C1FD8BE2D004EEACE /* JFFramework macOS Tests.xctest */,
+				4ECFE37A1FD8BE2D004EEACE /* JFFramework_iOS_Tests.xctest */,
+				4ECFE37C1FD8BE2D004EEACE /* JFFramework_macOS_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +364,7 @@
 				4ED5D2271FD8D5B1009C1EDD /* LaunchScreen-Swift.storyboard */,
 				4ED5D22B1FD8D5B1009C1EDD /* Main-iOS-Swift.storyboard */,
 				4ED5D2291FD8D5B1009C1EDD /* Main-macOS-Swift.storyboard */,
+				4E225BDD1FF953F00053183E /* Main-macOS-Swift.xib */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -340,6 +411,61 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4E225BAC1FF9516C0053183E /* Demo-Swift macOS XIBs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E225BBA1FF9516C0053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs" */;
+			buildPhases = (
+				4E225BAF1FF9516C0053183E /* Sources */,
+				4E225BB31FF9516C0053183E /* Frameworks */,
+				4E225BB51FF9516C0053183E /* Resources */,
+				4E225BB81FF9516C0053183E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E225BAD1FF9516C0053183E /* PBXTargetDependency */,
+			);
+			name = "Demo-Swift macOS XIBs";
+			productName = "Demo macOS";
+			productReference = 4E225BBD1FF9516C0053183E /* Demo-Swift macOS XIBs.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4E225BC11FF9516E0053183E /* Demo-Swift macOS XIBs Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E225BC81FF9516E0053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs Tests" */;
+			buildPhases = (
+				4E225BC41FF9516E0053183E /* Sources */,
+				4E225BC61FF9516E0053183E /* Frameworks */,
+				4E225BC71FF9516E0053183E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E225BDA1FF952B90053183E /* PBXTargetDependency */,
+			);
+			name = "Demo-Swift macOS XIBs Tests";
+			productName = "Demo macOSTests";
+			productReference = 4E225BCB1FF9516E0053183E /* Demo-Swift macOS XIBs Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4E225BCD1FF951700053183E /* Demo-Swift macOS XIBs UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E225BD41FF951700053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs UITests" */;
+			buildPhases = (
+				4E225BD01FF951700053183E /* Sources */,
+				4E225BD21FF951700053183E /* Frameworks */,
+				4E225BD31FF951700053183E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E225BDC1FF952BF0053183E /* PBXTargetDependency */,
+			);
+			name = "Demo-Swift macOS XIBs UITests";
+			productName = "Demo macOSUITests";
+			productReference = 4E225BD71FF951700053183E /* Demo-Swift macOS XIBs UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ECFE2C41FD8BD8F004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift iOS" */;
@@ -395,9 +521,9 @@
 			productReference = 4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */ = {
+		4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS" */;
+			buildConfigurationList = 4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards" */;
 			buildPhases = (
 				4ECFE2C71FD8BDA3004EEACE /* Sources */,
 				4ECFE2C81FD8BDA3004EEACE /* Frameworks */,
@@ -409,14 +535,14 @@
 			dependencies = (
 				4ECFE3981FD8C046004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo-Swift macOS";
+			name = "Demo-Swift macOS Storyboards";
 			productName = "Demo macOS";
-			productReference = 4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS.app */;
+			productReference = 4ECFE2CB1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Tests */ = {
+		4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Tests" */;
+			buildConfigurationList = 4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards Tests" */;
 			buildPhases = (
 				4ECFE2DB1FD8BDA3004EEACE /* Sources */,
 				4ECFE2DC1FD8BDA3004EEACE /* Frameworks */,
@@ -427,14 +553,14 @@
 			dependencies = (
 				4ECFE2E11FD8BDA3004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo-Swift macOS Tests";
+			name = "Demo-Swift macOS Storyboards Tests";
 			productName = "Demo macOSTests";
-			productReference = 4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Tests.xctest */;
+			productReference = 4ECFE2DF1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS UITests */ = {
+		4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS Storyboards UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS UITests" */;
+			buildConfigurationList = 4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards UITests" */;
 			buildPhases = (
 				4ECFE2E61FD8BDA3004EEACE /* Sources */,
 				4ECFE2E71FD8BDA3004EEACE /* Frameworks */,
@@ -445,9 +571,9 @@
 			dependencies = (
 				4ECFE2EC1FD8BDA3004EEACE /* PBXTargetDependency */,
 			);
-			name = "Demo-Swift macOS UITests";
+			name = "Demo-Swift macOS Storyboards UITests";
 			productName = "Demo macOSUITests";
-			productReference = 4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS UITests.xctest */;
+			productReference = 4ECFE2EA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -460,6 +586,12 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Jacopo Filié";
 				TargetAttributes = {
+					4E225BC11FF9516E0053183E = {
+						TestTargetID = 4E225BAC1FF9516C0053183E;
+					};
+					4E225BCD1FF951700053183E = {
+						TestTargetID = 4E225BAC1FF9516C0053183E;
+					};
 					4ECFE2921FD8BD8E004EEACE = {
 						CreatedOnToolsVersion = 9.2;
 					};
@@ -506,9 +638,12 @@
 				4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */,
 				4ECFE2AB1FD8BD8F004EEACE /* Demo-Swift iOS Tests */,
 				4ECFE2B61FD8BD8F004EEACE /* Demo-Swift iOS UITests */,
-				4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */,
-				4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Tests */,
-				4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS UITests */,
+				4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards */,
+				4ECFE2DE1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards Tests */,
+				4ECFE2E91FD8BDA3004EEACE /* Demo-Swift macOS Storyboards UITests */,
+				4E225BAC1FF9516C0053183E /* Demo-Swift macOS XIBs */,
+				4E225BC11FF9516E0053183E /* Demo-Swift macOS XIBs Tests */,
+				4E225BCD1FF951700053183E /* Demo-Swift macOS XIBs UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -528,14 +663,14 @@
 			remoteRef = 4ECFE3771FD8BE2D004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECFE37A1FD8BE2D004EEACE /* JFFramework iOS Tests.xctest */ = {
+		4ECFE37A1FD8BE2D004EEACE /* JFFramework_iOS_Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = JFFramework_iOS_Tests.xctest;
 			remoteRef = 4ECFE3791FD8BE2D004EEACE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4ECFE37C1FD8BE2D004EEACE /* JFFramework macOS Tests.xctest */ = {
+		4ECFE37C1FD8BE2D004EEACE /* JFFramework_macOS_Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = JFFramework_macOS_Tests.xctest;
@@ -545,6 +680,29 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4E225BB51FF9516C0053183E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E225BB61FF9516C0053183E /* Assets-macOS.xcassets in Resources */,
+				4E225BDF1FF953F10053183E /* Main-macOS-Swift.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BC71FF9516E0053183E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BD31FF951700053183E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4ECFE2911FD8BD8E004EEACE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -595,6 +753,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4E225BAF1FF9516C0053183E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E225BB01FF9516C0053183E /* ViewController.swift in Sources */,
+				4E225BB11FF9516C0053183E /* AppDelegate.swift in Sources */,
+				4E225BB21FF9516C0053183E /* Database-Swift.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BC41FF9516E0053183E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E225BC51FF9516E0053183E /* Demo-Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E225BD01FF951700053183E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E225BD11FF951700053183E /* Demo-UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4ECFE28F1FD8BD8E004EEACE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +835,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4E225BAD1FF9516C0053183E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JFFramework macOS";
+			targetProxy = 4E225BAE1FF9516C0053183E /* PBXContainerItemProxy */;
+		};
+		4E225BDA1FF952B90053183E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E225BAC1FF9516C0053183E /* Demo-Swift macOS XIBs */;
+			targetProxy = 4E225BD91FF952B90053183E /* PBXContainerItemProxy */;
+		};
+		4E225BDC1FF952BF0053183E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E225BAC1FF9516C0053183E /* Demo-Swift macOS XIBs */;
+			targetProxy = 4E225BDB1FF952BF0053183E /* PBXContainerItemProxy */;
+		};
 		4ECFE2AE1FD8BD8F004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4ECFE2921FD8BD8E004EEACE /* Demo-Swift iOS */;
@@ -663,12 +862,12 @@
 		};
 		4ECFE2E11FD8BDA3004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */;
+			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards */;
 			targetProxy = 4ECFE2E01FD8BDA3004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE2EC1FD8BDA3004EEACE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS */;
+			target = 4ECFE2CA1FD8BDA3004EEACE /* Demo-Swift macOS Storyboards */;
 			targetProxy = 4ECFE2EB1FD8BDA3004EEACE /* PBXContainerItemProxy */;
 		};
 		4ECFE3941FD8C03E004EEACE /* PBXTargetDependency */ = {
@@ -684,6 +883,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4E225BDD1FF953F00053183E /* Main-macOS-Swift.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E225BDE1FF953F00053183E /* en */,
+			);
+			name = "Main-macOS-Swift.xib";
+			sourceTree = "<group>";
+		};
 		4ED5D2271FD8D5B1009C1EDD /* LaunchScreen-Swift.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -711,6 +918,362 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4E225BBB1FF9516C0053183E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-XIBs.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				UI_MAIN_FILE = "Main-macOS-Swift";
+			};
+			name = Debug;
+		};
+		4E225BBC1FF9516C0053183E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-XIBs.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				UI_MAIN_FILE = "Main-macOS-Swift";
+			};
+			name = Release;
+		};
+		4E225BC91FF9516E0053183E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS XIBs.app/Contents/MacOS/Demo-Swift macOS XIBs";
+			};
+			name = Debug;
+		};
+		4E225BCA1FF9516E0053183E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS XIBs.app/Contents/MacOS/Demo-Swift macOS XIBs";
+			};
+			name = Release;
+		};
+		4E225BD51FF951700053183E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = "Demo-Swift macOS XIBs";
+			};
+			name = Debug;
+		};
+		4E225BD61FF951700053183E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = "Demo-Swift macOS XIBs";
+			};
+			name = Release;
+		};
 		4ECFE2501FD8BA20004EEACE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -740,6 +1303,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
@@ -773,6 +1338,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
 			name = Release;
@@ -826,7 +1393,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -885,7 +1451,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-iOS";
@@ -1191,7 +1756,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-Storyboards.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOS";
@@ -1249,7 +1814,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-macOS-Storyboards.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1320,7 +1885,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS.app/Contents/MacOS/Demo-Swift macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS Storyboards.app/Contents/MacOS/Demo-Swift macOS Storyboards";
 			};
 			name = Debug;
 		};
@@ -1376,7 +1941,7 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS.app/Contents/MacOS/Demo-Swift macOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo-Swift macOS Storyboards.app/Contents/MacOS/Demo-Swift macOS Storyboards";
 			};
 			name = Release;
 		};
@@ -1435,11 +2000,12 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = "Demo-Swift macOS";
+				TEST_TARGET_NAME = "Demo-Swift macOS Storyboards";
 			};
 			name = Debug;
 		};
@@ -1491,16 +2057,44 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.Demo-macOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = "Demo-Swift macOS";
+				TEST_TARGET_NAME = "Demo-Swift macOS Storyboards";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4E225BBA1FF9516C0053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E225BBB1FF9516C0053183E /* Debug */,
+				4E225BBC1FF9516C0053183E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E225BC81FF9516E0053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E225BC91FF9516E0053183E /* Debug */,
+				4E225BCA1FF9516E0053183E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E225BD41FF951700053183E /* Build configuration list for PBXNativeTarget "Demo-Swift macOS XIBs UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E225BD51FF951700053183E /* Debug */,
+				4E225BD61FF951700053183E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4ECFE24F1FD8BA20004EEACE /* Build configuration list for PBXProject "Demo-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1537,7 +2131,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS" */ = {
+		4ECFE2F11FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F21FD8BDA4004EEACE /* Debug */,
@@ -1546,7 +2140,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Tests" */ = {
+		4ECFE2F41FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F51FD8BDA4004EEACE /* Debug */,
@@ -1555,7 +2149,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS UITests" */ = {
+		4ECFE2F71FD8BDA4004EEACE /* Build configuration list for PBXNativeTarget "Demo-Swift macOS Storyboards UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4ECFE2F81FD8BDA4004EEACE /* Debug */,

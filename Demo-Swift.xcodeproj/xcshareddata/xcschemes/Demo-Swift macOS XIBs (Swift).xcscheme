@@ -14,37 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-               BuildableName = "Demo-Swift macOS.app"
-               BlueprintName = "Demo-Swift macOS"
-               ReferencedContainer = "container:Demo-Swift.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE2DE1FD8BDA3004EEACE"
-               BuildableName = "Demo-Swift macOS Tests.xctest"
-               BlueprintName = "Demo-Swift macOS Tests"
-               ReferencedContainer = "container:Demo-Swift.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE2E91FD8BDA3004EEACE"
-               BuildableName = "Demo-Swift macOS UITests.xctest"
-               BlueprintName = "Demo-Swift macOS UITests"
+               BlueprintIdentifier = "4E225BAC1FF9516C0053183E"
+               BuildableName = "Demo-Swift macOS XIBs.app"
+               BlueprintName = "Demo-Swift macOS XIBs"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE2DE1FD8BDA3004EEACE"
-               BuildableName = "Demo-Swift macOS Tests.xctest"
-               BlueprintName = "Demo-Swift macOS Tests"
+               BlueprintIdentifier = "4E225BC11FF9516E0053183E"
+               BuildableName = "Demo-Swift macOS XIBs Tests.xctest"
+               BlueprintName = "Demo-Swift macOS XIBs Tests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -71,9 +43,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ECFE2E91FD8BDA3004EEACE"
-               BuildableName = "Demo-Swift macOS UITests.xctest"
-               BlueprintName = "Demo-Swift macOS UITests"
+               BlueprintIdentifier = "4E225BCD1FF951700053183E"
+               BuildableName = "Demo-Swift macOS XIBs UITests.xctest"
+               BlueprintName = "Demo-Swift macOS XIBs UITests"
                ReferencedContainer = "container:Demo-Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -81,9 +53,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo-Swift macOS.app"
-            BlueprintName = "Demo-Swift macOS"
+            BlueprintIdentifier = "4E225BAC1FF9516C0053183E"
+            BuildableName = "Demo-Swift macOS XIBs.app"
+            BlueprintName = "Demo-Swift macOS XIBs"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -105,9 +77,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo-Swift macOS.app"
-            BlueprintName = "Demo-Swift macOS"
+            BlueprintIdentifier = "4E225BAC1FF9516C0053183E"
+            BuildableName = "Demo-Swift macOS XIBs.app"
+            BlueprintName = "Demo-Swift macOS XIBs"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -124,9 +96,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4ECFE2CA1FD8BDA3004EEACE"
-            BuildableName = "Demo-Swift macOS.app"
-            BlueprintName = "Demo-Swift macOS"
+            BlueprintIdentifier = "4E225BAC1FF9516C0053183E"
+            BuildableName = "Demo-Swift macOS XIBs.app"
+            BlueprintName = "Demo-Swift macOS XIBs"
             ReferencedContainer = "container:Demo-Swift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

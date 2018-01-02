@@ -25,6 +25,8 @@
 import CoreData
 import UIKit
 
+import JFFramework_iOS
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @UIApplicationMain
@@ -34,31 +36,49 @@ class AppDelegate : UIResponder, UIApplicationDelegate, UISplitViewControllerDel
 	// MARK: Properties - Stores
 	// =================================================================================================
 
-	lazy var persistentContainer:NSPersistentContainer = {
+	lazy var persistentContainer:JFPersistentContainer = {
 		/*
 		The persistent container for the application. This implementation
 		creates and returns a container, having loaded the store for the
 		application to it. This property is optional since there are legitimate
 		error conditions that could cause the creation of the store to fail.
 		*/
-		let container = NSPersistentContainer(name:"Database-Swift")
-		container.loadPersistentStores(completionHandler:{ (storeDescription, error) in
-			if let error = error as NSError?
-			{
-				// Replace this implementation with code to handle the error appropriately.
-				// fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-				
-				/*
-				Typical reasons for an error here include:
-				* The parent directory does not exist, cannot be created, or disallows writing.
-				* The persistent store is not accessible, due to permissions or data protection when the device is locked.
-				* The device is out of space.
-				* The store could not be migrated to the current model version.
-				Check the error message to determine what the actual problem was.
-				*/
-				fatalError("Unresolved error \(error), \(error.userInfo)")
-			}
-		})
+		let container = JFPersistentContainer(name:"Database-Swift")
+		
+		let errorBlock:JFBlockWithError = { (error) in
+			// Replace this implementation with code to handle the error appropriately.
+			// fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+			
+			/*
+			Typical reasons for an error here include:
+			* The parent directory does not exist, cannot be created, or disallows writing.
+			* The persistent store is not accessible, due to permissions or data protection when the device is locked.
+			* The device is out of space.
+			* The store could not be migrated to the current model version.
+			Check the error message to determine what the actual problem was.
+			*/
+			let error = error as NSError
+			fatalError("Unresolved error \(error), \(error.userInfo)")
+		}
+		
+		if #available(iOS 10.0, *)
+		{
+			container.loadPersistentStores(completionHandler:{ (storeDescription, error) in
+				if let error = error as NSError?
+				{
+					errorBlock(error)
+				}
+			})
+		}
+		else
+		{
+			container.loadPersistentStores(with:JFSimpleCompletion(block:{ (succeeded, error) in
+				if let error = error as NSError?
+				{
+					errorBlock(error)
+				}
+			}))
+		}
 		return container
 	}()
 	

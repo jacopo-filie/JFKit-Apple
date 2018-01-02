@@ -39,7 +39,15 @@ class MasterViewController : UITableViewController, NSFetchedResultsControllerDe
 	var fetchedResultsController:NSFetchedResultsController<Event> {
 		if _fetchedResultsController == nil
 		{
-			let fetchRequest:NSFetchRequest<Event> = Event.fetchRequest()
+			let fetchRequest:NSFetchRequest<Event>;
+			if #available(iOS 10.0, *)
+			{
+				fetchRequest = Event.fetchRequest();
+			}
+			else
+			{
+				fetchRequest = NSFetchRequest(entityName:"Event");
+			}
 			
 			// Set the batch size to a suitable number.
 			fetchRequest.fetchBatchSize = 20
@@ -85,7 +93,16 @@ class MasterViewController : UITableViewController, NSFetchedResultsControllerDe
 	func insertNewObject(_ sender:Any)
 	{
 		let context = self.fetchedResultsController.managedObjectContext
-		let newEvent = Event(context:context)
+		
+		let newEvent:Event
+		if #available(iOS 10.0, *)
+		{
+			newEvent = Event(context:context);
+		}
+		else
+		{
+			newEvent = NSEntityDescription.insertNewObject(forEntityName:"Event", into:context) as! Event
+		}
 		
 		// If appropriate, configure the new managed object.
 		newEvent.timestamp = Date()
