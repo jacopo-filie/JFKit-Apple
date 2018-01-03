@@ -30,6 +30,8 @@
 #import "JFShortcuts.h"
 #import "JFVersion.h"
 
+@class JFPersistentContainerBridge;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,15 +40,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFPersistentContainer ()
 
+// =================================================================================================
 // MARK: Properties - Concurrency
+// =================================================================================================
+
 @property (strong, nonatomic, readonly) NSOperationQueue* serialQueue;
 
+// =================================================================================================
 // MARK: Properties - Stack
-@property (strong, nonatomic, readonly, nullable) NSPersistentContainer* persistentContainer API_AVAILABLE(ios(10.0), macos(10.12));
+// =================================================================================================
 
+@property (strong, nonatomic, readonly, nullable) JFPersistentContainerBridge* persistentContainer API_AVAILABLE(ios(10.0), macos(10.12));
+
+// =================================================================================================
 // MARK: Methods - Stack management
+// =================================================================================================
+
 - (NSManagedObjectContext*)newManagedObjectContext API_DEPRECATED_WITH_REPLACEMENT("-newManagedObjectContextWithConcurrencyType:", ios(3.0, 5.0), macos(10.6, 10.7));
 - (NSManagedObjectContext*)newManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType API_AVAILABLE(ios(5.0), macos(10.7));
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+API_AVAILABLE(ios(10.0), macos(10.12))
+@interface JFPersistentContainerBridge : NSPersistentContainer
 
 @end
 
@@ -66,17 +86,17 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize name = _name;
+@synthesize managedObjectModel	= _managedObjectModel;
+@synthesize name 				= _name;
 
 // =================================================================================================
 // MARK: Properties - Stack
 // =================================================================================================
 
-@synthesize persistentContainer = _persistentContainer;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize persistentContainer			= _persistentContainer;
+@synthesize persistentStoreCoordinator 	= _persistentStoreCoordinator;
 @synthesize persistentStoreDescriptions = _persistentStoreDescriptions;
-@synthesize viewContext = _viewContext;
+@synthesize viewContext					= _viewContext;
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -84,13 +104,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSURL*)defaultDirectoryURL
 {
-	if(@available(iOS 10.0, macOS 10.12, *))
-		return NSPersistentContainer.defaultDirectoryURL;
-	
-	NSError* error = nil;
-	NSURL* retObj = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-	NSAssert(retObj, @"Failed to load application support directory for error '%@'", error.description);
-	return [retObj URLByAppendingPathComponent:@"Databases"];
+	static NSURL* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSError* error = nil;
+		NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
+		
+#if JF_MACOS
+		NSString* domain = AppInfoIdentifier;
+		NSAssert(domain, @"Bundle identifier not found!");
+		url = [url URLByAppendingPathComponent:domain];
+#endif
+		
+		retObj = [url URLByAppendingPathComponent:@"Databases"];
+	});
+	return retObj;
 }
 
 - (NSManagedObjectModel*)managedObjectModel
@@ -208,7 +237,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		// Stack
 		if(@available(iOS 10.0, macOS 10.12, *))
-			_persistentContainer = [[NSPersistentContainer alloc] initWithName:name managedObjectModel:model];
+			_persistentContainer = [[JFPersistentContainerBridge alloc] initWithName:name managedObjectModel:model];
 	}
 	return self;
 }
@@ -355,6 +384,23 @@ NS_ASSUME_NONNULL_BEGIN
 			innerBlock();
 		}];
 	}
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@implementation JFPersistentContainerBridge
+
+// =================================================================================================
+// MARK: Properties accessors (Inherited) - Data
+// =================================================================================================
+
++ (NSURL*)defaultDirectoryURL
+{
+	return [JFPersistentContainer defaultDirectoryURL];
 }
 
 @end

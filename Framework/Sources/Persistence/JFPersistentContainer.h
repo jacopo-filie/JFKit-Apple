@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 /**
- * Creates the default directory for the persistent stores on the current platform. This method returns a platform-dependent `NSURL` at which the persistent store(s) will be located or are currently located. If the class `NSPersistentContainer` is not available, the custom directory is located at path `Library/Application Support/Databases`.
+ * Creates the default directory for the persistent stores on the current platform. This method returns a platform-dependent `NSURL` at which the persistent store(s) will be located or are currently located. If the class `NSPersistentContainer` is not available, the custom directory is located at path `Library/Application Support/Databases` on iOS and `Library/Application Support/<bundle identifier>/Databases` on macOS.
  */
 @property (class, strong, readonly) NSURL* defaultDirectoryURL;
 
