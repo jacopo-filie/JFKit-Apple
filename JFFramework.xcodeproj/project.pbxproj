@@ -29,6 +29,10 @@
 		4E5DD40B1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */; };
 		4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */; };
+		4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
+		4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
 		4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,6 +103,8 @@
 		4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousBlockOperation.m; sourceTree = "<group>"; };
 		4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
 		4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
+		4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFObserversController.h; sourceTree = "<group>"; };
+		4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
 		4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
@@ -195,9 +201,19 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		4E5EE1AB1FFC5E16008444FD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */,
+				4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		4EA80C791FDCCE790086EBE2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4E5EE1AB1FFC5E16008444FD /* Core */,
 				4E0BF89F1FE08E970050114D /* Data */,
 				4E415F241FF6D4B200C252E3 /* Persistence */,
 				4EF2C7B81FF1178300311EB5 /* Utilities */,
@@ -283,6 +299,7 @@
 				4E5DD40A1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
+				4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
 				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
@@ -305,6 +322,7 @@
 				4E5DD40B1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
+				4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */,
 				4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */,
@@ -472,6 +490,7 @@
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
+				4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4E415F271FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
@@ -500,6 +519,7 @@
 				4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
+				4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E415F281FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,

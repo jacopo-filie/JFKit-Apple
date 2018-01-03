@@ -43,6 +43,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
 #import <JFFramework_macOS/JFColors.h>
 #import <JFFramework_macOS/JFImages.h>
 #import <JFFramework_macOS/JFMath.h>
+#import <JFFramework_macOS/JFObserversController.h>
 #import <JFFramework_macOS/JFPersistentContainer.h>
 #import <JFFramework_macOS/JFPreprocessorMacros.h>
 #import <JFFramework_macOS/JFReferences.h>
