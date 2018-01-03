@@ -173,6 +173,8 @@
 		4E225BCB1FF9516E0053183E /* Demo-Swift macOS XIBs Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS XIBs Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E225BD71FF951700053183E /* Demo-Swift macOS XIBs UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift macOS XIBs UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E225BDE1FF953F00053183E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Main-macOS-Swift.xib"; sourceTree = "<group>"; };
+		4E5EE1A71FFC5CF3008444FD /* Info-macOS-Storyboards.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS-Storyboards.plist"; sourceTree = "<group>"; };
+		4E5EE1A81FFC5CF3008444FD /* Info-macOS-XIBs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS-XIBs.plist"; sourceTree = "<group>"; };
 		4ECFE2931FD8BD8E004EEACE /* Demo-Swift iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-Swift iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2AC1FD8BD8F004EEACE /* Demo-Swift iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2B71FD8BD8F004EEACE /* Demo-Swift iOS UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo-Swift iOS UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +184,6 @@
 		4ECFE36E1FD8BE2D004EEACE /* JFFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = JFFramework.xcodeproj; sourceTree = "<group>"; };
 		4ED5D2061FD8D21F009C1EDD /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		4ED5D2071FD8D21F009C1EDD /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
-		4ED5D2081FD8D21F009C1EDD /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		4ED5D21F1FD8D5B1009C1EDD /* Assets-iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-iOS.xcassets"; sourceTree = "<group>"; };
 		4ED5D2201FD8D5B1009C1EDD /* Assets-macOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-macOS.xcassets"; sourceTree = "<group>"; };
 		4ED5D2231FD8D5B1009C1EDD /* Demo_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demo_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -323,8 +324,9 @@
 			isa = PBXGroup;
 			children = (
 				4ED5D2061FD8D21F009C1EDD /* Info-iOS.plist */,
+				4E5EE1A71FFC5CF3008444FD /* Info-macOS-Storyboards.plist */,
+				4E5EE1A81FFC5CF3008444FD /* Info-macOS-XIBs.plist */,
 				4ED5D2071FD8D21F009C1EDD /* Info-Tests.plist */,
-				4ED5D2081FD8D21F009C1EDD /* Info-macOS.plist */,
 			);
 			name = "Supporting Files";
 			path = "Demo/Supporting Files";
