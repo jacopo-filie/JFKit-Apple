@@ -36,52 +36,179 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Types
 // =================================================================================================
 
+/**
+ * A list of available output flags that represent where the log message should be written to.
+ */
 typedef NS_OPTIONS(UInt8, JFLoggerOutput)
 {
-	JFLoggerOutputConsole	= 1 << 0,	// Prints the message to the console.
-	JFLoggerOutputFile		= 1 << 1,	// Writes the message into the file if 'fileURL' is set.
+	/**
+	 * Prints the message to the console.
+	 */
+	JFLoggerOutputConsole = 1 << 0,
 	
-	JFLoggerOutputAll		= (JFLoggerOutputConsole | JFLoggerOutputFile),
+	/**
+	 * Prints the message to the currently active log file.
+	 */
+	JFLoggerOutputFile = 1 << 1,
+	
+	/**
+	 * Prints the message to all available outputs.
+	 */
+	JFLoggerOutputAll = (JFLoggerOutputConsole | JFLoggerOutputFile),
 };
 
+/**
+ * A list of available time interval rotation values that is used to divide the logged messages in multiple files, based on the currently active time interval. Specific log files are created only when needed; for example, if rotation is set to `day` and file name is set to `Log.log`, the log file called `Log-5.log` will be created (or overwritten if already existing) only on the fifth day of each month.
+ */
 typedef NS_ENUM(UInt8, JFLoggerRotation)
 {
+	/**
+	 * Rotation is disabled. There is only one log file.
+	 */
 	JFLoggerRotationNone,
+	
+	/**
+	 * Changes log file every hour. There is one log file for each hour of the day.
+	 */
 	JFLoggerRotationHour,
+	
+	/**
+	 * Changes log file every day. There is one log file for each day of the month.
+	 */
 	JFLoggerRotationDay,
+	
+	/**
+	 * Changes log file every week of the month. There is one log file for each week of the month.
+	 * @warning If a week starts in a month and ends in the following one, the log file is changed on the first day of the following month.
+	 */
 	JFLoggerRotationWeek,
+	
+	/**
+	 * Changes log file every month. There is one log file for each month of the year.
+	 */
 	JFLoggerRotationMonth,
 };
 
+/**
+ * A list of available severity level values for the logged message. The list is sorted from most important to most verbose.
+ */
 typedef NS_ENUM(UInt8, JFLoggerSeverity)
 {
-	JFLoggerSeverityEmergency,	// The highest priority, usually reserved for catastrophic failures and reboot notices.
-	JFLoggerSeverityAlert,		// A serious failure in a key system.
-	JFLoggerSeverityCritical,	// A failure in a key system.
-	JFLoggerSeverityError,		// Something has failed.
-	JFLoggerSeverityWarning,	// Something is amiss and might fail if not corrected.
-	JFLoggerSeverityNotice,		// Things of moderate interest to the user or administrator.
-	JFLoggerSeverityInfo,		// The lowest priority that you would normally log, and purely informational in nature.
-	JFLoggerSeverityDebug,		// The lowest priority, and normally not logged except for messages from the kernel.
+	/**
+	 * The highest priority, usually reserved for catastrophic failures and reboot notices.
+	 */
+	JFLoggerSeverityEmergency,
+	
+	/**
+	 * A serious failure in a key system.
+	 */
+	JFLoggerSeverityAlert,
+	
+	/**
+	 * A failure in a key system.
+	 */
+	JFLoggerSeverityCritical,
+	
+	/**
+	 * Something has failed.
+	 */
+	JFLoggerSeverityError,
+	
+	/**
+	 * Something is amiss and might fail if not corrected.
+	 */
+	JFLoggerSeverityWarning,
+	
+	/**
+	 * Things of moderate interest to the user or administrator.
+	 */
+	JFLoggerSeverityNotice,
+	
+	/**
+	 * The lowest priority that you would normally log, and purely informational in nature.
+	 */
+	JFLoggerSeverityInfo,
+	
+	/**
+	 * The lowest priority, and normally not logged except for messages from the kernel.
+	 */
+	JFLoggerSeverityDebug,
 };
 
+/**
+ * A list of available tag flags that simplifies the assignment of standard hashtags to the log message.
+ */
 typedef NS_OPTIONS(UInt16, JFLoggerTags)
 {
-	JFLoggerTagsNone		= 0,		// Message is not associated to any hashtag.
+	/**
+	 * Message not associated to any hashtag. Ignored if used together with other tags.
+	 */
+	JFLoggerTagsNone = 0,
 	
-	JFLoggerTagsAttention	= 1 << 0,	// Message that should be investigated by a system administrator, because it may be a sign of a larger issue. For example, errors from a hard drive controller that typically occur when the drive is about to fail.
-	JFLoggerTagsClue		= 1 << 1,	// Message containing extra key/value pairs with additional information to help reconstruct the context.
-	JFLoggerTagsComment		= 1 << 2,	// Message that is a comment.
-	JFLoggerTagsCritical	= 1 << 3,	// Message in the context of a critical event or critical failure.
-	JFLoggerTagsDeveloper	= 1 << 4,	// Message in the context of software development. For example, deprecated APIs and debugging messages.
-	JFLoggerTagsError		= 1 << 5,	// Message that is a noncritical error.
-	JFLoggerTagsFileSystem	= 1 << 6,	// Message describing a file system related event.
-	JFLoggerTagsHardware	= 1 << 7,	// Message describing a hardware-related event.
-	JFLoggerTagsMarker		= 1 << 8,	// Message that marks a change to divide the messages around it into those before and those after the change.
-	JFLoggerTagsNetwork		= 1 << 9,	// Message describing a network-related event.
-	JFLoggerTagsSecurity	= 1 << 10,	// Message related to security concerns.
-	JFLoggerTagsSystem		= 1 << 11,	// Message in the context of a system process.
-	JFLoggerTagsUser		= 1 << 12,	// Message in the context of a user process.
+	/**
+	 * Message that should be investigated by a system administrator, because it may be a sign of a larger issue. For example, errors from a hard drive controller that typically occur when the drive is about to fail.
+	 */
+	JFLoggerTagsAttention = 1 << 0,
+	
+	/**
+	 * Message containing extra key/value pairs with additional information to help reconstruct the context.
+	 */
+	JFLoggerTagsClue = 1 << 1,
+	
+	/**
+	 * Message that is a comment.
+	 */
+	JFLoggerTagsComment = 1 << 2,
+	
+	/**
+	 * Message in the context of a critical event or critical failure.
+	 */
+	JFLoggerTagsCritical = 1 << 3,
+	
+	/**
+	 * Message in the context of software development. For example, deprecated APIs and debugging messages.
+	 */
+	JFLoggerTagsDeveloper = 1 << 4,
+	
+	/**
+	 * Message that is a noncritical error.
+	 */
+	JFLoggerTagsError = 1 << 5,
+	
+	/**
+	 * Message describing a file system related event.
+	 */
+	JFLoggerTagsFileSystem = 1 << 6,
+	
+	/**
+	 * Message describing a hardware-related event.
+	 */
+	JFLoggerTagsHardware = 1 << 7,
+	
+	/**
+	 * Message that marks a change to divide the messages around it into those before and those after the change.
+	 */
+	JFLoggerTagsMarker = 1 << 8,
+	
+	/**
+	 * Message describing a network-related event.
+	 */
+	JFLoggerTagsNetwork = 1 << 9,
+	
+	/**
+	 * Message related to security concerns.
+	 */
+	JFLoggerTagsSecurity = 1 << 10,
+	
+	/**
+	 * Message in the context of a system process.
+	 */
+	JFLoggerTagsSystem = 1 << 11,
+	
+	/**
+	 * Message in the context of a user process.
+	 */
+	JFLoggerTagsUser = 1 << 12,
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
