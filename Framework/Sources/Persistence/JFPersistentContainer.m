@@ -68,6 +68,12 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(ios(10.0), macos(10.12))
 @interface JFPersistentContainerBridge : NSPersistentContainer
 
+// =================================================================================================
+// MARK: Properties (Inherited) - Data
+// =================================================================================================
+
+@property (class, strong, null_resettable) NSURL* defaultDirectoryURL;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,7 +243,10 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		
 		// Stack
 		if(@available(iOS 10.0, macOS 10.12, *))
+		{
+			JFPersistentContainerBridge.defaultDirectoryURL = self.class.defaultDirectoryURL;
 			_persistentContainer = [[JFPersistentContainerBridge alloc] initWithName:name managedObjectModel:model];
+		}
 	}
 	return self;
 }
@@ -395,12 +404,23 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 @implementation JFPersistentContainerBridge
 
 // =================================================================================================
+// MARK: Properties (Inherited) - Data
+// =================================================================================================
+
+static NSURL* __nullable _defaultDirectoryURL;
+
+// =================================================================================================
 // MARK: Properties accessors (Inherited) - Data
 // =================================================================================================
 
 + (NSURL*)defaultDirectoryURL
 {
-	return [JFPersistentContainer defaultDirectoryURL];
+	return (_defaultDirectoryURL ?: [JFPersistentContainer defaultDirectoryURL]);
+}
+
++ (void)setDefaultDirectoryURL:(NSURL* __nullable)defaultDirectoryURL
+{
+	_defaultDirectoryURL = defaultDirectoryURL;
 }
 
 @end
