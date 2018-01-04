@@ -61,6 +61,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate;
 - (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate;
 
+// =================================================================================================
+// MARK: Methods - Utilities management
+// =================================================================================================
+
+- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
+- (NSInteger)weekOfMonthFromDate:(NSDate*)date;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -289,6 +296,8 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	NSCalendarUnit component = 0;
 	BOOL shouldAppendSuffix = YES;
+	BOOL shouldUseWeekOfMonth = NO;
+	
 	switch(self.rotation)
 	{
 		case JFLoggerRotationHour:
@@ -303,7 +312,10 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 		case JFLoggerRotationWeek:
 		{
-			component = NSCalendarUnitWeekOfMonth;
+			if(@available(macOS 10.7, *))
+				component = NSCalendarUnitWeekOfMonth;
+			else
+				shouldUseWeekOfMonth = YES;
 			break;
 		}
 		case JFLoggerRotationMonth:
@@ -317,12 +329,12 @@ NS_ASSUME_NONNULL_BEGIN
 			break;
 		}
 	}
-
+	
 	if(shouldAppendSuffix)
 	{
 		NSString* extension = fileName.pathExtension;
-		NSString* suffix = JFStringFromNSInteger([NSCalendar.currentCalendar component:component fromDate:date]);
-		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@.%@", suffix, extension];
+		NSInteger suffix = (shouldUseWeekOfMonth ? [self weekOfMonthFromDate:date] : [self component:component fromDate:date]);
+		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@.%@", JFStringFromNSInteger(suffix), extension];
 	}
 	
 	return [folderURL URLByAppendingPathComponent:fileName];
@@ -405,11 +417,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate
 {
 	NSCalendar* calendar = [NSCalendar currentCalendar];
-	NSCalendarUnit components = (NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfMonth | NSCalendarUnitDay | NSCalendarUnitHour);
+	NSCalendarUnit components = (NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour);
 	
 	NSDateComponents* creationDateComponents = [calendar components:components fromDate:creationDate];
 	NSDateComponents* currentDateComponents = [calendar components:components fromDate:currentDate];
-
+	
 	if((creationDateComponents.era != currentDateComponents.era) || (creationDateComponents.year != currentDateComponents.year))
 		return NO;
 	
@@ -427,7 +439,7 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 		case JFLoggerRotationWeek:
 		{
-			if(creationDateComponents.weekOfMonth != currentDateComponents.weekOfMonth)
+			if([self weekOfMonthFromDate:creationDate] != [self weekOfMonthFromDate:currentDate])
 				return NO;
 		}
 		case JFLoggerRotationMonth:
@@ -476,7 +488,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	if(!shouldLogToFile)
 		return;
-
+	
 	// TODO: use the format string.
 	
 	// Gets the current thread ID.
@@ -485,7 +497,7 @@ NS_ASSUME_NONNULL_BEGIN
 	// Gets the current date as a string.
 	NSString* dateString = [self dateStringFromDate:currentDate];
 	NSString* timeString = [self timeStringFromDate:currentDate];
-
+	
 	// Prepares the log string.
 	message = [NSString stringWithFormat:@"%@ %@ [%x] %@\n", dateString, timeString, threadID, message];
 	
@@ -591,6 +603,64 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)logWarning:(NSString*)message tags:(JFLoggerTags)tags
 {
 	[self log:message output:JFLoggerOutputAll severity:JFLoggerSeverityWarning tags:tags];
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities management
+// =================================================================================================
+
+- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date
+{
+	NSCalendar* calendar = [NSCalendar currentCalendar];
+	
+	if(@available(macOS 10.9, *))
+		return [calendar component:component fromDate:date];
+	
+	NSDateComponents* components = [calendar components:component fromDate:date];
+	switch(component)
+	{
+		case NSCalendarUnitDay:
+			return components.day;
+		case NSCalendarUnitHour:
+			return components.hour;
+		case NSCalendarUnitMonth:
+			return components.month;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+		case NSWeekCalendarUnit:
+			return components.week;
+#pragma clang diagnostic pop
+		default:
+		{
+			if(@available(macOS 10.7, *))
+			{
+				if(component == NSCalendarUnitWeekOfMonth)
+					return components.weekOfMonth;
+			}
+			break;
+		}
+	}
+	
+	return -1;
+}
+
+- (NSInteger)weekOfMonthFromDate:(NSDate*)date
+{
+	if(@available(macOS 10.7, *))
+		return [self component:NSCalendarUnitWeekOfMonth fromDate:date];
+	
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+	NSCalendarUnit component = NSWeekCalendarUnit;
+#pragma clang diagnostic pop
+	
+	NSInteger retVal = [self component:component fromDate:date];
+	
+	NSRange range = [NSCalendar.currentCalendar rangeOfUnit:component inUnit:NSCalendarUnitMonth forDate:date];
+	if(range.location == NSNotFound)
+		return -1;
+	
+	return (retVal - range.location + 1);
 }
 
 @end
