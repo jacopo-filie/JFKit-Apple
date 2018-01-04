@@ -33,6 +33,42 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // =================================================================================================
+// MARK: Constants
+// =================================================================================================
+
+/**
+ * The date component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatDate;
+
+/**
+ * The message component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatMessage;
+
+/**
+ * The process ID component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatProcessID;
+
+/**
+ * The severity component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatSeverity;
+
+/**
+ * The thread ID component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatThreadID;
+
+/**
+ * The time component of the logger format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatTime;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// =================================================================================================
 // MARK: Types
 // =================================================================================================
 
@@ -275,11 +311,25 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // =================================================================================================
 
 /**
+ * Returns a string containing given severity level.
+ * @param severity The severity level to convert to string.
+ * @return A string containing given severity level.
+ */
++ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
+
+/**
  * Returns a string containing all the given tags, sorted alphabetically.
  * @param tags The tags to convert to string.
  * @return A string containing all the given tags, sorted alphabetically.
  */
 + (NSString*)stringFromTags:(JFLoggerTags)tags;
+
+/**
+ * Returns a string containing given severity level. This method simply calls the method `+stringFromSeverity:` of this class.
+ * @param severity The severity level to convert to string.
+ * @return A string containing given severity level.
+ */
+- (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
 
 /**
  * Returns a string containing all the given tags, sorted alphabetically. This method simply calls the method `+stringFromTags:` of this class.

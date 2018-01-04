@@ -28,6 +28,7 @@
 
 #import <pthread/pthread.h>
 
+#import "JFPreprocessorMacros.h"
 #import "JFShortcuts.h"
 #import "JFStrings.h"
 
@@ -37,7 +38,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// =================================================================================================
+// MARK: Constants
+// =================================================================================================
+
+NSString* const JFLoggerFormatDate		= @"%1$@";
+NSString* const JFLoggerFormatMessage	= @"%2$@";
+NSString* const JFLoggerFormatProcessID	= @"%3$@";
+NSString* const JFLoggerFormatSeverity	= @"%4$@";
+NSString* const JFLoggerFormatThreadID	= @"%5$@";
+NSString* const JFLoggerFormatTime		= @"%6$@";
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
 @interface JFLogger ()
+
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
+
+@property (strong, null_resettable) NSArray<NSString*>* requestedFormatValues;
 
 // =================================================================================================
 // MARK: Methods - Data management
@@ -66,6 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
+- (NSString*)logMessageWithFormat:(NSString*)format values:(NSDictionary<NSString*, NSString*>*)values;
 - (NSInteger)weekOfMonthFromDate:(NSDate*)date;
 
 @end
@@ -80,11 +103,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize dateFormatter	= _dateFormatter;
-@synthesize format			= _format;
-@synthesize outputFilter	= _outputFilter;
-@synthesize severityFilter	= _severityFilter;
-@synthesize timeFormatter	= _timeFormatter;
+@synthesize dateFormatter			= _dateFormatter;
+@synthesize format					= _format;
+@synthesize outputFilter			= _outputFilter;
+@synthesize requestedFormatValues	= _requestedFormatValues;
+@synthesize severityFilter			= _severityFilter;
+@synthesize timeFormatter			= _timeFormatter;
 
 // =================================================================================================
 // MARK: Properties - File system
@@ -145,18 +169,51 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	@synchronized(self)
 	{
+		if(!_format)
+			_format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
 		return [_format copy];
 	}
 }
 
 - (void)setFormat:(NSString* __nullable)format
 {
-	if(!format)
-		format = JFEmptyString;
-	
 	@synchronized(self)
 	{
 		_format = [format copy];
+		self.requestedFormatValues = nil;
+	}
+}
+
+- (NSArray<NSString*>*)requestedFormatValues
+{
+	@synchronized(self)
+	{
+		if(!_requestedFormatValues)
+		{
+			static NSArray<NSString*>* possibleValues = nil;
+			if(!possibleValues)
+				possibleValues = @[JFLoggerFormatDate, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
+			
+			NSString* format = self.format;
+			
+			NSMutableArray* requestedValues = [NSMutableArray arrayWithCapacity:possibleValues.count];
+			for(NSString* value in possibleValues)
+			{
+				if([format rangeOfString:value].location != NSNotFound)
+					[requestedValues addObject:value];
+			}
+			
+			_requestedFormatValues = [requestedValues copy];
+		}
+		return _requestedFormatValues;
+	}
+}
+
+- (void)setRequestedFormatValues:(NSArray<NSString*>* __nullable)requestedFormatValues
+{
+	@synchronized(self)
+	{
+		_requestedFormatValues = requestedFormatValues;
 	}
 }
 
@@ -167,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
 		if(!_timeFormatter)
 		{
 			NSDateFormatter* timeFormatter = [NSDateFormatter new];
-			timeFormatter.dateFormat = @"HH:mm:ss.SSS";
+			timeFormatter.dateFormat = @"HH:mm:ss.SSSZ";
 			timeFormatter.locale = [NSLocale currentLocale];
 			timeFormatter.timeZone = [NSTimeZone defaultTimeZone];
 			_timeFormatter = timeFormatter;
@@ -230,6 +287,21 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data management
 // =================================================================================================
 
++ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
+{
+	switch(severity)
+	{
+		case JFLoggerSeverityAlert:		return @"Alert";
+		case JFLoggerSeverityCritical:	return @"Critical";
+		case JFLoggerSeverityDebug:		return @"Debug";
+		case JFLoggerSeverityEmergency:	return @"Emergency";
+		case JFLoggerSeverityError:		return @"Error";
+		case JFLoggerSeverityInfo:		return @"Info";
+		case JFLoggerSeverityNotice:	return @"Notice";
+		case JFLoggerSeverityWarning:	return @"Warning";
+	}
+}
+
 + (NSString*)stringFromTags:(JFLoggerTags)tags
 {
 	if(tags == JFLoggerTagsNone)
@@ -282,6 +354,11 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		return [formatter stringFromDate:date];
 	}
+}
+
+- (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
+{
+	return [self.class stringFromSeverity:severity];
 }
 
 - (NSString*)stringFromTags:(JFLoggerTags)tags
@@ -489,20 +566,58 @@ NS_ASSUME_NONNULL_BEGIN
 	if(!shouldLogToFile)
 		return;
 	
-	// TODO: use the format string.
+	NSString* format;
+	NSArray<NSString*>* requestedFormatValues;
+	@synchronized(self)
+	{
+		format = self.format;
+		requestedFormatValues = self.requestedFormatValues;
+	}
+	
+	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:requestedFormatValues.count];
+	
+	// Converts the severity level to string.
+	if([requestedFormatValues containsObject:JFLoggerFormatSeverity])
+		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
+	
+	// Gets the current process ID. NSProcessInfo is thread-safe only on iOS or macOS 10.7 or later.
+	if([requestedFormatValues containsObject:JFLoggerFormatProcessID])
+	{
+		NSProcessInfo* processInfo = ProcessInfo;
+		int processID;
+		if(@available(macOS 10.7, *))
+			processID = processInfo.processIdentifier;
+		else
+		{
+			@synchronized(processInfo)
+			{
+				processID = processInfo.processIdentifier;
+			}
+		}
+		[values setObject:JFStringFromInt(processID) forKey:JFLoggerFormatProcessID];
+	}
 	
 	// Gets the current thread ID.
-	mach_port_t threadID = pthread_mach_thread_np(pthread_self());
+	if([requestedFormatValues containsObject:JFLoggerFormatThreadID])
+		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
 	
-	// Gets the current date as a string.
-	NSString* dateString = [self dateStringFromDate:currentDate];
-	NSString* timeString = [self timeStringFromDate:currentDate];
+	// Gets the current date.
+	if([requestedFormatValues containsObject:JFLoggerFormatDate])
+		[values setObject:[self dateStringFromDate:currentDate] forKey:JFLoggerFormatDate];
 	
+	// Gets the current time.
+	if([requestedFormatValues containsObject:JFLoggerFormatTime])
+		[values setObject:[self timeStringFromDate:currentDate] forKey:JFLoggerFormatTime];
+	
+	// Gets the message.
+	if([requestedFormatValues containsObject:JFLoggerFormatMessage])
+		[values setObject:message forKey:JFLoggerFormatMessage];
+
 	// Prepares the log string.
-	message = [NSString stringWithFormat:@"%@ %@ [%x] %@\n", dateString, timeString, threadID, message];
-	
+	NSString* logMessage = [self logMessageWithFormat:format values:values];
+
 	// Logs to file.
-	[self logToFile:message currentDate:currentDate];
+	[self logToFile:logMessage currentDate:currentDate];
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
@@ -642,6 +757,40 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	return -1;
+}
+
+- (NSString*)logMessageWithFormat:(NSString*)format values:(NSDictionary<NSString*, NSString*>*)values
+{
+	NSMutableString* retObj = [NSMutableString stringWithCapacity:format.length];
+	
+	NSScanner* scanner = [NSScanner scannerWithString:format];
+	scanner.charactersToBeSkipped = nil;
+	
+	NSString* string = nil;
+	while(![scanner isAtEnd])
+	{
+		if([scanner scanUpToString:@"%" intoString:&string])
+			[retObj appendString:string];
+		
+		if([scanner isAtEnd])
+			break;
+		
+		BOOL isFalsePositive = YES;
+		for(NSString* key in values.allKeys)
+		{
+			if(![scanner scanString:key intoString:nil])
+				continue;
+			
+			isFalsePositive = NO;
+			[retObj appendString:[values objectForKey:key]];
+			break;
+		}
+		
+		if(isFalsePositive && [scanner scanString:@"%" intoString:&string])
+			[retObj appendString:string];
+	}
+	
+	return retObj;
 }
 
 - (NSInteger)weekOfMonthFromDate:(NSDate*)date
