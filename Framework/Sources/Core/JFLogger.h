@@ -251,6 +251,9 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 
 #pragma mark -
 
+/**
+ * The `JFLogger` manages all the necessary code to log messages to both console and files, formatting the resulting string with a default style or with a custom style (composed with the available constants) using the property `format`. It also handles the automatic rotation of log files based on the time interval specified with the property `rotation` and the base name of the log files can be customized using the property `fileName`. The date and time formatters used when composing the log message can also be customized through the properties `dateFormatter` and `timeFormatter`, if you need more control over them. There are also a couple of filter options that prevent some logs from being written to the output on specific conditions, like when the severity of the message is not enough (see property `severityFilter`) or when the specified output for that message is not available for this logger (see property `outputFilter`).
+ */
 @interface JFLogger : NSObject
 
 // =================================================================================================
@@ -268,7 +271,19 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 @property (strong, null_resettable) NSDateFormatter* dateFormatter;
 
 /**
- * The format string of each log written on file.
+ * The format string of each log written on file. The following constants can be used to retrieve specific values:
+ * @code
+ *   JFLoggerFormatDate      = the current date;
+ *   JFLoggerFormatMessage   = the message to log;
+ *   JFLoggerFormatProcessID = the ID of the running process;
+ *   JFLoggerFormatSeverity  = the severity of the message;
+ *   JFLoggerFormatThreadID  = the ID of the running thread;
+ *   JFLoggerFormatTime      = the current time;
+ * @endcode
+ * For example, the default format is composed like this:
+ * @code
+ *   NSString* format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+ * @endcode
  * @warning Due to the implementation details, log to console ignores this property and uses the platform-dependent default format string.
  */
 @property (copy, null_resettable) NSString* format;
