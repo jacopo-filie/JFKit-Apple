@@ -41,6 +41,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 #import <JFFramework_iOS/JFBlocks.h>
 #import <JFFramework_iOS/JFByteStream.h>
 #import <JFFramework_iOS/JFColors.h>
+#import <JFFramework_iOS/JFConnectionMachine.h>
 #import <JFFramework_iOS/JFImages.h>
 #import <JFFramework_iOS/JFLogger.h>
 #import <JFFramework_iOS/JFMath.h>
@@ -51,6 +52,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 #import <JFFramework_iOS/JFShortcuts.h>
 #import <JFFramework_iOS/JFStateMachine.h>
 #import <JFFramework_iOS/JFStrings.h>
+#import <JFFramework_iOS/JFSwitchMachine.h>
 #import <JFFramework_iOS/JFUtilities.h>
 #import <JFFramework_iOS/JFVersion.h>
 

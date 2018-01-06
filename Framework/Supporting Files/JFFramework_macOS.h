@@ -41,6 +41,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
 #import <JFFramework_macOS/JFBlocks.h>
 #import <JFFramework_macOS/JFByteStream.h>
 #import <JFFramework_macOS/JFColors.h>
+#import <JFFramework_macOS/JFConnectionMachine.h>
 #import <JFFramework_macOS/JFImages.h>
 #import <JFFramework_macOS/JFLogger.h>
 #import <JFFramework_macOS/JFMath.h>
@@ -51,6 +52,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
 #import <JFFramework_macOS/JFShortcuts.h>
 #import <JFFramework_macOS/JFStateMachine.h>
 #import <JFFramework_macOS/JFStrings.h>
+#import <JFFramework_macOS/JFSwitchMachine.h>
 #import <JFFramework_macOS/JFUtilities.h>
 #import <JFFramework_macOS/JFVersion.h>
 
