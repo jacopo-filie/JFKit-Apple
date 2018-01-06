@@ -46,6 +46,10 @@
 		4E8490721FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8490731FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
+		4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC10F211FFEAC4000ED8A61 /* JFStateMachine.m */; };
+		4EC10F241FFEAC4000ED8A61 /* JFStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC10F211FFEAC4000ED8A61 /* JFStateMachine.m */; };
+		4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EC10F261FFEAC4000ED8A61 /* JFStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
 		4EC258701FEF294600179CC7 /* JFReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2586D1FEF294600179CC7 /* JFReferences.m */; };
 		4EC258711FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -115,6 +119,8 @@
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
 		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
+		4EC10F211FFEAC4000ED8A61 /* JFStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStateMachine.m; sourceTree = "<group>"; };
+		4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStateMachine.h; sourceTree = "<group>"; };
 		4EC2586D1FEF294600179CC7 /* JFReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFReferences.m; sourceTree = "<group>"; };
 		4EC2586E1FEF294600179CC7 /* JFReferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFReferences.h; sourceTree = "<group>"; };
 		4ECFE25B1FD8BCD9004EEACE /* JFFramework_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFFramework_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +220,8 @@
 				4E5EE1B51FFC7C69008444FD /* JFLogger.m */,
 				4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */,
 				4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */,
+				4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */,
+				4EC10F211FFEAC4000ED8A61 /* JFStateMachine.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
+				4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
 				4E5EE1B61FFC7C69008444FD /* JFLogger.h in Headers */,
@@ -333,6 +342,7 @@
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
 				4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */,
+				4EC10F261FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */,
 				4E5EE1B71FFC7C69008444FD /* JFLogger.h in Headers */,
@@ -496,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EF2C7C91FF11DE200311EB5 /* JFVersion.m in Sources */,
+				4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
@@ -526,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EF2C7CA1FF11DE200311EB5 /* JFVersion.m in Sources */,
+				4EC10F241FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
