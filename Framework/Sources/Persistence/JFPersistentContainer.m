@@ -285,7 +285,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 #if JF_WEAK_ENABLED
 	JFWeakifySelf;
 #else
-	id __block __strong tempSelf = self;
+	__typeof(self) __strong strongSelf = self;
 #endif
 	
 	JFBlock block = ^(void)
@@ -298,9 +298,6 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 			[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil]];
 			return;
 		}
-#else
-		__typeof(self) __strong strongSelf = tempSelf;
-		tempSelf = nil;
 #endif
 
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
