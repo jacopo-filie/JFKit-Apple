@@ -101,7 +101,8 @@ NS_ASSUME_NONNULL_BEGIN
 #	define JFStrongify(_var, _suffix) __typeof(_var) __strong strong ## _suffix = _var
 
 /**
- * Creates a new strong reference variable of the same type of `weakSelf`, called `strongSelf`. You should use this macro only if you already used the macro `JFWeakifySelf` in the same scope.
+ * Creates a new strong reference variable of the same type of `weakSelf`, called `strongSelf`.
+ * @warning You should use this macro only if you already used the macro `JFWeakifySelf` in the same scope.
  */
 #	define JFStrongifySelf JFStrongify(weakSelf, Self)
 
@@ -113,7 +114,8 @@ NS_ASSUME_NONNULL_BEGIN
 #	define JFWeakify(_var, _suffix) __typeof(_var) __weak weak ## _suffix = _var
 
 /**
- * Creates a new weak reference variable of the same type of `self`, called `weakSelf`. You should always use this macro before using the macro `JFStrongifySelf` in the same scope.
+ * Creates a new weak reference variable of the same type of `self`, called `weakSelf`.
+ * @warning You should always use this macro before using the macro `JFStrongifySelf` in the same scope.
  */
 #	define JFWeakifySelf JFWeakify(self, Self)
 
