@@ -340,9 +340,9 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 + (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 /**
- * Returns a string containing given severity level. This method simply calls the method `+stringFromSeverity:` of this class.
+ * Returns a string containing the given severity level. This method simply calls the method `+stringFromSeverity:` of this class.
  * @param severity The severity level to convert to string.
- * @return A string containing given severity level.
+ * @return A string containing the given severity level.
  */
 - (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
 
