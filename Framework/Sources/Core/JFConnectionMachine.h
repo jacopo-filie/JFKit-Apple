@@ -36,22 +36,70 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Types
 // =================================================================================================
 
+/**
+ * A list with the available connection states.
+ */
 typedef NS_ENUM(JFState, JFConnectionState)
 {
+	/**
+	 * The state machine is ready to perform the connection.
+	 */
 	JFConnectionStateReady,
+
+	/**
+	 * The state machine is connected.
+	 */
 	JFConnectionStateConnected,
+
+	/**
+	 * The state machine is disconnected.
+	 */
 	JFConnectionStateDisconnected,
+
+	/**
+	 * The state machine has lost connection.
+	 */
 	JFConnectionStateConnectionLost,
+
+	/**
+	 * The state machine is in a dirty state because something went wrong while trying to disconnect or reset the machine. To leave this state, the machine can only try to perform the transition `resetting`.
+	 */
 	JFConnectionStateDirty,
 };
 
+/**
+ * A list with the available connection state transitions.
+ */
 typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 {
+	/**
+	 * The state machine is not performing any transition.
+	 */
 	JFConnectionTransitionNone = JFStateTransitionNone,
+	
+	/**
+	 * The state machine is connecting: its state is changing from `ready` to `connected`; on failure, the ending state is `connection lost`.
+	 */
 	JFConnectionTransitionConnecting,
+	
+	/**
+	 * The state machine is disconnecting: its state is changing from either `connected` or `connection lost` to `disconnected`; on failure, the ending state is `dirty`.
+	 */
 	JFConnectionTransitionDisconnecting,
+	
+	/**
+	 * The state machine is losing connection: its state is changing from `connected` to `connection lost`; on failure, the ending state is still `connection lost`.
+	 */
 	JFConnectionTransitionLosingConnection,
+	
+	/**
+	 * The state machine is reconnecting: its state is changing from `connection lost` to `connected`; on failure, the state does not change.
+	 */
 	JFConnectionTransitionReconnecting,
+	
+	/**
+	 * The state machine is resetting: its state is changing from either `disconnected` or `dirty` to `ready`; on failure, the ending state is `dirty`.
+	 */
 	JFConnectionTransitionResetting,
 };
 
@@ -59,43 +107,138 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 
 #pragma mark -
 
+/**
+ * The class `JFConnectionMachine` is a state machine that can be used to handle the state of a complex connection.
+ */
 @interface JFConnectionMachine : JFStateMachine
 
 // =================================================================================================
 // MARK: Properties - State
 // =================================================================================================
 
+/**
+ * Returns whether the machine is in state `connected`.
+ */
 @property (assign, readonly, getter=isConnected) BOOL connected;
+
+/**
+ * Returns whether the machine is performing state transition `connecting`.
+ */
 @property (assign, readonly, getter=isConnecting) BOOL connecting;
+
+/**
+ * Returns whether the machine is in state `connection lost`.
+ */
 @property (assign, readonly, getter=isConnectionLost) BOOL connectionLost;
+
+/**
+ * Returns whether the machine is in state `dirty`.
+ */
 @property (assign, readonly, getter=isDirty) BOOL dirty;
+
+/**
+ * Returns whether the machine is in state `disconnected`.
+ */
 @property (assign, readonly, getter=isDisconnected) BOOL disconnected;
+
+/**
+ * Returns whether the machine is performing state transition `disconnecting`.
+ */
 @property (assign, readonly, getter=isDisconnecting) BOOL disconnecting;
+
+/**
+ * Returns whether the machine is performing state transition `losing connection`.
+ */
 @property (assign, readonly, getter=isLosingConnection) BOOL losingConnection;
+
+/**
+ * Returns whether the machine is in state `ready`.
+ */
 @property (assign, readonly, getter=isReady) BOOL ready;
+
+/**
+ * Returns whether the machine is performing state transition `reconnecting`.
+ */
 @property (assign, readonly, getter=isReconnecting) BOOL reconnecting;
+
+/**
+ * Returns whether the machine is performing state transition `resetting`.
+ */
 @property (assign, readonly, getter=isResetting) BOOL resetting;
 
 // =================================================================================================
 // MARK: Methods - Memory management
 // =================================================================================================
 
-// The starting state is "Ready".
+/**
+ * Initializes the state machine with the given delegate. The initial state of the machine is set to `ready`.
+ * @param delegate The delegate of the state machine.
+ * @return The initialized state machine.
+ */
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate;
 
 // =================================================================================================
 // MARK: Methods - Execution management
 // =================================================================================================
 
+/**
+ * Enqueues the state transition `connecting`.
+ */
 - (void)connect;
+
+/**
+ * Enqueues the state transition `connecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ */
 - (void)connect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+
+/**
+ * Enqueues the state transition `disconnecting`.
+ */
 - (void)disconnect;
+
+/**
+ * Enqueues the state transition `disconnecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ */
 - (void)disconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+
+/**
+ * Enqueues the state transition `losing connection`.
+ */
 - (void)loseConnection;
+
+/**
+ * Enqueues the state transition `losing connection`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ */
 - (void)loseConnection:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+
+/**
+ * Enqueues the state transition `reconnecting`.
+ */
 - (void)reconnect;
+
+/**
+ * Enqueues the state transition `reconnecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ */
 - (void)reconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+
+/**
+ * Enqueues the state transition `resetting`.
+ */
 - (void)reset;
+
+/**
+ * Enqueues the state transition `resetting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ */
 - (void)reset:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
 
 @end
