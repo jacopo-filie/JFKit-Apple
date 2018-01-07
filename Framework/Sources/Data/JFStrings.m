@@ -70,6 +70,47 @@ BOOL JFStringIsNullOrEmpty(NSString* __nullable string)
 }
 
 // =================================================================================================
+// MARK: Functions - Creation
+// =================================================================================================
+
+NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSString*, NSString*>* values)
+{
+	if(values.count == 0)
+		return [format copy];
+	
+	NSMutableString* retObj = [NSMutableString stringWithCapacity:format.length];
+	
+	NSScanner* scanner = [NSScanner scannerWithString:format];
+	scanner.charactersToBeSkipped = nil;
+	
+	NSString* string = nil;
+	while(![scanner isAtEnd])
+	{
+		if([scanner scanUpToString:@"%" intoString:&string])
+			[retObj appendString:string];
+		
+		if([scanner isAtEnd])
+			break;
+		
+		BOOL isFalsePositive = YES;
+		for(NSString* key in values.allKeys)
+		{
+			if(![scanner scanString:key intoString:nil])
+				continue;
+			
+			isFalsePositive = NO;
+			[retObj appendString:[values objectForKey:key]];
+			break;
+		}
+		
+		if(isFalsePositive && [scanner scanString:@"%" intoString:&string])
+			[retObj appendString:string];
+	}
+	
+	return [retObj copy];
+}
+
+// =================================================================================================
 // MARK: Functions - Creation (Objects conversion)
 // =================================================================================================
 

@@ -88,7 +88,6 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 // =================================================================================================
 
 - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
-- (NSString*)logMessageWithFormat:(NSString*)format values:(NSDictionary<NSString*, NSString*>*)values;
 - (NSInteger)weekOfMonthFromDate:(NSDate*)date;
 
 @end
@@ -614,7 +613,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 		[values setObject:message forKey:JFLoggerFormatMessage];
 
 	// Prepares the log string.
-	NSString* logMessage = [self logMessageWithFormat:format values:values];
+	NSString* logMessage = JFStringByReplacingKeysInFormat(format, values);
 
 	// Logs to file.
 	[self logToFile:logMessage currentDate:currentDate];
@@ -757,40 +756,6 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	}
 	
 	return -1;
-}
-
-- (NSString*)logMessageWithFormat:(NSString*)format values:(NSDictionary<NSString*, NSString*>*)values
-{
-	NSMutableString* retObj = [NSMutableString stringWithCapacity:format.length];
-	
-	NSScanner* scanner = [NSScanner scannerWithString:format];
-	scanner.charactersToBeSkipped = nil;
-	
-	NSString* string = nil;
-	while(![scanner isAtEnd])
-	{
-		if([scanner scanUpToString:@"%" intoString:&string])
-			[retObj appendString:string];
-		
-		if([scanner isAtEnd])
-			break;
-		
-		BOOL isFalsePositive = YES;
-		for(NSString* key in values.allKeys)
-		{
-			if(![scanner scanString:key intoString:nil])
-				continue;
-			
-			isFalsePositive = NO;
-			[retObj appendString:[values objectForKey:key]];
-			break;
-		}
-		
-		if(isFalsePositive && [scanner scanString:@"%" intoString:&string])
-			[retObj appendString:string];
-	}
-	
-	return retObj;
 }
 
 - (NSInteger)weekOfMonthFromDate:(NSDate*)date

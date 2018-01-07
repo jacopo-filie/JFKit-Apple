@@ -115,6 +115,23 @@ FOUNDATION_EXPORT BOOL JFStringIsMadeOfCharacters(NSString* string, NSString* ch
 FOUNDATION_EXPORT BOOL JFStringIsNullOrEmpty(NSString* __nullable string);
 
 // =================================================================================================
+// MARK: Functions - Creation
+// =================================================================================================
+
+/**
+ * Returns a new string created by replacing all occurrences of each given key in `values`, and found in `format`, with their associated values. This function can be used in place of the `NSString` method `-stringWithFormat:` when specifing the indexing of the parameters (typically used for localized strings) because it supports "skipping" of some indexes if needed. For example, if you have parameters `%1$@`, `%2$@`, `%3$@` and you only want to use the first and the third, you can do it by passing the following dictionary to the function:
+ * @code
+ *   NSDictionary<NSString*, NSString*>* values = @{@"%1$@":@"First value", @"%3$@":@"Third value"};
+ * @endcode
+ * The `NSString` method `-stringWithFormat:` does not allow you to skip the parameter `%2$@`, while this function does it.
+ * @param format The string to work on.
+ * @param values The dictionary containing all the keys and values to use.
+ * @return A new string created by replacing all occurrences of each given key in `values`, and found in `format`, with their associated values.
+ * @warning You can use any kind of key you want, but the string must begin with the character `%`, as this is used to recognize where keys might be found. If the character `%` is found outside of any recognized key in `format`, it is preserved and written in the resulting string.
+ */
+FOUNDATION_EXPORT NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSString*, NSString*>* values);
+
+// =================================================================================================
 // MARK: Functions - Creation (Objects conversion)
 // =================================================================================================
 
