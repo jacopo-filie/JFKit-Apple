@@ -37,13 +37,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface JFLoggerSubclass : JFLogger
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
 @interface JFLogger_Tests : XCTestCase
 
 // =================================================================================================
 // MARK: Properties - Tests
 // =================================================================================================
 
-@property (strong, nonatomic, nullable) JFLogger* logger;
+@property (strong, nonatomic, nullable) JFLoggerSubclass* logger;
 
 // =================================================================================================
 // MARK: Methods - Tests management
@@ -85,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[super setUp];
 	
 	// Creates the logger with the test log file.
-	JFLogger* logger = [[JFLogger alloc] init];
+	JFLoggerSubclass* logger = [[JFLoggerSubclass alloc] init];
 	XCTAssert(logger, @"Failed to create the test logger.");
 	logger.fileName = @"Test.log";
 	logger.severityFilter = JFLoggerSeverityInfo;
@@ -170,6 +178,38 @@ NS_ASSUME_NONNULL_BEGIN
 	if(lastLine && [lastLine isEqualToString:JFEmptyString])
 		[retObj removeLastObject];
 	
+	return retObj;
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@implementation JFLoggerSubclass
+
+// =================================================================================================
+// MARK: Properties accessors - Data
+// =================================================================================================
+
++ (NSURL*)defaultDirectoryURL
+{
+	static NSURL* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSError* error = nil;
+		NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
+		
+#if JF_MACOS
+		NSString* domain = [ClassBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
+		NSAssert(domain, @"Bundle identifier not found!");
+		url = [url URLByAppendingPathComponent:domain];
+#endif
+		
+		retObj = [url URLByAppendingPathComponent:@"Logs"];
+	});
 	return retObj;
 }
 
