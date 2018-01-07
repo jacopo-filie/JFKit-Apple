@@ -410,7 +410,9 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	{
 		NSString* extension = fileName.pathExtension;
 		NSInteger suffix = (shouldUseWeekOfMonth ? [self weekOfMonthFromDate:date] : [self component:component fromDate:date]);
-		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@.%@", JFStringFromNSInteger(suffix), extension];
+		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@", JFStringFromNSInteger(suffix)];
+		if(!JFStringIsNullOrEmpty(extension))
+			fileName = [fileName stringByAppendingPathExtension:extension];
 	}
 	
 	return [folderURL URLByAppendingPathComponent:fileName];
