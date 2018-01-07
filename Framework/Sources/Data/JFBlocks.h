@@ -84,7 +84,7 @@ typedef void (^JFBlockWithNotification) (NSNotification* notification);
 typedef void (^JFBlockWithSet) (NSSet* set);
 
 /**
- * A block of code to be executed as completion of an operation.
+ * A block of code to be executed as completion of an operation. Used in combination with the class `JFCompletion`.
  * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
  * @param result The result of the succeeded completed operation; `nil` if the operation failed.
  * @param error The error of the failed completed operation; `nil` if the operation succeeded.
@@ -92,11 +92,17 @@ typedef void (^JFBlockWithSet) (NSSet* set);
 typedef void (^JFCompletionBlock) (BOOL succeeded, id __nullable result, NSError* __nullable error);
 
 /**
- * A block of code to be executed as completion of an operation.
+ * A block of code to be executed as completion of an operation. Used in combination with the class `JFSimpleCompletion`.
  * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
  * @param error The error of the failed completed operation; `nil` if the operation succeeded.
  */
 typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable error);
+
+/**
+ * A block of code to be executed when a timer fires. Used in combination with the class `JFTimerHandler`.
+ * @param timer The timer that fired.
+ */
+typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -321,6 +327,59 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
  * @param queue The queue to use to execute the block.
  */
 - (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+/**
+ * An handler that can be passed to instances of the class `NSTimer` that wraps a block to execute when that timer fires. This class is useful to prevent the timer from keeping a strong reference to the object that owns the timer itself (a timer keeps a strong reference to the object that should respond to the fire event until the timer itself is invalidated).
+ */
+@interface JFTimerHandler : NSObject
+
+// =================================================================================================
+// MARK: Properties - Execution
+// =================================================================================================
+
+/**
+ * The block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly) JFTimerHandlerBlock block;
+
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
+
+/**
+ * A convenient constructor that initializes a new instance of this class using the given block.
+ * @param block The block to use.
+ * @return A new instance of this class.
+ */
++ (instancetype)handlerWithBlock:(JFTimerHandlerBlock)block;
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes this instance with the given block.
+ * @param block The block to use.
+ * @return This instance.
+ */
+- (instancetype)initWithBlock:(JFTimerHandlerBlock)block NS_DESIGNATED_INITIALIZER;
+
+// =================================================================================================
+// MARK: Methods - Execution management
+// =================================================================================================
+
+/**
+ * Called when the timer this instance is assigned to fires.
+ * @param timer The timer that fired.
+ */
+- (void)timerDidFire:(NSTimer*)timer;
 
 @end
 
