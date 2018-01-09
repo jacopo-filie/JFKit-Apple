@@ -27,6 +27,7 @@
 #import "JFStateMachine.h"
 
 #import "JFAsynchronousBlockOperation.h"
+#import "JFErrorFactory.h"
 #import "JFShortcuts.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface JFStateMachine ()
+
+// =================================================================================================
+// MARK: Properties - Errors
+// =================================================================================================
+
+@property (class, strong, nonatomic, readonly) JFErrorFactory* errorFactory;
 
 // =================================================================================================
 // MARK: Properties - Execution
@@ -100,6 +107,20 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @synthesize state	= _state;
+
+// =================================================================================================
+// MARK: Properties accessors - Errors
+// =================================================================================================
+
++ (JFErrorFactory*)errorFactory
+{
+	static JFErrorFactory* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retObj = [[JFErrorFactory alloc] initWithDomain:@"com.jackfelle.stateMachine"];
+	});
+	return retObj;
+}
 
 // =================================================================================================
 // MARK: Properties accessors - State
@@ -170,16 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)perform:(JFStateMachineTransition*)transition waitUntilFinished:(BOOL)waitUntilFinished queuePriority:(NSOperationQueuePriority)priority
 {
-	NSError* error = nil;
-	if(![self isValidTransition:transition.transition error:&error])
-	{
-		JFSimpleCompletion* completion = transition.completion;
-		if(completion)
-			[completion executeWithError:error async:YES];
-		return;
-	}
-	
-	BOOL __block shouldSkipIsCancelledCheckOnCompletion = NO;
+	JFErrorFactory* errorFactory = self.class.errorFactory;
+	NSString* transitionString = [self stringFromTransition:transition.transition];
 	
 	void (^cancelBlock)(NSError* __nullable) = ^(NSError* __nullable underlyingError)
 	{
@@ -187,11 +200,19 @@ NS_ASSUME_NONNULL_BEGIN
 		if(!completion)
 			return;
 		
-		// TODO: replace with specific error.
-		NSDictionary<NSErrorUserInfoKey, id>* userInfo = (underlyingError ? @{NSUnderlyingErrorKey:underlyingError} : nil);
-		NSError* error = [NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:userInfo];
+		NSString* errorDescription = [NSString stringWithFormat:@"Transition '%@' cancelled.", transitionString];
+		NSError* error = [errorFactory errorWithCode:JFStateMachineErrorTransitionCancelled description:errorDescription underlyingError:underlyingError];
 		[completion executeWithError:error async:YES];
 	};
+	
+	NSError* error = nil;
+	if(![self isValidTransition:transition.transition error:&error])
+	{
+		cancelBlock(error);
+		return;
+	}
+	
+	BOOL __block shouldSkipIsCancelledCheckOnCompletion = NO;
 	
 	JFAsynchronousBlockOperation* __block operation = nil;
 	
@@ -217,8 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
 		id<JFStateMachineDelegate> delegate = strongSelf.delegate;
 		if(!delegate)
 		{
-			// TODO: replace with specific error.
-			cancelBlock([NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil]);
+			cancelBlock([errorFactory errorWithCode:JFStateMachineErrorMissingDelegate]);
 			[operation finish];
 			return;
 		}
@@ -238,8 +258,8 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		if(isBeginningStateWrong)
 		{
-			// TODO: replace with specific error.
-			cancelBlock([NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil]);
+			NSString* errorDescription = [NSString stringWithFormat:@"Transition '%@' not allowed from state '%@'.", transitionString, [strongSelf stringFromState:state]];
+			cancelBlock([errorFactory errorWithCode:JFStateMachineErrorTransitionNotAllowed description:errorDescription]);
 			[operation finish];
 			return;
 		}
@@ -381,33 +401,33 @@ NS_ASSUME_NONNULL_BEGIN
 	BOOL (^errorBlock)(NSInteger) = ^BOOL(NSInteger errorCode)
 	{
 		if(outError != NULL)
-			*outError = [NSError errorWithDomain:ClassName code:errorCode userInfo:nil];
+			*outError = [self.class.errorFactory errorWithCode:errorCode description:[NSString stringWithFormat:@"Transition '%@' validation failed.", [self stringFromTransition:transition]]];
 		return NO;
 	};
 	
 	if((transition == JFStateTransitionNone) || (transition == JFStateTransitionNotAvailable))
-		return errorBlock(NSIntegerMax); // TODO: replace with specific error.
+		return errorBlock(JFStateMachineErrorTransitionNotValid);
 	
 	if([self beginningStatesForTransition:transition].count == 0)
-		return errorBlock(NSIntegerMax); // TODO: replace with specific error.
+		return errorBlock(JFStateMachineErrorBeginningStateNotValid);
 	
 	if([self endingStateForSucceededTransition:transition] == JFStateNotAvailable)
-		return errorBlock(NSIntegerMax); // TODO: replace with specific error.
+		return errorBlock(JFStateMachineErrorEndingStateOnSuccessNotValid);
 	
 	if([self endingStateForFailedTransition:transition] == JFStateNotAvailable)
-		return errorBlock(NSIntegerMax); // TODO: replace with specific error.
+		return errorBlock(JFStateMachineErrorEndingStateOnFailureNotValid);
 	
 	return YES;
 }
 
 - (NSString* __nullable)stringFromState:(JFState)state
 {
-	return nil;
+	return JFStringFromNSInteger(state);
 }
 
 - (NSString* __nullable)stringFromTransition:(JFStateTransition)transition
 {
-	return nil;
+	return JFStringFromNSInteger(transition);
 }
 
 @end

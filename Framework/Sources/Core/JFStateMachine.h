@@ -76,6 +76,20 @@ typedef NSInteger JFState;
  */
 typedef NSInteger JFStateTransition;
 
+/**
+ * A list of all errors generated inside the state machine.
+ */
+typedef NS_ENUM(NSInteger, JFStateMachineError) {
+	// TODO: complete documentation.
+	JFStateMachineErrorBeginningStateNotValid,
+	JFStateMachineErrorEndingStateOnFailureNotValid,
+	JFStateMachineErrorEndingStateOnSuccessNotValid,
+	JFStateMachineErrorMissingDelegate,
+	JFStateMachineErrorTransitionCancelled,
+	JFStateMachineErrorTransitionNotAllowed,
+	JFStateMachineErrorTransitionNotValid,
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark -
