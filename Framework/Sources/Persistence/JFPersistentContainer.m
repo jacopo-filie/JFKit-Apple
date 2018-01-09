@@ -26,7 +26,8 @@
 
 #import "JFPersistentContainer.h"
 
-#import	"JFPreprocessorMacros.h"
+#import "JFErrorFactory.h"
+#import "JFPreprocessorMacros.h"
 #import "JFShortcuts.h"
 #import "JFVersion.h"
 
@@ -45,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @property (strong, nonatomic, readonly) NSOperationQueue* serialQueue;
+
+// =================================================================================================
+// MARK: Properties - Errors
+// =================================================================================================
+
+@property (class, strong, nonatomic, readonly) JFErrorFactory* errorFactory;
 
 // =================================================================================================
 // MARK: Properties - Stack
@@ -142,6 +149,25 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		return self.persistentContainer.name;
 	
 	return [_name copy];
+}
+
+// =================================================================================================
+// MARK: Properties accessors - Errors
+// =================================================================================================
+
++ (JFErrorFactory*)errorFactory
+{
+	static JFErrorFactory* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retObj = [[JFErrorFactory alloc] initWithDomain:self.errorDomain];
+	});
+	return retObj;
+}
+
++ (NSErrorDomain)errorDomain
+{
+	return @"com.jackfelle.persistentContainer";
 }
 
 // =================================================================================================
@@ -281,7 +307,9 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		}];
 		return;
 	}
-	
+
+	JFErrorFactory* errorFactory = self.class.errorFactory;
+
 #if JF_WEAK_ENABLED
 	JFWeakifySelf;
 #else
@@ -294,8 +322,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		JFStrongifySelf;
 		if(!strongSelf)
 		{
-			// TODO: replace with specific error.
-			[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil]];
+			[completion executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorDeallocated]];
 			return;
 		}
 #endif
@@ -303,8 +330,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
 		if(!url)
 		{
-			// TODO: replace with specific error.
-			[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil]];
+			[completion executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorMissingURL]];
 			return;
 		}
 		

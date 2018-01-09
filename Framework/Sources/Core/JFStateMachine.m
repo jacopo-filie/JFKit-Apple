@@ -117,9 +117,14 @@ NS_ASSUME_NONNULL_BEGIN
 	static JFErrorFactory* retObj = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		retObj = [[JFErrorFactory alloc] initWithDomain:@"com.jackfelle.stateMachine"];
+		retObj = [[JFErrorFactory alloc] initWithDomain:self.errorDomain];
 	});
 	return retObj;
+}
+
++ (NSErrorDomain)errorDomain
+{
+	return @"com.jackfelle.stateMachine";
 }
 
 // =================================================================================================
@@ -229,7 +234,7 @@ NS_ASSUME_NONNULL_BEGIN
 		JFStrongifySelf;
 		if(!strongSelf)
 		{
-			cancelBlock(nil);
+			cancelBlock([errorFactory errorWithCode:JFStateMachineErrorDeallocated]);
 			[operation finish];
 			return;
 		}

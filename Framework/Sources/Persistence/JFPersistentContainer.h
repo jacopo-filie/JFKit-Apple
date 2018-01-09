@@ -34,8 +34,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// =================================================================================================
+// MARK: Types - Errors
+// =================================================================================================
+
 /**
- * This class can be used to replace the class `NSPersistentContainer` that has limited support for the most recent operating systems. It tries to extend the support down to macOS 10.6 and iOS 8.0 by using many checks to select the proper path of instructions to follow: if the class `NSPersistentContainer` is available, its properties and methods are used, otherwise the most recent available SDK APIs are used to implement a custom version of the needed `NSPersistentContainer` API.
+ * A list of all errors generated inside the persistent container.
+ */
+typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
+	
+	/**
+	 * The persistent container has already been deallocated.
+	 */
+	JFPersistentContainerErrorDeallocated,
+	
+	/**
+	 * The persistent container failed to create the database URL.
+	 */
+	JFPersistentContainerErrorMissingURL,
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+/**
+ * This class can be used to replace the class `NSPersistentContainer` that has limited support for the most recent operating systems. It tries to extend the support down to macOS 10.6 and iOS 8.0 by using many checks to select the proper path of instructions to follow: if the class `NSPersistentContainer` is available, its properties and methods are used, otherwise the most recent available SDK APIs are used to implement a custom version of the needed `NSPersistentContainer` APIs.
  * @warning If the class `NSPersistentContainer` is not available, only the `NSSQLiteStoreType` is supported.
  */
 @interface JFPersistentContainer : NSObject
@@ -58,6 +82,15 @@ NS_ASSUME_NONNULL_BEGIN
  * The name of this persistent container.
  */
 @property (copy, readonly) NSString* name;
+
+// =================================================================================================
+// MARK: Properties - Errors
+// =================================================================================================
+
+/**
+ * The domain of all the errors generated inside the persistent container.
+ */
+@property (class, strong, nonatomic, readonly) NSErrorDomain errorDomain;
 
 // =================================================================================================
 // MARK: Properties - Stack
