@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2017-2018 Jacopo Filié
+//	Copyright © 2015-2018 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@import CoreData;
-@import UIKit;
+#import "JFPreprocessorMacros.h"
 
-@import JFFramework_iOS;
+@import Foundation;
+
+#if JF_MACOS
+@import Cocoa;
+#else
+@import UIKit;
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,19 +40,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface AppDelegate : JFAppDelegate <UISplitViewControllerDelegate>
+#if JF_MACOS
+@interface JFAppDelegate : NSObject <NSApplicationDelegate>
+#else
+@interface JFAppDelegate : UIResponder <UIApplicationDelegate>
+#endif
 
 // =================================================================================================
-// MARK: Properties - Stores
+// MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-@property (strong, readonly) JFPersistentContainer* persistentContainer;
+#if JF_MACOS
+@property (strong, nonatomic, nullable) IBOutlet NSWindow* window;
+#endif
 
 // =================================================================================================
-// MARK: Methods - Stores management
+// MARK: Properties (Inherited) - User interface
 // =================================================================================================
 
-- (void)saveContext;
+#if JF_IOS
+@property (strong, nonatomic, nullable) UIWindow* window;
+#endif
 
 @end
 

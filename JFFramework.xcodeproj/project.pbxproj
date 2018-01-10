@@ -33,6 +33,10 @@
 		4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E50039C1FE5B3D1002710B9 /* JFStrings.m */; };
 		4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E50039D1FE5B3D1002710B9 /* JFStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E50039D1FE5B3D1002710B9 /* JFStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E515E172004FAD0008D3234 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E515E172004FAD0008D3234 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E515E182004FAD0008D3234 /* JFAppDelegate.m */; };
+		4E515E1C2004FAD0008D3234 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E515E182004FAD0008D3234 /* JFAppDelegate.m */; };
 		4E5DD4061FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5DD4071FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */; };
@@ -147,6 +151,8 @@
 		4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFByteStream-Tests.m"; sourceTree = "<group>"; };
 		4E50039C1FE5B3D1002710B9 /* JFStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStrings.m; sourceTree = "<group>"; };
 		4E50039D1FE5B3D1002710B9 /* JFStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStrings.h; sourceTree = "<group>"; };
+		4E515E172004FAD0008D3234 /* JFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppDelegate.h; sourceTree = "<group>"; };
+		4E515E182004FAD0008D3234 /* JFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppDelegate.m; sourceTree = "<group>"; };
 		4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousBlockOperation.h; sourceTree = "<group>"; };
 		4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousBlockOperation.m; sourceTree = "<group>"; };
 		4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
@@ -277,6 +283,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		4E515E162004FAD0008D3234 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4E515E172004FAD0008D3234 /* JFAppDelegate.h */,
+				4E515E182004FAD0008D3234 /* JFAppDelegate.m */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		4E5EE1AB1FFC5E16008444FD /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +314,7 @@
 		4EA80C791FDCCE790086EBE2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4E515E162004FAD0008D3234 /* Application */,
 				4E5EE1AB1FFC5E16008444FD /* Core */,
 				4E0BF89F1FE08E970050114D /* Data */,
 				4E415F241FF6D4B200C252E3 /* Persistence */,
@@ -409,6 +425,7 @@
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4EB1B3972001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4EF7251120005E180080136D /* JFConnectionMachine.h in Headers */,
 				4EF72507200056780080136D /* JFSwitchMachine.h in Headers */,
 				4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */,
@@ -438,6 +455,7 @@
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
 				4EB1B3982001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4EF7251220005E180080136D /* JFConnectionMachine.h in Headers */,
 				4EF72508200056780080136D /* JFSwitchMachine.h in Headers */,
 				4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */,
@@ -617,6 +635,7 @@
 				4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4E415F271FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
+				4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
 				4E84906F1FF4887300B029E6 /* JFImages.m in Sources */,
@@ -661,6 +680,7 @@
 				4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E415F281FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
+				4E515E1C2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250C200056780080136D /* JFSwitchMachine.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E8490701FF4887300B029E6 /* JFImages.m in Sources */,

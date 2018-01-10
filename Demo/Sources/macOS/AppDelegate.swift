@@ -31,7 +31,7 @@ import JFFramework_macOS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @NSApplicationMain
-class AppDelegate : NSObject, NSApplicationDelegate
+class AppDelegate : JFAppDelegate
 {
 	// =============================================================================================
 	// MARK: Properties - Stores
@@ -82,12 +82,6 @@ class AppDelegate : NSObject, NSApplicationDelegate
 		return container
 	}()
 	
-	// =================================================================================================
-	// MARK: Properties - User interface (Outlets)
-	// =================================================================================================
-	
-	@IBOutlet weak var window:NSWindow!
-
 	// =============================================================================================
 	// MARK: Methods - User interface management
 	// =============================================================================================
@@ -131,7 +125,7 @@ class AppDelegate : NSObject, NSApplicationDelegate
 	// MARK: Protocols (NSApplicationDelegate)
 	// =============================================================================================
 
-	func applicationShouldTerminate(_ sender:NSApplication) -> NSApplication.TerminateReply
+	override func applicationShouldTerminate(_ sender:NSApplication) -> NSApplication.TerminateReply
 	{
 	    // Save changes in the application's managed object context before the application terminates.
 	    let context = persistentContainer.viewContext

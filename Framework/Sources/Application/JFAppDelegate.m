@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2017-2018 Jacopo Filié
+//	Copyright © 2015-2018 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@import CoreData;
-@import UIKit;
-
-@import JFFramework_iOS;
+#import "JFAppDelegate.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,19 +32,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface AppDelegate : JFAppDelegate <UISplitViewControllerDelegate>
+@implementation JFAppDelegate
 
 // =================================================================================================
-// MARK: Properties - Stores
+// MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-@property (strong, readonly) JFPersistentContainer* persistentContainer;
+#if JF_MACOS
+@synthesize window = _window;
+#endif
 
 // =================================================================================================
-// MARK: Methods - Stores management
+// MARK: Properties (Inherited) - User interface
 // =================================================================================================
 
-- (void)saveContext;
+#if JF_IOS
+@synthesize window = _window;
+#endif
 
 @end
 

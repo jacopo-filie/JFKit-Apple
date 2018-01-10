@@ -35,17 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-
-// =================================================================================================
-// MARK: Properties - User interface (Outlets)
-// =================================================================================================
-
-#if JF_WEAK_ENABLED
-@property (weak, nonatomic, nullable) IBOutlet NSWindow* window;
-#else
-@property (strong, nonatomic, nullable) IBOutlet NSWindow* window;
-#endif
+@interface AppDelegate : JFAppDelegate
 
 // =================================================================================================
 // MARK: Properties - Stores

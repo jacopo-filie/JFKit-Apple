@@ -30,7 +30,7 @@ import JFFramework_iOS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @UIApplicationMain
-class AppDelegate : UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate
+class AppDelegate : JFAppDelegate, UISplitViewControllerDelegate
 {
 	// =================================================================================================
 	// MARK: Properties - Stores
@@ -83,12 +83,6 @@ class AppDelegate : UIResponder, UIApplicationDelegate, UISplitViewControllerDel
 	}()
 	
 	// =============================================================================================
-	// MARK: Properties (Inherited) - User interface
-	// =============================================================================================
-	
-	var window:UIWindow?
-	
-	// =============================================================================================
 	// MARK: Methods - Stores management
 	// =============================================================================================
 	
@@ -115,7 +109,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate, UISplitViewControllerDel
 	// MARK: Protocols (UIApplicationDelegate)
 	// =============================================================================================
 	
-	func application(_ application:UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey:Any]?) -> Bool
+	override func application(_ application:UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey:Any]?) -> Bool
 	{
 		// Override point for customization after application launch.
 		let splitViewController = self.window!.rootViewController as! UISplitViewController
@@ -130,7 +124,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate, UISplitViewControllerDel
 		return true
 	}
 	
-	func applicationWillTerminate(_ application: UIApplication) {
+	override func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		// Saves changes in the application's managed object context before the application terminates.
 		self.saveContext()
