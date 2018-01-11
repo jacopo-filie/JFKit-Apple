@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The `JFObserversController` manages the observers of its owner and dispatches notifications to them in many ways.
  * `ObserverType` defines the type of the object that is observing the owner and is expected to handle the dispatched notifications.
+ * @warning On systems where the `weak` keyword is not available, to prevent the risk of a dangling pointer creation you must manually remove any observer before it gets deallocated.
  */
 @interface JFObserversController<__covariant ObserverType> : NSObject
 
