@@ -26,6 +26,8 @@
 
 @import Foundation;
 
+@protocol JFLoggerDelegate;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -68,6 +70,8 @@ FOUNDATION_EXPORT NSString* const JFLoggerFormatTime;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark -
+
 // =================================================================================================
 // MARK: Types
 // =================================================================================================
@@ -83,14 +87,19 @@ typedef NS_OPTIONS(UInt8, JFLoggerOutput)
 	JFLoggerOutputConsole = 1 << 0,
 	
 	/**
+	 * Forwards the message to the registered delegates.
+	 */
+	JFLoggerOutputDelegates = 1 << 1,
+
+	/**
 	 * Prints the message to the currently active log file.
 	 */
-	JFLoggerOutputFile = 1 << 1,
+	JFLoggerOutputFile = 1 << 2,
 	
 	/**
 	 * Prints the message to all available outputs.
 	 */
-	JFLoggerOutputAll = (JFLoggerOutputConsole | JFLoggerOutputFile),
+	JFLoggerOutputAll = (JFLoggerOutputConsole | JFLoggerOutputDelegates | JFLoggerOutputFile),
 };
 
 /**
@@ -354,6 +363,22 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 - (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 // =================================================================================================
+// MARK: Methods - Observers management
+// =================================================================================================
+
+/**
+ * Registers a delegate. If the given delegate is already registered, it does nothing.
+ * @param delegate The delegate to register.
+ */
+- (void)addDelegate:(id<JFLoggerDelegate>)delegate;
+
+/**
+ * Unregisters a delegate. If the given delegate is not registered yet, it does nothing.
+ * @param delegate The delegate to unregister.
+ */
+- (void)removeDelegate:(id<JFLoggerDelegate>)delegate;
+
+// =================================================================================================
 // MARK: Methods - Service management
 // =================================================================================================
 
@@ -448,6 +473,28 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @param tags The tags assigned to the given message.
  */
 - (void)logWarning:(NSString*)message tags:(JFLoggerTags)tags;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+/**
+ * The protocol that the delegates of the logger must implement.
+ */
+@protocol JFLoggerDelegate <NSObject>
+
+@required
+
+/**
+ * Sends the delegate the formatted log message, passing also the reference current date associated with it.
+ * @param sender The logger instance.
+ * @param message The formatted message.
+ * @param date The date associated with the log message.
+ * @warning The parameter `message` is not the original string given to the logger, it's the result of the composition of the format string (see parameter `format`) and the available values.
+ */
+- (void)logger:(JFLogger*)sender logMessage:(NSString*)message currentDate:(NSDate*)date;
 
 @end
 

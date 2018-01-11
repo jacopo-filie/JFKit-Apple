@@ -28,6 +28,7 @@
 
 #import <pthread/pthread.h>
 
+#import "JFObserversController.h"
 #import "JFPreprocessorMacros.h"
 #import "JFShortcuts.h"
 #import "JFStrings.h"
@@ -60,6 +61,12 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 // =================================================================================================
 
 @property (strong, null_resettable) NSArray<NSString*>* requestedFormatValues;
+
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
+@property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegatesController;
 
 // =================================================================================================
 // MARK: Methods - Data management
@@ -113,8 +120,14 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 // MARK: Properties - File system
 // =================================================================================================
 
-@synthesize fileName	= _fileName;
-@synthesize rotation	= _rotation;
+@synthesize fileName = _fileName;
+@synthesize rotation = _rotation;
+
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
+@synthesize delegatesController = _delegatesController;
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -271,6 +284,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	self = [super init];
 	if(self)
 	{
+		_delegatesController = [JFObserversController<JFLoggerDelegate> new];
 		_outputFilter = JFLoggerOutputAll;
 		_rotation = JFLoggerRotationNone;
 #if DEBUG
@@ -531,6 +545,20 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
+// MARK: Methods - Observers management
+// =================================================================================================
+
+- (void)addDelegate:(id<JFLoggerDelegate>)delegate
+{
+	[self.delegatesController addObserver:delegate];
+}
+
+- (void)removeDelegate:(id<JFLoggerDelegate>)delegate
+{
+	[self.delegatesController removeObserver:delegate];
+}
+
+// =================================================================================================
 // MARK: Methods - Service management
 // =================================================================================================
 
@@ -548,8 +576,9 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	// Filters by output.
 	JFLoggerOutput outputFilter = self.outputFilter;
 	BOOL shouldLogToConsole = (output & JFLoggerOutputConsole) && (outputFilter & JFLoggerOutputConsole);
+	BOOL shouldLogToDelegates = (output & JFLoggerOutputDelegates) && (outputFilter & JFLoggerOutputDelegates);
 	BOOL shouldLogToFile = (output & JFLoggerOutputFile) && (outputFilter & JFLoggerOutputFile);
-	if(!shouldLogToConsole && !shouldLogToFile)
+	if(!shouldLogToConsole && !shouldLogToDelegates && !shouldLogToFile)
 		return;
 	
 	// Appends tags.
@@ -562,10 +591,12 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	
 	// Logs to console if needed.
 	if(shouldLogToConsole)
+	{
 		[self logToConsole:message currentDate:currentDate];
+		if(!shouldLogToDelegates && !shouldLogToFile)
+			return;
+	}
 	
-	if(!shouldLogToFile)
-		return;
 	
 	NSString* format;
 	NSArray<NSString*>* requestedFormatValues;
@@ -581,7 +612,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	if([requestedFormatValues containsObject:JFLoggerFormatSeverity])
 		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
 	
-	// Gets the current process ID. NSProcessInfo is thread-safe only on iOS or macOS 10.7 or later.
+	// Gets the current process ID. On macOS, NSProcessInfo is thread-safe only on 10.7 or later.
 	if([requestedFormatValues containsObject:JFLoggerFormatProcessID])
 	{
 		NSProcessInfo* processInfo = ProcessInfo;
@@ -613,12 +644,21 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	// Gets the message.
 	if([requestedFormatValues containsObject:JFLoggerFormatMessage])
 		[values setObject:message forKey:JFLoggerFormatMessage];
-
+	
 	// Prepares the log string.
 	NSString* logMessage = JFStringByReplacingKeysInFormat(format, values);
-
-	// Logs to file.
-	[self logToFile:logMessage currentDate:currentDate];
+	
+	// Logs to file if needed.
+	if(shouldLogToFile)
+		[self logToFile:logMessage currentDate:currentDate];
+	
+	// Forwards the log message to the registered delegates if needed.
+	if(shouldLogToDelegates)
+	{
+		[self.delegatesController notifyObservers:^(id<JFLoggerDelegate> delegate) {
+			[delegate logger:self logMessage:logMessage currentDate:currentDate];
+		} async:YES];
+	}
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
