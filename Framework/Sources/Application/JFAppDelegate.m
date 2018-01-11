@@ -38,17 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-#if JF_MACOS
 @synthesize window = _window;
-#endif
-
-// =================================================================================================
-// MARK: Properties (Inherited) - User interface
-// =================================================================================================
-
-#if JF_IOS
-@synthesize window = _window;
-#endif
 
 @end
 

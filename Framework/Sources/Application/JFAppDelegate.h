@@ -34,33 +34,45 @@
 @import UIKit;
 #endif
 
+#import "JFShortcuts.h"
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// =================================================================================================
+// MARK: Macros
+// =================================================================================================
+
 #if JF_MACOS
-@interface JFAppDelegate : NSObject <NSApplicationDelegate>
+/**
+ * The superclass and protocol of the macOS application delegate.
+ */
+#define JFAppDelegateSuperclass NSObject <NSApplicationDelegate>
 #else
-@interface JFAppDelegate : UIResponder <UIApplicationDelegate>
+/**
+ * The superclass and protocol of the iOS application delegate.
+ */
+#define JFAppDelegateSuperclass UIResponder <UIApplicationDelegate>
 #endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * A unified application delegate base class for both iOS and macOS. It exposes the useful property `window` (required for iOS and optional for macOS) that references the main window of the application.
+ */
+@interface JFAppDelegate : JFAppDelegateSuperclass
 
 // =================================================================================================
 // MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-#if JF_MACOS
-@property (strong, nonatomic, nullable) IBOutlet NSWindow* window;
-#endif
-
-// =================================================================================================
-// MARK: Properties (Inherited) - User interface
-// =================================================================================================
-
-#if JF_IOS
-@property (strong, nonatomic, nullable) UIWindow* window;
-#endif
+/**
+ * The main window of the application.
+ */
+@property (strong, nonatomic, nullable) IBOutlet JFWindow* window;
 
 @end
 
