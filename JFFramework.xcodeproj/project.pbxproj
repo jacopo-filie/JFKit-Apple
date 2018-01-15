@@ -29,6 +29,10 @@
 		4E4E97DA2000E3DA00E9CE87 /* JFVersion-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */; };
 		4E4E97DB2000E3DA00E9CE87 /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */; };
 		4E4E97DC2000E3DA00E9CE87 /* JFByteStream-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */; };
+		4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E4F527D200D0E2A00B24F1C /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E4F5280200D0E2B00B24F1C /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E4F527D200D0E2A00B24F1C /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F527E200D0E2A00B24F1C /* JFLogger.m */; };
+		4E4F5282200D0E2B00B24F1C /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4F527E200D0E2A00B24F1C /* JFLogger.m */; };
 		4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E50039C1FE5B3D1002710B9 /* JFStrings.m */; };
 		4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E50039C1FE5B3D1002710B9 /* JFStrings.m */; };
 		4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E50039D1FE5B3D1002710B9 /* JFStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,10 +53,6 @@
 		4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
 		4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
-		4E5EE1B61FFC7C69008444FD /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1B41FFC7C69008444FD /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E5EE1B71FFC7C69008444FD /* JFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1B41FFC7C69008444FD /* JFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E5EE1B81FFC7C69008444FD /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1B51FFC7C69008444FD /* JFLogger.m */; };
-		4E5EE1B91FFC7C69008444FD /* JFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1B51FFC7C69008444FD /* JFLogger.m */; };
 		4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -149,6 +149,8 @@
 		4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
 		4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFVersion-Tests.m"; sourceTree = "<group>"; };
 		4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFByteStream-Tests.m"; sourceTree = "<group>"; };
+		4E4F527D200D0E2A00B24F1C /* JFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFLogger.h; sourceTree = "<group>"; };
+		4E4F527E200D0E2A00B24F1C /* JFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		4E50039C1FE5B3D1002710B9 /* JFStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStrings.m; sourceTree = "<group>"; };
 		4E50039D1FE5B3D1002710B9 /* JFStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStrings.h; sourceTree = "<group>"; };
 		4E515E172004FAD0008D3234 /* JFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppDelegate.h; sourceTree = "<group>"; };
@@ -159,8 +161,6 @@
 		4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
 		4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFObserversController.h; sourceTree = "<group>"; };
 		4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
-		4E5EE1B41FFC7C69008444FD /* JFLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFLogger.h; sourceTree = "<group>"; };
-		4E5EE1B51FFC7C69008444FD /* JFLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
@@ -266,6 +266,8 @@
 		4E415F241FF6D4B200C252E3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				4E4F527D200D0E2A00B24F1C /* JFLogger.h */,
+				4E4F527E200D0E2A00B24F1C /* JFLogger.m */,
 				4E415F261FF6D4B200C252E3 /* JFPersistentContainer.h */,
 				4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */,
 			);
@@ -299,8 +301,6 @@
 				4EF7251020005E170080136D /* JFConnectionMachine.m */,
 				4EB1B3952001C480004C1FF4 /* JFErrorFactory.h */,
 				4EB1B3962001C480004C1FF4 /* JFErrorFactory.m */,
-				4E5EE1B41FFC7C69008444FD /* JFLogger.h */,
-				4E5EE1B51FFC7C69008444FD /* JFLogger.m */,
 				4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */,
 				4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */,
 				4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */,
@@ -425,6 +425,7 @@
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4EB1B3972001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */,
 				4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4EF7251120005E180080136D /* JFConnectionMachine.h in Headers */,
 				4EF72507200056780080136D /* JFSwitchMachine.h in Headers */,
@@ -433,7 +434,6 @@
 				4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
-				4E5EE1B61FFC7C69008444FD /* JFLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +455,7 @@
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4ECFE39F1FD8C7B4004EEACE /* JFFramework_macOS.h in Headers */,
 				4EB1B3982001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4E4F5280200D0E2B00B24F1C /* JFLogger.h in Headers */,
 				4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4EF7251220005E180080136D /* JFConnectionMachine.h in Headers */,
 				4EF72508200056780080136D /* JFSwitchMachine.h in Headers */,
@@ -463,7 +464,6 @@
 				4EC10F261FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */,
-				4E5EE1B71FFC7C69008444FD /* JFLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +629,7 @@
 				4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
+				4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */,
 				4E3AC70120024115002CE0A1 /* JFError.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
@@ -643,7 +644,6 @@
 				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
 				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
-				4E5EE1B81FFC7C69008444FD /* JFLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +674,7 @@
 				4EC10F241FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */,
+				4E4F5282200D0E2B00B24F1C /* JFLogger.m in Sources */,
 				4E3AC70220024115002CE0A1 /* JFError.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
@@ -688,7 +689,6 @@
 				4E99B94E1FF0A7720026724A /* JFMath.m in Sources */,
 				4ED607DC1FEE720000292837 /* JFColors.m in Sources */,
 				4EC258701FEF294600179CC7 /* JFReferences.m in Sources */,
-				4E5EE1B91FFC7C69008444FD /* JFLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
