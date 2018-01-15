@@ -24,38 +24,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <Cocoa/Cocoa.h>
+#import "JFWindowController.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_macOS.
-FOUNDATION_EXPORT double JFFramework_macOSVersionNumber;
-
-//! Project version string for JFFramework_macOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_macOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_macOS/JFAppDelegate.h>
-#import <JFFramework_macOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_macOS/JFAsynchronousOperation.h>
-#import <JFFramework_macOS/JFBlocks.h>
-#import <JFFramework_macOS/JFByteStream.h>
-#import <JFFramework_macOS/JFColors.h>
-#import <JFFramework_macOS/JFConnectionMachine.h>
-#import <JFFramework_macOS/JFImages.h>
-#import <JFFramework_macOS/JFLogger.h>
-#import <JFFramework_macOS/JFMath.h>
-#import <JFFramework_macOS/JFObserversController.h>
-#import <JFFramework_macOS/JFPersistentContainer.h>
-#import <JFFramework_macOS/JFPreprocessorMacros.h>
-#import <JFFramework_macOS/JFReferences.h>
-#import <JFFramework_macOS/JFShortcuts.h>
-#import <JFFramework_macOS/JFStateMachine.h>
-#import <JFFramework_macOS/JFStrings.h>
-#import <JFFramework_macOS/JFSwitchMachine.h>
-#import <JFFramework_macOS/JFUtilities.h>
-#import <JFFramework_macOS/JFVersion.h>
-#import <JFFramework_macOS/JFWindowController.h>
+@implementation JFWindowController
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
