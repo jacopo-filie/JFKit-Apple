@@ -309,16 +309,22 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 // MARK: Methods - Comparison management (iOS)
 // =================================================================================================
 
-#if JF_IOS
-
 + (BOOL)isIOS:(JFVersion*)version
 {
+#if JF_IOS
 	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
+#else
+	return NO;
+#endif
 }
 
 + (BOOL)isIOSPlus:(JFVersion*)version
 {
+#if JF_IOS
 	return [version compareToCurrentOperatingSystemVersion:JFRelationLessThanOrEqual];
+#else
+	return NO;
+#endif
 }
 
 + (BOOL)isIOS8
@@ -361,22 +367,26 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 	RETURN_IS_IOS_PLUS(11);
 }
 
-#endif
-
 // =================================================================================================
 // MARK: Methods - Comparison management (macOS)
 // =================================================================================================
 
-#if JF_MACOS
-
 + (BOOL)isMacOS:(JFVersion*)version
 {
+#if JF_MACOS
 	return [version compareToCurrentOperatingSystemVersion:JFRelationEqual];
+#else
+	return NO;
+#endif
 }
 
 + (BOOL)isMacOSPlus:(JFVersion*)version
 {
+#if JF_MACOS
 	return [version compareToCurrentOperatingSystemVersion:JFRelationLessThanOrEqual];
+#else
+	return NO;
+#endif
 }
 
 + (BOOL)isMacOS10_6
@@ -458,8 +468,6 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 {
 	RETURN_IS_MACOS_PLUS(10, 13);
 }
-
-#endif
 
 // =================================================================================================
 // MARK: Protocols (NSCopying)

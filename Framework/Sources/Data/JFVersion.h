@@ -48,189 +48,181 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros - Shortcuts (iOS)
 // =================================================================================================
 
-#	if JF_IOS
-
 /**
  * Checks whether the current iOS version is equal to the given version string.
  * @param _version The version string to compare.
  * @return `YES` if the current iOS version is equal to the given version string, `NO` otherwise.
  */
-#		define iOS(_version) [JFVersion isIOS:_version]
+#	define iOS(_version) [JFVersion isIOS:_version]
 
 /**
  * Checks whether the current iOS version is greater than or equal to the given version string.
  * @param _version The version string to compare.
  * @return `YES` if the current iOS version is greater than or equal to the given version string, `NO` otherwise.
  */
-#		define iOSPlus(_version) [JFVersion isIOSPlus:_version]
+#	define iOSPlus(_version) [JFVersion isIOSPlus:_version]
 
 /**
  * Checks whether the current iOS major version is `8`.
  * @return `YES` if the current iOS major version is `8`, `NO` otherwise.
  */
-#		define iOS8 [JFVersion isIOS8]
+#	define iOS8 [JFVersion isIOS8]
 
 /**
  * Checks whether the current iOS major version is `8` or greater.
  * @return `YES` if the current iOS major version is `8` or greater, `NO` otherwise.
  */
-#		define iOS8Plus [JFVersion isIOS8Plus]
+#	define iOS8Plus [JFVersion isIOS8Plus]
 
 /**
  * Checks whether the current iOS major version is `9`.
  * @return `YES` if the current iOS major version is `9`, `NO` otherwise.
  */
-#		define iOS9 [JFVersion isIOS9]
+#	define iOS9 [JFVersion isIOS9]
 
 /**
  * Checks whether the current iOS major version is `9` or greater.
  * @return `YES` if the current iOS major version is `9` or greater, `NO` otherwise.
  */
-#		define iOS9Plus [JFVersion isIOS9Plus]
+#	define iOS9Plus [JFVersion isIOS9Plus]
 
 /**
  * Checks whether the current iOS major version is `10`.
  * @return `YES` if the current iOS major version is `10`, `NO` otherwise.
  */
-#		define iOS10 [JFVersion isIOS10]
+#	define iOS10 [JFVersion isIOS10]
 
 /**
  * Checks whether the current iOS major version is `10` or greater.
  * @return `YES` if the current iOS major version is `10` or greater, `NO` otherwise.
  */
-#		define iOS10Plus [JFVersion isIOS10Plus]
+#	define iOS10Plus [JFVersion isIOS10Plus]
 
 /**
  * Checks whether the current iOS major version is `11`.
  * @return `YES` if the current iOS major version is `11`, `NO` otherwise.
  */
-#		define iOS11 [JFVersion isIOS11]
+#	define iOS11 [JFVersion isIOS11]
 
 /**
  * Checks whether the current iOS major version is `11` or greater.
  * @return `YES` if the current iOS major version is `11` or greater, `NO` otherwise.
  */
-#		define iOS11Plus [JFVersion isIOS11Plus]
-
-#	endif
+#	define iOS11Plus [JFVersion isIOS11Plus]
 
 // =================================================================================================
 // MARK: Macros - Shortcuts (macOS)
 // =================================================================================================
-
-#	if JF_MACOS
 
 /**
  * Checks whether the current macOS version is equal to the given version string.
  * @param _version The version string to compare.
  * @return `YES` if the current macOS version is equal to the given version string, `NO` otherwise.
  */
-#		define macOS(_version) [JFVersion isMacOS:_version]
+#	define macOS(_version) [JFVersion isMacOS:_version]
 
 /**
  * Checks whether the current macOS version is greater than or equal to the given version string.
  * @param _version The version string to compare.
  * @return `YES` if the current macOS version is greater than or equal to the given version string, `NO` otherwise.
  */
-#		define macOSPlus(_version) [JFVersion isMacOSPlus:_version]
+#	define macOSPlus(_version) [JFVersion isMacOSPlus:_version]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `6`.
  * @return `YES` if the current iOS major version is `10` and minor version is `6`, `NO` otherwise.
  */
-#		define macOS10_6 [JFVersion isMacOS10_6]
+#	define macOS10_6 [JFVersion isMacOS10_6]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.6`.
  * @return `YES` if the current macOS version is greater than or equal to `10.6`, `NO` otherwise.
  */
-#		define macOS10_6Plus [JFVersion isMacOS10_6Plus]
+#	define macOS10_6Plus [JFVersion isMacOS10_6Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `7`.
  * @return `YES` if the current iOS major version is `10` and minor version is `7`, `NO` otherwise.
  */
-#		define macOS10_7 [JFVersion isMacOS10_7]
+#	define macOS10_7 [JFVersion isMacOS10_7]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.7`.
  * @return `YES` if the current macOS version is greater than or equal to `10.7`, `NO` otherwise.
  */
-#		define macOS10_7Plus [JFVersion isMacOS10_7Plus]
+#	define macOS10_7Plus [JFVersion isMacOS10_7Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `8`.
  * @return `YES` if the current iOS major version is `10` and minor version is `8`, `NO` otherwise.
  */
-#		define macOS10_8 [JFVersion isMacOS10_8]
+#	define macOS10_8 [JFVersion isMacOS10_8]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.8`.
  * @return `YES` if the current macOS version is greater than or equal to `10.8`, `NO` otherwise.
  */
-#		define macOS10_8Plus [JFVersion isMacOS10_8Plus]
+#	define macOS10_8Plus [JFVersion isMacOS10_8Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `9`.
  * @return `YES` if the current iOS major version is `10` and minor version is `9`, `NO` otherwise.
  */
-#		define macOS10_9 [JFVersion isMacOS10_9]
+#	define macOS10_9 [JFVersion isMacOS10_9]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.9`.
  * @return `YES` if the current macOS version is greater than or equal to `10.9`, `NO` otherwise.
  */
-#		define macOS10_9Plus [JFVersion isMacOS10_9Plus]
+#	define macOS10_9Plus [JFVersion isMacOS10_9Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `10`.
  * @return `YES` if the current iOS major version is `10` and minor version is `10`, `NO` otherwise.
  */
-#		define macOS10_10 [JFVersion isMacOS10_10]
+#	define macOS10_10 [JFVersion isMacOS10_10]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.10`.
  * @return `YES` if the current macOS version is greater than or equal to `10.10`, `NO` otherwise.
  */
-#		define macOS10_10Plus [JFVersion isMacOS10_10Plus]
+#	define macOS10_10Plus [JFVersion isMacOS10_10Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `11`.
  * @return `YES` if the current iOS major version is `10` and minor version is `11`, `NO` otherwise.
  */
-#		define macOS10_11 [JFVersion isMacOS10_11]
+#	define macOS10_11 [JFVersion isMacOS10_11]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.11`.
  * @return `YES` if the current macOS version is greater than or equal to `10.11`, `NO` otherwise.
  */
-#		define macOS10_11Plus [JFVersion isMacOS10_11Plus]
+#	define macOS10_11Plus [JFVersion isMacOS10_11Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `12`.
  * @return `YES` if the current iOS major version is `10` and minor version is `12`, `NO` otherwise.
  */
-#		define macOS10_12 [JFVersion isMacOS10_12]
+#	define macOS10_12 [JFVersion isMacOS10_12]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.12`.
  * @return `YES` if the current macOS version is greater than or equal to `10.12`, `NO` otherwise.
  */
-#		define macOS10_12Plus [JFVersion isMacOS10_12Plus]
+#	define macOS10_12Plus [JFVersion isMacOS10_12Plus]
 
 /**
  * Checks whether the current macOS major version is `10` and minor version is `13`.
  * @return `YES` if the current iOS major version is `10` and minor version is `13`, `NO` otherwise.
  */
-#		define macOS10_13 [JFVersion isMacOS10_13]
+#	define macOS10_13 [JFVersion isMacOS10_13]
 
 /**
  * Checks whether the current macOS version is greater than or equal to `10.13`.
  * @return `YES` if the current macOS version is greater than or equal to `10.13`, `NO` otherwise.
  */
-#		define macOS10_13Plus [JFVersion isMacOS10_13Plus]
-
-#	endif
+#	define macOS10_13Plus [JFVersion isMacOS10_13Plus]
 
 #endif
 
@@ -420,8 +412,6 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 // MARK: Methods - Comparison management (iOS)
 // =================================================================================================
 
-#if JF_IOS
-
 /**
  * Checks whether the current iOS version is equal to the given version string.
  * @param version The version string to compare.
@@ -484,13 +474,9 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
  */
 + (BOOL)isIOS11Plus;
 
-#endif
-
 // =================================================================================================
 // MARK: Methods - Comparison management (macOS)
 // =================================================================================================
-
-#if JF_MACOS
 
 /**
  * Checks whether the current macOS version is equal to the given version string.
@@ -601,8 +587,6 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
  * @return `YES` if the current macOS version is greater than or equal to `10.13`, `NO` otherwise.
  */
 + (BOOL)isMacOS10_13Plus;
-
-#endif
 
 @end
 
