@@ -47,6 +47,8 @@
 #define iOS9Plus			JFVersion.isIOS9Plus
 #define iOS10				JFVersion.isIOS10
 #define iOS10Plus			JFVersion.isIOS10Plus
+#define iOS11				JFVersion.isIOS11
+#define iOS11Plus			JFVersion.isIOS11Plus
 
 #endif
 // =================================================================================================
@@ -70,6 +72,8 @@
 #define macOS10_11Plus		JFVersion.isMacOS10_11Plus
 #define macOS10_12			JFVersion.isMacOS10_12
 #define macOS10_12Plus		JFVersion.isMacOS10_12Plus
+#define macOS10_13			JFVersion.isMacOS10_13
+#define macOS10_13Plus		JFVersion.isMacOS10_13Plus
 
 #endif
 // =================================================================================================
@@ -147,6 +151,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)	isIOS9Plus;
 + (BOOL)	isIOS10;
 + (BOOL)	isIOS10Plus;
++ (BOOL)	isIOS11;
++ (BOOL)	isIOS11Plus;
 #endif
 
 #if JF_MACOS
@@ -167,6 +173,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)	isMacOS10_11Plus;
 + (BOOL)	isMacOS10_12;
 + (BOOL)	isMacOS10_12Plus;
++ (BOOL)	isMacOS10_13;
++ (BOOL)	isMacOS10_13Plus;
 #endif
 
 #if JF_TVOS

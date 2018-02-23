@@ -386,6 +386,16 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	RETURN_IS_IOS_PLUS(10);
 }
+
++ (BOOL)isIOS11
+{
+	RETURN_IS_IOS(11);
+}
+
++ (BOOL)isIOS11Plus
+{
+	RETURN_IS_IOS_PLUS(11);
+}
 #endif
 
 // =================================================================================================
@@ -471,6 +481,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isMacOS10_12Plus
 {
 	RETURN_IS_MACOS_PLUS(10, 12);
+}
+
++ (BOOL)isMacOS10_13
+{
+	RETURN_IS_MACOS(10, 13);
+}
+
++ (BOOL)isMacOS10_13Plus
+{
+	RETURN_IS_MACOS_PLUS(10, 13);
 }
 #endif
 
