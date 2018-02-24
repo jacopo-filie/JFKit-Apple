@@ -24,15 +24,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import "JFPreprocessorMacros.h"
-
 @import Foundation;
 
-#if JF_MACOS
-@import Cocoa;
-#else
-@import UIKit;
-#endif
+#import "JFPreprocessorMacros.h"
+#import "JFShortcuts.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,25 +35,187 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * A container for windows that automatically observes many of the changes in their states.
+ */
+@interface JFWindowController : NSObject
+
 // =================================================================================================
-// MARK: Macros
+// MARK: Properties - User interface
 // =================================================================================================
+
+/**
+ * The observed window object.
+ */
+@property (strong, nonatomic, readonly) JFWindow* window;
+
+/**
+ * Returns whether the observed window is hidden or not.
+ */
+@property (assign, nonatomic, readonly, getter=isWindowHidden) BOOL windowHidden;
+
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes the container with the given window object.
+ * @param window The window object to observe.
+ * @return The initialized container.
+ */
+- (instancetype)initWithWindow:(JFWindow*)window NS_DESIGNATED_INITIALIZER;
+
+// =================================================================================================
+// MARK: Methods - Events management (Window)
+// =================================================================================================
+
+/**
+ * Called when the observed window becomes hidden.
+ * On iOS, see notification `UIWindowDidBecomeHiddenNotification`.
+ * On macOS, this is observed using KVO notifications.
+ */
+- (void)windowDidBecomeHidden;
+
+/**
+ * Called when the observed window becomes the key window.
+ * On iOS, see notification `UIWindowDidBecomeKeyNotification`.
+ * On macOS, see notification `NSWindowDidBecomeKeyNotification`.
+ */
+- (void)windowDidBecomeKey;
 
 #if JF_MACOS
+
 /**
- * The superclass and protocol of the macOS window controller.
+ * Called when the observed window becomes the main window.
+ * See notification `NSWindowDidBecomeMainNotification`.
  */
-#define JFWindowControllerSuperclass NSWindowController
-#else
-/**
- * The superclass and protocol of the iOS window controller.
- */
-#define JFWindowControllerSuperclass NSObject
+- (void)windowDidBecomeMain;
+
 #endif
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Called when the observed window becomes visible.
+ * On iOS, see notification `UIWindowDidBecomeVisibleNotification`.
+ * On macOS, this is observed using KVO notifications.
+ */
+- (void)windowDidBecomeVisible;
 
-@interface JFWindowController : JFWindowControllerSuperclass
+#if JF_MACOS
+
+/**
+ * Called when the observed window changes screen.
+ * See notification `NSWindowDidBecomeMainNotification`.
+ */
+- (void)windowDidChangeScreen;
+
+/**
+ * Called when the observed window changes screen profile.
+ * See notification `NSWindowDidChangeScreenProfileNotification`.
+ */
+- (void)windowDidChangeScreenProfile;
+
+/**
+ * Called when the observed window is deminimized.
+ * See notification `NSWindowDidDeminiaturizeNotification`.
+ */
+- (void)windowDidDeminiaturize;
+
+/**
+ * Called when the observed window has been resized by the user.
+ * See notification `NSWindowDidEndLiveResizeNotification`.
+ */
+- (void)windowDidEndLiveResize;
+
+/**
+ * Called when the observed window closes an attached sheet.
+ * See notification `NSWindowDidEndSheetNotification`.
+ */
+- (void)windowDidEndSheet;
+
+/**
+ * Called when a portion of the observed window is exposed.
+ * See notification `NSWindowDidExposeNotification`.
+ * @param exposedRect The portion of the window that is exposed.
+ */
+- (void)windowDidExpose:(NSRect)exposedRect;
+
+/**
+ * Called when the observed window is minimized.
+ * See notification `NSWindowDidMiniaturizeNotification`.
+ */
+- (void)windowDidMiniaturize;
+
+/**
+ * Called when the observed window is moved.
+ * See notification `NSWindowDidMoveNotification`.
+ */
+- (void)windowDidMove;
+
+#endif
+
+/**
+ * Called when the observed window stops being the key window.
+ * On iOS, see notification `UIWindowDidResignKeyNotification`.
+ * On macOS, see notification `NSWindowDidResignKeyNotification`.
+ */
+- (void)windowDidResignKey;
+
+#if JF_MACOS
+
+/**
+ * Called when the observed window stops being the main window.
+ * See notification `NSWindowDidResignMainNotification`.
+ */
+- (void)windowDidResignMain;
+
+/**
+ * Called when the observed window is being resized.
+ * See notification `NSWindowDidResizeNotification`.
+ */
+- (void)windowDidResize;
+
+/**
+ * Called when the observed window receives an update message.
+ * See notification `NSWindowDidUpdateNotification`.
+ */
+- (void)windowDidUpdate;
+
+/**
+ * Called when the observed window is about to open a sheet.
+ * See notification `NSWindowWillBeginSheetNotification`.
+ */
+- (void)windowWillBeginSheet;
+
+/**
+ * Called when the observed window is about to close.
+ * See notification `NSWindowWillCloseNotification`.
+ */
+- (void)windowWillClose;
+
+/**
+ * Called when the observed window is about to be minimized.
+ * See notification `NSWindowWillMiniaturizeNotification`.
+ */
+- (void)windowWillMiniaturize;
+
+/**
+ * Called when the observed window is about to move.
+ * See notification `NSWindowWillMoveNotification`.
+ */
+- (void)windowWillMove;
+
+/**
+ * Called when the observed window is about to be resized by the user.
+ * See notification `NSWindowWillStartLiveResizeNotification`.
+ */
+- (void)windowWillStartLiveResize;
+
+#endif
 
 @end
 

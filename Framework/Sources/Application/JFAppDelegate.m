@@ -32,13 +32,82 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface JFAppDelegate ()
+
+// =================================================================================================
+// MARK: Properties - User interface (Outlets)
+// =================================================================================================
+
+@property (strong, nonatomic, readwrite, null_resettable) JFWindowController* windowController;
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+/**
+ * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
+ */
+- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
 @implementation JFAppDelegate
 
 // =================================================================================================
 // MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-@synthesize window = _window;
+@synthesize window				= _window;
+@synthesize windowController	= _windowController;
+
+// =================================================================================================
+// MARK: Properties accessors - User interface (Outlets)
+// =================================================================================================
+
+- (JFWindow*)window
+{
+	if(!_window)
+	{
+#if JF_MACOS
+		_window = [NSWindow new];
+#else
+		_window = [[UIWindow alloc] initWithFrame:MainScreen.bounds];
+#endif
+	}
+	return _window;
+}
+
+- (void)setWindow:(JFWindow* __nullable)window
+{
+	if(_window == window)
+		return;
+	
+	_window = window;
+	_windowController = nil;
+}
+
+- (JFWindowController*)windowController
+{
+	if(!_windowController)
+	{
+		JFWindow* window = self.window;
+		_windowController = ([self newControllerForWindow:window] ?: [[JFWindowController alloc] initWithWindow:window]);
+	}
+	return _windowController;
+}
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window
+{
+	return nil;
+}
 
 @end
 

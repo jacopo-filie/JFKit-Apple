@@ -35,6 +35,7 @@
 #endif
 
 #import "JFShortcuts.h"
+#import "JFWindowController.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,13 +67,32 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFAppDelegate : JFAppDelegateSuperclass
 
 // =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
+/**
+ * The main window controller.
+ */
+@property (strong, nonatomic, readonly) JFWindowController* windowController;
+
+// =================================================================================================
 // MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
 /**
  * The main window of the application.
+ * @warning Changing the value of this property also resets the property `windowController`.
  */
-@property (strong, nonatomic, nullable) IBOutlet JFWindow* window;
+@property (strong, nonatomic, null_resettable) IBOutlet JFWindow* window;
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+/**
+ * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
+ */
+- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
 
 @end
 
