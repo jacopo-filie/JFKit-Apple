@@ -43,7 +43,7 @@ typedef void (^JFBlock) (void);
 
 /**
  * A block of code to be executed with a parameter.
- * @param array A generic array.
+ * @param array A generic array object.
  */
 typedef void (^JFBlockWithArray) (NSArray* array);
 
@@ -55,15 +55,39 @@ typedef void (^JFBlockWithBOOL) (BOOL value);
 
 /**
  * A block of code to be executed with a parameter.
- * @param dictionary A generic dictionary.
+ * @param data A data object.
+ */
+typedef void (^JFBlockWithData) (NSData* data);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param date A date object.
+ */
+typedef void (^JFBlockWithDate) (NSDate* date);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param dictionary A generic dictionary object.
  */
 typedef void (^JFBlockWithDictionary) (NSDictionary* dictionary);
 
 /**
  * A block of code to be executed with a parameter.
- * @param error An error.
+ * @param value A double value.
+ */
+typedef void (^JFBlockWithDouble) (double value);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param error An error object.
  */
 typedef void (^JFBlockWithError) (NSError* error);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param value A float value.
+ */
+typedef void (^JFBlockWithFloat) (float value);
 
 /**
  * A block of code to be executed with a parameter.
@@ -73,15 +97,33 @@ typedef void (^JFBlockWithInteger) (NSInteger value);
 
 /**
  * A block of code to be executed with a parameter.
- * @param notification A notification.
+ * @param notification A notification object.
  */
 typedef void (^JFBlockWithNotification) (NSNotification* notification);
 
 /**
  * A block of code to be executed with a parameter.
- * @param set A generic set.
+ * @param number A number object.
+ */
+typedef void (^JFBlockWithNumber) (NSNumber* number);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param set A generic set object.
  */
 typedef void (^JFBlockWithSet) (NSSet* set);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param string A string object.
+ */
+typedef void (^JFBlockWithString) (NSString* string);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param value A value object.
+ */
+typedef void (^JFBlockWithValue) (NSValue* value);
 
 /**
  * A block of code to be executed as completion of an operation. Used in combination with the class `JFCompletion`.
