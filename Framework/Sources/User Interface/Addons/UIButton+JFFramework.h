@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2018 Jacopo Filié
+//	Copyright © 2016-2018 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,40 +24,42 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_iOS.
-FOUNDATION_EXPORT double JFFramework_iOSVersionNumber;
-
-//! Project version string for JFFramework_iOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_iOS/JFAppDelegate.h>
-#import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_iOS/JFAsynchronousOperation.h>
-#import <JFFramework_iOS/JFBlocks.h>
-#import <JFFramework_iOS/JFByteStream.h>
-#import <JFFramework_iOS/JFColors.h>
-#import <JFFramework_iOS/JFConnectionMachine.h>
-#import <JFFramework_iOS/JFImages.h>
-#import <JFFramework_iOS/JFLogger.h>
-#import <JFFramework_iOS/JFMath.h>
-#import <JFFramework_iOS/JFObserversController.h>
-#import <JFFramework_iOS/JFPersistentContainer.h>
-#import <JFFramework_iOS/JFPreprocessorMacros.h>
-#import <JFFramework_iOS/JFReferences.h>
-#import <JFFramework_iOS/JFShortcuts.h>
-#import <JFFramework_iOS/JFStateMachine.h>
-#import <JFFramework_iOS/JFStrings.h>
-#import <JFFramework_iOS/JFSwitchMachine.h>
-#import <JFFramework_iOS/JFUtilities.h>
-#import <JFFramework_iOS/JFVersion.h>
-#import <JFFramework_iOS/JFWindowController.h>
+/**
+ * A block of code to be executed when the button is tapped.
+ * @param sender The button that has been tapped.
+ */
+typedef void (^JFButtonBlock) (UIButton* sender);
 
-#import <JFFramework_iOS/UIButton+JFFramework.h>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+/**
+ * A category for the UIButton that adds support for an action block.
+ */
+@interface UIButton (JFFramework)
+
+// =================================================================================================
+// MARK: Properties - User interface (Actions)
+// =================================================================================================
+
+/**
+ * The block to be executed when the button is tapped.
+ */
+@property (strong, nonatomic, nullable, setter=jf_setActionBlock:) JFButtonBlock jf_actionBlock;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

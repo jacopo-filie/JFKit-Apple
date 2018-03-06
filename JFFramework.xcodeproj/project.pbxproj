@@ -57,6 +57,8 @@
 		4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
 		4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */; };
+		4E62747620424915007BCE81 /* UIButton+JFFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E62747420424914007BCE81 /* UIButton+JFFramework.m */; };
+		4E62747720424915007BCE81 /* UIButton+JFFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E62747520424914007BCE81 /* UIButton+JFFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */; };
 		4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,6 +169,8 @@
 		4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousOperation.m; sourceTree = "<group>"; };
 		4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFObserversController.h; sourceTree = "<group>"; };
 		4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFObserversController.m; sourceTree = "<group>"; };
+		4E62747420424914007BCE81 /* UIButton+JFFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JFFramework.m"; sourceTree = "<group>"; };
+		4E62747520424914007BCE81 /* UIButton+JFFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JFFramework.h"; sourceTree = "<group>"; };
 		4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFByteStream.m; sourceTree = "<group>"; };
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
@@ -317,9 +321,19 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		4E62747320424914007BCE81 /* Addons */ = {
+			isa = PBXGroup;
+			children = (
+				4E62747520424914007BCE81 /* UIButton+JFFramework.h */,
+				4E62747420424914007BCE81 /* UIButton+JFFramework.m */,
+			);
+			path = Addons;
+			sourceTree = "<group>";
+		};
 		4E96B27E200A3A7500C01987 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				4E62747320424914007BCE81 /* Addons */,
 				4E53A67E200CC4B2001EEBFD /* JFWindowController.h */,
 				4E53A67D200CC4B2001EEBFD /* JFWindowController.m */,
 			);
@@ -428,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
+				4E62747720424915007BCE81 /* UIButton+JFFramework.h in Headers */,
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4EF2C7C71FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E415F291FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
@@ -645,6 +660,7 @@
 				4EF7251320005E180080136D /* JFConnectionMachine.m in Sources */,
 				4EB1B3992001C480004C1FF4 /* JFErrorFactory.m in Sources */,
 				4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
+				4E62747620424915007BCE81 /* UIButton+JFFramework.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */,
