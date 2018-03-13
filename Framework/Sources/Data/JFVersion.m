@@ -475,7 +475,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 
 - (id)copyWithZone:(NSZone* __nullable)zone
 {
-	return [[[self class] alloc] initWithMajorComponent:_major minor:_minor patch:_patch build:_build];
+	return [[[self class] allocWithZone:zone] initWithMajorComponent:_major minor:_minor patch:_patch build:_build];
 }
 
 @end
