@@ -117,6 +117,8 @@
 		4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7C51FF11DE200311EB5 /* JFVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EF2C7C91FF11DE200311EB5 /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7C61FF11DE200311EB5 /* JFVersion.m */; };
 		4EF2C7CA1FF11DE200311EB5 /* JFVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7C61FF11DE200311EB5 /* JFVersion.m */; };
+		4EF6AD8A2051702800A0BFD1 /* JFActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF6AD882051702800A0BFD1 /* JFActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF6AD8B2051702800A0BFD1 /* JFActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */; };
 		4EF72507200056780080136D /* JFSwitchMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF72503200056770080136D /* JFSwitchMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EF72508200056780080136D /* JFSwitchMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF72503200056770080136D /* JFSwitchMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF72505200056770080136D /* JFSwitchMachine.m */; };
@@ -208,6 +210,8 @@
 		4EF2C7BC1FF1178300311EB5 /* JFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFUtilities.h; sourceTree = "<group>"; };
 		4EF2C7C51FF11DE200311EB5 /* JFVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFVersion.h; sourceTree = "<group>"; };
 		4EF2C7C61FF11DE200311EB5 /* JFVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFVersion.m; sourceTree = "<group>"; };
+		4EF6AD882051702800A0BFD1 /* JFActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFActivityIndicatorView.h; sourceTree = "<group>"; };
+		4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFActivityIndicatorView.m; sourceTree = "<group>"; };
 		4EF72503200056770080136D /* JFSwitchMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFSwitchMachine.h; sourceTree = "<group>"; };
 		4EF72505200056770080136D /* JFSwitchMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFSwitchMachine.m; sourceTree = "<group>"; };
 		4EF7250F20005E170080136D /* JFConnectionMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFConnectionMachine.h; sourceTree = "<group>"; };
@@ -338,6 +342,8 @@
 			isa = PBXGroup;
 			children = (
 				4E62747320424914007BCE81 /* Addons */,
+				4EF6AD882051702800A0BFD1 /* JFActivityIndicatorView.h */,
+				4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */,
 				4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */,
 				4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */,
 				4E53A67E200CC4B2001EEBFD /* JFWindowController.h */,
@@ -473,6 +479,7 @@
 				4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
+				4EF6AD8A2051702800A0BFD1 /* JFActivityIndicatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +688,7 @@
 				4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */,
 				4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
+				4EF6AD8B2051702800A0BFD1 /* JFActivityIndicatorView.m in Sources */,
 				4E84906F1FF4887300B029E6 /* JFImages.m in Sources */,
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,

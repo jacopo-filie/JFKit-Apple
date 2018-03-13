@@ -36,6 +36,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#import <JFFramework_iOS/JFActivityIndicatorView.h>
 #import <JFFramework_iOS/JFAppDelegate.h>
 #import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
 #import <JFFramework_iOS/JFAsynchronousOperation.h>
