@@ -77,6 +77,13 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize observersController = _observersController;
 
 // =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
+@synthesize hiddenOffset = _hiddenOffset;
+@synthesize visibleOffset = _visibleOffset;
+
+// =================================================================================================
 // MARK: Methods - Memory management
 // =================================================================================================
 

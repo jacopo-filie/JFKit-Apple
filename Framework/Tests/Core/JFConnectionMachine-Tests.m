@@ -85,6 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize expectation	= _expectation;
 @synthesize machine		= _machine;
 @synthesize shouldFail	= _shouldFail;
+@synthesize shouldFulfillOnDidPerform = _shouldFulfillOnDidPerform;
 
 // =================================================================================================
 // MARK: Methods - Tests management

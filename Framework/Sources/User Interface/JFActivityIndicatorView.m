@@ -191,6 +191,10 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @synthesize customConstraints = _customConstraints;
+@synthesize alertViewMaxHeightConstraint = _alertViewMaxHeightConstraint;
+@synthesize alertViewMaxWidthConstraint = _alertViewMaxWidthConstraint;
+@synthesize alertViewMinHeightConstraint = _alertViewMinHeightConstraint;
+@synthesize alertViewMinWidthConstraint = _alertViewMinWidthConstraint;
 @synthesize imageViewHeightConstraint = _imageViewHeightConstraint;
 @synthesize imageViewWidthConstraint = _imageViewWidthConstraint;
 
