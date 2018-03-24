@@ -81,6 +81,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) UIViewController* rootViewController;
 
 // =================================================================================================
+// MARK: Properties accessors - User interface
+// =================================================================================================
+
+/**
+ * Sets whether the overlay container is hidden or visible.
+ * @param overlayHidden `YES` if the overlay is about to be hidden, `NO` otherwise.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
+ */
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated;
+
+/**
+ * Sets whether the overlay container is hidden or visible.
+ * @param overlayHidden `YES` if the overlay is about to be hidden, `NO` otherwise.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
+ * @param completion The callback to be executed at the end of the transition.
+ */
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion;
+
+// =================================================================================================
 // MARK: Methods - Memory management
 // =================================================================================================
 
@@ -133,26 +152,30 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Called when the overlay view has appeared.
  * @param sender The overlay controller.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
  */
-- (void)overlayControllerOverlayDidAppear:(JFOverlayController*)sender;
+- (void)overlayController:(JFOverlayController*)sender overlayDidAppear:(BOOL)animated;
 
 /**
  * Called when the overlay view has disappeared.
  * @param sender The overlay controller.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
  */
-- (void)overlayControllerOverlayDidDisappear:(JFOverlayController*)sender;
+- (void)overlayController:(JFOverlayController*)sender overlayDidDisappear:(BOOL)animated;
 
 /**
  * Called when the overlay view is about to appear.
  * @param sender The overlay controller.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
  */
-- (void)overlayControllerOverlayWillAppear:(JFOverlayController*)sender;
+- (void)overlayController:(JFOverlayController*)sender overlayWillAppear:(BOOL)animated;
 
 /**
  * Called when the overlay view is about to disappear.
  * @param sender The overlay controller.
+ * @param animated `YES` if the transition is animated, `NO` otherwise.
  */
-- (void)overlayControllerOverlayWillDisappear:(JFOverlayController*)sender;
+- (void)overlayController:(JFOverlayController*)sender overlayWillDisappear:(BOOL)animated;
 
 @end
 

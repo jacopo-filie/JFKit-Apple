@@ -47,13 +47,18 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface
 // =================================================================================================
 
+@property (assign, nonatomic, getter=isOverlayViewAnimating) BOOL overlayViewAnimating;
 @property (assign, nonatomic, getter=hasOverlayViewAppeared) BOOL overlayViewAppeared;
+@property (assign, nonatomic, getter=isOverlayViewAppearing) BOOL overlayViewAppearing;
+@property (assign, nonatomic, getter=isOverlayViewDisappearing) BOOL overlayViewDisappearing;
+@property (assign, nonatomic, getter=isRootViewAnimating) BOOL rootViewAnimating;
 @property (assign, nonatomic, getter=hasRootViewAppeared) BOOL rootViewAppeared;
-@property (assign, nonatomic) BOOL shouldEndOverlayAppearanceTransitionOnDidAppear;
-@property (assign, nonatomic) BOOL shouldEndOverlayAppearanceTransitionOnDidDisappear;
-@property (assign, nonatomic) BOOL shouldEndRootAppearanceTransitionOnDidAppear;
-@property (assign, nonatomic) BOOL shouldEndRootAppearanceTransitionOnDidDisappear;
+@property (assign, nonatomic, getter=isRootViewAppearing) BOOL rootViewAppearing;
+@property (assign, nonatomic, getter=isRootViewDisappearing) BOOL rootViewDisappearing;
+@property (assign, nonatomic, getter=isViewAnimating) BOOL viewAnimating;
 @property (assign, nonatomic, getter=hasViewAppeared) BOOL viewAppeared;
+@property (assign, nonatomic, getter=isViewAppearing) BOOL viewAppearing;
+@property (assign, nonatomic, getter=isViewDisappearing) BOOL viewDisappearing;
 
 // =================================================================================================
 // MARK: Properties - User interface (Layout)
@@ -67,6 +72,16 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 + (void)initializeProperties:(JFOverlayController*)controller;
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+- (void)beginOverlayViewTransition:(BOOL)appearing animated:(BOOL)animated;
+- (void)beginRootViewTransition:(BOOL)appearing animated:(BOOL)animated;
+- (void)endOverlayViewTransition;
+- (void)endRootViewTransition;
+- (void)updateOverlayBackgroundColor;
 
 @end
 
@@ -88,6 +103,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @synthesize overlayHidden = _overlayHidden;
 @synthesize overlayOpaque = _overlayOpaque;
+@synthesize overlayViewAnimating = _overlayViewAnimating;
+@synthesize overlayViewAppeared = _overlayViewAppeared;
+@synthesize overlayViewAppearing = _overlayViewAppearing;
+@synthesize overlayViewDisappearing = _overlayViewDisappearing;
+@synthesize rootViewAnimating = _rootViewAnimating;
+@synthesize rootViewAppeared = _rootViewAppeared;
+@synthesize rootViewAppearing = _rootViewAppearing;
+@synthesize rootViewDisappearing = _rootViewDisappearing;
+@synthesize viewAnimating = _viewAnimating;
+@synthesize viewAppeared = _viewAppeared;
+@synthesize viewAppearing = _viewAppearing;
+@synthesize viewDisappearing = _viewDisappearing;
 
 // =================================================================================================
 // MARK: Properties - User interface (Appearance)
@@ -99,7 +126,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Layout)
 // =================================================================================================
 
+@synthesize overlayContainer = _overlayContainer;
 @synthesize overlayViewController = _overlayViewController;
+@synthesize rootContainer = _rootContainer;
 @synthesize rootViewController = _rootViewController;
 
 // =================================================================================================
@@ -108,91 +137,74 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setOverlayHidden:(BOOL)overlayHidden
 {
-	if(_overlayHidden == overlayHidden)
-		return;
-	
-	JFObserversController* observersController = self.observersController;
-	
-	[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
-		if(overlayHidden && [observer respondsToSelector:@selector(overlayControllerOverlayWillDisappear:)])
-			[observer overlayControllerOverlayWillDisappear:self];
-		else if(!overlayHidden && [observer respondsToSelector:@selector(overlayControllerOverlayWillAppear:)])
-			[observer overlayControllerOverlayWillAppear:self];
-	} async:NO];
+	[self setOverlayHidden:overlayHidden animated:NO completion:nil];
+}
 
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated
+{
+	[self setOverlayHidden:overlayHidden animated:animated completion:nil];
+}
+
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion
+{
+	if(_overlayHidden == overlayHidden)
+	{
+		if(completion)
+			[MainOperationQueue addOperationWithBlock:completion];
+		return;
+	}
+	
+	//NSLog(@" ");
+	//NSLog(@"%@: %@ [hidden = %@] [animated = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromBOOL(overlayHidden), JFStringFromBOOL(animated));
+	
 	_overlayHidden = overlayHidden;
 	
 	if([self isViewLoaded])
 	{
 		BOOL opaque = [self isOverlayOpaque];
-		UIViewController* overlayViewController = self.overlayViewController;
-		UIViewController* rootViewController = self.rootViewController;
-
+		
 		if(opaque)
-		{
-			if([self shouldEndRootAppearanceTransitionOnDidAppear])
-			{
-				self.shouldEndRootAppearanceTransitionOnDidAppear = NO;
-				[rootViewController endAppearanceTransition];
-				self.rootViewAppeared = YES;
-			}
-			
-			if([self shouldEndRootAppearanceTransitionOnDidDisappear])
-			{
-				self.shouldEndRootAppearanceTransitionOnDidDisappear = NO;
-				[rootViewController endAppearanceTransition];
-				self.rootViewAppeared = NO;
-			}
-		}
+			[self endRootViewTransition];
 		
-		if([self shouldEndOverlayAppearanceTransitionOnDidAppear])
-		{
-			self.shouldEndOverlayAppearanceTransitionOnDidAppear = NO;
-			[overlayViewController endAppearanceTransition];
-			self.overlayViewAppeared = YES;
-		}
-		
-		if([self shouldEndOverlayAppearanceTransitionOnDidDisappear])
-		{
-			self.shouldEndOverlayAppearanceTransitionOnDidDisappear = NO;
-			[overlayViewController endAppearanceTransition];
-			self.overlayViewAppeared = NO;
-		}
+		[self endOverlayViewTransition];
 		
 		BOOL overlayViewAppeared = [self hasOverlayViewAppeared];
 		BOOL rootViewAppeared = [self hasRootViewAppeared];
 		BOOL viewAppeared = [self hasViewAppeared];
-
+		
 		BOOL performOverlayAppearanceTransition = ((overlayViewAppeared || viewAppeared) && (overlayViewAppeared != !overlayHidden));
 		BOOL performRootAppearanceTransition = (opaque && (rootViewAppeared || viewAppeared) && (rootViewAppeared != overlayHidden));
-
-		if(performRootAppearanceTransition)
-			[rootViewController beginAppearanceTransition:overlayHidden animated:NO];
-		
-		if(performOverlayAppearanceTransition)
-			[overlayViewController beginAppearanceTransition:!overlayHidden animated:NO];
-		
-		self.overlayContainer.hidden = overlayHidden;
 		
 		if(performRootAppearanceTransition)
-		{
-			[rootViewController endAppearanceTransition];
-			self.rootViewAppeared = overlayHidden;
-		}
+			[self beginRootViewTransition:overlayHidden animated:animated];
 		
 		if(performOverlayAppearanceTransition)
-		{
-			[overlayViewController endAppearanceTransition];
-			self.overlayViewAppeared = !overlayHidden;
-		}
+			[self beginOverlayViewTransition:!overlayHidden animated:animated];
+		
+		NSTimeInterval duration = (animated ? JFAnimationDuration : 0.0);
+		UIViewAnimationOptions options = (UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve);
+		UIView* view = self.overlayContainer;
+		
+		JFBlock animations = ^(void) {
+			view.hidden = overlayHidden;
+		};
+		
+		[UIView transitionWithView:view duration:duration options:options animations:animations completion:^(BOOL finished) {
+			if(finished)
+			{
+				if(performRootAppearanceTransition)
+					[self endRootViewTransition];
+				
+				if(performOverlayAppearanceTransition)
+					[self endOverlayViewTransition];
+			}
+			
+			if(completion)
+				[MainOperationQueue addOperationWithBlock:completion];
+		}];
 	}
-	
-	[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
-		if(overlayHidden && [observer respondsToSelector:@selector(overlayControllerOverlayDidDisappear:)])
-			[observer overlayControllerOverlayDidDisappear:self];
-		else if(!overlayHidden && [observer respondsToSelector:@selector(overlayControllerOverlayDidAppear:)])
-			[observer overlayControllerOverlayDidAppear:self];
-	} async:NO];
+	else if(completion)
+		[MainOperationQueue addOperationWithBlock:completion];
 }
 
 - (void)setOverlayOpaque:(BOOL)overlayOpaque
@@ -200,36 +212,24 @@ NS_ASSUME_NONNULL_BEGIN
 	if(_overlayOpaque == overlayOpaque)
 		return;
 	
+	//NSLog(@" ");
+	//NSLog(@"%@: %@ [opaque = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromBOOL(overlayOpaque));
+	
 	_overlayOpaque = overlayOpaque;
 	
 	if([self isViewLoaded] && ![self isOverlayHidden])
 	{
-		UIViewController* rootViewController = self.rootViewController;
-		
-		if([self shouldEndRootAppearanceTransitionOnDidAppear])
-		{
-			self.shouldEndRootAppearanceTransitionOnDidAppear = NO;
-			[rootViewController endAppearanceTransition];
-			self.rootViewAppeared = YES;
-		}
-		
-		if([self shouldEndRootAppearanceTransitionOnDidDisappear])
-		{
-			self.shouldEndRootAppearanceTransitionOnDidDisappear = NO;
-			[rootViewController endAppearanceTransition];
-			self.rootViewAppeared = NO;
-		}
+		[self endRootViewTransition];
 		
 		BOOL rootViewAppeared = [self hasRootViewAppeared];
 		if((rootViewAppeared || [self hasViewAppeared]) && (rootViewAppeared != !overlayOpaque))
 		{
-			[rootViewController beginAppearanceTransition:!overlayOpaque animated:NO];
+			[self beginRootViewTransition:!overlayOpaque animated:NO];
 			
 			self.overlayContainer.opaque = overlayOpaque;
 			[self updateOverlayBackgroundColor];
 			
-			[rootViewController endAppearanceTransition];
-			self.rootViewAppeared = !overlayOpaque;
+			[self endRootViewTransition];
 		}
 	}
 }
@@ -261,24 +261,16 @@ NS_ASSUME_NONNULL_BEGIN
 	UIViewController* oldViewController = _overlayViewController;
 	UIViewController* newViewController = overlayViewController;
 	
+	//NSLog(@" ");
+	//NSLog(@"%@: %@ [old = %@] [new = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromObject(oldViewController), JFStringFromObject(newViewController));
+	
+	if([self isViewLoaded])
+		[self endOverlayViewTransition];
+	
 	_overlayViewController = overlayViewController;
 	
 	if([self isViewLoaded])
 	{
-		if([self shouldEndOverlayAppearanceTransitionOnDidAppear])
-		{
-			self.shouldEndOverlayAppearanceTransitionOnDidAppear = NO;
-			[oldViewController endAppearanceTransition];
-			self.overlayViewAppeared = YES;
-		}
-		
-		if([self shouldEndOverlayAppearanceTransitionOnDidDisappear])
-		{
-			self.shouldEndOverlayAppearanceTransitionOnDidDisappear = NO;
-			[oldViewController endAppearanceTransition];
-			self.overlayViewAppeared = NO;
-		}
-		
 		BOOL overlayViewAppeared = [self hasOverlayViewAppeared];
 		
 		[oldViewController willMoveToParentViewController:nil];
@@ -319,24 +311,16 @@ NS_ASSUME_NONNULL_BEGIN
 	UIViewController* oldViewController = _rootViewController;
 	UIViewController* newViewController = rootViewController;
 	
+	//NSLog(@" ");
+	//NSLog(@"%@: %@ [old = %@] [new = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromObject(oldViewController), JFStringFromObject(newViewController));
+	
+	if([self isViewLoaded])
+		[self endRootViewTransition];
+	
 	_rootViewController = rootViewController;
 	
 	if([self isViewLoaded])
 	{
-		if([self shouldEndRootAppearanceTransitionOnDidAppear])
-		{
-			self.shouldEndRootAppearanceTransitionOnDidAppear = NO;
-			[oldViewController endAppearanceTransition];
-			self.rootViewAppeared = YES;
-		}
-		
-		if([self shouldEndRootAppearanceTransitionOnDidDisappear])
-		{
-			self.shouldEndRootAppearanceTransitionOnDidDisappear = NO;
-			[oldViewController endAppearanceTransition];
-			self.rootViewAppeared = NO;
-		}
-		
 		BOOL rootViewAppeared = [self hasRootViewAppeared];
 		
 		[oldViewController willMoveToParentViewController:nil];
@@ -420,6 +404,103 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - User interface management
 // =================================================================================================
 
+- (void)beginOverlayViewTransition:(BOOL)appearing animated:(BOOL)animated
+{
+	JFObserversController<id<JFOverlayControllerObserver>>* observersController = self.observersController;
+	
+	self.overlayViewAnimating = animated;
+	
+	if(appearing)
+	{
+		self.overlayViewAppearing = YES;
+		
+		[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
+			if([observer respondsToSelector:@selector(overlayController:overlayWillAppear:)])
+				[observer overlayController:self overlayWillAppear:animated];
+		} async:NO];
+	}
+	else
+	{
+		self.overlayViewDisappearing = YES;
+		
+		[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
+			if([observer respondsToSelector:@selector(overlayController:overlayWillDisappear:)])
+				[observer overlayController:self overlayWillDisappear:animated];
+		} async:NO];
+	}
+	
+	[self.overlayViewController beginAppearanceTransition:appearing animated:animated];
+}
+
+- (void)beginRootViewTransition:(BOOL)appearing animated:(BOOL)animated
+{
+	self.rootViewAnimating = animated;
+	
+	if(appearing)
+		self.rootViewAppearing = YES;
+	else
+		self.rootViewDisappearing = YES;
+	
+	[self.rootViewController beginAppearanceTransition:appearing animated:animated];
+}
+
+- (void)endOverlayViewTransition
+{
+	JFObserversController<id<JFOverlayControllerObserver>>* observersController = self.observersController;
+	UIViewController* viewController = self.overlayViewController;
+	
+	if([self isOverlayViewAppearing])
+	{
+		BOOL animated = [self isOverlayViewAnimating];
+		
+		[viewController endAppearanceTransition];
+		self.overlayViewAnimating = NO;
+		self.overlayViewAppearing = NO;
+		self.overlayViewAppeared = YES;
+		
+		[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
+			if([observer respondsToSelector:@selector(overlayController:overlayDidAppear:)])
+				[observer overlayController:self overlayDidAppear:animated];
+		} async:NO];
+	}
+	
+	if([self isOverlayViewDisappearing])
+	{
+		BOOL animated = [self isOverlayViewAnimating];
+		
+		[viewController endAppearanceTransition];
+		self.overlayViewAnimating = NO;
+		self.overlayViewDisappearing = NO;
+		self.overlayViewAppeared = NO;
+		
+		[observersController notifyObservers:^(id<JFOverlayControllerObserver> observer) {
+			if([observer respondsToSelector:@selector(overlayController:overlayDidDisappear:)])
+				[observer overlayController:self overlayDidDisappear:animated];
+		} async:NO];
+	}
+}
+
+- (void)endRootViewTransition
+{
+	UIViewController* viewController = self.rootViewController;
+	
+	if([self isRootViewAppearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rootViewAnimating = NO;
+		self.rootViewAppearing = NO;
+		self.rootViewAppeared = YES;
+	}
+	
+	if([self isRootViewDisappearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rootViewAnimating = NO;
+		self.rootViewDisappearing = NO;
+		self.rootViewAppeared = NO;
+	}
+}
+
 - (void)updateOverlayBackgroundColor
 {
 	UIColor* color = self.overlayBackgroundColor;
@@ -439,42 +520,24 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	[super viewDidAppear:animated];
 	
+	self.viewAnimating = NO;
+	self.viewAppearing = NO;
 	self.viewAppeared = YES;
 	
-	if([self shouldEndRootAppearanceTransitionOnDidAppear])
-	{
-		self.shouldEndRootAppearanceTransitionOnDidAppear = NO;
-		[self.rootViewController endAppearanceTransition];
-		self.rootViewAppeared = YES;
-	}
-	
-	if([self shouldEndOverlayAppearanceTransitionOnDidAppear])
-	{
-		self.shouldEndOverlayAppearanceTransitionOnDidAppear = NO;
-		[self.overlayViewController endAppearanceTransition];
-		self.overlayViewAppeared = YES;
-	}
+	[self endRootViewTransition];
+	[self endOverlayViewTransition];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
 	
+	self.viewAnimating = NO;
+	self.viewDisappearing = NO;
 	self.viewAppeared = NO;
 	
-	if([self shouldEndRootAppearanceTransitionOnDidDisappear])
-	{
-		self.shouldEndRootAppearanceTransitionOnDidDisappear = NO;
-		[self.rootViewController endAppearanceTransition];
-		self.rootViewAppeared = NO;
-	}
-
-	if([self shouldEndOverlayAppearanceTransitionOnDidDisappear])
-	{
-		self.shouldEndOverlayAppearanceTransitionOnDidDisappear = NO;
-		[self.overlayViewController endAppearanceTransition];
-		self.overlayViewAppeared = NO;
-	}
+	[self endRootViewTransition];
+	[self endOverlayViewTransition];
 }
 
 - (void)viewDidLoad
@@ -494,7 +557,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	BOOL overlayHidden = [self isOverlayHidden];
 	BOOL overlayOpaque = [self isOverlayOpaque];
-
+	
 	UIView* overlayContainer = [[UIView alloc] initWithFrame:bounds];
 	overlayContainer.autoresizingMask = autoresizingMask;
 	overlayContainer.hidden = overlayHidden;
@@ -533,40 +596,34 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	[super viewWillAppear:animated];
 	
+	self.viewAnimating = animated;
+	self.viewAppearing = YES;
+	
 	BOOL overlayHidden = [self isOverlayHidden];
 	BOOL overlayOpaque = [self isOverlayOpaque];
 	
 	if(overlayHidden || !overlayOpaque)
-	{
-		self.shouldEndRootAppearanceTransitionOnDidAppear = YES;
-		[self.rootViewController beginAppearanceTransition:YES animated:animated];
-	}
+		[self beginRootViewTransition:YES animated:animated];
 	
 	if(!overlayHidden)
-	{
-		self.shouldEndOverlayAppearanceTransitionOnDidAppear = YES;
-		[self.overlayViewController beginAppearanceTransition:YES animated:animated];
-	}
+		[self beginOverlayViewTransition:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
 	
+	self.viewAnimating = animated;
+	self.viewDisappearing = YES;
+	
 	BOOL overlayHidden = [self isOverlayHidden];
 	BOOL overlayOpaque = [self isOverlayOpaque];
 	
 	if(overlayHidden || !overlayOpaque)
-	{
-		self.shouldEndRootAppearanceTransitionOnDidDisappear = YES;
-		[self.rootViewController beginAppearanceTransition:NO animated:animated];
-	}
+		[self beginRootViewTransition:NO animated:animated];
 	
 	if(!overlayHidden)
-	{
-		self.shouldEndOverlayAppearanceTransitionOnDidDisappear = YES;
-		[self.overlayViewController beginAppearanceTransition:NO animated:animated];
-	}
+		[self beginOverlayViewTransition:NO animated:animated];
 }
 
 @end
