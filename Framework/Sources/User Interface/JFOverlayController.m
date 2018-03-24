@@ -64,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Layout)
 // =================================================================================================
 
-@property (strong, nonatomic, nullable) UIView* overlayContainer;
-@property (strong, nonatomic, nullable) UIView* rootContainer;
+@property (weak, nonatomic, nullable) UIView* overlayContainer;
+@property (weak, nonatomic, nullable) UIView* rootContainer;
 
 // =================================================================================================
 // MARK: Methods - Memory management
