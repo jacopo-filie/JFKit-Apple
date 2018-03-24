@@ -27,6 +27,7 @@
 #import "JFDrawerController.h"
 
 #import "JFObserversController.h"
+#import "JFShortcuts.h"
 #import "JFUtilities.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +58,12 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 + (void)initializeProperties:(JFDrawerController*)controller;
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+- (void)updateContainersZOrder;
 
 // =================================================================================================
 // MARK: Methods - User interface management (Layout)
@@ -111,6 +118,32 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize rightViewController = _rightViewController;
 @synthesize rootContainer = _rootContainer;
 @synthesize rootViewController = _rootViewController;
+
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
+- (void)setLeftDrawerMode:(JFDrawerControllerMode)leftDrawerMode
+{
+	if(_leftDrawerMode == leftDrawerMode)
+		return;
+	
+	_leftDrawerMode = leftDrawerMode;
+	
+	if([self isViewLoaded])
+		[self updateContainersZOrder];
+}
+
+- (void)setRightDrawerMode:(JFDrawerControllerMode)rightDrawerMode
+{
+	if(_rightDrawerMode == rightDrawerMode)
+		return;
+	
+	_rightDrawerMode = rightDrawerMode;
+	
+	if([self isViewLoaded])
+		[self updateContainersZOrder];
+}
 
 // =================================================================================================
 // MARK: Methods - Memory management
@@ -176,6 +209,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)presentRightDrawer:(BOOL)animated completion:(JFBlock __nullable)completion
 {}
 
+- (void)updateContainersZOrder
+{
+	UIView* left = self.leftContainer;
+	UIView* right = self.rightContainer;
+	UIView* view = self.view;
+	
+	if(self.leftDrawerMode == JFDrawerControllerModeAbove)
+		[view bringSubviewToFront:left];
+	else
+		[view sendSubviewToBack:left];
+	
+	if(self.rightDrawerMode == JFDrawerControllerModeAbove)
+		[view bringSubviewToFront:right];
+	else
+		[view sendSubviewToBack:right];
+}
+
 // =================================================================================================
 // MARK: Methods - User interface management (Layout)
 // =================================================================================================
@@ -185,6 +235,87 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)uninstallDismissButton
 {}
+
+// =================================================================================================
+// MARK: Methods - User interface management (View lifecycle)
+// =================================================================================================
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	
+	UIView* view = self.view;
+	
+	UIViewAutoresizing autoresizingMask = ViewAutoresizingFlexibleSize;
+	CGRect bounds = view.bounds;
+	
+	CGFloat leftOffset = self.leftDrawerOffset;
+	CGFloat rightOffset = self.rightDrawerOffset;
+	
+	CGRect leftFrame = bounds;
+	leftFrame.size.width -= leftOffset;
+	
+	CGRect rightFrame = bounds;
+	rightFrame.origin.x += rightOffset;
+	rightFrame.size.width -= rightOffset;
+	
+	UIView* leftContainer = [[UIView alloc] initWithFrame:leftFrame];
+	leftContainer.autoresizingMask = autoresizingMask;
+	leftContainer.backgroundColor = [UIColor blackColor];
+	leftContainer.opaque = YES;
+	self.leftContainer = leftContainer;
+	
+	UIView* rightContainer = [[UIView alloc] initWithFrame:rightFrame];
+	rightContainer.autoresizingMask = autoresizingMask;
+	rightContainer.backgroundColor = [UIColor blackColor];
+	rightContainer.opaque = YES;
+	self.rightContainer = rightContainer;
+	
+	UIView* rootContainer = [[UIView alloc] initWithFrame:bounds];
+	rootContainer.autoresizingMask = autoresizingMask;
+	rootContainer.backgroundColor = [UIColor blackColor];
+	rootContainer.opaque = YES;
+	self.rootContainer = rootContainer;
+	
+	[view addSubview:leftContainer];
+	[view addSubview:rightContainer];
+	[view addSubview:rootContainer];
+	
+	[self updateContainersZOrder];
+	
+	UIViewController* rootViewController = self.rootViewController;
+	if(rootViewController)
+	{
+		[self addChildViewController:rootViewController];
+		rootViewController.view.autoresizingMask = autoresizingMask;
+		rootViewController.view.frame = rootContainer.bounds;
+		rootViewController.view.translatesAutoresizingMaskIntoConstraints = YES;
+		[rootContainer addSubview:rootViewController.view];
+		[rootViewController didMoveToParentViewController:self];
+	}
+	
+	UIViewController* leftViewController = self.leftViewController;
+	if(leftViewController)
+	{
+		[self addChildViewController:leftViewController];
+		leftViewController.view.autoresizingMask = autoresizingMask;
+		leftViewController.view.frame = leftContainer.bounds;
+		leftViewController.view.translatesAutoresizingMaskIntoConstraints = YES;
+		[leftContainer addSubview:leftViewController.view];
+		[leftViewController didMoveToParentViewController:self];
+	}
+	
+	UIViewController* rightViewController = self.rightViewController;
+	if(rightViewController)
+	{
+		[self addChildViewController:rightViewController];
+		rightViewController.view.autoresizingMask = autoresizingMask;
+		rightViewController.view.frame = rightContainer.bounds;
+		rightViewController.view.translatesAutoresizingMaskIntoConstraints = YES;
+		[rightContainer addSubview:rightViewController.view];
+		[rightViewController didMoveToParentViewController:self];
+	}
+}
 
 @end
 
