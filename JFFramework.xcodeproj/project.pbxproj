@@ -65,6 +65,8 @@
 		4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E6914F4205895DE00074DDD /* JFOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E6914F2205895DD00074DDD /* JFOverlayController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E6914F5205895DE00074DDD /* JFOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6914F3205895DD00074DDD /* JFOverlayController.m */; };
+		4E6A16822061DE0E00D697DC /* JFDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A16802061DE0D00D697DC /* JFDrawerController.m */; };
+		4E6A16832061DE0E00D697DC /* JFDrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E6A16812061DE0E00D697DC /* JFDrawerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E84906F1FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
 		4E8490701FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
 		4E8490721FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -181,6 +183,8 @@
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E6914F2205895DD00074DDD /* JFOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFOverlayController.h; sourceTree = "<group>"; };
 		4E6914F3205895DD00074DDD /* JFOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFOverlayController.m; sourceTree = "<group>"; };
+		4E6A16802061DE0D00D697DC /* JFDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFDrawerController.m; sourceTree = "<group>"; };
+		4E6A16812061DE0E00D697DC /* JFDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFDrawerController.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
 		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
 		4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
@@ -348,6 +352,8 @@
 				4E62747320424914007BCE81 /* Addons */,
 				4EF6AD882051702800A0BFD1 /* JFActivityIndicatorView.h */,
 				4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */,
+				4E6A16812061DE0E00D697DC /* JFDrawerController.h */,
+				4E6A16802061DE0D00D697DC /* JFDrawerController.m */,
 				4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */,
 				4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */,
 				4E6914F2205895DD00074DDD /* JFOverlayController.h */,
@@ -469,6 +475,7 @@
 				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
 				4E8490721FF4889200B029E6 /* JFImages.h in Headers */,
 				4E5DD4061FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
+				4E6A16832061DE0E00D697DC /* JFDrawerController.h in Headers */,
 				4E3AC6FF20024115002CE0A1 /* JFError.h in Headers */,
 				4E5DD40A1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFFramework_iOS.h in Headers */,
@@ -703,6 +710,7 @@
 				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
 				4E6914F5205895DE00074DDD /* JFOverlayController.m in Sources */,
 				4E53A67F200CC4B2001EEBFD /* JFWindowController.m in Sources */,
+				4E6A16822061DE0E00D697DC /* JFDrawerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
