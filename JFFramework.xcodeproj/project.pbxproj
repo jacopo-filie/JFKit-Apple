@@ -59,8 +59,8 @@
 		4E589EF020AD841B0068F879 /* JFTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E589EED20AD841B0068F879 /* JFTimerHandler.m */; };
 		4E589EF120AD841B0068F879 /* JFTimerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EEE20AD841B0068F879 /* JFTimerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E589EF220AD841B0068F879 /* JFTimerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EEE20AD841B0068F879 /* JFTimerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E589EF920AD857A0068F879 /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EF720AD857A0068F879 /* JFTableViewCell.h */; };
-		4E589EFA20AD857A0068F879 /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EF720AD857A0068F879 /* JFTableViewCell.h */; };
+		4E589EF920AD857A0068F879 /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EF720AD857A0068F879 /* JFTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E589EFA20AD857A0068F879 /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E589EF720AD857A0068F879 /* JFTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E589EFB20AD857A0068F879 /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E589EF820AD857A0068F879 /* JFTableViewCell.m */; };
 		4E589EFC20AD857A0068F879 /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E589EF820AD857A0068F879 /* JFTableViewCell.m */; };
 		4E7E06BC1EC9A426002EF301 /* JFOverlayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7E06B81EC9A426002EF301 /* JFOverlayController.h */; settings = {ATTRIBUTES = (Public, ); }; };
