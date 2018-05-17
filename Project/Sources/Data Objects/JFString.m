@@ -144,9 +144,9 @@ NSString* JFStringFromPersonName(NSString* firstName, NSString* middleName, NSSt
 	middleName	= [middleName stringByTrimmingCharactersInSet:characterSet];
 	lastName	= [lastName stringByTrimmingCharactersInSet:characterSet];
 
-	BOOL isFirstNameValid	= JFStringIsNullOrEmpty(firstName);
-	BOOL isMiddleNameValid	= JFStringIsNullOrEmpty(middleName);
-	BOOL isLastNameValid	= JFStringIsNullOrEmpty(lastName);
+	BOOL isFirstNameValid	= !JFStringIsNullOrEmpty(firstName);
+	BOOL isMiddleNameValid	= !JFStringIsNullOrEmpty(middleName);
+	BOOL isLastNameValid	= !JFStringIsNullOrEmpty(lastName);
 	
 	if(!isFirstNameValid && !isMiddleNameValid && !isLastNameValid)
 		return nil;
