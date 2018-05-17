@@ -1538,7 +1538,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JF;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Jacopo Filié";
 				TargetAttributes = {
 					6C668B801D4FA75D009E62E5 = {
