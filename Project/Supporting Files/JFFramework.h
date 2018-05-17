@@ -94,6 +94,9 @@
 #if JF_IOS
 #pragma mark - iOS specific headers
 
+// Data Objects
+#import	"JFTimerHandler.h"
+
 // User interface (Addons)
 #import	"UIButton+JFFramework.h"
 #import	"UILabel+JFFramework.h"
@@ -103,8 +106,11 @@
 #import	"JFActivityIndicatorView.h"
 #import	"JFAlert.h"
 #import	"JFAlertsController.h"
+#import	"JFGradientView.h"
+#import	"JFKeyboardEventsHandler.h"
 #import	"JFOverlayController.h"
 #import	"JFSliderController.h"
+#import	"JFTableViewCell.h"
 
 #endif
 

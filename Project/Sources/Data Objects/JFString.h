@@ -73,6 +73,7 @@ FOUNDATION_EXPORT NSString*		JFStringFromClassOfObject(id<NSObject> object);
 FOUNDATION_EXPORT NSString*		JFStringFromCString(const char* string);
 FOUNDATION_EXPORT NSString*		JFStringFromEncodedCString(const char* string, NSStringEncoding encoding);
 FOUNDATION_EXPORT NSString*		JFStringFromObject(id<NSObject> object);
+FOUNDATION_EXPORT NSString*		JFStringFromPersonName(NSString* firstName, NSString* middleName, NSString* lastName);
 FOUNDATION_EXPORT NSString*		JFStringFromPointer(void* pointer);
 FOUNDATION_EXPORT NSString*		JFStringFromPointerOfObject(id<NSObject> object);
 FOUNDATION_EXPORT const char*	JFStringToCString(NSString* string);

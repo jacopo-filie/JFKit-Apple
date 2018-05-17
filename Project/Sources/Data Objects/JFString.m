@@ -136,6 +136,29 @@ NSString* JFStringFromObject(id<NSObject> object)
 	return [NSString stringWithFormat:@"<%@: %@>", JFStringFromClassOfObject(object), JFStringFromPointerOfObject(object)];
 }
 
+NSString* JFStringFromPersonName(NSString* firstName, NSString* middleName, NSString* lastName)
+{
+	NSCharacterSet* characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+	
+	firstName	= [firstName stringByTrimmingCharactersInSet:characterSet];
+	middleName	= [middleName stringByTrimmingCharactersInSet:characterSet];
+	lastName	= [lastName stringByTrimmingCharactersInSet:characterSet];
+
+	BOOL isFirstNameValid	= JFStringIsNullOrEmpty(firstName);
+	BOOL isMiddleNameValid	= JFStringIsNullOrEmpty(middleName);
+	BOOL isLastNameValid	= JFStringIsNullOrEmpty(lastName);
+	
+	if(!isFirstNameValid && !isMiddleNameValid && !isLastNameValid)
+		return nil;
+	
+	NSMutableArray* components = [NSMutableArray arrayWithCapacity:3];
+	if(isFirstNameValid)	[components addObject:firstName];
+	if(isMiddleNameValid)	[components addObject:middleName];
+	if(isLastNameValid)		[components addObject:lastName];
+
+	return [components componentsJoinedByString:@" "];
+}
+
 NSString* JFStringFromPointer(void* pointer)
 {
 	if(!pointer)
