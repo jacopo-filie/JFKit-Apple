@@ -79,13 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Layout constraints)
 // =================================================================================================
 
-@property (strong, nonatomic) NSArray<NSLayoutConstraint*>* customConstraints;
-@property (weak, nonatomic) NSLayoutConstraint* alertViewMaxHeightConstraint;
-@property (weak, nonatomic) NSLayoutConstraint* alertViewMaxWidthConstraint;
-@property (weak, nonatomic) NSLayoutConstraint* alertViewMinHeightConstraint;
-@property (weak, nonatomic) NSLayoutConstraint* alertViewMinWidthConstraint;
-@property (weak, nonatomic) NSLayoutConstraint* imageViewHeightConstraint;
-@property (weak, nonatomic) NSLayoutConstraint* imageViewWidthConstraint;
+@property (strong, nonatomic, nullable) NSArray<NSLayoutConstraint*>* customConstraints;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* alertViewMaxHeightConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* alertViewMaxWidthConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* alertViewMinHeightConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* alertViewMinWidthConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* imageViewHeightConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* imageViewWidthConstraint;
 
 // =================================================================================================
 // MARK: Properties accessors - User interface (Layout)
@@ -1139,16 +1139,16 @@ NS_ASSUME_NONNULL_BEGIN
 			[constraints addObject:[NSLayoutConstraint constraintWithItem:v1 attribute:ax relatedBy:re toItem:v2 attribute:ax multiplier:1.0f constant:0.0f]]; // Center X
 			[constraints addObject:[NSLayoutConstraint constraintWithItem:v1 attribute:ay relatedBy:re toItem:v2 attribute:ay multiplier:1.0f constant:0.0f]]; // Center Y
 			NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:v1 attribute:aw relatedBy:rl toItem:nil attribute:an multiplier:1.0f constant:alertMaxSize.width]; // Max Width
-			[((alertMaxSize.width > 0) ? constraints : disabledConstraints) addObject:constraint];
+			[((alertMaxSize.width > 0.0f) ? constraints : disabledConstraints) addObject:constraint];
 			self.alertViewMaxWidthConstraint = constraint;
 			constraint = [NSLayoutConstraint constraintWithItem:v1 attribute:ah relatedBy:rl toItem:nil attribute:an multiplier:1.0f constant:alertMaxSize.height]; // Max Height
-			[((alertMaxSize.height > 0) ? constraints : disabledConstraints) addObject:constraint];
+			[((alertMaxSize.height > 0.0f) ? constraints : disabledConstraints) addObject:constraint];
 			self.alertViewMaxHeightConstraint = constraint;
 			constraint = [NSLayoutConstraint constraintWithItem:v1 attribute:aw relatedBy:rg toItem:nil attribute:an multiplier:1.0f constant:alertMinSize.width]; // Min Width
-			[((alertMinSize.width > 0) ? constraints : disabledConstraints) addObject:constraint];
+			[((alertMinSize.width > 0.0f) ? constraints : disabledConstraints) addObject:constraint];
 			self.alertViewMinWidthConstraint = constraint;
 			constraint = [NSLayoutConstraint constraintWithItem:v1 attribute:ah relatedBy:rg toItem:nil attribute:an multiplier:1.0f constant:alertMinSize.height]; // Min Height
-			[((alertMinSize.height > 0) ? constraints : disabledConstraints) addObject:constraint];
+			[((alertMinSize.height > 0.0f) ? constraints : disabledConstraints) addObject:constraint];
 			self.alertViewMinHeightConstraint = constraint;
 
 			if(animationView)
