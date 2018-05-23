@@ -84,6 +84,13 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize visibleOffset = _visibleOffset;
 
 // =================================================================================================
+// MARK: Properties - User interface (Outlets)
+// =================================================================================================
+
+@synthesize resizableView = _resizableView;
+@synthesize resizableViewBottomConstraint = _resizableViewBottomConstraint;
+
+// =================================================================================================
 // MARK: Methods - Memory management
 // =================================================================================================
 
