@@ -87,6 +87,23 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties accessors - Observers
 // =================================================================================================
 
+- (NSUInteger)count
+{
+	NSArray<Reference<id>*>* references = self.references;
+	@synchronized(references)
+	{
+		NSUInteger retVal = 0;
+		for(Reference<id>* reference in references)
+		{
+			if(reference.object)
+				retVal++;
+			else
+				self.needsCleanUp = YES;
+		}
+		return retVal;
+	}
+}
+
 - (void)setNeedsCleanUp:(BOOL)needsCleanUp
 {
 	if(needsCleanUp)

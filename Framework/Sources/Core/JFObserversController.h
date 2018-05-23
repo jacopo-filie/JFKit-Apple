@@ -40,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFObserversController<__covariant ObserverType> : NSObject
 
 // =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
+/**
+ * The number of registered observers.
+ */
+@property (assign, readonly) NSUInteger count;
+
+// =================================================================================================
 // MARK: Methods - Notifications management
 // =================================================================================================
 
