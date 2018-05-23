@@ -206,13 +206,14 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 	{
 		if(!_viewContext)
 		{
+			NSManagedObjectContext* __block viewContext = nil;
 			JFBlock block = ^(void) {
 				if(@available(macOS 10.7, *))
-					_viewContext = [self newManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+					viewContext = [self newManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
 				else
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-					_viewContext = [self newManagedObjectContext];
+					viewContext = [self newManagedObjectContext];
 #pragma clang diagnostic pop
 			};
 			
@@ -220,6 +221,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 				block();
 			else
 				[MainOperationQueue addOperations:@[[NSBlockOperation blockOperationWithBlock:block]] waitUntilFinished:YES];
+			_viewContext = viewContext;
 		}
 		return _viewContext;
 	}
