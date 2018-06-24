@@ -45,6 +45,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly)	JFObserversController<id<JFDrawerControllerObserver>>*	observersController;
 
 // =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
+@property (assign, nonatomic, readonly) NSOperationQueue* animationQueue;
+@property (assign, nonatomic, getter=isLeftViewAnimating) BOOL leftViewAnimating;
+@property (assign, nonatomic, getter=hasLeftViewAppeared) BOOL leftViewAppeared;
+@property (assign, nonatomic, getter=isLeftViewAppearing) BOOL leftViewAppearing;
+@property (assign, nonatomic, getter=isLeftViewDisappearing) BOOL leftViewDisappearing;
+@property (assign, nonatomic, getter=isRightViewAnimating) BOOL rightViewAnimating;
+@property (assign, nonatomic, getter=hasRightViewAppeared) BOOL rightViewAppeared;
+@property (assign, nonatomic, getter=isRightViewAppearing) BOOL rightViewAppearing;
+@property (assign, nonatomic, getter=isRightViewDisappearing) BOOL rightViewDisappearing;
+@property (assign, nonatomic, getter=isRootViewAnimating) BOOL rootViewAnimating;
+@property (assign, nonatomic, getter=hasRootViewAppeared) BOOL rootViewAppeared;
+@property (assign, nonatomic, getter=isRootViewAppearing) BOOL rootViewAppearing;
+@property (assign, nonatomic, getter=isRootViewDisappearing) BOOL rootViewDisappearing;
+@property (assign, nonatomic, getter=isViewAnimating) BOOL viewAnimating;
+@property (assign, nonatomic, getter=hasViewAppeared) BOOL viewAppeared;
+@property (assign, nonatomic, getter=isViewAppearing) BOOL viewAppearing;
+@property (assign, nonatomic, getter=isViewDisappearing) BOOL viewDisappearing;
+
+// =================================================================================================
 // MARK: Properties - User interface (Layout)
 // =================================================================================================
 
@@ -52,6 +74,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) UIView* leftContainer;
 @property (weak, nonatomic, nullable) UIView* rightContainer;
 @property (weak, nonatomic, nullable) UIView* rootContainer;
+
+// =================================================================================================
+// MARK: Properties - User interface (Layout constraints)
+// =================================================================================================
+
+@property (strong, nonatomic, nullable) NSArray<NSLayoutConstraint*>* customConstraints;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* leftContainerLeftToViewLeftConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* leftContainerWidthConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rightContainerRightToViewRightConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rightContainerWidthConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToLeftContainerRightConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToViewLeftConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToRightContainerLeftConstraint;
+@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToViewRightConstraint;
 
 // =================================================================================================
 // MARK: Methods - Memory management
@@ -63,13 +99,26 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - User interface management
 // =================================================================================================
 
+- (void)beginLeftViewTransition:(BOOL)appearing animated:(BOOL)animated;
+- (void)beginRightViewTransition:(BOOL)appearing animated:(BOOL)animated;
+- (void)beginRootViewTransition:(BOOL)appearing animated:(BOOL)animated;
+- (void)endLeftViewTransition;
+- (void)endRightViewTransition;
+- (void)endRootViewTransition;
 - (void)updateContainersZOrder;
+
+// =================================================================================================
+// MARK: Methods - User interface management (Actions)
+// =================================================================================================
+
+- (IBAction)dismissButtonTapped:(UIButton*)sender;
 
 // =================================================================================================
 // MARK: Methods - User interface management (Layout)
 // =================================================================================================
 
 - (void)installDismissButton;
+- (void)rebuildConstraints;
 - (void)uninstallDismissButton;
 
 @end
@@ -91,14 +140,31 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface
 // =================================================================================================
 
+@synthesize animationQueue = _animationQueue;
 @synthesize appearAnimationDuration = _appearAnimationDuration;
 @synthesize disappearAnimationDuration = _disappearAnimationDuration;
 @synthesize leftDrawerHidden = _leftDrawerHidden;
 @synthesize leftDrawerMode = _leftDrawerMode;
 @synthesize leftDrawerOffset = _leftDrawerOffset;
+@synthesize leftViewAnimating = _leftViewAnimating;
+@synthesize leftViewAppeared = _leftViewAppeared;
+@synthesize leftViewAppearing = _leftViewAppearing;
+@synthesize leftViewDisappearing = _leftViewDisappearing;
 @synthesize rightDrawerHidden = _rightDrawerHidden;
 @synthesize rightDrawerMode = _rightDrawerMode;
 @synthesize rightDrawerOffset = _rightDrawerOffset;
+@synthesize rightViewAnimating = _rightViewAnimating;
+@synthesize rightViewAppeared = _rightViewAppeared;
+@synthesize rightViewAppearing = _rightViewAppearing;
+@synthesize rightViewDisappearing = _rightViewDisappearing;
+@synthesize rootViewAnimating = _rootViewAnimating;
+@synthesize rootViewAppeared = _rootViewAppeared;
+@synthesize rootViewAppearing = _rootViewAppearing;
+@synthesize rootViewDisappearing = _rootViewDisappearing;
+@synthesize viewAnimating = _viewAnimating;
+@synthesize viewAppeared = _viewAppeared;
+@synthesize viewAppearing = _viewAppearing;
+@synthesize viewDisappearing = _viewDisappearing;
 
 // =================================================================================================
 // MARK: Properties - User interface (Gestures)
@@ -120,7 +186,21 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize rootViewController = _rootViewController;
 
 // =================================================================================================
-// MARK: Properties - User interface
+// MARK: Properties - User interface (Layout constraints)
+// =================================================================================================
+
+@synthesize customConstraints = _customConstraints;
+@synthesize leftContainerLeftToViewLeftConstraint = _leftContainerLeftToViewLeftConstraint;
+@synthesize leftContainerWidthConstraint = _leftContainerWidthConstraint;
+@synthesize rightContainerRightToViewRightConstraint = _rightContainerRightToViewRightConstraint;
+@synthesize rightContainerWidthConstraint = _rightContainerWidthConstraint;
+@synthesize rootContainerLeftToLeftContainerRightConstraint = _rootContainerLeftToLeftContainerRightConstraint;
+@synthesize rootContainerLeftToViewLeftConstraint = _rootContainerLeftToViewLeftConstraint;
+@synthesize rootContainerRightToRightContainerLeftConstraint = _rootContainerRightToRightContainerLeftConstraint;
+@synthesize rootContainerRightToViewRightConstraint = _rootContainerRightToViewRightConstraint;
+
+// =================================================================================================
+// MARK: Properties accessors - User interface
 // =================================================================================================
 
 - (void)setLeftDrawerMode:(JFDrawerControllerMode)leftDrawerMode
@@ -146,15 +226,177 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Properties accessors - User interface (Layout)
+// =================================================================================================
+
+- (void)setLeftViewController:(UIViewController* __nullable)leftViewController
+{
+	if(_leftViewController == leftViewController)
+		return;
+	
+	UIViewController* oldViewController = _leftViewController;
+	UIViewController* newViewController = leftViewController;
+	
+	NSLog(@" ");
+	NSLog(@"%@: %@ [old = %@] [new = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromObject(oldViewController), JFStringFromObject(newViewController));
+	
+	if([self isViewLoaded])
+		[self endLeftViewTransition];
+	
+	_leftViewController = leftViewController;
+	
+	if([self isViewLoaded])
+	{
+		BOOL leftViewAppeared = [self hasLeftViewAppeared];
+		
+		[oldViewController willMoveToParentViewController:nil];
+		[self addChildViewController:newViewController];
+		
+		if(leftViewAppeared)
+		{
+			[oldViewController beginAppearanceTransition:NO animated:NO];
+			[newViewController beginAppearanceTransition:YES animated:NO];
+		}
+		
+		UIView* container = self.leftContainer;
+		UIView* view = newViewController.view;
+		
+		view.autoresizingMask = ViewAutoresizingFlexibleSize;
+		view.frame = container.bounds;
+		view.translatesAutoresizingMaskIntoConstraints = YES;
+		[container addSubview:view];
+		
+		[oldViewController.view removeFromSuperview];
+		
+		if(leftViewAppeared)
+		{
+			[oldViewController endAppearanceTransition];
+			[newViewController endAppearanceTransition];
+		}
+		
+		[oldViewController removeFromParentViewController];
+		[newViewController didMoveToParentViewController:self];
+	}
+}
+
+- (void)setRightViewController:(UIViewController* __nullable)rightViewController
+{
+	if(_rightViewController == rightViewController)
+		return;
+	
+	UIViewController* oldViewController = _rightViewController;
+	UIViewController* newViewController = rightViewController;
+	
+	NSLog(@" ");
+	NSLog(@"%@: %@ [old = %@] [new = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromObject(oldViewController), JFStringFromObject(newViewController));
+	
+	if([self isViewLoaded])
+		[self endRightViewTransition];
+	
+	_rightViewController = rightViewController;
+	
+	if([self isViewLoaded])
+	{
+		BOOL rightViewAppeared = [self hasRightViewAppeared];
+		
+		[oldViewController willMoveToParentViewController:nil];
+		[self addChildViewController:newViewController];
+		
+		if(rightViewAppeared)
+		{
+			[oldViewController beginAppearanceTransition:NO animated:NO];
+			[newViewController beginAppearanceTransition:YES animated:NO];
+		}
+		
+		UIView* container = self.rightContainer;
+		UIView* view = newViewController.view;
+		
+		view.autoresizingMask = ViewAutoresizingFlexibleSize;
+		view.frame = container.bounds;
+		view.translatesAutoresizingMaskIntoConstraints = YES;
+		[container addSubview:view];
+		
+		[oldViewController.view removeFromSuperview];
+		
+		if(rightViewAppeared)
+		{
+			[oldViewController endAppearanceTransition];
+			[newViewController endAppearanceTransition];
+		}
+		
+		[oldViewController removeFromParentViewController];
+		[newViewController didMoveToParentViewController:self];
+	}
+}
+
+- (void)setRootViewController:(UIViewController* __nullable)rootViewController
+{
+	if(_rootViewController == rootViewController)
+		return;
+	
+	UIViewController* oldViewController = _rootViewController;
+	UIViewController* newViewController = rootViewController;
+	
+	NSLog(@" ");
+	NSLog(@"%@: %@ [old = %@] [new = %@]", JFStringFromObject(self), NSStringFromSelector(_cmd), JFStringFromObject(oldViewController), JFStringFromObject(newViewController));
+	
+	if([self isViewLoaded])
+		[self endRootViewTransition];
+	
+	_rootViewController = rootViewController;
+	
+	if([self isViewLoaded])
+	{
+		BOOL rootViewAppeared = [self hasRootViewAppeared];
+		
+		[oldViewController willMoveToParentViewController:nil];
+		[self addChildViewController:newViewController];
+		
+		if(rootViewAppeared)
+		{
+			[oldViewController beginAppearanceTransition:NO animated:NO];
+			[newViewController beginAppearanceTransition:YES animated:NO];
+		}
+		
+		UIView* container = self.rootContainer;
+		UIView* view = newViewController.view;
+		
+		view.autoresizingMask = ViewAutoresizingFlexibleSize;
+		view.frame = container.bounds;
+		view.translatesAutoresizingMaskIntoConstraints = YES;
+		[container addSubview:view];
+		
+		UIButton* dismissButton = self.dismissButton;
+		if(dismissButton)
+			[container bringSubviewToFront:dismissButton];
+		
+		[oldViewController.view removeFromSuperview];
+		
+		if(rootViewAppeared)
+		{
+			[oldViewController endAppearanceTransition];
+			[newViewController endAppearanceTransition];
+		}
+		
+		[oldViewController removeFromParentViewController];
+		[newViewController didMoveToParentViewController:self];
+	}
+}
+
+// =================================================================================================
 // MARK: Methods - Memory management
 // =================================================================================================
 
 + (void)initializeProperties:(JFDrawerController*)controller
 {
+	NSOperationQueue* queue = [NSOperationQueue new];
+	queue.maxConcurrentOperationCount = 1;
+	
 	// Observers
 	controller->_observersController = [JFObserversController<id<JFDrawerControllerObserver>> new];
 	
 	// User interface
+	controller->_animationQueue = queue;
 	controller->_appearAnimationDuration = JFAnimationDuration;
 	controller->_disappearAnimationDuration = JFAnimationDuration;
 	controller->_leftDrawerHidden = YES;
@@ -200,8 +442,107 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - User interface management
 // =================================================================================================
 
+- (void)beginLeftViewTransition:(BOOL)appearing animated:(BOOL)animated
+{
+	self.leftViewAnimating = animated;
+	
+	if(appearing)
+		self.leftViewAppearing = YES;
+	else
+		self.leftViewDisappearing = YES;
+	
+	[self.leftViewController beginAppearanceTransition:appearing animated:animated];
+}
+
+- (void)beginRightViewTransition:(BOOL)appearing animated:(BOOL)animated
+{
+	self.rightViewAnimating = animated;
+	
+	if(appearing)
+		self.rightViewAppearing = YES;
+	else
+		self.rightViewDisappearing = YES;
+	
+	[self.rightViewController beginAppearanceTransition:appearing animated:animated];
+}
+
+- (void)beginRootViewTransition:(BOOL)appearing animated:(BOOL)animated
+{
+	self.rootViewAnimating = animated;
+	
+	if(appearing)
+		self.rootViewAppearing = YES;
+	else
+		self.rootViewDisappearing = YES;
+	
+	[self.rootViewController beginAppearanceTransition:appearing animated:animated];
+}
+
 - (void)dismissAllDrawers:(BOOL)animated completion:(JFBlock __nullable)completion
 {}
+
+- (void)endLeftViewTransition
+{
+	UIViewController* viewController = self.leftViewController;
+	
+	if([self isLeftViewAppearing])
+	{
+		[viewController endAppearanceTransition];
+		self.leftViewAnimating = NO;
+		self.leftViewAppearing = NO;
+		self.leftViewAppeared = YES;
+	}
+	
+	if([self isLeftViewDisappearing])
+	{
+		[viewController endAppearanceTransition];
+		self.leftViewAnimating = NO;
+		self.leftViewDisappearing = NO;
+		self.leftViewAppeared = NO;
+	}
+}
+
+- (void)endRightViewTransition
+{
+	UIViewController* viewController = self.rightViewController;
+	
+	if([self isRightViewAppearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rightViewAnimating = NO;
+		self.rightViewAppearing = NO;
+		self.rightViewAppeared = YES;
+	}
+	
+	if([self isRightViewDisappearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rightViewAnimating = NO;
+		self.rightViewDisappearing = NO;
+		self.rightViewAppeared = NO;
+	}
+}
+
+- (void)endRootViewTransition
+{
+	UIViewController* viewController = self.rootViewController;
+	
+	if([self isRootViewAppearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rootViewAnimating = NO;
+		self.rootViewAppearing = NO;
+		self.rootViewAppeared = YES;
+	}
+	
+	if([self isRootViewDisappearing])
+	{
+		[viewController endAppearanceTransition];
+		self.rootViewAnimating = NO;
+		self.rootViewDisappearing = NO;
+		self.rootViewAppeared = NO;
+	}
+}
 
 - (void)presentLeftDrawer:(BOOL)animated completion:(JFBlock __nullable)completion
 {}
@@ -227,18 +568,158 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - User interface management (Actions)
+// =================================================================================================
+
+- (IBAction)dismissButtonTapped:(UIButton*)sender
+{
+	[self dismissAllDrawers:[self hasViewAppeared] completion:nil];
+}
+
+// =================================================================================================
 // MARK: Methods - User interface management (Layout)
 // =================================================================================================
 
 - (void)installDismissButton
-{}
+{
+	UIButton* button = self.dismissButton;
+	if(!button)
+	{
+		button = [UIButton buttonWithType:UIButtonTypeCustom];
+		button.autoresizingMask = ViewAutoresizingFlexibleSize;
+		[button addTarget:self action:@selector(dismissButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+		self.dismissButton = button;
+	}
+	
+	UIView* rootContainer = self.rootContainer;
+	button.frame = rootContainer.bounds;
+	[rootContainer addSubview:button];
+}
+
+- (void)rebuildConstraints
+{
+	// Prepares some shortcuts.
+	static __unused NSLayoutAttribute ab = NSLayoutAttributeBottom;
+	static __unused NSLayoutAttribute al = NSLayoutAttributeLeft;
+	static __unused NSLayoutAttribute ar = NSLayoutAttributeRight;
+	static __unused NSLayoutAttribute at = NSLayoutAttributeTop;
+	static __unused NSLayoutAttribute ah = NSLayoutAttributeHeight;
+	static __unused NSLayoutAttribute aw = NSLayoutAttributeWidth;
+	static __unused NSLayoutAttribute an = NSLayoutAttributeNotAnAttribute;
+	static __unused NSLayoutAttribute ax = NSLayoutAttributeCenterX;
+	static __unused NSLayoutAttribute ay = NSLayoutAttributeCenterY;
+	static __unused NSLayoutRelation re = NSLayoutRelationEqual;
+	static __unused NSLayoutRelation rg = NSLayoutRelationGreaterThanOrEqual;
+	static __unused NSLayoutRelation rl = NSLayoutRelationLessThanOrEqual;
+	
+	UIView* left = self.leftContainer;
+	UIView* right = self.rightContainer;
+	UIView* root = self.rootContainer;
+	UIView* view = self.view;
+	
+	CGFloat viewWidth = view.bounds.size.width;
+	
+	CGFloat leftWidth = viewWidth - self.leftDrawerOffset;
+	CGFloat rightWidth = viewWidth - self.rightDrawerOffset;
+	
+	BOOL leftHidden = [self isLeftDrawerHidden];
+	BOOL rightHidden = [self isRightDrawerHidden];
+	
+	BOOL leftAbove = (self.leftDrawerMode == JFDrawerControllerModeAbove);
+	BOOL rightAbove = (self.rightDrawerMode == JFDrawerControllerModeAbove);
+	
+	NSDictionary* views = NSDictionaryOfVariableBindings(left, right, root);
+	
+	NSMutableArray<NSLayoutConstraint*>* constraints = ([self.customConstraints mutableCopy] ?: [NSMutableArray<NSLayoutConstraint*> array]);
+	NSMutableArray<NSLayoutConstraint*>* disabledConstraints = [NSMutableArray<NSLayoutConstraint*> array];
+	
+	// Removes the old constraints.
+	[view removeConstraints:constraints];
+	[constraints removeAllObjects];
+	
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[root]-|" options:0 metrics:nil views:views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[left]-|" options:0 metrics:nil views:views]];
+	[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[right]-|" options:0 metrics:nil views:views]];
+	
+	[constraints addObject:[NSLayoutConstraint constraintWithItem:root attribute:aw relatedBy:re toItem:nil attribute:an multiplier:1.0f constant:viewWidth]];
+	
+	NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:left attribute:aw relatedBy:re toItem:nil attribute:an multiplier:1.0f constant:leftWidth];
+	[constraints addObject:constraint];
+	self.leftContainerWidthConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:right attribute:aw relatedBy:re toItem:nil attribute:an multiplier:1.0f constant:rightWidth];
+	[constraints addObject:constraint];
+	self.rightContainerWidthConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:root attribute:al relatedBy:re toItem:view attribute:al multiplier:1.0f constant:0.0f];
+	[((leftAbove || leftHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.rootContainerLeftToViewLeftConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:root attribute:ar relatedBy:re toItem:view attribute:ar multiplier:1.0f constant:0.0f];
+	[((rightAbove || rightHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.rootContainerRightToViewRightConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:left attribute:al relatedBy:re toItem:view attribute:al multiplier:1.0f constant:0.0f];
+	[((leftAbove != leftHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.leftContainerLeftToViewLeftConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:right attribute:ar relatedBy:re toItem:view attribute:ar multiplier:1.0f constant:0.0f];
+	[((rightAbove != rightHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.rightContainerRightToViewRightConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:root attribute:al relatedBy:re toItem:left attribute:ar multiplier:1.0f constant:0.0f];
+	[((leftAbove == leftHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.rootContainerLeftToLeftContainerRightConstraint = constraint;
+	
+	constraint = [NSLayoutConstraint constraintWithItem:root attribute:ar relatedBy:re toItem:right attribute:al multiplier:1.0f constant:0.0f];
+	[((rightAbove == rightHidden) ? constraints : disabledConstraints) addObject:constraint];
+	self.rootContainerRightToRightContainerLeftConstraint = constraint;
+	
+	// Saves the new constraints.
+	[view addConstraints:constraints];
+	[constraints addObjectsFromArray:disabledConstraints];
+	self.customConstraints = [constraints copy];
+}
 
 - (void)uninstallDismissButton
-{}
+{
+	[self.dismissButton removeFromSuperview];
+}
 
 // =================================================================================================
 // MARK: Methods - User interface management (View lifecycle)
 // =================================================================================================
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods
+{
+	return NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	self.viewAnimating = NO;
+	self.viewAppearing = NO;
+	self.viewAppeared = YES;
+	
+	[self endRootViewTransition];
+	[self endLeftViewTransition];
+	[self endRightViewTransition];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	
+	self.viewAnimating = NO;
+	self.viewDisappearing = NO;
+	self.viewAppeared = NO;
+	
+	[self endRootViewTransition];
+	[self endLeftViewTransition];
+	[self endRightViewTransition];
+}
 
 - (void)viewDidLoad
 {
@@ -262,19 +743,24 @@ NS_ASSUME_NONNULL_BEGIN
 	UIView* leftContainer = [[UIView alloc] initWithFrame:leftFrame];
 	leftContainer.autoresizingMask = autoresizingMask;
 	leftContainer.backgroundColor = [UIColor blackColor];
+	leftContainer.hidden = [self isLeftDrawerHidden];
 	leftContainer.opaque = YES;
+	leftContainer.translatesAutoresizingMaskIntoConstraints = NO;
 	self.leftContainer = leftContainer;
 	
 	UIView* rightContainer = [[UIView alloc] initWithFrame:rightFrame];
 	rightContainer.autoresizingMask = autoresizingMask;
 	rightContainer.backgroundColor = [UIColor blackColor];
+	rightContainer.hidden = [self isRightDrawerHidden];
 	rightContainer.opaque = YES;
+	rightContainer.translatesAutoresizingMaskIntoConstraints = NO;
 	self.rightContainer = rightContainer;
 	
 	UIView* rootContainer = [[UIView alloc] initWithFrame:bounds];
 	rootContainer.autoresizingMask = autoresizingMask;
 	rootContainer.backgroundColor = [UIColor blackColor];
 	rootContainer.opaque = YES;
+	rootContainer.translatesAutoresizingMaskIntoConstraints = NO;
 	self.rootContainer = rootContainer;
 	
 	[view addSubview:leftContainer];
@@ -315,6 +801,40 @@ NS_ASSUME_NONNULL_BEGIN
 		[rightContainer addSubview:rightViewController.view];
 		[rightViewController didMoveToParentViewController:self];
 	}
+	
+	[self rebuildConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	self.viewAnimating = animated;
+	self.viewAppearing = YES;
+	
+	[self beginRootViewTransition:YES animated:animated];
+	
+	if(![self isLeftDrawerHidden])
+		[self beginLeftViewTransition:YES animated:animated];
+	
+	if(![self isRightDrawerHidden])
+		[self beginRightViewTransition:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	self.viewAnimating = animated;
+	self.viewDisappearing = YES;
+	
+	[self beginRootViewTransition:NO animated:animated];
+	
+	if(![self isLeftDrawerHidden])
+		[self beginLeftViewTransition:NO animated:animated];
+	
+	if(![self isRightDrawerHidden])
+		[self beginRightViewTransition:NO animated:animated];
 }
 
 @end
