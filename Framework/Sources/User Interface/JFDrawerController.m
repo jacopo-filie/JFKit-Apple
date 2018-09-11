@@ -49,10 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @property (assign, nonatomic, readonly) NSOperationQueue* animationQueue;
+@property (assign, nonatomic, readwrite, getter=isLeftDrawerHidden) BOOL leftDrawerHidden;
 @property (assign, nonatomic, getter=isLeftViewAnimating) BOOL leftViewAnimating;
 @property (assign, nonatomic, getter=hasLeftViewAppeared) BOOL leftViewAppeared;
 @property (assign, nonatomic, getter=isLeftViewAppearing) BOOL leftViewAppearing;
 @property (assign, nonatomic, getter=isLeftViewDisappearing) BOOL leftViewDisappearing;
+@property (assign, nonatomic, readwrite, getter=isRightDrawerHidden) BOOL rightDrawerHidden;
 @property (assign, nonatomic, getter=isRightViewAnimating) BOOL rightViewAnimating;
 @property (assign, nonatomic, getter=hasRightViewAppeared) BOOL rightViewAppeared;
 @property (assign, nonatomic, getter=isRightViewAppearing) BOOL rightViewAppearing;
@@ -80,14 +82,14 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @property (strong, nonatomic, nullable) NSArray<NSLayoutConstraint*>* customConstraints;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* leftContainerLeftToViewLeftConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* leftContainerWidthConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rightContainerRightToViewRightConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rightContainerWidthConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToLeftContainerRightConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToViewLeftConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToRightContainerLeftConstraint;
-@property (weak, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToViewRightConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* leftContainerLeftToViewLeftConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* leftContainerWidthConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rightContainerRightToViewRightConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rightContainerWidthConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToLeftContainerRightConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rootContainerLeftToViewLeftConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToRightContainerLeftConstraint;
+@property (strong, nonatomic, nullable) NSLayoutConstraint* rootContainerRightToViewRightConstraint;
 
 // =================================================================================================
 // MARK: Methods - Memory management
@@ -211,7 +213,17 @@ NS_ASSUME_NONNULL_BEGIN
 	_leftDrawerMode = leftDrawerMode;
 	
 	if([self isViewLoaded])
-		[self updateContainersZOrder];
+	{
+		if([self isLeftDrawerHidden])
+			[self updateContainersZOrder];
+		else
+		{
+			JFWeakifySelf;
+			[self dismissAllDrawers:NO completion:^{
+				[weakSelf updateContainersZOrder];
+			}];
+		}
+	}
 }
 
 - (void)setRightDrawerMode:(JFDrawerControllerMode)rightDrawerMode
@@ -222,7 +234,17 @@ NS_ASSUME_NONNULL_BEGIN
 	_rightDrawerMode = rightDrawerMode;
 	
 	if([self isViewLoaded])
-		[self updateContainersZOrder];
+	{
+		if([self isRightDrawerHidden])
+			[self updateContainersZOrder];
+		else
+		{
+			JFWeakifySelf;
+			[self dismissAllDrawers:NO completion:^{
+				[weakSelf updateContainersZOrder];
+			}];
+		}
+	}
 }
 
 // =================================================================================================
@@ -479,7 +501,35 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)dismissAllDrawers:(BOOL)animated completion:(JFBlock __nullable)completion
-{}
+{
+	if(![self hasLeftViewAppeared] && ![self hasRightViewAppeared])
+	{
+		if(completion)
+			[MainOperationQueue addOperationWithBlock:completion];
+		return;
+	}
+	
+	BOOL leftDrawerAbove = (self.leftDrawerMode == JFDrawerControllerModeAbove);
+	self.leftContainerLeftToViewLeftConstraint.active = !leftDrawerAbove;
+	self.rootContainerLeftToLeftContainerRightConstraint.active = leftDrawerAbove;
+	self.rootContainerLeftToViewLeftConstraint.active = YES;
+
+	BOOL rightDrawerAbove = (self.rightDrawerMode == JFDrawerControllerModeAbove);
+	self.rightContainerRightToViewRightConstraint.active = !rightDrawerAbove;
+	self.rootContainerRightToRightContainerLeftConstraint.active = rightDrawerAbove;
+	self.rootContainerRightToViewRightConstraint.active = YES;
+	
+	JFWeakifySelf;
+	JFBlock animations = ^(void)
+	{
+		[weakSelf.view layoutIfNeeded];
+	};
+	
+	[UIView animateWithDuration:(animated ? JFAnimationDuration : 0.0) animations:animations completion:^(BOOL finished) {
+		if(completion)
+			completion();
+	}];
+}
 
 - (void)endLeftViewTransition
 {
@@ -545,10 +595,76 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)presentLeftDrawer:(BOOL)animated completion:(JFBlock __nullable)completion
-{}
+{
+	if([self hasLeftViewAppeared])
+	{
+		if(completion)
+			[MainOperationQueue addOperationWithBlock:completion];
+		return;
+	}
+	
+	if([self hasRightViewAppeared])
+	{
+		JFWeakifySelf;
+		[self dismissAllDrawers:animated completion:^{
+			[weakSelf presentLeftDrawer:animated completion:completion];
+		}];
+		return;
+	}
+	
+	BOOL leftDrawerAbove = (self.leftDrawerMode == JFDrawerControllerModeAbove);
+	self.leftContainerLeftToViewLeftConstraint.active = YES;
+	self.rootContainerLeftToLeftContainerRightConstraint.active = !leftDrawerAbove;
+	self.rootContainerLeftToViewLeftConstraint.active = leftDrawerAbove;
+	self.rootContainerRightToViewRightConstraint.active = leftDrawerAbove;
+
+	JFWeakifySelf;
+	JFBlock animations = ^(void)
+	{
+		[weakSelf.view layoutIfNeeded];
+	};
+	
+	[UIView animateWithDuration:(animated ? JFAnimationDuration : 0.0) animations:animations completion:^(BOOL finished) {
+		if(completion)
+			completion();
+	}];
+}
 
 - (void)presentRightDrawer:(BOOL)animated completion:(JFBlock __nullable)completion
-{}
+{
+	if([self hasRightViewAppeared])
+	{
+		if(completion)
+			[MainOperationQueue addOperationWithBlock:completion];
+		return;
+	}
+	
+	if([self hasLeftViewAppeared])
+	{
+		JFWeakifySelf;
+		[self dismissAllDrawers:animated completion:^{
+			[weakSelf presentRightDrawer:animated completion:completion];
+		}];
+		return;
+	}
+	
+	BOOL rightDrawerAbove = (self.rightDrawerMode == JFDrawerControllerModeAbove);
+	self.rightContainerRightToViewRightConstraint.active = YES;
+	self.rootContainerLeftToLeftContainerRightConstraint.active = !rightDrawerAbove;
+	self.rootContainerLeftToViewLeftConstraint.active = rightDrawerAbove;
+	self.rootContainerRightToViewRightConstraint.active = rightDrawerAbove;
+	
+	JFWeakifySelf;
+	JFBlock animations = ^(void)
+	{
+		[weakSelf.view layoutIfNeeded];
+	};
+	
+	[UIView animateWithDuration:(animated ? JFAnimationDuration : 0.0) animations:animations completion:^(BOOL finished) {
+		if(completion)
+			completion();
+	}];
+}
 
 - (void)updateContainersZOrder
 {
