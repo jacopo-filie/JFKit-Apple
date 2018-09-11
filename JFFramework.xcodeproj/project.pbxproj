@@ -187,6 +187,10 @@
 		4E6A16812061DE0E00D697DC /* JFDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFDrawerController.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
 		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
+		4E88C3FF20DC545D00E6F6B4 /* JFAlertsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
+		4E88C40020DC545E00E6F6B4 /* JFAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFAlert.m; sourceTree = "<group>"; };
+		4E88C40120DC545E00E6F6B4 /* JFAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFAlert.h; sourceTree = "<group>"; };
+		4E88C40220DC545E00E6F6B4 /* JFAlertsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFAlertsController.m; sourceTree = "<group>"; };
 		4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
 		4EAC2CA1200133CE00B7BC30 /* JFObserversController-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFObserversController-Tests.m"; sourceTree = "<group>"; };
@@ -352,6 +356,10 @@
 				4E62747320424914007BCE81 /* Addons */,
 				4EF6AD882051702800A0BFD1 /* JFActivityIndicatorView.h */,
 				4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */,
+				4E88C40120DC545E00E6F6B4 /* JFAlert.h */,
+				4E88C40020DC545E00E6F6B4 /* JFAlert.m */,
+				4E88C3FF20DC545D00E6F6B4 /* JFAlertsController.h */,
+				4E88C40220DC545E00E6F6B4 /* JFAlertsController.m */,
 				4E6A16812061DE0E00D697DC /* JFDrawerController.h */,
 				4E6A16802061DE0D00D697DC /* JFDrawerController.m */,
 				4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */,
