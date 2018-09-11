@@ -110,6 +110,48 @@ NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSStrin
 	return [retObj copy];
 }
 
+NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSString* __nullable middleName, NSString* __nullable familyName)
+{
+	if(!givenName && !middleName && !familyName)
+		return nil;
+	
+	NSCharacterSet* characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+	
+	givenName	= [givenName stringByTrimmingCharactersInSet:characterSet];
+	middleName	= [middleName stringByTrimmingCharactersInSet:characterSet];
+	familyName	= [familyName stringByTrimmingCharactersInSet:characterSet];
+	
+	BOOL isGivenNameValid	= !JFStringIsNullOrEmpty(givenName);
+	BOOL isMiddleNameValid	= !JFStringIsNullOrEmpty(middleName);
+	BOOL isFamilyNameValid	= !JFStringIsNullOrEmpty(familyName);
+	
+	if(!isGivenNameValid && !isMiddleNameValid && !isFamilyNameValid)
+		return nil;
+	
+	NSString* retObj = nil;
+	
+	if(@available(iOS 9.0, macOS 10.11, *))
+	{
+		NSPersonNameComponents* components = [NSPersonNameComponents new];
+		if(isGivenNameValid)	components.givenName = givenName;
+		if(isMiddleNameValid)	components.middleName = middleName;
+		if(isFamilyNameValid)	components.familyName = familyName;
+		
+		retObj = [NSPersonNameComponentsFormatter localizedStringFromPersonNameComponents:components style:NSPersonNameComponentsFormatterStyleLong options:0];
+	}
+	else
+	{
+		NSMutableArray* components = [NSMutableArray arrayWithCapacity:3];
+		if(isGivenNameValid)	[components addObject:givenName];
+		if(isMiddleNameValid)	[components addObject:middleName];
+		if(isFamilyNameValid)	[components addObject:familyName];
+		
+		retObj = [components componentsJoinedByString:@" "];
+	}
+	
+	return retObj;
+}
+
 // =================================================================================================
 // MARK: Functions - Creation (Objects conversion)
 // =================================================================================================

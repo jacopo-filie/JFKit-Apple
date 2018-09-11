@@ -131,6 +131,15 @@ FOUNDATION_EXPORT BOOL JFStringIsNullOrEmpty(NSString* __nullable string);
  */
 FOUNDATION_EXPORT NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSString*, NSString*>* values);
 
+/**
+ * Returns a new string by concatenating the components of the person's name.
+ * @param givenName Name bestowed upon an individual by one's parents, e.g. Johnathan.
+ * @param middleName given name chosen to differentiate those with the same first name, e.g. Maple.
+ * @param familyName Name passed from one generation to another to indicate lineage, e.g. Appleseed.
+ * @return A string containing the full person's name; if all given components are considered not valid (all strings are empty or `nil`), returns `nil`.
+ */
+FOUNDATION_EXPORT NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSString* __nullable middleName, NSString* __nullable familyName);
+
 // =================================================================================================
 // MARK: Functions - Creation (Objects conversion)
 // =================================================================================================
