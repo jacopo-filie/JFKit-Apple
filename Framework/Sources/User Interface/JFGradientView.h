@@ -24,45 +24,48 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//! Project version number for JFFramework_iOS.
-FOUNDATION_EXPORT double JFFramework_iOSVersionNumber;
-
-//! Project version string for JFFramework_iOS.
-FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFFramework_iOS/JFActivityIndicatorView.h>
-#import <JFFramework_iOS/JFAppDelegate.h>
-#import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
-#import <JFFramework_iOS/JFAsynchronousOperation.h>
-#import <JFFramework_iOS/JFBlocks.h>
-#import <JFFramework_iOS/JFByteStream.h>
-#import <JFFramework_iOS/JFColors.h>
-#import <JFFramework_iOS/JFConnectionMachine.h>
-#import <JFFramework_iOS/JFDrawerController.h>
-#import <JFFramework_iOS/JFGradientView.h>
-#import <JFFramework_iOS/JFImages.h>
-#import <JFFramework_iOS/JFKeyboardHelper.h>
-#import <JFFramework_iOS/JFLogger.h>
-#import <JFFramework_iOS/JFMath.h>
-#import <JFFramework_iOS/JFObserversController.h>
-#import <JFFramework_iOS/JFOverlayController.h>
-#import <JFFramework_iOS/JFPersistentContainer.h>
-#import <JFFramework_iOS/JFPreprocessorMacros.h>
-#import <JFFramework_iOS/JFReferences.h>
-#import <JFFramework_iOS/JFShortcuts.h>
-#import <JFFramework_iOS/JFStateMachine.h>
-#import <JFFramework_iOS/JFStrings.h>
-#import <JFFramework_iOS/JFSwitchMachine.h>
-#import <JFFramework_iOS/JFUtilities.h>
-#import <JFFramework_iOS/JFVersion.h>
-#import <JFFramework_iOS/JFWindowController.h>
+/**
+ * A simple view that uses a gradient layer instead of the default one.
+ */
+IB_DESIGNABLE
+@interface JFGradientView : UIView
 
-#import <JFFramework_iOS/UIButton+JFFramework.h>
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
+
+/**
+ * The end point of the gradient layer.
+ */
+@property (assign, nonatomic) IBInspectable CGPoint endPoint;
+
+/**
+ * The first color used for the gradient.
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor* firstColor;
+
+/**
+ * The last color used for the gradient.
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor* lastColor;
+
+/**
+ * The start point of the gradient layer.
+ */
+@property (assign, nonatomic) IBInspectable CGPoint startPoint;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -109,6 +109,8 @@
 		4ED607E21FEEA42700292837 /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
 		4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */; };
 		4EDC5F9C204F5AD000689B8D /* JFKeyboardHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EE82C082149C3CF00D94DA9 /* JFGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE82C062149C3CF00D94DA9 /* JFGradientView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EE82C092149C3CF00D94DA9 /* JFGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE82C072149C3CF00D94DA9 /* JFGradientView.m */; };
 		4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */; };
@@ -216,6 +218,8 @@
 		4ED607E01FEEA42700292837 /* JFMath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMath.m; sourceTree = "<group>"; };
 		4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFKeyboardHelper.m; sourceTree = "<group>"; };
 		4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFKeyboardHelper.h; sourceTree = "<group>"; };
+		4EE82C062149C3CF00D94DA9 /* JFGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFGradientView.h; sourceTree = "<group>"; };
+		4EE82C072149C3CF00D94DA9 /* JFGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFGradientView.m; sourceTree = "<group>"; };
 		4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFShortcuts.h; sourceTree = "<group>"; };
 		4EF2C7BA1FF1178300311EB5 /* JFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFUtilities.m; sourceTree = "<group>"; };
 		4EF2C7BB1FF1178300311EB5 /* JFShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFShortcuts.m; sourceTree = "<group>"; };
@@ -362,6 +366,8 @@
 				4E88C40220DC545E00E6F6B4 /* JFAlertsController.m */,
 				4E6A16812061DE0E00D697DC /* JFDrawerController.h */,
 				4E6A16802061DE0D00D697DC /* JFDrawerController.m */,
+				4EE82C062149C3CF00D94DA9 /* JFGradientView.h */,
+				4EE82C072149C3CF00D94DA9 /* JFGradientView.m */,
 				4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */,
 				4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */,
 				4E6914F2205895DD00074DDD /* JFOverlayController.h */,
@@ -502,6 +508,7 @@
 				4EF2C7BD1FF1178300311EB5 /* JFShortcuts.h in Headers */,
 				4EF2C7C31FF1178300311EB5 /* JFUtilities.h in Headers */,
 				4EF6AD8A2051702800A0BFD1 /* JFActivityIndicatorView.h in Headers */,
+				4EE82C082149C3CF00D94DA9 /* JFGradientView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +703,7 @@
 				4EF7251320005E180080136D /* JFConnectionMachine.m in Sources */,
 				4EB1B3992001C480004C1FF4 /* JFErrorFactory.m in Sources */,
 				4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
+				4EE82C092149C3CF00D94DA9 /* JFGradientView.m in Sources */,
 				4E62747620424915007BCE81 /* UIButton+JFFramework.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
