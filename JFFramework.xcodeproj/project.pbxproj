@@ -37,6 +37,8 @@
 		4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E50039C1FE5B3D1002710B9 /* JFStrings.m */; };
 		4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E50039D1FE5B3D1002710B9 /* JFStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E50039D1FE5B3D1002710B9 /* JFStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E503E34214C5B5E0030496B /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E503E32214C5B5E0030496B /* JFTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E503E35214C5B5E0030496B /* JFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E503E33214C5B5E0030496B /* JFTableViewCell.m */; };
 		4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E515E172004FAD0008D3234 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E515E172004FAD0008D3234 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E515E182004FAD0008D3234 /* JFAppDelegate.m */; };
@@ -169,6 +171,8 @@
 		4E4F527E200D0E2A00B24F1C /* JFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFLogger.m; sourceTree = "<group>"; };
 		4E50039C1FE5B3D1002710B9 /* JFStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFStrings.m; sourceTree = "<group>"; };
 		4E50039D1FE5B3D1002710B9 /* JFStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStrings.h; sourceTree = "<group>"; };
+		4E503E32214C5B5E0030496B /* JFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTableViewCell.h; sourceTree = "<group>"; };
+		4E503E33214C5B5E0030496B /* JFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTableViewCell.m; sourceTree = "<group>"; };
 		4E515E172004FAD0008D3234 /* JFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAppDelegate.h; sourceTree = "<group>"; };
 		4E515E182004FAD0008D3234 /* JFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppDelegate.m; sourceTree = "<group>"; };
 		4E53A67D200CC4B2001EEBFD /* JFWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFWindowController.m; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 				4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */,
 				4E6914F2205895DD00074DDD /* JFOverlayController.h */,
 				4E6914F3205895DD00074DDD /* JFOverlayController.m */,
+				4E503E32214C5B5E0030496B /* JFTableViewCell.h */,
+				4E503E33214C5B5E0030496B /* JFTableViewCell.m */,
 				4E53A67E200CC4B2001EEBFD /* JFWindowController.h */,
 				4E53A67D200CC4B2001EEBFD /* JFWindowController.m */,
 			);
@@ -484,6 +490,7 @@
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4EF2C7C71FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E415F291FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
+				4E503E34214C5B5E0030496B /* JFTableViewCell.h in Headers */,
 				4ED607DD1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
@@ -710,6 +717,7 @@
 				4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */,
 				4E3AC70120024115002CE0A1 /* JFError.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
+				4E503E35214C5B5E0030496B /* JFTableViewCell.m in Sources */,
 				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,

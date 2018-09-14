@@ -59,6 +59,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 #import <JFFramework_iOS/JFStateMachine.h>
 #import <JFFramework_iOS/JFStrings.h>
 #import <JFFramework_iOS/JFSwitchMachine.h>
+#import <JFFramework_iOS/JFTableViewCell.h>
 #import <JFFramework_iOS/JFUtilities.h>
 #import <JFFramework_iOS/JFVersion.h>
 #import <JFFramework_iOS/JFWindowController.h>
