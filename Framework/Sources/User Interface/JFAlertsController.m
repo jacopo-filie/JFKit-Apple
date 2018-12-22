@@ -22,49 +22,54 @@
 //	SOFTWARE.
 //
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
 #import "JFAlertsController.h"
 
 #import "JFAlert.h"
 #import "JFStrings.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+NS_ASSUME_NONNULL_BEGIN
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface JFAlertsController () <JFAlertDelegate>
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
 
-// User interface
-@property (strong, nonatomic, readonly)	NSMutableSet<JFAlert*>*	alerts;
+@property (strong, nonatomic, readonly) NSMutableSet<JFAlert*>* alerts;
 
-
-#pragma mark Methods
+// =================================================================================================
+// MARK: Methods - User interface management (Action sheets)
+// =================================================================================================
 
 #if JF_IOS
-// User interface management (Action sheets)
-- (JFAlert*)	createActionSheetWithTitle:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
+- (JFAlert*)createActionSheetWithTitle:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
 #elif JF_MACOS
-- (JFAlert*)	createActionSheet:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons;
+- (JFAlert*)createActionSheet:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton* __nullable)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
 #endif
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark
-
-
+#pragma mark -
 
 @implementation JFAlertsController
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
 
-// User interface
-@synthesize alerts	= _alerts;
+@synthesize alerts = _alerts;
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (void)dealloc
 {
@@ -75,24 +80,23 @@
 - (instancetype)init
 {
 	self = [super init];
-	if(self)
-	{
-		// User interface
-		_alerts = [NSMutableSet<JFAlert*> new];
-	}
+	
+	_alerts = [NSMutableSet<JFAlert*> new];
+	
 	return self;
 }
 
-
-#pragma mark User interface management (Action sheets)
+// =================================================================================================
+// MARK: Methods - User interface management (Action sheets)
+// =================================================================================================
 
 #if JF_IOS
-- (JFAlert*)createActionSheetWithTitle:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (JFAlert*)createActionSheetWithTitle:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 #elif JF_MACOS
-- (JFAlert*)createActionSheet:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (JFAlert*)createActionSheet:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton* __nullable)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 #endif
 {
-	JFAlert* retVal = [[JFAlert alloc] init];
+	JFAlert* retVal = [JFAlert new];
 	retVal.delegate = self;
 	retVal.title = title;
 	
@@ -113,7 +117,7 @@
 
 #if JF_IOS
 
-- (void)presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheetWithTitle:title cancelButton:cancelButton destructiveButton:destructiveButton otherButtons:otherButtons];
 	
@@ -123,7 +127,7 @@
 	});
 }
 
-- (void)presentActionSheetFromRect:(CGRect)rect inView:(UIView*)view title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetFromRect:(CGRect)rect inView:(UIView*)view title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheetWithTitle:title cancelButton:cancelButton destructiveButton:destructiveButton otherButtons:otherButtons];
 	
@@ -133,7 +137,7 @@
 	});
 }
 
-- (void)presentActionSheetFromTabBar:(UITabBar*)tabBar title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetFromTabBar:(UITabBar*)tabBar title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheetWithTitle:title cancelButton:cancelButton destructiveButton:destructiveButton otherButtons:otherButtons];
 	
@@ -143,7 +147,7 @@
 	});
 }
 
-- (void)presentActionSheetFromToolbar:(UIToolbar*)toolbar title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetFromToolbar:(UIToolbar*)toolbar title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheetWithTitle:title cancelButton:cancelButton destructiveButton:destructiveButton otherButtons:otherButtons];
 	
@@ -153,7 +157,7 @@
 	});
 }
 
-- (void)presentActionSheetInView:(UIView*)view title:(NSString*)title cancelButton:(JFAlertButton*)cancelButton destructiveButton:(JFAlertButton*)destructiveButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetInView:(UIView*)view title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheetWithTitle:title cancelButton:cancelButton destructiveButton:destructiveButton otherButtons:otherButtons];
 	
@@ -165,7 +169,7 @@
 
 #elif JF_MACOS
 
-- (void)presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton* __nullable)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	JFAlert* alert = [self createActionSheet:style title:title message:message cancelButton:cancelButton otherButtons:otherButtons];
 	
@@ -177,30 +181,28 @@
 
 #endif
 
-
-#pragma mark User interface management (Alert views)
+// =================================================================================================
+// MARK: Methods - User interface management (Alert views)
+// =================================================================================================
 
 #if JF_IOS
-- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	[self presentAlertViewForError:error cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
 }
 #elif JF_MACOS
-- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	[self presentAlertView:style forError:error cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
 }
 #endif
 
 #if JF_IOS
-- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
+- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout
 #elif JF_MACOS
-- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
+- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout
 #endif
 {
-	if(!error)
-		return;
-	
 	NSString* failureReason = [error localizedFailureReason];
 	NSString* recoverySuggestion = [error localizedRecoverySuggestion];
 	
@@ -227,14 +229,14 @@
 
 #if JF_IOS
 
-- (void)presentAlertViewWithTitle:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentAlertViewWithTitle:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	[self presentAlertViewWithTitle:title message:message cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
 }
 
-- (void)presentAlertViewWithTitle:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
+- (void)presentAlertViewWithTitle:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout
 {
-	JFAlert* alert = [[JFAlert alloc] init];
+	JFAlert* alert = [JFAlert new];
 	alert.delegate = self;
 	alert.message = message;
 	alert.title = title;
@@ -250,14 +252,14 @@
 
 #elif JF_MACOS
 
-- (void)presentAlertView:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons
+- (void)presentAlertView:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons
 {
 	[self presentAlertView:style title:title message:message cancelButton:cancelButton otherButtons:otherButtons timeout:0.0];
 }
 
-- (void)presentAlertView:(NSAlertStyle)style title:(NSString*)title message:(NSString*)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>*)otherButtons timeout:(NSTimeInterval)timeout
+- (void)presentAlertView:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout
 {
-	JFAlert* alert = [[JFAlert alloc] init];
+	JFAlert* alert = [JFAlert new];
 	alert.delegate = self;
 	alert.message = message;
 	alert.style = style;
@@ -274,10 +276,11 @@
 
 #endif
 
+// =================================================================================================
+// MARK: Methods (JFAlertViewDelegate) - User interface management
+// =================================================================================================
 
-#pragma mark Protocol implementation (JFAlertViewDelegate)
-
-- (void)alert:(JFAlert*)alert didDismissWithButton:(JFAlertButton*)button
+- (void)alert:(JFAlert*)alert didDismissWithButton:(JFAlertButton* __nullable)button
 {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.alerts removeObject:alert];
@@ -285,4 +288,9 @@
 }
 
 @end
-*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////

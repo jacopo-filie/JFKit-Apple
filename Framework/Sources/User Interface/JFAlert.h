@@ -22,7 +22,8 @@
 //	SOFTWARE.
 //
 
-/*
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #import "JFPreprocessorMacros.h"
 
 #if JF_MACOS
@@ -34,105 +35,294 @@
 #import "JFBlocks.h"
 #import "JFUtilities.h"
 
-
-
-@class JFAlert;
 @class JFAlertButton;
 
+@protocol JFAlertDelegate;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+NS_ASSUME_NONNULL_BEGIN
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * This class is used to wrap up in a single interface all the alert types available both on iOS and macOS.
+ */
+@interface JFAlert : NSObject
+
+// =================================================================================================
+// MARK: Properties - Attributes
+// =================================================================================================
+
+#if JF_MACOS
+/**
+ * The style of the alert.
+ */
+@property (assign, nonatomic) NSAlertStyle style;
+#endif
+
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
+
+/**
+ * The message that is displayed in the alert.
+ * On iOS action sheets, this property is ignored.
+ */
+@property (copy, nonatomic, nullable) NSString* message;
+
+/**
+ * The title that is displayed in the alert.
+ */
+@property (copy, nonatomic, nullable) NSString* title;
+
+// =================================================================================================
+// MARK: Properties - Flags
+// =================================================================================================
+
+/**
+ * Returns wheter the alert is displayed or not.
+ */
+@property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
+
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
+#if JF_WEAK_ENABLED
+/**
+ * The delegate of the alert.
+ */
+@property (weak, nonatomic, nullable) id<JFAlertDelegate> delegate;
+#else
+/**
+ * The delegate of the alert.
+ * @warning Remember to unset the delegate when it is not available anymore or it may become a dangling pointer.
+ */
+@property (unsafe_unretained, nonatomic, nullable) id<JFAlertDelegate> delegate;
+#endif
+
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
+/**
+ * The cancel button of the alert.
+ */
+@property (strong, nonatomic, nullable) JFAlertButton* cancelButton;
+
+#if JF_IOS
+/**
+ * The destructive button of the alert.
+ * On iOS alert views, this property is ignored.
+ * On macOS, this property is ignored.
+ */
+@property (strong, nonatomic, nullable) JFAlertButton* destructiveButton;
+#endif
+
+/**
+ * The list of additional buttons displayed in the alert.
+ */
+@property (copy, nonatomic, nullable) NSArray* otherButtons; // Array of "JFAlertButton" objects.
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
+/**
+ * Calls the action associated with the cancel button and dismissed the alert.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ */
+- (BOOL)dismiss:(JFBlock __nullable)completion;
+
+/**
+ * Calls the action associated with the given button and dismissed the alert.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ */
+- (BOOL)dismissWithClickedButton:(JFAlertButton* __nullable)button completion:(JFBlock __nullable)completion;
+
+#if JF_IOS
+/**
+ * Composes an action sheet using the properties set previously and presents it from the given bar button item.
+ * @param barButtonItem The presenting bar button item.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock __nullable)completion;
+
+/**
+ * Composes an action sheet using the properties set previously and presents it from the specified rect in the given view.
+ * @param rect The presenting view rect.
+ * @param view The presenting view.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock __nullable)completion;
+
+/**
+ * Composes the alert using the properties set previously and presents it from the given tab bar.
+ * @param tabBar The presenting tab bar.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock __nullable)completion;
+
+/**
+ * Composes an action sheet using the properties set previously and presents it from the given toolbar.
+ * @param toolbar The presenting toolbar.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock __nullable)completion;
+
+/**
+ * Composes an action sheet using the properties set previously and presents it in the given view.
+ * @param view The presenting view.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock __nullable)completion;
+
+#elif JF_MACOS
+/**
+ * Composes an action sheet using the properties set previously and presents it in the given window.
+ * @param window The presenting window.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no button has been set previously.
+ */
+- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock __nullable)completion;
+#endif
+
+/**
+ * Composes an alert view using the properties set previously and presents it modally.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no cancel button has been set previously.
+ */
+- (BOOL)presentAsAlertView:(JFBlock __nullable)completion;
+
+/**
+ * Composes an alert view using the properties set previously and presents it modally.
+ * @param timeout The time after which the alert view is automatically cancelled.
+ * @param completion The callback to be executed at the end of the operation.
+ * @return `YES` if the operation succeeded, `NO` otherwise.
+ * @warning It fails if no cancel button has been set previously.
+ */
+- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock __nullable)completion;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+/**
+ * A collection of methods that are used to notify the alert delegate when the alert itself is being presented or dismissed.
+ */
 @protocol JFAlertDelegate <NSObject>
+
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
 
 @optional
 
-- (void)	alertDidPresent:(JFAlert*)alert;
-- (void)	alertWillPresent:(JFAlert*)alert;
+/**
+ * Called when the alert has been dismissed using the given button.
+ * @param sender The alert.
+ * @param button The button used to dismiss the alert.
+ */
+- (void)alert:(JFAlert*)sender didDismissWithButton:(JFAlertButton* __nullable)button;
 
-- (void)	alert:(JFAlert*)alert didDismissWithButton:(JFAlertButton*)button;
-- (void)	alert:(JFAlert*)alert willDismissWithButton:(JFAlertButton*)button;
+/**
+ * Called when the alert is about to be dismissed using the given button.
+ * @param sender The alert.
+ * @param button The button used to dismiss the alert.
+ */
+- (void)alert:(JFAlert*)sender willDismissWithButton:(JFAlertButton* __nullable)button;
 
-@end
+/**
+ * Called when the alert has been presented.
+ * @param sender The alert.
+ */
+- (void)alertDidPresent:(JFAlert*)sender;
 
-
-
-#pragma mark
-
-
-
-@interface JFAlert : NSObject
-
-#pragma mark Properties
-
-// Attributes
-#if JF_MACOS
-@property (assign, nonatomic)	NSAlertStyle	style;
-#endif
-
-// Data
-@property (copy, nonatomic)	NSString*	message;	// Ignored by the iOS action sheet.
-@property (copy, nonatomic)	NSString*	title;
-
-// Flags
-@property (assign, nonatomic, readonly, getter = isVisible)	BOOL	visible;
-
-// Relationships
-#if __has_feature(objc_arc_weak)
-@property (weak, nonatomic)	id<JFAlertDelegate>	delegate;
-#else
-@property (unsafe_unretained, nonatomic)	id<JFAlertDelegate>	delegate;
-#endif
-
-// User interface
-@property (strong, nonatomic)	JFAlertButton*	cancelButton;
-#if JF_IOS
-@property (strong, nonatomic)	JFAlertButton*	destructiveButton;	// Only used by the iOS action sheet.
-#endif
-@property (copy, nonatomic)		NSArray*		otherButtons;		// Array of "JFAlertButton" objects.
-
-
-#pragma mark Methods
-
-// User interface management
-- (BOOL)	dismiss:(JFBlock)completion;
-- (BOOL)	dismissWithClickedButton:(JFAlertButton*)button completion:(JFBlock)completion;
-#if JF_IOS
-- (BOOL)	presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock)completion;	// Fails if there are no buttons.
-- (BOOL)	presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock)completion;			// Fails if there are no buttons.
-- (BOOL)	presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock)completion;						// Fails if there are no buttons.
-- (BOOL)	presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock)completion;						// Fails if there are no buttons.
-- (BOOL)	presentAsActionSheetInView:(UIView*)view completion:(JFBlock)completion;								// Fails if there are no buttons.
-#elif JF_MACOS
-- (BOOL)	presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock)completion;							// Fails if there are no buttons.
-#endif
-- (BOOL)	presentAsAlertView:(JFBlock)completion;																	// Fails if there is not the cancel button.
-- (BOOL)	presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock)completion;					// Fails if there is not the cancel button.
+/**
+ * Called when the alert is about to be presented.
+ * @param sender The alert.
+ */
+- (void)alertWillPresent:(JFAlert*)sender;
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark -
 
-#pragma mark
-
-
-
+/**
+ * An object that associated the alert button title with an action to be executed when the button is clicked or tapped.
+ */
 @interface JFAlertButton : NSObject
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
 
-// Blocks
-@property (copy, nonatomic, readonly)	JFBlock	action;
+/**
+ * The action to perform when the alert button is clicked or tapped.
+ */
+@property (strong, nonatomic, readonly, nullable) JFBlock action;
 
-// Data
-@property (copy, nonatomic, readonly)	NSString*	title;
+/**
+ * The title to display on the alert button.
+ */
+@property (copy, nonatomic, readonly) NSString* title;
 
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
-#pragma mark Methods
+/**
+ * Returns a new alert button with the given title an no action set.
+ * @param title The title of the alert button.
+ * @return A new alert button with the given title an no action set.
+ */
++ (instancetype)buttonWithTitle:(NSString*)title;
 
-// Memory management
-+ (instancetype)	buttonWithTitle:(NSString*)title;
-+ (instancetype)	buttonWithTitle:(NSString*)title action:(JFBlock)action;
-- (instancetype)	initWithTitle:(NSString*)title action:(JFBlock)action;
+/**
+ * Returns a new alert button with the given title and action set.
+ * @param title The title of the alert button.
+ * @param action The action of the alert button.
+ * @return A new alert button with the given title and action set.
+ */
++ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock __nullable)action;
+
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes the alert button setting the given title and action.
+ * @param title The title of the alert button.
+ * @param action The action of the alert button.
+ * @return The initialized alert button.
+ */
+- (instancetype)initWithTitle:(NSString*)title action:(JFBlock __nullable)action NS_DESIGNATED_INITIALIZER;
 
 @end
-*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -37,6 +37,9 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <JFFramework_iOS/JFActivityIndicatorView.h>
+#import <JFFramework_iOS/JFAlert.h>
+#import <JFFramework_iOS/JFAlertsController.h>
+#import <JFFramework_iOS/JFAppDelegate.h>
 #import <JFFramework_iOS/JFAppDelegate.h>
 #import <JFFramework_iOS/JFAsynchronousBlockOperation.h>
 #import <JFFramework_iOS/JFAsynchronousOperation.h>
@@ -44,7 +47,6 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 #import <JFFramework_iOS/JFByteStream.h>
 #import <JFFramework_iOS/JFColors.h>
 #import <JFFramework_iOS/JFConnectionMachine.h>
-#import <JFFramework_iOS/JFDrawerController.h>
 #import <JFFramework_iOS/JFGradientView.h>
 #import <JFFramework_iOS/JFImages.h>
 #import <JFFramework_iOS/JFKeyboardHelper.h>
@@ -56,6 +58,7 @@ FOUNDATION_EXPORT const unsigned char JFFramework_iOSVersionString[];
 #import <JFFramework_iOS/JFPreprocessorMacros.h>
 #import <JFFramework_iOS/JFReferences.h>
 #import <JFFramework_iOS/JFShortcuts.h>
+#import <JFFramework_iOS/JFSliderController.h>
 #import <JFFramework_iOS/JFStateMachine.h>
 #import <JFFramework_iOS/JFStrings.h>
 #import <JFFramework_iOS/JFSwitchMachine.h>

@@ -22,14 +22,18 @@
 //	SOFTWARE.
 //
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
 #import "JFAlert.h"
 
 #import "JFShortcuts.h"
 #import "JFVersion.h"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+NS_ASSUME_NONNULL_BEGIN
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS
 @interface JFAlert () <UIActionSheetDelegate, UIAlertViewDelegate>
@@ -37,128 +41,164 @@
 @interface JFAlert ()
 #endif
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Blocks
+// =================================================================================================
 
-// Blocks
-@property (copy, nonatomic)	JFBlock	dismissCompletion;
-@property (copy, nonatomic)	JFBlock	presentCompletion;
+@property (copy, nonatomic, nullable) JFBlock dismissCompletion;
+@property (copy, nonatomic, nullable) JFBlock presentCompletion;
 
-// Flags
+// =================================================================================================
+// MARK: Properties - Flags
+// =================================================================================================
+
 #if JF_MACOS
-@property (assign, nonatomic, getter = isApplicationModal)		BOOL	applicationModal;
+@property (assign, nonatomic, getter=isApplicationModal) BOOL applicationModal;
 #endif
-@property (assign, nonatomic, readwrite, getter = isVisible)	BOOL	visible;
+@property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
 
-// Timing
-@property (strong, nonatomic)	NSTimer*	timer;
+// =================================================================================================
+// MARK: Properties - Timing
+// =================================================================================================
 
-// User interface
+@property (strong, nonatomic, nullable) NSTimer* timer;
+
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
 #if JF_IOS
-@property (strong, nonatomic)	UIActionSheet*	actionSheet;
-@property (strong, nonatomic)	UIAlertView*	alertView;
+@property (strong, nonatomic, nullable) UIActionSheet* actionSheet;
+@property (strong, nonatomic, nullable) UIAlertView* alertView;
 #elif JF_MACOS
-@property (strong, nonatomic)	NSAlert*		alertView;
+@property (strong, nonatomic, nullable) NSAlert* alertView;
 #endif
-@property (strong, nonatomic)	NSArray*		currentButtons;
+@property (strong, nonatomic, nullable) NSArray* currentButtons;
 
+// =================================================================================================
+// MARK: Methods - Data management
+// =================================================================================================
 
-#pragma mark Methods
+- (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex;
 
-// Data management
-- (JFAlertButton*)	buttonAtIndex:(NSInteger)buttonIndex;
+// =================================================================================================
+// MARK: Methods - Notifications management
+// =================================================================================================
 
-// Notifications management
-- (void)	notifyDidDismissWithButton:(JFAlertButton*)button;
-- (void)	notifyDidPresent;
-- (void)	notifyWillDismissWithButton:(JFAlertButton*)button;
-- (void)	notifyWillPresent;
+- (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)notifyDidPresent;
+- (void)notifyWillDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)notifyWillPresent;
 
-// User interface management
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
+
 #if JF_IOS
-- (BOOL)	prepareActionSheet:(JFBlock)completion;
+- (BOOL)prepareActionSheet:(JFBlock __nullable)completion;
 #endif
-- (BOOL)	prepareAlertView:(JFBlock)completion;
+- (BOOL)prepareAlertView:(JFBlock __nullable)completion;
 
-// User interface management (Alerts handling)
-- (void)	alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
-- (void)	alert:(id)alert didDismissWithButtonIndex:(NSInteger)buttonIndex;
-- (void)	alert:(id)alert willDismissWithButtonIndex:(NSInteger)buttonIndex;
+// =================================================================================================
+// MARK: Methods - User interface management (Alerts)
+// =================================================================================================
+
+- (void)alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
+- (void)alert:(id)alert didDismissWithButtonIndex:(NSInteger)buttonIndex;
+- (void)alert:(id)alert willDismissWithButtonIndex:(NSInteger)buttonIndex;
 #if JF_MACOS
-- (void)	alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void*)contextInfo;
+- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* __nullable)contextInfo;
 #endif
-- (void)	didPresentAlert:(id)alert;
-- (void)	willPresentAlert:(id)alert;
+- (void)didPresentAlert:(id)alert;
+- (void)willPresentAlert:(id)alert;
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark
-
-
+#pragma mark -
 
 @implementation JFAlert
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Attributes
+// =================================================================================================
 
-// Attributes
 #if JF_MACOS
-@synthesize style	= _style;
+@synthesize style = _style;
 #endif
 
-// Blocks
-@synthesize dismissCompletion	= _dismissCompletion;
-@synthesize presentCompletion	= _presentCompletion;
+// =================================================================================================
+// MARK: Properties - Blocks
+// =================================================================================================
 
-// Data
-@synthesize message	= _message;
-@synthesize title	= _title;
+@synthesize dismissCompletion = _dismissCompletion;
+@synthesize presentCompletion = _presentCompletion;
 
-// Flags
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
+
+@synthesize message = _message;
+@synthesize title = _title;
+
+// =================================================================================================
+// MARK: Properties - Flags
+// =================================================================================================
+
 #if JF_MACOS
-@synthesize applicationModal	= _applicationModal;
+@synthesize applicationModal = _applicationModal;
 #endif
-@synthesize visible	= _visible;
+@synthesize visible = _visible;
 
-// Relationships
-@synthesize delegate	= _delegate;
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
 
-// Timing
-@synthesize timer	= _timer;
+@synthesize delegate = _delegate;
 
-// User interface
+// =================================================================================================
+// MARK: Properties - Timing
+// =================================================================================================
+
+@synthesize timer = _timer;
+
+// =================================================================================================
+// MARK: Properties - User interface
+// =================================================================================================
+
 #if JF_IOS
-@synthesize actionSheet			= _actionSheet;
+@synthesize actionSheet = _actionSheet;
 #endif
-@synthesize alertView			= _alertView;
-@synthesize cancelButton		= _cancelButton;
+@synthesize alertView = _alertView;
+@synthesize cancelButton = _cancelButton;
 #if JF_IOS
-@synthesize destructiveButton	= _destructiveButton;
+@synthesize destructiveButton = _destructiveButton;
 #endif
-@synthesize currentButtons		= _currentButtons;
-@synthesize otherButtons		= _otherButtons;
+@synthesize currentButtons = _currentButtons;
+@synthesize otherButtons = _otherButtons;
 
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 - (instancetype)init
 {
 	self = [super init];
-	if(self)
-	{
-		// Flags
+	
 #if JF_MACOS
-		_applicationModal = NO;
+	_applicationModal = NO;
 #endif
-		_visible = NO;
-	}
+	_visible = NO;
+	
 	return self;
 }
 
+// =================================================================================================
+// MARK: Methods - Data management
+// =================================================================================================
 
-#pragma mark Data management
-
-- (JFAlertButton*)buttonAtIndex:(NSInteger)buttonIndex
+- (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex
 {
 	NSArray* buttons = self.currentButtons;
 	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= [buttons count]))
@@ -167,10 +207,11 @@
 	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
 }
 
+// =================================================================================================
+// MARK: Methods - Notifications management
+// =================================================================================================
 
-#pragma mark Notifications management
-
-- (void)notifyDidDismissWithButton:(JFAlertButton*)button
+- (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button
 {
 	id<JFAlertDelegate> delegate = self.delegate;
 	if(delegate && [delegate respondsToSelector:@selector(alert:didDismissWithButton:)])
@@ -184,7 +225,7 @@
 		[delegate alertDidPresent:self];
 }
 
-- (void)notifyWillDismissWithButton:(JFAlertButton*)button
+- (void)notifyWillDismissWithButton:(JFAlertButton* __nullable)button
 {
 	id<JFAlertDelegate> delegate = self.delegate;
 	if(delegate && [delegate respondsToSelector:@selector(alert:willDismissWithButton:)])
@@ -198,15 +239,16 @@
 		[delegate alertWillPresent:self];
 }
 
+// =================================================================================================
+// MARK: Methods - User interface management
+// =================================================================================================
 
-#pragma mark User interface management
-
-- (BOOL)dismiss:(JFBlock)completion
+- (BOOL)dismiss:(JFBlock __nullable)completion
 {
 	return [self dismissWithClickedButton:nil completion:completion];
 }
 
-- (BOOL)dismissWithClickedButton:(JFAlertButton*)button completion:(JFBlock)completion
+- (BOOL)dismissWithClickedButton:(JFAlertButton* __nullable)button completion:(JFBlock __nullable)completion
 {
 	BOOL shouldAbort = (![self isVisible] || !self.alertView);
 	
@@ -282,7 +324,7 @@
 
 #if JF_IOS
 
-- (BOOL)prepareActionSheet:(JFBlock)completion
+- (BOOL)prepareActionSheet:(JFBlock __nullable)completion
 {
 	if([self isVisible] || self.actionSheet || self.alertView)
 		return NO;
@@ -317,7 +359,7 @@
 
 #endif
 
-- (BOOL)prepareAlertView:(JFBlock)completion
+- (BOOL)prepareAlertView:(JFBlock __nullable)completion
 {
 	if([self isVisible] || self.alertView)
 		return NO;
@@ -363,7 +405,7 @@
 
 #if JF_IOS
 
-- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock __nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -373,7 +415,7 @@
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock __nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -383,7 +425,7 @@
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock __nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -393,7 +435,7 @@
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock __nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -403,7 +445,7 @@
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock __nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -415,7 +457,7 @@
 
 #elif JF_MACOS
 
-- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock)completion
+- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock __nullable)completion
 {
 	if(![self prepareAlertView:completion])
 		return NO;
@@ -449,12 +491,12 @@
 
 #endif
 
-- (BOOL)presentAsAlertView:(JFBlock)completion
+- (BOOL)presentAsAlertView:(JFBlock __nullable)completion
 {
 	return [self presentAsAlertViewWithTimeout:0.0 completion:completion];
 }
 
-- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock)completion
+- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock __nullable)completion
 {
 	if(![self prepareAlertView:completion])
 		return NO;
@@ -487,8 +529,9 @@
 	return YES;
 }
 
-
-#pragma mark User interface management (Alerts handling)
+// =================================================================================================
+// MARK: Methods - User interface management (Alerts)
+// =================================================================================================
 
 - (void)alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -537,7 +580,7 @@
 
 #if JF_MACOS
 
-- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void*)contextInfo
+- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* __nullable)contextInfo
 {
 	if(returnCode < 0)
 		returnCode = NSAlertFirstButtonReturn;
@@ -583,10 +626,11 @@
 	[self notifyWillPresent];
 }
 
-
 #if JF_IOS
 
-#pragma mark Protocol implementation (UIActionSheetDelegate)
+// =================================================================================================
+// MARK: Methods (UIActionSheetDelegate)
+// =================================================================================================
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -613,8 +657,9 @@
 	[self willPresentAlert:actionSheet];
 }
 
-
-#pragma mark Protocol implementation (UIAlertViewDelegate)
+// =================================================================================================
+// MARK: Methods (UIAlertViewDelegate)
+// =================================================================================================
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -645,47 +690,47 @@
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-#pragma mark
-
-
+#pragma mark -
 
 @implementation JFAlertButton
 
-#pragma mark Properties
+// =================================================================================================
+// MARK: Properties - Data
+// =================================================================================================
 
-// Blocks
-@synthesize	action	= _action;
+@synthesize action = _action;
+@synthesize title = _title;
 
-// Data
-@synthesize	title	= _title;
-
-
-#pragma mark Memory management
+// =================================================================================================
+// MARK: Methods - Memory management
+// =================================================================================================
 
 + (instancetype)buttonWithTitle:(NSString*)title
 {
 	return [self buttonWithTitle:title action:nil];
 }
 
-+ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock)action
++ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock __nullable)action
 {
-	return [(JFAlertButton*)[self alloc] initWithTitle:title action:action];
+	return [[self alloc] initWithTitle:title action:action];
 }
 
-- (instancetype)initWithTitle:(NSString*)title action:(JFBlock)action
+- (instancetype)initWithTitle:(NSString*)title action:(JFBlock __nullable)action
 {
-	self = (title ? [self init] : nil);
-	if(self)
-	{
-		// Blocks
-		_action = (action ? [action copy] : nil);
-		_title = [title copy];
-	}
+	self = [super init];
+	
+	_action = action;
+	_title = [title copy];
+	
 	return self;
 }
 
 @end
-*/
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NS_ASSUME_NONNULL_END
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
