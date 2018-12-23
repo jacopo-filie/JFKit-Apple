@@ -147,6 +147,17 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
+- (void)didMoveToWindow
+{
+	[super didMoveToWindow];
+	
+	if(self.window)
+		[self prepareLayout];
+}
+
+- (void)prepareLayout
+{}
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

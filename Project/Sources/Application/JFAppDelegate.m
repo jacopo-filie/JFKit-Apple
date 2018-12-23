@@ -44,10 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - User interface management
 // =================================================================================================
 
-/**
- * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
- */
-- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
+- (JFWindowController*)prepareWindowController;
 
 @end
 
@@ -61,24 +58,31 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Outlets)
 // =================================================================================================
 
-@synthesize window				= _window;
-@synthesize windowController	= _windowController;
+@synthesize alertsController = _alertsController;
+@synthesize window = _window;
+@synthesize windowController = _windowController;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Outlets)
+// MARK: Properties accessors - User interface
 // =================================================================================================
+
+- (JFAlertsController*)alertsController
+{
+	JFAlertsController* retObj = _alertsController;
+	if(!retObj)
+	{
+		retObj = [JFAlertsController new];
+		_alertsController = retObj;
+	}
+	return retObj;
+}
 
 - (JFWindow*)window
 {
-	if(!_window)
-	{
-#if JF_MACOS
-		_window = [NSWindow new];
-#else
-		_window = [[UIWindow alloc] initWithFrame:MainScreen.bounds];
-#endif
-	}
-	return _window;
+	JFWindow* retObj = _window;
+	if(!retObj)
+		retObj = [self prepareWindowController].window;
+	return retObj;
 }
 
 - (void)setWindow:(JFWindow* __nullable)window
@@ -88,16 +92,25 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_window = window;
 	_windowController = nil;
+	
+	[self prepareWindowController];
 }
 
 - (JFWindowController*)windowController
 {
-	if(!_windowController)
-	{
-		JFWindow* window = self.window;
-		_windowController = ([self newControllerForWindow:window] ?: [[JFWindowController alloc] initWithWindow:window]);
-	}
-	return _windowController;
+	JFWindowController* retObj = _windowController;
+	if(!retObj)
+		retObj = [self prepareWindowController];
+	return retObj;
+}
+
+- (void)setWindowController:(JFWindowController* __nullable)windowController
+{
+	if(_windowController == windowController)
+		return;
+	
+	_window = windowController.window;
+	_windowController = windowController;
 }
 
 // =================================================================================================
@@ -107,6 +120,32 @@ NS_ASSUME_NONNULL_BEGIN
 - (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window
 {
 	return nil;
+}
+
+- (JFWindowController*)prepareWindowController
+{
+	JFWindow* window = _window;
+	JFWindowController* controller = _windowController;
+	
+	if(window && controller && (window == controller.window))
+		return controller;
+	
+	if(!window)
+	{
+#if JF_MACOS
+		window = [NSWindow new];
+#else
+		window = [[UIWindow alloc] initWithFrame:MainScreen.bounds];
+#endif
+	}
+	
+	if(!controller || (window != controller.window))
+		controller = ([self newControllerForWindow:window] ?: [[JFWindowController alloc] initWithWindow:window]);
+	
+	_window = window;
+	_windowController = controller;
+	
+	return controller;
 }
 
 @end

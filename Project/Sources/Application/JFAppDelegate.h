@@ -34,6 +34,7 @@
 @import UIKit;
 #endif
 
+#import "JFAlertsController.h"
 #import "JFShortcuts.h"
 #import "JFWindowController.h"
 
@@ -71,19 +72,20 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 /**
- * The main window controller.
+ * The main alerts controller for the application.
  */
-@property (strong, nonatomic, readonly) JFWindowController* windowController;
-
-// =================================================================================================
-// MARK: Properties - User interface (Outlets)
-// =================================================================================================
+@property (strong, nonatomic, readonly) JFAlertsController* alertsController;
 
 /**
  * The main window of the application.
  * @warning Changing the value of this property also resets the property `windowController`.
  */
 @property (strong, nonatomic, null_resettable) IBOutlet JFWindow* window;
+
+/**
+ * The main window controller.
+ */
+@property (strong, nonatomic, readonly) JFWindowController* windowController;
 
 // =================================================================================================
 // MARK: Methods - User interface management

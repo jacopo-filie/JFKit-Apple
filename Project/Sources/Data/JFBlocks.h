@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@import Foundation;
+@import UIKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,6 +91,12 @@ typedef void (^JFBlockWithFloat) (float value);
 
 /**
  * A block of code to be executed with a parameter.
+ * @param image An image object.
+ */
+typedef void (^JFBlockWithImage) (UIImage* image);
+
+/**
+ * A block of code to be executed with a parameter.
  * @param value An integer value.
  */
 typedef void (^JFBlockWithInteger) (NSInteger value);
@@ -106,6 +112,12 @@ typedef void (^JFBlockWithNotification) (NSNotification* notification);
  * @param number A number object.
  */
 typedef void (^JFBlockWithNumber) (NSNumber* number);
+
+/**
+ * A block of code to be executed with a parameter.
+ * @param object A generic object.
+ */
+typedef void (^JFBlockWithObject) (id<NSObject> object);
 
 /**
  * A block of code to be executed with a parameter.

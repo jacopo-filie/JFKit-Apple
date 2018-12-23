@@ -26,6 +26,8 @@
 
 #import "JFShortcuts.h"
 
+#import "JFBlocks.h"
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,11 +46,24 @@ NS_ASSUME_NONNULL_BEGIN
 	if(!class)
 		return nil;
 	
-	id<JFApplicationDelegate> retObj = SharedApplication.delegate;
-	if(!retObj || ![retObj isKindOfClass:class])
-		return nil;
+	AppDelegate* __block retObj = nil;
 	
-	return (AppDelegate*)retObj;
+	JFBlock block = ^(void) {
+		id<JFApplicationDelegate> delegate = SharedApplication.delegate;
+		if(delegate && [delegate isKindOfClass:class])
+			retObj = (AppDelegate*)delegate;
+	};
+	
+	if([NSThread isMainThread])
+		block();
+	else
+	{
+		NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:block];
+		[MainOperationQueue addOperation:operation];
+		[operation waitUntilFinished];
+	}
+	
+	return retObj;
 }
 
 + (NSString* __nullable)appVersion

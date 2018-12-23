@@ -135,47 +135,46 @@ static void* JFKVOContext = &JFKVOContext;
 - (instancetype)initWithWindow:(JFWindow*)window
 {
 	self = [super init];
-	if(self)
-	{
+	
 #if JF_MACOS
-		BOOL windowHidden = ![window isVisible];
+	BOOL windowHidden = ![window isVisible];
 #else
-		BOOL windowHidden = [window isHidden];
+	BOOL windowHidden = [window isHidden];
 #endif
-		
-		_window = window;
-		_windowHidden = windowHidden;
-
-		NSNotificationCenter* center = MainNotificationCenter;
+	
+	_window = window;
+	_windowHidden = windowHidden;
+	
+	NSNotificationCenter* center = MainNotificationCenter;
 #if JF_MACOS
-		[center addObserver:self selector:@selector(notifiedWindowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidChangeScreen:) name:NSWindowDidChangeScreenNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidChangeScreenProfile:) name:NSWindowDidChangeScreenProfileNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidDeminiaturize:) name:NSWindowDidDeminiaturizeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidEndLiveResize:) name:NSWindowDidEndLiveResizeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidEndSheet:) name:NSWindowDidEndSheetNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidExpose:) name:NSWindowDidExposeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidMiniaturize:) name:NSWindowDidMiniaturizeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidMove:) name:NSWindowDidMoveNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidResignKey:) name:NSWindowDidResignKeyNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidResignMain:) name:NSWindowDidResignMainNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidResize:) name:NSWindowDidResizeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidUpdate:) name:NSWindowDidUpdateNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowWillBeginSheet:) name:NSWindowWillBeginSheetNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowWillClose:) name:NSWindowWillCloseNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowWillMiniaturize:) name:NSWindowWillMiniaturizeNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowWillMove:) name:NSWindowWillMoveNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowWillStartLiveResize:) name:NSWindowWillStartLiveResizeNotification object:window];
-		if(@available(macOS 10.7, *))
-			[window addObserver:self forKeyPath:@"visible" options:NSKeyValueObservingOptionNew context:JFKVOContext];
+	[center addObserver:self selector:@selector(notifiedWindowDidBecomeKey:) name:NSWindowDidBecomeKeyNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidChangeScreen:) name:NSWindowDidChangeScreenNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidChangeScreenProfile:) name:NSWindowDidChangeScreenProfileNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidDeminiaturize:) name:NSWindowDidDeminiaturizeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidEndLiveResize:) name:NSWindowDidEndLiveResizeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidEndSheet:) name:NSWindowDidEndSheetNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidExpose:) name:NSWindowDidExposeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidMiniaturize:) name:NSWindowDidMiniaturizeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidMove:) name:NSWindowDidMoveNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidResignKey:) name:NSWindowDidResignKeyNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidResignMain:) name:NSWindowDidResignMainNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidResize:) name:NSWindowDidResizeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidUpdate:) name:NSWindowDidUpdateNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowWillBeginSheet:) name:NSWindowWillBeginSheetNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowWillClose:) name:NSWindowWillCloseNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowWillMiniaturize:) name:NSWindowWillMiniaturizeNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowWillMove:) name:NSWindowWillMoveNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowWillStartLiveResize:) name:NSWindowWillStartLiveResizeNotification object:window];
+	if(@available(macOS 10.7, *))
+		[window addObserver:self forKeyPath:@"visible" options:NSKeyValueObservingOptionNew context:JFKVOContext];
 #else
-		[center addObserver:self selector:@selector(notifiedWindowDidBecomeHidden:) name:UIWindowDidBecomeHiddenNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidBecomeKey:) name:UIWindowDidBecomeKeyNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidBecomeVisible:) name:UIWindowDidBecomeVisibleNotification object:window];
-		[center addObserver:self selector:@selector(notifiedWindowDidResignKey:) name:UIWindowDidResignKeyNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidBecomeHidden:) name:UIWindowDidBecomeHiddenNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidBecomeKey:) name:UIWindowDidBecomeKeyNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidBecomeVisible:) name:UIWindowDidBecomeVisibleNotification object:window];
+	[center addObserver:self selector:@selector(notifiedWindowDidResignKey:) name:UIWindowDidResignKeyNotification object:window];
 #endif
-	}
+	
 	return self;
 }
 

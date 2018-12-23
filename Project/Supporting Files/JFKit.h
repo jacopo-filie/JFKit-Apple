@@ -55,6 +55,8 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFByteStream.h>
 #import <JFKit/JFColors.h>
 #import <JFKit/JFConnectionMachine.h>
+#import <JFKit/JFError.h>
+#import <JFKit/JFErrorFactory.h>
 #import <JFKit/JFImages.h>
 #import <JFKit/JFLogger.h>
 #import <JFKit/JFMath.h>

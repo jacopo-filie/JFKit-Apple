@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-NSTimeInterval const	JFAnimationDuration	= 0.25;
+NSTimeInterval const JFAnimationDuration = 0.25;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -102,6 +102,26 @@ NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSSt
 // =================================================================================================
 // MARK: Functions - Runtime management
 // =================================================================================================
+
+void JFPerformOnMainThread(JFBlock block)
+{
+	if([NSThread isMainThread])
+		block();
+	else
+		[MainOperationQueue addOperationWithBlock:block];
+}
+
+void JFPerformOnMainThreadAndWait(JFBlock block)
+{
+	if([NSThread isMainThread])
+		block();
+	else
+	{
+		NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:block];
+		[MainOperationQueue addOperation:operation];
+		[operation waitUntilFinished];
+	}
+}
 
 void JFPerformSelector(NSObject* target, SEL action)
 {

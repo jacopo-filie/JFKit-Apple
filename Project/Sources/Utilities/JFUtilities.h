@@ -26,6 +26,8 @@
 
 @import Foundation;
 
+#import "JFBlocks.h"
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 NS_ASSUME_NONNULL_BEGIN
@@ -88,6 +90,18 @@ FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBu
 // =================================================================================================
 // MARK: Functions - Runtime management
 // =================================================================================================
+
+/**
+ * Performs the given block on the main thread. If the current thread is the main thread, the block is executed synchronously.
+ * @param block The block to execute.
+ */
+FOUNDATION_EXPORT void JFPerformOnMainThread(JFBlock block);
+
+/**
+ * Performs the given block on the main thread and waits until it is finished.
+ * @param block The block to execute.
+ */
+FOUNDATION_EXPORT void JFPerformOnMainThreadAndWait(JFBlock block);
 
 /**
  * Performs the given action on the given target.
