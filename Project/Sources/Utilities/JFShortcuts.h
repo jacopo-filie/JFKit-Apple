@@ -34,6 +34,7 @@
 @import UIKit;
 #endif
 
+#import "JFCompatibilityMacros.h"
 #import "JFStrings.h"
 #import "JFUtilities.h"
 
@@ -44,48 +45,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// =================================================================================================
-// MARK: Macros - Compatibility aliases
-// =================================================================================================
-
-#if JF_IOS
-
-/**
- * An alias for the `UIApplication` class.
- */
-#	define JFApplication UIApplication
-
-/**
- * An alias for the `UIApplicationDelegate` protocol.
- */
-#	define JFApplicationDelegate UIApplicationDelegate
-
-/**
- * An alias for the `UIWindow` class.
- */
-#	define JFWindow UIWindow
-
-#endif
-
-#if JF_MACOS
-
-/**
- * An alias for the `NSApplication` class.
- */
-#	define JFApplication NSApplication
-
-/**
- * An alias for the `NSApplicationDelegate` protocol.
- */
-#	define JFApplicationDelegate NSApplicationDelegate
-
-/**
- * An alias for the `NSWindow` class.
- */
-#	define JFWindow NSWindow
-
-#endif
 
 // =================================================================================================
 // MARK: Macros - Memory management

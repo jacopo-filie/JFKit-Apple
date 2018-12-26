@@ -79,6 +79,8 @@
 		4E8490701FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
 		4E8490721FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8490731FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCAB21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
 		4EAC2C9D2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */; };
 		4EAC2C9E2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */; };
@@ -203,6 +205,7 @@
 		4E78298621CD27DE0009A752 /* JFAlertsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
 		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
+		4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFCompatibilityMacros.h; sourceTree = "<group>"; };
 		4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
 		4EAC2CA1200133CE00B7BC30 /* JFObserversController-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFObserversController-Tests.m"; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 			children = (
 				4E0BF89E1FE08B400050114D /* Info-Tests.plist */,
 				4ECFE39D1FD8C78D004EEACE /* Info.plist */,
+				4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */,
 				4ECFE39C1FD8C78D004EEACE /* JFKit.h */,
 				4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */,
 			);
@@ -508,6 +512,7 @@
 				4E5DD40A1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFKit.h in Headers */,
 				4E6914F4205895DE00074DDD /* JFOverlayController.h in Headers */,
+				4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */,
 				4EDC5F9C204F5AD000689B8D /* JFKeyboardHelper.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4EB1B3972001C480004C1FF4 /* JFErrorFactory.h in Headers */,
@@ -543,6 +548,7 @@
 				4E5DD4071FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
 				4E3AC70020024115002CE0A1 /* JFError.h in Headers */,
 				4E5DD40B1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
+				4E8BCCAB21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */,
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4E78298921CD27E90009A752 /* JFAlertsController.h in Headers */,
 				4EB1B3982001C480004C1FF4 /* JFErrorFactory.h in Headers */,

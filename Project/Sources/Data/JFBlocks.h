@@ -24,7 +24,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#import "JFPreprocessorMacros.h"
+
+#if JF_MACOS
+@import Cocoa;
+#else
 @import UIKit;
+#endif
+
+#import "JFCompatibilityMacros.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -93,7 +101,7 @@ typedef void (^JFBlockWithFloat) (float value);
  * A block of code to be executed with a parameter.
  * @param image An image object.
  */
-typedef void (^JFBlockWithImage) (UIImage* image);
+typedef void (^JFBlockWithImage) (JFImage* image);
 
 /**
  * A block of code to be executed with a parameter.
