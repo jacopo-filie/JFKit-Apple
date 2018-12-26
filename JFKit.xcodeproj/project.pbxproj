@@ -11,6 +11,12 @@
 		4E04E65F21CCF9AC00479981 /* JFAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E04E65C21CCF9AC00479981 /* JFAlert.m */; };
 		4E04E66021CCF9AC00479981 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E04E66121CCF9AC00479981 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0932C821D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0932C921D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0932CC21D1C52B0010E261 /* JFJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0932CD21D1C52B0010E261 /* JFJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0932CE21D1C52B0010E261 /* JFJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */; };
+		4E0932CF21D1C52B0010E261 /* JFJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */; };
 		4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,6 +85,18 @@
 		4E8490701FF4887300B029E6 /* JFImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84906E1FF4887300B029E6 /* JFImages.m */; };
 		4E8490721FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8490731FF4889200B029E6 /* JFImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8490711FF4889200B029E6 /* JFImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCC9C21D1183700D77BE3 /* JFJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BCC9721D1183700D77BE3 /* JFJSONObject.m */; };
+		4E8BCC9D21D1183700D77BE3 /* JFJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BCC9721D1183700D77BE3 /* JFJSONObject.m */; };
+		4E8BCC9E21D1183700D77BE3 /* JFJSONArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BCC9821D1183700D77BE3 /* JFJSONArray.m */; };
+		4E8BCC9F21D1183700D77BE3 /* JFJSONArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8BCC9821D1183700D77BE3 /* JFJSONArray.m */; };
+		4E8BCCA021D1183700D77BE3 /* JFJSONValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9921D1183700D77BE3 /* JFJSONValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA121D1183700D77BE3 /* JFJSONValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9921D1183700D77BE3 /* JFJSONValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA221D1183700D77BE3 /* JFJSONObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9A21D1183700D77BE3 /* JFJSONObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA321D1183700D77BE3 /* JFJSONObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9A21D1183700D77BE3 /* JFJSONObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA421D1183700D77BE3 /* JFJSONArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9B21D1183700D77BE3 /* JFJSONArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA521D1183700D77BE3 /* JFJSONArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCC9B21D1183700D77BE3 /* JFJSONArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA721D119A800D77BE3 /* JFJSONNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E8BCCA821D119A800D77BE3 /* JFJSONNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8BCCAB21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
@@ -173,6 +191,9 @@
 /* Begin PBXFileReference section */
 		4E04E65C21CCF9AC00479981 /* JFAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlert.m; sourceTree = "<group>"; };
 		4E04E65D21CCF9AC00479981 /* JFAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlert.h; sourceTree = "<group>"; };
+		4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFJSONSerializationAdapter.h; sourceTree = "<group>"; };
+		4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFJSONSerializer.h; sourceTree = "<group>"; };
+		4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFJSONSerializer.m; sourceTree = "<group>"; };
 		4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
 		4E0BF89E1FE08B400050114D /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
 		4E0BF8A11FE08ED20050114D /* JFBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFBlocks.h; sourceTree = "<group>"; };
@@ -211,6 +232,12 @@
 		4E78298621CD27DE0009A752 /* JFAlertsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
 		4E8490711FF4889200B029E6 /* JFImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFImages.h; sourceTree = "<group>"; };
+		4E8BCC9721D1183700D77BE3 /* JFJSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFJSONObject.m; sourceTree = "<group>"; };
+		4E8BCC9821D1183700D77BE3 /* JFJSONArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFJSONArray.m; sourceTree = "<group>"; };
+		4E8BCC9921D1183700D77BE3 /* JFJSONValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONValue.h; sourceTree = "<group>"; };
+		4E8BCC9A21D1183700D77BE3 /* JFJSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONObject.h; sourceTree = "<group>"; };
+		4E8BCC9B21D1183700D77BE3 /* JFJSONArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONArray.h; sourceTree = "<group>"; };
+		4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONNode.h; sourceTree = "<group>"; };
 		4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFCompatibilityMacros.h; sourceTree = "<group>"; };
 		4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
@@ -318,6 +345,7 @@
 				4E50039C1FE5B3D1002710B9 /* JFStrings.m */,
 				4EF2C7C51FF11DE200311EB5 /* JFVersion.h */,
 				4EF2C7C61FF11DE200311EB5 /* JFVersion.m */,
+				4E52395A21D3A00100D206B8 /* JSON */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -352,6 +380,22 @@
 				4E515E182004FAD0008D3234 /* JFAppDelegate.m */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		4E52395A21D3A00100D206B8 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				4E8BCC9B21D1183700D77BE3 /* JFJSONArray.h */,
+				4E8BCC9821D1183700D77BE3 /* JFJSONArray.m */,
+				4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */,
+				4E8BCC9A21D1183700D77BE3 /* JFJSONObject.h */,
+				4E8BCC9721D1183700D77BE3 /* JFJSONObject.m */,
+				4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */,
+				4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */,
+				4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */,
+				4E8BCC9921D1183700D77BE3 /* JFJSONValue.h */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		4E5EE1AB1FFC5E16008444FD /* Core */ = {
@@ -519,10 +563,12 @@
 				4ED607DD1FEE720000292837 /* JFColors.h in Headers */,
 				4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */,
 				4ED607E11FEEA42700292837 /* JFMath.h in Headers */,
+				4E8BCCA721D119A800D77BE3 /* JFJSONNode.h in Headers */,
 				4E8490721FF4889200B029E6 /* JFImages.h in Headers */,
 				4E5DD4061FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
 				4E3AC6FF20024115002CE0A1 /* JFError.h in Headers */,
 				4E5DD40A1FEFCF7F00285B30 /* JFAsynchronousOperation.h in Headers */,
+				4E8BCCA421D1183700D77BE3 /* JFJSONArray.h in Headers */,
 				4ECFE39E1FD8C7AD004EEACE /* JFKit.h in Headers */,
 				4E6914F4205895DE00074DDD /* JFOverlayController.h in Headers */,
 				4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */,
@@ -532,8 +578,11 @@
 				4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */,
 				4E53A681200CC4B2001EEBFD /* JFWindowController.h in Headers */,
 				4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */,
+				4E8BCCA021D1183700D77BE3 /* JFJSONValue.h in Headers */,
 				4EF7251120005E180080136D /* JFConnectionMachine.h in Headers */,
 				4EF72507200056780080136D /* JFSwitchMachine.h in Headers */,
+				4E8BCCA221D1183700D77BE3 /* JFJSONObject.h in Headers */,
+				4E0932C821D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */,
 				4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
 				4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
@@ -543,6 +592,7 @@
 				4ECA37A221D063C3009BDA18 /* JFKitLogger.h in Headers */,
 				4EE82C082149C3CF00D94DA9 /* JFGradientView.h in Headers */,
 				4E78298821CD27DE0009A752 /* JFAlertsController.h in Headers */,
+				4E0932CC21D1C52B0010E261 /* JFJSONSerializer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,11 +600,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E8BCCA121D1183700D77BE3 /* JFJSONValue.h in Headers */,
 				4EC258731FEF295100179CC7 /* JFMath.h in Headers */,
 				4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
 				4ECA37BE21D06C41009BDA18 /* JFPair.h in Headers */,
 				4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E04E66121CCF9AC00479981 /* JFAlert.h in Headers */,
+				4E0932CD21D1C52B0010E261 /* JFJSONSerializer.h in Headers */,
+				4E8BCCA521D1183700D77BE3 /* JFJSONArray.h in Headers */,
+				4E0932C921D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */,
 				4E415F2A1FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DE1FEE720000292837 /* JFColors.h in Headers */,
@@ -567,6 +621,7 @@
 				4EC258721FEF294600179CC7 /* JFReferences.h in Headers */,
 				4E78298921CD27E90009A752 /* JFAlertsController.h in Headers */,
 				4EB1B3982001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4E8BCCA821D119A800D77BE3 /* JFJSONNode.h in Headers */,
 				4E4F5280200D0E2B00B24F1C /* JFLogger.h in Headers */,
 				4E53A682200CC4B2001EEBFD /* JFWindowController.h in Headers */,
 				4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */,
@@ -577,6 +632,7 @@
 				4E5003A11FE5B3D1002710B9 /* JFStrings.h in Headers */,
 				4EC10F261FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
 				4EF2C7BE1FF1178300311EB5 /* JFShortcuts.h in Headers */,
+				4E8BCCA321D1183700D77BE3 /* JFJSONObject.h in Headers */,
 				4ECA37A321D063C3009BDA18 /* JFKitLogger.h in Headers */,
 				4EF2C7C41FF1178300311EB5 /* JFUtilities.h in Headers */,
 			);
@@ -745,6 +801,7 @@
 				4EE82C092149C3CF00D94DA9 /* JFGradientView.m in Sources */,
 				4E62747620424915007BCE81 /* UIButton+JFKit.m in Sources */,
 				4E65E8D51FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
+				4E8BCC9C21D1183700D77BE3 /* JFJSONObject.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E04E65E21CCF9AC00479981 /* JFAlert.m in Sources */,
 				4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */,
@@ -760,6 +817,7 @@
 				4ECA37B721D06C41009BDA18 /* JFPair.m in Sources */,
 				4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */,
+				4E8BCC9E21D1183700D77BE3 /* JFJSONArray.m in Sources */,
 				4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */,
 				4EC2586F1FEF294600179CC7 /* JFReferences.m in Sources */,
 				4EF6AD8B2051702800A0BFD1 /* JFActivityIndicatorView.m in Sources */,
@@ -767,6 +825,7 @@
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
+				4E0932CE21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
 				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
 				4E6914F5205895DE00074DDD /* JFOverlayController.m in Sources */,
 				4E53A67F200CC4B2001EEBFD /* JFWindowController.m in Sources */,
@@ -804,6 +863,7 @@
 				4E4F5282200D0E2B00B24F1C /* JFLogger.m in Sources */,
 				4E3AC70220024115002CE0A1 /* JFError.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
+				4E0932CF21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
 				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5EE1B11FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4E5DD40D1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
@@ -814,6 +874,8 @@
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E8490701FF4887300B029E6 /* JFImages.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
+				4E8BCC9D21D1183700D77BE3 /* JFJSONObject.m in Sources */,
+				4E8BCC9F21D1183700D77BE3 /* JFJSONArray.m in Sources */,
 				4E99B94E1FF0A7720026724A /* JFMath.m in Sources */,
 				4E04E65F21CCF9AC00479981 /* JFAlert.m in Sources */,
 				4ED607DC1FEE720000292837 /* JFColors.m in Sources */,
