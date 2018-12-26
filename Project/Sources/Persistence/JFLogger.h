@@ -26,6 +26,7 @@
 
 @import Foundation;
 
+@protocol JFKitLoggerDelegate;
 @protocol JFLoggerDelegate;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +91,7 @@ typedef NS_OPTIONS(UInt8, JFLoggerOutput)
 	 * Forwards the message to the registered delegates.
 	 */
 	JFLoggerOutputDelegates = 1 << 1,
-
+	
 	/**
 	 * Prints the message to the currently active log file.
 	 */
@@ -495,6 +496,43 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @warning The parameter `message` is not the original string given to the logger, it's the result of the composition of the format string (see parameter `format`) and the available values.
  */
 - (void)logger:(JFLogger*)sender logMessage:(NSString*)message currentDate:(NSDate*)date;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@interface JFKitLogger : NSObject
+
+// =================================================================================================
+// MARK: Properties - Observers
+// =================================================================================================
+
+#if JF_WEAK_ENABLED
+/**
+ * The delegate of the kit logger.
+ */
+@property (class, weak, nullable) id<JFKitLoggerDelegate> delegate;
+#else
+/**
+ * The delegate of the kit logger.
+ * @warning Remember to unset the delegate when it is not available anymore or it may become a dangling pointer.
+ */
+@property (class, unsafe_unretained, nullable) id<JFKitLoggerDelegate> delegate;
+#endif
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@protocol JFKitLoggerDelegate <NSObject>
+
+@required
+
+- (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
 
 @end
 

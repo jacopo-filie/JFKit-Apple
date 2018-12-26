@@ -823,6 +823,111 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#pragma mark -
+
+@interface JFKitLogger (/* Private */)
+
+@property (class, strong, nonatomic, readonly) JFLogger* logger;
+
++ (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@implementation JFKitLogger
+
+#if JF_WEAK_ENABLED
+static id<JFKitLoggerDelegate> __weak _delegate;
+#else
+static id<JFKitLoggerDelegate> __unsafe_unretained _delegate;
+#endif
+
++ (id<JFKitLoggerDelegate> __nullable)delegate
+{
+	@synchronized(self)
+	{
+		return _delegate;
+	}
+}
+
++ (void)setDelegate:(id<JFKitLoggerDelegate> __nullable)delegate
+{
+	@synchronized(self)
+	{
+		_delegate = delegate;
+	}
+}
+
++ (JFLogger*)logger
+{
+	static JFLogger* retObj;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retObj = [JFLogger new];
+		retObj.outputFilter = JFLoggerOutputConsole;
+	});
+	return retObj;
+}
+
++ (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
+{
+	id<JFKitLoggerDelegate> delegate = self.delegate;
+	if(delegate)
+	{
+		[delegate log:message severity:severity tags:tags];
+		return;
+	}
+	
+	[self.logger log:message severity:severity tags:tags];
+}
+
++ (void)logAlert:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityAlert tags:tags];
+}
+
++ (void)logCritical:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityCritical tags:tags];
+}
+
++ (void)logDebug:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityDebug tags:tags];
+}
+
++ (void)logEmergency:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityEmergency tags:tags];
+}
+
++ (void)logError:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityError tags:tags];
+}
+
++ (void)logInfo:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityInfo tags:tags];
+}
+
++ (void)logNotice:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityNotice tags:tags];
+}
+
++ (void)logWarning:(NSString*)message tags:(JFLoggerTags)tags
+{
+	[self log:message severity:JFLoggerSeverityWarning tags:tags];
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
