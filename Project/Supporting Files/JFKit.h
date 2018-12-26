@@ -62,6 +62,7 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFLogger.h>
 #import <JFKit/JFMath.h>
 #import <JFKit/JFObserversController.h>
+#import <JFKit/JFPair.h>
 #import <JFKit/JFPersistentContainer.h>
 #import <JFKit/JFReferences.h>
 #import <JFKit/JFShortcuts.h>

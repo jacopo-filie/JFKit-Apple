@@ -107,6 +107,10 @@
 		4EC258711FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC258721FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC258731FEF295100179CC7 /* JFMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DF1FEEA42700292837 /* JFMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECA37B721D06C41009BDA18 /* JFPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECA37AD21D06C40009BDA18 /* JFPair.m */; };
+		4ECA37B821D06C41009BDA18 /* JFPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECA37AD21D06C40009BDA18 /* JFPair.m */; };
+		4ECA37BD21D06C41009BDA18 /* JFPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECA37B021D06C41009BDA18 /* JFPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ECA37BE21D06C41009BDA18 /* JFPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECA37B021D06C41009BDA18 /* JFPair.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ECFE2651FD8BCD9004EEACE /* JFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE25B1FD8BCD9004EEACE /* JFKit.framework */; };
 		4ECFE2811FD8BCF1004EEACE /* JFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE2781FD8BCF1004EEACE /* JFKit.framework */; };
 		4ECFE39E1FD8C7AD004EEACE /* JFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECFE39C1FD8C78D004EEACE /* JFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -218,6 +222,8 @@
 		4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStateMachine.h; sourceTree = "<group>"; };
 		4EC2586D1FEF294600179CC7 /* JFReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFReferences.m; sourceTree = "<group>"; };
 		4EC2586E1FEF294600179CC7 /* JFReferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFReferences.h; sourceTree = "<group>"; };
+		4ECA37AD21D06C40009BDA18 /* JFPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPair.m; sourceTree = "<group>"; };
+		4ECA37B021D06C41009BDA18 /* JFPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPair.h; sourceTree = "<group>"; };
 		4ECFE25B1FD8BCD9004EEACE /* JFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2641FD8BCD9004EEACE /* JFKit-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFKit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ECFE2781FD8BCF1004EEACE /* JFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +307,8 @@
 				4E84906E1FF4887300B029E6 /* JFImages.m */,
 				4ED607DF1FEEA42700292837 /* JFMath.h */,
 				4ED607E01FEEA42700292837 /* JFMath.m */,
+				4ECA37B021D06C41009BDA18 /* JFPair.h */,
+				4ECA37AD21D06C40009BDA18 /* JFPair.m */,
 				4EC2586E1FEF294600179CC7 /* JFReferences.h */,
 				4EC2586D1FEF294600179CC7 /* JFReferences.m */,
 				4E50039D1FE5B3D1002710B9 /* JFStrings.h */,
@@ -497,6 +505,7 @@
 			files = (
 				4E65E8D71FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
 				4E62747720424915007BCE81 /* UIButton+JFKit.h in Headers */,
+				4ECA37BD21D06C41009BDA18 /* JFPair.h in Headers */,
 				4E0BF89C1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4EF2C7C71FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E415F291FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
@@ -538,6 +547,7 @@
 			files = (
 				4EC258731FEF295100179CC7 /* JFMath.h in Headers */,
 				4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
+				4ECA37BE21D06C41009BDA18 /* JFPair.h in Headers */,
 				4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E04E66121CCF9AC00479981 /* JFAlert.h in Headers */,
 				4E415F2A1FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
@@ -741,6 +751,7 @@
 				4EEC977F21CBBD9300A9C138 /* JFSliderController.m in Sources */,
 				4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4E415F271FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
+				4ECA37B721D06C41009BDA18 /* JFPair.m in Sources */,
 				4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */,
 				4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */,
@@ -793,6 +804,7 @@
 				4E415F281FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
 				4E515E1C2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250C200056780080136D /* JFSwitchMachine.m in Sources */,
+				4ECA37B821D06C41009BDA18 /* JFPair.m in Sources */,
 				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E8490701FF4887300B029E6 /* JFImages.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
