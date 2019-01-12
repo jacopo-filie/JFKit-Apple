@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A soft reference is a wrapper that holds in memory the contained object until a memory warning is fired from the operating system. When a memory warning is fired, the soft reference tries to hold a weak reference (if available) to the wrapped object until the next access to the property `object`, in which the strong reference is restored if the weak reference is still valid. `ObjectType` is the type of object that the reference can wrap.
  */
-@interface JFSoftReference<__covariant ObjectType> : NSObject
+@interface JFSoftReference<__covariant ObjectType> : NSObject <NSCopying>
 
 // =================================================================================================
 // MARK: Properties - Memory
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * An unsafe reference is a wrapper that weakly holds in memory the contained object. Be careful when using it because the wrapped object can become a dangling pointer if that object is released without resetting the property `object`. `ObjectType` is the type of object that the reference can wrap.
  */
-@interface JFUnsafeReference<__covariant ObjectType> : NSObject
+@interface JFUnsafeReference<__covariant ObjectType> : NSObject <NSCopying>
 
 // =================================================================================================
 // MARK: Properties - Memory
@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A weak reference is a wrapper that weakly holds in memory the contained object. If the wrapped object is released, the property `object` is automatically reset. `ObjectType` is the type of object that the reference can wrap.
  */
-@interface JFWeakReference<__covariant ObjectType> : NSObject
+@interface JFWeakReference<__covariant ObjectType> : NSObject <NSCopying>
 
 // =================================================================================================
 // MARK: Properties - Memory

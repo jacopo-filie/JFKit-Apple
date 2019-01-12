@@ -152,6 +152,17 @@ NS_ASSUME_NONNULL_BEGIN
 #	endif
 }
 
+// =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* __nullable)zone
+{
+	JFSoftReference* retObj = [[[self class] allocWithZone:zone] init];
+	retObj.object = self.object;
+	return retObj;
+}
+
 @end
 #endif
 
@@ -179,6 +190,17 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
+// =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* __nullable)zone
+{
+	JFUnsafeReference* retObj = [[[self class] allocWithZone:zone] init];
+	retObj.object = self.object;
+	return retObj;
+}
+
 @end
 #endif
 
@@ -203,6 +225,17 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	JFWeakReference* retObj = [[JFWeakReference alloc] init];
 	retObj.object = object;
+	return retObj;
+}
+
+// =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* __nullable)zone
+{
+	JFWeakReference* retObj = [[[self class] allocWithZone:zone] init];
+	retObj.object = self.object;
 	return retObj;
 }
 
