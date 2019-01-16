@@ -124,10 +124,11 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	switch(curve)
 	{
-		case UIViewAnimationCurveEaseIn:	return UIViewAnimationOptionCurveEaseOut;
+		case UIViewAnimationCurveEaseIn:	return UIViewAnimationOptionCurveEaseIn;
 		case UIViewAnimationCurveEaseInOut:	return UIViewAnimationOptionCurveEaseInOut;
-		case UIViewAnimationCurveEaseOut:	return UIViewAnimationOptionCurveEaseIn;
+		case UIViewAnimationCurveEaseOut:	return UIViewAnimationOptionCurveEaseOut;
 		case UIViewAnimationCurveLinear:	return UIViewAnimationOptionCurveLinear;
+		default:							return (curve << 16); // Sometimes undocumented values are received so this should cover those cases.
 	}
 }
 
@@ -139,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
 	NSTimeInterval animationDuration = [(NSNumber*)userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 	CGRect beginFrame = [(NSValue*)userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
 	CGRect endFrame = [(NSValue*)userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
+	
 	return [[JFKeyboardInfo alloc] initWithFrame:beginFrame endFrame:endFrame animationCurve:animationCurve duration:animationDuration];
 }
 
