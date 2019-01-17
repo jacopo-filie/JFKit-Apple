@@ -48,6 +48,21 @@ FOUNDATION_EXPORT NSTimeInterval const JFAnimationDuration;
 #pragma mark -
 
 // =================================================================================================
+// MARK: Macros
+// =================================================================================================
+
+/**
+ * Checks whether the given `_optionMask` contains the given `_option`.
+ * @param _optionMask The bitmask containing all the selected options.
+ * @param _option The option to search in the bitmask.
+ */
+#define JFIsOptionSet(_optionMask, _option) ((_optionMask & _option) == _option)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+// =================================================================================================
 // MARK: Functions - Comparison management
 // =================================================================================================
 
