@@ -11,6 +11,8 @@
 		4E04E65F21CCF9AC00479981 /* JFAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E04E65C21CCF9AC00479981 /* JFAlert.m */; };
 		4E04E66021CCF9AC00479981 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E04E66121CCF9AC00479981 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E059E382208E1FD00AB72F5 /* JFMath-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */; };
+		4E059E392208E1FD00AB72F5 /* JFMath-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */; };
 		4E0932C821D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0932C921D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0932CC21D1C52B0010E261 /* JFJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -197,6 +199,7 @@
 /* Begin PBXFileReference section */
 		4E04E65C21CCF9AC00479981 /* JFAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlert.m; sourceTree = "<group>"; };
 		4E04E65D21CCF9AC00479981 /* JFAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlert.h; sourceTree = "<group>"; };
+		4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JFMath-Tests.m"; sourceTree = "<group>"; };
 		4E0932C721D1C4F60010E261 /* JFJSONSerializationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFJSONSerializationAdapter.h; sourceTree = "<group>"; };
 		4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFJSONSerializer.h; sourceTree = "<group>"; };
 		4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFJSONSerializer.m; sourceTree = "<group>"; };
@@ -376,6 +379,7 @@
 			children = (
 				4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */,
 				4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */,
+				4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */,
 				4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */,
 				4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */,
 			);
@@ -854,6 +858,7 @@
 				4E4E97D52000E3DA00E9CE87 /* JFString-Tests.m in Sources */,
 				4E4E97D72000E3DA00E9CE87 /* JFColor-Tests.m in Sources */,
 				4EAC2C9F2001300400B7BC30 /* JFUtilities-Tests.m in Sources */,
+				4E059E382208E1FD00AB72F5 /* JFMath-Tests.m in Sources */,
 				4EBD586820007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586D2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA52001361B00B7BC30 /* JFLogger-Tests.m in Sources */,
@@ -908,6 +913,7 @@
 				4E4E97D62000E3DA00E9CE87 /* JFString-Tests.m in Sources */,
 				4E4E97D82000E3DA00E9CE87 /* JFColor-Tests.m in Sources */,
 				4EAC2CA02001300400B7BC30 /* JFUtilities-Tests.m in Sources */,
+				4E059E392208E1FD00AB72F5 /* JFMath-Tests.m in Sources */,
 				4EBD586920007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586E2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA62001361B00B7BC30 /* JFLogger-Tests.m in Sources */,

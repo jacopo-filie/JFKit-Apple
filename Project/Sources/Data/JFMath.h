@@ -159,22 +159,62 @@ typedef NS_ENUM(UInt8, JFRelation) {
 #pragma mark -
 
 // =================================================================================================
-// MARK: Functions
+// MARK: Functions - Floating points
+// =================================================================================================
+
+/**
+ * Compares the given values down to the specified decimal precision.
+ * @param value1 The first value of the comparison.
+ * @param value2 The second value of the comparison.
+ * @param scale The number of decimal digits to use in the comparison; pass `NSDecimalNoScale` to use the full number.
+ * @return The result of the comparison.
+ */
+FOUNDATION_EXPORT NSComparisonResult JFCompareFloatValues(double value1, double value2, short scale);
+
+/**
+ * Checks whether the first value is equal to the second value.
+ * @param value1 The first value of the comparison.
+ * @param value2 The second value of the comparison.
+ * @param scale The number of decimal digits to use in the comparison; pass `NSDecimalNoScale` to use the full number.
+ * @return `YES` if the first value is equal to the second value, `NO` otherwise.
+ */
+FOUNDATION_EXPORT BOOL JFIsFloatValueEqualToValue(double value1, double value2, short scale);
+
+/**
+ * Checks whether the first value is greater than the second value.
+ * @param value1 The first value of the comparison.
+ * @param value2 The second value of the comparison.
+ * @param scale The number of decimal digits to use in the comparison; pass `NSDecimalNoScale` to use the full number.
+ * @return `YES` if the first value is greater than the second value, `NO` otherwise.
+ */
+FOUNDATION_EXPORT BOOL JFIsFloatValueGreaterThanValue(double value1, double value2, short scale);
+
+/**
+ * Checks whether the first value is less than the second value.
+ * @param value1 The first value of the comparison.
+ * @param value2 The second value of the comparison.
+ * @param scale The number of decimal digits to use in the comparison; pass `NSDecimalNoScale` to use the full number.
+ * @return `YES` if the first value is less than the second value, `NO` otherwise.
+ */
+FOUNDATION_EXPORT BOOL JFIsFloatValueLessThanValue(double value1, double value2, short scale);
+
+// =================================================================================================
+// MARK: Functions - Trigonometry
 // =================================================================================================
 
 /**
  * A convenient function to convert radians to degrees.
  * @param radians The value to convert.
- @return The converted value expressed in degrees.
+ * @return The converted value expressed in degrees.
  */
-FOUNDATION_EXPORT JFDegrees	JFDegreesFromRadians(JFRadians radians);
+FOUNDATION_EXPORT JFDegrees JFDegreesFromRadians(JFRadians radians);
 
 /**
  * A convenient function to convert degrees to radians.
  * @param degrees The value to convert.
- @return The converted value expressed in radians.
+ * @return The converted value expressed in radians.
  */
-FOUNDATION_EXPORT JFRadians	JFRadiansFromDegrees(JFDegrees degrees);
+FOUNDATION_EXPORT JFRadians JFRadiansFromDegrees(JFDegrees degrees);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

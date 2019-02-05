@@ -24,7 +24,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "JFMath.h"
+#import "JFMath.h"
+
+#import "JFStrings.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -33,7 +35,51 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // =================================================================================================
-// MARK: Functions
+// MARK: Functions - Floating points
+// =================================================================================================
+
+NSComparisonResult JFCompareFloatValues(double value1, double value2, short scale)
+{
+	NSInteger int1 = (NSInteger)trunc(value1);
+	NSInteger int2 = (NSInteger)trunc(value2);
+	
+	if(int1 != int2)
+		return ((int1 > int2) ? NSOrderedDescending : NSOrderedAscending);
+	
+	if(scale == 0)
+		return NSOrderedSame;
+	
+	NSDecimalNumber* dec1 = [[NSDecimalNumber alloc] initWithDouble:value1];
+	NSDecimalNumber* dec2 = [[NSDecimalNumber alloc] initWithDouble:value2];
+	
+	if(scale != NSDecimalNoScale)
+	{
+		NSRoundingMode mode = (int1 < 0) ? NSRoundUp : NSRoundDown;
+		NSDecimalNumberHandler* handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:mode scale:scale raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
+		dec1 = [dec1 decimalNumberByRoundingAccordingToBehavior:handler];
+		dec2 = [dec2 decimalNumberByRoundingAccordingToBehavior:handler];
+	}
+	
+	return [dec1 compare:dec2];
+}
+
+BOOL JFIsFloatValueEqualToValue(double value1, double value2, short scale)
+{
+	return (JFCompareFloatValues(value1, value2, scale) == NSOrderedSame);
+}
+
+BOOL JFIsFloatValueGreaterThanValue(double value1, double value2, short scale)
+{
+	return (JFCompareFloatValues(value1, value2, scale) == NSOrderedDescending);
+}
+
+BOOL JFIsFloatValueLessThanValue(double value1, double value2, short scale)
+{
+	return (JFCompareFloatValues(value1, value2, scale) == NSOrderedAscending);
+}
+
+// =================================================================================================
+// MARK: Functions - Trigonometry
 // =================================================================================================
 
 JFDegrees JFDegreesFromRadians(JFRadians radians)
