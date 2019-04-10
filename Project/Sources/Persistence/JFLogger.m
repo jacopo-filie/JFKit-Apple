@@ -73,7 +73,6 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 // =================================================================================================
 
 - (NSString*)dateStringFromDate:(NSDate*)date;
-- (NSURL*)fileURLForDate:(NSDate*)date;
 - (NSString*)timeStringFromDate:(NSDate*)date;
 
 // =================================================================================================

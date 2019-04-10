@@ -350,6 +350,13 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 + (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 /**
+ * Returns the URL of the log file used for the given date.
+ * @param date The reference date.
+ * @return The log file URL.
+ */
+- (NSURL*)fileURLForDate:(NSDate*)date;
+
+/**
  * Returns a string containing the given severity level. This method simply calls the method `+stringFromSeverity:` of this class.
  * @param severity The severity level to convert to string.
  * @return A string containing the given severity level.
