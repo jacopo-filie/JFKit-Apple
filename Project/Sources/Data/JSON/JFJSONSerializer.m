@@ -129,14 +129,23 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	NSLock* lock = self.lock;
 	
-	NSError* error = nil;
 	[lock lock];
+	NSError* error = nil;
 	id retObj = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
 	[lock unlock];
+	
 	if(!retObj)
+	{
 		[JFKitLogger logError:[NSString stringWithFormat:@"%@<%@>: Failed to convert JSON data to node. [data = '%@']", ClassName, JFStringFromPointer(self), jsonData] tags:JFLoggerTagsError];
-	else if(![retObj isKindOfClass:class])
+		return nil;
+	}
+	
+	if(![retObj isKindOfClass:class])
+	{
 		[JFKitLogger logError:[NSString stringWithFormat:@"%@<%@>: Converted JSON node class is not the requested one. [node = '%@'; class = '%@']", ClassName, JFStringFromPointer(self), retObj, NSStringFromClass(class)] tags:JFLoggerTagsError];
+		return nil;
+	}
+	
 	return retObj;
 }
 

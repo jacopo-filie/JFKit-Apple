@@ -101,7 +101,17 @@
 		4E8BCCA821D119A800D77BE3 /* JFJSONNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E8BCCAB21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E9591AA2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */; };
+		4E9591AB2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */; };
+		4E9591AD2256C5A5009D01E2 /* JFJSONObject-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */; };
+		4E9591AE2256C5A5009D01E2 /* JFJSONObject-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */; };
+		4E9591B02256C5BA009D01E2 /* JFJSONSerializer-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */; };
+		4E9591B12256C5BA009D01E2 /* JFJSONSerializer-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */; };
 		4E99B94E1FF0A7720026724A /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
+		4EA66DFD225754FA00D07D6A /* Array.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EA66DFC225754FA00D07D6A /* Array.json */; };
+		4EA66DFE225754FA00D07D6A /* Array.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EA66DFC225754FA00D07D6A /* Array.json */; };
+		4EA66E002257625800D07D6A /* Object.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EA66DFF2257625800D07D6A /* Object.json */; };
+		4EA66E012257625800D07D6A /* Object.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EA66DFF2257625800D07D6A /* Object.json */; };
 		4EA9711721E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9711621E980F30014BC0E /* JFObjectIdentifier-Tests.m */; };
 		4EA9711821E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9711621E980F30014BC0E /* JFObjectIdentifier-Tests.m */; };
 		4EAC2C9D2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */; };
@@ -248,6 +258,11 @@
 		4E8BCC9B21D1183700D77BE3 /* JFJSONArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONArray.h; sourceTree = "<group>"; };
 		4E8BCCA621D119A800D77BE3 /* JFJSONNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFJSONNode.h; sourceTree = "<group>"; };
 		4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFCompatibilityMacros.h; sourceTree = "<group>"; };
+		4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFJSONArray-Tests.m"; sourceTree = "<group>"; };
+		4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFJSONObject-Tests.m"; sourceTree = "<group>"; };
+		4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFJSONSerializer-Tests.m"; sourceTree = "<group>"; };
+		4EA66DFC225754FA00D07D6A /* Array.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Array.json; sourceTree = "<group>"; };
+		4EA66DFF2257625800D07D6A /* Object.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Object.json; sourceTree = "<group>"; };
 		4EA9711621E980F30014BC0E /* JFObjectIdentifier-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFObjectIdentifier-Tests.m"; sourceTree = "<group>"; };
 		4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFShortcuts-Tests.m"; sourceTree = "<group>"; };
 		4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFUtilities-Tests.m"; sourceTree = "<group>"; };
@@ -377,6 +392,7 @@
 		4E4E97D02000E3DA00E9CE87 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4E9591A82256C48D009D01E2 /* JSON */,
 				4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */,
 				4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */,
 				4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */,
@@ -437,6 +453,16 @@
 			path = Addons;
 			sourceTree = "<group>";
 		};
+		4E9591A82256C48D009D01E2 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */,
+				4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */,
+				4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		4E96B27E200A3A7500C01987 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,6 +487,24 @@
 				4E53A67D200CC4B2001EEBFD /* JFWindowController.m */,
 			);
 			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		4EA66DF72257526F00D07D6A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4EA66DF82257526F00D07D6A /* Tests */,
+			);
+			name = Resources;
+			path = Project/Resources;
+			sourceTree = "<group>";
+		};
+		4EA66DF82257526F00D07D6A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4EA66DFC225754FA00D07D6A /* Array.json */,
+				4EA66DFF2257625800D07D6A /* Object.json */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		4EA80C791FDCCE790086EBE2 /* Sources */ = {
@@ -502,6 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				4ECFE25C1FD8BCD9004EEACE /* Products */,
+				4EA66DF72257526F00D07D6A /* Resources */,
 				4EA80C791FDCCE790086EBE2 /* Sources */,
 				4ECFE39A1FD8C78D004EEACE /* Supporting Files */,
 				4ECFE3CC1FD8CC65004EEACE /* Tests */,
@@ -788,6 +833,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA66E002257625800D07D6A /* Object.json in Resources */,
+				4EA66DFD225754FA00D07D6A /* Array.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +849,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA66E012257625800D07D6A /* Object.json in Resources */,
+				4EA66DFE225754FA00D07D6A /* Array.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,11 +908,14 @@
 				4E4E97D72000E3DA00E9CE87 /* JFColor-Tests.m in Sources */,
 				4EAC2C9F2001300400B7BC30 /* JFUtilities-Tests.m in Sources */,
 				4E059E382208E1FD00AB72F5 /* JFMath-Tests.m in Sources */,
+				4E9591B02256C5BA009D01E2 /* JFJSONSerializer-Tests.m in Sources */,
 				4EBD586820007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586D2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA52001361B00B7BC30 /* JFLogger-Tests.m in Sources */,
 				4EAC2C9D2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */,
+				4E9591AA2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */,
 				4EA9711721E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */,
+				4E9591AD2256C5A5009D01E2 /* JFJSONObject-Tests.m in Sources */,
 				4EAC2CA2200133CE00B7BC30 /* JFObserversController-Tests.m in Sources */,
 				4E4E97D92000E3DA00E9CE87 /* JFVersion-Tests.m in Sources */,
 				4E4E97DB2000E3DA00E9CE87 /* JFByteStream-Tests.m in Sources */,
@@ -914,11 +966,14 @@
 				4E4E97D82000E3DA00E9CE87 /* JFColor-Tests.m in Sources */,
 				4EAC2CA02001300400B7BC30 /* JFUtilities-Tests.m in Sources */,
 				4E059E392208E1FD00AB72F5 /* JFMath-Tests.m in Sources */,
+				4E9591B12256C5BA009D01E2 /* JFJSONSerializer-Tests.m in Sources */,
 				4EBD586920007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586E2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA62001361B00B7BC30 /* JFLogger-Tests.m in Sources */,
 				4EAC2C9E2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */,
+				4E9591AB2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */,
 				4EA9711821E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */,
+				4E9591AE2256C5A5009D01E2 /* JFJSONObject-Tests.m in Sources */,
 				4EAC2CA3200133CE00B7BC30 /* JFObserversController-Tests.m in Sources */,
 				4E4E97DA2000E3DA00E9CE87 /* JFVersion-Tests.m in Sources */,
 				4E4E97DC2000E3DA00E9CE87 /* JFByteStream-Tests.m in Sources */,

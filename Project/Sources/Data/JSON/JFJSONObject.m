@@ -362,28 +362,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id<JFJSONValue> __nullable)checkValue:(id __nullable)value
 {
-	if(!value)
-		return nil;
-	
-	if([value conformsToProtocol:@protocol(JFJSONValue)])
+	if(!value || [value conformsToProtocol:@protocol(JFJSONValue)])
 		return value;
 	
 	// NB: sometimes the protocol check is not enough, maybe due to cluster classes.
 	
-	if([value isKindOfClass:[JFJSONArray class]])
-		return value;
+	static NSArray<Class>* conformingClasses = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		conformingClasses = @[JFJSONArray.class, JFJSONObject.class, NSNull.class, NSNumber.class, NSString.class];
+	});
 	
-	if([value isKindOfClass:[JFJSONObject class]])
-		return value;
-	
-	if([value isKindOfClass:[NSNull class]])
-		return value;
-	
-	if([value isKindOfClass:[NSNumber class]])
-		return value;
-	
-	if([value isKindOfClass:[NSString class]])
-		return value;
+	for(Class conformingClass in conformingClasses)
+	{
+		if([value isKindOfClass:conformingClass])
+			return value;
+	}
 	
 	return nil;
 }

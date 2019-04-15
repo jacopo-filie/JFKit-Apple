@@ -1,0 +1,41 @@
+{
+	"array":[
+		"Item 1",
+		"Item 2",
+		"Item 3"
+	],
+	"boolean":true,
+	"float":1.5,
+	"integer":1,
+	"nested_array":[
+		[
+			"Item 1",
+			"Item 2",
+			"Item 3"
+		],
+		{
+			"Key 1":"Value 1",
+			"Key 2":"Value 2",
+			"Key 3":"Value 3"
+		}
+	],
+	"nested_object":{
+		"array":[
+			"Item 1",
+			"Item 2",
+			"Item 3"
+		],
+		"object":{
+			"Key 1":"Value 1",
+			"Key 2":"Value 2",
+			"Key 3":"Value 3"
+		}
+	},
+	"null":null,
+	"object":{
+		"Key 1":"Value 1",
+		"Key 2":"Value 2",
+		"Key 3":"Value 3"
+	},
+	"string":"Example"
+}
