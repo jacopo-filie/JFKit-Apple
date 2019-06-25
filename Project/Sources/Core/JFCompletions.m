@@ -32,13 +32,61 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface JFCompletion (/* Private */)
+
+// =================================================================================================
+// MARK: Properties - Execution
+// =================================================================================================
+
+@property (strong, nonatomic, readonly, nullable) JFFailureBlock internalFailureBlock;
+@property (strong, nonatomic, readonly, nullable) JFSuccessBlock internalSuccessBlock;
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block;
++ (JFSuccessBlock)newSuccessBlockForCompletionBlock:(JFCompletionBlock)block;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@interface JFSimpleCompletion (/* Private */)
+
+// =================================================================================================
+// MARK: Properties - Execution
+// =================================================================================================
+
+@property (strong, nonatomic, readonly, nullable) JFFailureBlock internalFailureBlock;
+@property (strong, nonatomic, readonly, nullable) JFBlock internalSuccessBlock;
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
++ (JFBlock)newSuccessBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
 @implementation JFCompletion
 
 // =================================================================================================
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize block	= _block;
+@synthesize block = _block;
+@synthesize failureBlock = _failureBlock;
+@synthesize internalFailureBlock = _internalFailureBlock;
+@synthesize internalSuccessBlock = _internalSuccessBlock;
+@synthesize successBlock = _successBlock;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -49,14 +97,61 @@ NS_ASSUME_NONNULL_BEGIN
 	return [[self alloc] initWithBlock:block];
 }
 
++ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithFailureBlock:failureBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
 - (instancetype)initWithBlock:(JFCompletionBlock)block
 {
 	self = [super init];
-	if(self)
-	{
-		// Execution
-		_block	= block;
-	}
+	
+	_block = block;
+	_internalFailureBlock = [JFCompletion newFailureBlockForCompletionBlock:block];
+	_internalSuccessBlock = [JFCompletion newSuccessBlockForCompletionBlock:block];
+	
+	return self;
+}
+
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock
+{
+	self = [super init];
+	
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+
 	return self;
 }
 
@@ -71,24 +166,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)executeWithError:(NSError*)error async:(BOOL)async
 {
-	JFCompletionBlock block = self.block;
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
 	
 	if(!async)
 	{
-		block(NO, nil, error);
+		block(error);
 		return;
 	}
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(NO, nil, error);
+		block(error);
 	});
 }
 
 - (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue
 {
-	JFCompletionBlock block = self.block;
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
+	
 	[queue addOperationWithBlock:^{
-		block(NO, nil, error);
+		block(error);
 	}];
 }
 
@@ -99,25 +199,48 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)executeWithResult:(id)result async:(BOOL)async
 {
-	JFCompletionBlock block = self.block;
-	
+	JFSuccessBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
+
 	if(!async)
 	{
-		block(YES, result, nil);
+		block(result);
 		return;
 	}
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(YES, result, nil);
+		block(result);
 	});
 }
 
 - (void)executeWithResult:(id)result queue:(NSOperationQueue*)queue
 {
-	JFCompletionBlock block = self.block;
+	JFSuccessBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
+	
 	[queue addOperationWithBlock:^{
-		block(YES, result, nil);
+		block(result);
 	}];
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block
+{
+	return ^(NSError* error) {
+		block(NO, nil, error);
+	};
+}
+
++ (JFSuccessBlock)newSuccessBlockForCompletionBlock:(JFCompletionBlock)block
+{
+	return ^(id result) {
+		block(YES, result, nil);
+	};
 }
 
 @end
@@ -132,7 +255,11 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize block	= _block;
+@synthesize block = _block;
+@synthesize failureBlock = _failureBlock;
+@synthesize internalFailureBlock = _internalFailureBlock;
+@synthesize internalSuccessBlock = _internalSuccessBlock;
+@synthesize successBlock = _successBlock;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -143,14 +270,61 @@ NS_ASSUME_NONNULL_BEGIN
 	return [[self alloc] initWithBlock:block];
 }
 
++ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithFailureBlock:failureBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
 - (instancetype)initWithBlock:(JFSimpleCompletionBlock)block
 {
 	self = [super init];
-	if(self)
-	{
-		// Execution
-		_block	= block;
-	}
+	
+	_block = block;
+	_internalFailureBlock = [JFSimpleCompletion newFailureBlockForCompletionBlock:block];
+	_internalSuccessBlock = [JFSimpleCompletion newSuccessBlockForCompletionBlock:block];
+	
+	return self;
+}
+
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock
+{
+	self = [super init];
+	
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
 	return self;
 }
 
@@ -160,29 +334,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)execute
 {
-	[self execute:NO];
+	[self executeAsync:NO];
 }
 
-- (void)execute:(BOOL)async
+- (void)executeAsync:(BOOL)async
 {
-	JFSimpleCompletionBlock block = self.block;
+	JFBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
 	
 	if(!async)
 	{
-		block(YES, nil);
+		block();
 		return;
 	}
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(YES, nil);
+		block();
 	});
 }
 
 - (void)executeOnQueue:(NSOperationQueue*)queue
 {
-	JFSimpleCompletionBlock block = self.block;
+	JFBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
+	
 	[queue addOperationWithBlock:^{
-		block(YES, nil);
+		block();
 	}];
 }
 
@@ -193,25 +372,48 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)executeWithError:(NSError*)error async:(BOOL)async
 {
-	JFSimpleCompletionBlock block = self.block;
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
 	
 	if(!async)
 	{
-		block(NO, error);
+		block(error);
 		return;
 	}
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(NO, error);
+		block(error);
 	});
 }
 
 - (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue
 {
-	JFSimpleCompletionBlock block = self.block;
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
+	
 	[queue addOperationWithBlock:^{
-		block(NO, error);
+		block(error);
 	}];
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block
+{
+	return ^(NSError* error) {
+		block(NO, error);
+	};
+}
+
++ (JFBlock)newSuccessBlockForCompletionBlock:(JFSimpleCompletionBlock)block
+{
+	return ^{
+		block(YES, nil);
+	};
 }
 
 @end

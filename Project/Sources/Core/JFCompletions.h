@@ -32,6 +32,7 @@
 @import UIKit;
 #endif
 
+#import "JFBlocks.h"
 #import "JFCompatibilityMacros.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,11 +54,23 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^JFCompletionBlock) (BOOL succeeded, id __nullable result, NSError* __nullable error);
 
 /**
+ * A block of code to be executed when the operation has completed with a failure.
+ * @param error The error that caused the operation to fail.
+ */
+typedef void (^JFFailureBlock) (NSError* error);
+
+/**
  * A block of code to be executed as completion of an operation. Used in combination with the class `JFSimpleCompletion`.
  * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
  * @param error The error of the failed completed operation; `nil` if the operation succeeded.
  */
 typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable error);
+
+/**
+ * A block of code to be executed when the operation has completed successfully.
+ * @param result The result of the operation.
+ */
+typedef void (^JFSuccessBlock) (id result);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -76,7 +89,17 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
 /**
  * The block used to initialize this instance.
  */
-@property (strong, nonatomic, readonly) void (^block)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error);
+@property (strong, nonatomic, readonly, nullable) void (^block)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error);
+
+/**
+ * The failure block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) JFFailureBlock failureBlock;
+
+/**
+ * The success block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) void (^successBlock)(ResultType result);
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -90,6 +113,28 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
 + (instancetype)completionWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given success block.
+ * @param successBlock The block to use on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(void (^)(ResultType result))successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock;
+
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
@@ -100,6 +145,28 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
  * @return This instance.
  */
 - (instancetype)initWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @return This instance.
+ */
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given success block.
+ * @param successBlock The block to use on success.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Execution
@@ -193,7 +260,19 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
 /**
  * The block used to initialize this instance.
  */
-@property (strong, nonatomic, readonly) JFSimpleCompletionBlock block;
+@property (strong, nonatomic, readonly, nullable) JFSimpleCompletionBlock block;
+
+
+/**
+ * The failure block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) JFFailureBlock failureBlock;
+
+
+/**
+ * The success block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) JFBlock successBlock;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -207,6 +286,28 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
 + (instancetype)completionWithBlock:(JFSimpleCompletionBlock)block;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given success block.
+ * @param successBlock The block to use on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock;
+
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
@@ -217,6 +318,28 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
  * @return This instance.
  */
 - (instancetype)initWithBlock:(JFSimpleCompletionBlock)block NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @return This instance.
+ */
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given success block.
+ * @param successBlock The block to use on success.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Execution
@@ -239,7 +362,7 @@ typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable err
  * @endcode
  * @param async `YES` if the block should be executed asynchronously, `NO` otherwise.
  */
-- (void)execute:(BOOL)async;
+- (void)executeAsync:(BOOL)async;
 
 /**
  * Executes the wrapped block using the following values:

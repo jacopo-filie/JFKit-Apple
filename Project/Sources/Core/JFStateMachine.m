@@ -302,7 +302,7 @@ NS_ASSUME_NONNULL_BEGIN
 			if(completion)
 			{
 				if(succeeded)
-					[completion execute:YES];
+					[completion executeAsync:YES];
 				else
 					[completion executeWithError:error async:YES];
 			}

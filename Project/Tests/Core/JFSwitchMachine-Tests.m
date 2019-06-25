@@ -180,7 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
 	if(self.shouldFail)
 		[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];
 	else
-		[completion execute:YES];
+		[completion executeAsync:YES];
 }
 
 @end
