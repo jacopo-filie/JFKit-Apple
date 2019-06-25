@@ -23,8 +23,6 @@
 		4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BF8A21FE08ED20050114D /* JFBlocks.m */; };
-		4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0BF8A21FE08ED20050114D /* JFBlocks.m */; };
 		4E3AC6FF20024115002CE0A1 /* JFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E3AC6FD20024115002CE0A1 /* JFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3AC70020024115002CE0A1 /* JFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E3AC6FD20024115002CE0A1 /* JFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3AC70120024115002CE0A1 /* JFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3AC6FE20024115002CE0A1 /* JFError.m */; };
@@ -139,6 +137,14 @@
 		4EC258711FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC258721FEF294600179CC7 /* JFReferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC2586E1FEF294600179CC7 /* JFReferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC258731FEF295100179CC7 /* JFMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DF1FEEA42700292837 /* JFMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EC664FF22C2CCFE00B126CD /* JFCompletions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC664FB22C2CCFD00B126CD /* JFCompletions.m */; };
+		4EC6650022C2CCFE00B126CD /* JFCompletions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC664FB22C2CCFD00B126CD /* JFCompletions.m */; };
+		4EC6650122C2CCFE00B126CD /* JFTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC664FC22C2CCFE00B126CD /* JFTimerHandler.m */; };
+		4EC6650222C2CCFE00B126CD /* JFTimerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC664FC22C2CCFE00B126CD /* JFTimerHandler.m */; };
+		4EC6650322C2CCFE00B126CD /* JFTimerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC664FD22C2CCFE00B126CD /* JFTimerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EC6650422C2CCFE00B126CD /* JFTimerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC664FD22C2CCFE00B126CD /* JFTimerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EC6650522C2CCFE00B126CD /* JFCompletions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC664FE22C2CCFE00B126CD /* JFCompletions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EC6650622C2CCFE00B126CD /* JFCompletions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC664FE22C2CCFE00B126CD /* JFCompletions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ECA37A221D063C3009BDA18 /* JFKitLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECA37A121D063C3009BDA18 /* JFKitLogger.h */; };
 		4ECA37A321D063C3009BDA18 /* JFKitLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECA37A121D063C3009BDA18 /* JFKitLogger.h */; };
 		4ECA37B721D06C41009BDA18 /* JFPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECA37AD21D06C40009BDA18 /* JFPair.m */; };
@@ -216,7 +222,6 @@
 		4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
 		4E0BF89E1FE08B400050114D /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
 		4E0BF8A11FE08ED20050114D /* JFBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFBlocks.h; sourceTree = "<group>"; };
-		4E0BF8A21FE08ED20050114D /* JFBlocks.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFBlocks.m; sourceTree = "<group>"; };
 		4E3AC6FD20024115002CE0A1 /* JFError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFError.h; sourceTree = "<group>"; };
 		4E3AC6FE20024115002CE0A1 /* JFError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFError.m; sourceTree = "<group>"; };
 		4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPersistentContainer.m; sourceTree = "<group>"; };
@@ -276,6 +281,10 @@
 		4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFStateMachine.h; sourceTree = "<group>"; };
 		4EC2586D1FEF294600179CC7 /* JFReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFReferences.m; sourceTree = "<group>"; };
 		4EC2586E1FEF294600179CC7 /* JFReferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFReferences.h; sourceTree = "<group>"; };
+		4EC664FB22C2CCFD00B126CD /* JFCompletions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFCompletions.m; sourceTree = "<group>"; };
+		4EC664FC22C2CCFE00B126CD /* JFTimerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFTimerHandler.m; sourceTree = "<group>"; };
+		4EC664FD22C2CCFE00B126CD /* JFTimerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFTimerHandler.h; sourceTree = "<group>"; };
+		4EC664FE22C2CCFE00B126CD /* JFCompletions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFCompletions.h; sourceTree = "<group>"; };
 		4ECA37A121D063C3009BDA18 /* JFKitLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKitLogger.h; sourceTree = "<group>"; };
 		4ECA37AD21D06C40009BDA18 /* JFPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPair.m; sourceTree = "<group>"; };
 		4ECA37B021D06C41009BDA18 /* JFPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPair.h; sourceTree = "<group>"; };
@@ -348,12 +357,7 @@
 		4E0BF89F1FE08E970050114D /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */,
-				4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */,
-				4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */,
-				4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */,
 				4E0BF8A11FE08ED20050114D /* JFBlocks.h */,
-				4E0BF8A21FE08ED20050114D /* JFBlocks.m */,
 				4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */,
 				4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */,
 				4ED607DA1FEE720000292837 /* JFColors.h */,
@@ -430,6 +434,12 @@
 		4E5EE1AB1FFC5E16008444FD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */,
+				4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */,
+				4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */,
+				4E5DD4051FEFCF7F00285B30 /* JFAsynchronousOperation.m */,
+				4EC664FE22C2CCFE00B126CD /* JFCompletions.h */,
+				4EC664FB22C2CCFD00B126CD /* JFCompletions.m */,
 				4EF7250F20005E170080136D /* JFConnectionMachine.h */,
 				4EF7251020005E170080136D /* JFConnectionMachine.m */,
 				4EB1B3952001C480004C1FF4 /* JFErrorFactory.h */,
@@ -440,6 +450,8 @@
 				4EC10F211FFEAC4000ED8A61 /* JFStateMachine.m */,
 				4EF72503200056770080136D /* JFSwitchMachine.h */,
 				4EF72505200056770080136D /* JFSwitchMachine.m */,
+				4EC664FD22C2CCFE00B126CD /* JFTimerHandler.h */,
+				4EC664FC22C2CCFE00B126CD /* JFTimerHandler.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -636,7 +648,9 @@
 				4EDC5F9C204F5AD000689B8D /* JFKeyboardHelper.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
 				4EB1B3972001C480004C1FF4 /* JFErrorFactory.h in Headers */,
+				4EC6650522C2CCFE00B126CD /* JFCompletions.h in Headers */,
 				4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */,
+				4EC6650322C2CCFE00B126CD /* JFTimerHandler.h in Headers */,
 				4E53A681200CC4B2001EEBFD /* JFWindowController.h in Headers */,
 				4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4E8BCCA021D1183700D77BE3 /* JFJSONValue.h in Headers */,
@@ -675,6 +689,7 @@
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DE1FEE720000292837 /* JFColors.h in Headers */,
 				4EE9DF9F21E4C517008B5B78 /* JFObjectIdentifier.h in Headers */,
+				4EC6650422C2CCFE00B126CD /* JFTimerHandler.h in Headers */,
 				4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */,
 				4E8490731FF4889200B029E6 /* JFImages.h in Headers */,
 				4E5DD4071FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */,
@@ -689,6 +704,7 @@
 				4E53A682200CC4B2001EEBFD /* JFWindowController.h in Headers */,
 				4E515E1A2004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4EF7251220005E180080136D /* JFConnectionMachine.h in Headers */,
+				4EC6650622C2CCFE00B126CD /* JFCompletions.h in Headers */,
 				4EE867B721C9C2DE008DA0A8 /* JFKit.h in Headers */,
 				4EF72508200056780080136D /* JFSwitchMachine.h in Headers */,
 				4E5EE1AF1FFC5E92008444FD /* JFObserversController.h in Headers */,
@@ -877,6 +893,7 @@
 				4E3AC70120024115002CE0A1 /* JFError.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4E503E35214C5B5E0030496B /* JFTableViewCell.m in Sources */,
+				4EC664FF22C2CCFE00B126CD /* JFCompletions.m in Sources */,
 				4EF2C7BF1FF1178300311EB5 /* JFUtilities.m in Sources */,
 				4E5EE1B01FFC5E92008444FD /* JFObserversController.m in Sources */,
 				4EEC977F21CBBD9300A9C138 /* JFSliderController.m in Sources */,
@@ -884,6 +901,7 @@
 				4E415F271FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */,
 				4ECA37B721D06C41009BDA18 /* JFPair.m in Sources */,
 				4E515E1B2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
+				4EC6650122C2CCFE00B126CD /* JFTimerHandler.m in Sources */,
 				4EF7250B200056780080136D /* JFSwitchMachine.m in Sources */,
 				4E8BCC9E21D1183700D77BE3 /* JFJSONArray.m in Sources */,
 				4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */,
@@ -891,7 +909,6 @@
 				4EF6AD8B2051702800A0BFD1 /* JFActivityIndicatorView.m in Sources */,
 				4E84906F1FF4887300B029E6 /* JFImages.m in Sources */,
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
-				4E0BF8A51FE08ED20050114D /* JFBlocks.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
 				4E0932CE21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
 				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
@@ -935,6 +952,8 @@
 				4EE9DFA121E4C517008B5B78 /* JFObjectIdentifier.m in Sources */,
 				4E78298A21CD27EF0009A752 /* JFAlertsController.m in Sources */,
 				4E4F5282200D0E2B00B24F1C /* JFLogger.m in Sources */,
+				4EC6650222C2CCFE00B126CD /* JFTimerHandler.m in Sources */,
+				4EC6650022C2CCFE00B126CD /* JFCompletions.m in Sources */,
 				4E3AC70220024115002CE0A1 /* JFError.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0932CF21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
@@ -945,7 +964,6 @@
 				4E515E1C2004FAD0008D3234 /* JFAppDelegate.m in Sources */,
 				4EF7250C200056780080136D /* JFSwitchMachine.m in Sources */,
 				4ECA37B821D06C41009BDA18 /* JFPair.m in Sources */,
-				4E0BF8A61FE08ED20050114D /* JFBlocks.m in Sources */,
 				4E8490701FF4887300B029E6 /* JFImages.m in Sources */,
 				4E5DD4091FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */,
 				4E8BCC9D21D1183700D77BE3 /* JFJSONObject.m in Sources */,
