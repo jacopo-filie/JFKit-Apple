@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFString_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testConstants;
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFString_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testConstants

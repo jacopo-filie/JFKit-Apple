@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithNibName:(NSString* __nullable)nibNameOrNil bundle:(NSBundle* __nullable)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 /**
@@ -144,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JFOverlayControllerObserver <NSObject>
 
 // =================================================================================================
-// MARK: Methods - User interface management (Layout)
+// MARK: Methods - Layout (Layout)
 // =================================================================================================
 
 @optional

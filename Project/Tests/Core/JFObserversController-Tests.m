@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable)	NSArray<NSObject*>*					observers;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testAsynchronousNotifications;
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize observers			= _observers;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)setUp

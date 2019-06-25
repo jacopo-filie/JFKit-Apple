@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, readonly, nullable) NSString* localizedRecoverySuggestion;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -138,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDomain:(NSErrorDomain)domain code:(NSInteger)code;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 /**

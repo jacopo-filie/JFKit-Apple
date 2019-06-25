@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly)	NSMutableArray<Reference<ObserverType>*>*	references;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)cleanUp;
@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)init
@@ -144,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifyObservers:(void(^)(id observer))notificationBlock;
@@ -205,7 +205,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)addObserver:(id)observer

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly, nullable) JFPersistentContainerBridge* persistentContainer API_AVAILABLE(ios(10.0), macos(10.12));
 
 // =================================================================================================
-// MARK: Methods - Stack management
+// MARK: Methods - Stack
 // =================================================================================================
 
 - (NSManagedObjectContext*)newManagedObjectContext API_DEPRECATED_WITH_REPLACEMENT("-newManagedObjectContextWithConcurrencyType:", ios(3.0, 5.0), macos(10.6, 10.7));
@@ -228,7 +228,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)persistentContainerWithName:(NSString*)name
@@ -280,7 +280,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 }
 
 // =================================================================================================
-// MARK: Methods - Stack management
+// MARK: Methods - Stack
 // =================================================================================================
 
 - (NSManagedObjectContext*)newManagedObjectContext

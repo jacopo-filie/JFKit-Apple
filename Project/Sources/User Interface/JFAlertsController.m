@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) NSMutableSet<JFAlert*>* alerts;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Action sheets)
+// MARK: Methods - Layout (Action sheets)
 // =================================================================================================
 
 #if JF_IOS
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize alerts = _alerts;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (void)dealloc
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Action sheets)
+// MARK: Methods - Layout (Action sheets)
 // =================================================================================================
 
 #if JF_IOS
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 // =================================================================================================
-// MARK: Methods - User interface management (Alert views)
+// MARK: Methods - Layout (Alert views)
 // =================================================================================================
 
 #if JF_IOS
@@ -277,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 // =================================================================================================
-// MARK: Methods (JFAlertViewDelegate) - User interface management
+// MARK: Methods (JFAlertViewDelegate) - Layout
 // =================================================================================================
 
 - (void)alert:(JFAlert*)alert didDismissWithButton:(JFAlertButton* __nullable)button

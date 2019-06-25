@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFObjectIdentifier_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testObjectID;
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFObjectIdentifier_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testObjectID

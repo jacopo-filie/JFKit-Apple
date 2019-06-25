@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic)			BOOL					shouldFulfillOnDidPerform;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)setUpWithDescription:(NSString*)description beginningState:(JFConnectionState)state failureExpected:(BOOL)shouldFail;
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize shouldFulfillOnDidPerform = _shouldFulfillOnDidPerform;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)setUpWithDescription:(NSString*)description beginningState:(JFConnectionState)state failureExpected:(BOOL)shouldFail
@@ -254,7 +254,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Protocols (JFStateMachineDelegate) - State management
+// MARK: Methods (JFStateMachineDelegate) - State
 // =================================================================================================
 
 - (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id __nullable)context

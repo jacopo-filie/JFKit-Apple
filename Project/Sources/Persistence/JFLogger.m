@@ -69,28 +69,28 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 @property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegatesController;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (NSString*)dateStringFromDate:(NSDate*)date;
 - (NSString*)timeStringFromDate:(NSDate*)date;
 
 // =================================================================================================
-// MARK: Methods - File system management
+// MARK: Methods - File system
 // =================================================================================================
 
 - (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate;
 - (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate;
 
 // =================================================================================================
-// MARK: Methods - Service management
+// MARK: Methods - Service
 // =================================================================================================
 
 - (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate;
 - (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate;
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
@@ -275,7 +275,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)init
@@ -296,7 +296,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 + (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
@@ -437,7 +437,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - File system management
+// MARK: Methods - File system
 // =================================================================================================
 
 - (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate
@@ -544,7 +544,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)addDelegate:(id<JFLoggerDelegate>)delegate
@@ -558,7 +558,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Service management
+// MARK: Methods - Service
 // =================================================================================================
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
@@ -717,7 +717,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Service management (Convenience)
+// MARK: Methods - Service (Convenience)
 // =================================================================================================
 
 - (void)logAlert:(NSString*)message tags:(JFLoggerTags)tags
@@ -761,7 +761,7 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date

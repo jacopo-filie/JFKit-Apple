@@ -290,7 +290,7 @@ IB_DESIGNABLE
 - (void)setButtonTitleColor:(UIColor* __nullable)buttonTitleColor forState:(UIControlState)state;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

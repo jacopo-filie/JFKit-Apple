@@ -45,7 +45,7 @@ NSTimeInterval const JFAnimationDuration = 0.25;
 #pragma mark -
 
 // =================================================================================================
-// MARK: Functions - Comparison management
+// MARK: Functions - Comparison
 // =================================================================================================
 
 BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2)
@@ -81,7 +81,7 @@ BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj
 }
 
 // =================================================================================================
-// MARK: Functions - Resources management
+// MARK: Functions - Resources
 // =================================================================================================
 
 id __nullable JFApplicationInfoForKey(NSString* key)
@@ -100,7 +100,7 @@ NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSSt
 }
 
 // =================================================================================================
-// MARK: Functions - Runtime management
+// MARK: Functions - Runtime
 // =================================================================================================
 
 void JFPerformOnMainThread(JFBlock block)

@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly, getter=isWindowHidden) BOOL windowHidden;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithWindow:(JFWindow*)window NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Events management (Window)
+// MARK: Methods - Events (Window)
 // =================================================================================================
 
 /**

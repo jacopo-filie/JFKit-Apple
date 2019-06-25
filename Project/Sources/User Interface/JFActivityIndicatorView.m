@@ -94,19 +94,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setNeedsRebuildLayout;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFActivityIndicatorView*)view;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)toggleAnimations;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Layout)
+// MARK: Methods - Layout (Layout)
 // =================================================================================================
 
 - (void)rebuildLayout;
@@ -795,7 +795,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFActivityIndicatorView*)view
@@ -847,7 +847,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)toggleAnimations
@@ -874,7 +874,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Layout)
+// MARK: Methods - Layout (Layout)
 // =================================================================================================
 
 - (void)didMoveToWindow

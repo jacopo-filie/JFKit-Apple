@@ -63,7 +63,7 @@ FOUNDATION_EXPORT NSTimeInterval const JFAnimationDuration;
 #pragma mark -
 
 // =================================================================================================
-// MARK: Functions - Comparison management
+// MARK: Functions - Comparison
 // =================================================================================================
 
 /**
@@ -75,7 +75,7 @@ FOUNDATION_EXPORT NSTimeInterval const JFAnimationDuration;
 FOUNDATION_EXPORT BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2);
 
 // =================================================================================================
-// MARK: Functions - Resources management
+// MARK: Functions - Resources
 // =================================================================================================
 
 /**
@@ -103,7 +103,7 @@ FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFile(NSBundle* bundle,
 FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* __nullable filename, NSString* __nullable type);
 
 // =================================================================================================
-// MARK: Functions - Runtime management
+// MARK: Functions - Runtime
 // =================================================================================================
 
 /**

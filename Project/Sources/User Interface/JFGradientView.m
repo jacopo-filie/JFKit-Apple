@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFGradientView ()
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFGradientView*)object;
@@ -117,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFGradientView*)object
@@ -148,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)updateGradientLayer

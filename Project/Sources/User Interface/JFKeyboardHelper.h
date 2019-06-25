@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) IBOutlet NSLayoutConstraint* resizableViewBottomConstraint;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 /**
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JFKeyboardHelperObserver <NSObject>
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 @optional
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly) CGRect endFrame;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

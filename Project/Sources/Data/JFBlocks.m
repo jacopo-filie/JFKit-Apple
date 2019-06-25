@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize block	= _block;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)completionWithBlock:(JFCompletionBlock)block
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 - (void)executeWithError:(NSError*)error
@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize block	= _block;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)completionWithBlock:(JFSimpleCompletionBlock)block
@@ -155,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 - (void)execute
@@ -229,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize block	= _block;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)handlerWithBlock:(JFTimerHandlerBlock)block
@@ -248,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Timer management
+// MARK: Methods - Timer
 // =================================================================================================
 
 - (void)timerDidFire:(NSTimer*)timer

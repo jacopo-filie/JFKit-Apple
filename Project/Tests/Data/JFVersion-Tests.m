@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFVersion_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testCreateWithCurrentOperatingSystemVersion;
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFVersion_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testCreateWithCurrentOperatingSystemVersion

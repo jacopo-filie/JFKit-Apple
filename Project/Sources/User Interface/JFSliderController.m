@@ -65,13 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly, nullable) UIView* rootPanelContainer;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initialize:(JFSliderController*)instance;
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifyDidActivatePanel:(JFSliderControllerPanel)panel;
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyWillDeactivatePanel:(JFSliderControllerPanel)panel;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)installActivateRootPanelButton;
@@ -90,14 +90,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updatePanelContainersFrames;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Actions)
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer*)recognizer;
 - (void)activateRootPanelButtonTapped:(UIButton*)sender;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Sliding)
+// MARK: Methods - Layout (Sliding)
 // =================================================================================================
 
 - (void)cleanUp:(BOOL)finished animated:(BOOL)animated;
@@ -320,7 +320,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initialize:(JFSliderController*)instance
@@ -356,7 +356,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifyDidActivatePanel:(JFSliderControllerPanel)panel
@@ -402,7 +402,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (BOOL)activatePanel:(JFSliderControllerPanel)panel
@@ -520,7 +520,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Actions)
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
 - (void)activateRootPanelButtonTapped:(UIButton*)sender
@@ -568,7 +568,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Rotation)
+// MARK: Methods - Layout (Rotation)
 // =================================================================================================
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
@@ -598,7 +598,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Sliding)
+// MARK: Methods - Layout (Sliding)
 // =================================================================================================
 
 - (void)cleanUp:(BOOL)finished animated:(BOOL)animated
@@ -958,7 +958,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (View lifecycle)
+// MARK: Methods - Layout (View lifecycle)
 // =================================================================================================
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
@@ -1087,7 +1087,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 + (NSString*)debugStringFromPanel:(JFSliderControllerPanel)panel

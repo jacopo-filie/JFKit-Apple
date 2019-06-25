@@ -76,13 +76,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSArray* currentButtons;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex;
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button;
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyWillPresent;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 #if JF_IOS
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)prepareAlertView:(JFBlock __nullable)completion;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Alerts)
+// MARK: Methods - Layout (Alerts)
 // =================================================================================================
 
 - (void)alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -179,7 +179,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize otherButtons = _otherButtons;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)init
@@ -195,7 +195,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex
@@ -208,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button
@@ -240,7 +240,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (BOOL)dismiss:(JFBlock __nullable)completion
@@ -530,7 +530,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Alerts)
+// MARK: Methods - Layout (Alerts)
 // =================================================================================================
 
 - (void)alert:(id)alert clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -704,7 +704,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize title = _title;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)buttonWithTitle:(NSString*)title

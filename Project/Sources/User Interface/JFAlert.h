@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, nullable) NSArray* otherButtons; // Array of "JFAlertButton" objects.
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 /**
@@ -230,7 +230,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JFAlertDelegate <NSObject>
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 @optional
@@ -287,7 +287,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSString* title;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

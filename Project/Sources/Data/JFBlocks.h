@@ -186,7 +186,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 @property (strong, nonatomic, readonly) void (^block)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error);
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -209,7 +209,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 - (instancetype)initWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**
@@ -303,7 +303,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 @property (strong, nonatomic, readonly) JFSimpleCompletionBlock block;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -326,7 +326,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 - (instancetype)initWithBlock:(JFSimpleCompletionBlock)block NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**
@@ -411,7 +411,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 @property (strong, nonatomic, readonly) JFTimerHandlerBlock block;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -434,7 +434,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 - (instancetype)initWithBlock:(JFTimerHandlerBlock)block NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**

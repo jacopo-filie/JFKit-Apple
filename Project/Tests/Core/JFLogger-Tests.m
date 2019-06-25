@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) JFLoggerSubclass* logger;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)setUp;
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)testSimpleLogging;
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 - (NSArray*)readTestLogFileLines;
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize logger = _logger;
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)setUp
@@ -160,7 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 - (NSArray*)readTestLogFileLines

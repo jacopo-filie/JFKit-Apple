@@ -189,7 +189,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 @property (strong, nonatomic, nullable) UIViewController* rootViewController;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 /**
@@ -216,7 +216,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 - (UIViewController* __nullable)viewControllerForPanel:(JFSliderControllerPanel)panel;
 
 // =================================================================================================
-// MARK: Methods - Utilities management
+// MARK: Methods - Utilities
 // =================================================================================================
 
 /**
@@ -260,7 +260,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 @protocol JFSliderControllerDelegate <NSObject>
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 @optional
@@ -316,7 +316,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 - (void)sliderController:(JFSliderController*)sliderController willDeactivatePanel:(JFSliderControllerPanel)panel;
 
 // =================================================================================================
-// MARK: Methods - User interface management (Rotation)
+// MARK: Methods - Layout (Rotation)
 // =================================================================================================
 
 @optional

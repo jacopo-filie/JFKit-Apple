@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readwrite, null_resettable) JFWindowController* windowController;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (JFWindowController*)prepareWindowController;
@@ -114,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window

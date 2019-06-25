@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize domain = _domain;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)initWithDomain:(NSErrorDomain)domain
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (NSString* __nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode
@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Data management (Convenience)
+// MARK: Methods - Data (Convenience)
 // =================================================================================================
 
 - (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode
@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Factory management
+// MARK: Methods - Factory
 // =================================================================================================
 
 - (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values
@@ -160,7 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Factory management (Convenience)
+// MARK: Methods - Factory (Convenience)
 // =================================================================================================
 
 - (JFError*)errorWithCode:(NSInteger)errorCode

@@ -176,7 +176,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 @property (assign, readonly) JFStateTransition transition;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -193,7 +193,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 - (instancetype)initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 - (void)waitUntilCurrentTransitionIsFinished;
 
 // =================================================================================================
-// MARK: Methods - Execution management (Convenience)
+// MARK: Methods - Execution (Convenience)
 // =================================================================================================
 
 /**
@@ -239,7 +239,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 - (void)perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 /**
@@ -249,7 +249,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 - (void)clearDelegate;
 
 // =================================================================================================
-// MARK: Methods - State management
+// MARK: Methods - State
 // =================================================================================================
 
 /**
@@ -299,7 +299,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 @protocol JFStateMachineDelegate <NSObject>
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 @required
@@ -376,7 +376,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 @property (strong, nonatomic, nullable) JFStateMachineTransition* nextTransitionOnSuccess;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

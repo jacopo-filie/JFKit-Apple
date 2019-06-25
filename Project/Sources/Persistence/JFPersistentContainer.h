@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 @property (strong, readonly) NSManagedObjectContext* viewContext;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 - (instancetype)initWithName:(NSString*)name managedObjectModel:(NSManagedObjectModel*)model NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Stack management
+// MARK: Methods - Stack
 // =================================================================================================
 
 /**

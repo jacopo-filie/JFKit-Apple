@@ -167,7 +167,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 @property (assign, readonly, getter=isResetting) BOOL resetting;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -178,7 +178,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**

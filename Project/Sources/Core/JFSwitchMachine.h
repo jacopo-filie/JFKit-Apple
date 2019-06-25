@@ -107,7 +107,7 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
 @property (assign, readonly, getter=isOpening) BOOL opening;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -118,7 +118,7 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**

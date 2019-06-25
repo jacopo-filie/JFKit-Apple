@@ -120,7 +120,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (JFVersion*)currentOperatingSystemVersion
@@ -217,7 +217,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 }
 
 // =================================================================================================
-// MARK: Methods - Comparison management
+// MARK: Methods - Comparison
 // =================================================================================================
 
 - (BOOL)compareToCurrentOperatingSystemVersion:(JFRelation)relation
@@ -306,7 +306,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 }
 
 // =================================================================================================
-// MARK: Methods - Comparison management (iOS)
+// MARK: Methods - Comparison (iOS)
 // =================================================================================================
 
 + (BOOL)isIOS:(JFVersion*)version
@@ -368,7 +368,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 }
 
 // =================================================================================================
-// MARK: Methods - Comparison management (macOS)
+// MARK: Methods - Comparison (macOS)
 // =================================================================================================
 
 + (BOOL)isMacOS:(JFVersion*)version
@@ -470,7 +470,7 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 }
 
 // =================================================================================================
-// MARK: Protocols (NSCopying)
+// MARK: Methods (NSCopying)
 // =================================================================================================
 
 - (id)copyWithZone:(NSZone* __nullable)zone

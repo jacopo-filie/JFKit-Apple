@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 #	endif
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifiedDidReceiveMemoryWarning:(NSNotification*)notification;
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object
@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifiedDidReceiveMemoryWarning:(NSNotification*)notification
@@ -180,7 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize object	= _object;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object
@@ -218,7 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize object	= _object;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object

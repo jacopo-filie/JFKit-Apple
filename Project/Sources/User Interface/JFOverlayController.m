@@ -68,13 +68,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) UIView* rootContainer;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFOverlayController*)controller;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)beginOverlayViewTransition:(BOOL)appearing animated:(BOOL)animated;
@@ -354,7 +354,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (void)initializeProperties:(JFOverlayController*)controller
@@ -387,7 +387,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)addObserver:(id<JFOverlayControllerObserver>)observer
@@ -401,7 +401,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 - (void)beginOverlayViewTransition:(BOOL)appearing animated:(BOOL)animated
@@ -508,7 +508,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (View lifecycle)
+// MARK: Methods - Layout (View lifecycle)
 // =================================================================================================
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods

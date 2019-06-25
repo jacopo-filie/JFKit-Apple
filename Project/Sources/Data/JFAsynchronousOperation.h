@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFAsynchronousOperation : NSOperation
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 /**

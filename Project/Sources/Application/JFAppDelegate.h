@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) JFWindowController* windowController;
 
 // =================================================================================================
-// MARK: Methods - User interface management
+// MARK: Methods - Layout
 // =================================================================================================
 
 /**

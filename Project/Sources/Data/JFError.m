@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 + (instancetype)errorFromNSError:(NSError*)error
@@ -146,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 + (NSString*)composeDebugDescriptionForError:(NSError*)error
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Protocols (NSCopying)
+// MARK: Methods (NSCopying)
 // =================================================================================================
 
 - (instancetype)copyWithZone:(NSZone* __nullable)zone

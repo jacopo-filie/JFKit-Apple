@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFColor_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testCategory;
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFColor_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testCategory

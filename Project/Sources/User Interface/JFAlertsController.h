@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFAlertsController : NSObject
 
 // =================================================================================================
-// MARK: Methods - User interface management (Action sheets)
+// MARK: Methods - Layout (Action sheets)
 // =================================================================================================
 
 #if JF_IOS
@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 // =================================================================================================
-// MARK: Methods - User interface management (Alert views)
+// MARK: Methods - Layout (Alert views)
 // =================================================================================================
 
 #if JF_IOS

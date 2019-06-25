@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFShortcuts_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testMacros;
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFShortcuts_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testMacros

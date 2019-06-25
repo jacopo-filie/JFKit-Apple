@@ -291,7 +291,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 @property (strong, nonatomic, readonly) NSString* string;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -360,7 +360,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 - (instancetype)initWithVersionString:(NSString*)versionString;
 
 // =================================================================================================
-// MARK: Methods - Comparison management
+// MARK: Methods - Comparison
 // =================================================================================================
 
 /**
@@ -409,7 +409,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 - (BOOL)isLessThanVersion:(JFVersion*)version;
 
 // =================================================================================================
-// MARK: Methods - Comparison management (iOS)
+// MARK: Methods - Comparison (iOS)
 // =================================================================================================
 
 /**
@@ -475,7 +475,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 + (BOOL)isIOS11Plus;
 
 // =================================================================================================
-// MARK: Methods - Comparison management (macOS)
+// MARK: Methods - Comparison (macOS)
 // =================================================================================================
 
 /**

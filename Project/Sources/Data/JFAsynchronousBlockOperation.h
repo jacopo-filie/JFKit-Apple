@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly)	JFBlock	executionBlock;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

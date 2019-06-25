@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, readonly) NSUInteger count;
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 /**
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyObservers:(void(^)(ObserverType observer))notificationBlock queue:(NSOperationQueue*)queue waitUntilFinished:(BOOL)waitUntilFinished;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 /**

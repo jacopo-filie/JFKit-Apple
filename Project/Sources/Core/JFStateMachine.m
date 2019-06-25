@@ -69,13 +69,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, readwrite) JFState state;
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 - (void)perform:(JFStateMachineTransition*)transition waitUntilFinished:(BOOL)waitUntilFinished queuePriority:(NSOperationQueuePriority)priority;
 
 // =================================================================================================
-// MARK: Methods - State management
+// MARK: Methods - State
 // =================================================================================================
 
 - (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing __nullable *)outError;
@@ -157,7 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (void)dealloc
@@ -181,7 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Execution management
+// MARK: Methods - Execution
 // =================================================================================================
 
 - (void)perform:(JFStateMachineTransition*)transition
@@ -359,7 +359,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Execution management (Convenience)
+// MARK: Methods - Execution (Convenience)
 // =================================================================================================
 
 - (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* __nullable)completion
@@ -373,7 +373,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)clearDelegate
@@ -383,7 +383,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - State management
+// MARK: Methods - State
 // =================================================================================================
 
 - (NSArray<NSNumber*>*)beginningStatesForTransition:(JFStateTransition)transition
@@ -459,7 +459,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize nextTransitionOnSuccess	= _nextTransitionOnSuccess;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)initWithTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion

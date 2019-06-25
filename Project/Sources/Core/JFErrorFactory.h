@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) NSErrorDomain domain;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDomain:(NSErrorDomain)domain NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 /**
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values;
 
 // =================================================================================================
-// MARK: Methods - Factory management
+// MARK: Methods - Factory
 // =================================================================================================
 
 /**
@@ -171,7 +171,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (JFError*)newPlaceholderError:(NSError* __nullable)underlyingError;
 
 // =================================================================================================
-// MARK: Methods - Factory management (Convenience)
+// MARK: Methods - Factory (Convenience)
 // =================================================================================================
 
 /**

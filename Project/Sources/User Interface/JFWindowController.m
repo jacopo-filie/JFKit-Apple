@@ -51,7 +51,7 @@ static void* JFKVOContext = &JFKVOContext;
 @property (assign, nonatomic, readwrite, getter=isWindowHidden) BOOL windowHidden;
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 #if JF_IOS
@@ -119,7 +119,7 @@ static void* JFKVOContext = &JFKVOContext;
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (void)dealloc
@@ -179,7 +179,7 @@ static void* JFKVOContext = &JFKVOContext;
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 #if JF_IOS
@@ -374,7 +374,7 @@ static void* JFKVOContext = &JFKVOContext;
 #endif
 
 // =================================================================================================
-// MARK: Methods - Events management (Window)
+// MARK: Methods - Events (Window)
 // =================================================================================================
 
 - (void)windowDidBecomeHidden

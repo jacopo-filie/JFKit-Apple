@@ -45,14 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) JFObserversController<id<JFKeyboardHelperObserver>>* observersController;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (UIViewAnimationOptions)animationOptionFromCurve:(UIViewAnimationCurve)curve;
 - (JFKeyboardInfo*)extractInfoFromNotification:(NSNotification*)notification;
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifiedDidChangeFrame:(NSNotification*)notification;
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize resizableViewBottomConstraint = _resizableViewBottomConstraint;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (void)dealloc
@@ -117,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 - (UIViewAnimationOptions)animationOptionFromCurve:(UIViewAnimationCurve)curve
@@ -145,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Notifications management
+// MARK: Methods - Notifications
 // =================================================================================================
 
 - (void)notifiedDidChangeFrame:(NSNotification*)notification
@@ -243,7 +243,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)addObserver:(id<JFKeyboardHelperObserver>)observer
@@ -274,7 +274,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize endFrame = _endFrame;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)initWithFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationCurve:(UIViewAnimationCurve)curve duration:(NSTimeInterval)duration
@@ -290,7 +290,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Protocols (NSCopying)
+// MARK: Methods (NSCopying)
 // =================================================================================================
 
 - (id)copyWithZone:(NSZone* __nullable)zone

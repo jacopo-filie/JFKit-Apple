@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - State management
+// MARK: Methods - State
 // =================================================================================================
 
 - (void)connect
@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - State management
+// MARK: Methods - State
 // =================================================================================================
 
 - (NSArray<NSNumber*>*)beginningStatesForTransition:(JFStateTransition)transition

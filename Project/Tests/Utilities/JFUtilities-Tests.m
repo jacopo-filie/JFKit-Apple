@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFUtilities_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testConstants;
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFUtilities_Tests
 
 // =================================================================================================
-// MARK: Methods - Tests management
+// MARK: Methods - Tests
 // =================================================================================================
 
 - (void)testConstants

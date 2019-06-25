@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIButton (JFKit_Private)
 
 // =================================================================================================
-// MARK: Methods - User interface management (Actions)
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
 - (void)jf_buttonTapped:(UIButton*)button;
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - User interface management (Actions)
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
 - (void)jf_setActionBlock:(JFButtonBlock __nullable)block
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation UIButton (JFKit_Private)
 
 // =================================================================================================
-// MARK: Methods - User interface management (Actions)
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
 - (void)jf_buttonTapped:(UIButton*)button

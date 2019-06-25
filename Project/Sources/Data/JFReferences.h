@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nullable) ObjectType object;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (unsafe_unretained, nonatomic, nullable) ObjectType object;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) ObjectType object;
 
 // =================================================================================================
-// MARK: Methods - Memory management
+// MARK: Methods - Memory
 // =================================================================================================
 
 /**

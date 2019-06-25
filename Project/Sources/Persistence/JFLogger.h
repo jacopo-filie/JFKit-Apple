@@ -332,7 +332,7 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 @property (assign) JFLoggerRotation rotation;
 
 // =================================================================================================
-// MARK: Methods - Data management
+// MARK: Methods - Data
 // =================================================================================================
 
 /**
@@ -371,7 +371,7 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 - (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 // =================================================================================================
-// MARK: Methods - Observers management
+// MARK: Methods - Observers
 // =================================================================================================
 
 /**
@@ -387,7 +387,7 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 - (void)removeDelegate:(id<JFLoggerDelegate>)delegate;
 
 // =================================================================================================
-// MARK: Methods - Service management
+// MARK: Methods - Service
 // =================================================================================================
 
 /**
@@ -423,7 +423,7 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
 
 // =================================================================================================
-// MARK: Methods - Service management (Convenience)
+// MARK: Methods - Service (Convenience)
 // =================================================================================================
 
 /**
