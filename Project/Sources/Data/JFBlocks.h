@@ -53,7 +53,7 @@ typedef void (^JFBlock) (void);
  * A block of code to be executed with a parameter.
  * @param array A generic array object.
  */
-typedef void (^JFBlockWithArray) (NSArray* array);
+typedef void (^JFBlockWithArray) (NSArray* __nullable array);
 
 /**
  * A block of code to be executed with a parameter.
@@ -65,19 +65,19 @@ typedef void (^JFBlockWithBOOL) (BOOL value);
  * A block of code to be executed with a parameter.
  * @param data A data object.
  */
-typedef void (^JFBlockWithData) (NSData* data);
+typedef void (^JFBlockWithData) (NSData* __nullable data);
 
 /**
  * A block of code to be executed with a parameter.
  * @param date A date object.
  */
-typedef void (^JFBlockWithDate) (NSDate* date);
+typedef void (^JFBlockWithDate) (NSDate* __nullable date);
 
 /**
  * A block of code to be executed with a parameter.
  * @param dictionary A generic dictionary object.
  */
-typedef void (^JFBlockWithDictionary) (NSDictionary* dictionary);
+typedef void (^JFBlockWithDictionary) (NSDictionary* __nullable dictionary);
 
 /**
  * A block of code to be executed with a parameter.
@@ -89,7 +89,7 @@ typedef void (^JFBlockWithDouble) (double value);
  * A block of code to be executed with a parameter.
  * @param error An error object.
  */
-typedef void (^JFBlockWithError) (NSError* error);
+typedef void (^JFBlockWithError) (NSError* __nullable error);
 
 /**
  * A block of code to be executed with a parameter.
@@ -101,7 +101,7 @@ typedef void (^JFBlockWithFloat) (float value);
  * A block of code to be executed with a parameter.
  * @param image An image object.
  */
-typedef void (^JFBlockWithImage) (JFImage* image);
+typedef void (^JFBlockWithImage) (JFImage* __nullable image);
 
 /**
  * A block of code to be executed with a parameter.
@@ -113,37 +113,37 @@ typedef void (^JFBlockWithInteger) (NSInteger value);
  * A block of code to be executed with a parameter.
  * @param notification A notification object.
  */
-typedef void (^JFBlockWithNotification) (NSNotification* notification);
+typedef void (^JFBlockWithNotification) (NSNotification* __nullable notification);
 
 /**
  * A block of code to be executed with a parameter.
  * @param number A number object.
  */
-typedef void (^JFBlockWithNumber) (NSNumber* number);
+typedef void (^JFBlockWithNumber) (NSNumber* __nullable number);
 
 /**
  * A block of code to be executed with a parameter.
  * @param object A generic object.
  */
-typedef void (^JFBlockWithObject) (id<NSObject> object);
+typedef void (^JFBlockWithObject) (id<NSObject> __nullable object);
 
 /**
  * A block of code to be executed with a parameter.
  * @param set A generic set object.
  */
-typedef void (^JFBlockWithSet) (NSSet* set);
+typedef void (^JFBlockWithSet) (NSSet* __nullable set);
 
 /**
  * A block of code to be executed with a parameter.
  * @param string A string object.
  */
-typedef void (^JFBlockWithString) (NSString* string);
+typedef void (^JFBlockWithString) (NSString* __nullable string);
 
 /**
  * A block of code to be executed with a parameter.
  * @param value A value object.
  */
-typedef void (^JFBlockWithValue) (NSValue* value);
+typedef void (^JFBlockWithValue) (NSValue* __nullable value);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
