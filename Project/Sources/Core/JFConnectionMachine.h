@@ -45,22 +45,22 @@ typedef NS_ENUM(JFState, JFConnectionState)
 	 * The state machine is ready to perform the connection.
 	 */
 	JFConnectionStateReady,
-
+	
 	/**
 	 * The state machine is connected.
 	 */
 	JFConnectionStateConnected,
-
+	
 	/**
 	 * The state machine is disconnected.
 	 */
 	JFConnectionStateDisconnected,
-
+	
 	/**
 	 * The state machine has lost connection.
 	 */
 	JFConnectionStateConnectionLost,
-
+	
 	/**
 	 * The state machine is in a dirty state because something went wrong while trying to disconnect or reset the machine. To leave this state, the machine can only try to perform the transition `resetting`.
 	 */

@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
  * @param name The name of the persistent container.
  * @param model The `NSManagedObjectModel` object to be used by the persistent container.
  * @return An initialized persistent container using the passed in name and model.
-*/
+ */
 + (instancetype)persistentContainerWithName:(NSString*)name managedObjectModel:(NSManagedObjectModel*)model;
 
 /**

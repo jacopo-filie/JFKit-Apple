@@ -39,24 +39,24 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define RETURN_IS_MAJOR(_macro, _major)															\
-static BOOL retVal; static dispatch_once_t onceToken;											\
-dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorComponent:_major]); });	\
+#define RETURN_IS_MAJOR(_macro, _major) \
+static BOOL retVal; static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorComponent:_major]); }); \
 return retVal
 
-#define RETURN_IS_MAJOR_MINOR(_macro, _major, _minor)															\
-static BOOL retVal; static dispatch_once_t onceToken;															\
-dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorComponent:_major minor:_minor]); });	\
+#define RETURN_IS_MAJOR_MINOR(_macro, _major, _minor) \
+static BOOL retVal; static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ retVal = _macro([JFVersion versionWithMajorComponent:_major minor:_minor]); }); \
 return retVal
 
 // =================================================================================================
 // MARK: Macros - Shortcuts
 // =================================================================================================
 
-#define RETURN_IS_IOS(_major)					RETURN_IS_MAJOR(iOS, _major)
-#define RETURN_IS_IOS_PLUS(_major)				RETURN_IS_MAJOR(iOSPlus, _major)
-#define RETURN_IS_MACOS(_major, _minor)			RETURN_IS_MAJOR_MINOR(macOS, _major, _minor)
-#define RETURN_IS_MACOS_PLUS(_major, _minor)	RETURN_IS_MAJOR_MINOR(macOSPlus, _major, _minor)
+#define RETURN_IS_IOS(_major) RETURN_IS_MAJOR(iOS, _major)
+#define RETURN_IS_IOS_PLUS(_major) RETURN_IS_MAJOR(iOSPlus, _major)
+#define RETURN_IS_MACOS(_major, _minor) RETURN_IS_MAJOR_MINOR(macOS, _major, _minor)
+#define RETURN_IS_MACOS_PLUS(_major, _minor) RETURN_IS_MAJOR_MINOR(macOSPlus, _major, _minor)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,7 +66,7 @@ return retVal
 // MARK: Constants - Data
 // =================================================================================================
 
-NSInteger const	JFVersionComponentNotValid	= -1;
+NSInteger const JFVersionComponentNotValid = -1;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -78,11 +78,11 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize	build	= _build;
-@synthesize	major	= _major;
-@synthesize	minor	= _minor;
-@synthesize	patch	= _patch;
-@synthesize string	= _string;
+@synthesize build = _build;
+@synthesize major = _major;
+@synthesize minor = _minor;
+@synthesize patch = _patch;
+@synthesize string = _string;
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -163,13 +163,12 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 		build = nil;
 	
 	self = [super init];
-	if(self)
-	{
-		_build = (build ? [NSString stringWithString:build] : nil);
-		_major = ((major >= 0) ? major : JFVersionComponentNotValid);
-		_minor = ((minor >= 0) ? minor : JFVersionComponentNotValid);
-		_patch = ((patch >= 0) ? patch : JFVersionComponentNotValid);
-	}
+	
+	_build = (build ? [NSString stringWithString:build] : nil);
+	_major = ((major >= 0) ? major : JFVersionComponentNotValid);
+	_minor = ((minor >= 0) ? minor : JFVersionComponentNotValid);
+	_patch = ((patch >= 0) ? patch : JFVersionComponentNotValid);
+	
 	return self;
 }
 
@@ -246,9 +245,12 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 		if((comp1 == JFVersionComponentNotValid) || (comp2 == JFVersionComponentNotValid))
 			continue;
 		
-		if(comp1 == comp2)		result = NSOrderedSame;
-		else if(comp1 < comp2)	result = NSOrderedAscending;
-		else if(comp1 > comp2)	result = NSOrderedDescending;
+		if(comp1 == comp2)
+			result = NSOrderedSame;
+		else if(comp1 < comp2)
+			result = NSOrderedAscending;
+		else if(comp1 > comp2)
+			result = NSOrderedDescending;
 	}
 	
 	if(result == NSOrderedSame)
@@ -260,17 +262,37 @@ NSInteger const	JFVersionComponentNotValid	= -1;
 			result = comparatorBlock(build1, build2);
 	}
 	
-	BOOL ascending	= (result == NSOrderedAscending);
-	BOOL descending	= (result == NSOrderedDescending);
+	BOOL ascending = (result == NSOrderedAscending);
+	BOOL descending = (result == NSOrderedDescending);
 	
 	BOOL retVal = NO;
 	switch(relation)
 	{
-		case JFRelationLessThan:			retVal = ascending;						break;
-		case JFRelationLessThanOrEqual:		retVal = (ascending || !descending);	break;
-		case JFRelationEqual:				retVal = (!ascending && !descending);	break;
-		case JFRelationGreaterThanOrEqual:	retVal = (descending || !ascending);	break;
-		case JFRelationGreaterThan:			retVal = descending;					break;
+		case JFRelationLessThan:
+		{
+			retVal = ascending;
+			break;
+		}
+		case JFRelationLessThanOrEqual:
+		{
+			retVal = (ascending || !descending);
+			break;
+		}
+		case JFRelationEqual:
+		{
+			retVal = (!ascending && !descending);
+			break;
+		}
+		case JFRelationGreaterThanOrEqual:
+		{
+			retVal = (descending || !ascending);
+			break;
+		}
+		case JFRelationGreaterThan:
+		{
+			retVal = descending;
+			break;
+		}
 		default:
 			break;
 	}

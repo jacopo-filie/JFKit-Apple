@@ -49,12 +49,12 @@ typedef NS_ENUM(UInt8, JFSliderControllerPanel)
 	 * The left slider panel.
 	 */
 	JFSliderControllerPanelLeft,
-
+	
 	/**
 	 * The right slider panel.
 	 */
 	JFSliderControllerPanelRight,
-
+	
 	/**
 	 * The center slider panel.
 	 */
@@ -70,22 +70,22 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 	 * No panel is being moved.
 	 */
 	JFSliderControllerTransitionNone,
-
+	
 	/**
 	 * The left panel is being hidden and the center panel is being shown.
 	 */
 	JFSliderControllerTransitionLeftToRoot,
-
+	
 	/**
 	 * The right panel is being hidden and the center panel is being shown.
 	 */
 	JFSliderControllerTransitionRightToRoot,
-
+	
 	/**
 	 * The left panel is being shown and the center panel is being partially hidden.
 	 */
 	JFSliderControllerTransitionRootToLeft,
-
+	
 	/**
 	 * The right panel is being shown and the center panel is being partially hidden.
 	 */

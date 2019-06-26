@@ -290,7 +290,7 @@ static void* JFKVOContext = &JFKVOContext;
 	if(macOS10_6)
 		self.windowHidden = ![self.window isVisible];
 #endif
-
+	
 	[self windowDidResignKey];
 }
 

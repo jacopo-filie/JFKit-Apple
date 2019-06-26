@@ -65,8 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize observerController	= _observerController;
-@synthesize observers			= _observers;
+@synthesize observerController = _observerController;
+@synthesize observers = _observers;
 
 // =================================================================================================
 // MARK: Methods - Tests

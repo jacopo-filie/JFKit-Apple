@@ -38,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-NSString* const	JFEmptyString	= @"";
-NSString* const	JFFalseString	= @"False";
-NSString* const	JFNoString		= @"No";
-NSString* const	JFTrueString	= @"True";
-NSString* const	JFYesString		= @"Yes";
+NSString* const JFEmptyString = @"";
+NSString* const JFFalseString = @"False";
+NSString* const JFNoString = @"No";
+NSString* const JFTrueString = @"True";
+NSString* const JFYesString = @"Yes";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,13 +117,13 @@ NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSSt
 	
 	NSCharacterSet* characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
 	
-	givenName	= [givenName stringByTrimmingCharactersInSet:characterSet];
-	middleName	= [middleName stringByTrimmingCharactersInSet:characterSet];
-	familyName	= [familyName stringByTrimmingCharactersInSet:characterSet];
+	givenName = [givenName stringByTrimmingCharactersInSet:characterSet];
+	middleName = [middleName stringByTrimmingCharactersInSet:characterSet];
+	familyName = [familyName stringByTrimmingCharactersInSet:characterSet];
 	
-	BOOL isGivenNameValid	= !JFStringIsNullOrEmpty(givenName);
-	BOOL isMiddleNameValid	= !JFStringIsNullOrEmpty(middleName);
-	BOOL isFamilyNameValid	= !JFStringIsNullOrEmpty(familyName);
+	BOOL isGivenNameValid = !JFStringIsNullOrEmpty(givenName);
+	BOOL isMiddleNameValid = !JFStringIsNullOrEmpty(middleName);
+	BOOL isFamilyNameValid = !JFStringIsNullOrEmpty(familyName);
 	
 	if(!isGivenNameValid && !isMiddleNameValid && !isFamilyNameValid)
 		return nil;
@@ -133,18 +133,24 @@ NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSSt
 	if(@available(iOS 9.0, macOS 10.11, *))
 	{
 		NSPersonNameComponents* components = [NSPersonNameComponents new];
-		if(isGivenNameValid)	components.givenName = givenName;
-		if(isMiddleNameValid)	components.middleName = middleName;
-		if(isFamilyNameValid)	components.familyName = familyName;
+		if(isGivenNameValid)
+			components.givenName = givenName;
+		if(isMiddleNameValid)
+			components.middleName = middleName;
+		if(isFamilyNameValid)
+			components.familyName = familyName;
 		
 		retObj = [NSPersonNameComponentsFormatter localizedStringFromPersonNameComponents:components style:NSPersonNameComponentsFormatterStyleLong options:0];
 	}
 	else
 	{
 		NSMutableArray* components = [NSMutableArray arrayWithCapacity:3];
-		if(isGivenNameValid)	[components addObject:givenName];
-		if(isMiddleNameValid)	[components addObject:middleName];
-		if(isFamilyNameValid)	[components addObject:familyName];
+		if(isGivenNameValid)
+			[components addObject:givenName];
+		if(isMiddleNameValid)
+			[components addObject:middleName];
+		if(isFamilyNameValid)
+			[components addObject:familyName];
 		
 		retObj = [components componentsJoinedByString:@" "];
 	}

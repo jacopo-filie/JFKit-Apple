@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 {
-	@protected
+@protected
 	id _firstValue;
 	id _secondValue;
 }

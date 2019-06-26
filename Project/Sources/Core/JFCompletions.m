@@ -129,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
-
+	
 	return self;
 }
 
@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 	_internalFailureBlock = failureBlock;
 	_internalSuccessBlock = successBlock;
 	_successBlock = successBlock;
-
+	
 	return self;
 }
 
@@ -202,7 +202,7 @@ NS_ASSUME_NONNULL_BEGIN
 	JFSuccessBlock block = self.internalSuccessBlock;
 	if(!block)
 		return;
-
+	
 	if(!async)
 	{
 		block(result);

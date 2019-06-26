@@ -215,7 +215,7 @@ FOUNDATION_EXPORT const char* __nullable JFStringToEncodedCString(NSString* __nu
  * @param length The number of characters of the returned string.
  @return A randomly created string. If `length` is `0`, returns the constant `JFEmptyString`.
  */
-FOUNDATION_EXPORT NSString*	JFStringMakeRandom(NSUInteger length);
+FOUNDATION_EXPORT NSString* JFStringMakeRandom(NSUInteger length);
 
 /**
  * Creates a random string with the given length using the given characters.
@@ -223,7 +223,7 @@ FOUNDATION_EXPORT NSString*	JFStringMakeRandom(NSUInteger length);
  * @param characters A string containing the allowed characters.
  @return A randomly created string. If `length` is `0` or `characters` is empty, returns the constant `JFEmptyString`.
  */
-FOUNDATION_EXPORT NSString*	JFStringMakeRandomWithCharacters(NSUInteger length, NSString* characters);
+FOUNDATION_EXPORT NSString* JFStringMakeRandomWithCharacters(NSUInteger length, NSString* characters);
 
 // =================================================================================================
 // MARK: Functions - Creation (Scalars conversion)
@@ -234,49 +234,49 @@ FOUNDATION_EXPORT NSString*	JFStringMakeRandomWithCharacters(NSUInteger length, 
  * @param value A boolean value.
  * @return The constant `JFYesString` if `value` is `YES`, the constant `JFNoString` otherwise.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromBOOL(BOOL value);
+FOUNDATION_EXPORT NSString* JFStringFromBOOL(BOOL value);
 
 /**
  * Creates a string using the given value.
  * @param value A macOS historic boolean value.
  * @return The constant `JFTrueString` if `value` is `YES`, the constant `JFFalseString` otherwise.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromBoolean(Boolean value);
+FOUNDATION_EXPORT NSString* JFStringFromBoolean(Boolean value);
 
 /**
  * Creates a string using the given value.
  * @param value A core graphics float value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromCGFloat(CGFloat value);
+FOUNDATION_EXPORT NSString* JFStringFromCGFloat(CGFloat value);
 
 /**
  * Creates a string using the given value.
  * @param value A double value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromDouble(double value);
+FOUNDATION_EXPORT NSString* JFStringFromDouble(double value);
 
 /**
  * Creates a string using the given value.
  * @param value A float value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromFloat(float value);
+FOUNDATION_EXPORT NSString* JFStringFromFloat(float value);
 
 /**
  * Creates a string using the given value.
  * @param value A 32-bit float value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromFloat32(Float32 value);
+FOUNDATION_EXPORT NSString* JFStringFromFloat32(Float32 value);
 
 /**
  * Creates a string using the given value.
  * @param value A 64-bit float value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromFloat64(Float64 value);
+FOUNDATION_EXPORT NSString* JFStringFromFloat64(Float64 value);
 
 /**
  * Creates a string using the given value and formatting it based on `decimalDigits` and `fixed`.
@@ -285,7 +285,7 @@ FOUNDATION_EXPORT NSString*	JFStringFromFloat64(Float64 value);
  * @param fixed Whether the format string should use fixed-point or general conversion.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromFormattedDouble(double value, UInt8 decimalDigits, BOOL fixed);
+FOUNDATION_EXPORT NSString* JFStringFromFormattedDouble(double value, UInt8 decimalDigits, BOOL fixed);
 
 /**
  * Creates a string using the given value and formatting it based on `decimalDigits` and `fixed`.
@@ -294,133 +294,133 @@ FOUNDATION_EXPORT NSString*	JFStringFromFormattedDouble(double value, UInt8 deci
  * @param fixed Whether the format string should use fixed-point or general conversion.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromFormattedFloat(float value, UInt8 decimalDigits, BOOL fixed);
+FOUNDATION_EXPORT NSString* JFStringFromFormattedFloat(float value, UInt8 decimalDigits, BOOL fixed);
 
 /**
  * Creates a string using the given value.
  * @param value An hexadecimal value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromHex(unsigned int value);
+FOUNDATION_EXPORT NSString* JFStringFromHex(unsigned int value);
 
 /**
  * Creates a string using the given value.
  * @param value An int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromInt(int value);
+FOUNDATION_EXPORT NSString* JFStringFromInt(int value);
 
 /**
  * Creates a string using the given value.
  * @param value A long value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromLong(long value);
+FOUNDATION_EXPORT NSString* JFStringFromLong(long value);
 
 /**
  * Creates a string using the given value.
  * @param value A long long value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromLongLong(long long value);
+FOUNDATION_EXPORT NSString* JFStringFromLongLong(long long value);
 
 /**
  * Creates a string using the given value.
  * @param value An integer value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromNSInteger(NSInteger value);
+FOUNDATION_EXPORT NSString* JFStringFromNSInteger(NSInteger value);
 
 /**
  * Creates a string using the given value.
  * @param value A time interval value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromNSTimeInterval(NSTimeInterval value);
+FOUNDATION_EXPORT NSString* JFStringFromNSTimeInterval(NSTimeInterval value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned integer value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromNSUInteger(NSUInteger value);
+FOUNDATION_EXPORT NSString* JFStringFromNSUInteger(NSUInteger value);
 
 /**
  * Creates a string using the given value.
  * @param value A signed 8-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromSInt8(SInt8 value);
+FOUNDATION_EXPORT NSString* JFStringFromSInt8(SInt8 value);
 
 /**
  * Creates a string using the given value.
  * @param value A signed 16-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromSInt16(SInt16 value);
+FOUNDATION_EXPORT NSString* JFStringFromSInt16(SInt16 value);
 
 /**
  * Creates a string using the given value.
  * @param value A signed 32-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromSInt32(SInt32 value);
+FOUNDATION_EXPORT NSString* JFStringFromSInt32(SInt32 value);
 
 /**
  * Creates a string using the given value.
  * @param value A signed 64-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromSInt64(SInt64 value);
+FOUNDATION_EXPORT NSString* JFStringFromSInt64(SInt64 value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned 8-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUInt8(UInt8 value);
+FOUNDATION_EXPORT NSString* JFStringFromUInt8(UInt8 value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned 16-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUInt16(UInt16 value);
+FOUNDATION_EXPORT NSString* JFStringFromUInt16(UInt16 value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned 32-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUInt32(UInt32 value);
+FOUNDATION_EXPORT NSString* JFStringFromUInt32(UInt32 value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned 64-bit int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUInt64(UInt64 value);
+FOUNDATION_EXPORT NSString* JFStringFromUInt64(UInt64 value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned int value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUnsignedInt(unsigned int value);
+FOUNDATION_EXPORT NSString* JFStringFromUnsignedInt(unsigned int value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned long value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUnsignedLong(unsigned long value);
+FOUNDATION_EXPORT NSString* JFStringFromUnsignedLong(unsigned long value);
 
 /**
  * Creates a string using the given value.
  * @param value An unsigned long long value.
  * @return A string containing the given value.
  */
-FOUNDATION_EXPORT NSString*	JFStringFromUnsignedLongLong(unsigned long long value);
+FOUNDATION_EXPORT NSString* JFStringFromUnsignedLongLong(unsigned long long value);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

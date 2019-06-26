@@ -93,23 +93,23 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 // MARK: Properties - Concurrency
 // =================================================================================================
 
-@synthesize serialQueue	= _serialQueue;
+@synthesize serialQueue = _serialQueue;
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize managedObjectModel	= _managedObjectModel;
-@synthesize name 				= _name;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize name  = _name;
 
 // =================================================================================================
 // MARK: Properties - Stack
 // =================================================================================================
 
-@synthesize persistentContainer			= _persistentContainer;
-@synthesize persistentStoreCoordinator 	= _persistentStoreCoordinator;
+@synthesize persistentContainer = _persistentContainer;
+@synthesize persistentStoreCoordinator  = _persistentStoreCoordinator;
 @synthesize persistentStoreDescriptions = _persistentStoreDescriptions;
-@synthesize viewContext					= _viewContext;
+@synthesize viewContext = _viewContext;
 
 // =================================================================================================
 // MARK: Properties accessors - Data
@@ -257,25 +257,24 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 - (instancetype)initWithName:(NSString*)name managedObjectModel:(NSManagedObjectModel*)model
 {
 	self = [super init];
-	if(self)
+	
+	NSOperationQueue* queue = [NSOperationQueue new];
+	queue.maxConcurrentOperationCount = 1;
+	
+	// Concurrency
+	_serialQueue = queue;
+	
+	// Data
+	_managedObjectModel = model;
+	_name = [name copy];
+	
+	// Stack
+	if(@available(iOS 10.0, macOS 10.12, *))
 	{
-		NSOperationQueue* queue = [NSOperationQueue new];
-		queue.maxConcurrentOperationCount = 1;
-		
-		// Concurrency
-		_serialQueue = queue;
-		
-		// Data
-		_managedObjectModel = model;
-		_name = [name copy];
-		
-		// Stack
-		if(@available(iOS 10.0, macOS 10.12, *))
-		{
-			JFPersistentContainerBridge.defaultDirectoryURL = self.class.defaultDirectoryURL;
-			_persistentContainer = [[JFPersistentContainerBridge alloc] initWithName:name managedObjectModel:model];
-		}
+		JFPersistentContainerBridge.defaultDirectoryURL = self.class.defaultDirectoryURL;
+		_persistentContainer = [[JFPersistentContainerBridge alloc] initWithName:name managedObjectModel:model];
 	}
+	
 	return self;
 }
 
@@ -309,9 +308,9 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		}];
 		return;
 	}
-
+	
 	JFErrorFactory* errorFactory = self.class.errorFactory;
-
+	
 #if JF_WEAK_ENABLED
 	JFWeakifySelf;
 #else
@@ -328,7 +327,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 			return;
 		}
 #endif
-
+		
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
 		if(!url)
 		{

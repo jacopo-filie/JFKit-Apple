@@ -163,7 +163,7 @@ typedef struct {
 	 * The blue component value.
 	 */
 	UInt8 blue : 4;
-
+	
 } JFColorRGB12Components;
 
 /**
@@ -185,7 +185,7 @@ typedef struct {
 	 * The blue component value.
 	 */
 	UInt8 blue : 8;
-
+	
 } JFColorRGB24Components;
 
 /**
@@ -212,7 +212,7 @@ typedef struct {
 	 * The alpha component value.
 	 */
 	UInt8 alpha : 2;
-
+	
 } JFColorRGBA8Components;
 
 /**
@@ -239,7 +239,7 @@ typedef struct {
 	 * The alpha component value.
 	 */
 	UInt8 alpha : 4;
-
+	
 } JFColorRGBA16Components;
 
 /**
@@ -266,7 +266,7 @@ typedef struct {
 	 * The alpha component value.
 	 */
 	UInt8 alpha : 8;
-
+	
 } JFColorRGBA32Components;
 
 // =================================================================================================
@@ -304,7 +304,7 @@ typedef union {
 	 * The integer value of the color.
 	 */
 	UInt16 value;
-
+	
 } JFColorRGB12;
 
 /**
@@ -321,7 +321,7 @@ typedef union {
 	 * The integer value of the color.
 	 */
 	UInt32 value;
-
+	
 } JFColorRGB24;
 
 /**
@@ -338,7 +338,7 @@ typedef union {
 	 * The integer value of the color.
 	 */
 	UInt8 value;
-
+	
 } JFColorRGBA8;
 
 /**
@@ -355,7 +355,7 @@ typedef union {
 	 * The integer value of the color.
 	 */
 	UInt16 value;
-
+	
 } JFColorRGBA16;
 
 /**
@@ -372,7 +372,7 @@ typedef union {
 	 * The integer value of the color.
 	 */
 	UInt32 value;
-
+	
 } JFColorRGBA32;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

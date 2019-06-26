@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize block	= _block;
+@synthesize block = _block;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -52,10 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBlock:(JFTimerHandlerBlock)block
 {
 	self = [super init];
-	if(self)
-	{
-		_block = block;
-	}
+	
+	_block = block;
+	
 	return self;
 }
 

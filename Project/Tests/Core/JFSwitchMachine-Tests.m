@@ -72,10 +72,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Tests
 // =================================================================================================
 
-@synthesize expectation					= _expectation;
-@synthesize machine						= _machine;
-@synthesize shouldFail					= _shouldFail;
-@synthesize shouldFullfillOnDidPerform	= _shouldFullfillOnDidPerform;
+@synthesize expectation = _expectation;
+@synthesize machine = _machine;
+@synthesize shouldFail = _shouldFail;
+@synthesize shouldFullfillOnDidPerform = _shouldFullfillOnDidPerform;
 
 // =================================================================================================
 // MARK: Methods - Tests

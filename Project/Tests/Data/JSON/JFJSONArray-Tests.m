@@ -357,7 +357,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	JFJSONArray* jsonArray2 = [self newJSONArray];
-
+	
 	[jsonArray insertArray:jsonArray2 atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], jsonArray2);
@@ -367,7 +367,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	JFJSONArray* jsonArray2 = [self newJSONArray];
-
+	
 	[jsonArray addNull];
 	[jsonArray replaceWithArray:jsonArray2 atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
@@ -425,7 +425,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSNumber* number = @YES;
-
+	
 	[jsonArray insertNumber:number atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], number);
@@ -435,7 +435,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSNumber* number = @YES;
-
+	
 	[jsonArray addValue:number];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray numberAtIndex:0], number);
@@ -445,7 +445,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSNumber* number = @YES;
-
+	
 	[jsonArray addNull];
 	[jsonArray replaceWithNumber:number atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
@@ -466,7 +466,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	[jsonArray insertObject:jsonObject atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], jsonObject);
@@ -476,7 +476,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	[jsonArray addValue:jsonObject];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray objectAtIndex:0], jsonObject);
@@ -486,7 +486,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	[jsonArray addNull];
 	[jsonArray replaceWithObject:jsonObject atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
@@ -507,7 +507,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSString* string = @"";
-
+	
 	[jsonArray insertString:string atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], string);
@@ -517,7 +517,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSString* string = @"";
-
+	
 	[jsonArray addNull];
 	[jsonArray replaceWithString:string atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
@@ -528,7 +528,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	NSString* string = @"";
-
+	
 	[jsonArray addValue:string];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray stringAtIndex:0], string);
@@ -548,7 +548,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	id<JFJSONValue> value = @"";
-
+	
 	[jsonArray insertValue:value atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
@@ -567,7 +567,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	id<JFJSONValue> value = @"";
-
+	
 	[jsonArray addNull];
 	[jsonArray replaceWithValue:value atIndex:0];
 	XCTAssertEqual(jsonArray.count, 1);
@@ -578,7 +578,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
 	id<JFJSONValue> value = @"";
-
+	
 	[jsonArray addValue:value];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);

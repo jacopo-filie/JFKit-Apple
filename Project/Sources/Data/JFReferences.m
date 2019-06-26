@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 #	if JF_WEAK_ENABLED
-@property (weak, nonatomic, nullable)	ObjectType	weakObject;
+@property (weak, nonatomic, nullable) ObjectType weakObject;
 #	endif
 
 // =================================================================================================
@@ -69,9 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object		= _object;
+@synthesize object = _object;
 #	if JF_WEAK_ENABLED
-@synthesize weakObject	= _weakObject;
+@synthesize weakObject = _weakObject;
 #	endif
 
 // =================================================================================================
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object	= _object;
+@synthesize object = _object;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -215,7 +215,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-@synthesize object	= _object;
+@synthesize object = _object;
 
 // =================================================================================================
 // MARK: Methods - Memory

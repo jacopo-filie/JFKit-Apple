@@ -49,10 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDomain:(NSErrorDomain)domain
 {
 	self = [super init];
-	if(self)
-	{
-		_domain = [domain copy];
-	}
+	
+	_domain = [domain copy];
+	
 	return self;
 }
 
@@ -115,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	if(!description && !localizedDescription && !localizedFailureReason && !localizedRecoverySuggestion && !underlyingError)
 		return nil;
-
+	
 	NSMutableDictionary<NSErrorUserInfoKey, id>* retObj = [NSMutableDictionary dictionary];
 	if(description)
 		[retObj setObject:description forKey:JFError.descriptionKey];

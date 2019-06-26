@@ -57,8 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (assign, nonatomic)			BOOL										needsCleanUp;
-@property (strong, nonatomic, readonly)	NSMutableArray<Reference<ObserverType>*>*	references;
+@property (assign, nonatomic) BOOL needsCleanUp;
+@property (strong, nonatomic, readonly) NSMutableArray<Reference<ObserverType>*>* references;
 
 // =================================================================================================
 // MARK: Methods - Observers
@@ -80,8 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize needsCleanUp	= _needsCleanUp;
-@synthesize references		= _references;
+@synthesize needsCleanUp = _needsCleanUp;
+@synthesize references = _references;
 
 // =================================================================================================
 // MARK: Properties accessors - Observers
@@ -134,12 +134,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init
 {
 	self = [super init];
-	if(self)
-	{
-		// Observers
-		_needsCleanUp = NO;
-		_references = [NSMutableArray<Reference<id>*> new];
-	}
+	
+	_needsCleanUp = NO;
+	_references = [NSMutableArray<Reference<id>*> new];
+	
 	return self;
 }
 

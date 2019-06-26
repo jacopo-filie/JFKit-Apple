@@ -59,32 +59,32 @@ typedef NS_ENUM(JFUnitPrefix, JFBinaryPrefixes) {
 	/**
 	 * The kibi prefix: 2^10.
 	 */
-	JFKibi	= 1024ULL,
+	JFKibi = 1024ULL,
 	
 	/**
 	 * The mebi prefix: 2^20.
 	 */
-	JFMebi	= JFKibi * JFKibi,
+	JFMebi = JFKibi * JFKibi,
 	
 	/**
 	 * The gibi prefix: 2^30.
 	 */
-	JFGibi	= JFMebi * JFKibi,
+	JFGibi = JFMebi * JFKibi,
 	
 	/**
 	 * The tebi prefix: 2^40.
 	 */
-	JFTebi	= JFGibi * JFKibi,
+	JFTebi = JFGibi * JFKibi,
 	
 	/**
 	 * The pebi prefix: 2^50.
 	 */
-	JFPebi	= JFTebi * JFKibi,
+	JFPebi = JFTebi * JFKibi,
 	
 	/**
 	 * The pebi prefix: 2^60.
 	 */
-	JFExbi	= JFPebi * JFKibi,
+	JFExbi = JFPebi * JFKibi,
 };
 
 /*

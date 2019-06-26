@@ -334,9 +334,12 @@ NS_ASSUME_NONNULL_BEGIN
 	NSArray* otherButtons = self.otherButtons;
 	
 	NSMutableArray* buttons = [NSMutableArray arrayWithCapacity:([otherButtons count] + 2)];
-	if(destructiveButton)	[buttons addObject:destructiveButton];
-	if(cancelButton)		[buttons addObject:cancelButton];
-	if(otherButtons)		[buttons addObjectsFromArray:otherButtons];
+	if(destructiveButton)
+		[buttons addObject:destructiveButton];
+	if(cancelButton)
+		[buttons addObject:cancelButton];
+	if(otherButtons)
+		[buttons addObjectsFromArray:otherButtons];
 	
 	if([buttons count] == 0)
 		return NO;

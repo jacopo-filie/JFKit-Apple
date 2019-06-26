@@ -160,11 +160,31 @@ NS_ASSUME_NONNULL_BEGIN
 	NSArray<NSNumber*>* retObj;
 	switch(transition)
 	{
-		case JFConnectionTransitionConnecting:			retObj = @[@(JFConnectionStateReady)];											break;
-		case JFConnectionTransitionDisconnecting:		retObj = @[@(JFConnectionStateConnected), @(JFConnectionStateConnectionLost)];	break;
-		case JFConnectionTransitionLosingConnection:	retObj = @[@(JFConnectionStateConnected)];										break;
-		case JFConnectionTransitionReconnecting:		retObj = @[@(JFConnectionStateConnectionLost)];									break;
-		case JFConnectionTransitionResetting:			retObj = @[@(JFConnectionStateDirty), @(JFConnectionStateDisconnected)];		break;
+		case JFConnectionTransitionConnecting:
+		{
+			retObj = @[@(JFConnectionStateReady)];
+			break;
+		}
+		case JFConnectionTransitionDisconnecting:
+		{
+			retObj = @[@(JFConnectionStateConnected), @(JFConnectionStateConnectionLost)];
+			break;
+		}
+		case JFConnectionTransitionLosingConnection:
+		{
+			retObj = @[@(JFConnectionStateConnected)];
+			break;
+		}
+		case JFConnectionTransitionReconnecting:
+		{
+			retObj = @[@(JFConnectionStateConnectionLost)];
+			break;
+		}
+		case JFConnectionTransitionResetting:
+		{
+			retObj = @[@(JFConnectionStateDirty), @(JFConnectionStateDisconnected)];
+			break;
+		}
 		default:
 		{
 			retObj = [super beginningStatesForTransition:transition];
@@ -181,9 +201,17 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		case JFConnectionTransitionConnecting:
 		case JFConnectionTransitionLosingConnection:
-		case JFConnectionTransitionReconnecting:		retVal = JFConnectionStateConnectionLost;	break;
+		case JFConnectionTransitionReconnecting:
+		{
+			retVal = JFConnectionStateConnectionLost;
+			break;
+		}
 		case JFConnectionTransitionDisconnecting:
-		case JFConnectionTransitionResetting:			retVal = JFConnectionStateDirty;			break;
+		case JFConnectionTransitionResetting:
+		{
+			retVal = JFConnectionStateDirty;
+			break;
+		}
 		default:
 		{
 			retVal = [super endingStateForFailedTransition:transition];
@@ -199,10 +227,26 @@ NS_ASSUME_NONNULL_BEGIN
 	switch(transition)
 	{
 		case JFConnectionTransitionConnecting:
-		case JFConnectionTransitionReconnecting:		retVal = JFConnectionStateConnected;		break;
-		case JFConnectionTransitionDisconnecting:		retVal = JFConnectionStateDisconnected;		break;
-		case JFConnectionTransitionLosingConnection:	retVal = JFConnectionStateConnectionLost;	break;
-		case JFConnectionTransitionResetting:			retVal = JFConnectionStateReady;			break;
+		case JFConnectionTransitionReconnecting:
+		{
+			retVal = JFConnectionStateConnected;
+			break;
+		}
+		case JFConnectionTransitionDisconnecting:
+		{
+			retVal = JFConnectionStateDisconnected;
+			break;
+		}
+		case JFConnectionTransitionLosingConnection:
+		{
+			retVal = JFConnectionStateConnectionLost;
+			break;
+		}
+		case JFConnectionTransitionResetting:
+		{
+			retVal = JFConnectionStateReady;
+			break;
+		}
 		default:
 		{
 			retVal = [super endingStateForSucceededTransition:transition];
@@ -217,11 +261,31 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj = nil;
 	switch(state)
 	{
-		case JFConnectionStateConnected:		retObj = @"Connected";		break;
-		case JFConnectionStateConnectionLost:	retObj = @"ConnectionLost";	break;
-		case JFConnectionStateDirty:			retObj = @"Dirty";			break;
-		case JFConnectionStateDisconnected:		retObj = @"Disconnected";	break;
-		case JFConnectionStateReady:			retObj = @"Ready";			break;
+		case JFConnectionStateConnected:
+		{
+			retObj = @"Connected";
+			break;
+		}
+		case JFConnectionStateConnectionLost:
+		{
+			retObj = @"ConnectionLost";
+			break;
+		}
+		case JFConnectionStateDirty:
+		{
+			retObj = @"Dirty";
+			break;
+		}
+		case JFConnectionStateDisconnected:
+		{
+			retObj = @"Disconnected";
+			break;
+		}
+		case JFConnectionStateReady:
+		{
+			retObj = @"Ready";
+			break;
+		}
 		default:
 		{
 			retObj = [super stringFromState:state];
@@ -236,11 +300,31 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj = nil;
 	switch(transition)
 	{
-		case JFConnectionTransitionConnecting:			retObj = @"Connecting";			break;
-		case JFConnectionTransitionDisconnecting:		retObj = @"Disconnecting";		break;
-		case JFConnectionTransitionLosingConnection:	retObj = @"LosingConnection";	break;
-		case JFConnectionTransitionReconnecting:		retObj = @"Reconnecting";		break;
-		case JFConnectionTransitionResetting:			retObj = @"Resetting";			break;
+		case JFConnectionTransitionConnecting:
+		{
+			retObj = @"Connecting";
+			break;
+		}
+		case JFConnectionTransitionDisconnecting:
+		{
+			retObj = @"Disconnecting";
+			break;
+		}
+		case JFConnectionTransitionLosingConnection:
+		{
+			retObj = @"LosingConnection";
+			break;
+		}
+		case JFConnectionTransitionReconnecting:
+		{
+			retObj = @"Reconnecting";
+			break;
+		}
+		case JFConnectionTransitionResetting:
+		{
+			retObj = @"Resetting";
+			break;
+		}
 		default:
 		{
 			retObj = [super stringFromTransition:transition];

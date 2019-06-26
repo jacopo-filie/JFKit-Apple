@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 	XCTAssertEqual(JFCompareFloatValues(2.40, 2.50, 0), NSOrderedSame);
 	XCTAssertEqual(JFCompareFloatValues(2.50, 2.40, 0), NSOrderedSame);
 	XCTAssertEqual(JFCompareFloatValues(2.54, 2.55, 1), NSOrderedSame);
-
+	
 	XCTAssertEqual(JFCompareFloatValues(2.40, 2.50, 1), NSOrderedAscending);
 	XCTAssertEqual(JFCompareFloatValues(2.45, 2.55, 1), NSOrderedAscending);
 	XCTAssertEqual(JFCompareFloatValues(2.54, 2.55, 2), NSOrderedAscending);
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 	XCTAssertEqual(JFCompareFloatValues(-3.54, 2.55, 0), NSOrderedAscending);
 	XCTAssertEqual(JFCompareFloatValues(-3.54, 2.55, 1), NSOrderedAscending);
 	XCTAssertEqual(JFCompareFloatValues(-3.54, 2.55, 2), NSOrderedAscending);
-
+	
 	XCTAssertEqual(JFCompareFloatValues(2.50, 2.40, 1), NSOrderedDescending);
 	XCTAssertEqual(JFCompareFloatValues(2.55, 2.45, 1), NSOrderedDescending);
 	XCTAssertEqual(JFCompareFloatValues(2.55, 2.45, 2), NSOrderedDescending);
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 	XCTAssertEqual(JFCompareFloatValues(2.55, -3.45, 0), NSOrderedDescending);
 	XCTAssertEqual(JFCompareFloatValues(2.55, -3.45, 1), NSOrderedDescending);
 	XCTAssertEqual(JFCompareFloatValues(2.55, -3.45, 2), NSOrderedDescending);
-
+	
 	XCTAssertEqual(JFCompareFloatValues(100.0000000001, 100.0000000001, 9), NSOrderedSame);
 	XCTAssertEqual(JFCompareFloatValues(100.0000000001, 100.0000000002, 9), NSOrderedSame);
 	XCTAssertEqual(JFCompareFloatValues(100.0000000001, 100.0000000009, 9), NSOrderedSame);

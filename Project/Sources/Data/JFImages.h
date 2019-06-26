@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 
-FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageName(void);
-FOUNDATION_EXPORT NSString* __nullable	JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
+FOUNDATION_EXPORT NSString* __nullable JFLaunchImageName(void);
+FOUNDATION_EXPORT NSString* __nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation);
 
 #endif
 

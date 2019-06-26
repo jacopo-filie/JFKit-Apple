@@ -210,8 +210,10 @@ NS_ASSUME_NONNULL_BEGIN
 	if(failureReason || recoverySuggestion)
 	{
 		NSMutableArray* components = [NSMutableArray arrayWithCapacity:2];
-		if(failureReason)		[components addObject:failureReason];
-		if(recoverySuggestion)	[components addObject:recoverySuggestion];
+		if(failureReason)
+			[components addObject:failureReason];
+		if(recoverySuggestion)
+			[components addObject:recoverySuggestion];
 		
 		message = [components componentsJoinedByString:@" "];
 		if(JFStringIsEmpty(message))

@@ -82,9 +82,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Tests
 // =================================================================================================
 
-@synthesize expectation	= _expectation;
-@synthesize machine		= _machine;
-@synthesize shouldFail	= _shouldFail;
+@synthesize expectation = _expectation;
+@synthesize machine = _machine;
+@synthesize shouldFail = _shouldFail;
 @synthesize shouldFulfillOnDidPerform = _shouldFulfillOnDidPerform;
 
 // =================================================================================================
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 	self.machine = nil;
 	self.shouldFail = NO;
 	self.shouldFulfillOnDidPerform = YES;
-
+	
 	[super tearDown];
 }
 

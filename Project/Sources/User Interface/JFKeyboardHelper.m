@@ -124,11 +124,16 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	switch(curve)
 	{
-		case UIViewAnimationCurveEaseIn:	return UIViewAnimationOptionCurveEaseIn;
-		case UIViewAnimationCurveEaseInOut:	return UIViewAnimationOptionCurveEaseInOut;
-		case UIViewAnimationCurveEaseOut:	return UIViewAnimationOptionCurveEaseOut;
-		case UIViewAnimationCurveLinear:	return UIViewAnimationOptionCurveLinear;
-		default:							return (curve << 16); // Sometimes undocumented values are received so this should cover those cases.
+		case UIViewAnimationCurveEaseIn:
+			return UIViewAnimationOptionCurveEaseIn;
+		case UIViewAnimationCurveEaseInOut:
+			return UIViewAnimationOptionCurveEaseInOut;
+		case UIViewAnimationCurveEaseOut:
+			return UIViewAnimationOptionCurveEaseOut;
+		case UIViewAnimationCurveLinear:
+			return UIViewAnimationOptionCurveLinear;
+		default:
+			return (curve << 16); // FIX: Sometimes undocumented values are received so this should cover those cases.
 	}
 }
 

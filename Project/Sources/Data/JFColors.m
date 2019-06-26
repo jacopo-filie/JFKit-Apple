@@ -38,12 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-UInt8 const JFColorRGB6ComponentMaxValue	= 0x3;
-UInt8 const JFColorRGB12ComponentMaxValue	= 0xF;
-UInt8 const JFColorRGB24ComponentMaxValue	= 0xFF;
-UInt8 const JFColorRGBA8ComponentMaxValue	= 0x3;
-UInt8 const JFColorRGBA16ComponentMaxValue	= 0xF;
-UInt8 const JFColorRGBA32ComponentMaxValue	= 0xFF;
+UInt8 const JFColorRGB6ComponentMaxValue = 0x3;
+UInt8 const JFColorRGB12ComponentMaxValue = 0xF;
+UInt8 const JFColorRGB24ComponentMaxValue = 0xFF;
+UInt8 const JFColorRGBA8ComponentMaxValue = 0x3;
+UInt8 const JFColorRGBA16ComponentMaxValue = 0xF;
+UInt8 const JFColorRGBA32ComponentMaxValue = 0xFF;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,10 +127,10 @@ JFColor* JFColorWithRGBA(UInt8 r, UInt8 g, UInt8 b, UInt8 a)
 {
 	CGFloat maxValue = UCHAR_MAX;
 	
-	CGFloat red		= (CGFloat)r / maxValue;
-	CGFloat green	= (CGFloat)g / maxValue;
-	CGFloat blue	= (CGFloat)b / maxValue;
-	CGFloat alpha	= (CGFloat)a / maxValue;
+	CGFloat red = (CGFloat)r / maxValue;
+	CGFloat green = (CGFloat)g / maxValue;
+	CGFloat blue = (CGFloat)b / maxValue;
+	CGFloat alpha = (CGFloat)a / maxValue;
 	
 #if JF_MACOS
 	return [JFColor colorWithCalibratedRed:red green:green blue:blue alpha:alpha];
@@ -224,14 +224,14 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGB6ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
 	
 	JFColorRGB6 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
 	return retVal;
 }
 
@@ -242,14 +242,14 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGB12ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
 	
 	JFColorRGB12 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
 	return retVal;
 }
 
@@ -260,14 +260,14 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGB24ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
 	
 	JFColorRGB24 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
 	return retVal;
 }
 
@@ -278,16 +278,16 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGBA8ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
-	CGFloat alpha	= (CGFloat)a * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
+	CGFloat alpha = (CGFloat)a * maxValue;
 	
 	JFColorRGBA8 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
-	retVal.components.alpha	= (UInt8)alpha;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
+	retVal.components.alpha = (UInt8)alpha;
 	return retVal;
 }
 
@@ -298,16 +298,16 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGBA16ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
-	CGFloat alpha	= (CGFloat)a * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
+	CGFloat alpha = (CGFloat)a * maxValue;
 	
 	JFColorRGBA16 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
-	retVal.components.alpha	= (UInt8)alpha;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
+	retVal.components.alpha = (UInt8)alpha;
 	return retVal;
 }
 
@@ -318,16 +318,16 @@ JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
 	
 	CGFloat maxValue = JFColorRGBA32ComponentMaxValue;
 	
-	CGFloat red		= (CGFloat)r * maxValue;
-	CGFloat green	= (CGFloat)g * maxValue;
-	CGFloat blue	= (CGFloat)b * maxValue;
-	CGFloat alpha	= (CGFloat)a * maxValue;
+	CGFloat red = (CGFloat)r * maxValue;
+	CGFloat green = (CGFloat)g * maxValue;
+	CGFloat blue = (CGFloat)b * maxValue;
+	CGFloat alpha = (CGFloat)a * maxValue;
 	
 	JFColorRGBA32 retVal;
-	retVal.components.red	= (UInt8)red;
-	retVal.components.green	= (UInt8)green;
-	retVal.components.blue	= (UInt8)blue;
-	retVal.components.alpha	= (UInt8)alpha;
+	retVal.components.red = (UInt8)red;
+	retVal.components.green = (UInt8)green;
+	retVal.components.blue = (UInt8)blue;
+	retVal.components.alpha = (UInt8)alpha;
 	return retVal;
 }
 

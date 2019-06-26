@@ -58,24 +58,29 @@ BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj
 	if(!obj1 || !obj2)
 		return NO;
 	
-	BOOL (^checkClass)(Class) = ^BOOL(Class class)
-	{
-		if(![obj1 isKindOfClass:class])	return NO;
-		if(![obj2 isKindOfClass:class])	return NO;
-		return YES;
+	BOOL (^checkClass)(Class) = ^BOOL(Class class) {
+		return ([obj1 isKindOfClass:class] && [obj2 isKindOfClass:class]);
 	};
 	
 	id o1 = obj1;
 	id o2 = obj2;
 	
-	if(checkClass([NSArray class]))				return [o1 isEqualToArray:o2];
-	if(checkClass([NSAttributedString class]))	return [o1 isEqualToAttributedString:o2];
-	if(checkClass([NSData class]))				return [o1 isEqualToData:o2];
-	if(checkClass([NSDate class]))				return [o1 isEqualToDate:o2];
-	if(checkClass([NSDictionary class]))		return [o1 isEqualToDictionary:o2];
-	if(checkClass([NSNumber class]))			return [o1 isEqualToNumber:o2];
-	if(checkClass([NSSet class]))				return [o1 isEqualToSet:o2];
-	if(checkClass([NSString class]))			return [o1 isEqualToString:o2];
+	if(checkClass([NSArray class]))
+		return [o1 isEqualToArray:o2];
+	if(checkClass([NSAttributedString class]))
+		return [o1 isEqualToAttributedString:o2];
+	if(checkClass([NSData class]))
+		return [o1 isEqualToData:o2];
+	if(checkClass([NSDate class]))
+		return [o1 isEqualToDate:o2];
+	if(checkClass([NSDictionary class]))
+		return [o1 isEqualToDictionary:o2];
+	if(checkClass([NSNumber class]))
+		return [o1 isEqualToNumber:o2];
+	if(checkClass([NSSet class]))
+		return [o1 isEqualToSet:o2];
+	if(checkClass([NSString class]))
+		return [o1 isEqualToString:o2];
 	
 	return [obj1 isEqual:obj2];
 }

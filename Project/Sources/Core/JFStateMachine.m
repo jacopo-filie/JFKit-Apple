@@ -48,9 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@property (strong, nonatomic, nullable)	NSOperation*				executingOperation;
-@property (strong, nonatomic, nullable)	JFStateMachineTransition*	executingTransition;
-@property (strong, nonatomic, readonly)	NSOperationQueue*			executionQueue;
+@property (strong, nonatomic, nullable) NSOperation* executingOperation;
+@property (strong, nonatomic, nullable) JFStateMachineTransition* executingTransition;
+@property (strong, nonatomic, readonly) NSOperationQueue* executionQueue;
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -92,21 +92,21 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize executingOperation	= _executingOperation;
-@synthesize executingTransition	= _executingTransition;
-@synthesize executionQueue		= _executionQueue;
+@synthesize executingOperation = _executingOperation;
+@synthesize executingTransition = _executingTransition;
+@synthesize executionQueue = _executionQueue;
 
 // =================================================================================================
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize delegate	= _delegate;
+@synthesize delegate = _delegate;
 
 // =================================================================================================
 // MARK: Properties - State
 // =================================================================================================
 
-@synthesize state	= _state;
+@synthesize state = _state;
 
 // =================================================================================================
 // MARK: Properties accessors - Errors
@@ -168,15 +168,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithState:(JFState)state delegate:(id<JFStateMachineDelegate>)delegate
 {
 	self = [super init];
-	if(self)
-	{
-		NSOperationQueue* executionQueue = [NSOperationQueue new];
-		executionQueue.maxConcurrentOperationCount = 1;
-
-		_delegate = delegate;
-		_executionQueue = executionQueue;
-		_state = state;
-	}
+	
+	NSOperationQueue* executionQueue = [NSOperationQueue new];
+	executionQueue.maxConcurrentOperationCount = 1;
+	
+	_delegate = delegate;
+	_executionQueue = executionQueue;
+	_state = state;
+	
 	return self;
 }
 
@@ -247,7 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
 			[operation finish];
 			return;
 		}
-
+		
 		JFState state = strongSelf.state;
 		NSArray<NSNumber*>* beginningStates = [strongSelf beginningStatesForTransition:transition.transition];
 		
@@ -268,7 +267,7 @@ NS_ASSUME_NONNULL_BEGIN
 			[operation finish];
 			return;
 		}
-
+		
 		if([delegate respondsToSelector:@selector(stateMachine:willPerform:context:)])
 			[delegate stateMachine:strongSelf willPerform:transition.transition context:transition.context];
 		
@@ -297,7 +296,7 @@ NS_ASSUME_NONNULL_BEGIN
 				if(delegate && [delegate respondsToSelector:@selector(stateMachine:didPerform:context:)])
 					[delegate stateMachine:strongSelf didPerform:transition.transition context:transition.context];
 			}
-
+			
 			JFSimpleCompletion* completion = transition.completion;
 			if(completion)
 			{
@@ -447,16 +446,16 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize completion	= _completion;
-@synthesize context		= _context;
-@synthesize transition	= _transition;
+@synthesize completion = _completion;
+@synthesize context = _context;
+@synthesize transition = _transition;
 
 // =================================================================================================
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize nextTransitionOnFailure	= _nextTransitionOnFailure;
-@synthesize nextTransitionOnSuccess	= _nextTransitionOnSuccess;
+@synthesize nextTransitionOnFailure = _nextTransitionOnFailure;
+@synthesize nextTransitionOnSuccess = _nextTransitionOnSuccess;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -465,12 +464,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
 {
 	self = [super init];
-	if(self)
-	{
-		_completion = completion;
-		_context = context;
-		_transition = transition;
-	}
+	
+	_completion = completion;
+	_context = context;
+	_transition = transition;
+	
 	return self;
 }
 

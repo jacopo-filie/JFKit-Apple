@@ -211,7 +211,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	
 	result = [serializer arrayFromString:self.jsonObjectString];
 	XCTAssertNil(result);
-
+	
 	result = [serializer arrayFromString:self.jsonArrayString];
 	XCTAssertNotNil(result);
 	XCTAssertEqualObjects(self.jsonArray, result);
@@ -231,13 +231,13 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	
 	data = [serializer dataFromArray:source];
 	XCTAssertNotNil(data);
-
+	
 	NSError* error;
 	id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 	XCTAssertNil(error);
 	XCTAssertNotNil(result);
 	XCTAssertTrue([result isKindOfClass:NSArray.class]);
-
+	
 	XCTAssertEqualObjects(source, result);
 }
 
@@ -255,7 +255,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	
 	string = [serializer stringFromArray:source];
 	XCTAssertNotNil(string);
-
+	
 	NSError* error;
 	id result = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
 	XCTAssertNil(error);
@@ -319,7 +319,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	
 	result = [serializer dictionaryFromString:self.jsonArrayString];
 	XCTAssertNil(result);
-
+	
 	result = [serializer dictionaryFromString:self.jsonObjectString];
 	XCTAssertNotNil(result);
 	XCTAssertEqualObjects(self.jsonObject, result);
@@ -336,7 +336,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertNil(string);
 	
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* source = self.jsonObject;
-
+	
 	string = [serializer stringFromDictionary:source];
 	XCTAssertNotNil(string);
 	

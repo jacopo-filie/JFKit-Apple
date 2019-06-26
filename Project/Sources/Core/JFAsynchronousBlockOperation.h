@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The block to execute when the operation is started.
  */
-@property (strong, nonatomic, readonly)	JFBlock	executionBlock;
+@property (strong, nonatomic, readonly) JFBlock executionBlock;
 
 // =================================================================================================
 // MARK: Methods - Memory

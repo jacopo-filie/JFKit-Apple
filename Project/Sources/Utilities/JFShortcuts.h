@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns the application delegate object.
  */
-#	define	ApplicationDelegate [JFShortcuts appDelegate]
+#	define ApplicationDelegate [JFShortcuts appDelegate]
 
 /**
  * Returns whether the current device is a CarPlay.

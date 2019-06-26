@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Execution
 // =================================================================================================
 
-@synthesize executionBlock	= _executionBlock;
+@synthesize executionBlock = _executionBlock;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -47,11 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithExecutionBlock:(JFBlock)executionBlock
 {
 	self = [super init];
-	if(self)
-	{
-		// Execution
-		_executionBlock	= executionBlock;
-	}
+	
+	_executionBlock = executionBlock;
+	
 	return self;
 }
 

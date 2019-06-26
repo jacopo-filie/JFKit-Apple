@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 	static NSMutableDictionary<NSString*, JFTableViewCell*>* pool = nil;
 	if(!pool)
 		pool = [NSMutableDictionary<NSString*, JFTableViewCell*> new];
-
+	
 	NSString* key = self.reuseIdentifier;
 	
 	JFTableViewCell* retObj = pool[key];

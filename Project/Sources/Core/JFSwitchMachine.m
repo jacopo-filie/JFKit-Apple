@@ -100,8 +100,16 @@ NS_ASSUME_NONNULL_BEGIN
 	NSArray<NSNumber*>* retObj;
 	switch(transition)
 	{
-		case JFSwitchTransitionClosing:	retObj = @[@(JFSwitchStateOpen)];	break;
-		case JFSwitchTransitionOpening:	retObj = @[@(JFSwitchStateClosed)];	break;
+		case JFSwitchTransitionClosing:
+		{
+			retObj = @[@(JFSwitchStateOpen)];
+			break;
+		}
+		case JFSwitchTransitionOpening:
+		{
+			retObj = @[@(JFSwitchStateClosed)];
+			break;
+		}
 		default:
 		{
 			retObj = [super beginningStatesForTransition:transition];
@@ -116,8 +124,16 @@ NS_ASSUME_NONNULL_BEGIN
 	JFState retVal;
 	switch(transition)
 	{
-		case JFSwitchTransitionClosing:	retVal = JFSwitchStateOpen;		break;
-		case JFSwitchTransitionOpening:	retVal = JFSwitchStateClosed;	break;
+		case JFSwitchTransitionClosing:
+		{
+			retVal = JFSwitchStateOpen;
+			break;
+		}
+		case JFSwitchTransitionOpening:
+		{
+			retVal = JFSwitchStateClosed;
+			break;
+		}
 		default:
 		{
 			retVal = [super endingStateForFailedTransition:transition];
@@ -132,8 +148,16 @@ NS_ASSUME_NONNULL_BEGIN
 	JFState retVal;
 	switch(transition)
 	{
-		case JFSwitchTransitionClosing:	retVal = JFSwitchStateClosed;	break;
-		case JFSwitchTransitionOpening:	retVal = JFSwitchStateOpen;		break;
+		case JFSwitchTransitionClosing:
+		{
+			retVal = JFSwitchStateClosed;
+			break;
+		}
+		case JFSwitchTransitionOpening:
+		{
+			retVal = JFSwitchStateOpen;
+			break;
+		}
 		default:
 		{
 			retVal = [super endingStateForSucceededTransition:transition];
@@ -148,8 +172,16 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj = nil;
 	switch(state)
 	{
-		case JFSwitchStateClosed:	retObj = @"Closed";	break;
-		case JFSwitchStateOpen:		retObj = @"Open";	break;
+		case JFSwitchStateClosed:
+		{
+			retObj = @"Closed";
+			break;
+		}
+		case JFSwitchStateOpen:
+		{
+			retObj = @"Open";
+			break;
+		}
 		default:
 		{
 			retObj = [super stringFromState:state];
@@ -164,8 +196,16 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj = nil;
 	switch(transition)
 	{
-		case JFSwitchTransitionClosing:	retObj = @"Closing";	break;
-		case JFSwitchTransitionOpening:	retObj = @"Opening";	break;
+		case JFSwitchTransitionClosing:
+		{
+			retObj = @"Closing";
+			break;
+		}
+		case JFSwitchTransitionOpening:
+		{
+			retObj = @"Opening";
+			break;
+		}
 		default:
 		{
 			retObj = [super stringFromTransition:transition];

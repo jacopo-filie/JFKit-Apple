@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 		return nil;
 	
 	NSLock* lock = self.lock;
-
+	
 	[lock lock];
 	if(![NSJSONSerialization isValidJSONObject:jsonNode])
 	{

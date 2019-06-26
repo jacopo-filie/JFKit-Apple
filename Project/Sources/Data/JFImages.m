@@ -53,11 +53,11 @@ NSString* __nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orie
 	
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		NSString* const launchImagesKey	= @"UILaunchImages";
-		NSString* const minOSVersionKey	= @"UILaunchImageMinimumOSVersion";
-		NSString* const nameKey			= @"UILaunchImageName";
-		NSString* const orientationKey	= @"UILaunchImageOrientation";
-		NSString* const sizeKey			= @"UILaunchImageSize";
+		NSString* const launchImagesKey = @"UILaunchImages";
+		NSString* const minOSVersionKey = @"UILaunchImageMinimumOSVersion";
+		NSString* const nameKey = @"UILaunchImageName";
+		NSString* const orientationKey = @"UILaunchImageOrientation";
+		NSString* const sizeKey = @"UILaunchImageSize";
 		
 		NSMutableArray<NSDictionary<NSString*, NSString*>*>* launchScreens = [NSMutableArray<NSDictionary<NSString*, NSString*>*> array];
 		@autoreleasepool

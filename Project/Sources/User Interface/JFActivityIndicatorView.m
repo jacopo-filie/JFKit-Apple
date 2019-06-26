@@ -808,7 +808,7 @@ NS_ASSUME_NONNULL_BEGIN
 	view->_animationImagesHidden = YES;
 	view->_buttonHidden = YES;
 	view->_textHidden = YES;
-
+	
 	// User interface (Appearance)
 	view->_alertCornerRadius = 8.0;
 	view->_alertMargin = 20.0f;
@@ -842,7 +842,7 @@ NS_ASSUME_NONNULL_BEGIN
 	self = [super initWithFrame:frame];
 	
 	[JFActivityIndicatorView initializeProperties:self];
-
+	
 	return self;
 }
 
@@ -925,7 +925,7 @@ NS_ASSUME_NONNULL_BEGIN
 			layer.shadowOffset = self.alertShadowOffset;
 			layer.shadowOpacity = self.alertShadowOpacity;
 			layer.shadowRadius = self.alertShadowRadius;
-
+			
 			self.alertView = alertView;
 			[self addSubview:alertView];
 		}
@@ -942,10 +942,10 @@ NS_ASSUME_NONNULL_BEGIN
 				alertBackgroundView.clipsToBounds = YES;
 				alertBackgroundView.image = self.alertBackgroundImage;
 				alertBackgroundView.opaque = NO;
-
+				
 				CALayer* layer = alertBackgroundView.layer;
 				layer.cornerRadius = self.alertCornerRadius;
-
+				
 				self.alertBackgroundView = alertBackgroundView;
 			}
 			[alertView addSubview:alertBackgroundView];
@@ -992,7 +992,7 @@ NS_ASSUME_NONNULL_BEGIN
 				animationView.backgroundColor = [UIColor clearColor];
 				animationView.opaque = NO;
 				animationView.translatesAutoresizingMaskIntoConstraints = NO;
-
+				
 				self.animationView = animationView;
 			}
 			[alertView addSubview:animationView];
@@ -1082,7 +1082,7 @@ NS_ASSUME_NONNULL_BEGIN
 	{
 		NSMutableArray<NSLayoutConstraint*>* constraints = ([self.customConstraints mutableCopy] ?: [NSMutableArray<NSLayoutConstraint*> array]);
 		NSMutableArray<NSLayoutConstraint*>* disabledConstraints = [NSMutableArray<NSLayoutConstraint*> array];
-
+		
 		// Removes the old constraints.
 		[self removeConstraints:constraints];
 		[constraints removeAllObjects];
@@ -1112,7 +1112,7 @@ NS_ASSUME_NONNULL_BEGIN
 			CGSize alertMaxSize = self.alertMaxSize;
 			CGSize alertMinSize = self.alertMinSize;
 			CGSize animationImageSize = self.animationImageSize;
-
+			
 			UIView* alertView = self.alertView;
 			UIView* animationView = self.animationView;
 			UIView* button = self.button;
@@ -1150,7 +1150,7 @@ NS_ASSUME_NONNULL_BEGIN
 			constraint = [NSLayoutConstraint constraintWithItem:v1 attribute:ah relatedBy:rg toItem:nil attribute:an multiplier:1.0f constant:alertMinSize.height]; // Min Height
 			[((alertMinSize.height > 0.0f) ? constraints : disabledConstraints) addObject:constraint];
 			self.alertViewMinHeightConstraint = constraint;
-
+			
 			if(animationView)
 			{
 				v1 = animationView;
@@ -1160,7 +1160,7 @@ NS_ASSUME_NONNULL_BEGIN
 				[constraints addObject:[NSLayoutConstraint constraintWithItem:v1 attribute:ax relatedBy:re toItem:v2 attribute:ax multiplier:1.0f constant:0.0f]]; // Center X
 				if(textHidden && buttonHidden)
 					[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[animationView]-(padding)-|" options:0 metrics:metrics views:views]]; // Bottom
-
+				
 				if(imageView && !animationImagesHidden)
 				{
 					v1 = imageView;
@@ -1176,7 +1176,7 @@ NS_ASSUME_NONNULL_BEGIN
 					[constraints addObject:constraint];
 					self.imageViewHeightConstraint = constraint;
 				}
-
+				
 				if(spinnerView && !spinnerHidden)
 				{
 					v1 = spinnerView;

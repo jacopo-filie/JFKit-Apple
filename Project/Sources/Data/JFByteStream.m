@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-JFByteStream const JFByteStreamZero	= {NULL, 0};
+JFByteStream const JFByteStreamZero = {NULL, 0};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,8 +74,11 @@ BOOL JFByteStreamEqualToByteStream(JFByteStream byteStream1, JFByteStream byteSt
 	Byte* bytes1 = byteStream1.bytes;
 	Byte* bytes2 = byteStream2.bytes;
 	
-	if(!bytes1 && !bytes2)	return YES;
-	if(!bytes1 || !bytes2)	return NO;
+	if(!bytes1 && !bytes2)
+		return YES;
+	
+	if(!bytes1 || !bytes2)
+		return NO;
 	
 	return (memcmp(bytes1, bytes2, byteStream1.length) == 0);
 }

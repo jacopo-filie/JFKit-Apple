@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (strong, nonatomic, readonly)	JFObserversController<id<JFOverlayControllerObserver>>*	observersController;
+@property (strong, nonatomic, readonly) JFObserversController<id<JFOverlayControllerObserver>>* observersController;
 
 // =================================================================================================
 // MARK: Properties - User interface

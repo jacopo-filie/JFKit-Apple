@@ -124,16 +124,16 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize currentSlideDuration = _currentSlideDuration;
 @synthesize currentSlideLength = _currentSlideLength;
 @synthesize currentSlideOrigin = _currentSlideOrigin;
-@synthesize	slideInDuration = _slideInDuration;
-@synthesize	slideInsets = _slideInsets;
-@synthesize	slideOutDuration = _slideOutDuration;
+@synthesize slideInDuration = _slideInDuration;
+@synthesize slideInsets = _slideInsets;
+@synthesize slideOutDuration = _slideOutDuration;
 
 // =================================================================================================
 // MARK: Properties - Flags
 // =================================================================================================
 
 @synthesize animating = _animating;
-@synthesize	currentActivePanel = _currentActivePanel;
+@synthesize currentActivePanel = _currentActivePanel;
 @synthesize currentTransition = _currentTransition;
 @synthesize shouldCancelCurrentTransition = _shouldCancelCurrentTransition;
 
@@ -147,19 +147,19 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize	delegate = _delegate;
+@synthesize delegate = _delegate;
 
 // =================================================================================================
 // MARK: Properties - User interface
 // =================================================================================================
 
 @synthesize activateRootPanelButton = _activateRootPanelButton;
-@synthesize	leftPanelContainer = _leftPanelContainer;
-@synthesize	leftViewController = _leftViewController;
-@synthesize	rightPanelContainer = _rightPanelContainer;
-@synthesize	rightViewController = _rightViewController;
-@synthesize	rootPanelContainer = _rootPanelContainer;
-@synthesize	rootViewController = _rootViewController;
+@synthesize leftPanelContainer = _leftPanelContainer;
+@synthesize leftViewController = _leftViewController;
+@synthesize rightPanelContainer = _rightPanelContainer;
+@synthesize rightViewController = _rightViewController;
+@synthesize rootPanelContainer = _rootPanelContainer;
+@synthesize rootViewController = _rootViewController;
 
 // =================================================================================================
 // MARK: Properties accessors - Attributes
@@ -344,7 +344,9 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)
+	{
 		[JFSliderController initialize:self];
+	}
 	return self;
 }
 
@@ -422,14 +424,30 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	switch(self.currentActivePanel)
 	{
-		case JFSliderControllerPanelLeft:	transition = JFSliderControllerTransitionLeftToRoot;	break;
-		case JFSliderControllerPanelRight:	transition = JFSliderControllerTransitionRightToRoot;	break;
+		case JFSliderControllerPanelLeft:
+		{
+			transition = JFSliderControllerTransitionLeftToRoot;
+			break;
+		}
+		case JFSliderControllerPanelRight:
+		{
+			transition = JFSliderControllerTransitionRightToRoot;
+			break;
+		}
 		case JFSliderControllerPanelRoot:
 		{
 			switch(panel)
 			{
-				case JFSliderControllerPanelLeft:	transition = JFSliderControllerTransitionRootToLeft;	break;
-				case JFSliderControllerPanelRight:	transition = JFSliderControllerTransitionRootToRight;	break;
+				case JFSliderControllerPanelLeft:
+				{
+					transition = JFSliderControllerTransitionRootToLeft;
+					break;
+				}
+				case JFSliderControllerPanelRight:
+				{
+					transition = JFSliderControllerTransitionRootToRight;
+					break;
+				}
 				default:
 					return NO;
 			}
@@ -509,10 +527,21 @@ NS_ASSUME_NONNULL_BEGIN
 	UIViewController* retObj = nil;
 	switch(panel)
 	{
-		case JFSliderControllerPanelLeft:	retObj = self.leftViewController;	break;
-		case JFSliderControllerPanelRight:	retObj = self.rightViewController;	break;
-		case JFSliderControllerPanelRoot:	retObj = self.rootViewController;	break;
-			
+		case JFSliderControllerPanelLeft:
+		{
+			retObj = self.leftViewController;
+			break;
+		}
+		case JFSliderControllerPanelRight:
+		{
+			retObj = self.rightViewController;
+			break;
+		}
+		case JFSliderControllerPanelRoot:
+		{
+			retObj = self.rootViewController;
+			break;
+		}
 		default:
 			break;
 	}
@@ -1095,10 +1124,26 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj;
 	switch(panel)
 	{
-		case JFSliderControllerPanelLeft:	retObj = @"Left Panel";		break;
-		case JFSliderControllerPanelRight:	retObj = @"Right Panel";	break;
-		case JFSliderControllerPanelRoot:	retObj = @"Root Panel";		break;
-		default:							retObj = @"Unknown";		break;
+		case JFSliderControllerPanelLeft:
+		{
+			retObj = @"Left Panel";
+			break;
+		}
+		case JFSliderControllerPanelRight:
+		{
+			retObj = @"Right Panel";
+			break;
+		}
+		case JFSliderControllerPanelRoot:
+		{
+			retObj = @"Root Panel";
+			break;
+		}
+		default:
+		{
+			retObj = @"Unknown";
+			break;
+		}
 	}
 	return retObj;
 }
@@ -1108,12 +1153,36 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* retObj;
 	switch(transition)
 	{
-		case JFSliderControllerTransitionLeftToRoot:	retObj = @"Left => Root";	break;
-		case JFSliderControllerTransitionRightToRoot:	retObj = @"Right => Root";	break;
-		case JFSliderControllerTransitionRootToLeft:	retObj = @"Root => Left";	break;
-		case JFSliderControllerTransitionRootToRight:	retObj = @"Root => Right";	break;
-		case JFSliderControllerTransitionNone:			retObj = @"None";			break;
-		default:										retObj = @"Unknown";		break;
+		case JFSliderControllerTransitionLeftToRoot:
+		{
+			retObj = @"Left => Root";
+			break;
+		}
+		case JFSliderControllerTransitionRightToRoot:
+		{
+			retObj = @"Right => Root";
+			break;
+		}
+		case JFSliderControllerTransitionRootToLeft:
+		{
+			retObj = @"Root => Left";
+			break;
+		}
+		case JFSliderControllerTransitionRootToRight:
+		{
+			retObj = @"Root => Right";
+			break;
+		}
+		case JFSliderControllerTransitionNone:
+		{
+			retObj = @"None";
+			break;
+		}
+		default:
+		{
+			retObj = @"Unknown";
+			break;
+		}
 	}
 	return retObj;
 }

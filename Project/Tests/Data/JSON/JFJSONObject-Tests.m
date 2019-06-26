@@ -197,7 +197,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	
 	NSSet<NSString*>* keys1 = [NSSet<NSString*> setWithArray:dictionary.allKeys];
 	NSSet<NSString*>* keys2 = [NSSet<NSString*> setWithArray:jsonObject.allKeys];
-
+	
 	XCTAssertEqualObjects(keys1, keys2);
 }
 
@@ -230,7 +230,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testDictionaryValue
 {
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionary = self.dictionary;
-
+	
 	JFJSONObject* jsonObject = [[JFJSONObject alloc] initWithDictionary:dictionary];
 	XCTAssertNotNil(jsonObject);
 	XCTAssertEqualObjects(jsonObject.dictionaryValue, dictionary);
@@ -261,7 +261,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertNil([JFJSONObject objectWithData:nil serializer:serializer]);
 	
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionary = self.dictionary;
-
+	
 	JFJSONObject* jsonObject = [JFJSONObject objectWithData:self.data serializer:nil];
 	XCTAssertNotNil(jsonObject);
 	XCTAssertEqual(jsonObject.serializer, [self newJSONObject].serializer);
@@ -276,7 +276,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testObjectWithDictionary
 {
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionary = self.dictionary;
-
+	
 	XCTAssertNil([JFJSONObject objectWithDictionary:nil]);
 	
 	JFJSONObject* jsonObject = [JFJSONObject objectWithDictionary:dictionary];
@@ -292,7 +292,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertNil([JFJSONObject objectWithDictionary:nil serializer:serializer]);
 	
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionary = self.dictionary;
-
+	
 	JFJSONObject* jsonObject = [JFJSONObject objectWithDictionary:dictionary serializer:nil];
 	XCTAssertNotNil(jsonObject);
 	XCTAssertEqual(jsonObject.serializer, [self newJSONObject].serializer);
@@ -356,7 +356,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testInitWithDictionary
 {
 	NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionary = self.dictionary;
-
+	
 	JFJSONObject* jsonObject = [[JFJSONObject alloc] initWithDictionary:dictionary];
 	XCTAssertNotNil(jsonObject);
 	XCTAssertEqualObjects(jsonObject.dictionaryValue, dictionary);
@@ -396,7 +396,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testIsNullForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	NSString* key = @"null";
 	[jsonObject setValue:[NSNull null] forKey:key];
 	XCTAssertEqual(jsonObject.count, 1);
@@ -406,7 +406,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testSetNullForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	NSString* key = @"null";
 	[jsonObject setNullForKey:key];
 	XCTAssertEqual(jsonObject.count, 1);
@@ -450,7 +450,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
 	JFJSONObject* jsonObject2 = [self newJSONObject];
-
+	
 	NSString* key = @"object";
 	[jsonObject setObject:jsonObject2 forKey:key];
 	XCTAssertEqual(jsonObject.count, 1);
@@ -461,7 +461,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
 	NSString* string = @"";
-
+	
 	NSString* key = @"string";
 	[jsonObject setString:string forKey:key];
 	XCTAssertEqual(jsonObject.count, 1);
@@ -482,7 +482,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testHasValueForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	NSString* key = @"key";
 	XCTAssertFalse([jsonObject hasValueForKey:key]);
 	
@@ -493,7 +493,7 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 - (void)testRemoveValueForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];
-
+	
 	NSString* key = @"key";
 	[jsonObject setNullForKey:key];
 	[jsonObject removeValueForKey:key];

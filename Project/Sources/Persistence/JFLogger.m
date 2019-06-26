@@ -43,12 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Constants
 // =================================================================================================
 
-NSString* const JFLoggerFormatDate		= @"%1$@";
-NSString* const JFLoggerFormatMessage	= @"%2$@";
-NSString* const JFLoggerFormatProcessID	= @"%3$@";
-NSString* const JFLoggerFormatSeverity	= @"%4$@";
-NSString* const JFLoggerFormatThreadID	= @"%5$@";
-NSString* const JFLoggerFormatTime		= @"%6$@";
+NSString* const JFLoggerFormatDate = @"%1$@";
+NSString* const JFLoggerFormatMessage = @"%2$@";
+NSString* const JFLoggerFormatProcessID = @"%3$@";
+NSString* const JFLoggerFormatSeverity = @"%4$@";
+NSString* const JFLoggerFormatThreadID = @"%5$@";
+NSString* const JFLoggerFormatTime = @"%6$@";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,12 +108,12 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize dateFormatter			= _dateFormatter;
-@synthesize format					= _format;
-@synthesize outputFilter			= _outputFilter;
-@synthesize requestedFormatValues	= _requestedFormatValues;
-@synthesize severityFilter			= _severityFilter;
-@synthesize timeFormatter			= _timeFormatter;
+@synthesize dateFormatter = _dateFormatter;
+@synthesize format = _format;
+@synthesize outputFilter = _outputFilter;
+@synthesize requestedFormatValues = _requestedFormatValues;
+@synthesize severityFilter = _severityFilter;
+@synthesize timeFormatter = _timeFormatter;
 
 // =================================================================================================
 // MARK: Properties - File system
@@ -281,17 +281,16 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 - (instancetype)init
 {
 	self = [super init];
-	if(self)
-	{
-		_delegatesController = [JFObserversController<JFLoggerDelegate> new];
-		_outputFilter = JFLoggerOutputAll;
-		_rotation = JFLoggerRotationNone;
+	
+	_delegatesController = [JFObserversController<JFLoggerDelegate> new];
+	_outputFilter = JFLoggerOutputAll;
+	_rotation = JFLoggerRotationNone;
 #if DEBUG
-		_severityFilter = JFLoggerSeverityDebug;
+	_severityFilter = JFLoggerSeverityDebug;
 #else
-		_severityFilter = JFLoggerSeverityInfo;
+	_severityFilter = JFLoggerSeverityInfo;
 #endif
-	}
+	
 	return self;
 }
 
@@ -303,14 +302,22 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 {
 	switch(severity)
 	{
-		case JFLoggerSeverityAlert:		return @"Alert";
-		case JFLoggerSeverityCritical:	return @"Critical";
-		case JFLoggerSeverityDebug:		return @"Debug";
-		case JFLoggerSeverityEmergency:	return @"Emergency";
-		case JFLoggerSeverityError:		return @"Error";
-		case JFLoggerSeverityInfo:		return @"Info";
-		case JFLoggerSeverityNotice:	return @"Notice";
-		case JFLoggerSeverityWarning:	return @"Warning";
+		case JFLoggerSeverityAlert:
+			return @"Alert";
+		case JFLoggerSeverityCritical:
+			return @"Critical";
+		case JFLoggerSeverityDebug:
+			return @"Debug";
+		case JFLoggerSeverityEmergency:
+			return @"Emergency";
+		case JFLoggerSeverityError:
+			return @"Error";
+		case JFLoggerSeverityInfo:
+			return @"Info";
+		case JFLoggerSeverityNotice:
+			return @"Notice";
+		case JFLoggerSeverityWarning:
+			return @"Warning";
 	}
 }
 
@@ -323,19 +330,32 @@ NSString* const JFLoggerFormatTime		= @"%6$@";
 	NSMutableArray* tagStrings = [NSMutableArray arrayWithCapacity:13];
 	
 	// Inserts each requested hashtag.
-	if(tags & JFLoggerTagsAttention)	[tagStrings addObject:@"#Attention"];
-	if(tags & JFLoggerTagsClue)			[tagStrings addObject:@"#Clue"];
-	if(tags & JFLoggerTagsComment)		[tagStrings addObject:@"#Comment"];
-	if(tags & JFLoggerTagsCritical)		[tagStrings addObject:@"#Critical"];
-	if(tags & JFLoggerTagsDeveloper)	[tagStrings addObject:@"#Developer"];
-	if(tags & JFLoggerTagsError)		[tagStrings addObject:@"#Error"];
-	if(tags & JFLoggerTagsFileSystem)	[tagStrings addObject:@"#FileSystem"];
-	if(tags & JFLoggerTagsHardware)		[tagStrings addObject:@"#Hardware"];
-	if(tags & JFLoggerTagsMarker)		[tagStrings addObject:@"#Marker"];
-	if(tags & JFLoggerTagsNetwork)		[tagStrings addObject:@"#Network"];
-	if(tags & JFLoggerTagsSecurity)		[tagStrings addObject:@"#Security"];
-	if(tags & JFLoggerTagsSystem)		[tagStrings addObject:@"#System"];
-	if(tags & JFLoggerTagsUser)			[tagStrings addObject:@"#User"];
+	if(tags & JFLoggerTagsAttention)
+		[tagStrings addObject:@"#Attention"];
+	if(tags & JFLoggerTagsClue)
+		[tagStrings addObject:@"#Clue"];
+	if(tags & JFLoggerTagsComment)
+		[tagStrings addObject:@"#Comment"];
+	if(tags & JFLoggerTagsCritical)
+		[tagStrings addObject:@"#Critical"];
+	if(tags & JFLoggerTagsDeveloper)
+		[tagStrings addObject:@"#Developer"];
+	if(tags & JFLoggerTagsError)
+		[tagStrings addObject:@"#Error"];
+	if(tags & JFLoggerTagsFileSystem)
+		[tagStrings addObject:@"#FileSystem"];
+	if(tags & JFLoggerTagsHardware)
+		[tagStrings addObject:@"#Hardware"];
+	if(tags & JFLoggerTagsMarker)
+		[tagStrings addObject:@"#Marker"];
+	if(tags & JFLoggerTagsNetwork)
+		[tagStrings addObject:@"#Network"];
+	if(tags & JFLoggerTagsSecurity)
+		[tagStrings addObject:@"#Security"];
+	if(tags & JFLoggerTagsSystem)
+		[tagStrings addObject:@"#System"];
+	if(tags & JFLoggerTagsUser)
+		[tagStrings addObject:@"#User"];
 	
 	return [tagStrings componentsJoinedByString:@" "];
 }
