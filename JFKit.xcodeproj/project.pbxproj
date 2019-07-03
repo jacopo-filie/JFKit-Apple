@@ -160,6 +160,10 @@
 		4ED607DE1FEE720000292837 /* JFColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DA1FEE720000292837 /* JFColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED607E11FEEA42700292837 /* JFMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED607DF1FEEA42700292837 /* JFMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED607E21FEEA42700292837 /* JFMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED607E01FEEA42700292837 /* JFMath.m */; };
+		4ED869D122CBEA1000575B95 /* JFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED869CF22CBEA1000575B95 /* JFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ED869D222CBEA1000575B95 /* JFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED869CF22CBEA1000575B95 /* JFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ED869D322CBEA1000575B95 /* JFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED869D022CBEA1000575B95 /* JFExecutor.m */; };
+		4ED869D422CBEA1000575B95 /* JFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED869D022CBEA1000575B95 /* JFExecutor.m */; };
 		4EDC5F9B204F5AD000689B8D /* JFKeyboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */; };
 		4EDC5F9C204F5AD000689B8D /* JFKeyboardHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EE82C082149C3CF00D94DA9 /* JFGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE82C062149C3CF00D94DA9 /* JFGradientView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,6 +302,8 @@
 		4ED607DA1FEE720000292837 /* JFColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFColors.h; sourceTree = "<group>"; };
 		4ED607DF1FEEA42700292837 /* JFMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFMath.h; sourceTree = "<group>"; };
 		4ED607E01FEEA42700292837 /* JFMath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMath.m; sourceTree = "<group>"; };
+		4ED869CF22CBEA1000575B95 /* JFExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFExecutor.h; sourceTree = "<group>"; };
+		4ED869D022CBEA1000575B95 /* JFExecutor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFExecutor.m; sourceTree = "<group>"; };
 		4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFKeyboardHelper.m; sourceTree = "<group>"; };
 		4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFKeyboardHelper.h; sourceTree = "<group>"; };
 		4EE82C062149C3CF00D94DA9 /* JFGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFGradientView.h; sourceTree = "<group>"; };
@@ -444,6 +450,8 @@
 				4EF7251020005E170080136D /* JFConnectionMachine.m */,
 				4EB1B3952001C480004C1FF4 /* JFErrorFactory.h */,
 				4EB1B3962001C480004C1FF4 /* JFErrorFactory.m */,
+				4ED869CF22CBEA1000575B95 /* JFExecutor.h */,
+				4ED869D022CBEA1000575B95 /* JFExecutor.m */,
 				4E5EE1AC1FFC5E92008444FD /* JFObserversController.h */,
 				4E5EE1AD1FFC5E92008444FD /* JFObserversController.m */,
 				4EC10F221FFEAC4000ED8A61 /* JFStateMachine.h */,
@@ -647,6 +655,7 @@
 				4E8BCCAA21D11E2F00D77BE3 /* JFCompatibilityMacros.h in Headers */,
 				4EDC5F9C204F5AD000689B8D /* JFKeyboardHelper.h in Headers */,
 				4EC258711FEF294600179CC7 /* JFReferences.h in Headers */,
+				4ED869D122CBEA1000575B95 /* JFExecutor.h in Headers */,
 				4EB1B3972001C480004C1FF4 /* JFErrorFactory.h in Headers */,
 				4EC6650522C2CCFE00B126CD /* JFCompletions.h in Headers */,
 				4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */,
@@ -683,6 +692,7 @@
 				4EF2C7C81FF11DE200311EB5 /* JFVersion.h in Headers */,
 				4E04E66121CCF9AC00479981 /* JFAlert.h in Headers */,
 				4E0932CD21D1C52B0010E261 /* JFJSONSerializer.h in Headers */,
+				4ED869D222CBEA1000575B95 /* JFExecutor.h in Headers */,
 				4E8BCCA521D1183700D77BE3 /* JFJSONArray.h in Headers */,
 				4E0932C921D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */,
 				4E415F2A1FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
@@ -911,6 +921,7 @@
 				4E50039E1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4ED607DB1FEE720000292837 /* JFColors.m in Sources */,
 				4E0932CE21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
+				4ED869D322CBEA1000575B95 /* JFExecutor.m in Sources */,
 				4ED607E21FEEA42700292837 /* JFMath.m in Sources */,
 				4E6914F5205895DE00074DDD /* JFOverlayController.m in Sources */,
 				4E53A67F200CC4B2001EEBFD /* JFWindowController.m in Sources */,
@@ -955,6 +966,7 @@
 				4EC6650222C2CCFE00B126CD /* JFTimerHandler.m in Sources */,
 				4EC6650022C2CCFE00B126CD /* JFCompletions.m in Sources */,
 				4E3AC70220024115002CE0A1 /* JFError.m in Sources */,
+				4ED869D422CBEA1000575B95 /* JFExecutor.m in Sources */,
 				4E50039F1FE5B3D1002710B9 /* JFStrings.m in Sources */,
 				4E0932CF21D1C52B0010E261 /* JFJSONSerializer.m in Sources */,
 				4EF2C7C01FF1178300311EB5 /* JFUtilities.m in Sources */,
