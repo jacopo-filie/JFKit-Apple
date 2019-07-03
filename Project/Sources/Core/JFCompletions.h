@@ -137,6 +137,11 @@ typedef void (^JFSuccessBlock) (id result);
 /**
  * NOT AVAILABLE
  */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
+ * NOT AVAILABLE
+ */
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -306,6 +311,11 @@ typedef void (^JFSuccessBlock) (id result);
  * @return A new instance of this class.
  */
 + (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock;
+
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  * NOT AVAILABLE

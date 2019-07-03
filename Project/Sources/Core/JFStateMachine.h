@@ -156,7 +156,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 #else
 /**
  * The delegate of the state machine.
- * @warning Remember to use `-clearDelegate` to unset the delegate when it is not available anymore or it may become a dangling pointer.
+ * @warning Remember to use `-clearDelegate` to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
  */
 @property (unsafe_unretained, nonatomic, readonly, nullable) id<JFStateMachineDelegate> delegate;
 #endif
@@ -178,6 +178,11 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
+
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  * NOT AVAILABLE
@@ -243,7 +248,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // =================================================================================================
 
 /**
- * Unsets the delegate of the state machine.
+ * Cancels all enqueued transitions and unsets the delegate of the state machine.
  * @warning On systems where the `weak` keyword is not available, you can use this method to prevent the risk of a dangling pointer creation.
  */
 - (void)clearDelegate;
@@ -378,6 +383,11 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
+
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  * NOT AVAILABLE

@@ -116,6 +116,11 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 // =================================================================================================
 
 /**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
  * Initializes a new persistent container using the provided name for the container.
  * @param name The name of the persistent container.
  * @return An initialized persistent container using the passed in name.

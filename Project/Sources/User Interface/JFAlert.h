@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 #else
 /**
  * The delegate of the alert.
- * @warning Remember to unset the delegate when it is not available anymore or it may become a dangling pointer.
+ * @warning Remember to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
  */
 @property (unsafe_unretained, nonatomic, nullable) id<JFAlertDelegate> delegate;
 #endif
@@ -304,6 +304,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A new alert button with the given title and action set.
  */
 + (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock __nullable)action;
+
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
  * NOT AVAILABLE

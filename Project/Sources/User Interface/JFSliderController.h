@@ -159,7 +159,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
 #else
 /**
  * The delegate of the slider controller.
- * @warning Remember to unset the delegate when it is not available anymore or it may become a dangling pointer.
+ * @warning Remember to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
  */
 @property (unsafe_unretained, nonatomic, nullable) id<JFSliderControllerDelegate> delegate;
 #endif

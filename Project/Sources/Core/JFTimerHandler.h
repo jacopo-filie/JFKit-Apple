@@ -74,6 +74,11 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 /**
  * NOT AVAILABLE
  */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
+ * NOT AVAILABLE
+ */
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

@@ -301,6 +301,11 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 + (JFVersion*)currentOperatingSystemVersion;
 
 /**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
  * Returns a version object containing the following components:
  * @code
  *   `major` = major;
@@ -327,7 +332,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
  */
 + (instancetype)versionWithMajorComponent:(NSInteger)major minor:(NSInteger)minor;
 
-/*
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
