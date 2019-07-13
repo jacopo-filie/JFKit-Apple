@@ -27,6 +27,7 @@
 @import Foundation;
 
 #import "JFCompletions.h"
+#import "JFPreprocessorMacros.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 
 /**
- * An executor can be used to garantee serialized execution of operation blocks. It is tipically used inside other objects to perform internal operations without using expensive synchronization utilities (e.g.: locks).
+ * An executor can be used to garantee existence of the owner object when the enqueued blocks are executed.
  * `OwnerType` defines the type of the parameter `owner` of the executor block.
  */
 @interface JFExecutor<__covariant OwnerType> : NSObject
@@ -85,11 +86,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Initializes the executor with the given owner.
+ * Initializes the executor with the given owner; a private background queue will be used to enqueue blocks.
  * @param owner The owner of the executor.
  * @return The initialized executor.
  */
-- (instancetype)initWithOwner:(OwnerType)owner NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOwner:(OwnerType)owner;
+
+/**
+ * Initializes the executor with the given owner and queue.
+ * @param owner The owner of the executor.
+ * @param queue The queue that will be used by the executor.
+ * @return The initialized executor.
+ */
+- (instancetype)initWithOwner:(OwnerType)owner queue:(NSOperationQueue*)queue NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Observers
@@ -104,6 +113,11 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 // MARK: Methods - Service
 // =================================================================================================
+
+/**
+ * Cancels all currently enqueued blocks calling the `failureBlock` of each request, when available.
+ */
+- (void)cancelEnqueuedBlocks;
 
 /**
  * Enqueues the given executor block; `block` will not be executed in case of internal error.

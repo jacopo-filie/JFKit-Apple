@@ -26,6 +26,7 @@
 
 #import "JFExecutor.h"
 
+#import "JFCompatibilityMacros.h"
 #import "JFShortcuts.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,11 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
-@property (weak, nonatomic, readwrite, nullable) OwnerType owner;
-#else
-@property (unsafe_unretained, nonatomic, readwrite, nullable) OwnerType owner;
-#endif
+@property (JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY, nonatomic, readwrite, nullable) OwnerType owner;
 
 // =================================================================================================
 // MARK: Properties - Service
@@ -85,16 +82,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)dealloc
 {
-	[self.queue cancelAllOperations];
+	[self cancelEnqueuedBlocks];
 }
 
 - (instancetype)initWithOwner:(id)owner
 {
-	self = [super init];
-	
 	NSOperationQueue* queue = [NSOperationQueue new];
 	queue.maxConcurrentOperationCount = 1;
 	queue.name = ClassName;
+	
+	return [self initWithOwner:owner queue:queue];
+}
+
+- (instancetype)initWithOwner:(id)owner queue:(NSOperationQueue*)queue
+{
+	self = [super init];
 	
 	_owner = owner;
 	_queue = queue;
@@ -108,13 +110,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)clearOwner
 {
-	[self.queue cancelAllOperations];
+	[self cancelEnqueuedBlocks];
 	self.owner = nil;
 }
 
 // =================================================================================================
 // MARK: Methods - Service
 // =================================================================================================
+
+- (void)cancelEnqueuedBlocks
+{
+	[self.queue cancelAllOperations];
+}
 
 - (void)enqueue:(void (^)(id owner))block
 {
