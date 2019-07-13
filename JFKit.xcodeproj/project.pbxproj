@@ -402,12 +402,12 @@
 		4E4E97D02000E3DA00E9CE87 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4E9591A82256C48D009D01E2 /* JSON */,
 				4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */,
 				4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */,
 				4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */,
 				4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */,
 				4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */,
+				4E9591A82256C48D009D01E2 /* JSON */,
 			);
 			path = Data;
 			sourceTree = "<group>";
