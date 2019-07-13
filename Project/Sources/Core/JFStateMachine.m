@@ -27,6 +27,7 @@
 #import "JFStateMachine.h"
 
 #import "JFAsynchronousBlockOperation.h"
+#import "JFCompatibilityMacros.h"
 #import "JFErrorFactory.h"
 #import "JFShortcuts.h"
 
@@ -56,11 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
-@property (weak, nonatomic, readwrite, nullable) id<JFStateMachineDelegate> delegate;
-#else
-@property (unsafe_unretained, nonatomic, readwrite, nullable) id<JFStateMachineDelegate> delegate;
-#endif
+@property (JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY, nonatomic, readwrite, nullable) id<JFStateMachineDelegate> delegate;
 
 // =================================================================================================
 // MARK: Properties - State
