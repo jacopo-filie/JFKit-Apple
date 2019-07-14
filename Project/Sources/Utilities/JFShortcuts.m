@@ -83,6 +83,20 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Properties - Operation queues
+// =================================================================================================
+
++ (NSOperationQueue*)backgroundOperationQueue
+{
+	static NSOperationQueue* retObj;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retObj = JFCreateConcurrentOperationQueue(JF_KIT_DOMAIN);
+	});
+	return retObj;
+}
+
+// =================================================================================================
 // MARK: Properties - System
 // =================================================================================================
 

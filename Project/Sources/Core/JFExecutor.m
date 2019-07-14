@@ -87,11 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithOwner:(id)owner
 {
-	NSOperationQueue* queue = [NSOperationQueue new];
-	queue.maxConcurrentOperationCount = 1;
-	queue.name = ClassName;
-	
-	return [self initWithOwner:owner queue:queue];
+	return [self initWithOwner:owner queue:JFCreateSerialOperationQueue(ClassName)];
 }
 
 - (instancetype)initWithOwner:(id)owner queue:(NSOperationQueue*)queue

@@ -75,6 +75,24 @@ FOUNDATION_EXPORT NSTimeInterval const JFAnimationDuration;
 FOUNDATION_EXPORT BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2);
 
 // =================================================================================================
+// MARK: Functions - Operation queues
+// =================================================================================================
+
+/**
+ * Creates an operation queue with the given `name` and the default maximum number of concurrent operations.
+ * @param name The name of the queue.
+ * @return An initialized operation queue.
+ */
+FOUNDATION_EXPORT NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* __nullable name);
+
+/**
+ * Creates an operation queue with the given `name` and limits the maximum number of concurrent operations to `1`.
+ * @param name The name of the queue.
+ * @return An initialized operation queue.
+ */
+FOUNDATION_EXPORT NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nullable name);
+
+// =================================================================================================
 // MARK: Functions - Resources
 // =================================================================================================
 

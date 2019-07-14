@@ -258,11 +258,8 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 {
 	self = [super init];
 	
-	NSOperationQueue* queue = [NSOperationQueue new];
-	queue.maxConcurrentOperationCount = 1;
-	
 	// Concurrency
-	_serialQueue = queue;
+	_serialQueue = JFCreateSerialOperationQueue(ClassName);
 	
 	// Data
 	_managedObjectModel = model;

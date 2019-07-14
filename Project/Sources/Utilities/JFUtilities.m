@@ -86,6 +86,27 @@ BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj
 }
 
 // =================================================================================================
+// MARK: Functions - Queues
+// =================================================================================================
+
+NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* __nullable name)
+{
+	NSOperationQueue* retObj = [NSOperationQueue new];
+	retObj.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+	retObj.name = name;
+	return retObj;
+}
+
+NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nullable name)
+{
+	NSOperationQueue* retObj = [NSOperationQueue new];
+	retObj.maxConcurrentOperationCount = 1;
+	retObj.name = name;
+	return retObj;
+}
+
+
+// =================================================================================================
 // MARK: Functions - Resources
 // =================================================================================================
 

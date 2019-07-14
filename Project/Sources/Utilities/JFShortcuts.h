@@ -205,6 +205,11 @@ NS_ASSUME_NONNULL_BEGIN
 #	define MainNotificationCenter [NSNotificationCenter defaultCenter]
 
 /**
+ * Returns the shared background concurrent operation queue.
+ */
+#	define BackgroundOperationQueue [JFShortcuts backgroundOperationQueue]
+
+/**
  * Returns the operation queue associated with the main thread.
  */
 #	define MainOperationQueue [NSOperationQueue mainQueue]
@@ -290,6 +295,15 @@ NS_ASSUME_NONNULL_BEGIN
  * The `release` component is retrieved using the shortcut `AppInfoReleaseVersion`. The `build` component is retrieved using the shortcut `AppInfoBuildVersion`.
  */
 @property (class, assign, nonatomic, readonly, nullable) NSString* appVersion;
+
+// =================================================================================================
+// MARK: Properties - Operation queues
+// =================================================================================================
+
+/**
+ * Returns the shared background concurrent operation queue.
+ */
+@property (class, strong, readonly) NSOperationQueue* backgroundOperationQueue;
 
 // =================================================================================================
 // MARK: Properties - System

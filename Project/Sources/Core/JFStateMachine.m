@@ -166,11 +166,8 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	self = [super init];
 	
-	NSOperationQueue* executionQueue = [NSOperationQueue new];
-	executionQueue.maxConcurrentOperationCount = 1;
-	
 	_delegate = delegate;
-	_executionQueue = executionQueue;
+	_executionQueue = JFCreateSerialOperationQueue(ClassName);
 	_state = state;
 	
 	return self;
