@@ -27,6 +27,7 @@
 #import "JFObjectIdentifier.h"
 
 #import "JFReferences.h"
+#import "JFShortcuts.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,8 +68,8 @@ static NSTimeInterval kJFObjectIdentifierLegacyImplementationCleanRegistryDelay 
 // MARK: Methods - Identifiers
 // =================================================================================================
 
-+ (void)clearID:(id<NSObject>)object;
-+ (NSUInteger)getID:(id<NSObject>)object;
+- (void)clearID:(id<NSObject>)object;
+- (NSUInteger)getID:(id<NSObject>)object;
 
 @end
 
@@ -82,7 +83,7 @@ static NSTimeInterval kJFObjectIdentifierLegacyImplementationCleanRegistryDelay 
 // MARK: Properties - Strategy
 // =================================================================================================
 
-@property (class, assign, readonly) Class<JFObjectIdentifierImplementation> implementation;
+@property (strong, nonatomic, readonly) id<JFObjectIdentifierImplementation> implementation;
 
 @end
 
@@ -97,8 +98,8 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // MARK: Properties - Identifiers
 // =================================================================================================
 
-@property (class, assign, readonly, getter=getAndIncrementNextFreeID) NSUInteger nextFreeID;
-@property (class, strong, readonly) Registry* registry;
+@property (assign, readonly, getter=getAndIncrementNextFreeID) NSUInteger nextFreeID;
+@property (strong, nonatomic, readonly) Registry* registry;
 
 @end
 
@@ -112,17 +113,17 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // MARK: Properties - Identifiers
 // =================================================================================================
 
-@property (class, assign) BOOL needsCleanRegistry;
-@property (class, assign, readonly, getter=getAndIncrementNextFreeID) NSUInteger nextFreeID;
-@property (class, strong, readonly) LegacyRegistry* registry;
+@property (assign) BOOL needsCleanRegistry;
+@property (assign, readonly, getter=getAndIncrementNextFreeID) NSUInteger nextFreeID;
+@property (strong, nonatomic, readonly) LegacyRegistry* registry;
 
 // =================================================================================================
 // MARK: Methods - Identifiers
 // =================================================================================================
 
-+ (void)cleanRegistry;
-+ (void)cleanRegistryIfNeeded;
-+ (Reference* __nullable)referenceForObject:(id<NSObject>)object;
+- (void)cleanRegistry;
+- (void)cleanRegistryIfNeeded;
+- (Reference* __nullable)referenceForObject:(id<NSObject>)object;
 
 @end
 
@@ -133,14 +134,42 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 @implementation JFObjectIdentifier
 
 // =================================================================================================
-// MARK: Properties accessors - Strategy
+// MARK: Fields - Strategy
 // =================================================================================================
 
-+ (Class<JFObjectIdentifierImplementation>)implementation
+@synthesize implementation = _implementation;
+
+// =================================================================================================
+// MARK: Properties - Memory
+// =================================================================================================
+
++ (JFObjectIdentifier*)sharedInstance
 {
+	static JFObjectIdentifier* retObj;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		retObj = [JFObjectIdentifier new];
+	});
+	return retObj;
+}
+
+// =================================================================================================
+// MARK: Methods - Memory
+// =================================================================================================
+
+- (instancetype)init
+{
+	self = [super init];
+	
+	id<JFObjectIdentifierImplementation> implementation;
 	if(@available(macOS 10.8, *))
-		return [JFObjectIdentifierImplementation class];
-	return [JFObjectIdentifierLegacyImplementation class];
+		implementation = [JFObjectIdentifierImplementation new];
+	else
+		implementation = [JFObjectIdentifierLegacyImplementation new];
+	
+	_implementation = implementation;
+
+	return self;
 }
 
 // =================================================================================================
@@ -149,10 +178,20 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 
 + (void)clearID:(id<NSObject>)object
 {
-	[self.implementation clearID:object];
+	[JFObjectIdentifier.sharedInstance clearID:object];
 }
 
 + (NSUInteger)getID:(id<NSObject>)object
+{
+	return [JFObjectIdentifier.sharedInstance getID:object];
+}
+
+- (void)clearID:(id<NSObject>)object
+{
+	[self.implementation clearID:object];
+}
+
+- (NSUInteger)getID:(id<NSObject>)object
 {
 	return [self.implementation getID:object];
 }
@@ -166,33 +205,43 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 @implementation JFObjectIdentifierImplementation
 
 // =================================================================================================
+// MARK: Fields - Identifiers
+// =================================================================================================
+
+@synthesize nextFreeID = _nextFreeID;
+@synthesize registry = _registry;
+
+// =================================================================================================
 // MARK: Properties - Identifiers
 // =================================================================================================
 
-+ (NSUInteger)getAndIncrementNextFreeID
+- (NSUInteger)getAndIncrementNextFreeID
 {
-	static NSUInteger retVal = 0;
 	@synchronized(self)
 	{
-		return retVal++;
+		return _nextFreeID++;
 	}
 }
 
-+ (Registry*)registry
+// =================================================================================================
+// MARK: Methods - Memory
+// =================================================================================================
+
+- (instancetype)init
 {
-	static Registry* retObj;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retObj = [Registry mapTableWithKeyOptions:(NSMapTableWeakMemory | NSMapTableObjectPointerPersonality) valueOptions:NSMapTableStrongMemory];
-	});
-	return retObj;
+	self = [super init];
+	
+	_nextFreeID = 0;
+	_registry = [Registry mapTableWithKeyOptions:(NSMapTableWeakMemory | NSMapTableObjectPointerPersonality) valueOptions:NSMapTableStrongMemory];
+	
+	return self;
 }
 
 // =================================================================================================
 // MARK: Methods - Identifiers
 // =================================================================================================
 
-+ (void)clearID:(id<NSObject>)object
+- (void)clearID:(id<NSObject>)object
 {
 	Registry* registry = self.registry;
 	@synchronized(registry)
@@ -201,7 +250,7 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	}
 }
 
-+ (NSUInteger)getID:(id<NSObject>)object
+- (NSUInteger)getID:(id<NSObject>)object
 {
 	Registry* registry = self.registry;
 	@synchronized(registry)
@@ -231,13 +280,15 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // MARK: Fields - Identifiers
 // =================================================================================================
 
-static BOOL _needsCleanRegistry;
+@synthesize needsCleanRegistry = _needsCleanRegistry;
+@synthesize nextFreeID = _nextFreeID;
+@synthesize registry = _registry;
 
 // =================================================================================================
 // MARK: Properties - Identifiers
 // =================================================================================================
 
-+ (BOOL)needsCleanRegistry
+- (BOOL)needsCleanRegistry
 {
 	@synchronized(self)
 	{
@@ -245,7 +296,7 @@ static BOOL _needsCleanRegistry;
 	}
 }
 
-+ (void)setNeedsCleanRegistry:(BOOL)needsCleanRegistry
+- (void)setNeedsCleanRegistry:(BOOL)needsCleanRegistry
 {
 	@synchronized(self)
 	{
@@ -258,35 +309,45 @@ static BOOL _needsCleanRegistry;
 	if(!needsCleanRegistry)
 		return;
 	
+#if JF_WEAK_ENABLED
+	JFWeakifySelf;
+#else
+	__typeof(self) __strong weakSelf = self;
+#endif
+	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kJFObjectIdentifierLegacyImplementationCleanRegistryDelay * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-		[self cleanRegistryIfNeeded];
+		[weakSelf cleanRegistryIfNeeded];
 	});
 }
 
-+ (NSUInteger)getAndIncrementNextFreeID
+- (NSUInteger)getAndIncrementNextFreeID
 {
-	static NSUInteger retVal = 0;
 	@synchronized(self)
 	{
-		return retVal++;
+		return _nextFreeID++;
 	}
 }
 
-+ (LegacyRegistry*)registry
+// =================================================================================================
+// MARK: Methods - Memory
+// =================================================================================================
+
+- (instancetype)init
 {
-	static LegacyRegistry* retObj;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		retObj = [LegacyRegistry new];
-	});
-	return retObj;
+	self = [super init];
+	
+	_needsCleanRegistry = NO;
+	_nextFreeID = 0;
+	_registry = [LegacyRegistry new];
+	
+	return self;
 }
 
 // =================================================================================================
 // MARK: Methods - Identifiers
 // =================================================================================================
 
-+ (void)cleanRegistry
+- (void)cleanRegistry
 {
 	LegacyRegistry* registry = self.registry;
 	@synchronized(registry)
@@ -299,7 +360,7 @@ static BOOL _needsCleanRegistry;
 	}
 }
 
-+ (void)cleanRegistryIfNeeded
+- (void)cleanRegistryIfNeeded
 {
 	@synchronized(self)
 	{
@@ -312,7 +373,7 @@ static BOOL _needsCleanRegistry;
 	[self cleanRegistry];
 }
 
-+ (void)clearID:(id<NSObject>)object
+- (void)clearID:(id<NSObject>)object
 {
 	LegacyRegistry* registry = self.registry;
 	@synchronized(registry)
@@ -323,7 +384,7 @@ static BOOL _needsCleanRegistry;
 	}
 }
 
-+ (NSUInteger)getID:(id<NSObject>)object
+- (NSUInteger)getID:(id<NSObject>)object
 {
 	LegacyRegistry* registry = self.registry;
 	@synchronized(registry)
@@ -342,7 +403,7 @@ static BOOL _needsCleanRegistry;
 	}
 }
 
-+ (Reference* __nullable)referenceForObject:(id<NSObject>)object
+- (Reference* __nullable)referenceForObject:(id<NSObject>)object
 {
 	Reference* retObj = nil;
 	BOOL needsCleanRegistry = NO;
