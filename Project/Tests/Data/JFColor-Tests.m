@@ -209,7 +209,10 @@ NS_ASSUME_NONNULL_BEGIN
 	hex = color.jf_colorRGBHex;
 	result = 0x000FF0;
 	XCTAssert((hex == result), @"The color hex value is '%@'; it should be '%@'.", JFStringFromHex(hex), JFStringFromHex(result));
-	
+	XCTAssertNil(JFColorWithRGBHexString(nil));
+	XCTAssertNil(JFColorWithRGBHexString(JFEmptyString));
+	XCTAssertNil(JFColorWithRGBHexString(@"Wrong string."));
+
 	// JFColorWithRGBA
 	color = JFColorWithRGBA(0, value, 0, value);
 	hex = color.jf_colorRGBAHex;
@@ -251,6 +254,9 @@ NS_ASSUME_NONNULL_BEGIN
 	hex = color.jf_colorRGBAHex;
 	result = 0x0FFFFFF0;
 	XCTAssert((hex == result), @"The color hex value is '%@'; it should be '%@'.", JFStringFromHex(hex), JFStringFromHex(result));
+	XCTAssertNil(JFColorWithRGBAHexString(nil));
+	XCTAssertNil(JFColorWithRGBAHexString(JFEmptyString));
+	XCTAssertNil(JFColorWithRGBAHexString(@"Wrong string."));
 }
 
 - (void)testMacros
