@@ -31,6 +31,7 @@
 #endif
 
 #import "JFBlocks.h"
+#import "JFShortcuts.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS
-@interface JFSoftReference<ObjectType> ()
+@interface JFSoftReference<ObjectType> (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Memory
@@ -135,6 +136,28 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - Identity
+// =================================================================================================
+
+- (NSUInteger)hash
+{
+	id object = self.object;
+	if([object conformsToProtocol:@protocol(NSObject)])
+		return ((id<NSObject>)object).hash;
+	
+	return ClassName.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+	if(!object || ![object isKindOfClass:self.class])
+		return NO;
+	
+	JFSoftReference* other = object;
+	return JFAreObjectsEqual(self.object, other.object);
+}
+
+// =================================================================================================
 // MARK: Methods - Notifications
 // =================================================================================================
 
@@ -191,6 +214,28 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - Identity
+// =================================================================================================
+
+- (NSUInteger)hash
+{
+	id object = self.object;
+	if([object conformsToProtocol:@protocol(NSObject)])
+		return ((id<NSObject>)object).hash;
+	
+	return ClassName.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+	if(!object || ![object isKindOfClass:self.class])
+		return NO;
+	
+	JFUnsafeReference* other = object;
+	return JFAreObjectsEqual(self.object, other.object);
+}
+
+// =================================================================================================
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
@@ -226,6 +271,28 @@ NS_ASSUME_NONNULL_BEGIN
 	JFWeakReference* retObj = [[JFWeakReference alloc] init];
 	retObj.object = object;
 	return retObj;
+}
+
+// =================================================================================================
+// MARK: Methods - Identity
+// =================================================================================================
+
+- (NSUInteger)hash
+{
+	id object = self.object;
+	if([object conformsToProtocol:@protocol(NSObject)])
+		return ((id<NSObject>)object).hash;
+	
+	return ClassName.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+	if(!object || ![object isKindOfClass:self.class])
+		return NO;
+	
+	JFWeakReference* other = object;
+	return JFAreObjectsEqual(self.object, other.object);
 }
 
 // =================================================================================================
