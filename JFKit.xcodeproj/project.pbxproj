@@ -57,12 +57,6 @@
 		4E53A680200CC4B2001EEBFD /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53A67D200CC4B2001EEBFD /* JFWindowController.m */; };
 		4E53A681200CC4B2001EEBFD /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E53A67E200CC4B2001EEBFD /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E53A682200CC4B2001EEBFD /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E53A67E200CC4B2001EEBFD /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E57E252232414C00023A725 /* JFDeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E57E250232414C00023A725 /* JFDeallocNotifier.m */; };
-		4E57E253232414C00023A725 /* JFDeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E57E250232414C00023A725 /* JFDeallocNotifier.m */; };
-		4E57E254232414C00023A725 /* JFDeallocNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E57E251232414C00023A725 /* JFDeallocNotifier.h */; };
-		4E57E255232414C00023A725 /* JFDeallocNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E57E251232414C00023A725 /* JFDeallocNotifier.h */; };
-		4E57E257232421210023A725 /* JFDeallocNotifier-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E57E256232421210023A725 /* JFDeallocNotifier-Tests.m */; };
-		4E57E258232421210023A725 /* JFDeallocNotifier-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E57E256232421210023A725 /* JFDeallocNotifier-Tests.m */; };
 		4E5DD4061FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5DD4071FEFCF7F00285B30 /* JFAsynchronousBlockOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E5DD4081FEFCF7F00285B30 /* JFAsynchronousBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */; };
@@ -250,9 +244,6 @@
 		4E515E182004FAD0008D3234 /* JFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAppDelegate.m; sourceTree = "<group>"; };
 		4E53A67D200CC4B2001EEBFD /* JFWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFWindowController.m; sourceTree = "<group>"; };
 		4E53A67E200CC4B2001EEBFD /* JFWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFWindowController.h; sourceTree = "<group>"; };
-		4E57E250232414C00023A725 /* JFDeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFDeallocNotifier.m; sourceTree = "<group>"; };
-		4E57E251232414C00023A725 /* JFDeallocNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFDeallocNotifier.h; sourceTree = "<group>"; };
-		4E57E256232421210023A725 /* JFDeallocNotifier-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFDeallocNotifier-Tests.m"; sourceTree = "<group>"; };
 		4E5DD4021FEFCF7E00285B30 /* JFAsynchronousBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousBlockOperation.h; sourceTree = "<group>"; };
 		4E5DD4031FEFCF7E00285B30 /* JFAsynchronousBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAsynchronousBlockOperation.m; sourceTree = "<group>"; };
 		4E5DD4041FEFCF7E00285B30 /* JFAsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAsynchronousOperation.h; sourceTree = "<group>"; };
@@ -457,8 +448,6 @@
 				4EC664FB22C2CCFD00B126CD /* JFCompletions.m */,
 				4EF7250F20005E170080136D /* JFConnectionMachine.h */,
 				4EF7251020005E170080136D /* JFConnectionMachine.m */,
-				4E57E251232414C00023A725 /* JFDeallocNotifier.h */,
-				4E57E250232414C00023A725 /* JFDeallocNotifier.m */,
 				4EB1B3952001C480004C1FF4 /* JFErrorFactory.h */,
 				4EB1B3962001C480004C1FF4 /* JFErrorFactory.m */,
 				4ED869CF22CBEA1000575B95 /* JFExecutor.h */,
@@ -566,7 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				4EBD586C2000808700BCBC9E /* JFConnectionMachine-Tests.m */,
-				4E57E256232421210023A725 /* JFDeallocNotifier-Tests.m */,
 				4EAC2CA42001361B00B7BC30 /* JFLogger-Tests.m */,
 				4EAC2CA1200133CE00B7BC30 /* JFObserversController-Tests.m */,
 				4EBD585E20007D5C00BCBC9E /* JFSwitchMachine-Tests.m */,
@@ -672,7 +660,6 @@
 				4EC6650522C2CCFE00B126CD /* JFCompletions.h in Headers */,
 				4E4F527F200D0E2B00B24F1C /* JFLogger.h in Headers */,
 				4EC6650322C2CCFE00B126CD /* JFTimerHandler.h in Headers */,
-				4E57E254232414C00023A725 /* JFDeallocNotifier.h in Headers */,
 				4E53A681200CC4B2001EEBFD /* JFWindowController.h in Headers */,
 				4E515E192004FAD0008D3234 /* JFAppDelegate.h in Headers */,
 				4E8BCCA021D1183700D77BE3 /* JFJSONValue.h in Headers */,
@@ -711,7 +698,6 @@
 				4E415F2A1FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */,
 				4E0BF89D1FE076770050114D /* JFPreprocessorMacros.h in Headers */,
 				4ED607DE1FEE720000292837 /* JFColors.h in Headers */,
-				4E57E255232414C00023A725 /* JFDeallocNotifier.h in Headers */,
 				4EE9DF9F21E4C517008B5B78 /* JFObjectIdentifier.h in Headers */,
 				4EC6650422C2CCFE00B126CD /* JFTimerHandler.h in Headers */,
 				4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */,
@@ -903,7 +889,6 @@
 			files = (
 				4EF2C7C91FF11DE200311EB5 /* JFVersion.m in Sources */,
 				4EE9DFA021E4C517008B5B78 /* JFObjectIdentifier.m in Sources */,
-				4E57E252232414C00023A725 /* JFDeallocNotifier.m in Sources */,
 				4EF7251320005E180080136D /* JFConnectionMachine.m in Sources */,
 				4EB1B3992001C480004C1FF4 /* JFErrorFactory.m in Sources */,
 				4EC10F231FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
@@ -955,7 +940,6 @@
 				4EBD586820007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586D2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA52001361B00B7BC30 /* JFLogger-Tests.m in Sources */,
-				4E57E257232421210023A725 /* JFDeallocNotifier-Tests.m in Sources */,
 				4EAC2C9D2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */,
 				4E9591AA2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */,
 				4EA9711721E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */,
@@ -972,7 +956,6 @@
 			files = (
 				4EF2C7CA1FF11DE200311EB5 /* JFVersion.m in Sources */,
 				4EF7251420005E180080136D /* JFConnectionMachine.m in Sources */,
-				4E57E253232414C00023A725 /* JFDeallocNotifier.m in Sources */,
 				4EB1B39A2001C480004C1FF4 /* JFErrorFactory.m in Sources */,
 				4EC10F241FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
@@ -1017,7 +1000,6 @@
 				4EBD586920007D5C00BCBC9E /* JFSwitchMachine-Tests.m in Sources */,
 				4EBD586E2000808700BCBC9E /* JFConnectionMachine-Tests.m in Sources */,
 				4EAC2CA62001361B00B7BC30 /* JFLogger-Tests.m in Sources */,
-				4E57E258232421210023A725 /* JFDeallocNotifier-Tests.m in Sources */,
 				4EAC2C9E2001300400B7BC30 /* JFShortcuts-Tests.m in Sources */,
 				4E9591AB2256C50C009D01E2 /* JFJSONArray-Tests.m in Sources */,
 				4EA9711821E980F30014BC0E /* JFObjectIdentifier-Tests.m in Sources */,
