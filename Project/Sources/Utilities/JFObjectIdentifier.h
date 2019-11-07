@@ -60,9 +60,15 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns the ID associated with the given object; if the object is not saved in the common registry yet, a new ID is associated with it and saved in the registry.
  * @param object The object whos ID is being requested.
  * @return The ID associated with the given object.
- * @warning On systems that does not support weak references, call the method `clearID:` passing the object that must be unregistered, prior to it being deallocated leaving the registry with a dangling pointer.
+ * @warning On systems that does not support weak references, call the method `clearID:` passing the object that must be unregistered, prior to it being deallocated leaving the registry with a dangling pointer; you can also use the method `resetID:` passing the ID of the object to unregister.
  */
 + (NSUInteger)getID:(id<NSObject>)object;
+
+/*
+ * Removes the given object ID from the common registry; if no object with the given ID is registered yet, it does nothing.
+ * @param objectID The ID of the object to unregister.
+ */
++ (void)resetID:(NSUInteger)objectID;
 
 /*
  * Removes the given object from the instance registry; if the object is not registered yet, it does nothing.
@@ -74,9 +80,15 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns the ID associated with the given object; if the object is not saved in the instance registry yet, a new ID is associated with it and saved in the registry.
  * @param object The object whos ID is being requested.
  * @return The ID associated with the given object.
- * @warning On systems that does not support weak references, call the method `clearID:` passing the object that must be unregistered, prior to it being deallocated leaving the registry with a dangling pointer.
+ * @warning On systems that does not support weak references, call the method `clearID:` passing the object that must be unregistered, prior to it being deallocated leaving the registry with a dangling pointer; you can also use the method `resetID:` passing the ID of the object to unregister.
  */
 - (NSUInteger)getID:(id<NSObject>)object;
+
+/*
+ * Removes the given object ID from the instance registry; if no object with the given ID is registered yet, it does nothing.
+ * @param objectID The ID of the object to unregister.
+ */
+- (void)resetID:(NSUInteger)objectID;
 
 @end
 

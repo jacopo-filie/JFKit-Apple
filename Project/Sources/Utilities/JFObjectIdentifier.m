@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import "JFObjectIdentifier.h"
+#import "JFObjectIdentifier_Project.h"
 
 #import "JFReferences.h"
 #import "JFShortcuts.h"
@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
+#define CleanRegistryDelay kJFObjectIdentifierLegacyImplementationCleanRegistryDelay
 #define LegacyRegistry NSMutableDictionary<Reference*, NSNumber*>
 #define Registry NSMapTable<id<NSObject>, NSNumber*>
 
@@ -65,11 +66,18 @@ static NSTimeInterval kJFObjectIdentifierLegacyImplementationCleanRegistryDelay 
 @protocol JFObjectIdentifierImplementation <NSObject>
 
 // =================================================================================================
+// MARK: Properties - Identifiers
+// =================================================================================================
+
+@property (assign, readonly) NSUInteger count;
+
+// =================================================================================================
 // MARK: Methods - Identifiers
 // =================================================================================================
 
 - (void)clearID:(id<NSObject>)object;
 - (NSUInteger)getID:(id<NSObject>)object;
+- (void)resetID:(NSUInteger)objectID;
 
 @end
 
@@ -123,6 +131,11 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 
 - (void)cleanRegistry;
 - (void)cleanRegistryIfNeeded;
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
 - (Reference* __nullable)referenceForObject:(id<NSObject>)object;
 
 @end
@@ -154,6 +167,15 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 }
 
 // =================================================================================================
+// MARK: Properties - Identifiers
+// =================================================================================================
+
+- (NSUInteger)count
+{
+	return self.implementation.count;
+}
+
+// =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
@@ -172,6 +194,25 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	return self;
 }
 
+- (instancetype)initWithCurrentImplementation API_AVAILABLE(ios(8.0), macos(10.8))
+{
+	self = [super init];
+	
+	_implementation = [JFObjectIdentifierImplementation new];
+	
+	return self;
+}
+
+- (instancetype)initWithLegacyImplementation
+{
+	self = [super init];
+	
+	_implementation = [JFObjectIdentifierLegacyImplementation new];
+	
+	return self;
+}
+
+
 // =================================================================================================
 // MARK: Methods - Identifiers
 // =================================================================================================
@@ -186,6 +227,11 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	return [JFObjectIdentifier.sharedInstance getID:object];
 }
 
++ (void)resetID:(NSUInteger)objectID
+{
+	[JFObjectIdentifier.sharedInstance resetID:objectID];
+}
+
 - (void)clearID:(id<NSObject>)object
 {
 	[self.implementation clearID:object];
@@ -194,6 +240,11 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 - (NSUInteger)getID:(id<NSObject>)object
 {
 	return [self.implementation getID:object];
+}
+
+- (void)resetID:(NSUInteger)objectID
+{
+	[self.implementation resetID:objectID];
 }
 
 @end
@@ -214,6 +265,15 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // =================================================================================================
 // MARK: Properties - Identifiers
 // =================================================================================================
+
+- (NSUInteger)count
+{
+	Registry* registry = self.registry;
+	@synchronized(registry)
+	{
+		return registry.count;
+	}
+}
 
 - (NSUInteger)getAndIncrementNextFreeID
 {
@@ -268,6 +328,25 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	}
 }
 
+- (void)resetID:(NSUInteger)objectID
+{
+	Registry* registry = self.registry;
+	@synchronized(registry)
+	{
+		NSNumber* number = @(objectID);
+		
+		NSMutableArray<id<NSObject>>* objects = [NSMutableArray<id<NSObject>> array];
+		for(id<NSObject> object in registry)
+		{
+			if([[registry objectForKey:object] isEqualToNumber:number])
+				[objects addObject:object];
+		}
+		
+		for(id<NSObject> object in objects)
+			[registry removeObjectForKey:object];
+	}
+}
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -287,6 +366,15 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // =================================================================================================
 // MARK: Properties - Identifiers
 // =================================================================================================
+
+- (NSUInteger)count
+{
+	LegacyRegistry* registry = self.registry;
+	@synchronized(registry)
+	{
+		return registry.count;
+	}
+}
 
 - (BOOL)needsCleanRegistry
 {
@@ -315,7 +403,7 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	__typeof(self) __strong weakSelf = self;
 #endif
 	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kJFObjectIdentifierLegacyImplementationCleanRegistryDelay * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(CleanRegistryDelay * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[weakSelf cleanRegistryIfNeeded];
 	});
 }
@@ -389,26 +477,45 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	LegacyRegistry* registry = self.registry;
 	@synchronized(registry)
 	{
-		NSUInteger retVal;
 		Reference* reference = [self referenceForObject:object];
-		NSNumber* value = (reference ? [registry objectForKey:reference] : nil);
-		if(value != nil)
-			retVal = [value unsignedIntegerValue];
-		else
+		if(reference)
 		{
-			retVal = [self getAndIncrementNextFreeID];
-			[registry setObject:@(retVal) forKey:(reference ?: [Reference referenceWithObject:object])];
+			NSNumber* value = [registry objectForKey:reference];
+			if(value != nil)
+				return [value unsignedIntegerValue];
+			
+			reference.object = object;
 		}
+		else
+			reference = [Reference referenceWithObject:object];
+		
+		NSUInteger retVal = [self getAndIncrementNextFreeID];
+		[registry setObject:@(retVal) forKey:reference];
+		
 		return retVal;
 	}
 }
+
+- (void)resetID:(NSUInteger)objectID
+{
+	LegacyRegistry* registry = self.registry;
+	@synchronized(registry)
+	{
+		for(Reference* reference in [registry allKeysForObject:@(objectID)])
+			[registry removeObjectForKey:reference];
+	}
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
 
 - (Reference* __nullable)referenceForObject:(id<NSObject>)object
 {
 	Reference* retObj = nil;
 	BOOL needsCleanRegistry = NO;
 	
-	for(Reference* reference in self.registry.allKeys)
+	for(Reference* reference in self.registry)
 	{
 		NSObject* referencedObject = reference.object;
 		if(!referencedObject)
