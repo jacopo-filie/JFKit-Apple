@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	@synchronized(self)
 	{
-		if(![self isExecuting])
+		if([self isFinished] || (![self isExecuting] && ![self isCancelled]))
 			return;
 		
 		self.executing = NO;
