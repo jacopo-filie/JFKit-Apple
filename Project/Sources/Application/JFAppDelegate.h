@@ -52,12 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The superclass and protocol of the macOS application delegate.
  */
-#define JFAppDelegateSuperclass NSObject <NSApplicationDelegate>
+#	define JFAppDelegateSuperclass NSObject <NSApplicationDelegate>
 #else
 /**
  * The superclass and protocol of the iOS application delegate.
  */
-#define JFAppDelegateSuperclass UIResponder <UIApplicationDelegate>
+#	define JFAppDelegateSuperclass UIResponder <UIApplicationDelegate>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
