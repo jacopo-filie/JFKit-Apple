@@ -52,6 +52,7 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFAsynchronousBlockOperation.h>
 #import <JFKit/JFAsynchronousOperation.h>
 #import <JFKit/JFBlocks.h>
+#import <JFKit/JFBlockWrapper.h>
 #import <JFKit/JFByteStream.h>
 #import <JFKit/JFColors.h>
 #import <JFKit/JFCompatibilityMacros.h>
@@ -60,6 +61,7 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFError.h>
 #import <JFKit/JFErrorFactory.h>
 #import <JFKit/JFExecutor.h>
+#import <JFKit/JFHook.h>
 #import <JFKit/JFImages.h>
 #import <JFKit/JFJSONArray.h>
 #import <JFKit/JFJSONNode.h>
@@ -67,11 +69,13 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFJSONSerializationAdapter.h>
 #import <JFKit/JFJSONSerializer.h>
 #import <JFKit/JFJSONValue.h>
+#import <JFKit/JFLazy.h>
 #import <JFKit/JFLogger.h>
 #import <JFKit/JFMath.h>
 #import <JFKit/JFObjectIdentifier.h>
 #import <JFKit/JFObserversController.h>
 #import <JFKit/JFPair.h>
+#import <JFKit/JFParameterizedLazy.h>
 #import <JFKit/JFPersistentContainer.h>
 #import <JFKit/JFReferences.h>
 #import <JFKit/JFShortcuts.h>
@@ -86,7 +90,9 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #if JF_IOS
 #	import <JFKit/JFActivityIndicatorView.h>
 #	import <JFKit/JFGradientView.h>
+#	import <JFKit/JFImageWrapper.h>
 #	import <JFKit/JFKeyboardHelper.h>
+#	import <JFKit/JFOptional.h>
 #	import <JFKit/JFOverlayController.h>
 #	import <JFKit/JFSliderController.h>
 #	import <JFKit/JFTableViewCell.h>

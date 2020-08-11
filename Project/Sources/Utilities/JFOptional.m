@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define Builder OptionalBuilder
-#define Template OptionalTemplate
+#define Builder JFOptionalBuilder
+#define Template JFOptionalTemplate
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

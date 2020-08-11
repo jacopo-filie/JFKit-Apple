@@ -36,26 +36,60 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define LazyTemplate __covariant ObjectType
+/**
+ * A convenient macro that represents the template parameters of this class.
+ */
+#define JFLazyTemplate __covariant ObjectType
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark -
 
-@interface JFLazy<LazyTemplate> : NSObject
+/**
+ * This class can be used to simplify management of the lazy initialization of an object. You can force the initialization of the wrapped object by calling the method `get`, otherwise you can just query the wrapper content using the method `opt` that will return `nil` if the object has not been initialized yet. If you're sure about the thread-safety of the context you're going to use this class, you can use unsynchronized instances; using synchronized instances is recommended otherwise.
+ */
+@interface JFLazy<JFLazyTemplate> : NSObject
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
-@property (strong, nonatomic, readonly) ObjectType object;
+/**
+ * The lazy initialized object; the getter of this property forces the initialization of the object if it has not been done yet.
+ */
+@property (strong, nonatomic, readonly) ObjectType get;
+
+/**
+ * The lazy initialized object or `nil` if the object has not been initialized yet.
+ */
+@property (strong, nonatomic, readonly, nullable) ObjectType opt;
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
+ * Creates and initializes a new unsynchronized instance with the given `builder`.
+ * @param builder The block to use to create and initialize the lazy object.
+ * @return A new instance of this class.
+ */
 + (instancetype)newInstance:(ObjectType (^)(void))builder;
+
+/**
+ * Creates and initializes a new synchronized instance with the given `builder`.
+ * @param builder The block to use to create and initialize the lazy object.
+ * @return A new instance of this class.
+ */
 + (instancetype)newSynchronizedInstance:(ObjectType (^)(void))builder;
+
+/**
+ * NOT AVAILABLE
+ */
 - (instancetype)init NS_UNAVAILABLE;
 
 @end

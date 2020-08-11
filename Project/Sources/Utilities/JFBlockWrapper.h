@@ -34,27 +34,55 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * This wrapper does nothing more than keeping a reference to the block given during initialization and executes it when requested. This class can be useful when you can't implement different execution paths based on method names and you need to do it by using multiple objects.
+ */
 @interface JFBlockWrapper : NSObject
 
 // =================================================================================================
 // MARK: Properties
 // =================================================================================================
 
+/**
+ * The block that has been given during initialization.
+ */
 @property (strong, nonatomic, readonly) JFBlock block;
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
+/**
+ * NOT AVAILABLE
+ */
 + (instancetype)new NS_UNAVAILABLE;
+
+/**
+ * Creates and initializes a new instance with the given `block`.
+ * @param block The block to wrap.
+ * @return A new instance of this class.
+ */
 + (instancetype)newWithBlock:(JFBlock)block;
+
+/**
+ * NOT AVAILABLE
+ */
 - (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes this instance with the given `block`.
+ * @param block The block to wrap.
+ * @return This instance.
+ */
 - (instancetype)initWithBlock:(JFBlock)block;
 
 // =================================================================================================
 // MARK: Methods - Execution
 // =================================================================================================
 
+/**
+ * Executes the wrapped block.
+ */
 - (void)executeBlock;
 
 @end

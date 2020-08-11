@@ -36,10 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define Builder ParameterizedLazyBuilder
-#define Implementation ParameterizedLazyImplementation
-#define SynchronizedImplementation ParameterizedLazySynchronizedImplementation
-#define Template ParameterizedLazyTemplate
+#define Builder JFParameterizedLazyBuilder
+#define Implementation JFParameterizedLazyImplementation
+#define SynchronizedImplementation JFParameterizedLazySynchronizedImplementation
+#define Template JFParameterizedLazyTemplate
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,7 +74,13 @@ typedef id (^Builder)(id param);
 // MARK: Methods - Data
 // =================================================================================================
 
-- (ObjectType)getObject:(ParamType)param;
+@property (strong, nonatomic, readonly, nullable) ObjectType opt;
+
+// =================================================================================================
+// MARK: Methods - Data
+// =================================================================================================
+
+- (ObjectType)get:(ParamType)param;
 
 @end
 
@@ -119,6 +125,15 @@ typedef id (^Builder)(id param);
 @synthesize implementation = _implementation;
 
 // =================================================================================================
+// MARK: Properties (Accessors) - Data
+// =================================================================================================
+
+- (id __nullable)opt
+{
+	return self.implementation.opt;
+}
+
+// =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
@@ -145,9 +160,9 @@ typedef id (^Builder)(id param);
 // MARK: Methods - Data
 // =================================================================================================
 
-- (id)getObject:(id)param
+- (id)get:(id)param
 {
-	return [self.implementation getObject:param];
+	return [self.implementation get:param];
 }
 
 @end
@@ -174,6 +189,15 @@ typedef id (^Builder)(id param);
 @synthesize builder = _builder;
 
 // =================================================================================================
+// MARK: Properties (Accessors) - Data
+// =================================================================================================
+
+- (id __nullable)opt
+{
+	return _object;
+}
+
+// =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
@@ -190,7 +214,7 @@ typedef id (^Builder)(id param);
 // MARK: Methods - Data
 // =================================================================================================
 
-- (id)getObject:(id)param
+- (id)get:(id)param
 {
 	id retObj = _object;
 	if(!retObj)
@@ -210,18 +234,26 @@ typedef id (^Builder)(id param);
 @implementation SynchronizedImplementation
 
 // =================================================================================================
+// MARK: Properties (Accessors) - Data
+// =================================================================================================
+
+- (id __nullable)opt
+{
+	@synchronized(self)
+	{
+		return super.opt;
+	}
+}
+
+// =================================================================================================
 // MARK: Methods - Data
 // =================================================================================================
 
-- (id)getObject:(id)param
+- (id)get:(id)param
 {
-	id retObj = _object;
-	if(retObj)
-		return retObj;
-	
 	@synchronized(self)
 	{
-		return [super getObject:param];
+		return [super get:param];
 	}
 }
 

@@ -24,7 +24,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import "JFImage.h"
+@import Foundation;
+
+@import UIKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,91 +34,61 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFImage (/* Private */)
-
 // =================================================================================================
-// MARK: Methods - Utilities
+// MARK: Types
 // =================================================================================================
 
-+ (UIImage* __nullable)loadImage:(ImageLoader __nullable)loader;
-
-@end
+typedef UIImage* __nullable (^JFImageLoader)(void);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation JFImage
+#pragma mark -
+
+/**
+ * This wrapper is useful to decouple the places where the image is loaded and where it is used. Instead of loading the image and pass it through all the intermediary methods until the image is used, this wrapper can delay the loading of the image until it is really needed. Obviously, the source of the image may change in the meantime, so you must know what you're doing when choosing this behaviour. If the image has an associated thumbnail, you can also load it in the same way. Mind that unused loaded images will be removed from memory and reloaded next time the image is needed.
+ */
+@interface JFImageWrapper : NSObject
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
-@synthesize image = _image;
-@synthesize imageLoader = _imageLoader;
-@synthesize thumbnail = _thumbnail;
-@synthesize thumbnailLoader = _thumbnailLoader;
+/**
+ * The stored image or `nil` if the image could not be loaded.
+ */
+@property (weak, nonatomic, readonly, nullable) UIImage* image;
 
-// =================================================================================================
-// MARK: Properties (Accessors) - Data
-// =================================================================================================
+/**
+ * The block that will be used to load the image or `nil` if no image loader has been given during initialization.
+ */
+@property (strong, nonatomic, readonly, nullable) JFImageLoader imageLoader;
 
-- (UIImage* __nullable)image
-{
-	UIImage* retObj = _image;
-	if(!retObj)
-	{
-		@synchronized(self)
-		{
-			retObj = _image;
-			if(!retObj)
-			{
-				retObj = [JFImage loadImage:self.imageLoader];
-				_image = retObj;
-			}
-		}
-	}
-	return retObj;
-}
+/**
+ * The stored thumbnail or `nil` if the thumbnail could not be loaded.
+ */
+@property (weak, nonatomic, readonly, nullable) UIImage* thumbnail;
 
-- (UIImage* __nullable)thumbnail
-{
-	UIImage* retObj = _thumbnail;
-	if(!retObj)
-	{
-		@synchronized(self)
-		{
-			retObj = _thumbnail;
-			if(!retObj)
-			{
-				retObj = [JFImage loadImage:self.thumbnailLoader];
-				_thumbnail = retObj;
-			}
-		}
-	}
-	return retObj;
-}
+/**
+ * The block that will be used to load the thumbnail or `nil` if no thumbnail loader has been given during initialization.
+ */
+@property (strong, nonatomic, readonly, nullable) JFImageLoader thumbnailLoader;
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
-- (instancetype)initWithImageLoader:(ImageLoader __nullable)imageLoader thumbnailLoader:(ImageLoader __nullable)thumbnailLoader
-{
-	self = [super init];
-	
-	_imageLoader = imageLoader;
-	_thumbnailLoader = thumbnailLoader;
-	
-	return self;
-}
+/**
+ * NOT AVAILABLE
+ */
+- (instancetype)init NS_UNAVAILABLE;
 
-// =================================================================================================
-// MARK: Methods - Utilities
-// =================================================================================================
-
-+ (UIImage* __nullable)loadImage:(ImageLoader __nullable)loader
-{
-	return (loader ? loader() : nil);
-}
+/**
+ * Initializes this instance with the given image loaders.
+ * @param imageLoader The block to use to load the image.
+ * @param thumbnailLoader The block to use to load the thumbnail.
+ * @return This instance.
+ */
+- (instancetype)initWithImageLoader:(JFImageLoader __nullable)imageLoader thumbnailLoader:(JFImageLoader __nullable)thumbnailLoader NS_DESIGNATED_INITIALIZER;
 
 @end
 

@@ -44,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Memory
 // =================================================================================================
 
++ (instancetype)newWithObject:(id __nullable)object
+{
+	return [[self alloc] initWithObject:object];
+}
+
 - (instancetype)initWithObject:(id __nullable)object
 {
 	self = [self init];

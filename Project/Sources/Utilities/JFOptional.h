@@ -36,27 +36,60 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define OptionalTemplate __covariant ObjectType
+/**
+ * A convenient macro that represents the template parameters of this class.
+ */
+#define JFOptionalTemplate __covariant ObjectType
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark -
 
-@interface JFOptional<OptionalTemplate> : NSObject
+/**
+ * A useful wrapper for properties that are optional and should be discarded and recreated only when needed, improving memory usage in this way.
+ */
+@interface JFOptional<JFOptionalTemplate> : NSObject
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
+/**
+ * The initialized object; the getter of this property forces the initialization of the object if it has not been done yet.
+ */
 @property (assign, nonatomic, readonly) ObjectType get;
+
+/**
+ * The initialized object or `nil` if the object has not been initialized yet.
+ */
 @property (weak, nonatomic, readonly, nullable) ObjectType opt;
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
+/**
+ * NOT AVAILABLE
+ */
++ (instancetype)new NS_UNAVAILABLE;
+
+/**
+ * Creates and initializes a new optional with the given `builder`.
+ * @param builder The block to use to create and initialize the optional object.
+ * @return A new instance of this class.
+ */
 + (instancetype)optionalWithBuilder:(ObjectType (^)(void))builder;
+
+/**
+ * NOT AVAILABLE
+ */
 - (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Initializes this instance with the given `builder`.
+ * @param builder The block to use to create and initialize the optional object.
+ * @return This instance.
+ */
 - (instancetype)initWithBuilder:(ObjectType (^)(void))builder NS_DESIGNATED_INITIALIZER;
 
 @end

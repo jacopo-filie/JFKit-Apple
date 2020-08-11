@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
+/**
  * This class holds a list of IDs associated with the objects that you pass to it through the method `getID:`. The object is retained weakly and can become a dangling pointer if weak references are not supported by the running operating system: remember to clear the IDs of those objects before they are deallocated, in that case.
  */
 @interface JFObjectIdentifier : NSObject
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-/*
+/**
  * Returns the object identifier that uses the common registry.
  */
 @property (class, strong, readonly) JFObjectIdentifier* sharedInstance;
@@ -50,13 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Identifiers
 // =================================================================================================
 
-/*
+/**
  * Removes the given object from the common registry; if the object is not registered yet, it does nothing.
  * @param object The object to unregister.
  */
 + (void)clearID:(id<NSObject>)object;
 
-/*
+/**
  * Returns the ID associated with the given object; if the object is not saved in the common registry yet, a new ID is associated with it and saved in the registry.
  * @param object The object whos ID is being requested.
  * @return The ID associated with the given object.
@@ -64,19 +64,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSUInteger)getID:(id<NSObject>)object;
 
-/*
+/**
  * Removes the given object ID from the common registry; if no object with the given ID is registered yet, it does nothing.
  * @param objectID The ID of the object to unregister.
  */
 + (void)resetID:(NSUInteger)objectID;
 
-/*
+/**
  * Removes the given object from the instance registry; if the object is not registered yet, it does nothing.
  * @param object The object to unregister.
  */
 - (void)clearID:(id<NSObject>)object;
 
-/*
+/**
  * Returns the ID associated with the given object; if the object is not saved in the instance registry yet, a new ID is associated with it and saved in the registry.
  * @param object The object whos ID is being requested.
  * @return The ID associated with the given object.
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSUInteger)getID:(id<NSObject>)object;
 
-/*
+/**
  * Removes the given object ID from the instance registry; if no object with the given ID is registered yet, it does nothing.
  * @param objectID The ID of the object to unregister.
  */

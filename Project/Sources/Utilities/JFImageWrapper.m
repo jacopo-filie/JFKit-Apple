@@ -24,9 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@import Foundation;
-
-@import UIKit;
+#import "JFImageWrapper.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,33 +32,91 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface JFImageWrapper (/* Private */)
+
 // =================================================================================================
-// MARK: Types
+// MARK: Methods - Utilities
 // =================================================================================================
 
-typedef UIImage* __nullable (^ImageLoader)(void);
++ (UIImage* __nullable)loadImage:(JFImageLoader __nullable)loader;
+
+@end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark -
-
-@interface JFImage : NSObject
+@implementation JFImageWrapper
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
-@property (weak, nonatomic, readonly, nullable) UIImage* image;
-@property (strong, nonatomic, readonly, nullable) ImageLoader imageLoader;
-@property (weak, nonatomic, readonly, nullable) UIImage* thumbnail;
-@property (strong, nonatomic, readonly, nullable) ImageLoader thumbnailLoader;
+@synthesize image = _image;
+@synthesize imageLoader = _imageLoader;
+@synthesize thumbnail = _thumbnail;
+@synthesize thumbnailLoader = _thumbnailLoader;
+
+// =================================================================================================
+// MARK: Properties (Accessors) - Data
+// =================================================================================================
+
+- (UIImage* __nullable)image
+{
+	UIImage* retObj = _image;
+	if(!retObj)
+	{
+		@synchronized(self)
+		{
+			retObj = _image;
+			if(!retObj)
+			{
+				retObj = [JFImageWrapper loadImage:self.imageLoader];
+				_image = retObj;
+			}
+		}
+	}
+	return retObj;
+}
+
+- (UIImage* __nullable)thumbnail
+{
+	UIImage* retObj = _thumbnail;
+	if(!retObj)
+	{
+		@synchronized(self)
+		{
+			retObj = _thumbnail;
+			if(!retObj)
+			{
+				retObj = [JFImageWrapper loadImage:self.thumbnailLoader];
+				_thumbnail = retObj;
+			}
+		}
+	}
+	return retObj;
+}
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithImageLoader:(ImageLoader __nullable)imageLoader thumbnailLoader:(ImageLoader __nullable)thumbnailLoader NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageLoader:(JFImageLoader __nullable)imageLoader thumbnailLoader:(JFImageLoader __nullable)thumbnailLoader
+{
+	self = [super init];
+	
+	_imageLoader = imageLoader;
+	_thumbnailLoader = thumbnailLoader;
+	
+	return self;
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (UIImage* __nullable)loadImage:(JFImageLoader __nullable)loader
+{
+	return (loader ? loader() : nil);
+}
 
 @end
 

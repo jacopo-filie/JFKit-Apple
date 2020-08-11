@@ -36,10 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros
 // =================================================================================================
 
-#define Builder LazyBuilder
-#define Implementation LazyImplementation
-#define SynchronizedImplementation LazySynchronizedImplementation
-#define Template LazyTemplate
+#define Builder JFLazyBuilder
+#define Implementation JFLazyImplementation
+#define SynchronizedImplementation JFLazySynchronizedImplementation
+#define Template JFLazyTemplate
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,7 +62,8 @@ typedef id (^Builder)(void);
 // =================================================================================================
 
 @property (strong, nonatomic, readonly) Builder builder;
-@property (strong, nonatomic, readonly) ObjectType object;
+@property (strong, nonatomic, readonly) ObjectType get;
+@property (strong, nonatomic, readonly, nullable) ObjectType opt;
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -117,9 +118,14 @@ typedef id (^Builder)(void);
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (id)object
+- (id)get
 {
-	return self.implementation.object;
+	return self.implementation.get;
+}
+
+- (id __nullable)opt
+{
+	return self.implementation.opt;
 }
 
 // =================================================================================================
@@ -172,7 +178,7 @@ typedef id (^Builder)(void);
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (id)object
+- (id)get
 {
 	id retObj = _object;
 	if(!retObj)
@@ -181,6 +187,11 @@ typedef id (^Builder)(void);
 		_object = retObj;
 	}
 	return retObj;
+}
+
+- (id __nullable)opt
+{
+	return _object;
 }
 
 // =================================================================================================
@@ -208,15 +219,19 @@ typedef id (^Builder)(void);
 // MARK: Methods - Data
 // =================================================================================================
 
-- (id)object
+- (id)get
 {
-	id retObj = _object;
-	if(retObj)
-		return retObj;
-	
 	@synchronized(self)
 	{
-		return super.object;
+		return super.get;
+	}
+}
+
+- (id __nullable)opt
+{
+	@synchronized(self)
+	{
+		return super.opt;
 	}
 }
 

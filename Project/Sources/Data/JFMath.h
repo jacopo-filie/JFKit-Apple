@@ -51,7 +51,7 @@ typedef double JFRadians;
  */
 typedef UInt64 JFUnitPrefix;
 
-/*
+/**
  * A list of available binary unit prefixes.
  */
 typedef NS_ENUM(JFUnitPrefix, JFBinaryPrefixes) {
@@ -87,7 +87,7 @@ typedef NS_ENUM(JFUnitPrefix, JFBinaryPrefixes) {
 	JFExbi = JFPebi * JFKibi,
 };
 
-/*
+/**
  * A list of available decimal unit prefixes.
  */
 typedef NS_ENUM(JFUnitPrefix, JFDecimalPrefixes) {

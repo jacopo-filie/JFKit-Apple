@@ -32,18 +32,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * A hook only keeps a strong reference to the object given during initialization and does nothing else. You may use this class to have a memory area ready to hold an object that will be available in the future, or to pass the result of an asynchronous method to another asynchronous method.
+ */
 @interface JFHook<__covariant ObjectType> : NSObject
 
 // =================================================================================================
 // MARK: Properties - Data
 // =================================================================================================
 
+/**
+ * The object that has been given during initialization.
+ */
 @property (strong, nullable) ObjectType object;
 
 // =================================================================================================
 // MARK: Methods - Memory
 // =================================================================================================
 
+/**
+ * Creates and initializes a new instance with the given `object`.
+ * @param object The object to hold.
+ * @return A new instance of this class.
+ */
++ (instancetype)newWithObject:(ObjectType __nullable)object;
+
+/**
+ * Initializes this instance with the given `object`.
+ * @param object The object to hold.
+ * @return This instance.
+ */
 - (instancetype)initWithObject:(ObjectType __nullable)object;
 
 @end
