@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFConnectionMachine
 
 // =================================================================================================
-// MARK: Properties accessors - State
+// MARK: Properties (Accessors) - State
 // =================================================================================================
 
 - (BOOL)isConnected

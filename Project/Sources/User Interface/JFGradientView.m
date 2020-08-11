@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFGradientView ()
+@interface JFGradientView (/* Private */)
 
 // =================================================================================================
 // MARK: Methods - Memory
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize startPoint = _startPoint;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 - (void)setEndPoint:(CGPoint)endPoint
@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 + (Class)layerClass

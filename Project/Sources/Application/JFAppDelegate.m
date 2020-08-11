@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFAppDelegate ()
+@interface JFAppDelegate (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - User interface (Outlets)
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize windowController = _windowController;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 - (JFAlertsController*)alertsController

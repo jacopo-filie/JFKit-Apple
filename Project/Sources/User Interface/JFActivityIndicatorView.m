@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFActivityIndicatorView ()
+@interface JFActivityIndicatorView (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) NSLayoutConstraint* imageViewWidthConstraint;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Layout)
+// MARK: Properties (Accessors) - User interface (Layout)
 // =================================================================================================
 
 - (void)setNeedsRebuildLayout;
@@ -199,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize imageViewWidthConstraint = _imageViewWidthConstraint;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 + (NSSet<NSNumber*>*)buttonDictionaryKeys
@@ -300,7 +300,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 - (void)setAlertBackgroundImageHidden:(BOOL)alertBackgroundImageHidden
@@ -401,7 +401,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Actions)
+// MARK: Properties (Accessors) - User interface (Actions)
 // =================================================================================================
 
 - (void)setButtonBlock:(JFButtonBlock __nullable)buttonBlock
@@ -416,7 +416,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Appearance)
+// MARK: Properties (Accessors) - User interface (Appearance)
 // =================================================================================================
 
 - (UIColor*)alertBackgroundColor
@@ -770,7 +770,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Layout)
+// MARK: Properties (Accessors) - User interface (Layout)
 // =================================================================================================
 
 - (void)setNeedsRebuildLayout

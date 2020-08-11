@@ -190,7 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFLoggerSubclass
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 + (NSURL*)defaultDirectoryURL

@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFKeyboardHelper ()
+@interface JFKeyboardHelper (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Observers

@@ -36,9 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS
-@interface JFAlert () <UIActionSheetDelegate, UIAlertViewDelegate>
+@interface JFAlert (/* Private */) <UIActionSheetDelegate, UIAlertViewDelegate>
 #elif JF_MACOS
-@interface JFAlert ()
+@interface JFAlert (/* Private */)
 #endif
 
 // =================================================================================================

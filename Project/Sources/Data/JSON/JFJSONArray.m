@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize serializer = _serializer;
 
 // =================================================================================================
-// MARK: Properties accessors - Serialization
+// MARK: Properties (Accessors) - Serialization
 // =================================================================================================
 
 + (id<JFJSONSerializationAdapter> __nullable)defaultSerializer
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 - (NSArray<id<JFJSONConvertibleValue>>*)arrayValue

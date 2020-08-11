@@ -42,7 +42,7 @@ static void* JFKVOContext = &JFKVOContext;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFWindowController ()
+@interface JFWindowController (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - User interface
@@ -102,7 +102,7 @@ static void* JFKVOContext = &JFKVOContext;
 @synthesize windowHidden = _windowHidden;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 - (void)setWindowHidden:(BOOL)windowHidden

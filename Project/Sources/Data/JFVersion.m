@@ -85,7 +85,7 @@ NSInteger const JFVersionComponentNotValid = -1;
 @synthesize string = _string;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 - (NSOperatingSystemVersion)operatingSystemVersion

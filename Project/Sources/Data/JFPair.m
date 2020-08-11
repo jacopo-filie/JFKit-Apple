@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 @dynamic secondValue;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 - (void)setFirstValue:(id __nullable)firstValue

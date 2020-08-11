@@ -219,7 +219,7 @@ IB_DESIGNABLE
 @property (strong, nonatomic, nullable) UIFont* textFont;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 /**
@@ -244,7 +244,7 @@ IB_DESIGNABLE
 - (void)setText:(NSString* __nullable)text animated:(BOOL)animated;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Appearance)
+// MARK: Properties (Accessors) - User interface (Appearance)
 // =================================================================================================
 
 /**

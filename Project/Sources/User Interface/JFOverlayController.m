@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFOverlayController ()
+@interface JFOverlayController (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize rootViewController = _rootViewController;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 - (void)setOverlayHidden:(BOOL)overlayHidden
@@ -235,7 +235,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Appearance)
+// MARK: Properties (Accessors) - User interface (Appearance)
 // =================================================================================================
 
 - (void)setOverlayBackgroundColor:(UIColor* __nullable)overlayBackgroundColor
@@ -250,7 +250,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface (Layout)
+// MARK: Properties (Accessors) - User interface (Layout)
 // =================================================================================================
 
 - (void)setOverlayViewController:(UIViewController* __nullable)overlayViewController

@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-@interface JFObserversController<ObserverType> ()
+@interface JFObserversController<ObserverType> (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize references = _references;
 
 // =================================================================================================
-// MARK: Properties accessors - Observers
+// MARK: Properties (Accessors) - Observers
 // =================================================================================================
 
 - (NSUInteger)count

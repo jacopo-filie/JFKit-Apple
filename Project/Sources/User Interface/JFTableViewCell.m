@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFTableViewCell ()
+@interface JFTableViewCell (/* Private */)
 
 // =================================================================================================
 // MARK: Methods - Presentation
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFTableViewCell
 
 // =================================================================================================
-// MARK: Properties accessors - Memory
+// MARK: Properties (Accessors) - Memory
 // =================================================================================================
 
 + (UINib*)nib
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - Presentation
+// MARK: Properties (Accessors) - Presentation
 // =================================================================================================
 
 + (CGFloat)defaultHeight

@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFSliderController () <UIGestureRecognizerDelegate>
+@interface JFSliderController (/* Private */) <UIGestureRecognizerDelegate>
 
 // =================================================================================================
 // MARK: Properties - Attributes
@@ -162,7 +162,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize rootViewController = _rootViewController;
 
 // =================================================================================================
-// MARK: Properties accessors - Attributes
+// MARK: Properties (Accessors) - Attributes
 // =================================================================================================
 
 - (void)setSlideInsets:(UIEdgeInsets)slideInsets
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - Flags
+// MARK: Properties (Accessors) - Flags
 // =================================================================================================
 
 - (void)setCurrentTransition:(JFSliderControllerTransition)currentTransition
@@ -192,7 +192,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 - (UIViewController* __nullable)activeViewController

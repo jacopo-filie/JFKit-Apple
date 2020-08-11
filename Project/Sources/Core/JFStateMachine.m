@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFStateMachine ()
+@interface JFStateMachine (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Errors
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize state = _state;
 
 // =================================================================================================
-// MARK: Properties accessors - Errors
+// MARK: Properties (Accessors) - Errors
 // =================================================================================================
 
 + (JFErrorFactory*)errorFactory
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Properties accessors - State
+// MARK: Properties (Accessors) - State
 // =================================================================================================
 
 - (JFState)state

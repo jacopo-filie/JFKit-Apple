@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFPersistentContainer ()
+@interface JFPersistentContainer (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Concurrency
@@ -112,7 +112,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 @synthesize viewContext = _viewContext;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 + (NSURL*)defaultDirectoryURL
@@ -152,7 +152,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 }
 
 // =================================================================================================
-// MARK: Properties accessors - Errors
+// MARK: Properties (Accessors) - Errors
 // =================================================================================================
 
 + (JFErrorFactory*)errorFactory
@@ -171,7 +171,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 }
 
 // =================================================================================================
-// MARK: Properties accessors - Stack
+// MARK: Properties (Accessors) - Stack
 // =================================================================================================
 
 - (NSPersistentStoreCoordinator*)persistentStoreCoordinator
@@ -431,7 +431,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 static NSURL* __nullable _defaultDirectoryURL;
 
 // =================================================================================================
-// MARK: Properties accessors (Inherited) - Data
+// MARK: Properties (Accessors) (Inherited) - Data
 // =================================================================================================
 
 + (NSURL*)defaultDirectoryURL

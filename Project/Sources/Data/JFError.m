@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @dynamic userInfo;
 
 // =================================================================================================
-// MARK: Properties accessors - Data (User info keys)
+// MARK: Properties (Accessors) - Data (User info keys)
 // =================================================================================================
 
 + (NSErrorUserInfoKey)descriptionKey

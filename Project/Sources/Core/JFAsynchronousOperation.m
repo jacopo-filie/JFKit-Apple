@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFAsynchronousOperation ()
+@interface JFAsynchronousOperation (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Execution
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize finished = _finished;
 
 // =================================================================================================
-// MARK: Properties accessors - Execution
+// MARK: Properties (Accessors) - Execution
 // =================================================================================================
 
 - (BOOL)isAsynchronous

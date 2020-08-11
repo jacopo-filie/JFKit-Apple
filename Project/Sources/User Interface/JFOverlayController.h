@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) UIViewController* rootViewController;
 
 // =================================================================================================
-// MARK: Properties accessors - User interface
+// MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
 /**

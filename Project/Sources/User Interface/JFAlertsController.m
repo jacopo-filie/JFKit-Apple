@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface JFAlertsController () <JFAlertDelegate>
+@interface JFAlertsController (/* Private */) <JFAlertDelegate>
 
 // =================================================================================================
 // MARK: Properties - User interface

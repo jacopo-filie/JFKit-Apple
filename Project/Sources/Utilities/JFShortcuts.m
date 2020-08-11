@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFShortcuts
 
 // =================================================================================================
-// MARK: Properties accessors - Application
+// MARK: Properties (Accessors) - Application
 // =================================================================================================
 
 + (AppDelegate* __nullable)appDelegate

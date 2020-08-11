@@ -54,7 +54,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 #pragma mark -
 
-@interface JFLogger ()
+@interface JFLogger (/* Private */)
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -129,7 +129,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @synthesize delegatesController = _delegatesController;
 
 // =================================================================================================
-// MARK: Properties accessors - Data
+// MARK: Properties (Accessors) - Data
 // =================================================================================================
 
 + (NSURL*)defaultDirectoryURL
@@ -253,7 +253,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 }
 
 // =================================================================================================
-// MARK: Properties accessors - File system
+// MARK: Properties (Accessors) - File system
 // =================================================================================================
 
 - (NSString*)fileName
