@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock;
++ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock;
 + (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block;
 + (JFSuccessBlock)newSuccessBlockForCompletionBlock:(JFCompletionBlock)block;
 
@@ -67,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock;
++ (JFBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFBlock)successBlock;
 + (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
 + (JFBlock)newSuccessBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
 
@@ -84,6 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @synthesize block = _block;
 @synthesize failureBlock = _failureBlock;
+@synthesize finallyBlock = _finallyBlock;
 @synthesize internalFailureBlock = _internalFailureBlock;
 @synthesize internalSuccessBlock = _internalSuccessBlock;
 @synthesize successBlock = _successBlock;
@@ -110,6 +115,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
 }
 
 - (instancetype)initWithBlock:(JFCompletionBlock)block
@@ -150,6 +160,19 @@ NS_ASSUME_NONNULL_BEGIN
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
 	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_finallyBlock = finallyBlock;
+	_internalFailureBlock = [JFCompletion appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFCompletion appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
 	return self;
@@ -229,6 +252,22 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock
+{
+	return ^(NSError* error) {
+		failureBlock(error);
+		finallyBlock();
+	};
+}
+
++ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock
+{
+	return ^(id result) {
+		successBlock(result);
+		finallyBlock();
+	};
+}
+
 + (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block
 {
 	return ^(NSError* error) {
@@ -257,6 +296,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @synthesize block = _block;
 @synthesize failureBlock = _failureBlock;
+@synthesize finallyBlock = _finallyBlock;
 @synthesize internalFailureBlock = _internalFailureBlock;
 @synthesize internalSuccessBlock = _internalSuccessBlock;
 @synthesize successBlock = _successBlock;
@@ -283,6 +323,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
 }
 
 - (instancetype)initWithBlock:(JFSimpleCompletionBlock)block
@@ -323,6 +368,19 @@ NS_ASSUME_NONNULL_BEGIN
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
 	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_finallyBlock = finallyBlock;
+	_internalFailureBlock = [JFSimpleCompletion appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFSimpleCompletion appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
 	return self;
@@ -401,6 +459,22 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 // MARK: Methods - Utilities
 // =================================================================================================
+
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock
+{
+	return ^(NSError* error) {
+		failureBlock(error);
+		finallyBlock();
+	};
+}
+
++ (JFBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFBlock)successBlock
+{
+	return ^{
+		successBlock();
+		finallyBlock();
+	};
+}
 
 + (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block
 {

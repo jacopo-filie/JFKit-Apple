@@ -97,6 +97,11 @@ typedef void (^JFSuccessBlock) (id result);
 @property (strong, nonatomic, readonly, nullable) JFFailureBlock failureBlock;
 
 /**
+ * The finally block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) JFBlock finallyBlock;
+
+/**
  * The success block used to initialize this instance.
  */
 @property (strong, nonatomic, readonly, nullable) void (^successBlock)(ResultType result);
@@ -133,6 +138,15 @@ typedef void (^JFSuccessBlock) (id result);
  * @return A new instance of this class.
  */
 + (instancetype)completionWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
 
 /**
  * NOT AVAILABLE
@@ -172,6 +186,15 @@ typedef void (^JFSuccessBlock) (id result);
  * @return This instance.
  */
 - (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Execution
@@ -267,12 +290,15 @@ typedef void (^JFSuccessBlock) (id result);
  */
 @property (strong, nonatomic, readonly, nullable) JFSimpleCompletionBlock block;
 
-
 /**
  * The failure block used to initialize this instance.
  */
 @property (strong, nonatomic, readonly, nullable) JFFailureBlock failureBlock;
 
+/**
+ * The finally block used to initialize this instance.
+ */
+@property (strong, nonatomic, readonly, nullable) JFBlock finallyBlock;
 
 /**
  * The success block used to initialize this instance.
@@ -313,6 +339,15 @@ typedef void (^JFSuccessBlock) (id result);
 + (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
+
+/**
  * NOT AVAILABLE
  */
 + (instancetype)new NS_UNAVAILABLE;
@@ -350,6 +385,15 @@ typedef void (^JFSuccessBlock) (id result);
  * @return This instance.
  */
 - (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Execution
