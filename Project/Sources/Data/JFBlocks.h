@@ -125,7 +125,7 @@ typedef void (^JFBlockWithNumber) (NSNumber* __nullable number);
  * A block of code to be executed with a parameter.
  * @param object A generic object.
  */
-typedef void (^JFBlockWithObject) (id<NSObject> __nullable object);
+typedef void (^JFBlockWithObject) (__kindof id<NSObject> __nullable object);
 
 /**
  * A block of code to be executed with a parameter.
