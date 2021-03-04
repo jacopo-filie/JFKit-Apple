@@ -278,6 +278,8 @@
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E6914F2205895DD00074DDD /* JFOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFOverlayController.h; sourceTree = "<group>"; };
 		4E6914F3205895DD00074DDD /* JFOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFOverlayController.m; sourceTree = "<group>"; };
+		4E6B219325F0A025005BC9BD /* Target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Target.xcconfig; sourceTree = "<group>"; };
+		4E6B219425F0A03A005BC9BD /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		4E6B219D25F0A17E005BC9BD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4E6B219E25F0A17E005BC9BD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E78298521CD27DD0009A752 /* JFAlertsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlertsController.m; sourceTree = "<group>"; };
@@ -635,6 +637,8 @@
 				4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */,
 				4ECFE39C1FD8C78D004EEACE /* JFKit.h */,
 				4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */,
+				4E6B219325F0A025005BC9BD /* Target.xcconfig */,
+				4E6B219425F0A03A005BC9BD /* Version.xcconfig */,
 			);
 			name = "Supporting Files";
 			path = "Project/Supporting Files";
@@ -1104,7 +1108,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BASE_DIR = Project;
-				BUILD_VERSION = 2;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1150,7 +1153,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				RELEASE_VERSION = 3.0;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
 			name = Debug;
@@ -1159,7 +1161,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BASE_DIR = Project;
-				BUILD_VERSION = 2;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1202,13 +1203,13 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				RELEASE_VERSION = 3.0;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
 			name = Release;
 		};
 		4ECFE26E1FD8BCD9004EEACE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1245,7 +1246,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS";
 				PRODUCT_NAME = JFKit;
@@ -1260,6 +1260,7 @@
 		};
 		4ECFE26F1FD8BCD9004EEACE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1294,7 +1295,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS";
 				PRODUCT_NAME = JFKit;
@@ -1414,6 +1414,7 @@
 		};
 		4ECFE28A1FD8BCF1004EEACE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1451,7 +1452,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFKit;
@@ -1464,6 +1464,7 @@
 		};
 		4ECFE28B1FD8BCF1004EEACE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1500,7 +1501,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFKit;
