@@ -278,6 +278,8 @@
 		4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFByteStream.h; sourceTree = "<group>"; };
 		4E6914F2205895DD00074DDD /* JFOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFOverlayController.h; sourceTree = "<group>"; };
 		4E6914F3205895DD00074DDD /* JFOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFOverlayController.m; sourceTree = "<group>"; };
+		4E6B219D25F0A17E005BC9BD /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4E6B219E25F0A17E005BC9BD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E78298521CD27DD0009A752 /* JFAlertsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAlertsController.m; sourceTree = "<group>"; };
 		4E78298621CD27DE0009A752 /* JFAlertsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAlertsController.h; sourceTree = "<group>"; };
 		4E84906E1FF4887300B029E6 /* JFImages.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFImages.m; sourceTree = "<group>"; };
@@ -605,6 +607,8 @@
 				4EA80C791FDCCE790086EBE2 /* Sources */,
 				4ECFE39A1FD8C78D004EEACE /* Supporting Files */,
 				4ECFE3CC1FD8CC65004EEACE /* Tests */,
+				4E6B219D25F0A17E005BC9BD /* LICENSE */,
+				4E6B219E25F0A17E005BC9BD /* README.md */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
