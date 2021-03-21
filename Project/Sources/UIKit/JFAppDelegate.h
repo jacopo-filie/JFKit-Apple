@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2016-2021 Jacopo Filié
+//	Copyright © 2015-2021 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,19 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#import "JFPreprocessorMacros.h"
+
+@import Foundation;
+@import JFKit;
+
+#if JF_MACOS
+@import Cocoa;
+#else
 @import UIKit;
+#endif
+
+#import "JFAlertsController.h"
+#import "JFWindowController.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,29 +44,57 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// =================================================================================================
+// MARK: Macros
+// =================================================================================================
+
+#if JF_MACOS
 /**
- * A block of code to be executed when the button is tapped.
- * @param sender The button that has been tapped.
+ * The superclass and protocol of the macOS application delegate.
  */
-typedef void (^JFButtonBlock) (UIButton* sender);
+#	define JFAppDelegateSuperclass NSObject <NSApplicationDelegate>
+#else
+/**
+ * The superclass and protocol of the iOS application delegate.
+ */
+#	define JFAppDelegateSuperclass UIResponder <UIApplicationDelegate>
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark -
-
 /**
- * A category for the UIButton that adds support for an action block.
+ * A unified application delegate base class for both iOS and macOS. It exposes the useful property `window` (required for iOS and optional for macOS) that references the main window of the application.
  */
-@interface UIButton (JFKit)
+@interface JFAppDelegate : JFAppDelegateSuperclass
 
 // =================================================================================================
-// MARK: Properties - User interface (Actions)
+// MARK: Properties - User interface
 // =================================================================================================
 
 /**
- * The block to be executed when the button is tapped.
+ * The main alerts controller for the application.
  */
-@property (strong, nonatomic, nullable, setter=jf_setActionBlock:) JFButtonBlock jf_actionBlock;
+@property (strong, nonatomic, readonly) JFAlertsController* alertsController;
+
+/**
+ * The main window of the application.
+ * @warning Changing the value of this property also resets the property `windowController`.
+ */
+@property (strong, nonatomic, null_resettable) IBOutlet JFWindow* window;
+
+/**
+ * The main window controller.
+ */
+@property (strong, nonatomic, readonly) JFWindowController* windowController;
+
+// =================================================================================================
+// MARK: Methods - Layout
+// =================================================================================================
+
+/**
+ * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
+ */
+- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
 
 @end
 

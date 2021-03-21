@@ -26,9 +26,7 @@
 
 #import "JFActivityIndicatorView.h"
 
-#import "JFBlocks.h"
-#import "JFColors.h"
-#import "JFShortcuts.h"
+@import JFKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

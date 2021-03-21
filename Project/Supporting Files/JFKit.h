@@ -29,7 +29,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if JF_IOS
-#	import <UIKit/UIKit.h>
+#	import <Foundation/Foundation.h>
 #endif
 
 #if JF_MACOS
@@ -46,9 +46,6 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import <JFKit/JFAlert.h>
-#import <JFKit/JFAlertsController.h>
-#import <JFKit/JFAppDelegate.h>
 #import <JFKit/JFAsynchronousBlockOperation.h>
 #import <JFKit/JFAsynchronousOperation.h>
 #import <JFKit/JFBlocks.h>
@@ -85,18 +82,10 @@ FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
 #import <JFKit/JFTimerHandler.h>
 #import <JFKit/JFUtilities.h>
 #import <JFKit/JFVersion.h>
-#import <JFKit/JFWindowController.h>
 
 #if JF_IOS
-#	import <JFKit/JFActivityIndicatorView.h>
-#	import <JFKit/JFGradientView.h>
 #	import <JFKit/JFImageWrapper.h>
-#	import <JFKit/JFKeyboardHelper.h>
 #	import <JFKit/JFOptional.h>
-#	import <JFKit/JFOverlayController.h>
-#	import <JFKit/JFSliderController.h>
-#	import <JFKit/JFTableViewCell.h>
-#	import <JFKit/UIButton+JFKit.h>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

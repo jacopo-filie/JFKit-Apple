@@ -26,9 +26,7 @@
 
 #import "JFKeyboardHelper.h"
 
-#import "JFBlocks.h"
-#import "JFObserversController.h"
-#import "JFShortcuts.h"
+@import JFKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

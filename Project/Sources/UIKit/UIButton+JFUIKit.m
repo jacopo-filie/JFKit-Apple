@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2021 Jacopo Filié
+//	Copyright © 2016-2021 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,19 +24,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import "JFPreprocessorMacros.h"
+#import "UIButton+JFUIKit.h"
 
-@import Foundation;
-
-#if JF_MACOS
-@import Cocoa;
-#else
-@import UIKit;
-#endif
-
-#import "JFAlertsController.h"
-#import "JFShortcuts.h"
-#import "JFWindowController.h"
+@import ObjectiveC;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -44,57 +34,66 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+@interface UIButton (JFUIKit_Private)
+
 // =================================================================================================
-// MARK: Macros
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
-#if JF_MACOS
-/**
- * The superclass and protocol of the macOS application delegate.
- */
-#	define JFAppDelegateSuperclass NSObject <NSApplicationDelegate>
-#else
-/**
- * The superclass and protocol of the iOS application delegate.
- */
-#	define JFAppDelegateSuperclass UIResponder <UIApplicationDelegate>
-#endif
+- (void)jf_buttonTapped:(UIButton*)button;
+
+@end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/**
- * A unified application delegate base class for both iOS and macOS. It exposes the useful property `window` (required for iOS and optional for macOS) that references the main window of the application.
- */
-@interface JFAppDelegate : JFAppDelegateSuperclass
+#pragma mark -
+
+@implementation UIButton (JFUIKit)
 
 // =================================================================================================
-// MARK: Properties - User interface
+// MARK: Properties - User interface (Actions)
 // =================================================================================================
 
-/**
- * The main alerts controller for the application.
- */
-@property (strong, nonatomic, readonly) JFAlertsController* alertsController;
-
-/**
- * The main window of the application.
- * @warning Changing the value of this property also resets the property `windowController`.
- */
-@property (strong, nonatomic, null_resettable) IBOutlet JFWindow* window;
-
-/**
- * The main window controller.
- */
-@property (strong, nonatomic, readonly) JFWindowController* windowController;
+- (JFButtonBlock __nullable)jf_actionBlock
+{
+	return objc_getAssociatedObject(self, _cmd);
+}
 
 // =================================================================================================
-// MARK: Methods - Layout
+// MARK: Methods - Layout (Actions)
 // =================================================================================================
 
-/**
- * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
- */
-- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
+- (void)jf_setActionBlock:(JFButtonBlock __nullable)block
+{
+	SEL action = @selector(jf_buttonTapped:);
+	UIControlEvents events = UIControlEventTouchUpInside;
+	
+	[self removeTarget:self action:action forControlEvents:events];
+	
+	if(block)
+		[self addTarget:self action:action forControlEvents:events];
+	
+	objc_setAssociatedObject(self, @selector(jf_actionBlock), block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark -
+
+@implementation UIButton (JFUIKit_Private)
+
+// =================================================================================================
+// MARK: Methods - Layout (Actions)
+// =================================================================================================
+
+- (void)jf_buttonTapped:(UIButton*)button
+{
+	JFButtonBlock block = self.jf_actionBlock;
+	if(block)
+		block(self);
+}
 
 @end
 
@@ -103,3 +102,4 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+

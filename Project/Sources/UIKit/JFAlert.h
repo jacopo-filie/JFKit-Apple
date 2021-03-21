@@ -32,8 +32,7 @@
 @import UIKit;
 #endif
 
-#import "JFBlocks.h"
-#import "JFUtilities.h"
+@import JFKit;
 
 @class JFAlertButton;
 

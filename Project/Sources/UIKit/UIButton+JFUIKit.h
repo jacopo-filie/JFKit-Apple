@@ -24,9 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#import "UIButton+JFKit.h"
-
-@import ObjectiveC;
+@import UIKit;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,66 +32,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface UIButton (JFKit_Private)
-
-// =================================================================================================
-// MARK: Methods - Layout (Actions)
-// =================================================================================================
-
-- (void)jf_buttonTapped:(UIButton*)button;
-
-@end
+/**
+ * A block of code to be executed when the button is tapped.
+ * @param sender The button that has been tapped.
+ */
+typedef void (^JFButtonBlock) (UIButton* sender);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark -
 
-@implementation UIButton (JFKit)
+/**
+ * A category for the UIButton that adds support for an action block.
+ */
+@interface UIButton (JFUIKit)
 
 // =================================================================================================
 // MARK: Properties - User interface (Actions)
 // =================================================================================================
 
-- (JFButtonBlock __nullable)jf_actionBlock
-{
-	return objc_getAssociatedObject(self, _cmd);
-}
-
-// =================================================================================================
-// MARK: Methods - Layout (Actions)
-// =================================================================================================
-
-- (void)jf_setActionBlock:(JFButtonBlock __nullable)block
-{
-	SEL action = @selector(jf_buttonTapped:);
-	UIControlEvents events = UIControlEventTouchUpInside;
-	
-	[self removeTarget:self action:action forControlEvents:events];
-	
-	if(block)
-		[self addTarget:self action:action forControlEvents:events];
-	
-	objc_setAssociatedObject(self, @selector(jf_actionBlock), block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
-
-@implementation UIButton (JFKit_Private)
-
-// =================================================================================================
-// MARK: Methods - Layout (Actions)
-// =================================================================================================
-
-- (void)jf_buttonTapped:(UIButton*)button
-{
-	JFButtonBlock block = self.jf_actionBlock;
-	if(block)
-		block(self);
-}
+/**
+ * The block to be executed when the button is tapped.
+ */
+@property (strong, nonatomic, nullable, setter=jf_setActionBlock:) JFButtonBlock jf_actionBlock;
 
 @end
 
@@ -102,4 +63,3 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-

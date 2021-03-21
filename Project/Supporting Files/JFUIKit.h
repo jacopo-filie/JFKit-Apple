@@ -24,42 +24,41 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@import Foundation;
+#import <JFUIKit/JFPreprocessorMacros.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// =================================================================================================
-// MARK: Compatibility addons
-// =================================================================================================
+#if JF_IOS
+#	import <Foundation/Foundation.h>
+#endif
 
-#ifndef TARGET_OS_OSX
-#	define TARGET_OS_OSX (!TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED)
+#if JF_MACOS
+#	import <Cocoa/Cocoa.h>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark -
+//! Project version number for JFUIKit.
+FOUNDATION_EXPORT double JFUIKitVersionNumber;
 
-// =================================================================================================
-// MARK: Feature conditionals
-// =================================================================================================
+//! Project version string for JFUIKit.
+FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
 
-#ifndef JF_WEAK_ENABLED
-#	define JF_WEAK_ENABLED __has_feature(objc_arc_weak)
-#endif
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// =================================================================================================
-// MARK: Target conditionals
-// =================================================================================================
+#import <JFUIKit/JFAlert.h>
+#import <JFUIKit/JFAlertsController.h>
+#import <JFUIKit/JFAppDelegate.h>
+#import <JFUIKit/JFWindowController.h>
 
-#ifndef JF_TARGET_CONDITIONALS
-#	define JF_TARGET_CONDITIONALS
-#	define JF_ARCH32 !__LP64__
-#	define JF_ARCH64 __LP64__
-#	define JF_IOS (TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_IOS)
-#	define JF_MACOS (TARGET_OS_MAC && TARGET_OS_OSX)
-#	define JF_TVOS (TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_TV)
-#	define JF_WATCHOS (TARGET_OS_MAC && TARGET_OS_IPHONE && TARGET_OS_WATCH)
+#if JF_IOS
+#	import <JFUIKit/JFActivityIndicatorView.h>
+#	import <JFUIKit/JFGradientView.h>
+#	import <JFUIKit/JFKeyboardHelper.h>
+#	import <JFUIKit/JFOverlayController.h>
+#	import <JFUIKit/JFSliderController.h>
+#	import <JFUIKit/JFTableViewCell.h>
+#	import <JFUIKit/UIButton+JFUIKit.h>
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

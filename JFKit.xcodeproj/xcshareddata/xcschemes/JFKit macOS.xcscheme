@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4ECFE2771FD8BCF1004EEACE"
-               BuildableName = "JFKit.framework"
+               BuildableName = ".framework"
                BlueprintName = "JFKit macOS"
                ReferencedContainer = "container:JFKit.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2771FD8BCF1004EEACE"
-            BuildableName = "JFKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "JFKit macOS"
             ReferencedContainer = "container:JFKit.xcodeproj">
          </BuildableReference>
@@ -78,7 +78,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2771FD8BCF1004EEACE"
-            BuildableName = "JFKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "JFKit macOS"
             ReferencedContainer = "container:JFKit.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4ECFE2771FD8BCF1004EEACE"
-            BuildableName = "JFKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "JFKit macOS"
             ReferencedContainer = "container:JFKit.xcodeproj">
          </BuildableReference>
