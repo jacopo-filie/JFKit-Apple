@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

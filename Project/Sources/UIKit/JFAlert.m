@@ -175,7 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize otherButtons = _otherButtons;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)init
@@ -702,7 +702,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize title = _title;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)buttonWithTitle:(NSString*)title

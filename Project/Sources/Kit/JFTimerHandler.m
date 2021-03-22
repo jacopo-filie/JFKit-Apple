@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize block = _block;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)handlerWithBlock:(JFTimerHandlerBlock)block

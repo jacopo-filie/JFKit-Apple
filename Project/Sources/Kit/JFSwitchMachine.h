@@ -106,7 +106,7 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
 @property (assign, readonly, getter=isOpening) BOOL opening;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

@@ -62,7 +62,7 @@ typedef id (^Builder)(id param);
 @property (strong, nonatomic, readonly) Builder builder;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -101,7 +101,7 @@ typedef id (^Builder)(id param);
 @property (strong, nonatomic, readonly) Implementation<ObjectType, ParamType>* implementation;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithImplementation:(Implementation*)implementation NS_DESIGNATED_INITIALIZER;
@@ -129,7 +129,7 @@ typedef id (^Builder)(id param);
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)newInstance:(Builder)builder
@@ -192,7 +192,7 @@ typedef id (^Builder)(id param);
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithBuilder:(Builder)builder

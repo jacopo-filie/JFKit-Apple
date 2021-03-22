@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 @property (assign, readonly) JFStateTransition transition;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**
@@ -377,7 +377,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 @property (strong, nonatomic, nullable) JFStateMachineTransition* nextTransitionOnSuccess;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

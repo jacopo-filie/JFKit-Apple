@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize successBlock = _successBlock;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)completionWithBlock:(JFCompletionBlock)block
@@ -299,7 +299,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize successBlock = _successBlock;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)completionWithBlock:(JFSimpleCompletionBlock)block

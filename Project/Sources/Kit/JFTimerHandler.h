@@ -60,7 +60,7 @@ typedef void (^JFTimerHandlerBlock) (NSTimer* timer);
 @property (strong, nonatomic, readonly) JFTimerHandlerBlock block;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

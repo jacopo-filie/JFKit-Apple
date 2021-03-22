@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nullable) id<JFJSONSerializationAdapter> serializer;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

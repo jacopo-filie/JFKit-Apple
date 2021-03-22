@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithDelegate:(id<JFStateMachineDelegate>)delegate

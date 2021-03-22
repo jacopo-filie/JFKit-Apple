@@ -118,7 +118,7 @@ NSInteger const JFVersionComponentNotValid = -1;
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (JFVersion*)currentOperatingSystemVersion

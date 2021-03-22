@@ -289,7 +289,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
 @property (strong, nonatomic, readonly) NSString* string;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

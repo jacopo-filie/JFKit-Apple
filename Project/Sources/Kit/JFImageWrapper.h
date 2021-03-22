@@ -73,7 +73,7 @@ typedef UIImage* __nullable (^JFImageLoader)(void);
 @property (strong, nonatomic, readonly, nullable) JFImageLoader thumbnailLoader;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

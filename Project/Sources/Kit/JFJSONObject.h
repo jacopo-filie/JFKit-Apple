@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSDictionary<NSString*, id<JFJSONConvertibleValue>>* dictionaryValue;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

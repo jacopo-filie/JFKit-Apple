@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setNeedsRebuildLayout;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFActivityIndicatorView*)view;
@@ -792,7 +792,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFActivityIndicatorView*)view

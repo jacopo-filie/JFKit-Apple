@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize domain = _domain;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithDomain:(NSErrorDomain)domain

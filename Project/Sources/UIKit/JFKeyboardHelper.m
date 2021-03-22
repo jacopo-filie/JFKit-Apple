@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize resizableViewBottomConstraint = _resizableViewBottomConstraint;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (void)dealloc
@@ -275,7 +275,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize endFrame = _endFrame;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationCurve:(UIViewAnimationCurve)curve duration:(NSTimeInterval)duration

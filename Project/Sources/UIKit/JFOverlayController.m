@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) UIView* rootContainer;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFOverlayController*)controller;
@@ -352,7 +352,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFOverlayController*)controller

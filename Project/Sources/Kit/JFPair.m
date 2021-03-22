@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize secondValue = _secondValue;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)pairWithFirstValue:(id __nullable)firstValue secondValue:(id __nullable)secondValue

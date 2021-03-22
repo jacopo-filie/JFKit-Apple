@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 @property (strong, readonly) NSManagedObjectContext* viewContext;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

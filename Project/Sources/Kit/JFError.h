@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, readonly, nullable) NSString* localizedRecoverySuggestion;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

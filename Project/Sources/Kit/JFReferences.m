@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object
@@ -201,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize object = _object;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object
@@ -260,7 +260,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize object = _object;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)referenceWithObject:(id __nullable)object

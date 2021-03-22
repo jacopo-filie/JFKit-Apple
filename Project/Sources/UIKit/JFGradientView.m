@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JFGradientView (/* Private */)
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFGradientView*)object;
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (void)initializeProperties:(JFGradientView*)object

@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize executionBlock = _executionBlock;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithExecutionBlock:(JFBlock)executionBlock

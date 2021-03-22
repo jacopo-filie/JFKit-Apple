@@ -106,7 +106,7 @@ typedef void (^JFSuccessBlock) (id result);
 @property (strong, nonatomic, readonly, nullable) void (^successBlock)(ResultType result);
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**
@@ -304,7 +304,7 @@ typedef void (^JFSuccessBlock) (id result);
 @property (strong, nonatomic, readonly, nullable) JFBlock successBlock;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

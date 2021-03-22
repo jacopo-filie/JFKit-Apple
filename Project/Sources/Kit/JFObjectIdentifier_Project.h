@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, readonly) NSUInteger count;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithCurrentImplementation API_AVAILABLE(ios(8.0), macos(10.8));

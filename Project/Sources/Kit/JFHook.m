@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize object = _object;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)newWithObject:(id __nullable)object

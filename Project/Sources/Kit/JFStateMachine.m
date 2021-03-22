@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (void)dealloc
@@ -450,7 +450,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize nextTransitionOnSuccess = _nextTransitionOnSuccess;
 
 // =================================================================================================
-// MARK: Methods - Memory
+// MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)initWithTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
