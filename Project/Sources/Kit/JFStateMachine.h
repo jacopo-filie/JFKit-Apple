@@ -22,7 +22,7 @@
 //	SOFTWARE.
 //
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
 
@@ -33,11 +33,11 @@
 
 @protocol JFStateMachineDelegate;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
 // MARK: Macros
@@ -58,9 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 #define JFStateTransitionNotAvailable -1
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 // =================================================================================================
 // MARK: Types
@@ -126,9 +125,8 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 	JFStateMachineErrorTransitionNotValid,
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * The class `JFStateMachine` encapsulates all the necessary code to handle thread-safety when working with a finite-state machine. It enqueues each request (if it's considered valid) and performs each one sequentially by asking its delegate to execute the transition and call the completion callback when the transition is finished. There's no way to perform a transition between two states that are not directly linked: to do it the state machine must execute multiple transitions through all the intermediary steps. You can chain together multiple transitions by using the class `JFStateMachineTransition` and its properties `nextTransitionOnFailure` and `nextTransitionOnSuccess`, but be careful because not all the given transitions are performed: if any analyzed transition does not pass the validation step, its completion (if set) is called due to the cancellation of the operation and the following chained transitions are simply ignored; also transitions that are chained on a path that is not executed (for example: a transition set to perform on failure but the current transition succeeds) are ignored and their completions are never called.
@@ -294,9 +292,8 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * The delegate of the state machine is responsible for actually executing the state transition that the machine needs to perform. It can also be notified when that state transition is about to begin or has just finished.
@@ -338,9 +335,8 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * The class `JFStateMachineTransition` wraps the needed information to perform any state transition in a finite-state machine. It also exposes a couple of properties (`nextTransitionOnFailure` and `nextTransitionOnSuccess`) that lets you chain various state transitions when they need to be performed sequentially. Note that chained transitions are always executed in a single batch, they are never interrupted by other state transitions.
@@ -405,8 +401,8 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

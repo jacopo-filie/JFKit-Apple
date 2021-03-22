@@ -22,17 +22,17 @@
 //	SOFTWARE.
 //
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import CoreData;
 
 #import "JFCompletions.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
 // MARK: Types - Errors
@@ -54,9 +54,8 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 	JFPersistentContainerErrorMissingURL,
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * This class can be used to replace the class `NSPersistentContainer` that has limited support for the most recent operating systems. It tries to extend the support down to macOS 10.6 and iOS 8.0 by using many checks to select the proper path of instructions to follow: if the class `NSPersistentContainer` is available, its properties and methods are used, otherwise the most recent available SDK APIs are used to implement a custom version of the needed `NSPersistentContainer` APIs.
@@ -186,8 +185,8 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

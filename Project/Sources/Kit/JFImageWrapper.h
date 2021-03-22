@@ -22,17 +22,17 @@
 //	SOFTWARE.
 //
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
 
 @import UIKit;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
 // MARK: Types
@@ -40,9 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef UIImage* __nullable (^JFImageLoader)(void);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * This wrapper is useful to decouple the places where the image is loaded and where it is used. Instead of loading the image and pass it through all the intermediary methods until the image is used, this wrapper can delay the loading of the image until it is really needed. Obviously, the source of the image may change in the meantime, so you must know what you're doing when choosing this behaviour. If the image has an associated thumbnail, you can also load it in the same way. Mind that unused loaded images will be removed from memory and reloaded next time the image is needed.
@@ -92,8 +91,8 @@ typedef UIImage* __nullable (^JFImageLoader)(void);
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

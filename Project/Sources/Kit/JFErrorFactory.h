@@ -22,17 +22,17 @@
 //	SOFTWARE.
 //
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
 
 #import "JFError.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 /**
  * The class `JFErrorFactory` is a base class that implements many methods to easily create new errors using the given information. It is associated with a specific domain during initialization and can create any kind of error for that specific domain. To use the localized methods, you need to subclass this class and override instance methods `-localizedDescriptionForErrorCode:`, `localizedFailureReasonForErrorCode:` and `localizedRecoverySuggestionForErrorCode:` to let them return the localized strings for the given error code. The instance methods `-localizedDescriptionForErrorCode:values:`, `localizedFailureReasonForErrorCode:values:` and `localizedRecoverySuggestionForErrorCode:values:` rely on them to retrieve the format string to populate with the given values; it is not necessary to subclass these methods.
@@ -220,8 +220,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

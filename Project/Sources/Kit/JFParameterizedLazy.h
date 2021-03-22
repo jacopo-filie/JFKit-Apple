@@ -22,15 +22,15 @@
 //	SOFTWARE.
 //
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
 // MARK: Macros
@@ -41,9 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 #define JFParameterizedLazyTemplate __covariant ObjectType, __covariant ParamType
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#pragma mark -
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
 
 /**
  * This class can be used to simplify management of the lazy initialization of an object that requires a parameter to be initialized. You can force the initialization of the wrapped object by calling the method `get`, otherwise you can just query the wrapper content using the method `opt` that will return `nil` if the object has not been initialized yet. If you're sure about the thread-safety of the context you're going to use this class, you can use unsynchronized instances; using synchronized instances is recommended otherwise.
@@ -100,8 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
