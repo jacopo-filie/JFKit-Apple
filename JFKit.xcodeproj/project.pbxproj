@@ -644,6 +644,7 @@
 		4ECFE23D1FD8B9D3004EEACE = {
 			isa = PBXGroup;
 			children = (
+				4E1C979225F530A900A2EE12 /* Frameworks */,
 				4ECFE25C1FD8BCD9004EEACE /* Products */,
 				4EA66DF72257526F00D07D6A /* Resources */,
 				4EA80C791FDCCE790086EBE2 /* Sources */,
@@ -651,7 +652,6 @@
 				4ECFE3CC1FD8CC65004EEACE /* Tests */,
 				4E6B219D25F0A17E005BC9BD /* LICENSE */,
 				4E6B219E25F0A17E005BC9BD /* README.md */,
-				4E1C979225F530A900A2EE12 /* Frameworks */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
