@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Presentation
 // =================================================================================================
 
-+ (JFTableViewCell* __nullable)sizingCell;
++ (JFTableViewCell* _Nullable)sizingCell;
 
 @end
 
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-+ (JFTableViewCell* __nullable)sizingCell
++ (JFTableViewCell* _Nullable)sizingCell
 {
 	static NSMutableDictionary<NSString*, JFTableViewCell*>* pool = nil;
 	if(!pool)

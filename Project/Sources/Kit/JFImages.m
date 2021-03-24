@@ -41,12 +41,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 
-NSString* __nullable JFLaunchImageName(void)
+NSString* _Nullable JFLaunchImageName(void)
 {
 	return JFLaunchImageNameForOrientation(CurrentInterfaceOrientation);
 }
 
-NSString* __nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
+NSString* _Nullable JFLaunchImageNameForOrientation(UIInterfaceOrientation orientation)
 {
 	static NSString* landscapeRetObj = nil;
 	static NSString* portraitRetObj = nil;

@@ -51,7 +51,7 @@ NSString* const JFYesString = @"Yes";
 // MARK: Functions - Comparisons
 // =================================================================================================
 
-BOOL JFStringIsEmpty(NSString* __nullable string)
+BOOL JFStringIsEmpty(NSString* _Nullable string)
 {
 	return (string && [string isEqualToString:JFEmptyString]);
 }
@@ -63,7 +63,7 @@ BOOL JFStringIsMadeOfCharacters(NSString* string, NSString* characters)
 	return [charactersSet isSupersetOfSet:stringSet];
 }
 
-BOOL JFStringIsNullOrEmpty(NSString* __nullable string)
+BOOL JFStringIsNullOrEmpty(NSString* _Nullable string)
 {
 	return (!string || [string isEqualToString:JFEmptyString]);
 }
@@ -109,7 +109,7 @@ NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSStrin
 	return [retObj copy];
 }
 
-NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSString* __nullable middleName, NSString* __nullable familyName)
+NSString* _Nullable JFStringFromPersonName(NSString* _Nullable givenName, NSString* _Nullable middleName, NSString* _Nullable familyName)
 {
 	if(!givenName && !middleName && !familyName)
 		return nil;
@@ -161,42 +161,42 @@ NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSSt
 // MARK: Functions - Creation (Objects conversion)
 // =================================================================================================
 
-NSString* __nullable JFStringFromClassOfObject(id<NSObject> __nullable object)
+NSString* _Nullable JFStringFromClassOfObject(id<NSObject> _Nullable object)
 {
 	return (object ? NSStringFromClass(object.class) : nil);
 }
 
-NSString* __nullable JFStringFromCPointer(void* __nullable pointer)
+NSString* _Nullable JFStringFromCPointer(void* _Nullable pointer)
 {
 	return (pointer ? [NSString stringWithFormat:@"%p", pointer] : nil);
 }
 
-NSString* __nullable JFStringFromCString(const char* __nullable string)
+NSString* _Nullable JFStringFromCString(const char* _Nullable string)
 {
 	return JFStringFromEncodedCString(string, NSUTF8StringEncoding);
 }
 
-NSString* __nullable JFStringFromEncodedCString(const char* __nullable string, NSStringEncoding encoding)
+NSString* _Nullable JFStringFromEncodedCString(const char* _Nullable string, NSStringEncoding encoding)
 {
 	return (string ? [NSString stringWithCString:string encoding:encoding] : nil);
 }
 
-NSString* __nullable JFStringFromObject(id<NSObject> __nullable object)
+NSString* _Nullable JFStringFromObject(id<NSObject> _Nullable object)
 {
 	return (object ? [NSString stringWithFormat:@"<%@:%@>", JFStringFromClassOfObject(object), JFStringFromPointer(object)] : nil);
 }
 
-NSString* __nullable JFStringFromPointer(id __nullable object)
+NSString* _Nullable JFStringFromPointer(id _Nullable object)
 {
 	return (object ? [NSString stringWithFormat:@"%p", object] : nil);
 }
 
-const char* __nullable JFStringToCString(NSString* __nullable string)
+const char* _Nullable JFStringToCString(NSString* _Nullable string)
 {
 	return JFStringToEncodedCString(string, NSUTF8StringEncoding);
 }
 
-const char* __nullable JFStringToEncodedCString(NSString* __nullable string, NSStringEncoding encoding)
+const char* _Nullable JFStringToEncodedCString(NSString* _Nullable string, NSStringEncoding encoding)
 {
 	return (string ? [string cStringUsingEncoding:encoding] : NULL);
 }

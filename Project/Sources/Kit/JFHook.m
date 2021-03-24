@@ -44,12 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype)newWithObject:(id __nullable)object
++ (instancetype)newWithObject:(id _Nullable)object
 {
 	return [[self alloc] initWithObject:object];
 }
 
-- (instancetype)initWithObject:(id __nullable)object
+- (instancetype)initWithObject:(id _Nullable)object
 {
 	self = [self init];
 	

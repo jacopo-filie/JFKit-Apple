@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param secondValue The second value of the pair.
  * @return A new instance of this class.
  */
-+ (instancetype)pairWithFirstValue:(FirstType __nullable)firstValue secondValue:(SecondType __nullable)secondValue;
++ (instancetype)pairWithFirstValue:(FirstType _Nullable)firstValue secondValue:(SecondType _Nullable)secondValue;
 
 /**
  * Initializes this instance with the given values.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param secondValue The second value of the pair.
  * @return This instance.
  */
-- (instancetype)initWithFirstValue:(FirstType __nullable)firstValue secondValue:(SecondType __nullable)secondValue NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithFirstValue:(FirstType _Nullable)firstValue secondValue:(SecondType _Nullable)secondValue NS_DESIGNATED_INITIALIZER;
 
 @end
 

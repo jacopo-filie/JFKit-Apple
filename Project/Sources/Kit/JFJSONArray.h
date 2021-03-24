@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param data The JSON data.
  * @return A new instance of this class, or `nil` if `data` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)arrayWithData:(NSData* __nullable)data;
++ (instancetype _Nullable)arrayWithData:(NSData* _Nullable)data;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON data using the given JSON serializer.
@@ -67,14 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return A new instance of this class, or `nil` if `data` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)arrayWithData:(NSData* __nullable)data serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)arrayWithData:(NSData* _Nullable)data serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given array.
  * @param array The array containing the JSON values.
  * @return A new instance of this class, or `nil` if `array` does not exist.
  */
-+ (instancetype __nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array;
++ (instancetype _Nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given array.
@@ -82,14 +82,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to set after the instance creation.
  * @return A new instance of this class, or `nil` if `array` does not exist.
  */
-+ (instancetype __nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON string.
  * @param string The JSON string.
  * @return A new instance of this class, or `nil` if `string` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)arrayWithString:(NSString* __nullable)string;
++ (instancetype _Nullable)arrayWithString:(NSString* _Nullable)string;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON string using the given JSON serializer.
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return A new instance of this class, or `nil` if `string` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)arrayWithString:(NSString* __nullable)string serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)arrayWithString:(NSString* _Nullable)string serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * Initializes this instance.
@@ -124,14 +124,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param data The JSON data.
  * @return This instance, or `nil` if `data` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithData:(NSData*)data;
+- (instancetype _Nullable)initWithData:(NSData*)data;
 
 /**
  * Initializes this instance with the given JSON string using the default JSON serializer.
  * @param string The JSON string.
  * @return This instance, or `nil` if `string` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithString:(NSString*)string;
+- (instancetype _Nullable)initWithString:(NSString*)string;
 
 // =================================================================================================
 // MARK: Methods - Data (Arrays)
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The array associated with the given index.
  * @warning If no value is associated with the given index, or it is not an array, this method returns `nil`.
  */
-- (JFJSONArray* __nullable)arrayAtIndex:(NSUInteger)index;
+- (JFJSONArray* _Nullable)arrayAtIndex:(NSUInteger)index;
 
 /**
  * Inserts the given array at the given index in the collection, incrementing all subsequent indexes.
@@ -216,7 +216,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The number associated with the given index.
  * @warning If no value is associated with the given index, or it is not a number, this method returns `nil`.
  */
-- (NSNumber* __nullable)numberAtIndex:(NSUInteger)index;
+- (NSNumber* _Nullable)numberAtIndex:(NSUInteger)index;
 
 /**
  * Replaces the value stored at the given index in the collection with given number.
@@ -248,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The object associated with the given index.
  * @warning If no value is associated with the given index, or it is not an object, this method returns `nil`.
  */
-- (JFJSONObject* __nullable)objectAtIndex:(NSUInteger)index;
+- (JFJSONObject* _Nullable)objectAtIndex:(NSUInteger)index;
 
 /**
  * Replaces the value stored at the given index in the collection with given object.
@@ -287,7 +287,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The string associated with the given index.
  * @warning If no value is associated with the given index, or it is not a string, this method returns `nil`.
  */
-- (NSString* __nullable)stringAtIndex:(NSUInteger)index;
+- (NSString* _Nullable)stringAtIndex:(NSUInteger)index;
 
 // =================================================================================================
 // MARK: Methods - Data (Values)
@@ -324,7 +324,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param index The index of the association.
  * @return The value associated with the given index.
  */
-- (id<JFJSONValue> __nullable)valueAtIndex:(NSUInteger)index;
+- (id<JFJSONValue> _Nullable)valueAtIndex:(NSUInteger)index;
 
 // =================================================================================================
 // MARK: Methods - Subscripting
@@ -335,7 +335,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param index The index of the association.
  * @return The value associated with the given index.
  */
-- (id<JFJSONValue> __nullable)objectAtIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8));
+- (id<JFJSONValue> _Nullable)objectAtIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8));
 
 /**
  * Associates the given value with the given index. Used to enable setting values using the subscripting notation.

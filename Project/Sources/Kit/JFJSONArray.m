@@ -53,13 +53,13 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (void)importFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array;
+- (void)importFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array;
 
 // =================================================================================================
 // MARK: Methods - Data (Values)
 // =================================================================================================
 
-- (id<JFJSONValue> __nullable)checkValue:(id __nullable)value;
+- (id<JFJSONValue> _Nullable)checkValue:(id _Nullable)value;
 
 @end
 
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - Serialization
 // =================================================================================================
 
-+ (id<JFJSONSerializationAdapter> __nullable)defaultSerializer
++ (id<JFJSONSerializationAdapter> _Nullable)defaultSerializer
 {
 	static id<JFJSONSerializationAdapter> retObj = nil;
 	static dispatch_once_t onceToken;
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (id<JFJSONSerializationAdapter> __nullable)serializer
+- (id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	@synchronized(self)
 	{
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (void)setSerializer:(id<JFJSONSerializationAdapter> __nullable)serializer
+- (void)setSerializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	@synchronized(self)
 	{
@@ -137,12 +137,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return self.list.count;
 }
 
-- (NSData* __nullable)dataValue
+- (NSData* _Nullable)dataValue
 {
 	return [self.serializer dataFromArray:self.arrayValue];
 }
 
-- (NSString* __nullable)stringValue
+- (NSString* _Nullable)stringValue
 {
 	return [self.serializer stringFromArray:self.arrayValue];
 }
@@ -151,22 +151,22 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype __nullable)arrayWithData:(NSData* __nullable)data
++ (instancetype _Nullable)arrayWithData:(NSData* _Nullable)data
 {
 	return [self arrayWithData:data serializer:nil];
 }
 
-+ (instancetype __nullable)arrayWithData:(NSData* __nullable)data serializer:(id<JFJSONSerializationAdapter> __nullable)serializer
++ (instancetype _Nullable)arrayWithData:(NSData* _Nullable)data serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	return (data ? [self arrayWithArray:[(serializer ?: self.defaultSerializer) arrayFromData:data] serializer:serializer] : nil);
 }
 
-+ (instancetype __nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array
++ (instancetype _Nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array
 {
 	return [self arrayWithArray:array serializer:nil];
 }
 
-+ (instancetype __nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array serializer:(id<JFJSONSerializationAdapter> __nullable)serializer
++ (instancetype _Nullable)arrayWithArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	if(!array)
 		return nil;
@@ -176,12 +176,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-+ (instancetype __nullable)arrayWithString:(NSString* __nullable)string
++ (instancetype _Nullable)arrayWithString:(NSString* _Nullable)string
 {
 	return [self arrayWithString:string serializer:nil];
 }
 
-+ (instancetype __nullable)arrayWithString:(NSString* __nullable)string serializer:(id<JFJSONSerializationAdapter> __nullable)serializer
++ (instancetype _Nullable)arrayWithString:(NSString* _Nullable)string serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	return (string ? [self arrayWithArray:[(serializer ?: self.defaultSerializer) arrayFromString:string] serializer:serializer] : nil);
 }
@@ -213,12 +213,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (instancetype __nullable)initWithData:(NSData*)data
+- (instancetype _Nullable)initWithData:(NSData*)data
 {
 	return [self initWithData:data serializer:nil];
 }
 
-- (instancetype __nullable)initWithData:(NSData*)data serializer:(id<JFJSONSerializationAdapter> __nullable)serializer
+- (instancetype _Nullable)initWithData:(NSData*)data serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	self = [self init];
 	
@@ -233,12 +233,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (instancetype __nullable)initWithString:(NSString*)string
+- (instancetype _Nullable)initWithString:(NSString*)string
 {
 	return [self initWithString:string serializer:nil];
 }
 
-- (instancetype __nullable)initWithString:(NSString*)string serializer:(id<JFJSONSerializationAdapter> __nullable)serializer
+- (instancetype _Nullable)initWithString:(NSString*)string serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer
 {
 	self = [self init];
 	
@@ -257,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (void)importFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array
+- (void)importFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array
 {
 	for(NSUInteger index = 0; index < array.count; index++)
 	{
@@ -279,7 +279,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self addValue:value];
 }
 
-- (JFJSONArray* __nullable)arrayAtIndex:(NSUInteger)index
+- (JFJSONArray* _Nullable)arrayAtIndex:(NSUInteger)index
 {
 	id<JFJSONValue> retVal = [self valueAtIndex:index];
 	return ((retVal && [retVal isKindOfClass:[JFJSONArray class]]) ? (JFJSONArray*)retVal : nil);
@@ -334,7 +334,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self insertValue:value atIndex:index];
 }
 
-- (NSNumber* __nullable)numberAtIndex:(NSUInteger)index
+- (NSNumber* _Nullable)numberAtIndex:(NSUInteger)index
 {
 	id<JFJSONValue> retVal = [self valueAtIndex:index];
 	return ((retVal && [retVal isKindOfClass:[NSNumber class]]) ? (NSNumber*)retVal : nil);
@@ -359,7 +359,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self insertValue:value atIndex:index];
 }
 
-- (JFJSONObject* __nullable)objectAtIndex:(NSUInteger)index
+- (JFJSONObject* _Nullable)objectAtIndex:(NSUInteger)index
 {
 	id<JFJSONValue> retVal = [self valueAtIndex:index];
 	return ((retVal && [retVal isKindOfClass:[JFJSONObject class]]) ? (JFJSONObject*)retVal : nil);
@@ -389,7 +389,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self replaceWithValue:value atIndex:index];
 }
 
-- (NSString* __nullable)stringAtIndex:(NSUInteger)index
+- (NSString* _Nullable)stringAtIndex:(NSUInteger)index
 {
 	id<JFJSONValue> retVal = [self valueAtIndex:index];
 	return ((retVal && [retVal isKindOfClass:[NSString class]]) ? (NSString*)retVal : nil);
@@ -406,7 +406,7 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.list addObject:value];
 }
 
-- (id<JFJSONValue> __nullable)checkValue:(id __nullable)value
+- (id<JFJSONValue> _Nullable)checkValue:(id _Nullable)value
 {
 	if(!value || [value conformsToProtocol:@protocol(JFJSONValue)])
 		return value;
@@ -447,7 +447,7 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.list replaceObjectAtIndex:index withObject:value];
 }
 
-- (id<JFJSONValue> __nullable)valueAtIndex:(NSUInteger)index
+- (id<JFJSONValue> _Nullable)valueAtIndex:(NSUInteger)index
 {
 	return [self.list objectAtIndex:index];
 }
@@ -456,7 +456,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Subscripting
 // =================================================================================================
 
-- (id<JFJSONValue> __nullable)objectAtIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8))
+- (id<JFJSONValue> _Nullable)objectAtIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	return [self valueAtIndex:index];
 }

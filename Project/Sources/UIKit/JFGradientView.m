@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self updateGradientLayer];
 }
 
-- (void)setFirstColor:(UIColor* __nullable)firstColor
+- (void)setFirstColor:(UIColor* _Nullable)firstColor
 {
 	if(JFAreObjectsEqual(_firstColor, firstColor))
 		return;
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self updateGradientLayer];
 }
 
-- (void)setLastColor:(UIColor* __nullable)lastColor
+- (void)setLastColor:(UIColor* _Nullable)lastColor
 {
 	if(JFAreObjectsEqual(_lastColor, lastColor))
 		return;
@@ -127,7 +127,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[object updateGradientLayer];
 }
 
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)

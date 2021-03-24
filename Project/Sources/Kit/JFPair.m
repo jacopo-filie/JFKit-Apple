@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype)pairWithFirstValue:(id __nullable)firstValue secondValue:(id __nullable)secondValue
++ (instancetype)pairWithFirstValue:(id _Nullable)firstValue secondValue:(id _Nullable)secondValue
 {
 	return [[self alloc] initWithFirstValue:firstValue secondValue:secondValue];
 }
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return [self initWithFirstValue:nil secondValue:nil];
 }
 
-- (instancetype)initWithFirstValue:(id __nullable)firstValue secondValue:(id __nullable)secondValue
+- (instancetype)initWithFirstValue:(id _Nullable)firstValue secondValue:(id _Nullable)secondValue
 {
 	self = [super init];
 	
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	return self;
 }
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSMutableCopying)
 // =================================================================================================
 
-- (id)mutableCopyWithZone:(NSZone* __nullable)zone
+- (id)mutableCopyWithZone:(NSZone* _Nullable)zone
 {
 	return [[JFMutablePair allocWithZone:zone] initWithFirstValue:self.firstValue secondValue:self.secondValue];
 }
@@ -111,12 +111,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (void)setFirstValue:(id __nullable)firstValue
+- (void)setFirstValue:(id _Nullable)firstValue
 {
 	_firstValue = firstValue;
 }
 
-- (void)setSecondValue:(id __nullable)secondValue
+- (void)setSecondValue:(id _Nullable)secondValue
 {
 	_secondValue = secondValue;
 }
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	return [[JFPair allocWithZone:zone] initWithFirstValue:self.firstValue secondValue:self.secondValue];
 }

@@ -216,7 +216,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (void)setAnimationImages:(NSArray<UIImage*>* __nullable)animationImages
+- (void)setAnimationImages:(NSArray<UIImage*>* _Nullable)animationImages
 {
 	animationImages = [animationImages copy];
 	if(JFAreObjectsEqual(_animationImages, animationImages))
@@ -230,22 +230,22 @@ NS_ASSUME_NONNULL_BEGIN
 		self.imageView.animationImages = animationImages;
 }
 
-- (NSString* __nullable)buttonTitle
+- (NSString* _Nullable)buttonTitle
 {
 	return [self buttonTitleForState:UIControlStateNormal];
 }
 
-- (NSString* __nullable)buttonTitleForState:(UIControlState)state
+- (NSString* _Nullable)buttonTitleForState:(UIControlState)state
 {
 	return self.buttonTitles[@(state)];
 }
 
-- (void)setButtonTitle:(NSString* __nullable)buttonTitle
+- (void)setButtonTitle:(NSString* _Nullable)buttonTitle
 {
 	[self setButtonTitle:buttonTitle forState:UIControlStateNormal];
 }
 
-- (void)setButtonTitle:(NSString* __nullable)buttonTitle forState:(UIControlState)state
+- (void)setButtonTitle:(NSString* _Nullable)buttonTitle forState:(UIControlState)state
 {
 	NSNumber* key = @(state);
 	if(![[self.class buttonDictionaryKeys] containsObject:key])
@@ -268,12 +268,12 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.button setTitle:buttonTitle forState:state];
 }
 
-- (void)setText:(NSString* __nullable)text
+- (void)setText:(NSString* _Nullable)text
 {
 	[self setText:text animated:NO];
 }
 
-- (void)setText:(NSString* __nullable)text animated:(BOOL)animated
+- (void)setText:(NSString* _Nullable)text animated:(BOOL)animated
 {
 	text = [text copy];
 	if(JFAreObjectsEqual(_text, text))
@@ -401,7 +401,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - User interface (Actions)
 // =================================================================================================
 
-- (void)setButtonBlock:(JFButtonBlock __nullable)buttonBlock
+- (void)setButtonBlock:(JFButtonBlock _Nullable)buttonBlock
 {
 	if(JFAreObjectsEqual(_buttonBlock, buttonBlock))
 		return;
@@ -423,7 +423,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return _alertBackgroundColor;
 }
 
-- (void)setAlertBackgroundColor:(UIColor* __nullable)alertBackgroundColor
+- (void)setAlertBackgroundColor:(UIColor* _Nullable)alertBackgroundColor
 {
 	if(JFAreObjectsEqual(_alertBackgroundColor, alertBackgroundColor))
 		return;
@@ -434,7 +434,7 @@ NS_ASSUME_NONNULL_BEGIN
 		self.alertView.backgroundColor = self.alertBackgroundColor;
 }
 
-- (void)setAlertBackgroundImage:(UIImage* __nullable)alertBackgroundImage
+- (void)setAlertBackgroundImage:(UIImage* _Nullable)alertBackgroundImage
 {
 	if(JFAreObjectsEqual(_alertBackgroundImage, alertBackgroundImage))
 		return;
@@ -447,7 +447,7 @@ NS_ASSUME_NONNULL_BEGIN
 		self.alertBackgroundView.image = alertBackgroundImage;
 }
 
-- (void)setAlertBorderColor:(UIColor* __nullable)alertBorderColor
+- (void)setAlertBorderColor:(UIColor* _Nullable)alertBorderColor
 {
 	if(JFAreObjectsEqual(_alertBorderColor, alertBorderColor))
 		return;
@@ -548,7 +548,7 @@ NS_ASSUME_NONNULL_BEGIN
 		[self setNeedsUpdateConstraints];
 }
 
-- (void)setAlertShadowColor:(UIColor* __nullable)alertShadowColor
+- (void)setAlertShadowColor:(UIColor* _Nullable)alertShadowColor
 {
 	if(JFAreObjectsEqual(_alertShadowColor, alertShadowColor))
 		return;
@@ -603,22 +603,22 @@ NS_ASSUME_NONNULL_BEGIN
 		[self setNeedsUpdateConstraints];
 }
 
-- (UIImage* __nullable)buttonBackgroundImage
+- (UIImage* _Nullable)buttonBackgroundImage
 {
 	return [self buttonBackgroundImageForState:UIControlStateNormal];
 }
 
-- (UIImage* __nullable)buttonBackgroundImageForState:(UIControlState)state
+- (UIImage* _Nullable)buttonBackgroundImageForState:(UIControlState)state
 {
 	return self.buttonBackgroundImages[@(state)];
 }
 
-- (void)setButtonBackgroundImage:(UIImage* __nullable)buttonBackgroundImage
+- (void)setButtonBackgroundImage:(UIImage* _Nullable)buttonBackgroundImage
 {
 	[self setButtonBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
 }
 
-- (void)setButtonBackgroundImage:(UIImage* __nullable)buttonBackgroundImage forState:(UIControlState)state
+- (void)setButtonBackgroundImage:(UIImage* _Nullable)buttonBackgroundImage forState:(UIControlState)state
 {
 	NSNumber* key = @(state);
 	if(![[self.class buttonDictionaryKeys] containsObject:key])
@@ -638,22 +638,22 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.button setBackgroundImage:buttonBackgroundImage forState:state];
 }
 
-- (UIImage* __nullable)buttonImage
+- (UIImage* _Nullable)buttonImage
 {
 	return [self buttonImageForState:UIControlStateNormal];
 }
 
-- (UIImage* __nullable)buttonImageForState:(UIControlState)state
+- (UIImage* _Nullable)buttonImageForState:(UIControlState)state
 {
 	return self.buttonImages[@(state)];
 }
 
-- (void)setButtonImage:(UIImage* __nullable)buttonImage
+- (void)setButtonImage:(UIImage* _Nullable)buttonImage
 {
 	[self setButtonImage:buttonImage forState:UIControlStateNormal];
 }
 
-- (void)setButtonImage:(UIImage* __nullable)buttonImage forState:(UIControlState)state
+- (void)setButtonImage:(UIImage* _Nullable)buttonImage forState:(UIControlState)state
 {
 	NSNumber* key = @(state);
 	if(![[self.class buttonDictionaryKeys] containsObject:key])
@@ -673,22 +673,22 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.button setImage:buttonImage forState:state];
 }
 
-- (UIColor* __nullable)buttonTitleColor
+- (UIColor* _Nullable)buttonTitleColor
 {
 	return [self buttonTitleColorForState:UIControlStateNormal];
 }
 
-- (UIColor* __nullable)buttonTitleColorForState:(UIControlState)state
+- (UIColor* _Nullable)buttonTitleColorForState:(UIControlState)state
 {
 	return self.buttonTitleColors[@(state)];
 }
 
-- (void)setButtonTitleColor:(UIColor* __nullable)buttonTitleColor
+- (void)setButtonTitleColor:(UIColor* _Nullable)buttonTitleColor
 {
 	[self setButtonTitleColor:buttonTitleColor forState:UIControlStateNormal];
 }
 
-- (void)setButtonTitleColor:(UIColor* __nullable)buttonTitleColor forState:(UIControlState)state
+- (void)setButtonTitleColor:(UIColor* _Nullable)buttonTitleColor forState:(UIControlState)state
 {
 	NSNumber* key = @(state);
 	if(![[self.class buttonDictionaryKeys] containsObject:key])
@@ -715,7 +715,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return _spinnerColor;
 }
 
-- (void)setSpinnerColor:(UIColor* __nullable)spinnerColor
+- (void)setSpinnerColor:(UIColor* _Nullable)spinnerColor
 {
 	if(JFAreObjectsEqual(_spinnerColor, spinnerColor))
 		return;
@@ -744,7 +744,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return _textColor;
 }
 
-- (void)setTextColor:(UIColor* __nullable)textColor
+- (void)setTextColor:(UIColor* _Nullable)textColor
 {
 	if(JFAreObjectsEqual(_textColor, textColor))
 		return;
@@ -755,7 +755,7 @@ NS_ASSUME_NONNULL_BEGIN
 		self.textLabel.textColor = self.textColor;
 }
 
-- (void)setTextFont:(UIFont* __nullable)textFont
+- (void)setTextFont:(UIFont* _Nullable)textFont
 {
 	if(JFAreObjectsEqual(_textFont, textFont))
 		return;
@@ -824,7 +824,7 @@ NS_ASSUME_NONNULL_BEGIN
 	view.userInteractionEnabled = YES;
 }
 
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)

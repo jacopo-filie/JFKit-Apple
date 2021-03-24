@@ -76,15 +76,15 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex;
+- (JFAlertButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex;
 
 // =================================================================================================
 // MARK: Methods - Notifications
 // =================================================================================================
 
-- (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)notifyDidDismissWithButton:(JFAlertButton* _Nullable)button;
 - (void)notifyDidPresent;
-- (void)notifyWillDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)notifyWillDismissWithButton:(JFAlertButton* _Nullable)button;
 - (void)notifyWillPresent;
 
 // =================================================================================================
@@ -92,9 +92,9 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 #if JF_IOS
-- (BOOL)prepareActionSheet:(JFBlock __nullable)completion;
+- (BOOL)prepareActionSheet:(JFBlock _Nullable)completion;
 #endif
-- (BOOL)prepareAlertView:(JFBlock __nullable)completion;
+- (BOOL)prepareAlertView:(JFBlock _Nullable)completion;
 
 // =================================================================================================
 // MARK: Methods - Layout (Alerts)
@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)alert:(id)alert didDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)alert:(id)alert willDismissWithButtonIndex:(NSInteger)buttonIndex;
 #if JF_MACOS
-- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* __nullable)contextInfo;
+- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* _Nullable)contextInfo;
 #endif
 - (void)didPresentAlert:(id)alert;
 - (void)willPresentAlert:(id)alert;
@@ -194,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (JFAlertButton* __nullable)buttonAtIndex:(NSInteger)buttonIndex
+- (JFAlertButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
 {
 	NSArray* buttons = self.currentButtons;
 	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= [buttons count]))
@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Notifications
 // =================================================================================================
 
-- (void)notifyDidDismissWithButton:(JFAlertButton* __nullable)button
+- (void)notifyDidDismissWithButton:(JFAlertButton* _Nullable)button
 {
 	id<JFAlertDelegate> delegate = self.delegate;
 	if(delegate && [delegate respondsToSelector:@selector(alert:didDismissWithButton:)])
@@ -221,7 +221,7 @@ NS_ASSUME_NONNULL_BEGIN
 		[delegate alertDidPresent:self];
 }
 
-- (void)notifyWillDismissWithButton:(JFAlertButton* __nullable)button
+- (void)notifyWillDismissWithButton:(JFAlertButton* _Nullable)button
 {
 	id<JFAlertDelegate> delegate = self.delegate;
 	if(delegate && [delegate respondsToSelector:@selector(alert:willDismissWithButton:)])
@@ -239,12 +239,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Layout
 // =================================================================================================
 
-- (BOOL)dismiss:(JFBlock __nullable)completion
+- (BOOL)dismiss:(JFBlock _Nullable)completion
 {
 	return [self dismissWithClickedButton:nil completion:completion];
 }
 
-- (BOOL)dismissWithClickedButton:(JFAlertButton* __nullable)button completion:(JFBlock __nullable)completion
+- (BOOL)dismissWithClickedButton:(JFAlertButton* _Nullable)button completion:(JFBlock _Nullable)completion
 {
 	BOOL shouldAbort = (![self isVisible] || !self.alertView);
 	
@@ -320,7 +320,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 
-- (BOOL)prepareActionSheet:(JFBlock __nullable)completion
+- (BOOL)prepareActionSheet:(JFBlock _Nullable)completion
 {
 	if([self isVisible] || self.actionSheet || self.alertView)
 		return NO;
@@ -358,7 +358,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #endif
 
-- (BOOL)prepareAlertView:(JFBlock __nullable)completion
+- (BOOL)prepareAlertView:(JFBlock _Nullable)completion
 {
 	if([self isVisible] || self.alertView)
 		return NO;
@@ -404,7 +404,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 
-- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -414,7 +414,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -424,7 +424,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -434,7 +434,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -444,7 +444,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
-- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareActionSheet:completion])
 		return NO;
@@ -456,7 +456,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #elif JF_MACOS
 
-- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock __nullable)completion
+- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareAlertView:completion])
 		return NO;
@@ -490,12 +490,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #endif
 
-- (BOOL)presentAsAlertView:(JFBlock __nullable)completion
+- (BOOL)presentAsAlertView:(JFBlock _Nullable)completion
 {
 	return [self presentAsAlertViewWithTimeout:0.0 completion:completion];
 }
 
-- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock __nullable)completion
+- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock _Nullable)completion
 {
 	if(![self prepareAlertView:completion])
 		return NO;
@@ -579,7 +579,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_MACOS
 
-- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* __nullable)contextInfo
+- (void)alertDidEnd:(NSAlert*)alert returnCode:(NSModalResponse)returnCode contextInfo:(void* _Nullable)contextInfo
 {
 	if(returnCode < 0)
 		returnCode = NSAlertFirstButtonReturn;
@@ -710,12 +710,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return [self buttonWithTitle:title action:nil];
 }
 
-+ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock __nullable)action
++ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock _Nullable)action
 {
 	return [[self alloc] initWithTitle:title action:action];
 }
 
-- (instancetype)initWithTitle:(NSString*)title action:(JFBlock __nullable)action
+- (instancetype)initWithTitle:(NSString*)title action:(JFBlock _Nullable)action
 {
 	self = [super init];
 	

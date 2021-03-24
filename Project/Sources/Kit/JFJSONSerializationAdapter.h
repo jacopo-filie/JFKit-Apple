@@ -48,28 +48,28 @@ NS_ASSUME_NONNULL_BEGIN
  * @param jsonData The JSON data to convert.
  * @return The result of the conversion.
  */
-- (NSArray<id<JFJSONConvertibleValue>>* __nullable)arrayFromData:(NSData* __nullable)jsonData;
+- (NSArray<id<JFJSONConvertibleValue>>* _Nullable)arrayFromData:(NSData* _Nullable)jsonData;
 
 /**
  * Converts a JSON string to JSON array.
  * @param jsonString The JSON string to convert.
  * @return The result of the conversion.
  */
-- (NSArray<id<JFJSONConvertibleValue>>* __nullable)arrayFromString:(NSString* __nullable)jsonString;
+- (NSArray<id<JFJSONConvertibleValue>>* _Nullable)arrayFromString:(NSString* _Nullable)jsonString;
 
 /**
  * Converts a JSON array to JSON data.
  * @param array The JSON array to convert.
  * @return The result of the conversion.
  */
-- (NSData* __nullable)dataFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array;
+- (NSData* _Nullable)dataFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array;
 
 /**
  * Converts a JSON array to JSON string.
  * @param array The JSON array to convert.
  * @return The result of the conversion.
  */
-- (NSString* __nullable)stringFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array;
+- (NSString* _Nullable)stringFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array;
 
 // =================================================================================================
 // MARK: Methods - Data (Dictionaries)
@@ -80,28 +80,28 @@ NS_ASSUME_NONNULL_BEGIN
  * @param dictionary The JSON dictionary to convert.
  * @return The result of the conversion.
  */
-- (NSData* __nullable)dataFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary;
+- (NSData* _Nullable)dataFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary;
 
 /**
  * Converts a JSON data to JSON dictionary.
  * @param jsonData The JSON data to convert.
  * @return The result of the conversion.
  */
-- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionaryFromData:(NSData* __nullable)jsonData;
+- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionaryFromData:(NSData* _Nullable)jsonData;
 
 /**
  * Converts a JSON string to JSON dictionary.
  * @param jsonString The JSON string to convert.
  * @return The result of the conversion.
  */
-- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionaryFromString:(NSString* __nullable)jsonString;
+- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionaryFromString:(NSString* _Nullable)jsonString;
 
 /**
  * Converts a JSON dictionary to JSON string.
  * @param dictionary The JSON dictionary to convert.
  * @return The result of the conversion.
  */
-- (NSString* __nullable)stringFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary;
+- (NSString* _Nullable)stringFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary;
 
 @end
 

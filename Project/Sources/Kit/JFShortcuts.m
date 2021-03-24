@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - Application
 // =================================================================================================
 
-+ (AppDelegate* __nullable)appDelegate
++ (AppDelegate* _Nullable)appDelegate
 {
 	Class class = NSClassFromString(@"AppDelegate");
 	if(!class)
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-+ (NSString* __nullable)appVersion
++ (NSString* _Nullable)appVersion
 {
 	NSString* build = AppInfoBuildVersion;
 	NSString* release = AppInfoReleaseVersion;

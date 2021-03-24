@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	JFStateMachineTransition* openTransition = [[JFStateMachineTransition alloc] initWithTransition:JFSwitchTransitionOpening context:nil completion:nil];
 	
-	JFSimpleCompletion* closeCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* __nullable error) {
+	JFSimpleCompletion* closeCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 		[self.expectation fulfill];
 	}];
 	
@@ -165,13 +165,13 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (JFStateMachineDelegate) - Execution
 // =================================================================================================
 
-- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id __nullable)context
+- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id _Nullable)context
 {
 	if(self.shouldFullfillOnDidPerform)
 		[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion*)completion
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion
 {
 	if(self.shouldFail)
 		[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];

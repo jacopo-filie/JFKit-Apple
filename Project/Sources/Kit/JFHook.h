@@ -55,14 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object The object to hold.
  * @return A new instance of this class.
  */
-+ (instancetype)newWithObject:(ObjectType __nullable)object;
++ (instancetype)newWithObject:(ObjectType _Nullable)object;
 
 /**
  * Initializes this instance with the given `object`.
  * @param object The object to hold.
  * @return This instance.
  */
-- (instancetype)initWithObject:(ObjectType __nullable)object;
+- (instancetype)initWithObject:(ObjectType _Nullable)object;
 
 @end
 

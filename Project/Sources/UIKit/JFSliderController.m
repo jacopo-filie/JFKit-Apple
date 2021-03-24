@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)prepareSlideWithTransition:(JFSliderControllerTransition)transition animated:(BOOL)animated;
 - (BOOL)prepareSlideWithTranslation:(CGFloat)translation animated:(BOOL)animated;
 - (BOOL)shouldPrepareSlideWithTransition:(JFSliderControllerTransition)transition;
-- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion;
+- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock _Nullable)completion;
 - (void)updateCurrentSlideDistancesForTransition:(JFSliderControllerTransition)transition;
 
 @end
@@ -193,12 +193,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - User interface
 // =================================================================================================
 
-- (UIViewController* __nullable)activeViewController
+- (UIViewController* _Nullable)activeViewController
 {
 	return [self viewControllerForPanel:self.currentActivePanel];
 }
 
-- (void)setLeftViewController:(UIViewController* __nullable)leftViewController
+- (void)setLeftViewController:(UIViewController* _Nullable)leftViewController
 {
 	if(_leftViewController == leftViewController)
 		return;
@@ -241,7 +241,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (void)setRightViewController:(UIViewController* __nullable)rightViewController
+- (void)setRightViewController:(UIViewController* _Nullable)rightViewController
 {
 	if(_rightViewController == rightViewController)
 		return;
@@ -284,7 +284,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (void)setRootViewController:(UIViewController* __nullable)rootViewController
+- (void)setRootViewController:(UIViewController* _Nullable)rootViewController
 {
 	if(_rootViewController == rootViewController)
 		return;
@@ -338,7 +338,7 @@ NS_ASSUME_NONNULL_BEGIN
 	instance->_slideOutDuration = JFAnimationDuration;
 }
 
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)
@@ -348,7 +348,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (instancetype)initWithNibName:(NSString* __nullable)nibNameOrNil bundle:(NSBundle* __nullable)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString* _Nullable)nibNameOrNil bundle:(NSBundle* _Nullable)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	[JFSliderController initialize:self];
@@ -410,7 +410,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return [self activatePanel:panel animated:YES completion:nil];
 }
 
-- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion
+- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBooleanBlock _Nullable)completion
 {
 	if([self isAnimating])
 		return NO;
@@ -520,7 +520,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self updateCurrentSlideDistancesForTransition:self.currentTransition];
 }
 
-- (UIViewController* __nullable)viewControllerForPanel:(JFSliderControllerPanel)panel
+- (UIViewController* _Nullable)viewControllerForPanel:(JFSliderControllerPanel)panel
 {
 	UIViewController* retObj = nil;
 	switch(panel)
@@ -898,7 +898,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion
+- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock _Nullable)completion
 {
 	if(![self isAnimating])
 		return;

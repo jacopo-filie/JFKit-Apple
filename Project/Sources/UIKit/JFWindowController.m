@@ -360,7 +360,7 @@ static void* JFKVOContext = &JFKVOContext;
 #endif
 
 #if JF_MACOS
-- (void)observeValueForKeyPath:(NSString* __nullable)keyPath ofObject:(id __nullable)object change:(NSDictionary<NSKeyValueChangeKey, id>* __nullable)change context:(void* __nullable)context;
+- (void)observeValueForKeyPath:(NSString* _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id>* _Nullable)change context:(void* _Nullable)context;
 {
 	if(context == JFKVOContext)
 	{

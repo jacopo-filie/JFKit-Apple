@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (JFObjectIdentifier* __nullable)newCurrentIdentifier API_AVAILABLE(ios(8.0), macos(10.8));
+- (JFObjectIdentifier* _Nullable)newCurrentIdentifier API_AVAILABLE(ios(8.0), macos(10.8));
 - (JFObjectIdentifier*)newLegacyIdentifier;
 
 @end
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (JFObjectIdentifier* __nullable)newCurrentIdentifier API_AVAILABLE(ios(8.0), macos(10.8))
+- (JFObjectIdentifier* _Nullable)newCurrentIdentifier API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	return [[JFObjectIdentifier alloc] initWithCurrentImplementation];
 }

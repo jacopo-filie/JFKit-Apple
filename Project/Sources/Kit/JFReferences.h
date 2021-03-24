@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object The object to wrap.
  * @return A new soft reference containing the given object.
  */
-+ (instancetype)referenceWithObject:(ObjectType __nullable)object;
++ (instancetype)referenceWithObject:(ObjectType _Nullable)object;
 
 @end
 #endif
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object The object to wrap.
  * @return A new unsafe reference containing the given object.
  */
-+ (instancetype)referenceWithObject:(ObjectType __nullable)object;
++ (instancetype)referenceWithObject:(ObjectType _Nullable)object;
 
 @end
 #endif
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object The object to wrap.
  * @return A new weak reference containing the given object.
  */
-+ (instancetype)referenceWithObject:(ObjectType __nullable)object;
++ (instancetype)referenceWithObject:(ObjectType _Nullable)object;
 
 @end
 #endif

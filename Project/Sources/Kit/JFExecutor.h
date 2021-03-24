@@ -129,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param block The block to enqueue.
  * @param failureBlock The block to execute in case of internal error.
  */
-- (void)enqueue:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock __nullable)failureBlock;
+- (void)enqueue:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock _Nullable)failureBlock;
 
 /**
  * Enqueues the given executor block; `failureBlock` will be executed instead of `block` in case of internal error.
@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param failureBlock The block to execute in case of internal error.
  * @param waitUntilFinished `YES` if the calling thread should wait until `block` or `failureBlock` are executed, `NO` otherwise.
  */
-- (void)enqueue:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock __nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished;
+- (void)enqueue:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock _Nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished;
 
 /**
  * Enqueues the given executor block; `block` will not be executed in case of internal error.
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param failureBlock The block to execute in case of internal error.
  * @warning If the current thread queue is not the internal executor queue, `block` will be enqueued on the internal executor queue.
  */
-- (void)execute:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock __nullable)failureBlock;
+- (void)execute:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock _Nullable)failureBlock;
 
 /**
  * Executes the given executor block as soon as possible; `failureBlock` will be executed instead of `block` in case of internal error.
@@ -168,7 +168,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param waitUntilFinished `YES` if the calling thread should wait until `block` or `failureBlock` are executed, `NO` otherwise.
  * @warning If the current thread queue is not the internal executor queue, `block` will be enqueued on the internal executor queue.
  */
-- (void)execute:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock __nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished;
+- (void)execute:(JFExecutorBlockParameter)block failureBlock:(JFFailureBlock _Nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished;
 
 /**
  * Executes the given executor block as soon as possible; `block` will not be executed in case of internal error.

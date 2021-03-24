@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self setOverlayHidden:overlayHidden animated:animated completion:nil];
 }
 
-- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock _Nullable)completion
 {
 	if(_overlayHidden == overlayHidden)
 	{
@@ -236,7 +236,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - User interface (Appearance)
 // =================================================================================================
 
-- (void)setOverlayBackgroundColor:(UIColor* __nullable)overlayBackgroundColor
+- (void)setOverlayBackgroundColor:(UIColor* _Nullable)overlayBackgroundColor
 {
 	if(JFAreObjectsEqual(_overlayBackgroundColor, overlayBackgroundColor))
 		return;
@@ -251,7 +251,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - User interface (Layout)
 // =================================================================================================
 
-- (void)setOverlayViewController:(UIViewController* __nullable)overlayViewController
+- (void)setOverlayViewController:(UIViewController* _Nullable)overlayViewController
 {
 	if(_overlayViewController == overlayViewController)
 		return;
@@ -301,7 +301,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (void)setRootViewController:(UIViewController* __nullable)rootViewController
+- (void)setRootViewController:(UIViewController* _Nullable)rootViewController
 {
 	if(_rootViewController == rootViewController)
 		return;
@@ -365,7 +365,7 @@ NS_ASSUME_NONNULL_BEGIN
 	controller->_overlayOpaque = YES;
 }
 
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if(self)
@@ -375,7 +375,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (instancetype)initWithNibName:(NSString* __nullable)nibNameOrNil bundle:(NSBundle* __nullable)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString* _Nullable)nibNameOrNil bundle:(NSBundle* _Nullable)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	

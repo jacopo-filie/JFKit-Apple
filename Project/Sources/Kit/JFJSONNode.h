@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return This instance, or `nil` if `data` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithData:(NSData*)data serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
+- (instancetype _Nullable)initWithData:(NSData*)data serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * Initializes this instance with the given JSON string.
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return This instance, or `nil` if `string` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithString:(NSString*)string serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
+- (instancetype _Nullable)initWithString:(NSString*)string serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 @end
 

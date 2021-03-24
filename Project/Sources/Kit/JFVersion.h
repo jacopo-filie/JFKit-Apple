@@ -343,7 +343,7 @@ FOUNDATION_EXPORT NSInteger const JFVersionComponentNotValid;
  * @param build The build component value.
  * @return A version object with the given components.
  */
-- (instancetype)initWithMajorComponent:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* __nullable)build NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMajorComponent:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* _Nullable)build NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes a version object by using the given version struct values.

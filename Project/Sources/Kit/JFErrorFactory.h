@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The localized description for the given error code.
  * @warning You need to override this method in a subclass for it to return something different than `nil`.
  */
-- (NSString* __nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode;
+- (NSString* _Nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode;
 
 /**
  * Returns the localized description for the given error code using the given values to replace any key found in it.
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param values The values to use when replacing the keys found in the localized string.
  * @return The localized description for the given error code.
  */
-- (NSString* __nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values;
+- (NSString* _Nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values;
 
 /**
  * Returns the localized failure reason for the given error code using the given values to replace any key found in it.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The localized failure reason for the given error code.
  * @warning You need to override this method in a subclass for it to return something different than `nil`.
  */
-- (NSString* __nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode;
+- (NSString* _Nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode;
 
 /**
  * Returns the localized failure reason for the given error code using the given values to replace any key found in it.
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param values The values to use when replacing the keys found in the localized string.
  * @return The localized failure reason for the given error code.
  */
-- (NSString* __nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values;
+- (NSString* _Nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values;
 
 /**
  * Returns the localized recovery suggestion for the given error code using the given values to replace any key found in it.
@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The localized recovery suggestion for the given error code.
  * @warning You need to override this method in a subclass for it to return something different than `nil`.
  */
-- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode;
+- (NSString* _Nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode;
 
 /**
  * Returns the localized recovery suggestion for the given error code using the given values to replace any key found in it.
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param values The values to use when replacing the keys found in the localized string.
  * @return The localized recovery suggestion for the given error code.
  */
-- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values;
+- (NSString* _Nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values;
 
 /**
  * Returns a string containing the given error code (tipically the name of the constant that represents the error code).
@@ -133,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param errorCode The code of the error.
  * @return The user info for the given error code.
  */
-- (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode;
+- (NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfoForErrorCode:(NSInteger)errorCode;
 
 /**
  * Creates the user info for the given error code using the given information (description, underlying error and values). To retrieve the needed localized information, this method calls the other instance methods `-localizedDescriptionForErrorCode:values:`, `localizedFailureReasonForErrorCode:values:` and `localizedRecoverySuggestionForErrorCode:values:` passing the appropriate values, found in `values`, to each of them. For example, when calling `-localizedDescriptionForErrorCode:values:`, this method passes the dictionary found in `values` associated with the key `JFError.localizedDescriptionKey`.
@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param values The values to use when replacing the keys found in the localized strings.
  * @return The user info for the given error code.
  */
-- (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values;
+- (NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfoForErrorCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* _Nullable)values;
 
 // =================================================================================================
 // MARK: Methods - Factory
@@ -157,7 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param values The values to use when replacing the keys found in the localized strings.
  * @return A new error with the given information.
  */
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values;
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* _Nullable)values;
 
 /**
  * Creates a new error with the given information. The domain is the same of this factory instance.
@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param userInfo The user info of the error.
  * @return A new error with the given information.
  */
-- (JFError*)errorWithCode:(NSInteger)errorCode userInfo:(NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfo;
+- (JFError*)errorWithCode:(NSInteger)errorCode userInfo:(NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfo;
 
 /**
  * Creates a new placeholder error with code `NSIntegerMax`.
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A new placeholder error.
  * @warning You should never use this in production builds.
  */
-- (JFError*)newPlaceholderError:(NSError* __nullable)underlyingError;
+- (JFError*)newPlaceholderError:(NSError* _Nullable)underlyingError;
 
 // =================================================================================================
 // MARK: Methods - Factory (Convenience)
@@ -192,7 +192,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param description The description of the error.
  * @return A new error with the given information.
  */
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description;
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description;
 
 /**
  * A convenient method to create an error using the given information.
@@ -201,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param underlyingError The underlying error that caused the created error.
  * @return A new error with the given information.
  */
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError;
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError;
 
 /**
  * A convenient method to create an error using the given information.
@@ -209,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param underlyingError The underlying error that caused the created error.
  * @return A new error with the given information.
  */
-- (JFError*)errorWithCode:(NSInteger)errorCode underlyingError:(NSError* __nullable)underlyingError;
+- (JFError*)errorWithCode:(NSInteger)errorCode underlyingError:(NSError* _Nullable)underlyingError;
 
 /**
  * Creates a new placeholder error with code `NSIntegerMax`.

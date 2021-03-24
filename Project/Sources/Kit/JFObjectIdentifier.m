@@ -131,7 +131,7 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (Reference* __nullable)referenceForObject:(id<NSObject>)object;
+- (Reference* _Nullable)referenceForObject:(id<NSObject>)object;
 
 @end
 
@@ -502,7 +502,7 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (Reference* __nullable)referenceForObject:(id<NSObject>)object
+- (Reference* _Nullable)referenceForObject:(id<NSObject>)object
 {
 	Reference* retObj = nil;
 	BOOL needsCleanRegistry = NO;

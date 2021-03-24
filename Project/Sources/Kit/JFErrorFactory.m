@@ -59,12 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (NSString* __nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode
+- (NSString* _Nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode
 {
 	return nil;
 }
 
-- (NSString* __nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values
+- (NSString* _Nullable)localizedDescriptionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values
 {
 	NSString* format = [self localizedDescriptionForErrorCode:errorCode];
 	if(!values)
@@ -73,12 +73,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return JFStringByReplacingKeysInFormat(format, values);
 }
 
-- (NSString* __nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode
+- (NSString* _Nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode
 {
 	return nil;
 }
 
-- (NSString* __nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values
+- (NSString* _Nullable)localizedFailureReasonForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values
 {
 	NSString* format = [self localizedFailureReasonForErrorCode:errorCode];
 	if(!values)
@@ -87,12 +87,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return JFStringByReplacingKeysInFormat(format, values);
 }
 
-- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode
+- (NSString* _Nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode
 {
 	return nil;
 }
 
-- (NSString* __nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* __nullable)values
+- (NSString* _Nullable)localizedRecoverySuggestionForErrorCode:(NSInteger)errorCode values:(NSDictionary<NSString*, NSString*>* _Nullable)values
 {
 	NSString* format = [self localizedRecoverySuggestionForErrorCode:errorCode];
 	if(!values)
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return JFEmptyString;
 }
 
-- (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values
+- (NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfoForErrorCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* _Nullable)values
 {
 	NSString* localizedDescription = [self localizedDescriptionForErrorCode:errorCode values:[values objectForKey:JFError.localizedDescriptionKey]];
 	NSString* localizedFailureReason = [self localizedFailureReasonForErrorCode:errorCode values:[values objectForKey:JFError.localizedFailureReasonKey]];
@@ -133,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data (Convenience)
 // =================================================================================================
 
-- (NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfoForErrorCode:(NSInteger)errorCode
+- (NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfoForErrorCode:(NSInteger)errorCode
 {
 	return [self userInfoForErrorCode:errorCode description:nil underlyingError:nil values:nil];
 }
@@ -142,18 +142,18 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Factory
 // =================================================================================================
 
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* __nullable)values
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError values:(NSDictionary<NSErrorUserInfoKey, NSDictionary<NSString*, NSString*>*>* _Nullable)values
 {
 	NSDictionary<NSErrorUserInfoKey, id>* userInfo = [self userInfoForErrorCode:errorCode description:description underlyingError:underlyingError values:values];
 	return [self errorWithCode:errorCode userInfo:userInfo];
 }
 
-- (JFError*)errorWithCode:(NSInteger)errorCode userInfo:(NSDictionary<NSErrorUserInfoKey, id>* __nullable)userInfo
+- (JFError*)errorWithCode:(NSInteger)errorCode userInfo:(NSDictionary<NSErrorUserInfoKey, id>* _Nullable)userInfo
 {
 	return [JFError errorWithDomain:self.domain code:errorCode userInfo:userInfo];
 }
 
-- (JFError*)newPlaceholderError:(NSError* __nullable)underlyingError
+- (JFError*)newPlaceholderError:(NSError* _Nullable)underlyingError
 {
 	return [self errorWithCode:NSIntegerMax underlyingError:underlyingError];
 }
@@ -167,17 +167,17 @@ NS_ASSUME_NONNULL_BEGIN
 	return [self errorWithCode:errorCode description:nil underlyingError:nil values:nil];
 }
 
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description
 {
 	return [self errorWithCode:errorCode description:description underlyingError:nil values:nil];
 }
 
-- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* __nullable)description underlyingError:(NSError* __nullable)underlyingError
+- (JFError*)errorWithCode:(NSInteger)errorCode description:(NSString* _Nullable)description underlyingError:(NSError* _Nullable)underlyingError
 {
 	return [self errorWithCode:errorCode description:description underlyingError:underlyingError values:nil];
 }
 
-- (JFError*)errorWithCode:(NSInteger)errorCode underlyingError:(NSError* __nullable)underlyingError
+- (JFError*)errorWithCode:(NSInteger)errorCode underlyingError:(NSError* _Nullable)underlyingError
 {
 	return [self errorWithCode:errorCode description:nil underlyingError:underlyingError values:nil];
 }

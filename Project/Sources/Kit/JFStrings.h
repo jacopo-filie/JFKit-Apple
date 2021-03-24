@@ -95,7 +95,7 @@ FOUNDATION_EXPORT NSString* const JFYesString;
  * @param string The string to check.
  * @return `YES` if the string exists and is empty, `NO` otherwise.
  */
-FOUNDATION_EXPORT BOOL JFStringIsEmpty(NSString* __nullable string);
+FOUNDATION_EXPORT BOOL JFStringIsEmpty(NSString* _Nullable string);
 
 /**
  * Check whether `string` contains only characters from `characters`.
@@ -110,7 +110,7 @@ FOUNDATION_EXPORT BOOL JFStringIsMadeOfCharacters(NSString* string, NSString* ch
  * @param string The string to check.
  * @return `YES` if the string does not exists or exists but is empty, `NO` otherwise.
  */
-FOUNDATION_EXPORT BOOL JFStringIsNullOrEmpty(NSString* __nullable string);
+FOUNDATION_EXPORT BOOL JFStringIsNullOrEmpty(NSString* _Nullable string);
 
 // =================================================================================================
 // MARK: Functions - Creation
@@ -136,7 +136,7 @@ FOUNDATION_EXPORT NSString* JFStringByReplacingKeysInFormat(NSString* format, NS
  * @param familyName Name passed from one generation to another to indicate lineage, e.g. Appleseed.
  * @return A string containing the full person's name; if all given components are considered not valid (all strings are empty or `nil`), returns `nil`.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromPersonName(NSString* __nullable givenName, NSString* __nullable middleName, NSString* __nullable familyName);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromPersonName(NSString* _Nullable givenName, NSString* _Nullable middleName, NSString* _Nullable familyName);
 
 // =================================================================================================
 // MARK: Functions - Creation (Objects conversion)
@@ -147,21 +147,21 @@ FOUNDATION_EXPORT NSString* __nullable JFStringFromPersonName(NSString* __nullab
  * @param object The object to use.
  * @return A string containing the class of the given object. If `object` does not exists, returns `nil`.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromClassOfObject(id<NSObject> __nullable object);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromClassOfObject(id<NSObject> _Nullable object);
 
 /**
  * Creates a string using the given C pointer.
  * @param pointer The C pointer to use.
  * @return A string containing the given pointer value. If `pointer` does not exists, returns `nil`.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromCPointer(void* __nullable pointer);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromCPointer(void* _Nullable pointer);
 
 /**
  * Creates a string using the given C string and the UTF-8 encoding.
  * @param string The C string to use.
  * @return A string converted from the given C string using the UTF-8 encoding.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromCString(const char* __nullable string);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromCString(const char* _Nullable string);
 
 /**
  * Creates a string using the given C string and the given encoding.
@@ -169,28 +169,28 @@ FOUNDATION_EXPORT NSString* __nullable JFStringFromCString(const char* __nullabl
  * @param encoding The encoding to use.
  * @return A string converted from the given C string using the given encoding.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromEncodedCString(const char* __nullable string, NSStringEncoding encoding);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromEncodedCString(const char* _Nullable string, NSStringEncoding encoding);
 
 /**
  * Creates a string using the given object.
  * @param object The object to use.
  * @return A string containing the given object class name and pointer value. If `object` does not exists, returns `nil`.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromObject(id<NSObject> __nullable object);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromObject(id<NSObject> _Nullable object);
 
 /**
  * Creates a string using the given id pointer.
  * @param pointer The id pointer to use.
  * @return A string containing the given id pointer value. If `pointer` does not exists, returns `nil`.
  */
-FOUNDATION_EXPORT NSString* __nullable JFStringFromPointer(id __nullable pointer);
+FOUNDATION_EXPORT NSString* _Nullable JFStringFromPointer(id _Nullable pointer);
 
 /**
  * Creates a C string using the given string and the UTF-8 encoding.
  * @param string The string to use.
  * @return A C string converted from the given string using the UTF-8 encoding.
  */
-FOUNDATION_EXPORT const char* __nullable JFStringToCString(NSString* __nullable string);
+FOUNDATION_EXPORT const char* _Nullable JFStringToCString(NSString* _Nullable string);
 
 /**
  * Creates a C string using the given string and the given encoding.
@@ -198,7 +198,7 @@ FOUNDATION_EXPORT const char* __nullable JFStringToCString(NSString* __nullable 
  * @param encoding The encoding to use.
  * @return A C string converted from the given string using the given encoding.
  */
-FOUNDATION_EXPORT const char* __nullable JFStringToEncodedCString(NSString* __nullable string, NSStringEncoding encoding);
+FOUNDATION_EXPORT const char* _Nullable JFStringToEncodedCString(NSString* _Nullable string, NSStringEncoding encoding);
 
 // =================================================================================================
 // MARK: Functions - Creation (Randomization)

@@ -47,7 +47,7 @@ NSTimeInterval const JFAnimationDuration = 0.25;
 // MARK: Functions - Comparison
 // =================================================================================================
 
-BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2)
+BOOL JFAreObjectsEqual(id<NSObject> _Nullable obj1, id<NSObject> _Nullable obj2)
 {
 	// If both are 'nil', they are equal.
 	if(!obj1 && !obj2)
@@ -88,7 +88,7 @@ BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj
 // MARK: Functions - Queues
 // =================================================================================================
 
-NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* __nullable name)
+NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* _Nullable name)
 {
 	NSOperationQueue* retObj = [NSOperationQueue new];
 	retObj.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
@@ -96,7 +96,7 @@ NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* __nullable name)
 	return retObj;
 }
 
-NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nullable name)
+NSOperationQueue* JFCreateSerialOperationQueue(NSString* _Nullable name)
 {
 	NSOperationQueue* retObj = [NSOperationQueue new];
 	retObj.maxConcurrentOperationCount = 1;
@@ -109,17 +109,17 @@ NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nullable name)
 // MARK: Functions - Resources
 // =================================================================================================
 
-id __nullable JFApplicationInfoForKey(NSString* key)
+id _Nullable JFApplicationInfoForKey(NSString* key)
 {
 	return [MainBundle.infoDictionary objectForKey:key];
 }
 
-NSURL* __nullable JFBundleResourceURLForFile(NSBundle* bundle, NSString* __nullable filename)
+NSURL* _Nullable JFBundleResourceURLForFile(NSBundle* bundle, NSString* _Nullable filename)
 {
 	return JFBundleResourceURLForFileWithExtension(bundle, [filename stringByDeletingPathExtension], [filename pathExtension]);
 }
 
-NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* __nullable filename, NSString* __nullable type)
+NSURL* _Nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* _Nullable filename, NSString* _Nullable type)
 {
 	return [bundle URLForResource:filename withExtension:type];
 }
@@ -155,14 +155,14 @@ void JFPerformSelector(NSObject* target, SEL action)
 	performMethod(target, action);
 }
 
-void JFPerformSelector1(NSObject* target, SEL action, id __nullable object)
+void JFPerformSelector1(NSObject* target, SEL action, id _Nullable object)
 {
 	IMP implementation = [target methodForSelector:action];
 	void (*performMethod)(id, SEL, id) = (void*)implementation;
 	performMethod(target, action, object);
 }
 
-void JFPerformSelector2(NSObject* target, SEL action, id __nullable obj1, id __nullable obj2)
+void JFPerformSelector2(NSObject* target, SEL action, id _Nullable obj1, id _Nullable obj2)
 {
 	IMP implementation = [target methodForSelector:action];
 	void (*performMethod)(id, SEL, id, id) = (void*)implementation;

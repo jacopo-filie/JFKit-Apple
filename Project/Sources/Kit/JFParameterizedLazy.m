@@ -123,7 +123,7 @@ typedef id (^Builder)(id param);
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	return self.implementation.opt;
 }
@@ -173,7 +173,7 @@ typedef id (^Builder)(id param);
 
 {
 @protected
-	id __nullable _object;
+	id _Nullable _object;
 }
 
 // =================================================================================================
@@ -186,7 +186,7 @@ typedef id (^Builder)(id param);
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	return _object;
 }
@@ -230,7 +230,7 @@ typedef id (^Builder)(id param);
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	@synchronized(self)
 	{

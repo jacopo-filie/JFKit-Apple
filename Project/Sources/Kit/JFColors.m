@@ -107,7 +107,7 @@ JFColor* JFColorWithRGBHex(unsigned int value)
 	return JFColorWithRGB24Components(color.components);
 }
 
-JFColor* __nullable JFColorWithRGBHexString(NSString* __nullable string)
+JFColor* _Nullable JFColorWithRGBHexString(NSString* _Nullable string)
 {
 	if(JFStringIsNullOrEmpty(string))
 		return nil;
@@ -191,7 +191,7 @@ JFColor* JFColorWithRGBAHex(unsigned int value)
 	return JFColorWithRGBA32Components(color.components);
 }
 
-JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string)
+JFColor* _Nullable JFColorWithRGBAHexString(NSString* _Nullable string)
 {
 	if(JFStringIsNullOrEmpty(string))
 		return nil;

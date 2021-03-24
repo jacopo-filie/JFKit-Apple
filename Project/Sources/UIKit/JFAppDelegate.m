@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (void)setWindow:(JFWindow* __nullable)window
+- (void)setWindow:(JFWindow* _Nullable)window
 {
 	if(_window == window)
 		return;
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (void)setWindowController:(JFWindowController* __nullable)windowController
+- (void)setWindowController:(JFWindowController* _Nullable)windowController
 {
 	if(_windowController == windowController)
 		return;
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Layout
 // =================================================================================================
 
-- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window
+- (JFWindowController* _Nullable)newControllerForWindow:(JFWindow*)window
 {
 	return nil;
 }

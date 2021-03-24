@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param animated `YES` if the transition is animated, `NO` otherwise.
  * @param completion The callback to be executed at the end of the transition.
  */
-- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock __nullable)completion;
+- (void)setOverlayHidden:(BOOL)overlayHidden animated:(BOOL)animated completion:(JFBlock _Nullable)completion;
 
 // =================================================================================================
 // MARK: Lifecycle
@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param aDecoder The decoder.
  * @return The initialized overlay controller.
  */
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes the instance with the given nib name and bundle.
@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param nibBundleOrNil The bundle of the nib.
  * @return The initialized overlay controller.
  */
-- (instancetype)initWithNibName:(NSString* __nullable)nibNameOrNil bundle:(NSBundle* __nullable)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(NSString* _Nullable)nibNameOrNil bundle:(NSBundle* _Nullable)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Observers

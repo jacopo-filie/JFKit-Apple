@@ -44,7 +44,7 @@ typedef struct {
 	/**
 	 * The bytes contained by this stream.
 	 */
-	Byte* __nullable bytes;
+	Byte* _Nullable bytes;
 	
 	/**
 	 * The number of elements contained by `bytes`.
@@ -111,7 +111,7 @@ FOUNDATION_EXPORT void JFByteStreamFree(JFByteStream byteStream);
  * @param length The number of elements of the given bytes.
  * @return A new stream containing `length` elements which are inside `bytes`.
  */
-FOUNDATION_EXPORT JFByteStream JFByteStreamMake(Byte* __nullable bytes, NSUInteger length);
+FOUNDATION_EXPORT JFByteStream JFByteStreamMake(Byte* _Nullable bytes, NSUInteger length);
 
 /**
  * Reallocates the stream buffer to contain `length` elements.

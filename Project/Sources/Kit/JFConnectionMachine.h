@@ -190,7 +190,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)connect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)connect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * Enqueues the state transition `disconnecting`.
@@ -202,7 +202,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)disconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)disconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * Enqueues the state transition `losing connection`.
@@ -214,7 +214,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)loseConnection:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)loseConnection:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * Enqueues the state transition `reconnecting`.
@@ -226,7 +226,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)reconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)reconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * Enqueues the state transition `resetting`.
@@ -238,7 +238,7 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)reset:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)reset:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 @end
 

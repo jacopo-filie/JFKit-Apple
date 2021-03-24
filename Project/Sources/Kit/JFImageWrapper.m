@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
-+ (UIImage* __nullable)loadImage:(JFImageLoader __nullable)loader;
++ (UIImage* _Nullable)loadImage:(JFImageLoader _Nullable)loader;
 
 @end
 
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - Data
 // =================================================================================================
 
-- (UIImage* __nullable)image
+- (UIImage* _Nullable)image
 {
 	UIImage* retObj = _image;
 	if(!retObj)
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (UIImage* __nullable)thumbnail
+- (UIImage* _Nullable)thumbnail
 {
 	UIImage* retObj = _thumbnail;
 	if(!retObj)
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-- (instancetype)initWithImageLoader:(JFImageLoader __nullable)imageLoader thumbnailLoader:(JFImageLoader __nullable)thumbnailLoader
+- (instancetype)initWithImageLoader:(JFImageLoader _Nullable)imageLoader thumbnailLoader:(JFImageLoader _Nullable)thumbnailLoader
 {
 	self = [super init];
 	
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
-+ (UIImage* __nullable)loadImage:(JFImageLoader __nullable)loader
++ (UIImage* _Nullable)loadImage:(JFImageLoader _Nullable)loader
 {
 	return (loader ? loader() : nil);
 }

@@ -295,7 +295,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
 	{
-		[self.persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* description, NSError* __nullable error) {
+		[self.persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* description, NSError* _Nullable error) {
 			if(error)
 				[completion executeWithError:error];
 			else
@@ -365,7 +365,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 	[self.serialQueue addOperationWithBlock:block];
 }
 
-- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* __nullable error))completion
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))completion
 {
 	[self.persistentContainer loadPersistentStoresWithCompletionHandler:completion];
 }
@@ -425,7 +425,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 // MARK: Properties (Inherited) - Data
 // =================================================================================================
 
-static NSURL* __nullable _defaultDirectoryURL;
+static NSURL* _Nullable _defaultDirectoryURL;
 
 // =================================================================================================
 // MARK: Properties (Accessors) (Inherited) - Data
@@ -436,7 +436,7 @@ static NSURL* __nullable _defaultDirectoryURL;
 	return (_defaultDirectoryURL ?: [JFPersistentContainer defaultDirectoryURL]);
 }
 
-+ (void)setDefaultDirectoryURL:(NSURL* __nullable)defaultDirectoryURL
++ (void)setDefaultDirectoryURL:(NSURL* _Nullable)defaultDirectoryURL
 {
 	_defaultDirectoryURL = defaultDirectoryURL;
 }

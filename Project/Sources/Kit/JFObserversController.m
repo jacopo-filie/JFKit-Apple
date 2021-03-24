@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cleanUp;
 - (void)cleanUpIfNeeded;
-- (Reference<ObserverType>* __nullable)referenceForObserver:(ObserverType)observer;
+- (Reference<ObserverType>* _Nullable)referenceForObserver:(ObserverType)observer;
 
 @end
 
@@ -239,7 +239,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (Reference<id>* __nullable)referenceForObserver:(id)observer
+- (Reference<id>* _Nullable)referenceForObserver:(id)observer
 {
 	NSArray<Reference<id>*>* references = self.references;
 	@synchronized(references)

@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
  * Instructs the persistent container to load the persistent stores. Once the completion handler has fired, the stack is fully initialized and is ready for use. The completion handler will be called once for each persistent store that is created.
  * @param completion Once the loading of each persistent store has completed, this completion handler will be executed.
  */
-- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* __nullable error))completion API_AVAILABLE(ios(10.0), macos(10.12));
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))completion API_AVAILABLE(ios(10.0), macos(10.12));
 
 /**
  * Creates a private managed object context.

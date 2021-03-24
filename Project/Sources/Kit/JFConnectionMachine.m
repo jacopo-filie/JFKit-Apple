@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self connect:nil completion:nil];
 }
 
-- (void)connect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)connect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFConnectionTransitionConnecting context:context completion:completion];
 }
@@ -116,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self disconnect:nil completion:nil];
 }
 
-- (void)disconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)disconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFConnectionTransitionDisconnecting context:context completion:completion];
 }
@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self loseConnection:nil completion:nil];
 }
 
-- (void)loseConnection:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)loseConnection:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFConnectionTransitionLosingConnection context:context completion:completion];
 }
@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self reconnect:nil completion:nil];
 }
 
-- (void)reconnect:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)reconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFConnectionTransitionReconnecting context:context completion:completion];
 }
@@ -146,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self reset:nil completion:nil];
 }
 
-- (void)reset:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)reset:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFConnectionTransitionResetting context:context completion:completion];
 }
@@ -256,7 +256,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-- (NSString* __nullable)stringFromState:(JFState)state
+- (NSString* _Nullable)stringFromState:(JFState)state
 {
 	NSString* retObj = nil;
 	switch(state)
@@ -295,7 +295,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (NSString* __nullable)stringFromTransition:(JFStateTransition)transition
+- (NSString* _Nullable)stringFromTransition:(JFStateTransition)transition
 {
 	NSString* retObj = nil;
 	switch(transition)

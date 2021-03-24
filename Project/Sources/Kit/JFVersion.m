@@ -154,7 +154,7 @@ NSInteger const JFVersionComponentNotValid = -1;
 	return [[self alloc] initWithMajorComponent:major minor:minor patch:JFVersionComponentNotValid build:nil];
 }
 
-- (instancetype)initWithMajorComponent:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* __nullable)build
+- (instancetype)initWithMajorComponent:(NSInteger)major minor:(NSInteger)minor patch:(NSInteger)patch build:(NSString* _Nullable)build
 {
 	// Prevents an analyzer false positive.
 	if(JFStringIsEmpty(build))
@@ -493,7 +493,7 @@ NSInteger const JFVersionComponentNotValid = -1;
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	return [[[self class] allocWithZone:zone] initWithMajorComponent:_major minor:_minor patch:_patch build:_build];
 }

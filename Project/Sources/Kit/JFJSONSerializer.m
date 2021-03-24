@@ -49,10 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (NSData* __nullable)dataFromNode:(id __nullable)jsonNode;
-- (NSData* __nullable)dataFromString:(NSString* __nullable)jsonString;
-- (id __nullable)nodeFromData:(NSData* __nullable)jsonData class:(Class)class;
-- (NSString* __nullable)stringFromData:(NSData* __nullable)jsonData;
+- (NSData* _Nullable)dataFromNode:(id _Nullable)jsonNode;
+- (NSData* _Nullable)dataFromString:(NSString* _Nullable)jsonString;
+- (id _Nullable)nodeFromData:(NSData* _Nullable)jsonData class:(Class)class;
+- (NSString* _Nullable)stringFromData:(NSData* _Nullable)jsonData;
 
 @end
 
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data
 // =================================================================================================
 
-- (NSData* __nullable)dataFromNode:(id __nullable)jsonNode
+- (NSData* _Nullable)dataFromNode:(id _Nullable)jsonNode
 {
 	if(!jsonNode)
 		return nil;
@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (NSData* __nullable)dataFromString:(NSString* __nullable)jsonString
+- (NSData* _Nullable)dataFromString:(NSString* _Nullable)jsonString
 {
 	if(!jsonString)
 		return nil;
@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (id __nullable)nodeFromData:(NSData* __nullable)jsonData class:(Class)class
+- (id _Nullable)nodeFromData:(NSData* _Nullable)jsonData class:(Class)class
 {
 	if(!jsonData)
 		return nil;
@@ -148,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (NSString* __nullable)stringFromData:(NSData* __nullable)jsonData
+- (NSString* _Nullable)stringFromData:(NSData* _Nullable)jsonData
 {
 	if(!jsonData)
 		return nil;
@@ -163,22 +163,22 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data (Arrays)
 // =================================================================================================
 
-- (NSArray<id<JFJSONConvertibleValue>>* __nullable)arrayFromData:(NSData* __nullable)jsonData
+- (NSArray<id<JFJSONConvertibleValue>>* _Nullable)arrayFromData:(NSData* _Nullable)jsonData
 {
 	return (NSArray<id<JFJSONConvertibleValue>>*)[self nodeFromData:jsonData class:[NSArray class]];
 }
 
-- (NSArray<id<JFJSONConvertibleValue>>* __nullable)arrayFromString:(NSString* __nullable)jsonString
+- (NSArray<id<JFJSONConvertibleValue>>* _Nullable)arrayFromString:(NSString* _Nullable)jsonString
 {
 	return [self arrayFromData:[self dataFromString:jsonString]];
 }
 
-- (NSData* __nullable)dataFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array
+- (NSData* _Nullable)dataFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array
 {
 	return [self dataFromNode:array];
 }
 
-- (NSString* __nullable)stringFromArray:(NSArray<id<JFJSONConvertibleValue>>* __nullable)array
+- (NSString* _Nullable)stringFromArray:(NSArray<id<JFJSONConvertibleValue>>* _Nullable)array
 {
 	return [self stringFromData:[self dataFromArray:array]];
 }
@@ -187,22 +187,22 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Data (Dictionaries)
 // =================================================================================================
 
-- (NSData* __nullable)dataFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary
+- (NSData* _Nullable)dataFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary
 {
 	return [self dataFromNode:dictionary];
 }
 
-- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionaryFromData:(NSData* __nullable)jsonData
+- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionaryFromData:(NSData* _Nullable)jsonData
 {
 	return (NSDictionary<NSString*, id>*)[self nodeFromData:jsonData class:[NSDictionary class]];
 }
 
-- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionaryFromString:(NSString* __nullable)jsonString
+- (NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionaryFromString:(NSString* _Nullable)jsonString
 {
 	return [self dictionaryFromData:[self dataFromString:jsonString]];
 }
 
-- (NSString* __nullable)stringFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary
+- (NSString* _Nullable)stringFromDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary
 {
 	return [self stringFromData:[self dataFromDictionary:dictionary]];
 }

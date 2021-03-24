@@ -118,7 +118,7 @@ typedef id (^Builder)(void);
 	return self.implementation.get;
 }
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	return self.implementation.opt;
 }
@@ -159,7 +159,7 @@ typedef id (^Builder)(void);
 
 {
 @protected
-	id __nullable _object;
+	id _Nullable _object;
 }
 
 // =================================================================================================
@@ -183,7 +183,7 @@ typedef id (^Builder)(void);
 	return retObj;
 }
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	return _object;
 }
@@ -220,7 +220,7 @@ typedef id (^Builder)(void);
 	}
 }
 
-- (id __nullable)opt
+- (id _Nullable)opt
 {
 	@synchronized(self)
 	{

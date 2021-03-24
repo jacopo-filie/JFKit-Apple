@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Types
 // =================================================================================================
 
-typedef UIImage* __nullable (^JFImageLoader)(void);
+typedef UIImage* _Nullable (^JFImageLoader)(void);
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
@@ -87,7 +87,7 @@ typedef UIImage* __nullable (^JFImageLoader)(void);
  * @param thumbnailLoader The block to use to load the thumbnail.
  * @return This instance.
  */
-- (instancetype)initWithImageLoader:(JFImageLoader __nullable)imageLoader thumbnailLoader:(JFImageLoader __nullable)thumbnailLoader NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageLoader:(JFImageLoader _Nullable)imageLoader thumbnailLoader:(JFImageLoader _Nullable)thumbnailLoader NS_DESIGNATED_INITIALIZER;
 
 @end
 

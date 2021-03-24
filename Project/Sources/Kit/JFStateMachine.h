@@ -231,7 +231,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param transition The transition to perform.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* __nullable)completion;
+- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * A convenient method to enqueue a state transition without creating an instance of the class `JFStateMachineTransition`: the wrapping will be implicitly done for you.
@@ -239,7 +239,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param context An object or collection associated with the given transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 // =================================================================================================
 // MARK: Methods - Observers
@@ -281,14 +281,14 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param state The state to convert to string.
  * @return A string containing the given state, or `nil` if the given state is not valid.
  */
-- (NSString* __nullable)stringFromState:(JFState)state;
+- (NSString* _Nullable)stringFromState:(JFState)state;
 
 /**
  * Returns a string containing the given state transition.
  * @param transition The state transition to convert to string.
  * @return A string containing the given state transition, or `nil` if the given state transition is not valid.
  */
-- (NSString* __nullable)stringFromTransition:(JFStateTransition)transition;
+- (NSString* _Nullable)stringFromTransition:(JFStateTransition)transition;
 
 @end
 
@@ -313,7 +313,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param context An object or collection associated with the given transition.
  * @param completion A callback to use when the delegate completes the state transition to notify the state machine that is can resume its work.
  */
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion*)completion;
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion;
 
 @optional
 
@@ -323,7 +323,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param transition The state transition that has just finished.
  * @param context An object or collection associated with the given transition.
  */
-- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id __nullable)context;
+- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id _Nullable)context;
 
 /**
  * Notifies the delegate that a state transition is about to begin.
@@ -331,7 +331,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param transition The state transition that is about to begin.
  * @param context An object or collection associated with the given transition.
  */
-- (void)stateMachine:(JFStateMachine*)sender willPerform:(JFStateTransition)transition context:(id __nullable)context;
+- (void)stateMachine:(JFStateMachine*)sender willPerform:(JFStateTransition)transition context:(id _Nullable)context;
 
 @end
 
@@ -397,7 +397,7 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param completion The completion to execute when the transition is finished.
  * @return The initialized state machine transition.
  */
-- (instancetype)initWithTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion NS_DESIGNATED_INITIALIZER;
 
 @end
 

@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties (Accessors) - Memory
 // =================================================================================================
 
-- (id __nullable)object
+- (id _Nullable)object
 {
 	@synchronized(self)
 	{
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (void)setObject:(id __nullable)object
+- (void)setObject:(id _Nullable)object
 {
 	@synchronized(self)
 	{
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype)referenceWithObject:(id __nullable)object
++ (instancetype)referenceWithObject:(id _Nullable)object
 {
 	JFSoftReference* retObj = [[JFSoftReference alloc] init];
 	retObj.object = object;
@@ -178,7 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	JFSoftReference* retObj = [[[self class] allocWithZone:zone] init];
 	retObj.object = self.object;
@@ -204,7 +204,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype)referenceWithObject:(id __nullable)object
++ (instancetype)referenceWithObject:(id _Nullable)object
 {
 	JFUnsafeReference* retObj = [[JFUnsafeReference alloc] init];
 	retObj.object = object;
@@ -237,7 +237,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	JFUnsafeReference* retObj = [[[self class] allocWithZone:zone] init];
 	retObj.object = self.object;
@@ -263,7 +263,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-+ (instancetype)referenceWithObject:(id __nullable)object
++ (instancetype)referenceWithObject:(id _Nullable)object
 {
 	JFWeakReference* retObj = [[JFWeakReference alloc] init];
 	retObj.object = object;
@@ -296,7 +296,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	JFWeakReference* retObj = [[[self class] allocWithZone:zone] init];
 	retObj.object = self.object;

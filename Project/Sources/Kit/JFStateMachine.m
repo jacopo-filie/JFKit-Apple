@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - State
 // =================================================================================================
 
-- (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing __nullable *)outError;
+- (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing _Nullable *)outError;
 
 @end
 
@@ -191,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 	JFErrorFactory* errorFactory = self.class.errorFactory;
 	NSString* transitionString = [self stringFromTransition:transition.transition];
 	
-	void (^cancelBlock)(NSError* __nullable) = ^(NSError* __nullable underlyingError)
+	void (^cancelBlock)(NSError* _Nullable) = ^(NSError* _Nullable underlyingError)
 	{
 		JFSimpleCompletion* completion = transition.completion;
 		if(!completion)
@@ -270,7 +270,7 @@ NS_ASSUME_NONNULL_BEGIN
 			strongSelf.executingTransition = transition;
 		}
 		
-		JFSimpleCompletion* completion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* __nullable error) {
+		JFSimpleCompletion* completion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 #if JF_WEAK_ENABLED
 			JFStrongifySelf;
 #endif
@@ -354,12 +354,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Execution (Convenience)
 // =================================================================================================
 
-- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* __nullable)completion
+- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:[[JFStateMachineTransition alloc] initWithTransition:transition context:nil completion:completion]];
 }
 
-- (void)perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:[[JFStateMachineTransition alloc] initWithTransition:transition context:context completion:completion]];
 }
@@ -393,7 +393,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return JFStateNotAvailable;
 }
 
-- (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing __nullable *)outError
+- (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing _Nullable *)outError
 {
 	BOOL (^errorBlock)(NSInteger) = ^BOOL(NSInteger errorCode)
 	{
@@ -417,12 +417,12 @@ NS_ASSUME_NONNULL_BEGIN
 	return YES;
 }
 
-- (NSString* __nullable)stringFromState:(JFState)state
+- (NSString* _Nullable)stringFromState:(JFState)state
 {
 	return JFStringFromNSInteger(state);
 }
 
-- (NSString* __nullable)stringFromTransition:(JFStateTransition)transition
+- (NSString* _Nullable)stringFromTransition:(JFStateTransition)transition
 {
 	return JFStringFromNSInteger(transition);
 }
@@ -453,7 +453,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
-- (instancetype)initWithTransition:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	self = [super init];
 	

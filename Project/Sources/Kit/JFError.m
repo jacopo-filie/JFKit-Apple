@@ -102,12 +102,12 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties accesors - Data (Convenience)
 // =================================================================================================
 
-- (NSString* __nullable)description
+- (NSString* _Nullable)description
 {
 	return [[self.userInfo objectForKey:self.class.descriptionKey] copy];
 }
 
-- (NSError* __nullable)underlyingError
+- (NSError* _Nullable)underlyingError
 {
 	return [[self.userInfo objectForKey:self.class.underlyingErrorKey] copy];
 }
@@ -116,17 +116,17 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties accesors (Inherited) - Data (Convenience)
 // =================================================================================================
 
-- (NSString* __nullable)localizedDescription
+- (NSString* _Nullable)localizedDescription
 {
 	return [[self.userInfo objectForKey:self.class.localizedDescriptionKey] copy];
 }
 
-- (NSString* __nullable)localizedFailureReason
+- (NSString* _Nullable)localizedFailureReason
 {
 	return [[self.userInfo objectForKey:self.class.localizedFailureReasonKey] copy];
 }
 
-- (NSString* __nullable)localizedRecoverySuggestion
+- (NSString* _Nullable)localizedRecoverySuggestion
 {
 	return [[self.userInfo objectForKey:self.class.localizedRecoverySuggestionKey] copy];
 }
@@ -180,7 +180,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (instancetype)copyWithZone:(NSZone* __nullable)zone
+- (instancetype)copyWithZone:(NSZone* _Nullable)zone
 {
 	return [[[self class] allocWithZone:zone] initWithDomain:self.domain code:self.code userInfo:self.userInfo];
 }

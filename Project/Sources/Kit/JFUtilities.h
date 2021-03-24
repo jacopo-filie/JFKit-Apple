@@ -70,7 +70,7 @@ FOUNDATION_EXPORT NSTimeInterval const JFAnimationDuration;
  * @param obj2 The second object to compare.
  * @return `YES` if the given objects are equal, `NO` otherwise. If both objects are `nil`, it returns `YES`.
  */
-FOUNDATION_EXPORT BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObject> __nullable obj2);
+FOUNDATION_EXPORT BOOL JFAreObjectsEqual(id<NSObject> _Nullable obj1, id<NSObject> _Nullable obj2);
 
 // =================================================================================================
 // MARK: Functions - Operation queues
@@ -81,14 +81,14 @@ FOUNDATION_EXPORT BOOL JFAreObjectsEqual(id<NSObject> __nullable obj1, id<NSObje
  * @param name The name of the queue.
  * @return An initialized operation queue.
  */
-FOUNDATION_EXPORT NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* __nullable name);
+FOUNDATION_EXPORT NSOperationQueue* JFCreateConcurrentOperationQueue(NSString* _Nullable name);
 
 /**
  * Creates an operation queue with the given `name` and limits the maximum number of concurrent operations to `1`.
  * @param name The name of the queue.
  * @return An initialized operation queue.
  */
-FOUNDATION_EXPORT NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nullable name);
+FOUNDATION_EXPORT NSOperationQueue* JFCreateSerialOperationQueue(NSString* _Nullable name);
 
 // =================================================================================================
 // MARK: Functions - Resources
@@ -99,7 +99,7 @@ FOUNDATION_EXPORT NSOperationQueue* JFCreateSerialOperationQueue(NSString* __nul
  * @param key The key of the pair.
  * @return The object paired with the given key in the `Info.plist` file.
  */
-FOUNDATION_EXPORT id __nullable JFApplicationInfoForKey(NSString* key);
+FOUNDATION_EXPORT id _Nullable JFApplicationInfoForKey(NSString* key);
 
 /**
  * Returns the first URL found in the given bundle for the given filename.
@@ -107,7 +107,7 @@ FOUNDATION_EXPORT id __nullable JFApplicationInfoForKey(NSString* key);
  * @param filename The filename to search for.
  * @return the first URL found in the given bundle for the given filename.
  */
-FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFile(NSBundle* bundle, NSString* __nullable filename);
+FOUNDATION_EXPORT NSURL* _Nullable JFBundleResourceURLForFile(NSBundle* bundle, NSString* _Nullable filename);
 
 /**
  * Returns the first URL found in the given bundle for the given filename and type.
@@ -116,7 +116,7 @@ FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFile(NSBundle* bundle,
  * @param type The type of file to search for.
  * @return the first URL found in the given bundle for the given filename and type.
  */
-FOUNDATION_EXPORT NSURL* __nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* __nullable filename, NSString* __nullable type);
+FOUNDATION_EXPORT NSURL* _Nullable JFBundleResourceURLForFileWithExtension(NSBundle* bundle, NSString* _Nullable filename, NSString* _Nullable type);
 
 // =================================================================================================
 // MARK: Functions - Runtime
@@ -147,7 +147,7 @@ FOUNDATION_EXPORT void JFPerformSelector(NSObject* target, SEL action);
  * @param action The action to perform.
  * @param object An object to pass to the action as the first parameter.
  */
-FOUNDATION_EXPORT void JFPerformSelector1(NSObject* target, SEL action, id __nullable object);
+FOUNDATION_EXPORT void JFPerformSelector1(NSObject* target, SEL action, id _Nullable object);
 
 /**
  * Performs the given action on the given target.
@@ -156,7 +156,7 @@ FOUNDATION_EXPORT void JFPerformSelector1(NSObject* target, SEL action, id __nul
  * @param obj1 An object to pass to the action as the first parameter.
  * @param obj2 An object to pass to the action as the second parameter.
  */
-FOUNDATION_EXPORT void JFPerformSelector2(NSObject* target, SEL action, id __nullable obj1, id __nullable obj2);
+FOUNDATION_EXPORT void JFPerformSelector2(NSObject* target, SEL action, id _Nullable obj1, id _Nullable obj2);
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

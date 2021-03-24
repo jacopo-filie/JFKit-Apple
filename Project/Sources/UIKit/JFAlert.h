@@ -133,14 +133,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param completion The callback to be executed at the end of the operation.
  * @return `YES` if the operation succeeded, `NO` otherwise.
  */
-- (BOOL)dismiss:(JFBlock __nullable)completion;
+- (BOOL)dismiss:(JFBlock _Nullable)completion;
 
 /**
  * Calls the action associated with the given button and dismissed the alert.
  * @param completion The callback to be executed at the end of the operation.
  * @return `YES` if the operation succeeded, `NO` otherwise.
  */
-- (BOOL)dismissWithClickedButton:(JFAlertButton* __nullable)button completion:(JFBlock __nullable)completion;
+- (BOOL)dismissWithClickedButton:(JFAlertButton* _Nullable)button completion:(JFBlock _Nullable)completion;
 
 #if JF_IOS
 /**
@@ -150,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem completion:(JFBlock _Nullable)completion;
 
 /**
  * Composes an action sheet using the properties set previously and presents it from the specified rect in the given view.
@@ -160,7 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetFromRect:(CGRect)rect inView:(UIView*)view completion:(JFBlock _Nullable)completion;
 
 /**
  * Composes the alert using the properties set previously and presents it from the given tab bar.
@@ -169,7 +169,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetFromTabBar:(UITabBar*)tabBar completion:(JFBlock _Nullable)completion;
 
 /**
  * Composes an action sheet using the properties set previously and presents it from the given toolbar.
@@ -178,7 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetFromToolbar:(UIToolbar*)toolbar completion:(JFBlock _Nullable)completion;
 
 /**
  * Composes an action sheet using the properties set previously and presents it in the given view.
@@ -187,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetInView:(UIView*)view completion:(JFBlock _Nullable)completion;
 
 #elif JF_MACOS
 /**
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no button has been set previously.
  */
-- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsActionSheetForWindow:(NSWindow*)window completion:(JFBlock _Nullable)completion;
 #endif
 
 /**
@@ -206,7 +206,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no cancel button has been set previously.
  */
-- (BOOL)presentAsAlertView:(JFBlock __nullable)completion;
+- (BOOL)presentAsAlertView:(JFBlock _Nullable)completion;
 
 /**
  * Composes an alert view using the properties set previously and presents it modally.
@@ -215,7 +215,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `YES` if the operation succeeded, `NO` otherwise.
  * @warning It fails if no cancel button has been set previously.
  */
-- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock __nullable)completion;
+- (BOOL)presentAsAlertViewWithTimeout:(NSTimeInterval)timeout completion:(JFBlock _Nullable)completion;
 
 @end
 
@@ -238,14 +238,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param sender The alert.
  * @param button The button used to dismiss the alert.
  */
-- (void)alert:(JFAlert*)sender didDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)alert:(JFAlert*)sender didDismissWithButton:(JFAlertButton* _Nullable)button;
 
 /**
  * Called when the alert is about to be dismissed using the given button.
  * @param sender The alert.
  * @param button The button used to dismiss the alert.
  */
-- (void)alert:(JFAlert*)sender willDismissWithButton:(JFAlertButton* __nullable)button;
+- (void)alert:(JFAlert*)sender willDismissWithButton:(JFAlertButton* _Nullable)button;
 
 /**
  * Called when the alert has been presented.
@@ -300,7 +300,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param action The action of the alert button.
  * @return A new alert button with the given title and action set.
  */
-+ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock __nullable)action;
++ (instancetype)buttonWithTitle:(NSString*)title action:(JFBlock _Nullable)action;
 
 /**
  * NOT AVAILABLE
@@ -318,7 +318,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param action The action of the alert button.
  * @return The initialized alert button.
  */
-- (instancetype)initWithTitle:(NSString*)title action:(JFBlock __nullable)action NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitle:(NSString*)title action:(JFBlock _Nullable)action NS_DESIGNATED_INITIALIZER;
 
 @end
 

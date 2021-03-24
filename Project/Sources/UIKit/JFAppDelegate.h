@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Called when a new window is set. It asks its subclasses to create a new controller for the main window. If `nil` is returned, a default controller of type `JFWindowController` will be created instead.
  */
-- (JFWindowController* __nullable)newControllerForWindow:(JFWindow*)window;
+- (JFWindowController* _Nullable)newControllerForWindow:(JFWindow*)window;
 
 @end
 

@@ -89,7 +89,7 @@ void JFByteStreamFree(JFByteStream byteStream)
 		free(byteStream.bytes);
 }
 
-JFByteStream JFByteStreamMake(Byte* __nullable bytes, NSUInteger length)
+JFByteStream JFByteStreamMake(Byte* _Nullable bytes, NSUInteger length)
 {
 	JFByteStream retVal;
 	retVal.bytes = bytes;

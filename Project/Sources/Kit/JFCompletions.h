@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param result The result of the succeeded completed operation; `nil` if the operation failed.
  * @param error The error of the failed completed operation; `nil` if the operation succeeded.
  */
-typedef void (^JFCompletionBlock) (BOOL succeeded, id __nullable result, NSError* __nullable error);
+typedef void (^JFCompletionBlock) (BOOL succeeded, id _Nullable result, NSError* _Nullable error);
 
 /**
  * A block of code to be executed when the operation has completed with a failure.
@@ -64,7 +64,7 @@ typedef void (^JFFailureBlock) (NSError* error);
  * @param succeeded `YES` if the completed operation succeeded, `NO` otherwise.
  * @param error The error of the failed completed operation; `nil` if the operation succeeded.
  */
-typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* __nullable error);
+typedef void (^JFSimpleCompletionBlock) (BOOL succeeded, NSError* _Nullable error);
 
 /**
  * A block of code to be executed when the operation has completed successfully.
@@ -88,7 +88,7 @@ typedef void (^JFSuccessBlock) (id result);
 /**
  * The block used to initialize this instance.
  */
-@property (strong, nonatomic, readonly, nullable) void (^block)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error);
+@property (strong, nonatomic, readonly, nullable) void (^block)(BOOL succeeded, ResultType _Nullable result, NSError* _Nullable error);
 
 /**
  * The failure block used to initialize this instance.
@@ -114,7 +114,7 @@ typedef void (^JFSuccessBlock) (id result);
  * @param block The block to use.
  * @return A new instance of this class.
  */
-+ (instancetype)completionWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block;
++ (instancetype)completionWithBlock:(void (^)(BOOL succeeded, ResultType _Nullable result, NSError* _Nullable error))block;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given failure block.
@@ -162,7 +162,7 @@ typedef void (^JFSuccessBlock) (id result);
  * @param block The block to use.
  * @return This instance.
  */
-- (instancetype)initWithBlock:(void (^)(BOOL succeeded, ResultType __nullable result, NSError* __nullable error))block NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithBlock:(void (^)(BOOL succeeded, ResultType _Nullable result, NSError* _Nullable error))block NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes this instance with the given failure block.

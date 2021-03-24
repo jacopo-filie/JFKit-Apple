@@ -227,21 +227,21 @@ IB_DESIGNABLE
  * @param state The control state of the button.
  * @return The button title for the given state.
  */
-- (NSString* __nullable)buttonTitleForState:(UIControlState)state;
+- (NSString* _Nullable)buttonTitleForState:(UIControlState)state;
 
 /**
  * Sets the button title for the given state.
  * @param buttonTitle The title of the button.
  * @param state The state of the button.
  */
-- (void)setButtonTitle:(NSString* __nullable)buttonTitle forState:(UIControlState)state;
+- (void)setButtonTitle:(NSString* _Nullable)buttonTitle forState:(UIControlState)state;
 
 /**
  * Sets the text message.
  * @param text The text message to display in the alert container.
  * @param animated `YES` if the change must be animated.
  */
-- (void)setText:(NSString* __nullable)text animated:(BOOL)animated;
+- (void)setText:(NSString* _Nullable)text animated:(BOOL)animated;
 
 // =================================================================================================
 // MARK: Properties (Accessors) - User interface (Appearance)
@@ -252,42 +252,42 @@ IB_DESIGNABLE
  * @param state The state of the button.
  * @return The background image of the button for the given state.
  */
-- (UIImage* __nullable)buttonBackgroundImageForState:(UIControlState)state;
+- (UIImage* _Nullable)buttonBackgroundImageForState:(UIControlState)state;
 
 /**
  * Sets the background image of the button for the given state.
  * @param buttonBackgroundImage The background image of the button.
  * @param state The state of the button.
  */
-- (void)setButtonBackgroundImage:(UIImage* __nullable)buttonBackgroundImage forState:(UIControlState)state;
+- (void)setButtonBackgroundImage:(UIImage* _Nullable)buttonBackgroundImage forState:(UIControlState)state;
 
 /**
  * Returns the image of the button for the given state.
  * @param state The state of the button.
  * @return The image of the button for the given state.
  */
-- (UIImage* __nullable)buttonImageForState:(UIControlState)state;
+- (UIImage* _Nullable)buttonImageForState:(UIControlState)state;
 
 /**
  * Sets the image of the button for the given state.
  * @param buttonImage The image of the button.
  * @param state The state of the button.
  */
-- (void)setButtonImage:(UIImage* __nullable)buttonImage forState:(UIControlState)state;
+- (void)setButtonImage:(UIImage* _Nullable)buttonImage forState:(UIControlState)state;
 
 /**
  * Returns the title color of the button for the given state.
  * @param state The state of the button.
  * @return The title color of the button for the given state.
  */
-- (UIColor* __nullable)buttonTitleColorForState:(UIControlState)state;
+- (UIColor* _Nullable)buttonTitleColorForState:(UIControlState)state;
 
 /**
  * Sets the title color of the button for the given state.
  * @param buttonTitleColor The title color of the button.
  * @param state The state of the button.
  */
-- (void)setButtonTitleColor:(UIColor* __nullable)buttonTitleColor forState:(UIControlState)state;
+- (void)setButtonTitleColor:(UIColor* _Nullable)buttonTitleColor forState:(UIControlState)state;
 
 // =================================================================================================
 // MARK: Lifecycle
@@ -298,7 +298,7 @@ IB_DESIGNABLE
  * @param aDecoder The decoder.
  * @return The initialized view.
  */
-- (instancetype __nullable)initWithCoder:(NSCoder*)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithCoder:(NSCoder*)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes the instance using the given frame.

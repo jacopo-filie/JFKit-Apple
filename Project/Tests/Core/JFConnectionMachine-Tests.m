@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 	JFStateMachineTransition* disconnectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionDisconnecting context:nil completion:nil];
 	reconnectTransition.nextTransitionOnSuccess = disconnectTransition;
 	
-	JFSimpleCompletion* resetCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* __nullable error) {
+	JFSimpleCompletion* resetCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 		[self.expectation fulfill];
 	}];
 	
@@ -256,13 +256,13 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (JFStateMachineDelegate) - State
 // =================================================================================================
 
-- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id __nullable)context
+- (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id _Nullable)context
 {
 	if(self.shouldFulfillOnDidPerform)
 		[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id __nullable)context completion:(JFSimpleCompletion*)completion
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion
 {
 	if(self.shouldFail)
 		[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];

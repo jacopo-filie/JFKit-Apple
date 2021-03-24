@@ -166,7 +166,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	}
 }
 
-- (void)setDateFormatter:(NSDateFormatter* __nullable)dateFormatter
+- (void)setDateFormatter:(NSDateFormatter* _Nullable)dateFormatter
 {
 	@synchronized(self)
 	{
@@ -184,7 +184,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	}
 }
 
-- (void)setFormat:(NSString* __nullable)format
+- (void)setFormat:(NSString* _Nullable)format
 {
 	@synchronized(self)
 	{
@@ -218,7 +218,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	}
 }
 
-- (void)setRequestedFormatValues:(NSArray<NSString*>* __nullable)requestedFormatValues
+- (void)setRequestedFormatValues:(NSArray<NSString*>* _Nullable)requestedFormatValues
 {
 	@synchronized(self)
 	{
@@ -242,7 +242,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	}
 }
 
-- (void)setTimeFormatter:(NSDateFormatter* __nullable)timeFormatter
+- (void)setTimeFormatter:(NSDateFormatter* _Nullable)timeFormatter
 {
 	@synchronized(self)
 	{
@@ -264,7 +264,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	}
 }
 
-- (void)setFileName:(NSString* __nullable)fileName
+- (void)setFileName:(NSString* _Nullable)fileName
 {
 	@synchronized(self)
 	{
@@ -865,7 +865,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 static id<JFKitLoggerDelegate> __unsafe_unretained _delegate;
 #endif
 
-+ (id<JFKitLoggerDelegate> __nullable)delegate
++ (id<JFKitLoggerDelegate> _Nullable)delegate
 {
 	@synchronized(self)
 	{
@@ -873,7 +873,7 @@ static id<JFKitLoggerDelegate> __unsafe_unretained _delegate;
 	}
 }
 
-+ (void)setDelegate:(id<JFKitLoggerDelegate> __nullable)delegate
++ (void)setDelegate:(id<JFKitLoggerDelegate> _Nullable)delegate
 {
 	@synchronized(self)
 	{

@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - User interface (Actions)
 // =================================================================================================
 
-- (JFButtonBlock __nullable)jf_actionBlock
+- (JFButtonBlock _Nullable)jf_actionBlock
 {
 	return objc_getAssociatedObject(self, _cmd);
 }
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Layout (Actions)
 // =================================================================================================
 
-- (void)jf_setActionBlock:(JFButtonBlock __nullable)block
+- (void)jf_setActionBlock:(JFButtonBlock _Nullable)block
 {
 	SEL action = @selector(jf_buttonTapped:);
 	UIControlEvents events = UIControlEventTouchUpInside;

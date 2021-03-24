@@ -458,7 +458,7 @@ FOUNDATION_EXPORT JFColor* JFColorWithRGBHex(unsigned int value);
  * @param string The RGB hexadecimal string value.
  * @return The requested color object, or `nil` if the operation failed.
  */
-FOUNDATION_EXPORT JFColor* __nullable JFColorWithRGBHexString(NSString* __nullable string);
+FOUNDATION_EXPORT JFColor* _Nullable JFColorWithRGBHexString(NSString* _Nullable string);
 
 /**
  * Returns a color object with the specified values.
@@ -503,7 +503,7 @@ FOUNDATION_EXPORT JFColor* JFColorWithRGBAHex(unsigned int value);
  * @param string The RGBA hexadecimal string value.
  * @return The requested color object, or `nil` if the operation failed.
  */
-FOUNDATION_EXPORT JFColor* __nullable JFColorWithRGBAHexString(NSString* __nullable string);
+FOUNDATION_EXPORT JFColor* _Nullable JFColorWithRGBAHexString(NSString* _Nullable string);
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -

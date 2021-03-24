@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self close:nil completion:nil];
 }
 
-- (void)close:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)close:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFSwitchTransitionClosing context:context completion:completion];
 }
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self open:nil completion:nil];
 }
 
-- (void)open:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion
+- (void)open:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:JFSwitchTransitionOpening context:context completion:completion];
 }
@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-- (NSString* __nullable)stringFromState:(JFState)state
+- (NSString* _Nullable)stringFromState:(JFState)state
 {
 	NSString* retObj = nil;
 	switch(state)
@@ -191,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retObj;
 }
 
-- (NSString* __nullable)stringFromTransition:(JFStateTransition)transition
+- (NSString* _Nullable)stringFromTransition:(JFStateTransition)transition
 {
 	NSString* retObj = nil;
 	switch(transition)

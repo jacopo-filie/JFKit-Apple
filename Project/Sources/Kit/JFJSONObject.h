@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param data The JSON data.
  * @return A new instance of this class, or `nil` if `data` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)objectWithData:(NSData* __nullable)data;
++ (instancetype _Nullable)objectWithData:(NSData* _Nullable)data;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON data using the given JSON serializer.
@@ -77,14 +77,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return A new instance of this class, or `nil` if `data` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)objectWithData:(NSData* __nullable)data serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)objectWithData:(NSData* _Nullable)data serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given dictionary.
  * @param dictionary The dictionary containing the JSON values.
  * @return A new instance of this class, or `nil` if `dictionary` does not exist.
  */
-+ (instancetype __nullable)objectWithDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary;
++ (instancetype _Nullable)objectWithDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given dictionary.
@@ -92,14 +92,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to set after the instance creation.
  * @return A new instance of this class, or `nil` if `dictionary` does not exist.
  */
-+ (instancetype __nullable)objectWithDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* __nullable)dictionary serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)objectWithDictionary:(NSDictionary<NSString*, id<JFJSONConvertibleValue>>* _Nullable)dictionary serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON string.
  * @param string The JSON string.
  * @return A new instance of this class, or `nil` if `string` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)objectWithString:(NSString* __nullable)string;
++ (instancetype _Nullable)objectWithString:(NSString* _Nullable)string;
 
 /**
  * A convenient constructor that initializes a new instance of this class with the given JSON string using the given JSON serializer.
@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param serializer The JSON serializer to use or `nil` to use the default one.
  * @return A new instance of this class, or `nil` if `string` does not exist or it does not contain valid JSON content.
  */
-+ (instancetype __nullable)objectWithString:(NSString* __nullable)string serializer:(id<JFJSONSerializationAdapter> __nullable)serializer;
++ (instancetype _Nullable)objectWithString:(NSString* _Nullable)string serializer:(id<JFJSONSerializationAdapter> _Nullable)serializer;
 
 /**
  * Initializes this instance.
@@ -127,7 +127,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param data The JSON data.
  * @return This instance, or `nil` if `data` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithData:(NSData*)data;
+- (instancetype _Nullable)initWithData:(NSData*)data;
 
 /**
  * Initializes this instance with the given dictionary.
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param string The JSON string.
  * @return This instance, or `nil` if `string` does not contain valid JSON content.
  */
-- (instancetype __nullable)initWithString:(NSString*)string;
+- (instancetype _Nullable)initWithString:(NSString*)string;
 
 // =================================================================================================
 // MARK: Methods - Data (Arrays)
@@ -153,14 +153,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The array associated with the given key.
  * @warning If no value is associated with the given key, or it is not an array, this method returns `nil`.
  */
-- (JFJSONArray* __nullable)arrayForKey:(NSString*)key;
+- (JFJSONArray* _Nullable)arrayForKey:(NSString*)key;
 
 /**
  * Sets the given array as value associated with the given key.
  * @param value The array to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setArray:(JFJSONArray* __nullable)value forKey:(NSString*)key;
+- (void)setArray:(JFJSONArray* _Nullable)value forKey:(NSString*)key;
 
 // =================================================================================================
 // MARK: Methods - Data (Null)
@@ -189,14 +189,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The number associated with the given key.
  * @warning If no value is associated with the given key, or it is not a number, this method returns `nil`.
  */
-- (NSNumber* __nullable)numberForKey:(NSString*)key;
+- (NSNumber* _Nullable)numberForKey:(NSString*)key;
 
 /**
  * Sets the given number as value associated with the given key.
  * @param value The number to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setNumber:(NSNumber* __nullable)value forKey:(NSString*)key;
+- (void)setNumber:(NSNumber* _Nullable)value forKey:(NSString*)key;
 
 // =================================================================================================
 // MARK: Methods - Data (Objects)
@@ -208,14 +208,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The object associated with the given key.
  * @warning If no value is associated with the given key, or it is not an object, this method returns `nil`.
  */
-- (JFJSONObject* __nullable)objectForKey:(NSString*)key;
+- (JFJSONObject* _Nullable)objectForKey:(NSString*)key;
 
 /**
  * Sets the given object as value associated with the given key.
  * @param value The object to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setObject:(JFJSONObject* __nullable)value forKey:(NSString*)key;
+- (void)setObject:(JFJSONObject* _Nullable)value forKey:(NSString*)key;
 
 // =================================================================================================
 // MARK: Methods - Data (Strings)
@@ -226,7 +226,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param value The string to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setString:(NSString* __nullable)value forKey:(NSString*)key;
+- (void)setString:(NSString* _Nullable)value forKey:(NSString*)key;
 
 /**
  * Returns the string associated with the given key.
@@ -234,7 +234,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The string associated with the given key.
  * @warning If no value is associated with the given key, or it is not a string, this method returns `nil`.
  */
-- (NSString* __nullable)stringForKey:(NSString*)key;
+- (NSString* _Nullable)stringForKey:(NSString*)key;
 
 // =================================================================================================
 // MARK: Methods - Data (Values)
@@ -258,14 +258,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param value The value to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setValue:(id<JFJSONValue> __nullable)value forKey:(NSString*)key;
+- (void)setValue:(id<JFJSONValue> _Nullable)value forKey:(NSString*)key;
 
 /**
  * Returns the value associated with the given key.
  * @param key The key of the association.
  * @return The value associated with the given key.
  */
-- (id<JFJSONValue> __nullable)valueForKey:(NSString*)key;
+- (id<JFJSONValue> _Nullable)valueForKey:(NSString*)key;
 
 // =================================================================================================
 // MARK: Methods - Subscripting
@@ -276,14 +276,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param key The key of the association.
  * @return The value associated with the given key.
  */
-- (id<JFJSONValue> __nullable)objectForKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8));
+- (id<JFJSONValue> _Nullable)objectForKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8));
 
 /**
  * Associates the given value with the given key. Used to enable setting values using the subscripting notation.
  * @param object The value to associate with the given key, or `nil` to remove the currently stored value.
  * @param key The key to use to store the given value.
  */
-- (void)setObject:(id<JFJSONValue> __nullable)object forKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8));
+- (void)setObject:(id<JFJSONValue> _Nullable)object forKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8));
 
 @end
 

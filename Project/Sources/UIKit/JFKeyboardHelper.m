@@ -294,7 +294,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (NSCopying)
 // =================================================================================================
 
-- (id)copyWithZone:(NSZone* __nullable)zone
+- (id)copyWithZone:(NSZone* _Nullable)zone
 {
 	if([self isMemberOfClass:[JFKeyboardInfo class]])
 		return self;

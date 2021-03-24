@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param destructiveButton The destructive button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetFromBarButtonItem:(UIBarButtonItem*)barButtonItem title:(NSString* _Nullable)title cancelButton:(JFAlertButton* _Nullable)cancelButton destructiveButton:(JFAlertButton* _Nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an action sheet using with the given values and presents it from the specified rect in the given view. If no button is provided, the operation is aborted.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param destructiveButton The destructive button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetFromRect:(CGRect)rect inView:(UIView*)view title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetFromRect:(CGRect)rect inView:(UIView*)view title:(NSString* _Nullable)title cancelButton:(JFAlertButton* _Nullable)cancelButton destructiveButton:(JFAlertButton* _Nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an action sheet using with the given values and presents it from the given tab bar. If no button is provided, the operation is aborted.
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param destructiveButton The destructive button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetFromTabBar:(UITabBar*)tabBar title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetFromTabBar:(UITabBar*)tabBar title:(NSString* _Nullable)title cancelButton:(JFAlertButton* _Nullable)cancelButton destructiveButton:(JFAlertButton* _Nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an action sheet using with the given values and presents it from the given toolbar. If no button is provided, the operation is aborted.
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param destructiveButton The destructive button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetFromToolbar:(UIToolbar*)toolbar title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetFromToolbar:(UIToolbar*)toolbar title:(NSString* _Nullable)title cancelButton:(JFAlertButton* _Nullable)cancelButton destructiveButton:(JFAlertButton* _Nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an action sheet using with the given values and presents it in the given view. If no button is provided, the operation is aborted.
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param destructiveButton The destructive button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetInView:(UIView*)view title:(NSString* __nullable)title cancelButton:(JFAlertButton* __nullable)cancelButton destructiveButton:(JFAlertButton* __nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetInView:(UIView*)view title:(NSString* _Nullable)title cancelButton:(JFAlertButton* _Nullable)cancelButton destructiveButton:(JFAlertButton* _Nullable)destructiveButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 #elif JF_MACOS
 /**
@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cancelButton The cancel button of the action sheet.
  * @param otherButtons The additional buttons of the action sheet.
  */
-- (void)presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton* __nullable)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentActionSheetForWindow:(NSWindow*)window style:(NSAlertStyle)style title:(NSString* _Nullable)title message:(NSString* _Nullable)message cancelButton:(JFAlertButton* _Nullable)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 #endif
 
 // =================================================================================================
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cancelButton The cancel button of the alert view.
  * @param otherButtons The additional buttons of the alert view.
  */
-- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -134,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param otherButtons The additional buttons of the alert view.
  * @param timeout The time after which the alert view is automatically cancelled.
  */
-- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout;
+- (void)presentAlertViewForError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons timeout:(NSTimeInterval)timeout;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cancelButton The cancel button of the alert view.
  * @param otherButtons The additional buttons of the alert view.
  */
-- (void)presentAlertViewWithTitle:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentAlertViewWithTitle:(NSString* _Nullable)title message:(NSString* _Nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param otherButtons The additional buttons of the alert view.
  * @param timeout The time after which the alert view is automatically cancelled.
  */
-- (void)presentAlertViewWithTitle:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout;
+- (void)presentAlertViewWithTitle:(NSString* _Nullable)title message:(NSString* _Nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons timeout:(NSTimeInterval)timeout;
 
 #elif JF_MACOS
 /**
@@ -163,7 +163,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cancelButton The cancel button of the alert view.
  * @param otherButtons The additional buttons of the alert view.
  */
-- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param otherButtons The additional buttons of the alert view.
  * @param timeout The time after which the alert view is automatically cancelled.
  */
-- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout;
+- (void)presentAlertView:(NSAlertStyle)style forError:(NSError*)error cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons timeout:(NSTimeInterval)timeout;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -183,7 +183,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param cancelButton The cancel button of the alert view.
  * @param otherButtons The additional buttons of the alert view.
  */
-- (void)presentAlertView:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons;
+- (void)presentAlertView:(NSAlertStyle)style title:(NSString* _Nullable)title message:(NSString* _Nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons;
 
 /**
  * Composes an alert view using with the given values and presents it modally.
@@ -194,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param otherButtons The additional buttons of the alert view.
  * @param timeout The time after which the alert view is automatically cancelled.
  */
-- (void)presentAlertView:(NSAlertStyle)style title:(NSString* __nullable)title message:(NSString* __nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* __nullable)otherButtons timeout:(NSTimeInterval)timeout;
+- (void)presentAlertView:(NSAlertStyle)style title:(NSString* _Nullable)title message:(NSString* _Nullable)message cancelButton:(JFAlertButton*)cancelButton otherButtons:(NSArray<JFAlertButton*>* _Nullable)otherButtons timeout:(NSTimeInterval)timeout;
 #endif
 
 @end

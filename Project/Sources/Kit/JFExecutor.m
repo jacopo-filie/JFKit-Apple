@@ -123,12 +123,12 @@ NS_ASSUME_NONNULL_BEGIN
 	[self enqueue:block failureBlock:nil waitUntilFinished:NO];
 }
 
-- (void)enqueue:(void (^)(id owner))block failureBlock:(JFFailureBlock __nullable)failureBlock
+- (void)enqueue:(void (^)(id owner))block failureBlock:(JFFailureBlock _Nullable)failureBlock
 {
 	[self enqueue:block failureBlock:failureBlock waitUntilFinished:NO];
 }
 
-- (void)enqueue:(void (^)(id owner))block failureBlock:(JFFailureBlock __nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished
+- (void)enqueue:(void (^)(id owner))block failureBlock:(JFFailureBlock _Nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished
 {
 	BOOL __block executed = NO;
 	
@@ -174,12 +174,12 @@ NS_ASSUME_NONNULL_BEGIN
 	[self execute:block failureBlock:nil waitUntilFinished:NO];
 }
 
-- (void)execute:(void (^)(id owner))block failureBlock:(JFFailureBlock __nullable)failureBlock
+- (void)execute:(void (^)(id owner))block failureBlock:(JFFailureBlock _Nullable)failureBlock
 {
 	[self execute:block failureBlock:failureBlock waitUntilFinished:NO];
 }
 
-- (void)execute:(void (^)(id owner))block failureBlock:(JFFailureBlock __nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished
+- (void)execute:(void (^)(id owner))block failureBlock:(JFFailureBlock _Nullable)failureBlock waitUntilFinished:(BOOL)waitUntilFinished
 {
 	if([NSOperationQueue currentQueue] != self.queue)
 	{

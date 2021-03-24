@@ -130,7 +130,7 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)close:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)close:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 /**
  * Enqueues the state transition `opening`.
@@ -142,7 +142,7 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
  * @param context An object or collection associated with the state transition.
  * @param completion The completion to execute when the transition is finished.
  */
-- (void)open:(id __nullable)context completion:(JFSimpleCompletion* __nullable)completion;
+- (void)open:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
 
 @end
 
