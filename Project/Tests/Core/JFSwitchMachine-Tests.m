@@ -154,14 +154,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)waitExpectingResult:(JFSwitchState)expectedResult
 {
-	JFBlockWithError handler = ^(NSError* error)
-	{
+	[self waitForExpectationsWithTimeout:1 handler:^(NSError* error) {
 		XCTAssertNil(error, @"Error: %@", error);
 		if(!error)
 			[self verifyResult:expectedResult];
-	};
-	
-	[self waitForExpectationsWithTimeout:1 handler:handler];
+	}];
 }
 
 // =================================================================================================

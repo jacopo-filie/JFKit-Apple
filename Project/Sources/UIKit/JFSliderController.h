@@ -204,7 +204,7 @@ typedef NS_ENUM(UInt8, JFSliderControllerTransition)
  * @param completion The callback to be executed at the end of the transition.
  * @return `YES` if the transition started, `NO` otherwise.
  */
-- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBlockWithBOOL __nullable)completion;
+- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion;
 
 /**
  * Returns the view controller that is installed on the given panel.

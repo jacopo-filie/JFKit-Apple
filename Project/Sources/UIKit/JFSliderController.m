@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)prepareSlideWithTransition:(JFSliderControllerTransition)transition animated:(BOOL)animated;
 - (BOOL)prepareSlideWithTranslation:(CGFloat)translation animated:(BOOL)animated;
 - (BOOL)shouldPrepareSlideWithTransition:(JFSliderControllerTransition)transition;
-- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBlockWithBOOL __nullable)completion;
+- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion;
 - (void)updateCurrentSlideDistancesForTransition:(JFSliderControllerTransition)transition;
 
 @end
@@ -410,7 +410,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return [self activatePanel:panel animated:YES completion:nil];
 }
 
-- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBlockWithBOOL __nullable)completion
+- (BOOL)activatePanel:(JFSliderControllerPanel)panel animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion
 {
 	if([self isAnimating])
 		return NO;
@@ -458,7 +458,7 @@ NS_ASSUME_NONNULL_BEGIN
 	if(![self prepareSlideWithTransition:transition animated:animated])
 		return NO;
 	
-	JFBlockWithBOOL internalCompletion = ^(BOOL finished)
+	JFBooleanBlock internalCompletion = ^(BOOL finished)
 	{
 		[self cleanUp:finished animated:animated];
 		if(completion)
@@ -747,7 +747,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	self.shouldCancelCurrentTransition = (translation == 0.0f);
 	
-	JFBlockWithBOOL completion = ^(BOOL finished)
+	JFBooleanBlock completion = ^(BOOL finished)
 	{
 		[self cleanUp:finished animated:YES];
 	};
@@ -898,7 +898,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return retVal;
 }
 
-- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBlockWithBOOL __nullable)completion
+- (void)slideWithTranslation:(CGFloat)translation animated:(BOOL)animated completion:(JFBooleanBlock __nullable)completion
 {
 	if(![self isAnimating])
 		return;
