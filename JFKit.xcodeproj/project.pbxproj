@@ -191,6 +191,10 @@
 		4ED869D222CBEA1000575B95 /* JFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ED869CF22CBEA1000575B95 /* JFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED869D322CBEA1000575B95 /* JFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED869D022CBEA1000575B95 /* JFExecutor.m */; };
 		4ED869D422CBEA1000575B95 /* JFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED869D022CBEA1000575B95 /* JFExecutor.m */; };
+		4EE5EB7C260C0AED00EF8E5B /* JFClosures.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5EB7A260C0AED00EF8E5B /* JFClosures.m */; };
+		4EE5EB7D260C0AED00EF8E5B /* JFClosures.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5EB7A260C0AED00EF8E5B /* JFClosures.m */; };
+		4EE5EB7E260C0AED00EF8E5B /* JFClosures.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE5EB7B260C0AED00EF8E5B /* JFClosures.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EE5EB7F260C0AED00EF8E5B /* JFClosures.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE5EB7B260C0AED00EF8E5B /* JFClosures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EE867B721C9C2DE008DA0A8 /* JFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ECFE39C1FD8C78D004EEACE /* JFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EE9DF9E21E4C517008B5B78 /* JFObjectIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE9DF9C21E4C517008B5B78 /* JFObjectIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EE9DF9F21E4C517008B5B78 /* JFObjectIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE9DF9C21E4C517008B5B78 /* JFObjectIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -382,6 +386,8 @@
 		4ED869D022CBEA1000575B95 /* JFExecutor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFExecutor.m; sourceTree = "<group>"; };
 		4EDC5F99204F5AD000689B8D /* JFKeyboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFKeyboardHelper.m; sourceTree = "<group>"; };
 		4EDC5F9A204F5AD000689B8D /* JFKeyboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFKeyboardHelper.h; sourceTree = "<group>"; };
+		4EE5EB7A260C0AED00EF8E5B /* JFClosures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFClosures.m; sourceTree = "<group>"; };
+		4EE5EB7B260C0AED00EF8E5B /* JFClosures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFClosures.h; sourceTree = "<group>"; };
 		4EE82C062149C3CF00D94DA9 /* JFGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFGradientView.h; sourceTree = "<group>"; };
 		4EE82C072149C3CF00D94DA9 /* JFGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFGradientView.m; sourceTree = "<group>"; };
 		4EE9DF9C21E4C517008B5B78 /* JFObjectIdentifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFObjectIdentifier.h; sourceTree = "<group>"; };
@@ -485,6 +491,8 @@
 				4EB0625124E26ECE006B1B98 /* JFBlockWrapper.m */,
 				4E65E8D41FEDDFC200BBCA2E /* JFByteStream.h */,
 				4E65E8D31FEDDFC200BBCA2E /* JFByteStream.m */,
+				4EE5EB7B260C0AED00EF8E5B /* JFClosures.h */,
+				4EE5EB7A260C0AED00EF8E5B /* JFClosures.m */,
 				4ED607DA1FEE720000292837 /* JFColors.h */,
 				4ED607D91FEE720000292837 /* JFColors.m */,
 				4E8BCCA921D11E2F00D77BE3 /* JFCompatibilityMacros.h */,
@@ -757,6 +765,7 @@
 				4EF72507200056780080136D /* JFSwitchMachine.h in Headers */,
 				4E8BCCA221D1183700D77BE3 /* JFJSONObject.h in Headers */,
 				4E0932C821D1C4F60010E261 /* JFJSONSerializationAdapter.h in Headers */,
+				4EE5EB7E260C0AED00EF8E5B /* JFClosures.h in Headers */,
 				4E5EE1AE1FFC5E92008444FD /* JFObserversController.h in Headers */,
 				4E5003A01FE5B3D1002710B9 /* JFStrings.h in Headers */,
 				4EC10F251FFEAC4000ED8A61 /* JFStateMachine.h in Headers */,
@@ -775,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8BCCA121D1183700D77BE3 /* JFJSONValue.h in Headers */,
+				4EE5EB7F260C0AED00EF8E5B /* JFClosures.h in Headers */,
 				4EC258731FEF295100179CC7 /* JFMath.h in Headers */,
 				4E65E8D81FEDDFC200BBCA2E /* JFByteStream.h in Headers */,
 				4ECA37BE21D06C41009BDA18 /* JFPair.h in Headers */,
@@ -1072,6 +1082,7 @@
 				4E8BCC9C21D1183700D77BE3 /* JFJSONObject.m in Sources */,
 				4EF2C7C11FF1178300311EB5 /* JFShortcuts.m in Sources */,
 				4E4F5281200D0E2B00B24F1C /* JFLogger.m in Sources */,
+				4EE5EB7C260C0AED00EF8E5B /* JFClosures.m in Sources */,
 				4E3AC70120024115002CE0A1 /* JFError.m in Sources */,
 				4E5DD40C1FEFCF7F00285B30 /* JFAsynchronousOperation.m in Sources */,
 				4EB0626224E26ECE006B1B98 /* JFParameterizedLazy.m in Sources */,
@@ -1132,6 +1143,7 @@
 				4EC10F241FFEAC4000ED8A61 /* JFStateMachine.m in Sources */,
 				4E65E8D61FEDDFC200BBCA2E /* JFByteStream.m in Sources */,
 				4EF2C7C21FF1178300311EB5 /* JFShortcuts.m in Sources */,
+				4EE5EB7D260C0AED00EF8E5B /* JFClosures.m in Sources */,
 				4EE9DFA121E4C517008B5B78 /* JFObjectIdentifier.m in Sources */,
 				4E2D9B3F24E2CDFB0099C00A /* JFBlockWrapper.m in Sources */,
 				4E2D9B4924E2E51D0099C00A /* JFParameterizedLazy.m in Sources */,

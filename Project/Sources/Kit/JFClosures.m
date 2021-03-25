@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFCompletions.h"
+#import "JFClosures.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -32,33 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@interface JFCompletion (/* Private */)
+@interface JFFailableClosure (/* Private */)
 
 // =================================================================================================
-// MARK: Properties - Execution
-// =================================================================================================
-
-@property (strong, nonatomic, readonly, nullable) JFFailureBlock internalFailureBlock;
-@property (strong, nonatomic, readonly, nullable) JFSuccessBlock internalSuccessBlock;
-
-// =================================================================================================
-// MARK: Methods - Utilities
-// =================================================================================================
-
-+ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock;
-+ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock;
-+ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block;
-+ (JFSuccessBlock)newSuccessBlockForCompletionBlock:(JFCompletionBlock)block;
-
-@end
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
-@interface JFSimpleCompletion (/* Private */)
-
-// =================================================================================================
-// MARK: Properties - Execution
+// MARK: Properties
 // =================================================================================================
 
 @property (strong, nonatomic, readonly, nullable) JFFailureBlock internalFailureBlock;
@@ -70,217 +47,94 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock;
 + (JFBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFBlock)successBlock;
-+ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
-+ (JFBlock)newSuccessBlockForCompletionBlock:(JFSimpleCompletionBlock)block;
++ (JFFailureBlock)newFailureBlockForClosureBlock:(JFFailableClosureBlock)block;
++ (JFBlock)newSuccessBlockForClosureBlock:(JFFailableClosureBlock)block;
 
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
-@implementation JFCompletion
-#pragma GCC diagnostic pop
+@interface JFFetchingClosure (/* Private */)
 
 // =================================================================================================
-// MARK: Properties - Execution
+// MARK: Properties
 // =================================================================================================
 
-@synthesize block = _block;
-@synthesize failureBlock = _failureBlock;
-@synthesize finallyBlock = _finallyBlock;
-@synthesize internalFailureBlock = _internalFailureBlock;
-@synthesize internalSuccessBlock = _internalSuccessBlock;
-@synthesize successBlock = _successBlock;
-
-// =================================================================================================
-// MARK: Lifecycle
-// =================================================================================================
-
-+ (instancetype)completionWithBlock:(JFCompletionBlock)block
-{
-	return [[self alloc] initWithBlock:block];
-}
-
-+ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock
-{
-	return [[self alloc] initWithFailureBlock:failureBlock];
-}
-
-+ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock
-{
-	return [[self alloc] initWithSuccessBlock:successBlock];
-}
-
-+ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
-{
-	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
-}
-
-+ (instancetype)completionWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
-{
-	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
-}
-
-- (instancetype)initWithBlock:(JFCompletionBlock)block
-{
-	self = [super init];
-	
-	_block = block;
-	_internalFailureBlock = [JFCompletion newFailureBlockForCompletionBlock:block];
-	_internalSuccessBlock = [JFCompletion newSuccessBlockForCompletionBlock:block];
-	
-	return self;
-}
-
-- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock
-{
-	self = [super init];
-	
-	_failureBlock = failureBlock;
-	_internalFailureBlock = failureBlock;
-	
-	return self;
-}
-
-- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock
-{
-	self = [super init];
-	
-	_internalSuccessBlock = successBlock;
-	_successBlock = successBlock;
-	
-	return self;
-}
-
-- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
-{
-	self = [super init];
-	
-	_failureBlock = failureBlock;
-	_internalFailureBlock = failureBlock;
-	_internalSuccessBlock = successBlock;
-	_successBlock = successBlock;
-	
-	return self;
-}
-
-- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
-{
-	self = [super init];
-	
-	_failureBlock = failureBlock;
-	_finallyBlock = finallyBlock;
-	_internalFailureBlock = [JFCompletion appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
-	_internalSuccessBlock = [JFCompletion appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
-	_successBlock = successBlock;
-	
-	return self;
-}
-
-// =================================================================================================
-// MARK: Methods - Execution
-// =================================================================================================
-
-- (void)executeWithError:(NSError*)error
-{
-	[self executeWithError:error async:NO];
-}
-
-- (void)executeWithError:(NSError*)error async:(BOOL)async
-{
-	JFFailureBlock block = self.internalFailureBlock;
-	if(!block)
-		return;
-	
-	if(!async)
-	{
-		block(error);
-		return;
-	}
-	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(error);
-	});
-}
-
-- (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue
-{
-	JFFailureBlock block = self.internalFailureBlock;
-	if(!block)
-		return;
-	
-	[queue addOperationWithBlock:^{
-		block(error);
-	}];
-}
-
-- (void)executeWithResult:(id)result
-{
-	[self executeWithResult:result async:NO];
-}
-
-- (void)executeWithResult:(id)result async:(BOOL)async
-{
-	JFSuccessBlock block = self.internalSuccessBlock;
-	if(!block)
-		return;
-	
-	if(!async)
-	{
-		block(result);
-		return;
-	}
-	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		block(result);
-	});
-}
-
-- (void)executeWithResult:(id)result queue:(NSOperationQueue*)queue
-{
-	JFSuccessBlock block = self.internalSuccessBlock;
-	if(!block)
-		return;
-	
-	[queue addOperationWithBlock:^{
-		block(result);
-	}];
-}
+@property (strong, nonatomic, readonly, nullable) JFFailureBlock internalFailureBlock;
+@property (strong, nonatomic, readonly, nullable) JFSuccessBlock internalSuccessBlock;
 
 // =================================================================================================
 // MARK: Methods - Utilities
 // =================================================================================================
 
-+ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock;
++ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock;
++ (JFFailureBlock)newFailureBlockForClosureBlock:(JFFetchingClosureBlock)block;
++ (JFSuccessBlock)newSuccessBlockForClosureBlock:(JFFetchingClosureBlock)block;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFClosure
+
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
+@synthesize block = _block;
+
+// =================================================================================================
+// MARK: Lifetime
+// =================================================================================================
+
++ (instancetype)newWithBlock:(JFBlock)block
 {
-	return ^(NSError* error) {
-		failureBlock(error);
-		finallyBlock();
-	};
+	return [[self alloc] initWithBlock:block];
 }
 
-+ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock
+- (instancetype)initWithBlock:(JFBlock)block
 {
-	return ^(id result) {
-		successBlock(result);
-		finallyBlock();
-	};
+	self = [super init];
+	
+	_block = block;
+	
+	return self;
 }
 
-+ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFCompletionBlock)block
+// =================================================================================================
+// MARK: Methods
+// =================================================================================================
+
+- (void)execute
 {
-	return ^(NSError* error) {
-		block(NO, nil, error);
-	};
+	[self executeAsync:NO];
 }
 
-+ (JFSuccessBlock)newSuccessBlockForCompletionBlock:(JFCompletionBlock)block
+- (void)executeAsync:(BOOL)async
 {
-	return ^(id result) {
-		block(YES, result, nil);
-	};
+	JFBlock block = self.block;
+	
+	if(!async)
+	{
+		block();
+		return;
+	}
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		block();
+	});
+}
+
+- (void)executeOnQueue:(NSOperationQueue*)queue
+{
+	JFBlock block = self.block;
+
+	[queue addOperationWithBlock:^{
+		block();
+	}];
 }
 
 @end
@@ -288,13 +142,10 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
-@implementation JFSimpleCompletion
-#pragma GCC diagnostic pop
+@implementation JFFailableClosure
 
 // =================================================================================================
-// MARK: Properties - Execution
+// MARK: Properties
 // =================================================================================================
 
 @synthesize block = _block;
@@ -305,41 +156,41 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize successBlock = _successBlock;
 
 // =================================================================================================
-// MARK: Lifecycle
+// MARK: Lifetime
 // =================================================================================================
 
-+ (instancetype)completionWithBlock:(JFSimpleCompletionBlock)block
++ (instancetype)newWithBlock:(JFFailableClosureBlock)block
 {
 	return [[self alloc] initWithBlock:block];
 }
 
-+ (instancetype)completionWithFailureBlock:(JFFailureBlock)failureBlock
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock
 {
 	return [[self alloc] initWithFailureBlock:failureBlock];
 }
 
-+ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock
++ (instancetype)newWithSuccessBlock:(JFBlock)successBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock];
 }
 
-+ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
++ (instancetype)newWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
 }
 
-+ (instancetype)completionWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
++ (instancetype)newWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
 }
 
-- (instancetype)initWithBlock:(JFSimpleCompletionBlock)block
+- (instancetype)initWithBlock:(JFFailableClosureBlock)block
 {
 	self = [super init];
 	
 	_block = block;
-	_internalFailureBlock = [JFSimpleCompletion newFailureBlockForCompletionBlock:block];
-	_internalSuccessBlock = [JFSimpleCompletion newSuccessBlockForCompletionBlock:block];
+	_internalFailureBlock = [JFFailableClosure newFailureBlockForClosureBlock:block];
+	_internalSuccessBlock = [JFFailableClosure newSuccessBlockForClosureBlock:block];
 	
 	return self;
 }
@@ -382,15 +233,15 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_finallyBlock = finallyBlock;
-	_internalFailureBlock = [JFSimpleCompletion appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
-	_internalSuccessBlock = [JFSimpleCompletion appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
+	_internalFailureBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
 	return self;
 }
 
 // =================================================================================================
-// MARK: Methods - Execution
+// MARK: Methods
 // =================================================================================================
 
 - (void)execute
@@ -479,17 +330,224 @@ NS_ASSUME_NONNULL_BEGIN
 	};
 }
 
-+ (JFFailureBlock)newFailureBlockForCompletionBlock:(JFSimpleCompletionBlock)block
++ (JFFailureBlock)newFailureBlockForClosureBlock:(JFFailableClosureBlock)block
 {
 	return ^(NSError* error) {
 		block(NO, error);
 	};
 }
 
-+ (JFBlock)newSuccessBlockForCompletionBlock:(JFSimpleCompletionBlock)block
++ (JFBlock)newSuccessBlockForClosureBlock:(JFFailableClosureBlock)block
 {
 	return ^{
 		block(YES, nil);
+	};
+}
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFFetchingClosure
+
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
+@synthesize block = _block;
+@synthesize failureBlock = _failureBlock;
+@synthesize finallyBlock = _finallyBlock;
+@synthesize internalFailureBlock = _internalFailureBlock;
+@synthesize internalSuccessBlock = _internalSuccessBlock;
+@synthesize successBlock = _successBlock;
+
+// =================================================================================================
+// MARK: Lifetime
+// =================================================================================================
+
++ (instancetype)newWithBlock:(JFFetchingClosureBlock)block
+{
+	return [[self alloc] initWithBlock:block];
+}
+
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithFailureBlock:failureBlock];
+}
+
++ (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock];
+}
+
++ (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
+- (instancetype)initWithBlock:(JFFetchingClosureBlock)block
+{
+	self = [super init];
+	
+	_block = block;
+	_internalFailureBlock = [JFFetchingClosure newFailureBlockForClosureBlock:block];
+	_internalSuccessBlock = [JFFetchingClosure newSuccessBlockForClosureBlock:block];
+	
+	return self;
+}
+
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock
+{
+	self = [super init];
+	
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = failureBlock;
+	_internalSuccessBlock = successBlock;
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_finallyBlock = finallyBlock;
+	_internalFailureBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+// =================================================================================================
+// MARK: Methods
+// =================================================================================================
+
+- (void)executeWithError:(NSError*)error
+{
+	[self executeWithError:error async:NO];
+}
+
+- (void)executeWithError:(NSError*)error async:(BOOL)async
+{
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
+	
+	if(!async)
+	{
+		block(error);
+		return;
+	}
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		block(error);
+	});
+}
+
+- (void)executeWithError:(NSError*)error queue:(NSOperationQueue*)queue
+{
+	JFFailureBlock block = self.internalFailureBlock;
+	if(!block)
+		return;
+	
+	[queue addOperationWithBlock:^{
+		block(error);
+	}];
+}
+
+- (void)executeWithResult:(id)result
+{
+	[self executeWithResult:result async:NO];
+}
+
+- (void)executeWithResult:(id)result async:(BOOL)async
+{
+	JFSuccessBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
+	
+	if(!async)
+	{
+		block(result);
+		return;
+	}
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		block(result);
+	});
+}
+
+- (void)executeWithResult:(id)result queue:(NSOperationQueue*)queue
+{
+	JFSuccessBlock block = self.internalSuccessBlock;
+	if(!block)
+		return;
+	
+	[queue addOperationWithBlock:^{
+		block(result);
+	}];
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (JFFailureBlock)appendFinallyBlock:(JFBlock)finallyBlock toFailureBlock:(JFFailureBlock)failureBlock
+{
+	return ^(NSError* error) {
+		failureBlock(error);
+		finallyBlock();
+	};
+}
+
++ (JFSuccessBlock)appendFinallyBlock:(JFBlock)finallyBlock toSuccessBlock:(JFSuccessBlock)successBlock
+{
+	return ^(id result) {
+		successBlock(result);
+		finallyBlock();
+	};
+}
+
++ (JFFailureBlock)newFailureBlockForClosureBlock:(JFFetchingClosureBlock)block
+{
+	return ^(NSError* error) {
+		block(NO, nil, error);
+	};
+}
+
++ (JFSuccessBlock)newSuccessBlockForClosureBlock:(JFFetchingClosureBlock)block
+{
+	return ^(id result) {
+		block(YES, result, nil);
 	};
 }
 
@@ -500,4 +558,3 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
