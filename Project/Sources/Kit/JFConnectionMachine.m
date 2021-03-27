@@ -103,7 +103,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)connect
 {
-	[self connect:nil completion:nil];
+	[self connect:nil closure:nil];
+}
+
+- (void)connect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFConnectionTransitionConnecting context:context closure:closure];
 }
 
 - (void)connect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -113,7 +118,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)disconnect
 {
-	[self disconnect:nil completion:nil];
+	[self disconnect:nil closure:nil];
+}
+
+- (void)disconnect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFConnectionTransitionDisconnecting context:context closure:closure];
 }
 
 - (void)disconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -123,7 +133,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loseConnection
 {
-	[self loseConnection:nil completion:nil];
+	[self loseConnection:nil closure:nil];
+}
+
+- (void)loseConnection:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFConnectionTransitionLosingConnection context:context closure:closure];
 }
 
 - (void)loseConnection:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -133,7 +148,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reconnect
 {
-	[self reconnect:nil completion:nil];
+	[self reconnect:nil closure:nil];
+}
+
+- (void)reconnect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFConnectionTransitionReconnecting context:context closure:closure];
 }
 
 - (void)reconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -143,7 +163,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reset
 {
-	[self reset:nil completion:nil];
+	[self reset:nil closure:nil];
+}
+
+- (void)reset:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFConnectionTransitionResetting context:context closure:closure];
 }
 
 - (void)reset:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion

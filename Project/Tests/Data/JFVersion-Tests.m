@@ -70,9 +70,12 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString* result = nil;
 #if JF_MACOS
 	SInt32 major, minor, patch;
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	Gestalt(gestaltSystemVersionMajor, &major);
 	Gestalt(gestaltSystemVersionMinor, &minor);
 	Gestalt(gestaltSystemVersionBugFix, &patch);
+#	pragma GCC diagnostic pop
 	result = [NSString stringWithFormat:@"%@.%@.%@", JFStringFromSInt32(major), JFStringFromSInt32(minor), JFStringFromSInt32(patch)];
 #else
 	result = SystemVersion;

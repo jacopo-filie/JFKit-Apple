@@ -159,17 +159,25 @@ typedef NS_ENUM(NSInteger, JFPersistentContainerError) {
 // =================================================================================================
 
 /**
+ * Instructs the persistent container to load the persistent stores. Once the closure handler has fired, the stack is fully initialized and is ready for use. The closure block will be called once for each persistent store that is created.
+ * @param closure Once the loading of each persistent store has completed, this closure block will be executed.
+ * @warning You should use `-loadPersistentStoresWithCompletionHandler:` if available because the closure block of this method will be missing the description of the current store that has finished loading, so you won't be able to recognize which store has finished loading.
+ */
+- (void)loadPersistentStoresWithClosure:(JFFailableClosure*)closure API_DEPRECATED_WITH_REPLACEMENT("-loadPersistentStoresWithCompletionHandler:", ios(8.0, 10.0), macos(10.6, 10.12));
+
+/**
  * Instructs the persistent container to load the persistent stores. Once the completion handler has fired, the stack is fully initialized and is ready for use. The completion block will be called once for each persistent store that is created.
  * @param completion Once the loading of each persistent store has completed, this completion block will be executed.
  * @warning You should use `-loadPersistentStoresWithCompletionHandler:` if available because the completion block of this method will be missing the description of the current store that has finished loading, so you won't be able to recognize which store has finished loading.
+ * @deprecated Use '-loadPersistentStoresWithClosure:' instead.
  */
-- (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion API_DEPRECATED_WITH_REPLACEMENT("-loadPersistentStoresWithCompletionHandler:", ios(8.0, 10.0), macos(10.6, 10.12));
+- (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion API_DEPRECATED_WITH_REPLACEMENT("-loadPersistentStoresWithCompletionHandler:", ios(8.0, 10.0), macos(10.6, 10.12)) DEPRECATED_MSG_ATTRIBUTE("Use '-loadPersistentStoresWithClosure:' instead.");
 
 /**
  * Instructs the persistent container to load the persistent stores. Once the completion handler has fired, the stack is fully initialized and is ready for use. The completion handler will be called once for each persistent store that is created.
- * @param completion Once the loading of each persistent store has completed, this completion handler will be executed.
+ * @param handler Once the loading of each persistent store has completed, this completion handler will be executed.
  */
-- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))completion API_AVAILABLE(ios(10.0), macos(10.12));
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))handler API_AVAILABLE(ios(10.0), macos(10.12));
 
 /**
  * Creates a private managed object context.

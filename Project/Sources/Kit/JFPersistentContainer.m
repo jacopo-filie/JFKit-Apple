@@ -291,15 +291,15 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 	return retVal;
 }
 
-- (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion
+- (void)loadPersistentStoresWithClosure:(JFFailableClosure*)closure
 {
 	if(@available(iOS 10.0, macOS 10.12, *))
 	{
 		[self.persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription* description, NSError* _Nullable error) {
 			if(error)
-				[completion executeWithError:error];
+				[closure executeWithError:error];
 			else
-				[completion execute];
+				[closure execute];
 		}];
 		return;
 	}
@@ -312,13 +312,12 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 	__typeof(self) __strong strongSelf = self;
 #endif
 	
-	JFBlock block = ^(void)
-	{
+	[self.serialQueue addOperationWithBlock:^{
 #if JF_WEAK_ENABLED
 		JFStrongifySelf;
 		if(!strongSelf)
 		{
-			[completion executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorDeallocated]];
+			[closure executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorDeallocated]];
 			return;
 		}
 #endif
@@ -326,7 +325,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
 		if(!url)
 		{
-			[completion executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorMissingURL]];
+			[closure executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorMissingURL]];
 			return;
 		}
 		
@@ -345,7 +344,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 			
 			if(failed)
 			{
-				[completion executeWithError:error];
+				[closure executeWithError:error];
 				return;
 			}
 		}
@@ -355,19 +354,26 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 		NSError* error = nil;
 		if(![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error])
 		{
-			[completion executeWithError:error];
+			[closure executeWithError:error];
 			return;
 		}
 		
-		[completion execute];
-	};
-	
-	[self.serialQueue addOperationWithBlock:block];
+		[closure execute];
+	}];
 }
 
-- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))completion
+- (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion
 {
-	[self.persistentContainer loadPersistentStoresWithCompletionHandler:completion];
+	[self loadPersistentStoresWithCompletion:[JFSimpleCompletion completionWithSuccessBlock:^{
+		[completion execute];
+	} failureBlock:^(NSError* error) {
+		[completion executeWithError:error];
+	}]];
+}
+
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription* description, NSError* _Nullable error))handler
+{
+	[self.persistentContainer loadPersistentStoresWithCompletionHandler:handler];
 }
 
 - (NSManagedObjectContext*)newBackgroundContext

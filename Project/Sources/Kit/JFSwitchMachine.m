@@ -73,7 +73,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)close
 {
-	[self close:nil completion:nil];
+	[self close:nil closure:nil];
+}
+
+- (void)close:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFSwitchTransitionClosing context:context closure:closure];
 }
 
 - (void)close:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -83,7 +88,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)open
 {
-	[self open:nil completion:nil];
+	[self open:nil closure:nil];
+}
+
+- (void)open:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:JFSwitchTransitionOpening context:context closure:closure];
 }
 
 - (void)open:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion

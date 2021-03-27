@@ -191,15 +191,23 @@ NS_ASSUME_NONNULL_BEGIN
 	JFErrorFactory* errorFactory = self.class.errorFactory;
 	NSString* transitionString = [self stringFromTransition:transition.transition];
 	
-	void (^cancelBlock)(NSError* _Nullable) = ^(NSError* _Nullable underlyingError)
-	{
+	JFOptionalErrorBlock cancelBlock = ^(NSError* _Nullable underlyingError) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+		JFFailableClosure* closure = transition.closure;
 		JFSimpleCompletion* completion = transition.completion;
-		if(!completion)
+		if(!closure && !completion)
 			return;
 		
+		NSInteger errorCode = JFStateMachineErrorTransitionCancelled;
 		NSString* errorDescription = [NSString stringWithFormat:@"Transition '%@' cancelled.", transitionString];
-		NSError* error = [errorFactory errorWithCode:JFStateMachineErrorTransitionCancelled description:errorDescription underlyingError:underlyingError];
-		[completion executeWithError:error async:YES];
+		NSError* error = [errorFactory errorWithCode:errorCode description:errorDescription underlyingError:underlyingError];
+		
+		if(closure)
+			[closure executeWithError:error async:YES];
+		else if(completion)
+			[completion executeWithError:error async:YES];
+#pragma GCC diagnostic pop
 	};
 	
 	NSError* error = nil;
@@ -270,7 +278,7 @@ NS_ASSUME_NONNULL_BEGIN
 			strongSelf.executingTransition = transition;
 		}
 		
-		JFSimpleCompletion* completion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
+		JFFailableClosure* closure = [JFFailableClosure newWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 #if JF_WEAK_ENABLED
 			JFStrongifySelf;
 #endif
@@ -290,15 +298,29 @@ NS_ASSUME_NONNULL_BEGIN
 					[delegate stateMachine:strongSelf didPerform:transition.transition context:transition.context];
 			}
 			
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+			JFFailableClosure* closure = transition.closure;
 			JFSimpleCompletion* completion = transition.completion;
-			if(completion)
+			if(closure || completion)
 			{
-				if(succeeded)
-					[completion executeAsync:YES];
-				else
-					[completion executeWithError:error async:YES];
+				if(closure)
+				{
+					if(succeeded)
+						[closure executeAsync:YES];
+					else
+						[closure executeWithError:error async:YES];
+				}
+				else if(completion)
+				{
+					if(succeeded)
+						[completion executeAsync:YES];
+					else
+						[completion executeWithError:error async:YES];
+				}
 			}
-			
+#pragma GCC diagnostic pop
+
 			if(strongSelf)
 			{
 				JFStateMachineTransition* nextTransition = (succeeded ? transition.nextTransitionOnSuccess : transition.nextTransitionOnFailure);
@@ -309,7 +331,28 @@ NS_ASSUME_NONNULL_BEGIN
 			[operation finish];
 		}];
 		
-		[delegate stateMachine:strongSelf perform:transition.transition context:transition.context completion:completion];
+		if(!delegate)
+		{
+			[closure execute];
+			return;
+		}
+		
+		if([delegate respondsToSelector:@selector(stateMachine:perform:context:closure:)])
+			[delegate stateMachine:strongSelf perform:transition.transition context:transition.context closure:closure];
+		else if([delegate respondsToSelector:@selector(stateMachine:perform:context:completion:)])
+		{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+			[delegate stateMachine:strongSelf perform:transition.transition context:transition.context completion:[JFSimpleCompletion completionWithSuccessBlock:^{
+				[closure execute];
+			} failureBlock:^(NSError* error) {
+				[closure executeWithError:error];
+			}]];
+#pragma GCC diagnostic pop
+			return;
+		}
+		else
+			[closure execute];
 	}];
 	
 	operation.completionBlock = ^{
@@ -354,9 +397,19 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Execution (Convenience)
 // =================================================================================================
 
+- (void)perform:(JFStateTransition)transition closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:[[JFStateMachineTransition alloc] initWithTransition:transition context:nil closure:closure]];
+}
+
 - (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* _Nullable)completion
 {
 	[self perform:[[JFStateMachineTransition alloc] initWithTransition:transition context:nil completion:completion]];
+}
+
+- (void)perform:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	[self perform:[[JFStateMachineTransition alloc] initWithTransition:transition context:context closure:closure]];
 }
 
 - (void)perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
@@ -395,8 +448,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isValidTransition:(JFStateTransition)transition error:(NSError* __autoreleasing _Nullable *)outError
 {
-	BOOL (^errorBlock)(NSInteger) = ^BOOL(NSInteger errorCode)
-	{
+	BOOL (^errorBlock)(NSInteger) = ^BOOL(NSInteger errorCode) {
 		if(outError != NULL)
 			*outError = [self.class.errorFactory errorWithCode:errorCode description:[NSString stringWithFormat:@"Transition '%@' validation failed.", [self stringFromTransition:transition]]];
 		return NO;
@@ -438,6 +490,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Data
 // =================================================================================================
 
+@synthesize closure = _closure;
 @synthesize completion = _completion;
 @synthesize context = _context;
 @synthesize transition = _transition;
@@ -453,14 +506,21 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Lifecycle
 // =================================================================================================
 
+- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure
+{
+	self = [super init];
+	_closure = closure;
+	_context = context;
+	_transition = transition;
+	return self;
+}
+
 - (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion
 {
 	self = [super init];
-	
 	_completion = completion;
 	_context = context;
 	_transition = transition;
-	
 	return self;
 }
 

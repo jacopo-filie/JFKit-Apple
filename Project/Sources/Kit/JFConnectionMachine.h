@@ -188,9 +188,17 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 /**
  * Enqueues the state transition `connecting`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)connect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)connect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `connecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-connect:closure:' instead.
+ */
+- (void)connect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-connect:closure:' instead.");
 
 /**
  * Enqueues the state transition `disconnecting`.
@@ -200,9 +208,17 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 /**
  * Enqueues the state transition `disconnecting`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)disconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)disconnect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `disconnecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-disconnect:closure:' instead.
+ */
+- (void)disconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-disconnect:closure:' instead.");
 
 /**
  * Enqueues the state transition `losing connection`.
@@ -212,9 +228,17 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 /**
  * Enqueues the state transition `losing connection`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)loseConnection:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)loseConnection:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `losing connection`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-loseConnection:closure:' instead.
+ */
+- (void)loseConnection:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-loseConnection:closure:' instead.");
 
 /**
  * Enqueues the state transition `reconnecting`.
@@ -224,9 +248,17 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 /**
  * Enqueues the state transition `reconnecting`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)reconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)reconnect:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `reconnecting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-reconnect:closure:' instead.
+ */
+- (void)reconnect:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-reconnect:closure:' instead.");
 
 /**
  * Enqueues the state transition `resetting`.
@@ -236,9 +268,17 @@ typedef NS_ENUM(JFStateTransition, JFConnectionTransition)
 /**
  * Enqueues the state transition `resetting`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)reset:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)reset:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `resetting`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-reset:closure:' instead.
+ */
+- (void)reset:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-reset:closure:' instead.");
 
 @end
 

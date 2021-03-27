@@ -104,13 +104,11 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	self.shouldFullfillOnDidPerform = NO;
 	
-	JFStateMachineTransition* openTransition = [[JFStateMachineTransition alloc] initWithTransition:JFSwitchTransitionOpening context:nil completion:nil];
+	JFStateMachineTransition* openTransition = [[JFStateMachineTransition alloc] initWithTransition:JFSwitchTransitionOpening context:nil closure:nil];
 	
-	JFSimpleCompletion* closeCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
+	openTransition.nextTransitionOnSuccess = [[JFStateMachineTransition alloc] initWithTransition:JFSwitchTransitionClosing context:nil closure:[JFFailableClosure newWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 		[self.expectation fulfill];
-	}];
-	
-	openTransition.nextTransitionOnSuccess = [[JFStateMachineTransition alloc] initWithTransition:JFSwitchTransitionClosing context:nil completion:closeCompletion];
+	}]];
 	
 	[self.machine perform:openTransition];
 	
@@ -171,12 +169,12 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure*)closure
 {
 	if(self.shouldFail)
-		[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];
+		[closure executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];
 	else
-		[completion executeAsync:YES];
+		[closure executeAsync:YES];
 }
 
 @end

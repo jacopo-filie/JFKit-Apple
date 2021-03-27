@@ -128,9 +128,17 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
 /**
  * Enqueues the state transition `closing`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)close:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)close:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `closing`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-close:closure:' instead.
+ */
+- (void)close:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-close:closure:' instead.");
 
 /**
  * Enqueues the state transition `opening`.
@@ -140,9 +148,17 @@ typedef NS_ENUM(JFStateTransition, JFSwitchTransition)
 /**
  * Enqueues the state transition `opening`.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)open:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)open:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * Enqueues the state transition `opening`.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-open:closure:' instead.
+ */
+- (void)open:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-open:closure:' instead.");
 
 @end
 

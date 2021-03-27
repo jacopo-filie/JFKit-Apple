@@ -229,17 +229,34 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 /**
  * A convenient method to enqueue a state transition without creating an instance of the class `JFStateMachineTransition`: the wrapping will be implicitly done for you.
  * @param transition The transition to perform.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  */
-- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)perform:(JFStateTransition)transition closure:(JFFailableClosure* _Nullable)closure;
+
+/**
+ * A convenient method to enqueue a state transition without creating an instance of the class `JFStateMachineTransition`: the wrapping will be implicitly done for you.
+ * @param transition The transition to perform.
+ * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-perform:closure:' instead.
+ */
+- (void)perform:(JFStateTransition)transition completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-perform:closure:' instead.");
+
+/**
+ * A convenient method to enqueue a state transition without creating an instance of the class `JFStateMachineTransition`: the wrapping will be implicitly done for you.
+ * @param transition The transition to perform.
+ * @param context An object or collection associated with the given transition.
+ * @param closure The closure to execute when the transition is finished.
+ */
+- (void)perform:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure;
 
 /**
  * A convenient method to enqueue a state transition without creating an instance of the class `JFStateMachineTransition`: the wrapping will be implicitly done for you.
  * @param transition The transition to perform.
  * @param context An object or collection associated with the given transition.
  * @param completion The completion to execute when the transition is finished.
+ * @deprecated Use '-perform:context:closure:' instead.
  */
-- (void)perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion;
+- (void)perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion DEPRECATED_MSG_ATTRIBUTE("Use '-perform:context:closure:' instead.");
 
 // =================================================================================================
 // MARK: Methods - Observers
@@ -304,17 +321,6 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // MARK: Methods - Execution
 // =================================================================================================
 
-@required
-
-/**
- * Asks the delegate to perform the given transition, using the given context. When the delegate finishes the state transition, it must respond using the given completion.
- * @param sender The state machine that is sending the request.
- * @param transition The requested state transition.
- * @param context An object or collection associated with the given transition.
- * @param completion A callback to use when the delegate completes the state transition to notify the state machine that is can resume its work.
- */
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion;
-
 @optional
 
 /**
@@ -324,6 +330,25 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * @param context An object or collection associated with the given transition.
  */
 - (void)stateMachine:(JFStateMachine*)sender didPerform:(JFStateTransition)transition context:(id _Nullable)context;
+
+/**
+ * Asks the delegate to perform the given transition, using the given context. When the delegate finishes the state transition, it must respond using the given completion.
+ * @param sender The state machine that is sending the request.
+ * @param transition The requested state transition.
+ * @param context An object or collection associated with the given transition.
+ * @param closure A callback to use when the delegate completes the state transition to notify the state machine that it can resume its work.
+ */
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure*)closure;
+
+/**
+ * Asks the delegate to perform the given transition, using the given context. When the delegate finishes the state transition, it must respond using the given completion.
+ * @param sender The state machine that is sending the request.
+ * @param transition The requested state transition.
+ * @param context An object or collection associated with the given transition.
+ * @param completion A callback to use when the delegate completes the state transition to notify the state machine that it can resume its work.
+ * @deprecated Use '-stateMachine:perform:context:closure:' instead; this method will not be called if that method is also implemented.
+ */
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion DEPRECATED_MSG_ATTRIBUTE("Use '-stateMachine:perform:context:closure:' instead.");
 
 /**
  * Notifies the delegate that a state transition is about to begin.
@@ -348,9 +373,17 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // =================================================================================================
 
 /**
- * The callback to execute when the state transition is finished.
+ * The callback to execute when the state transition is finished; this property has a value only if a closure has been used during allocation
+ * of the transition.
  */
-@property (strong, nonatomic, readonly, nullable) JFSimpleCompletion* completion;
+@property (strong, nonatomic, readonly, nullable) JFFailableClosure* closure;
+
+/**
+ * The callback to execute when the state transition is finished; this property has a value only if a completion has been used during
+ * allocation of the transition.
+ * @deprecated You should use closures instead.
+ */
+@property (strong, nonatomic, readonly, nullable) JFSimpleCompletion* completion DEPRECATED_ATTRIBUTE;
 
 /**
  * An object or collection associated with the state transition.
@@ -394,10 +427,20 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
  * Initializes a state machine transition using the given state transition, context and completion.
  * @param transition The state transition to perform.
  * @param context An object or collection associated with the state transition.
- * @param completion The completion to execute when the transition is finished.
+ * @param closure The closure to execute when the transition is finished.
  * @return The initialized state machine transition.
  */
-- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure* _Nullable)closure NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes a state machine transition using the given state transition, context and completion.
+ * @param transition The state transition to perform.
+ * @param context An object or collection associated with the state transition.
+ * @param completion The completion to execute when the transition is finished.
+ * @return The initialized state machine transition.
+ * @deprecated Use '-initWithTransition:context:closure:' instead.
+ */
+- (instancetype)initWithTransition:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion* _Nullable)completion NS_DESIGNATED_INITIALIZER DEPRECATED_MSG_ATTRIBUTE("Use '-initWithTransition:context:closure:' instead.");
 
 @end
 

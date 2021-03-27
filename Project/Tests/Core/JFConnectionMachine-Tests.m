@@ -114,22 +114,20 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	self.shouldFulfillOnDidPerform = NO;
 	
-	JFStateMachineTransition* connectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionConnecting context:nil completion:nil];
+	JFStateMachineTransition* connectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionConnecting context:nil closure:nil];
 	
-	JFStateMachineTransition* loseConnectionTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionLosingConnection context:nil completion:nil];
+	JFStateMachineTransition* loseConnectionTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionLosingConnection context:nil closure:nil];
 	connectTransition.nextTransitionOnSuccess = loseConnectionTransition;
 	
-	JFStateMachineTransition* reconnectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionReconnecting context:nil completion:nil];
+	JFStateMachineTransition* reconnectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionReconnecting context:nil closure:nil];
 	loseConnectionTransition.nextTransitionOnSuccess = reconnectTransition;
 	
-	JFStateMachineTransition* disconnectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionDisconnecting context:nil completion:nil];
+	JFStateMachineTransition* disconnectTransition = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionDisconnecting context:nil closure:nil];
 	reconnectTransition.nextTransitionOnSuccess = disconnectTransition;
 	
-	JFSimpleCompletion* resetCompletion = [JFSimpleCompletion completionWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
+	disconnectTransition.nextTransitionOnSuccess = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionResetting context:nil closure:[JFFailableClosure newWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
 		[self.expectation fulfill];
-	}];
-	
-	disconnectTransition.nextTransitionOnSuccess = [[JFStateMachineTransition alloc] initWithTransition:JFConnectionTransitionResetting context:nil completion:resetCompletion];
+	}]];
 	
 	[self.machine perform:connectTransition];
 	
@@ -262,12 +260,12 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.expectation fulfill];
 }
 
-- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context completion:(JFSimpleCompletion*)completion
+- (void)stateMachine:(JFStateMachine*)sender perform:(JFStateTransition)transition context:(id _Nullable)context closure:(JFFailableClosure*)closure
 {
 	if(self.shouldFail)
-		[completion executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];
+		[closure executeWithError:[NSError errorWithDomain:ClassName code:NSIntegerMax userInfo:nil] async:YES];
 	else
-		[completion executeAsync:YES];
+		[closure executeAsync:YES];
 }
 
 @end
