@@ -59,7 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlertsController
+#pragma GCC diagnostic pop
 
 // =================================================================================================
 // MARK: Properties - User interface
