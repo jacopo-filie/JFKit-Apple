@@ -466,19 +466,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4E4E97D02000E3DA00E9CE87 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */,
-				4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */,
-				4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */,
-				4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */,
-				4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */,
-				4E9591A82256C48D009D01E2 /* JSON */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		4E7E6B2425F4F0A40045E201 /* Kit */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,16 +577,6 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		4E9591A82256C48D009D01E2 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */,
-				4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */,
-				4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */,
-			);
-			path = JSON;
-			sourceTree = "<group>";
-		};
 		4EA66DF72257526F00D07D6A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,25 +605,26 @@
 			path = Project/Sources;
 			sourceTree = "<group>";
 		};
-		4EAC2C9A2001300400B7BC30 /* Utilities */ = {
+		4EBD585920007D5C00BCBC9E /* Kit */ = {
 			isa = PBXGroup;
 			children = (
-				4EA9711621E980F30014BC0E /* JFObjectIdentifier-Tests.m */,
-				4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */,
-				4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		4EBD585920007D5C00BCBC9E /* Core */ = {
-			isa = PBXGroup;
-			children = (
+				4E4E97D42000E3DA00E9CE87 /* JFByteStream-Tests.m */,
+				4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */,
 				4EBD586C2000808700BCBC9E /* JFConnectionMachine-Tests.m */,
+				4E9591A92256C50C009D01E2 /* JFJSONArray-Tests.m */,
+				4E9591AC2256C5A5009D01E2 /* JFJSONObject-Tests.m */,
+				4E9591AF2256C5BA009D01E2 /* JFJSONSerializer-Tests.m */,
 				4EAC2CA42001361B00B7BC30 /* JFLogger-Tests.m */,
+				4E059E372208E1FD00AB72F5 /* JFMath-Tests.m */,
+				4EA9711621E980F30014BC0E /* JFObjectIdentifier-Tests.m */,
 				4EAC2CA1200133CE00B7BC30 /* JFObserversController-Tests.m */,
+				4EAC2C9B2001300400B7BC30 /* JFShortcuts-Tests.m */,
+				4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */,
 				4EBD585E20007D5C00BCBC9E /* JFSwitchMachine-Tests.m */,
+				4EAC2C9C2001300400B7BC30 /* JFUtilities-Tests.m */,
+				4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */,
 			);
-			path = Core;
+			path = Kit;
 			sourceTree = "<group>";
 		};
 		4ECFE23D1FD8B9D3004EEACE = {
@@ -698,9 +676,7 @@
 		4ECFE3CC1FD8CC65004EEACE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD585920007D5C00BCBC9E /* Core */,
-				4E4E97D02000E3DA00E9CE87 /* Data */,
-				4EAC2C9A2001300400B7BC30 /* Utilities */,
+				4EBD585920007D5C00BCBC9E /* Kit */,
 			);
 			name = Tests;
 			path = Project/Tests;
