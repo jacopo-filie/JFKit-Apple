@@ -163,6 +163,16 @@ NS_ASSUME_NONNULL_BEGIN
 #		define CurrentDevice [UIDevice currentDevice]
 
 /**
+ * Returns the model identifier of the current device (e.g.: "iPhone10,6", "iPad2,4", etc..).
+ */
+#		define CurrentDeviceModelID [JFShortcuts deviceModelID]
+
+/**
+ * Returns the model name of the current device (e.g.: "iPhone X", "iPad 2", etc..); returns `nil` if no name is mapped to the current model identifier.
+ */
+#		define CurrentDeviceModelName [JFShortcuts deviceModelName]
+
+/**
  * Returns the current device orientation.
  */
 #		define CurrentDeviceOrientation [CurrentDevice orientation]
@@ -296,17 +306,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, assign, nonatomic, readonly, nullable) NSString* appVersion;
 
 // =================================================================================================
-// MARK: Properties - Operation queues
+// MARK: Properties - Device
+// =================================================================================================
+
+// =================================================================================================
+// MARK: Functions - Device
 // =================================================================================================
 
 /**
- * Returns the shared background concurrent operation queue.
+ * Returns the model name of the current device, or its identifier if the translation map does not contain it.
+ * @return The model name of the device (e.g.: "iPhone 5", "iPhone X", "iPad 2", etc..).
  */
-@property (class, strong, readonly) NSOperationQueue* backgroundOperationQueue;
+FOUNDATION_EXPORT NSString* JFDeviceModelName(void);
 
-// =================================================================================================
-// MARK: Properties - System
-// =================================================================================================
 
 #if JF_IOS
 
@@ -321,6 +333,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, assign, nonatomic, readonly, getter=isCarPlayDevice) BOOL carPlayDevice;
 
 /**
+ * Returns the model identifier of the current device (e.g.: "iPhone10,6", "iPad2,4", etc..).
+ */
+@property (class, strong, readonly) NSString* deviceModelID;
+
+/**
+ * Returns the map used to translate the model ID of the current device to its model name.
+ */
+@property (class, strong, readonly) NSDictionary<NSString*, NSString*>* deviceModelMap;
+
+/**
+ * Returns the model name of the current device (e.g.: "iPhone X", "iPad 2", etc..); returns `nil` if no name is mapped to the identifier.
+ */
+@property (class, strong, readonly, nullable) NSString* deviceModelName;
+
+/**
  * Returns whether the current device is an iPad.
  */
 @property (class, assign, nonatomic, readonly, getter=isIPadDevice) BOOL iPadDevice;
@@ -331,6 +358,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, assign, nonatomic, readonly, getter=isIPhoneDevice) BOOL iPhoneDevice;
 
 #endif
+
+// =================================================================================================
+// MARK: Properties - Operation queues
+// =================================================================================================
+
+/**
+ * Returns the shared background concurrent operation queue.
+ */
+@property (class, strong, readonly) NSOperationQueue* backgroundOperationQueue;
 
 // =================================================================================================
 // MARK: Properties - User interface
