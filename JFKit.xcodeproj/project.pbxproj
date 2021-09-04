@@ -1104,7 +1104,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BASE_DIR = Project;
-				BUILD_VERSION = 4;
+				BUILD_VERSION = 5;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1150,7 +1150,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				RELEASE_VERSION = 3.1;
+				RELEASE_VERSION = 3.1.1;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
 			name = Debug;
@@ -1159,7 +1159,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BASE_DIR = Project;
-				BUILD_VERSION = 4;
+				BUILD_VERSION = 5;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1202,7 +1202,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				RELEASE_VERSION = 3.1;
+				RELEASE_VERSION = 3.1.1;
 				SUPPORTING_FILES_DIR = "${BASE_DIR}/Supporting Files";
 			};
 			name = Release;
