@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The main alerts controller for the application.
  */
-@property (strong, nonatomic, readonly) JFAlertsController* alertsController;
+@property (strong, nonatomic, readonly) JFAlertsController* alertsController DEPRECATED_ATTRIBUTE;
 
 /**
  * The main window of the application.

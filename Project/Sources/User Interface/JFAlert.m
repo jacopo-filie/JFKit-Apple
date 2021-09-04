@@ -118,7 +118,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlert
+#pragma GCC diagnostic pop
 
 // =================================================================================================
 // MARK: Properties - Attributes
@@ -635,6 +638,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods (UIActionSheetDelegate)
 // =================================================================================================
 
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
+
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	[self alert:actionSheet clickedButtonAtIndex:buttonIndex];
@@ -660,9 +666,14 @@ NS_ASSUME_NONNULL_BEGIN
 	[self willPresentAlert:actionSheet];
 }
 
+#	pragma GCC diagnostic pop
+
 // =================================================================================================
 // MARK: Methods (UIAlertViewDelegate)
 // =================================================================================================
+
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -689,6 +700,8 @@ NS_ASSUME_NONNULL_BEGIN
 	[self willPresentAlert:alertView];
 }
 
+#	pragma GCC diagnostic pop
+
 #endif
 
 @end
@@ -697,7 +710,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlertButton
+#pragma GCC diagnostic pop
 
 // =================================================================================================
 // MARK: Properties - Data

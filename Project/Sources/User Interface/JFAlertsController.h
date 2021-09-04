@@ -44,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A container for alerts that exposes some convenience methods to create them when needed. If the controller is destroyed, all handled pending alerts are automatically cancelled.
  */
+DEPRECATED_ATTRIBUTE
 @interface JFAlertsController : NSObject
 
 // =================================================================================================
