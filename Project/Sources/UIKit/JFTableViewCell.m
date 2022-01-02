@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)dynamicHeightForWidth:(CGFloat)width setupBlock:(JFTableViewCellSetupBlock)setupBlock
 {
-	JFTableViewCell* cell = [JFTableViewCell sizingCell];
+	JFTableViewCell* cell = [self sizingCell];
 	if(!cell)
 		return [self defaultHeight];
 	
