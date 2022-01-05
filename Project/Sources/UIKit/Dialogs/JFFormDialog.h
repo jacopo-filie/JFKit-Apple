@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2022 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,69 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
+#import "JFDialog.h"
+#import "JFPreprocessorMacros.h"
 
 #if JF_MACOS
-#	import <Cocoa/Cocoa.h>
+@import Cocoa;
+#else
+@import UIKit;
 #endif
+
+@class JFFormDialog;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFUIKit.
-FOUNDATION_EXPORT double JFUIKitVersionNumber;
-
-//! Project version string for JFUIKit.
-FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFAlert.h>
-#import <JFUIKit/JFAlertDialog.h>
-#import <JFUIKit/JFAlertsController.h>
-#import <JFUIKit/JFAppDelegate.h>
-#import <JFUIKit/JFDialog.h>
-#import <JFUIKit/JFFormDialog.h>
-#import <JFUIKit/JFSheetDialog.h>
-#import <JFUIKit/JFWindowController.h>
-
-#if JF_IOS
-#	import <JFUIKit/JFActivityIndicatorView.h>
-#	import <JFUIKit/JFGradientView.h>
-#	import <JFUIKit/JFKeyboardHelper.h>
-#	import <JFUIKit/JFOverlayController.h>
-#	import <JFUIKit/JFSliderController.h>
-#	import <JFUIKit/JFTableViewCell.h>
-#	import <JFUIKit/UIButton+JFUIKit.h>
+#if JF_MACOS
+typedef void (^JFFormDialogButtonAction)(NSArray<NSTextField*>* fields);
+typedef void (^JFFormDialogFieldConfigurator)(NSTextField* field);
+#else
+typedef void (^JFFormDialogButtonAction)(NSArray<UITextField*>* fields);
+typedef void (^JFFormDialogFieldConfigurator)(UITextField* field);
 #endif
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@interface JFFormDialogButton : JFDialogButton
+
+@property (strong, nonatomic, readonly, nullable) JFFormDialogButtonAction action;
+
++ (instancetype)newWithTitle:(NSString*)title action:(JFFormDialogButtonAction _Nullable)action;
+- (instancetype)initWithTitle:(NSString*)title action:(JFFormDialogButtonAction _Nullable)action NS_DESIGNATED_INITIALIZER;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@protocol JFFormDialogObserver <JFDialogObserver>
+
+@optional
+
+- (void)formDialog:(JFFormDialog*)sender didDismissWithButton:(JFFormDialogButton* _Nullable)button;
+- (void)formDialog:(JFFormDialog*)sender willDismissWithButton:(JFFormDialogButton* _Nullable)button;
+- (void)formDialogDidPresent:(JFFormDialog*)sender;
+- (void)formDialogWillPresent:(JFFormDialog*)sender;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@interface JFFormDialog : JFDialog <JFFormDialogButton*, id<JFFormDialogObserver>>
+
+@property (copy, nonatomic, nullable) NSArray<JFFormDialogFieldConfigurator>* fieldConfigurators;
+@property (copy, nonatomic, nullable) NSString* message;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

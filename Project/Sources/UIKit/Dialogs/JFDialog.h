@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2022 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,60 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
+@import Foundation;
+
+@class JFDialog;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
-
-#if JF_MACOS
-#	import <Cocoa/Cocoa.h>
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFUIKit.
-FOUNDATION_EXPORT double JFUIKitVersionNumber;
+@interface JFDialogButton : NSObject
 
-//! Project version string for JFUIKit.
-FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
+@property (copy, nonatomic, readonly) NSString* title;
+
++ (instancetype)new NS_UNAVAILABLE;
++ (instancetype)newWithTitle:(NSString*)title;
+
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithTitle:(NSString*)title;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@protocol JFDialogObserver <NSObject>
+
+@optional
+
+- (void)dialog:(__kindof JFDialog*)sender didDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
+- (void)dialog:(__kindof JFDialog*)sender willDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
+- (void)dialogDidPresent:(__kindof JFDialog*)sender;
+- (void)dialogWillPresent:(__kindof JFDialog*)sender;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> : NSObject
+
+@property (strong, nonatomic, nullable) ButtonType cancelButton;
+@property (copy, nonatomic, nullable) NSArray<ButtonType>* otherButtons;
+@property (strong, nonatomic, nullable) ButtonType preferredButton;
+@property (copy, nonatomic, nullable) NSString* title;
+@property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
+
+- (void)addObserver:(ObserverType)observer;
+- (void)removeObserver:(ObserverType)observer;
+
+@end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFAlert.h>
-#import <JFUIKit/JFAlertDialog.h>
-#import <JFUIKit/JFAlertsController.h>
-#import <JFUIKit/JFAppDelegate.h>
-#import <JFUIKit/JFDialog.h>
-#import <JFUIKit/JFFormDialog.h>
-#import <JFUIKit/JFSheetDialog.h>
-#import <JFUIKit/JFWindowController.h>
-
-#if JF_IOS
-#	import <JFUIKit/JFActivityIndicatorView.h>
-#	import <JFUIKit/JFGradientView.h>
-#	import <JFUIKit/JFKeyboardHelper.h>
-#	import <JFUIKit/JFOverlayController.h>
-#	import <JFUIKit/JFSliderController.h>
-#	import <JFUIKit/JFTableViewCell.h>
-#	import <JFUIKit/UIButton+JFUIKit.h>
-#endif
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

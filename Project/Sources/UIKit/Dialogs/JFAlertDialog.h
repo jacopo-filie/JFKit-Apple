@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2022 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,57 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
+#import "JFDialog.h"
+
+@import JFKit;
+
+@class JFAlertDialog;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
-
-#if JF_MACOS
-#	import <Cocoa/Cocoa.h>
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFUIKit.
-FOUNDATION_EXPORT double JFUIKitVersionNumber;
+typedef JFBlock JFAlertDialogButtonAction;
 
-//! Project version string for JFUIKit.
-FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@interface JFAlertDialogButton : JFDialogButton
+
+@property (strong, nonatomic, readonly, nullable) JFAlertDialogButtonAction action;
+
++ (instancetype)newWithTitle:(NSString*)title action:(JFAlertDialogButtonAction _Nullable)action;
+- (instancetype)initWithTitle:(NSString*)title action:(JFAlertDialogButtonAction _Nullable)action NS_DESIGNATED_INITIALIZER;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@protocol JFAlertDialogObserver <JFDialogObserver>
+
+@optional
+
+- (void)alertDialog:(JFAlertDialog*)sender didDismissWithButton:(JFAlertDialogButton* _Nullable)button;
+- (void)alertDialog:(JFAlertDialog*)sender willDismissWithButton:(JFAlertDialogButton* _Nullable)button;
+- (void)alertDialogDidPresent:(JFAlertDialog*)sender;
+- (void)alertDialogWillPresent:(JFAlertDialog*)sender;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@interface JFAlertDialog : JFDialog <JFAlertDialogButton*, id<JFAlertDialogObserver>>
+
+@property (copy, nonatomic, nullable) NSString* message;
+
+@end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFAlert.h>
-#import <JFUIKit/JFAlertDialog.h>
-#import <JFUIKit/JFAlertsController.h>
-#import <JFUIKit/JFAppDelegate.h>
-#import <JFUIKit/JFDialog.h>
-#import <JFUIKit/JFFormDialog.h>
-#import <JFUIKit/JFSheetDialog.h>
-#import <JFUIKit/JFWindowController.h>
-
-#if JF_IOS
-#	import <JFUIKit/JFActivityIndicatorView.h>
-#	import <JFUIKit/JFGradientView.h>
-#	import <JFUIKit/JFKeyboardHelper.h>
-#	import <JFUIKit/JFOverlayController.h>
-#	import <JFUIKit/JFSliderController.h>
-#	import <JFUIKit/JFTableViewCell.h>
-#	import <JFUIKit/UIButton+JFUIKit.h>
-#endif
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

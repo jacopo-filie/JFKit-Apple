@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2022 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,70 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
+#import "JFDialog.h"
+
+@import JFKit;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
-
-#if JF_MACOS
-#	import <Cocoa/Cocoa.h>
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFUIKit.
-FOUNDATION_EXPORT double JFUIKitVersionNumber;
+@interface JFDialog (/* Private */)
 
-//! Project version string for JFUIKit.
-FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
+@property (strong, nonatomic, readonly) JFObserversController<__kindof id<JFDialogObserver>>* observers;
+@property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFDialog
+
+@synthesize cancelButton = _cancelButton;
+@synthesize observers = _observers;
+@synthesize otherButtons = _otherButtons;
+@synthesize preferredButton = _preferredButton;
+@synthesize title = _title;
+@synthesize visible = _visible;
+
+- (void)addObserver:(__kindof id<JFDialogObserver>)observer
+{
+	[self.observers addObserver:observer];
+}
+
+- (void)removeObserver:(__kindof id<JFDialogObserver>)observer
+{
+	[self.observers removeObserver:observer];
+}
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFDialogButton
+
+@synthesize title = _title;
+
++ (instancetype)newWithTitle:(NSString*)title
+{
+	return [[self alloc] initWithTitle:title];
+}
+
+- (instancetype)initWithTitle:(NSString*)title
+{
+	self = [super init];
+	_title = [title copy];
+	return self;
+}
+
+@end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFAlert.h>
-#import <JFUIKit/JFAlertDialog.h>
-#import <JFUIKit/JFAlertsController.h>
-#import <JFUIKit/JFAppDelegate.h>
-#import <JFUIKit/JFDialog.h>
-#import <JFUIKit/JFFormDialog.h>
-#import <JFUIKit/JFSheetDialog.h>
-#import <JFUIKit/JFWindowController.h>
-
-#if JF_IOS
-#	import <JFUIKit/JFActivityIndicatorView.h>
-#	import <JFUIKit/JFGradientView.h>
-#	import <JFUIKit/JFKeyboardHelper.h>
-#	import <JFUIKit/JFOverlayController.h>
-#	import <JFUIKit/JFSliderController.h>
-#	import <JFUIKit/JFTableViewCell.h>
-#	import <JFUIKit/UIButton+JFUIKit.h>
-#endif
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
