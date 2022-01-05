@@ -143,6 +143,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return self;
 }
 
+#if JF_IOS
 - (BOOL)dismiss
 {
 	return [self dismissWithClickedButton:nil closure:nil];
@@ -166,6 +167,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 {
 	return [self dismissWithClickedButton:nil closure:closure];
 }
+#endif
 
 - (BOOL)present
 {
@@ -310,6 +312,35 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return NO;
 }
 
+- (void)performAction:(JFAlertDialogButtonAction _Nullable)action
+{
+	if(action) {
+		action();
+	}
+}
+
+- (void)performDismissClosure
+{
+	JFClosure* closure = self.dismissClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.dismissClosure = nil;
+	[closure execute];
+}
+
+- (void)performPresentClosure
+{
+	JFClosure* closure = self.presentClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.presentClosure = nil;
+	[closure execute];
+}
+
 - (void)setUpTimerWithTimeout:(NSTimeInterval)timeout
 {
 	if(!JFIsFloatValueGreaterThanValue(timeout, 0.0, NSDecimalNoScale)) {
@@ -363,9 +394,101 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 @synthesize alert = _alert;
 
+- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+{
+	[NSApp abortModal];
+	return YES;
+}
+
+- (BOOL)prepareAlert
+{
+	if(self.alert) {
+		return NO;
+	}
+	
+	JFAlertDialog* owner = self.owner;
+	
+	JFAlertDialogButton* cancelButton = owner.cancelButton;
+	if(!cancelButton) {
+		return NO;
+	}
+	
+	NSArray<JFAlertDialogButton*>* otherButtons = owner.otherButtons;
+	
+	NSMutableArray<JFAlertDialogButton*>* buttons = [NSMutableArray<JFAlertDialogButton*> arrayWithCapacity:(otherButtons.count + 1)];
+	[buttons addObject:cancelButton];
+	if(otherButtons) {
+		[buttons addObjectsFromArray:otherButtons];
+	}
+	
+	NSAlert* alert = [NSAlert new];
+	alert.informativeText = owner.message;
+	alert.messageText = owner.title;
+
+	for(NSUInteger i = 0; i < buttons.count; i++) {
+		[alert addButtonWithTitle:buttons[i].title];
+	}
+	
+	self.alert = alert;
+	self.buttons = buttons;
+	
+	return YES;
+}
+
+- (void)presentAlert
+{
+	JFAlertDialog* owner = self.owner;
+	owner.visible = YES;
+	[owner notifyWillPresent];
+	
+	[self startTimer];
+	[self performPresentClosure];
+	
+	owner.presenting = NO;
+	[owner notifyDidPresent];
+	
+	NSAlert* alert = self.alert;
+	NSModalResponse response = [alert runModal];
+	if(response < 0)
+		response = NSAlertFirstButtonReturn;
+	
+	NSInteger buttonIndex = response - NSAlertFirstButtonReturn;
+	
+	JFAlertDialogButton* button = [self buttonAtIndex:buttonIndex];
+	[self performAction:button.action];
+	
+	[self stopAndTearDownTimer];
+	[self.owner notifyWillDismissWithButton:button];
+	
+	self.alert = nil;
+	self.buttons = nil;
+	
+	owner.dismissing = NO;
+	owner.visible = NO;
+	[owner notifyDidDismissWithButton:button];
+	
+	[self performDismissClosure];
+}
+
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
 {
-	return NO;
+	if(![self prepareAlert]) {
+		return NO;
+	}
+	
+	[self setUpTimerWithTimeout:timeout];
+	
+	JFAlertDialog* owner = self.owner;
+	owner.currentImplementation = self;
+	owner.presenting = YES;
+	
+	self.presentClosure = closure;
+	
+	[MainOperationQueue addOperationWithBlock:^{
+		[self presentAlert];
+	}];
+	
+	return YES;
 }
 
 @end
@@ -422,36 +545,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return YES;
 }
 
-- (void)performAction:(JFAlertDialogButtonAction _Nullable)action
-{
-	if(action) {
-		action();
-	}
-}
-
-- (void)performDismissClosure
-{
-	JFClosure* closure = self.dismissClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.dismissClosure = nil;
-	[closure execute];
-}
-
-- (void)performPresentClosure
-{
-	JFClosure* closure = self.presentClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.presentClosure = nil;
-	[closure execute];
-}
-
-- (BOOL)setUpAlertView
+- (BOOL)prepareAlertView
 {
 	if(self.alertView) {
 		return NO;
@@ -486,14 +580,16 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
 {
-	if(![self setUpAlertView]) {
+	if(![self prepareAlertView]) {
 		return NO;
 	}
 	
 	[self setUpTimerWithTimeout:timeout];
 	
-	self.owner.presenting = YES;
-	
+	JFAlertDialog* owner = self.owner;
+	owner.currentImplementation = self;
+	owner.presenting = YES;
+
 	self.presentClosure = closure;
 	[self.alertView show];
 	
@@ -539,7 +635,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 - (void)willPresentAlertView:(UIAlertView*)alertView
 {
 	JFAlertDialog* owner = self.owner;
-	owner.currentImplementation = self;
 	owner.visible = YES;
 	[owner notifyWillPresent];
 }

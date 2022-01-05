@@ -71,10 +71,12 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 @property (copy, nonatomic, nullable) NSString* message;
 
+#if JF_IOS
 - (BOOL)dismiss;
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button;
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
 - (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
+#endif
 
 - (BOOL)present API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 9.0));
 - (BOOL)presentWithClosure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 9.0));
