@@ -24,9 +24,9 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@import Foundation;
+#import "JFDialog.h"
 
-@class JFDialog;
+@import JFKit;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -34,47 +34,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@interface JFDialogButton : NSObject
+@interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> (/* Protected */)
 
-@property (copy, nonatomic, readonly) NSString* title;
+@property (assign, nonatomic, readwrite, getter=isDismissing) BOOL dismissing;
+@property (strong, nonatomic, readonly) JFObserversController<ObserverType>* observers;
+@property (assign, nonatomic, readwrite, getter=isPresenting) BOOL presenting;
+@property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
 
-+ (instancetype)new NS_UNAVAILABLE;
-+ (instancetype)newWithTitle:(NSString*)title;
-
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithTitle:(NSString*)title;
-
-@end
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
-@protocol JFDialogObserver <NSObject>
-
-@optional
-
-- (void)dialog:(__kindof JFDialog*)sender didDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
-- (void)dialog:(__kindof JFDialog*)sender willDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
-- (void)dialogDidPresent:(__kindof JFDialog*)sender;
-- (void)dialogWillPresent:(__kindof JFDialog*)sender;
-
-@end
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
-@interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> : NSObject
-
-@property (strong, nonatomic, nullable) ButtonType cancelButton;
-@property (assign, nonatomic, readonly, getter=isDismissing) BOOL dismissing;
-@property (copy, nonatomic, nullable) NSArray<ButtonType>* otherButtons;
-@property (strong, nonatomic, nullable) ButtonType preferredButton;
-@property (assign, nonatomic, readonly, getter=isPresenting) BOOL presenting;
-@property (copy, nonatomic, nullable) NSString* title;
-@property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
-
-- (void)addObserver:(ObserverType)observer;
-- (void)removeObserver:(ObserverType)observer;
+- (void)notifyDidDismissWithButton:(ButtonType _Nullable)button;
+- (void)notifyDidPresent;
+- (void)notifyWillDismissWithButton:(ButtonType _Nullable)button;
+- (void)notifyWillPresent;
 
 @end
 

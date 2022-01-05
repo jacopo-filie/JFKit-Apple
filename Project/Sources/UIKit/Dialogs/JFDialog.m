@@ -24,9 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFDialog.h"
-
-@import JFKit;
+#import "JFDialog+Protected.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -36,22 +34,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFDialog (/* Private */)
 
-@property (strong, nonatomic, readonly) JFObserversController<__kindof id<JFDialogObserver>>* observers;
-@property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
-
 @end
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
 @implementation JFDialog
 
 @synthesize cancelButton = _cancelButton;
+@synthesize dismissing = _dismissing;
 @synthesize observers = _observers;
 @synthesize otherButtons = _otherButtons;
 @synthesize preferredButton = _preferredButton;
+@synthesize presenting = _presenting;
 @synthesize title = _title;
 @synthesize visible = _visible;
+
+- (instancetype)init
+{
+	self = [super init];
+	_observers = [JFObserversController<__kindof id<JFDialogObserver>> new];
+	return self;
+}
 
 - (void)addObserver:(__kindof id<JFDialogObserver>)observer
 {
@@ -61,6 +65,42 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeObserver:(__kindof id<JFDialogObserver>)observer
 {
 	[self.observers removeObserver:observer];
+}
+
+- (void)notifyDidDismissWithButton:(__kindof JFDialogButton* _Nullable)button
+{
+	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(dialog:didDismissWithButton:)]) {
+			[observer dialog:self didDismissWithButton:button];
+		}
+	} async:NO];
+}
+
+- (void)notifyDidPresent
+{
+	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(dialogDidPresent:)]) {
+			[observer dialogDidPresent:self];
+		}
+	} async:NO];
+}
+
+- (void)notifyWillDismissWithButton:(__kindof JFDialogButton* _Nullable)button
+{
+	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(dialog:willDismissWithButton:)]) {
+			[observer dialog:self willDismissWithButton:button];
+		}
+	} async:NO];
+}
+
+- (void)notifyWillPresent
+{
+	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(dialogWillPresent:)]) {
+			[observer dialogWillPresent:self];
+		}
+	} async:NO];
 }
 
 @end

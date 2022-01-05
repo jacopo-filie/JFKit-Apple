@@ -36,6 +36,8 @@
 		4E415F281FF6D4B300C252E3 /* JFPersistentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */; };
 		4E415F291FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E415F261FF6D4B200C252E3 /* JFPersistentContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E415F2A1FF6D4B300C252E3 /* JFPersistentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E415F261FF6D4B200C252E3 /* JFPersistentContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E472BBB2784EF1E00CBBE63 /* JFDialog+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E472BBA2784EEE300CBBE63 /* JFDialog+Protected.h */; };
+		4E472BC22784EF1F00CBBE63 /* JFDialog+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E472BBA2784EEE300CBBE63 /* JFDialog+Protected.h */; };
 		4E4E97D52000E3DA00E9CE87 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */; };
 		4E4E97D62000E3DA00E9CE87 /* JFString-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */; };
 		4E4E97D72000E3DA00E9CE87 /* JFColor-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */; };
@@ -307,6 +309,7 @@
 		4E3AC6FE20024115002CE0A1 /* JFError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFError.m; sourceTree = "<group>"; };
 		4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPersistentContainer.m; sourceTree = "<group>"; };
 		4E415F261FF6D4B200C252E3 /* JFPersistentContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPersistentContainer.h; sourceTree = "<group>"; };
+		4E472BBA2784EEE300CBBE63 /* JFDialog+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFDialog+Protected.h"; sourceTree = "<group>"; };
 		4E4E97D12000E3DA00E9CE87 /* JFString-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFString-Tests.m"; sourceTree = "<group>"; };
 		4E4E97D22000E3DA00E9CE87 /* JFColor-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFColor-Tests.m"; sourceTree = "<group>"; };
 		4E4E97D32000E3DA00E9CE87 /* JFVersion-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JFVersion-Tests.m"; sourceTree = "<group>"; };
@@ -497,6 +500,7 @@
 				4E69664927833F9D0076E260 /* JFAlertDialog.m */,
 				4E69663927833CEE0076E260 /* JFDialog.h */,
 				4E69663A27833CEE0076E260 /* JFDialog.m */,
+				4E472BBA2784EEE300CBBE63 /* JFDialog+Protected.h */,
 				4E69666A278343000076E260 /* JFFormDialog.h */,
 				4E69666B278343000076E260 /* JFFormDialog.m */,
 				4E696668278342FE0076E260 /* JFSheetDialog.h */,
@@ -732,6 +736,7 @@
 				4E69665C278340C10076E260 /* JFAlertDialog.h in Headers */,
 				4E69663B27833CEE0076E260 /* JFDialog.h in Headers */,
 				4E7E6AC525F4ECE30045E201 /* UIButton+JFUIKit.h in Headers */,
+				4E472BBB2784EF1E00CBBE63 /* JFDialog+Protected.h in Headers */,
 				4E7E6AC725F4ECE30045E201 /* JFPreprocessorMacros.h in Headers */,
 				4E7E6ACA25F4ECE30045E201 /* JFSliderController.h in Headers */,
 				4E7E6ACB25F4ECE30045E201 /* JFTableViewCell.h in Headers */,
@@ -858,6 +863,7 @@
 				4EFCAE7F25F583F800D508C0 /* JFWindowController.h in Headers */,
 				4EFCAE8025F583F800D508C0 /* JFAppDelegate.h in Headers */,
 				4E696662278340C20076E260 /* JFAlertDialog.h in Headers */,
+				4E472BC22784EF1F00CBBE63 /* JFDialog+Protected.h in Headers */,
 				4EFCAE8325F583F800D508C0 /* JFAlertsController.h in Headers */,
 				4EFCAE8425F583F800D508C0 /* JFUIKit.h in Headers */,
 				4E69667F2783437C0076E260 /* JFFormDialog.h in Headers */,

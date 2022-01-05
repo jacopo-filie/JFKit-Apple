@@ -71,6 +71,23 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 @property (copy, nonatomic, nullable) NSString* message;
 
+- (BOOL)dismiss;
+- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button;
+- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
+- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
+
+- (BOOL)present;
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
+- (BOOL)presentWithTimeout:(NSTimeInterval)timeout;
+- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
+
+#if JF_IOS
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController;
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure;
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout;
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
+#endif
+
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
