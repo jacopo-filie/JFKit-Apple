@@ -80,6 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: -
 
 #if JF_IOS
+API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", ios(2.0, 9.0))
 @interface JFAlertDialogAlertViewImplementation : JFAlertDialogImplementation <UIAlertViewDelegate>
 
 @property (strong, nonatomic, nullable) UIAlertView* alertView;
@@ -98,7 +99,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) JFParameterizedLazy<JFAlertDialogAlertImplementation*, JFAlertDialog*>* alertImplementation;
 #else
 @property (strong, nonatomic) JFParameterizedLazy<JFAlertDialogAlertControllerImplementation*, JFAlertDialog*>* alertControllerImplementation;
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 @property (strong, nonatomic) JFParameterizedLazy<JFAlertDialogAlertViewImplementation*, JFAlertDialog*>* alertViewImplementation;
+#	pragma GCC diagnostic pop
 #endif
 @property (strong, nonatomic, nullable) JFAlertDialogImplementation* currentImplementation;
 
@@ -129,9 +133,12 @@ NS_ASSUME_NONNULL_BEGIN
 	_alertControllerImplementation = [JFParameterizedLazy<JFAlertDialogAlertControllerImplementation*, JFAlertDialog*> newInstance:^JFAlertDialogAlertControllerImplementation*(JFAlertDialog* owner) {
 		return [[JFAlertDialogAlertControllerImplementation alloc] initWithOwner:owner];
 	}];
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	_alertViewImplementation = [JFParameterizedLazy<JFAlertDialogAlertViewImplementation*, JFAlertDialog*> newInstance:^JFAlertDialogAlertViewImplementation*(JFAlertDialog* owner) {
 		return [[JFAlertDialogAlertViewImplementation alloc] initWithOwner:owner];
 	}];
+#	pragma GCC diagnostic pop
 #endif
 	return self;
 }
@@ -384,6 +391,8 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: -
 
 #if JF_IOS
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlertDialogAlertViewImplementation
 
 @synthesize alertView = _alertView;
@@ -536,6 +545,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
+#	pragma GCC diagnostic pop
 #endif
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
