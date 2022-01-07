@@ -36,6 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+// =================================================================================================
+// MARK: Types
+// =================================================================================================
+
 typedef JFBlock JFAlertDialogButtonAction;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -43,7 +47,15 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 @interface JFAlertDialogButton : JFDialogButton
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, readonly, nullable) JFAlertDialogButtonAction action;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 + (instancetype)newWithTitle:(NSString*)title action:(JFAlertDialogButtonAction _Nullable)action;
 - (instancetype)initWithTitle:(NSString*)title action:(JFAlertDialogButtonAction _Nullable)action NS_DESIGNATED_INITIALIZER;
@@ -69,14 +81,26 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 @interface JFAlertDialog : JFDialog <JFAlertDialogButton*, id<JFAlertDialogObserver>>
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (copy, nonatomic, nullable) NSString* message;
 
 #if JF_IOS
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
+
 - (BOOL)dismiss;
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button;
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
 - (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
 #endif
+
+// =================================================================================================
+// MARK: Methods - Presentation (Alert & AlertView)
+// =================================================================================================
 
 - (BOOL)present API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 9.0));
 - (BOOL)presentWithClosure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 9.0));
@@ -84,6 +108,10 @@ typedef JFBlock JFAlertDialogButtonAction;
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:timeout:closure:", ios(2.0, 9.0));
 
 #if JF_IOS
+// =================================================================================================
+// MARK: Methods - Presentation (AlertController)
+// =================================================================================================
+
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController;
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure;
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout;

@@ -36,15 +36,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFAlertDialogImplementation : NSObject
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (copy, nonatomic, nullable) NSArray<JFAlertDialogButton*>* buttons;
 @property (strong, nonatomic, nullable) JFClosure* dismissClosure;
 @property (weak, nonatomic, readonly, nullable) JFAlertDialog* owner;
 @property (strong, nonatomic, nullable) JFClosure* presentClosure;
 @property (strong, nonatomic, nullable) NSTimer* timer;
 
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
+
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithOwner:(JFAlertDialog*)owner NS_DESIGNATED_INITIALIZER;
+
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
 
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
 
@@ -56,7 +68,15 @@ NS_ASSUME_NONNULL_BEGIN
 #if JF_MACOS
 @interface JFAlertDialogAlertImplementation : JFAlertDialogImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, nullable) NSAlert* alert;
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
 
@@ -69,7 +89,15 @@ NS_ASSUME_NONNULL_BEGIN
 #if JF_IOS
 @interface JFAlertDialogAlertControllerImplementation : JFAlertDialogImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, nullable) UIAlertController* alertController;
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
 
@@ -83,7 +111,15 @@ NS_ASSUME_NONNULL_BEGIN
 API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", ios(2.0, 9.0))
 @interface JFAlertDialogAlertViewImplementation : JFAlertDialogImplementation <UIAlertViewDelegate>
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, nullable) UIAlertView* alertView;
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
 
@@ -94,6 +130,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: -
 
 @interface JFAlertDialog (/* Private */)
+
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
 
 #if JF_MACOS
 @property (strong, nonatomic) JFParameterizedLazy<JFAlertDialogAlertImplementation*, JFAlertDialog*>* alertImplementation;
@@ -113,6 +153,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 @implementation JFAlertDialog
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 #if JF_MACOS
 @synthesize alertImplementation = _alertImplementation;
 #else
@@ -121,6 +165,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 #endif
 @synthesize currentImplementation = _currentImplementation;
 @synthesize message = _message;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 - (instancetype)init
 {
@@ -144,6 +192,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 }
 
 #if JF_IOS
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
+
 - (BOOL)dismiss
 {
 	return [self dismissWithClickedButton:nil closure:nil];
@@ -168,6 +220,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return [self dismissWithClickedButton:nil closure:closure];
 }
 #endif
+
+// =================================================================================================
+// MARK: Methods - Presentation (Alert & AlertView)
+// =================================================================================================
 
 - (BOOL)present
 {
@@ -198,6 +254,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 }
 
 #if JF_IOS
+// =================================================================================================
+// MARK: Methods - Presentation (AlertController)
+// =================================================================================================
+
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController
 {
 	return [self presentFromViewController:presentingViewController timeout:0.0 closure:nil];
@@ -222,6 +282,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return [[self.alertControllerImplementation get:self] presentFromViewController:presentingViewController timeout:timeout closure:closure];
 }
 #endif
+
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
 
 - (void)notifyDidDismissWithButton:(JFAlertDialogButton* _Nullable)button
 {
@@ -274,11 +338,19 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 @implementation JFAlertDialogImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize buttons = _buttons;
 @synthesize dismissClosure = _dismissClosure;
 @synthesize owner = _owner;
 @synthesize presentClosure = _presentClosure;
 @synthesize timer = _timer;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 - (instancetype)initWithOwner:(JFAlertDialog*)owner
 {
@@ -287,59 +359,18 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return self;
 }
 
-- (JFAlertDialogButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
-{
-	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
-	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= buttons.count)) {
-		return nil;
-	}
-	
-	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
-}
-
-- (NSInteger)indexOfButton:(JFAlertDialogButton* _Nullable)button
-{
-	if(!button) {
-		return -1;
-	}
-	
-	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
-	return [buttons containsObject:button] ? (NSInteger)[buttons indexOfObject:button] : -1;
-}
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
 
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	return NO;
 }
 
-- (void)performAction:(JFAlertDialogButtonAction _Nullable)action
-{
-	if(action) {
-		action();
-	}
-}
-
-- (void)performDismissClosure
-{
-	JFClosure* closure = self.dismissClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.dismissClosure = nil;
-	[closure execute];
-}
-
-- (void)performPresentClosure
-{
-	JFClosure* closure = self.presentClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.presentClosure = nil;
-	[closure execute];
-}
+// =================================================================================================
+// MARK: Methods - Timer
+// =================================================================================================
 
 - (void)setUpTimerWithTimeout:(NSTimeInterval)timeout
 {
@@ -384,6 +415,59 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	self.timer = nil;
 }
 
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
+- (JFAlertDialogButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
+{
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= buttons.count)) {
+		return nil;
+	}
+	
+	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
+}
+
+- (NSInteger)indexOfButton:(JFAlertDialogButton* _Nullable)button
+{
+	if(!button) {
+		return -1;
+	}
+	
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	return [buttons containsObject:button] ? (NSInteger)[buttons indexOfObject:button] : -1;
+}
+
++ (void)performAction:(JFAlertDialogButtonAction _Nullable)action
+{
+	if(action) {
+		action();
+	}
+}
+
+- (void)performDismissClosure
+{
+	JFClosure* closure = self.dismissClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.dismissClosure = nil;
+	[closure execute];
+}
+
+- (void)performPresentClosure
+{
+	JFClosure* closure = self.presentClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.presentClosure = nil;
+	[closure execute];
+}
+
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -392,13 +476,25 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 #if JF_MACOS
 @implementation JFAlertDialogAlertImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize alert = _alert;
+
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
 
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	[NSApp abortModal];
 	return YES;
 }
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)prepareAlert
 {
@@ -455,7 +551,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	NSInteger buttonIndex = response - NSAlertFirstButtonReturn;
 	
 	JFAlertDialogButton* button = [self buttonAtIndex:buttonIndex];
-	[self performAction:button.action];
+	[JFAlertDialogImplementation performAction:button.action];
 	
 	[self stopAndTearDownTimer];
 	[self.owner notifyWillDismissWithButton:button];
@@ -500,7 +596,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 #if JF_IOS
 @implementation JFAlertDialogAlertControllerImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize alertController = _alertController;
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
 {
@@ -518,7 +622,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 #	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlertDialogAlertViewImplementation
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize alertView = _alertView;
+
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
 
 - (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
@@ -539,11 +651,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	
 	// Dismissing the alert view in this way prevents the system from calling the delegate method
 	// `alertView:clickedButtonAtIndex:`; we have to perform the button action ourselves.
-	[self performAction:button.action];
+	[JFAlertDialogImplementation performAction:button.action];
 	[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
 	
 	return YES;
 }
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
 
 - (BOOL)prepareAlertView
 {
@@ -596,9 +712,13 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return YES;
 }
 
+// =================================================================================================
+// MARK: Methods (UIAlertViewDelegate)
+// =================================================================================================
+
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	[self performAction:[self buttonAtIndex:buttonIndex].action];
+	[JFAlertDialogImplementation performAction:[self buttonAtIndex:buttonIndex].action];
 }
 
 - (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -648,7 +768,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 @implementation JFAlertDialogButton
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize action = _action;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 + (instancetype)newWithTitle:(NSString*)title action:(JFAlertDialogButtonAction _Nullable)action
 {
