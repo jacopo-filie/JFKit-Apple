@@ -69,9 +69,10 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 @optional
 
-- (void)alertDialog:(JFAlertDialog*)sender didDismissWithButton:(JFAlertDialogButton* _Nullable)button;
-- (void)alertDialog:(JFAlertDialog*)sender willDismissWithButton:(JFAlertDialogButton* _Nullable)button;
+- (void)alertDialog:(JFAlertDialog*)sender buttonTapped:(JFAlertDialogButton*)button;
+- (void)alertDialogDidDismiss:(JFAlertDialog*)sender;
 - (void)alertDialogDidPresent:(JFAlertDialog*)sender;
+- (void)alertDialogWillDismiss:(JFAlertDialog*)sender;
 - (void)alertDialogWillPresent:(JFAlertDialog*)sender;
 
 @end

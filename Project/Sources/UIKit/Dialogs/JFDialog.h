@@ -53,9 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
-- (void)dialog:(__kindof JFDialog*)sender didDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
-- (void)dialog:(__kindof JFDialog*)sender willDismissWithButton:(__kindof JFDialogButton* _Nullable)button;
+- (void)dialog:(__kindof JFDialog*)sender buttonTapped:(__kindof JFDialogButton*)button;
+- (void)dialogDidDismiss:(__kindof JFDialog*)sender;
 - (void)dialogDidPresent:(__kindof JFDialog*)sender;
+- (void)dialogWillDismiss:(__kindof JFDialog*)sender;
 - (void)dialogWillPresent:(__kindof JFDialog*)sender;
 
 @end

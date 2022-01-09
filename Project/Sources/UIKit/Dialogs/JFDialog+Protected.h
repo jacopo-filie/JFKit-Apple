@@ -41,9 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readwrite, getter=isPresenting) BOOL presenting;
 @property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
 
-- (void)notifyDidDismissWithButton:(ButtonType _Nullable)button;
+- (void)notifyButtonTapped:(ButtonType)button;
+- (void)notifyDidDismiss;
 - (void)notifyDidPresent;
-- (void)notifyWillDismissWithButton:(ButtonType _Nullable)button;
+- (void)notifyWillDismiss;
 - (void)notifyWillPresent;
 
 @end

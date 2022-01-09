@@ -67,11 +67,20 @@ NS_ASSUME_NONNULL_BEGIN
 	[self.observers removeObserver:observer];
 }
 
-- (void)notifyDidDismissWithButton:(__kindof JFDialogButton* _Nullable)button
+- (void)notifyButtonTapped:(__kindof JFDialogButton*)button
 {
 	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
-		if([observer respondsToSelector:@selector(dialog:didDismissWithButton:)]) {
-			[observer dialog:self didDismissWithButton:button];
+		if([observer respondsToSelector:@selector(dialog:buttonTapped:)]) {
+			[observer dialog:self buttonTapped:button];
+		}
+	} async:NO];
+}
+
+- (void)notifyDidDismiss
+{
+	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(dialogDidDismiss:)]) {
+			[observer dialogDidDismiss:self];
 		}
 	} async:NO];
 }
@@ -85,11 +94,11 @@ NS_ASSUME_NONNULL_BEGIN
 	} async:NO];
 }
 
-- (void)notifyWillDismissWithButton:(__kindof JFDialogButton* _Nullable)button
+- (void)notifyWillDismiss
 {
 	[self.observers notifyObservers:^(__kindof id<JFDialogObserver> observer) {
-		if([observer respondsToSelector:@selector(dialog:willDismissWithButton:)]) {
-			[observer dialog:self willDismissWithButton:button];
+		if([observer respondsToSelector:@selector(dialogWillDismiss:)]) {
+			[observer dialogWillDismiss:self];
 		}
 	} async:NO];
 }

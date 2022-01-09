@@ -20,6 +20,8 @@
 		4E0BF8A31FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E0BF8A41FE08ED20050114D /* JFBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF8A11FE08ED20050114D /* JFBlocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E1C979325F530A900A2EE12 /* JFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ECFE25B1FD8BCD9004EEACE /* JFKit.framework */; };
+		4E25B48D278859DB002172CD /* JFAlertController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E25B48B278859DB002172CD /* JFAlertController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E25B48F278859DB002172CD /* JFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E25B48C278859DB002172CD /* JFAlertController.m */; };
 		4E2D9B3E24E2CDFB0099C00A /* JFBlockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EB0625424E26ECE006B1B98 /* JFBlockWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E2D9B3F24E2CDFB0099C00A /* JFBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0625124E26ECE006B1B98 /* JFBlockWrapper.m */; };
 		4E2D9B4024E2CECA0099C00A /* JFHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EB0625224E26ECE006B1B98 /* JFHook.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -305,6 +307,8 @@
 		4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPreprocessorMacros.h; sourceTree = "<group>"; };
 		4E0BF89E1FE08B400050114D /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
 		4E0BF8A11FE08ED20050114D /* JFBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFBlocks.h; sourceTree = "<group>"; };
+		4E25B48B278859DB002172CD /* JFAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFAlertController.h; sourceTree = "<group>"; };
+		4E25B48C278859DB002172CD /* JFAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFAlertController.m; sourceTree = "<group>"; };
 		4E3AC6FD20024115002CE0A1 /* JFError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFError.h; sourceTree = "<group>"; };
 		4E3AC6FE20024115002CE0A1 /* JFError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFError.m; sourceTree = "<group>"; };
 		4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPersistentContainer.m; sourceTree = "<group>"; };
@@ -599,6 +603,8 @@
 				4EF6AD892051702800A0BFD1 /* JFActivityIndicatorView.m */,
 				4E04E65D21CCF9AC00479981 /* JFAlert.h */,
 				4E04E65C21CCF9AC00479981 /* JFAlert.m */,
+				4E25B48B278859DB002172CD /* JFAlertController.h */,
+				4E25B48C278859DB002172CD /* JFAlertController.m */,
 				4E78298621CD27DE0009A752 /* JFAlertsController.h */,
 				4E78298521CD27DD0009A752 /* JFAlertsController.m */,
 				4E515E172004FAD0008D3234 /* JFAppDelegate.h */,
@@ -738,6 +744,7 @@
 				4E7E6AC525F4ECE30045E201 /* UIButton+JFUIKit.h in Headers */,
 				4E472BBB2784EF1E00CBBE63 /* JFDialog+Protected.h in Headers */,
 				4E7E6AC725F4ECE30045E201 /* JFPreprocessorMacros.h in Headers */,
+				4E25B48D278859DB002172CD /* JFAlertController.h in Headers */,
 				4E7E6ACA25F4ECE30045E201 /* JFSliderController.h in Headers */,
 				4E7E6ACB25F4ECE30045E201 /* JFTableViewCell.h in Headers */,
 				4E7E6ACC25F4ECE30045E201 /* JFAlert.h in Headers */,
@@ -1095,6 +1102,7 @@
 				4E7E6AB025F4ECE30045E201 /* JFAppDelegate.m in Sources */,
 				4E69666D278343010076E260 /* JFFormDialog.m in Sources */,
 				4E7E6AB425F4ECE30045E201 /* JFKeyboardHelper.m in Sources */,
+				4E25B48F278859DB002172CD /* JFAlertController.m in Sources */,
 				4E7E6AB725F4ECE30045E201 /* JFActivityIndicatorView.m in Sources */,
 				4E69664B27833F9E0076E260 /* JFAlertDialog.m in Sources */,
 				4E69668B2783439D0076E260 /* JFSheetDialog.m in Sources */,
