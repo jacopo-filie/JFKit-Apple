@@ -44,10 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties
 // =================================================================================================
 
-@property (copy, nonatomic, nullable) NSArray<JFAlertDialogButton*>* buttons;
-@property (strong, nonatomic, nullable) JFClosure* dismissClosure;
 @property (weak, nonatomic, readonly, nullable) JFAlertDialog* owner;
-@property (strong, nonatomic, nullable) JFClosure* presentClosure;
 @property (strong, nonatomic, nullable) NSTimer* timer;
 
 // =================================================================================================
@@ -62,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
 
 @end
 
@@ -77,6 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @property (strong, nonatomic, nullable) NSAlert* alert;
+@property (strong, nonatomic, nullable) NSArray<JFAlertDialogButton*>* buttons;
+@property (strong, nonatomic, nullable) JFClosure* dismissClosure;
+@property (strong, nonatomic, nullable) JFClosure* presentClosure;
 
 // =================================================================================================
 // MARK: Methods - Presentation
@@ -122,6 +122,9 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // =================================================================================================
 
 @property (strong, nonatomic, nullable) UIAlertView* alertView;
+@property (strong, nonatomic, nullable) NSArray<JFAlertDialogButton*>* buttons;
+@property (strong, nonatomic, nullable) JFClosure* dismissClosure;
+@property (strong, nonatomic, nullable) JFClosure* presentClosure;
 
 // =================================================================================================
 // MARK: Methods - Presentation
@@ -204,26 +207,26 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (BOOL)dismiss
 {
-	return [self dismissWithClickedButton:nil closure:nil];
+	return [self dismissWithTappedButton:nil closure:nil];
 }
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button
 {
-	return [self dismissWithClickedButton:button closure:nil];
+	return [self dismissWithTappedButton:button closure:nil];
 }
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	if([self isDismissing] || ![self isVisible]) {
 		return NO;
 	}
 	
-	return [self.currentImplementation dismissWithClickedButton:button closure:closure];
+	return [self.currentImplementation dismissWithTappedButton:button closure:closure];
 }
 
 - (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure
 {
-	return [self dismissWithClickedButton:nil closure:closure];
+	return [self dismissWithTappedButton:nil closure:closure];
 }
 #endif
 
@@ -357,10 +360,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Properties
 // =================================================================================================
 
-@synthesize buttons = _buttons;
-@synthesize dismissClosure = _dismissClosure;
 @synthesize owner = _owner;
-@synthesize presentClosure = _presentClosure;
 @synthesize timer = _timer;
 
 // =================================================================================================
@@ -378,7 +378,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	return NO;
 }
@@ -395,7 +395,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	
 	JFWeakifySelf;
 	JFTimerHandlerBlock block = ^(NSTimer* timer) {
-		[weakSelf dismissWithClickedButton:nil closure:nil];
+		[weakSelf dismissWithTappedButton:nil closure:nil];
 	};
 	
 	if(@available(iOS 10.0, macOS 12.0, *)) {
@@ -434,53 +434,11 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (JFAlertDialogButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
-{
-	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
-	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= buttons.count)) {
-		return nil;
-	}
-	
-	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
-}
-
-- (NSInteger)indexOfButton:(JFAlertDialogButton* _Nullable)button
-{
-	if(!button) {
-		return -1;
-	}
-	
-	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
-	return [buttons containsObject:button] ? (NSInteger)[buttons indexOfObject:button] : -1;
-}
-
 + (void)performAction:(JFAlertDialogButtonAction _Nullable)action
 {
 	if(action) {
 		action();
 	}
-}
-
-- (void)performDismissClosure
-{
-	JFClosure* closure = self.dismissClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.dismissClosure = nil;
-	[closure execute];
-}
-
-- (void)performPresentClosure
-{
-	JFClosure* closure = self.presentClosure;
-	if(!closure) {
-		return;
-	}
-	
-	self.presentClosure = nil;
-	[closure execute];
 }
 
 @end
@@ -496,12 +454,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // =================================================================================================
 
 @synthesize alert = _alert;
+@synthesize buttons = _buttons;
+@synthesize dismissClosure = _dismissClosure;
+@synthesize presentClosure = _presentClosure;
 
 // =================================================================================================
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	[NSApp abortModal];
 	return YES;
@@ -577,10 +538,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	owner.visible = NO;
 	[owner notifyDidDismiss];
 	
-	[JFAlertDialogImplementation performAction:button.action];
-	[owner notifyButtonTapped:button];
-	
 	[self performDismissClosure];
+	
+	[owner notifyButtonTapped:button];
+	[JFAlertDialogImplementation performAction:button.action];
 }
 
 - (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
@@ -604,6 +565,52 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return YES;
 }
 
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
+- (JFAlertDialogButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
+{
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= buttons.count)) {
+		return nil;
+	}
+	
+	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
+}
+
+- (NSInteger)indexOfButton:(JFAlertDialogButton* _Nullable)button
+{
+	if(!button) {
+		return -1;
+	}
+	
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	return [buttons containsObject:button] ? (NSInteger)[buttons indexOfObject:button] : -1;
+}
+
+- (void)performDismissClosure
+{
+	JFClosure* closure = self.dismissClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.dismissClosure = nil;
+	[closure execute];
+}
+
+- (void)performPresentClosure
+{
+	JFClosure* closure = self.presentClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.presentClosure = nil;
+	[closure execute];
+}
+
 @end
 #endif
 
@@ -625,7 +632,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	if(self.clickedButton) {
 		return NO;
@@ -638,15 +645,16 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	self.clickedButton = button;
 	
 	JFBlock block = ^{
-		[self tearDownAlertController];
+		[closure execute];
 		if(button) {
 			[self.owner notifyButtonTapped:button];
+			[JFAlertDialogImplementation performAction:button.action];
 		}
-		[JFAlertDialogImplementation performAction:button.action];
-		[closure execute];
 	};
 	
 	JFAlertController* alertController = self.alertController;
+	self.alertController = nil;
+	
 	UIViewController* presentingViewController = alertController.presentingViewController;
 	if(presentingViewController && ![alertController isBeingDismissed]) {
 		[presentingViewController dismissViewControllerAnimated:YES completion:block];
@@ -688,7 +696,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 {
 	JFWeakifySelf;
 	return [UIAlertAction actionWithTitle:button.title style:style handler:^(UIAlertAction* action) {
-		[weakSelf dismissWithClickedButton:button closure:nil];
+		[weakSelf dismissWithTappedButton:button closure:nil];
 	}];
 }
 
@@ -740,11 +748,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return YES;
 }
 
-- (void)tearDownAlertController
-{
-	self.alertController = nil;
-}
-
 // =================================================================================================
 // MARK: Methods (JFAlertControllerDelegate)
 // =================================================================================================
@@ -760,8 +763,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (void)alertControllerDidDisappear:(JFAlertController*)sender
 {
-	[self tearDownAlertController];
-	
 	JFAlertDialog* owner = self.owner;
 	owner.dismissing = NO;
 	owner.visible = NO;
@@ -776,7 +777,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 		// alert controller calls the clicked button action only after the dismissal of the view, so
 		// we have no way to know, in this moment, if a button was clicked or the view controller
 		// was forcefully dismissed from outside.
-		[weakSelf dismissWithClickedButton:nil closure:nil];
+		[weakSelf dismissWithTappedButton:nil closure:nil];
 	});
 }
 
@@ -809,12 +810,15 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // =================================================================================================
 
 @synthesize alertView = _alertView;
+@synthesize buttons = _buttons;
+@synthesize dismissClosure = _dismissClosure;
+@synthesize presentClosure = _presentClosure;
 
 // =================================================================================================
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	UIAlertView* alertView = self.alertView;
 	if(!alertView) {
@@ -826,14 +830,10 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	NSInteger buttonIndex = [self indexOfButton:button];
 	if(buttonIndex < 0) {
 		buttonIndex = alertView.cancelButtonIndex;
-		button = [self buttonAtIndex:buttonIndex];
 	}
 	
 	self.owner.dismissing = YES;
 	
-	// Dismissing the alert view in this way prevents the system from calling the delegate method
-	// `alertView:clickedButtonAtIndex:`; we have to perform the button action ourselves.
-	[JFAlertDialogImplementation performAction:button.action];
 	[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
 	
 	return YES;
@@ -895,18 +895,57 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 }
 
 // =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
+- (JFAlertDialogButton* _Nullable)buttonAtIndex:(NSInteger)buttonIndex
+{
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	if((buttonIndex < 0) || ((NSUInteger)buttonIndex >= buttons.count)) {
+		return nil;
+	}
+	
+	return [buttons objectAtIndex:(NSUInteger)buttonIndex];
+}
+
+- (NSInteger)indexOfButton:(JFAlertDialogButton* _Nullable)button
+{
+	if(!button) {
+		return -1;
+	}
+	
+	NSArray<JFAlertDialogButton*>* buttons = self.buttons;
+	return [buttons containsObject:button] ? (NSInteger)[buttons indexOfObject:button] : -1;
+}
+
+- (void)performDismissClosure
+{
+	JFClosure* closure = self.dismissClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.dismissClosure = nil;
+	[closure execute];
+}
+
+- (void)performPresentClosure
+{
+	JFClosure* closure = self.presentClosure;
+	if(!closure) {
+		return;
+	}
+	
+	self.presentClosure = nil;
+	[closure execute];
+}
+
+// =================================================================================================
 // MARK: Methods (UIAlertViewDelegate)
 // =================================================================================================
 
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	LogMethod;
-	[JFAlertDialogImplementation performAction:[self buttonAtIndex:buttonIndex].action];
-}
-
 - (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	LogMethod;
 	self.alertView = nil;
 	self.buttons = nil;
 	
@@ -916,18 +955,22 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	[owner notifyDidDismiss];
 	
 	[self performDismissClosure];
+	
+	JFAlertDialogButton* button = [self buttonAtIndex:buttonIndex];
+	if(button) {
+		[owner notifyButtonTapped:button];
+		[JFAlertDialogImplementation performAction:button.action];
+	}
 }
 
 - (void)alertView:(UIAlertView*)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	LogMethod;
 	[self stopAndTearDownTimer];
 	[self.owner notifyWillDismiss];
 }
 
 - (void)didPresentAlertView:(UIAlertView*)alertView
 {
-	LogMethod;
 	[self startTimer];
 	[self performPresentClosure];
 	
@@ -938,7 +981,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (void)willPresentAlertView:(UIAlertView*)alertView
 {
-	LogMethod;
 	JFAlertDialog* owner = self.owner;
 	owner.visible = YES;
 	[owner notifyWillPresent];

@@ -94,8 +94,8 @@ typedef JFBlock JFAlertDialogButtonAction;
 // =================================================================================================
 
 - (BOOL)dismiss;
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button;
-- (BOOL)dismissWithClickedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button;
+- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
 - (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
 #endif
 
