@@ -30,16 +30,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-@interface JFDialog (/* Private */)
-
-@end
-
 //  –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
 
 @implementation JFDialog
+
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
 
 @synthesize cancelButton = _cancelButton;
 @synthesize dismissing = _dismissing;
@@ -50,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize title = _title;
 @synthesize visible = _visible;
 
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
+
 - (instancetype)init
 {
 	self = [super init];
@@ -57,15 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 	return self;
 }
 
-- (void)addObserver:(__kindof id<JFDialogObserver>)observer
-{
-	[self.observers addObserver:observer];
-}
-
-- (void)removeObserver:(__kindof id<JFDialogObserver>)observer
-{
-	[self.observers removeObserver:observer];
-}
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
 
 - (void)notifyButtonTapped:(__kindof JFDialogButton*)button
 {
@@ -112,6 +107,20 @@ NS_ASSUME_NONNULL_BEGIN
 	} async:NO];
 }
 
+// =================================================================================================
+// MARK: Methods - Observers
+// =================================================================================================
+
+- (void)addObserver:(__kindof id<JFDialogObserver>)observer
+{
+	[self.observers addObserver:observer];
+}
+
+- (void)removeObserver:(__kindof id<JFDialogObserver>)observer
+{
+	[self.observers removeObserver:observer];
+}
+
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -119,7 +128,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation JFDialogButton
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @synthesize title = _title;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 + (instancetype)newWithTitle:(NSString*)title
 {

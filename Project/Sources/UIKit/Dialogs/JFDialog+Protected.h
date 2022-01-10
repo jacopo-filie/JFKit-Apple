@@ -36,10 +36,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> (/* Protected */)
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (assign, nonatomic, readwrite, getter=isDismissing) BOOL dismissing;
 @property (strong, nonatomic, readonly) JFObserversController<ObserverType>* observers;
 @property (assign, nonatomic, readwrite, getter=isPresenting) BOOL presenting;
 @property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
+
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
 
 - (void)notifyButtonTapped:(ButtonType)button;
 - (void)notifyDidDismiss;

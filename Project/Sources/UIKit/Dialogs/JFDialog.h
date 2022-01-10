@@ -36,11 +36,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFDialogButton : NSObject
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (copy, nonatomic, readonly) NSString* title;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 + (instancetype)new NS_UNAVAILABLE;
 + (instancetype)newWithTitle:(NSString*)title;
-
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTitle:(NSString*)title;
 
@@ -66,6 +73,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> : NSObject
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, nullable) ButtonType cancelButton;
 @property (assign, nonatomic, readonly, getter=isDismissing) BOOL dismissing;
 @property (copy, nonatomic, nullable) NSArray<ButtonType>* otherButtons;
@@ -73,6 +84,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly, getter=isPresenting) BOOL presenting;
 @property (copy, nonatomic, nullable) NSString* title;
 @property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
+
+// =================================================================================================
+// MARK: Methods - Observers
+// =================================================================================================
 
 - (void)addObserver:(ObserverType)observer;
 - (void)removeObserver:(ObserverType)observer;
