@@ -25,6 +25,7 @@
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
+@import JFKit;
 
 @class JFDialog;
 
@@ -80,7 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) ButtonType cancelButton;
 @property (assign, nonatomic, readonly, getter=isDismissing) BOOL dismissing;
 @property (copy, nonatomic, nullable) NSArray<ButtonType>* otherButtons;
+#if JF_IOS
 @property (strong, nonatomic, nullable) ButtonType preferredButton;
+#endif
 @property (assign, nonatomic, readonly, getter=isPresenting) BOOL presenting;
 @property (copy, nonatomic, nullable) NSString* title;
 @property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;

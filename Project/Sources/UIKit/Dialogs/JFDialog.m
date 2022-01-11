@@ -42,7 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize dismissing = _dismissing;
 @synthesize observers = _observers;
 @synthesize otherButtons = _otherButtons;
+#if JF_IOS
 @synthesize preferredButton = _preferredButton;
+#endif
 @synthesize presenting = _presenting;
 @synthesize title = _title;
 @synthesize visible = _visible;
