@@ -946,6 +946,8 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+	JFAlertDialogButton* button = [self buttonAtIndex:buttonIndex];
+	
 	self.alertView = nil;
 	self.buttons = nil;
 	
@@ -956,7 +958,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	
 	[self performDismissClosure];
 	
-	JFAlertDialogButton* button = [self buttonAtIndex:buttonIndex];
 	if(button) {
 		[owner notifyButtonTapped:button];
 		[JFAlertDialogImplementation performAction:button.action];
