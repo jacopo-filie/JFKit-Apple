@@ -92,9 +92,9 @@ typedef JFBlock JFAlertDialogButtonAction;
 // =================================================================================================
 
 - (BOOL)dismiss;
+- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
 - (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button;
 - (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
 #endif
 
 // =================================================================================================
@@ -103,8 +103,6 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 - (BOOL)present API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 9.0));
 - (BOOL)presentWithClosure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 9.0));
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:timeout:", ios(2.0, 9.0));
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:timeout:closure:", ios(2.0, 9.0));
 
 #if JF_IOS
 // =================================================================================================
@@ -113,8 +111,6 @@ typedef JFBlock JFAlertDialogButtonAction;
 
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController;
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure;
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout;
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
 #endif
 
 @end

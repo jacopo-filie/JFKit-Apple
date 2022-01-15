@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Presentation
 // =================================================================================================
 
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
 
 @end
 #endif
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Presentation
 // =================================================================================================
 
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure;
 
 @end
 #endif
@@ -130,7 +130,7 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Presentation
 // =================================================================================================
 
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure;
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
 
 @end
 #endif
@@ -210,6 +210,11 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return [self dismissWithTappedButton:nil closure:nil];
 }
 
+- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure
+{
+	return [self dismissWithTappedButton:nil closure:closure];
+}
+
 - (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button
 {
 	return [self dismissWithTappedButton:button closure:nil];
@@ -223,11 +228,6 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	
 	return [self.currentImplementation dismissWithTappedButton:button closure:closure];
 }
-
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure
-{
-	return [self dismissWithTappedButton:nil closure:closure];
-}
 #endif
 
 // =================================================================================================
@@ -236,29 +236,19 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (BOOL)present
 {
-	return [self presentWithTimeout:0.0 closure:nil];
+	return [self presentWithClosure:nil];
 }
 
 - (BOOL)presentWithClosure:(JFClosure* _Nullable)closure
-{
-	return [self presentWithTimeout:0.0 closure:closure];
-}
-
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout
-{
-	return [self presentWithTimeout:timeout closure:nil];
-}
-
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
 {
 	if([self isPresenting] || [self isVisible]) {
 		return NO;
 	}
 	
 #if JF_MACOS
-	return [[self.alertImplementation get:self] presentWithTimeout:timeout closure:closure];
+	return [[self.alertImplementation get:self] presentWithClosure:closure];
 #else
-	return [[self.alertViewImplementation get:self] presentWithTimeout:timeout closure:closure];
+	return [[self.alertViewImplementation get:self] presentWithClosure:closure];
 #endif
 }
 
@@ -269,26 +259,16 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController
 {
-	return [self presentFromViewController:presentingViewController timeout:0.0 closure:nil];
+	return [self presentFromViewController:presentingViewController closure:nil];
 }
 
 - (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure
-{
-	return [self presentFromViewController:presentingViewController timeout:0.0 closure:closure];
-}
-
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout
-{
-	return [self presentFromViewController:presentingViewController timeout:timeout closure:nil];
-}
-
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
 {
 	if([self isPresenting] || [self isVisible]) {
 		return NO;
 	}
 	
-	return [[self.alertControllerImplementation get:self] presentFromViewController:presentingViewController timeout:timeout closure:closure];
+	return [[self.alertControllerImplementation get:self] presentFromViewController:presentingViewController closure:closure];
 }
 #endif
 
@@ -387,8 +367,9 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Timer
 // =================================================================================================
 
-- (void)setUpTimerWithTimeout:(NSTimeInterval)timeout
+- (void)setUpTimer
 {
+	NSTimeInterval timeout = self.owner.timeout;
 	if(!JFIsFloatValueGreaterThanValue(timeout, 0.0, NSDecimalNoScale)) {
 		return;
 	}
@@ -544,13 +525,13 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	[JFAlertDialogImplementation performAction:button.action];
 }
 
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure
 {
 	if(![self prepareAlert]) {
 		return NO;
 	}
 	
-	[self setUpTimerWithTimeout:timeout];
+	[self setUpTimer];
 	
 	JFAlertDialog* owner = self.owner;
 	owner.currentImplementation = self;
@@ -669,13 +650,13 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 // MARK: Methods - Presentation
 // =================================================================================================
 
-- (BOOL)presentFromViewController:(UIViewController*)presentingViewController timeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure
 {
 	if(presentingViewController.presentedViewController || ![self setUpAlertController]) {
 		return NO;
 	}
 	
-	[self setUpTimerWithTimeout:timeout];
+	[self setUpTimer];
 	
 	JFAlertDialog* owner = self.owner;
 	owner.currentImplementation = self;
@@ -876,13 +857,13 @@ API_DEPRECATED_WITH_REPLACEMENT("JFAlertDialogAlertControllerImplementation", io
 	return YES;
 }
 
-- (BOOL)presentWithTimeout:(NSTimeInterval)timeout closure:(JFClosure* _Nullable)closure
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure
 {
 	if(![self prepareAlertView]) {
 		return NO;
 	}
 	
-	[self setUpTimerWithTimeout:timeout];
+	[self setUpTimer];
 	
 	JFAlertDialog* owner = self.owner;
 	owner.currentImplementation = self;

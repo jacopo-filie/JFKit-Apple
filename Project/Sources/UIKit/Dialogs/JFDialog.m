@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize preferredButton = _preferredButton;
 #endif
 @synthesize presenting = _presenting;
+@synthesize timeout = _timeout;
 @synthesize title = _title;
 @synthesize visible = _visible;
 
