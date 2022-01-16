@@ -40,10 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)alertDialog:(JFAlertDialog*)sender buttonTapped:(JFAlertDialogButton* _Nullable)button;
-- (void)alertDialogDidAppear:(JFAlertDialog*)sender;
-- (void)alertDialogDidDisappear:(JFAlertDialog*)sender;
-- (void)alertDialogWillAppear:(JFAlertDialog*)sender;
-- (void)alertDialogWillDisappear:(JFAlertDialog*)sender;
+- (void)alertDialogHasBeenDismissed:(JFAlertDialog*)sender;
+- (void)alertDialogHasBeenPresented:(JFAlertDialog*)sender;
+- (void)alertDialogWillBeDismissed:(JFAlertDialog*)sender;
+- (void)alertDialogWillBePresented:(JFAlertDialog*)sender;
 
 @end
 

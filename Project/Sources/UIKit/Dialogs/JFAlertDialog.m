@@ -25,6 +25,7 @@
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 #import "JFAlertDialog.h"
+#import "JFDialog+Protected.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -45,6 +46,65 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #endif
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
+
+- (void)notifyButtonTapped:(JFAlertDialogButton*)button
+{
+	[self.observers notifyObservers:^(id<JFAlertDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(alertDialog:buttonTapped:)]) {
+			[observer alertDialog:self buttonTapped:button];
+		}
+	} async:NO];
+	
+	[super notifyButtonTapped:button];
+}
+
+- (void)notifyHasBeenDismissed
+{
+	[self.observers notifyObservers:^(id<JFAlertDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(alertDialogHasBeenDismissed:)]) {
+			[observer alertDialogHasBeenDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenDismissed];
+}
+
+- (void)notifyHasBeenPresented
+{
+	[self.observers notifyObservers:^(id<JFAlertDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(alertDialogHasBeenPresented:)]) {
+			[observer alertDialogHasBeenPresented:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenPresented];
+}
+
+- (void)notifyWillBeDismissed
+{
+	[self.observers notifyObservers:^(id<JFAlertDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(alertDialogWillBeDismissed:)]) {
+			[observer alertDialogWillBeDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBeDismissed];
+}
+
+- (void)notifyWillBePresented
+{
+	[self.observers notifyObservers:^(id<JFAlertDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(alertDialogWillBePresented:)]) {
+			[observer alertDialogWillBePresented:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBePresented];
+}
+
 // =================================================================================================
 // MARK: Methods - Presentation
 // =================================================================================================

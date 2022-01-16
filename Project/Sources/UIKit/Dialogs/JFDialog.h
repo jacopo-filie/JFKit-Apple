@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) ButtonType preferredButton;
 @property (assign, nonatomic) NSTimeInterval timeout;
 
+@property (assign, nonatomic, readonly, getter=isBeingDismissed) BOOL beingDismissed;
+@property (assign, nonatomic, readonly, getter=isBeingPresented) BOOL beingPresented;
 @property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
 
 // =================================================================================================

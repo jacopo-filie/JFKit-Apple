@@ -24,6 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+#import "JFDialog+Protected.h"
 #import "JFFormDialog.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -47,6 +48,65 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)dismissWithTappedButton:(JFFormDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	return NO;
+}
+
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
+
+- (void)notifyButtonTapped:(JFFormDialogButton*)button
+{
+	[self.observers notifyObservers:^(id<JFFormDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(formDialog:buttonTapped:)]) {
+			[observer formDialog:self buttonTapped:button];
+		}
+	} async:NO];
+	
+	[super notifyButtonTapped:button];
+}
+
+- (void)notifyHasBeenDismissed
+{
+	[self.observers notifyObservers:^(id<JFFormDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(formDialogHasBeenDismissed:)]) {
+			[observer formDialogHasBeenDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenDismissed];
+}
+
+- (void)notifyHasBeenPresented
+{
+	[self.observers notifyObservers:^(id<JFFormDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(formDialogHasBeenPresented:)]) {
+			[observer formDialogHasBeenPresented:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenPresented];
+}
+
+- (void)notifyWillBeDismissed
+{
+	[self.observers notifyObservers:^(id<JFFormDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(formDialogWillBeDismissed:)]) {
+			[observer formDialogWillBeDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBeDismissed];
+}
+
+- (void)notifyWillBePresented
+{
+	[self.observers notifyObservers:^(id<JFFormDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(formDialogWillBePresented:)]) {
+			[observer formDialogWillBePresented:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBePresented];
 }
 
 // =================================================================================================

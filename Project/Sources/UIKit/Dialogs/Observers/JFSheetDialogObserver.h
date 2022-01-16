@@ -40,10 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)sheetDialog:(JFSheetDialog*)sender buttonTapped:(JFSheetDialogButton* _Nullable)button;
-- (void)sheetDialogDidAppear:(JFSheetDialog*)sender;
-- (void)sheetDialogDidDisappear:(JFSheetDialog*)sender;
-- (void)sheetDialogWillAppear:(JFSheetDialog*)sender;
-- (void)sheetDialogWillDisappear:(JFSheetDialog*)sender;
+- (void)sheetDialogHasBeenDismissed:(JFSheetDialog*)sender;
+- (void)sheetDialogHasBeenPresented:(JFSheetDialog*)sender;
+- (void)sheetDialogWillBeDismissed:(JFSheetDialog*)sender;
+- (void)sheetDialogWillBePresented:(JFSheetDialog*)sender;
 
 @end
 

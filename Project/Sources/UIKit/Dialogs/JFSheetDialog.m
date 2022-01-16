@@ -24,6 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+#import "JFDialog+Protected.h"
 #import "JFSheetDialog.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -49,6 +50,65 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)dismissWithTappedButton:(JFSheetDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	return NO;
+}
+
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
+
+- (void)notifyButtonTapped:(JFSheetDialogButton*)button
+{
+	[self.observers notifyObservers:^(id<JFSheetDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(sheetDialog:buttonTapped:)]) {
+			[observer sheetDialog:self buttonTapped:button];
+		}
+	} async:NO];
+	
+	[super notifyButtonTapped:button];
+}
+
+- (void)notifyHasBeenDismissed
+{
+	[self.observers notifyObservers:^(id<JFSheetDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(sheetDialogHasBeenDismissed:)]) {
+			[observer sheetDialogHasBeenDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenDismissed];
+}
+
+- (void)notifyHasBeenPresented
+{
+	[self.observers notifyObservers:^(id<JFSheetDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(sheetDialogHasBeenPresented:)]) {
+			[observer sheetDialogHasBeenPresented:self];
+		}
+	} async:NO];
+	
+	[super notifyHasBeenPresented];
+}
+
+- (void)notifyWillBeDismissed
+{
+	[self.observers notifyObservers:^(id<JFSheetDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(sheetDialogWillBeDismissed:)]) {
+			[observer sheetDialogWillBeDismissed:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBeDismissed];
+}
+
+- (void)notifyWillBePresented
+{
+	[self.observers notifyObservers:^(id<JFSheetDialogObserver> observer) {
+		if([observer respondsToSelector:@selector(sheetDialogWillBePresented:)]) {
+			[observer sheetDialogWillBePresented:self];
+		}
+	} async:NO];
+	
+	[super notifyWillBePresented];
 }
 
 // =================================================================================================

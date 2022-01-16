@@ -40,10 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)formDialog:(JFFormDialog*)sender buttonTapped:(JFFormDialogButton* _Nullable)button;
-- (void)formDialogDidAppear:(JFFormDialog*)sender;
-- (void)formDialogDidDisappear:(JFFormDialog*)sender;
-- (void)formDialogWillAppear:(JFFormDialog*)sender;
-- (void)formDialogWillDisappear:(JFFormDialog*)sender;
+- (void)formDialogHasBeenDismissed:(JFFormDialog*)sender;
+- (void)formDialogHasBeenPresented:(JFFormDialog*)sender;
+- (void)formDialogWillBeDismissed:(JFFormDialog*)sender;
+- (void)formDialogWillBePresented:(JFFormDialog*)sender;
 
 @end
 

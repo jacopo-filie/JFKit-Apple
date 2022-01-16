@@ -476,6 +476,7 @@
 		4EF7250F20005E170080136D /* JFConnectionMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFConnectionMachine.h; sourceTree = "<group>"; };
 		4EF7251020005E170080136D /* JFConnectionMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFConnectionMachine.m; sourceTree = "<group>"; };
 		4EFCAE8925F583F800D508C0 /* JFUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JFUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EFF418D27946AB9006556C4 /* JFDialog+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFDialog+Protected.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +583,7 @@
 				4E69664A27833F9D0076E260 /* JFAlertDialog.h */,
 				4E69664927833F9D0076E260 /* JFAlertDialog.m */,
 				4E69663927833CEE0076E260 /* JFDialog.h */,
+				4EFF418D27946AB9006556C4 /* JFDialog+Protected.h */,
 				4E69663A27833CEE0076E260 /* JFDialog.m */,
 				4E69666A278343000076E260 /* JFFormDialog.h */,
 				4E69666B278343000076E260 /* JFFormDialog.m */,

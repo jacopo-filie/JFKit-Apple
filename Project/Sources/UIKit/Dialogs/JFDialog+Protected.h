@@ -24,10 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@import Foundation;
-
-@class JFDialog;
-@class JFDialogButton;
+#import "JFDialog.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -35,15 +32,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@protocol JFDialogObserver <NSObject>
+@interface JFDialog<__covariant ButtonType : JFDialogButton*, __covariant ObserverType : id<JFDialogObserver>> (/* Protected */)
 
-@optional
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
 
-- (void)dialog:(__kindof JFDialog*)sender buttonTapped:(__kindof JFDialogButton*)button;
-- (void)dialogHasBeenDismissed:(__kindof JFDialog*)sender;
-- (void)dialogHasBeenPresented:(__kindof JFDialog*)sender;
-- (void)dialogWillBeDismissed:(__kindof JFDialog*)sender;
-- (void)dialogWillBePresented:(__kindof JFDialog*)sender;
+@property (strong, nonatomic, readonly) JFObserversController<ObserverType>* observers;
+
+@property (assign, nonatomic, readwrite, getter=isBeingDismissed) BOOL beingDismissed;
+@property (assign, nonatomic, readwrite, getter=isBeingPresented) BOOL beingPresented;
+@property (assign, nonatomic, readwrite, getter=isVisible) BOOL visible;
+
+// =================================================================================================
+// MARK: Methods - Notifications
+// =================================================================================================
+
+- (void)notifyButtonTapped:(ButtonType)button;
+- (void)notifyHasBeenDismissed;
+- (void)notifyHasBeenPresented;
+- (void)notifyWillBeDismissed;
+- (void)notifyWillBePresented;
 
 @end
 
