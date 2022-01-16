@@ -39,21 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Dismissal
 // =================================================================================================
 
-- (BOOL)dismiss
-{
-	return [self dismissWithTappedButton:nil closure:nil];
-}
-
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure
-{
-	return [self dismissWithTappedButton:nil closure:closure];
-}
-
-- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button
-{
-	return [self dismissWithTappedButton:button closure:nil];
-}
-
 - (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure
 {
 	return NO;
@@ -65,21 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 #if JF_IOS
-- (BOOL)presentFromViewController:(UIViewController*)presenter
-{
-	return [self presentFromViewController:presenter closure:nil];
-}
-
 - (BOOL)presentFromViewController:(UIViewController*)presenter closure:(JFClosure* _Nullable)closure
 {
 	return NO;
 }
 #else
-- (BOOL)present
-{
-	return [self presentWithClosure:nil];
-}
-
 - (BOOL)presentWithClosure:(JFClosure* _Nullable)closure
 {
 	return NO;

@@ -25,6 +25,7 @@
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @import Foundation;
+@import JFKit;
 
 #import "JFDialogButton.h"
 #import "JFDialogObserver.h"
@@ -54,11 +55,32 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly, getter=isVisible) BOOL visible;
 
 // =================================================================================================
-// MARK: Methods
+// MARK: Methods - Dismissal
+// =================================================================================================
+
+- (BOOL)dismiss;
+- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
+- (BOOL)dismissWithTappedButton:(ButtonType _Nullable)button;
+- (BOOL)dismissWithTappedButton:(ButtonType _Nullable)button closure:(JFClosure* _Nullable)closure;
+
+// =================================================================================================
+// MARK: Methods - Observers
 // =================================================================================================
 
 - (void)addObserver:(ObserverType)observer;
 - (void)removeObserver:(ObserverType)observer;
+
+// =================================================================================================
+// MARK: Methods - Presentation
+// =================================================================================================
+
+#if JF_IOS
+- (BOOL)presentFromViewController:(UIViewController*)presenter;
+- (BOOL)presentFromViewController:(UIViewController*)presenter closure:(JFClosure* _Nullable)closure;
+#else
+- (BOOL)present;
+- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
+#endif
 
 @end
 

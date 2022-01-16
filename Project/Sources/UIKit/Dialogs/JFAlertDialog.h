@@ -36,29 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JFAlertDialog : JFDialog<JFAlertDialogButton*, id<JFAlertDialogObserver>>
 
-#if JF_IOS
-// =================================================================================================
-// MARK: Methods - Dismissal
-// =================================================================================================
-
-- (BOOL)dismiss;
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
-- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button;
-- (BOOL)dismissWithTappedButton:(JFAlertDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
-
-#endif
-// =================================================================================================
-// MARK: Methods - Presentation
-// =================================================================================================
-
-#if JF_IOS
-- (BOOL)presentFromViewController:(UIViewController*)presenter;
-- (BOOL)presentFromViewController:(UIViewController*)presenter closure:(JFClosure* _Nullable)closure;
-#else
-- (BOOL)present;
-- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
-#endif
-
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

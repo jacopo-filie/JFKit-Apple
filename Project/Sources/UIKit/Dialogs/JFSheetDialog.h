@@ -54,27 +54,6 @@ typedef void (^JFSheetDialogPopoverConfigurator)(UIPopoverPresentationController
 @property (strong, nonatomic, nullable) JFSheetDialogPopoverConfigurator popoverConfigurator;
 
 #endif
-// =================================================================================================
-// MARK: Methods - Dismissal
-// =================================================================================================
-
-- (BOOL)dismiss;
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
-- (BOOL)dismissWithTappedButton:(JFSheetDialogButton* _Nullable)button;
-- (BOOL)dismissWithTappedButton:(JFSheetDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
-
-// =================================================================================================
-// MARK: Methods - Presentation
-// =================================================================================================
-
-#if JF_IOS
-- (BOOL)presentFromViewController:(UIViewController*)presenter;
-- (BOOL)presentFromViewController:(UIViewController*)presenter closure:(JFClosure* _Nullable)closure;
-#else
-- (BOOL)present;
-- (BOOL)presentWithClosure:(JFClosure* _Nullable)closure;
-#endif
-
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

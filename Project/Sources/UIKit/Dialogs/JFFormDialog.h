@@ -24,7 +24,6 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@import JFKit;
 @import UIKit;
 
 #import "JFDialog.h"
@@ -53,22 +52,6 @@ typedef void (^JFFormDialogFieldConfigurator)(UITextField* field);
 // =================================================================================================
 
 @property (copy, nonatomic, nullable) NSArray<JFFormDialogFieldConfigurator>* fieldConfigurators;
-
-// =================================================================================================
-// MARK: Methods - Dismissal
-// =================================================================================================
-
-- (BOOL)dismiss;
-- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
-- (BOOL)dismissWithTappedButton:(JFFormDialogButton* _Nullable)button;
-- (BOOL)dismissWithTappedButton:(JFFormDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
-
-// =================================================================================================
-// MARK: Methods - Presentation
-// =================================================================================================
-
-- (BOOL)presentFromViewController:(UIViewController*)presenter;
-- (BOOL)presentFromViewController:(UIViewController*)presenter closure:(JFClosure* _Nullable)closure;
 
 @end
 
