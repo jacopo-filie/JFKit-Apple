@@ -26,8 +26,6 @@
 
 #import "JFDialog.h"
 
-@import JFKit;
-
 @class JFSheetDialog;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -35,6 +33,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// =================================================================================================
+// MARK: Types
+// =================================================================================================
 
 typedef JFBlock JFSheetDialogButtonAction;
 #if JF_IOS
@@ -46,7 +48,15 @@ typedef void (^JFSheetDialogPopoverConfigurator)(UIPopoverPresentationController
 
 @interface JFSheetDialogButton : JFDialogButton
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, readonly, nullable) JFSheetDialogButtonAction action;
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
 
 + (instancetype)newWithTitle:(NSString*)title action:(JFSheetDialogButtonAction _Nullable)action;
 - (instancetype)initWithTitle:(NSString*)title action:(JFSheetDialogButtonAction _Nullable)action NS_DESIGNATED_INITIALIZER;
@@ -60,9 +70,10 @@ typedef void (^JFSheetDialogPopoverConfigurator)(UIPopoverPresentationController
 
 @optional
 
-- (void)sheetDialog:(JFSheetDialog*)sender didDismissWithButton:(JFSheetDialogButton* _Nullable)button;
-- (void)sheetDialog:(JFSheetDialog*)sender willDismissWithButton:(JFSheetDialogButton* _Nullable)button;
+- (void)sheetDialog:(JFSheetDialog*)sender buttonTapped:(JFSheetDialogButton*)button;
+- (void)sheetDialogDidDismiss:(JFSheetDialog*)sender;
 - (void)sheetDialogDidPresent:(JFSheetDialog*)sender;
+- (void)sheetDialogWillDismiss:(JFSheetDialog*)sender;
 - (void)sheetDialogWillPresent:(JFSheetDialog*)sender;
 
 @end
@@ -72,9 +83,54 @@ typedef void (^JFSheetDialogPopoverConfigurator)(UIPopoverPresentationController
 
 @interface JFSheetDialog : JFDialog <JFSheetDialogButton*, id<JFSheetDialogObserver>>
 
+// =================================================================================================
+// MARK: Properties
+// =================================================================================================
+
 @property (strong, nonatomic, nullable) JFSheetDialogButton* destructiveButton;
 #if JF_IOS
 @property (strong, nonatomic, nullable) JFSheetDialogPopoverConfigurator popoverConfigurator;
+#endif
+
+// =================================================================================================
+// MARK: Methods - Dismissal
+// =================================================================================================
+
+- (BOOL)dismiss;
+- (BOOL)dismissWithClosure:(JFClosure* _Nullable)closure;
+- (BOOL)dismissWithTappedButton:(JFSheetDialogButton* _Nullable)button;
+- (BOOL)dismissWithTappedButton:(JFSheetDialogButton* _Nullable)button closure:(JFClosure* _Nullable)closure;
+
+#if JF_MACOS
+// =================================================================================================
+// MARK: Methods - Presentation (Alert)
+// =================================================================================================
+
+- (BOOL)presentOnWindow:(NSWindow*)window;
+- (BOOL)presentOnWindow:(NSWindow*)window closure:(JFClosure* _Nullable)closure;
+
+#else
+// =================================================================================================
+// MARK: Methods - Presentation (ActionSheet)
+// =================================================================================================
+
+- (BOOL)presentFromBarButtonItem:(UIBarButtonItem*)barButtonItem API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 8.3));
+- (BOOL)presentFromBarButtonItem:(UIBarButtonItem*)barButtonItem closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 8.3));
+- (BOOL)presentFromRect:(CGRect)rect inView:(UIView*)view API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 8.3));
+- (BOOL)presentFromRect:(CGRect)rect inView:(UIView*)view closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 8.3));
+- (BOOL)presentFromTabBar:(UITabBar*)tabBar API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 8.3));
+- (BOOL)presentFromTabBar:(UITabBar*)tabBar closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 8.3));
+- (BOOL)presentFromToolbar:(UIToolbar*)toolbar API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 8.3));
+- (BOOL)presentFromToolbar:(UIToolbar*)toolbar closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 8.3));
+- (BOOL)presentInView:(UIView*)view API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:", ios(2.0, 8.3));
+- (BOOL)presentInView:(UIView*)view closure:(JFClosure* _Nullable)closure API_DEPRECATED_WITH_REPLACEMENT("-presentFromViewController:closure:", ios(2.0, 8.3));
+
+// =================================================================================================
+// MARK: Methods - Presentation (AlertController)
+// =================================================================================================
+
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController;
+- (BOOL)presentFromViewController:(UIViewController*)presentingViewController closure:(JFClosure* _Nullable)closure;
 #endif
 
 @end
