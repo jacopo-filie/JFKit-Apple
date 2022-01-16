@@ -53,6 +53,14 @@
 		4E397F56279434AA00C4B052 /* JFFormDialogObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F482794342200C4B052 /* JFFormDialogObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E397F57279434AA00C4B052 /* JFFormDialogButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F472794341D00C4B052 /* JFFormDialogButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E397F58279434AA00C4B052 /* JFFormDialogButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E397F462794341C00C4B052 /* JFFormDialogButton.m */; };
+		4E397F722794474200C4B052 /* JFDialogImplementation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F702794474200C4B052 /* JFDialogImplementation.h */; };
+		4E397F732794474200C4B052 /* JFDialogImplementation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F702794474200C4B052 /* JFDialogImplementation.h */; };
+		4E397F742794474200C4B052 /* JFDialogImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E397F712794474200C4B052 /* JFDialogImplementation.m */; };
+		4E397F752794474200C4B052 /* JFDialogImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E397F712794474200C4B052 /* JFDialogImplementation.m */; };
+		4E397F7D2794476200C4B052 /* JFDialogAlertImplementation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F7B2794476200C4B052 /* JFDialogAlertImplementation.h */; };
+		4E397F7E2794476200C4B052 /* JFDialogAlertImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E397F7C2794476200C4B052 /* JFDialogAlertImplementation.m */; };
+		4E397F862794477600C4B052 /* JFDialogAlertControllerImplementation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E397F842794477600C4B052 /* JFDialogAlertControllerImplementation.h */; };
+		4E397F872794477600C4B052 /* JFDialogAlertControllerImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E397F852794477600C4B052 /* JFDialogAlertControllerImplementation.m */; };
 		4E3AC6FF20024115002CE0A1 /* JFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E3AC6FD20024115002CE0A1 /* JFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3AC70020024115002CE0A1 /* JFError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E3AC6FD20024115002CE0A1 /* JFError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3AC70120024115002CE0A1 /* JFError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3AC6FE20024115002CE0A1 /* JFError.m */; };
@@ -334,6 +342,12 @@
 		4E397F462794341C00C4B052 /* JFFormDialogButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFFormDialogButton.m; sourceTree = "<group>"; };
 		4E397F472794341D00C4B052 /* JFFormDialogButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFormDialogButton.h; sourceTree = "<group>"; };
 		4E397F482794342200C4B052 /* JFFormDialogObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFFormDialogObserver.h; sourceTree = "<group>"; };
+		4E397F702794474200C4B052 /* JFDialogImplementation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFDialogImplementation.h; sourceTree = "<group>"; };
+		4E397F712794474200C4B052 /* JFDialogImplementation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFDialogImplementation.m; sourceTree = "<group>"; };
+		4E397F7B2794476200C4B052 /* JFDialogAlertImplementation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFDialogAlertImplementation.h; sourceTree = "<group>"; };
+		4E397F7C2794476200C4B052 /* JFDialogAlertImplementation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFDialogAlertImplementation.m; sourceTree = "<group>"; };
+		4E397F842794477600C4B052 /* JFDialogAlertControllerImplementation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFDialogAlertControllerImplementation.h; sourceTree = "<group>"; };
+		4E397F852794477600C4B052 /* JFDialogAlertControllerImplementation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFDialogAlertControllerImplementation.m; sourceTree = "<group>"; };
 		4E3AC6FD20024115002CE0A1 /* JFError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFError.h; sourceTree = "<group>"; };
 		4E3AC6FE20024115002CE0A1 /* JFError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFError.m; sourceTree = "<group>"; };
 		4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPersistentContainer.m; sourceTree = "<group>"; };
@@ -547,10 +561,24 @@
 			path = Observers;
 			sourceTree = "<group>";
 		};
+		4E397F6A2794468C00C4B052 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				4E397F842794477600C4B052 /* JFDialogAlertControllerImplementation.h */,
+				4E397F852794477600C4B052 /* JFDialogAlertControllerImplementation.m */,
+				4E397F7B2794476200C4B052 /* JFDialogAlertImplementation.h */,
+				4E397F7C2794476200C4B052 /* JFDialogAlertImplementation.m */,
+				4E397F702794474200C4B052 /* JFDialogImplementation.h */,
+				4E397F712794474200C4B052 /* JFDialogImplementation.m */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
 		4E69663327833C990076E260 /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
 				4E397F6327943CAC00C4B052 /* Buttons */,
+				4E397F6A2794468C00C4B052 /* Implementations */,
 				4E69664A27833F9D0076E260 /* JFAlertDialog.h */,
 				4E69664927833F9D0076E260 /* JFAlertDialog.m */,
 				4E69663927833CEE0076E260 /* JFDialog.h */,
@@ -798,6 +826,7 @@
 				4E7E6ACA25F4ECE30045E201 /* JFSliderController.h in Headers */,
 				4E7E6ACB25F4ECE30045E201 /* JFTableViewCell.h in Headers */,
 				4E7E6ACC25F4ECE30045E201 /* JFAlert.h in Headers */,
+				4E397F722794474200C4B052 /* JFDialogImplementation.h in Headers */,
 				4E397F2E279432BC00C4B052 /* JFSheetDialogObserver.h in Headers */,
 				4E397F2F279432BC00C4B052 /* JFSheetDialogButton.h in Headers */,
 				4E7E6AD925F4ECE30045E201 /* JFOverlayController.h in Headers */,
@@ -813,6 +842,7 @@
 				4E7E6AF525F4ECE30045E201 /* JFGradientView.h in Headers */,
 				4E7E6AF625F4ECE30045E201 /* JFAlertsController.h in Headers */,
 				4E7E6B1825F4EE600045E201 /* JFUIKit.h in Headers */,
+				4E397F862794477600C4B052 /* JFDialogAlertControllerImplementation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +951,9 @@
 				4E397F36279432BC00C4B052 /* JFSheetDialogButton.h in Headers */,
 				4E69663C27833CEE0076E260 /* JFDialog.h in Headers */,
 				4EFCAE7825F583F800D508C0 /* JFPreprocessorMacros.h in Headers */,
+				4E397F7D2794476200C4B052 /* JFDialogAlertImplementation.h in Headers */,
 				4E397F0E27942EB100C4B052 /* JFAlertDialogObserver.h in Headers */,
+				4E397F732794474200C4B052 /* JFDialogImplementation.h in Headers */,
 				4E6966802783437C0076E260 /* JFSheetDialog.h in Headers */,
 				4EFCAE7B25F583F800D508C0 /* JFAlert.h in Headers */,
 				4EFCAE7F25F583F800D508C0 /* JFWindowController.h in Headers */,
@@ -1152,12 +1184,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E7E6A9A25F4ECE30045E201 /* JFGradientView.m in Sources */,
+				4E397F742794474200C4B052 /* JFDialogImplementation.m in Sources */,
 				4E69663D27833CEE0076E260 /* JFDialog.m in Sources */,
 				4E397F0227942EB100C4B052 /* JFAlertDialog.m in Sources */,
 				4E7E6A9B25F4ECE30045E201 /* UIButton+JFUIKit.m in Sources */,
 				4E397F0327942EB100C4B052 /* JFAlertDialogButton.m in Sources */,
 				4E7E6A9F25F4ECE30045E201 /* JFAlert.m in Sources */,
 				4E7E6AA125F4ECE30045E201 /* JFAlertsController.m in Sources */,
+				4E397F872794477600C4B052 /* JFDialogAlertControllerImplementation.m in Sources */,
 				4E7E6AA525F4ECE30045E201 /* JFTableViewCell.m in Sources */,
 				4E7E6AAB25F4ECE30045E201 /* JFSliderController.m in Sources */,
 				4E397EE027942B4000C4B052 /* JFDialogButton.m in Sources */,
@@ -1301,6 +1335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E397F752794474200C4B052 /* JFDialogImplementation.m in Sources */,
 				4E69663E27833CEE0076E260 /* JFDialog.m in Sources */,
 				4E397F1C2794315E00C4B052 /* JFSheetDialogButton.m in Sources */,
 				4EFCAE6B25F583F800D508C0 /* JFAlert.m in Sources */,
@@ -1310,6 +1345,7 @@
 				4EFCAE6C25F583F800D508C0 /* JFAlertsController.m in Sources */,
 				4E397F0C27942EB100C4B052 /* JFAlertDialog.m in Sources */,
 				4EFCAE6F25F583F800D508C0 /* JFAppDelegate.m in Sources */,
+				4E397F7E2794476200C4B052 /* JFDialogAlertImplementation.m in Sources */,
 				4EFCAE7325F583F800D508C0 /* JFWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
