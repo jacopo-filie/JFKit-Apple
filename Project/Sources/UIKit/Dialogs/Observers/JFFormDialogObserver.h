@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2022 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,53 +24,31 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
+#import "JFDialogObserver.h"
+
+@class JFFormDialog;
+@class JFFormDialogButton;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
-
-#if JF_MACOS
-#	import <Cocoa/Cocoa.h>
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFUIKit.
-FOUNDATION_EXPORT double JFUIKitVersionNumber;
+@protocol JFFormDialogObserver <JFDialogObserver>
 
-//! Project version string for JFUIKit.
-FOUNDATION_EXPORT const unsigned char JFUIKitVersionString[];
+@optional
+
+- (void)formDialog:(JFFormDialog*)sender buttonTapped:(JFFormDialogButton* _Nullable)button;
+- (void)formDialogDidAppear:(JFFormDialog*)sender;
+- (void)formDialogDidDisappear:(JFFormDialog*)sender;
+- (void)formDialogWillAppear:(JFFormDialog*)sender;
+- (void)formDialogWillDisappear:(JFFormDialog*)sender;
+
+@end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFAlert.h>
-#import <JFUIKit/JFAlertDialog.h>
-#import <JFUIKit/JFAlertDialogButton.h>
-#import <JFUIKit/JFAlertDialogObserver.h>
-#import <JFUIKit/JFAlertsController.h>
-#import <JFUIKit/JFAppDelegate.h>
-#import <JFUIKit/JFDialog.h>
-#import <JFUIKit/JFDialogButton.h>
-#import <JFUIKit/JFDialogObserver.h>
-#import <JFUIKit/JFSheetDialog.h>
-#import <JFUIKit/JFSheetDialogButton.h>
-#import <JFUIKit/JFSheetDialogObserver.h>
-#import <JFUIKit/JFWindowController.h>
-
-#if JF_IOS
-#	import <JFUIKit/JFActivityIndicatorView.h>
-#	import <JFUIKit/JFFormDialog.h>
-#	import <JFUIKit/JFFormDialogButton.h>
-#	import <JFUIKit/JFFormDialogObserver.h>
-#	import <JFUIKit/JFGradientView.h>
-#	import <JFUIKit/JFKeyboardHelper.h>
-#	import <JFUIKit/JFOverlayController.h>
-#	import <JFUIKit/JFSliderController.h>
-#	import <JFUIKit/JFTableViewCell.h>
-#	import <JFUIKit/UIButton+JFUIKit.h>
-#endif
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
