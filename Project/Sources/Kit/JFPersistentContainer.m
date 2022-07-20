@@ -364,7 +364,7 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 
 - (void)loadPersistentStoresWithCompletion:(JFSimpleCompletion*)completion
 {
-	[self loadPersistentStoresWithCompletion:[JFSimpleCompletion completionWithSuccessBlock:^{
+	[self loadPersistentStoresWithClosure:[JFFailableClosure newWithSuccessBlock:^{
 		[completion execute];
 	} failureBlock:^(NSError* error) {
 		[completion executeWithError:error];
