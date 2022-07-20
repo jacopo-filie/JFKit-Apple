@@ -742,6 +742,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)completeSlideWithTranslation:(CGFloat)translation velocity:(CGFloat)velocity
 {
+	if(self.currentTransition == JFSliderControllerTransitionNone)
+		return;
+	
 	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Completing slide transition. [translation = '%@'; velocity = '%@']", ClassName, JFStringFromPointer(self), JFStringFromCGFloat(translation), JFStringFromCGFloat(velocity)] tags:JFLoggerTagsNone];
 	
 	CGFloat originalTranslation = translation;
