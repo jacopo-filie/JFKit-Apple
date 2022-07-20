@@ -418,6 +418,8 @@ NS_ASSUME_NONNULL_BEGIN
 	if((self.currentActivePanel != JFSliderControllerPanelRoot) && (panel != JFSliderControllerPanelRoot))
 		return NO;
 	
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Activating panel. [panel = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromPanel:panel], JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
+	
 	JFSliderControllerTransition transition;
 	
 	switch(self.currentActivePanel)
@@ -447,31 +449,38 @@ NS_ASSUME_NONNULL_BEGIN
 					break;
 				}
 				default:
+				{
+					[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Aborting panel activation. [panel = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromPanel:panel], JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
 					return NO;
+				}
 			}
 			break;
 		}
 		default:
+		{
+			[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Aborting panel activation. [panel = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromPanel:panel], JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
 			return NO;
+		}
 	}
 	
-	if(![self prepareSlideWithTransition:transition animated:animated])
+	if(![self prepareSlideWithTransition:transition animated:animated]) {
+		[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Aborting panel activation. [panel = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromPanel:panel], JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
 		return NO;
+	}
 	
-	JFBooleanBlock internalCompletion = ^(BOOL finished)
-	{
+	[self slideWithTranslation:self.currentSlideLength animated:animated completion:^(BOOL finished) {
+		[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Panel activated. [panel = '%@'; isFinished = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromPanel:panel], JFStringFromBOOL(finished), JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
 		[self cleanUp:finished animated:animated];
 		if(completion)
 			completion(finished);
-	};
-	
-	[self slideWithTranslation:self.currentSlideLength animated:animated completion:internalCompletion];
+	}];
 	
 	return YES;
 }
 
 - (void)installActivateRootPanelButton
 {
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Installing root panel button.", ClassName, JFStringFromPointer(self)] tags:JFLoggerTagsNone];
 	UIButton* button = self.activateRootPanelButton;
 	button.frame = self.rootPanelContainer.bounds;
 	[self.rootPanelContainer addSubview:button];
@@ -479,11 +488,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)uninstallActivateRootPanelButton
 {
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Uninstalling root panel button.", ClassName, JFStringFromPointer(self)] tags:JFLoggerTagsNone];
 	[self.activateRootPanelButton removeFromSuperview];
 }
 
 - (void)updatePanelContainersFrames
 {
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Updating frames of panel containers.", ClassName, JFStringFromPointer(self)] tags:JFLoggerTagsNone];
+	
 	CGRect bounds = self.view.bounds;
 	UIEdgeInsets insets = self.slideInsets;
 	
@@ -557,16 +569,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer*)recognizer
 {
-	CGPoint translation = [recognizer translationInView:self.view];
 	switch(recognizer.state)
 	{
 		case UIGestureRecognizerStateBegan:
 		{
+			CGPoint translation = [recognizer translationInView:self.view];
+			[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Pan gesture began. [translation = '%@']", ClassName, JFStringFromPointer(self), NSStringFromCGPoint(translation)] tags:JFLoggerTagsNone];
 			[self prepareSlideWithTranslation:translation.x animated:YES];
 			break;
 		}
 		case UIGestureRecognizerStateChanged:
 		{
+			CGPoint translation = [recognizer translationInView:self.view];
 			if([self isAnimating])
 				[self slideWithTranslation:translation.x animated:NO completion:nil];
 			else
@@ -575,17 +589,21 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 		case UIGestureRecognizerStateEnded:
 		{
+			CGPoint translation = [recognizer translationInView:self.view];
 			CGPoint velocity = [recognizer velocityInView:self.view];
+			[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Pan gesture ended. [translation = '%@'; velocity = '%@']", ClassName, JFStringFromPointer(self), NSStringFromCGPoint(translation), NSStringFromCGPoint(velocity)] tags:JFLoggerTagsNone];
 			[self completeSlideWithTranslation:translation.x velocity:velocity.x];
 			break;
 		}
 		case UIGestureRecognizerStateCancelled:
 		{
+			[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Pan gesture cancelled.", ClassName, JFStringFromPointer(self)] tags:JFLoggerTagsNone];
 			[self completeSlideWithTranslation:0.0f velocity:0.0f];
 			break;
 		}
 		case UIGestureRecognizerStateFailed:
 		{
+			[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Pan gesture failed.", ClassName, JFStringFromPointer(self)] tags:JFLoggerTagsNone];
 			[self completeSlideWithTranslation:0.0f velocity:0.0f];
 			break;
 		}
@@ -631,6 +649,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)cleanUp:(BOOL)finished animated:(BOOL)animated
 {
 	BOOL shouldCancel = self.shouldCancelCurrentTransition;
+	
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Cleaning up transition. [isFinished = '%@'; isAnimated = '%@'; isCancelled = '%@']", ClassName, JFStringFromPointer(self), JFStringFromBOOL(finished), JFStringFromBOOL(animated), JFStringFromBOOL(shouldCancel)] tags:JFLoggerTagsNone];
 	
 	BOOL didActivateSidePanel = NO;
 	BOOL didDeactivateSidePanel = NO;
@@ -722,6 +742,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)completeSlideWithTranslation:(CGFloat)translation velocity:(CGFloat)velocity
 {
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Completing slide transition. [translation = '%@'; velocity = '%@']", ClassName, JFStringFromPointer(self), JFStringFromCGFloat(translation), JFStringFromCGFloat(velocity)] tags:JFLoggerTagsNone];
+	
+	CGFloat originalTranslation = translation;
+	
 	if(velocity != 0.0f)
 	{
 		switch(self.currentTransition)
@@ -745,14 +769,17 @@ NS_ASSUME_NONNULL_BEGIN
 	else
 		translation = ((fabs(translation) >= fabs(self.currentSlideLength / 2.0f)) ? self.currentSlideLength : 0.0f);
 	
+	if(originalTranslation != translation)
+	{
+		[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Completing slide transition: translation updated. [translation = '%@']", ClassName, JFStringFromPointer(self), JFStringFromCGFloat(translation)] tags:JFLoggerTagsNone];
+	}
+	
 	self.shouldCancelCurrentTransition = (translation == 0.0f);
 	
-	JFBooleanBlock completion = ^(BOOL finished)
-	{
+	[self slideWithTranslation:translation animated:YES completion:^(BOOL finished) {
+		[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Completed slide transition. [translation = '%@'; velocity = '%@', isFinished = '%@']", ClassName, JFStringFromPointer(self), JFStringFromCGFloat(translation), JFStringFromCGFloat(velocity), JFStringFromBOOL(finished)] tags:JFLoggerTagsNone];
 		[self cleanUp:finished animated:YES];
-	};
-	
-	[self slideWithTranslation:translation animated:YES completion:completion];
+	}];
 }
 
 - (BOOL)prepareSlideWithTransition:(JFSliderControllerTransition)transition animated:(BOOL)animated
@@ -762,6 +789,8 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	if(![self shouldPrepareSlideWithTransition:transition])
 		return NO;
+	
+	[JFKitLogger logDebug:[NSString stringWithFormat:@"%@<%@>: Preparing slide transition. [transition = '%@'; isAnimated = '%@']", ClassName, JFStringFromPointer(self), [self debugStringFromTransition:transition], JFStringFromBOOL(animated)] tags:JFLoggerTagsNone];
 	
 	[self updateCurrentSlideDistancesForTransition:transition];
 	
@@ -930,12 +959,9 @@ NS_ASSUME_NONNULL_BEGIN
 	CGRect frame = self.rootPanelContainer.frame;
 	frame.origin.x = destination;
 	
-	JFBlock animations = ^(void)
-	{
+	[UIView animateWithDuration:duration animations:^{
 		self.rootPanelContainer.frame = frame;
-	};
-	
-	[UIView animateWithDuration:duration animations:animations completion:completion];
+	} completion:completion];
 }
 
 - (void)updateCurrentSlideDistancesForTransition:(JFSliderControllerTransition)transition
