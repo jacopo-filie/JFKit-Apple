@@ -208,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The object associated with the given key.
  * @warning If no value is associated with the given key, or it is not an object, this method returns `nil`.
  */
-- (JFJSONObject* _Nullable)objectForKey:(NSString*)key;
+- (JFJSONObject* _Nullable)objectForKey:(NSString*)key NS_SWIFT_NAME(object(forKey:));
 
 /**
  * Sets the given object as value associated with the given key.
