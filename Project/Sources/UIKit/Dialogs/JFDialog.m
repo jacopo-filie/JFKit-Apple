@@ -40,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties
 // =================================================================================================
 
-@synthesize cancelButton = _cancelButton;
 @synthesize beingDismissed = _beingDismissed;
 @synthesize beingPresented = _beingPresented;
+@synthesize cancelButton = _cancelButton;
 @synthesize destructiveButton = _destructiveButton;
 @synthesize message = _message;
 @synthesize observers = _observers;
