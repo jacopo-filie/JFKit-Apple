@@ -582,8 +582,7 @@
 			children = (
 				4EA66DF82257526F00D07D6A /* Tests */,
 			);
-			name = Resources;
-			path = Project/Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		4EA66DF82257526F00D07D6A /* Tests */ = {
@@ -601,8 +600,7 @@
 				4E7E6B2425F4F0A40045E201 /* Kit */,
 				4E7E6B2525F4F0A80045E201 /* UIKit */,
 			);
-			name = Sources;
-			path = Project/Sources;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		4EBD585920007D5C00BCBC9E /* Kit */ = {
@@ -669,8 +667,7 @@
 				4E6B219325F0A025005BC9BD /* Target.xcconfig */,
 				4E6B219425F0A03A005BC9BD /* Version.xcconfig */,
 			);
-			name = "Supporting Files";
-			path = "Project/Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		4ECFE3CC1FD8CC65004EEACE /* Tests */ = {
@@ -678,8 +675,7 @@
 			children = (
 				4EBD585920007D5C00BCBC9E /* Kit */,
 			);
-			name = Tests;
-			path = Project/Tests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1238,7 +1234,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_DIR = Project;
+				BASE_DIR = .;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
@@ -1300,7 +1296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BASE_DIR = Project;
+				BASE_DIR = .;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
