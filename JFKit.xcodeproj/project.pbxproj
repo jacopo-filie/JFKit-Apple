@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -951,7 +951,7 @@
 				};
 			};
 			buildConfigurationList = 4ECFE2411FD8B9D3004EEACE /* Build configuration list for PBXProject "JFKit" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1206,13 +1206,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.JFUIKit-iOS";
 				PRODUCT_NAME = JFUIKit;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/UIKit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/UIKit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -1220,13 +1227,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jackfelle.JFUIKit-iOS";
 				PRODUCT_NAME = JFUIKit;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/UIKit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/UIKit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Release;
 		};
@@ -1355,13 +1369,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS";
 				PRODUCT_NAME = JFKit;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/Kit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/Kit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -1369,13 +1390,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS";
 				PRODUCT_NAME = JFKit;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/Kit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/Kit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Release;
 		};
@@ -1422,7 +1450,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS-Tests";
 				PRODUCT_NAME = "JFKit-Tests";
@@ -1472,7 +1504,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-iOS-Tests";
 				PRODUCT_NAME = "JFKit-Tests";
@@ -1487,11 +1523,18 @@
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFKit;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/Kit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/Kit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -1500,11 +1543,18 @@
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFKit;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/Kit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/Kit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Release;
 		};
@@ -1552,7 +1602,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS-Tests";
 				PRODUCT_NAME = "JFKit-Tests";
@@ -1602,7 +1656,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${SUPPORTING_FILES_DIR}/Info-Tests.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS-Tests";
 				PRODUCT_NAME = "JFKit-Tests";
@@ -1615,11 +1673,18 @@
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFUIKit;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/UIKit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/UIKit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -1628,11 +1693,18 @@
 			baseConfigurationReference = 4E6B219325F0A025005BC9BD /* Target.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-macOS";
 				PRODUCT_NAME = JFUIKit;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(BASE_DIR)/Sources/UIKit/** \"$(SUPPORTING_FILES_DIR)\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"$(BASE_DIR)/Sources/UIKit/**",
+					"\"$(SUPPORTING_FILES_DIR)\"",
+				);
 			};
 			name = Release;
 		};
