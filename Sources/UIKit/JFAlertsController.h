@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFPreprocessorMacros.h"
+#import <JFUIKit/JFPreprocessorMacros.h>
 
 #if JF_MACOS
 @import Cocoa;

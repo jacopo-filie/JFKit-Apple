@@ -26,7 +26,7 @@
 
 @import Foundation;
 
-#import "JFJSONNode.h"
+#import <JFKit/JFJSONNode.h>
 
 @class JFJSONArray;
 

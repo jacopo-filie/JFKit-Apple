@@ -26,7 +26,7 @@
 
 @import CoreData;
 
-#import "JFCompletions.h"
+#import <JFKit/JFCompletions.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

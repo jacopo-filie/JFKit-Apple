@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFPreprocessorMacros.h"
+#import <JFKit/JFPreprocessorMacros.h>
 
 @import Foundation;
 
@@ -34,9 +34,9 @@
 @import UIKit;
 #endif
 
-#import "JFCompatibilityMacros.h"
-#import "JFStrings.h"
-#import "JFUtilities.h"
+#import <JFKit/JFCompatibilityMacros.h>
+#import <JFKit/JFStrings.h>
+#import <JFKit/JFUtilities.h>
 
 @class AppDelegate;
 

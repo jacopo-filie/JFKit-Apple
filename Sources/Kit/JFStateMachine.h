@@ -26,8 +26,8 @@
 
 @import Foundation;
 
-#import "JFCompletions.h"
-#import "JFPreprocessorMacros.h"
+#import <JFKit/JFCompletions.h>
+#import <JFKit/JFPreprocessorMacros.h>
 
 @class JFStateMachineTransition;
 

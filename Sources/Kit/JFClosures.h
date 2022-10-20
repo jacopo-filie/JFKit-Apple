@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFPreprocessorMacros.h"
+#import <JFKit/JFPreprocessorMacros.h>
 
 #if JF_MACOS
 @import Cocoa;
@@ -32,7 +32,7 @@
 @import UIKit;
 #endif
 
-#import "JFBlocks.h"
+#import <JFKit/JFBlocks.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

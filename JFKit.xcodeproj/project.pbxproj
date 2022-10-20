@@ -819,9 +819,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E7E6AF925F4ECE30045E201 /* Build configuration list for PBXNativeTarget "JFUIKit iOS" */;
 			buildPhases = (
+				4E7E6AC225F4ECE30045E201 /* Headers */,
 				4E7E6A9425F4ECE30045E201 /* Sources */,
 				4E7E6AC125F4ECE30045E201 /* Frameworks */,
-				4E7E6AC225F4ECE30045E201 /* Headers */,
 				4E7E6AF825F4ECE30045E201 /* Resources */,
 			);
 			buildRules = (
@@ -838,9 +838,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ECFE26D1FD8BCD9004EEACE /* Build configuration list for PBXNativeTarget "JFKit iOS" */;
 			buildPhases = (
+				4ECFE2581FD8BCD9004EEACE /* Headers */,
 				4ECFE2561FD8BCD9004EEACE /* Sources */,
 				4ECFE2571FD8BCD9004EEACE /* Frameworks */,
-				4ECFE2581FD8BCD9004EEACE /* Headers */,
 				4ECFE2591FD8BCD9004EEACE /* Resources */,
 			);
 			buildRules = (
@@ -874,9 +874,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ECFE2891FD8BCF1004EEACE /* Build configuration list for PBXNativeTarget "JFKit macOS" */;
 			buildPhases = (
+				4ECFE2751FD8BCF1004EEACE /* Headers */,
 				4ECFE2731FD8BCF1004EEACE /* Sources */,
 				4ECFE2741FD8BCF1004EEACE /* Frameworks */,
-				4ECFE2751FD8BCF1004EEACE /* Headers */,
 				4ECFE2761FD8BCF1004EEACE /* Resources */,
 			);
 			buildRules = (
@@ -910,9 +910,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EFCAE8625F583F800D508C0 /* Build configuration list for PBXNativeTarget "JFUIKit macOS" */;
 			buildPhases = (
+				4EFCAE7625F583F800D508C0 /* Headers */,
 				4EFCAE6825F583F800D508C0 /* Sources */,
 				4EFCAE7425F583F800D508C0 /* Frameworks */,
-				4EFCAE7625F583F800D508C0 /* Headers */,
 				4EFCAE8525F583F800D508C0 /* Resources */,
 				4E959AAB2607F76700B2CBC5 /* Embed Frameworks */,
 			);

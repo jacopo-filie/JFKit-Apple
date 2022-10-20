@@ -24,9 +24,9 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFJSONValue.h"
+#import <JFKit/JFJSONValue.h>
 
-#import "JFJSONSerializationAdapter.h"
+#import <JFKit/JFJSONSerializationAdapter.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

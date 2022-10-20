@@ -27,7 +27,7 @@
 @import Foundation;
 @import JFKit;
 
-#import "JFPreprocessorMacros.h"
+#import <JFUIKit/JFPreprocessorMacros.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

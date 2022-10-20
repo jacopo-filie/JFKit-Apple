@@ -26,7 +26,7 @@
 
 @import Foundation;
 
-#import "JFJSONSerializationAdapter.h"
+#import <JFKit/JFJSONSerializationAdapter.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

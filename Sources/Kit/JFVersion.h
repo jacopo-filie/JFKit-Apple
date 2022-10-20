@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFPreprocessorMacros.h"
+#import <JFKit/JFPreprocessorMacros.h>
 
 @import Foundation;
 
@@ -34,7 +34,7 @@
 @import UIKit;
 #endif
 
-#import "JFMath.h"
+#import <JFKit/JFMath.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

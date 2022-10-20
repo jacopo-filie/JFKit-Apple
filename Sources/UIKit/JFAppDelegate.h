@@ -24,7 +24,7 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import "JFPreprocessorMacros.h"
+#import <JFUIKit/JFPreprocessorMacros.h>
 
 @import Foundation;
 @import JFKit;
@@ -35,8 +35,8 @@
 @import UIKit;
 #endif
 
-#import "JFAlertsController.h"
-#import "JFWindowController.h"
+#import <JFUIKit/JFAlertsController.h>
+#import <JFUIKit/JFWindowController.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

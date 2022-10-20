@@ -26,7 +26,7 @@
 
 @import Foundation;
 
-#import "JFJSONValue.h"
+#import <JFKit/JFJSONValue.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

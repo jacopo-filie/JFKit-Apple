@@ -26,7 +26,7 @@
 
 @import UIKit;
 
-#import "UIButton+JFUIKit.h"
+#import <JFUIKit/UIButton+JFUIKit.h>
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
