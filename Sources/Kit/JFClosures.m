@@ -95,6 +95,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return [[self alloc] initWithBlock:block];
 }
 
++ (instancetype)onExecute:(JFBlock)block
+{
+	return [self newWithBlock:block];
+}
+
 - (instancetype)initWithBlock:(JFBlock)block
 {
 	self = [super init];
@@ -169,6 +174,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return [[self alloc] initWithFailureBlock:failureBlock];
 }
 
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithFailureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
 + (instancetype)newWithSuccessBlock:(JFBlock)successBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock];
@@ -182,6 +192,56 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)newWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)newWithSuccessBlock:(JFBlock)successBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onExecute:(JFFailableClosureBlock)block
+{
+	return [self newWithBlock:block];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock
+{
+	return [self newWithFailureBlock:failureBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFBlock)successBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFBlock)successBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithFailureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onSuccess:(JFBlock)successBlock
+{
+	return [self newWithSuccessBlock:successBlock];
+}
+
++ (instancetype)onSuccess:(JFBlock)successBlock onFailure:(JFFailureBlock)failureBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)onSuccess:(JFBlock)successBlock onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onSuccess:(JFBlock)successBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock finallyBlock:finallyBlock];
 }
 
 - (instancetype)initWithBlock:(JFFailableClosureBlock)block
@@ -201,6 +261,16 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
+
+	return self;
+}
+
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
 	
 	return self;
 }
@@ -234,6 +304,16 @@ NS_ASSUME_NONNULL_BEGIN
 	_failureBlock = failureBlock;
 	_finallyBlock = finallyBlock;
 	_internalFailureBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
 	_internalSuccessBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
@@ -376,6 +456,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return [[self alloc] initWithFailureBlock:failureBlock];
 }
 
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithFailureBlock:failureBlock finallyBlock:(JFBlock)finallyBlock];
+}
+
 + (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock];
@@ -389,6 +474,56 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
 {
 	return [[self alloc] initWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)newWithSuccessBlock:(JFSuccessBlock)successBlock finallyBlock:(JFBlock)finallyBlock
+{
+	return [[self alloc] initWithSuccessBlock:successBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onExecute:(JFFetchingClosureBlock)block
+{
+	return [self newWithBlock:block];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock
+{
+	return [self newWithFailureBlock:failureBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFSuccessBlock)successBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFSuccessBlock)successBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithFailureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onSuccess:(JFSuccessBlock)successBlock
+{
+	return [self newWithSuccessBlock:successBlock];
+}
+
++ (instancetype)onSuccess:(JFSuccessBlock)successBlock onFailure:(JFFailureBlock)failureBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++ (instancetype)onSuccess:(JFSuccessBlock)successBlock onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock failureBlock:failureBlock finallyBlock:finallyBlock];
+}
+
++ (instancetype)onSuccess:(JFSuccessBlock)successBlock then:(JFBlock)finallyBlock
+{
+	return [self newWithSuccessBlock:successBlock finallyBlock:finallyBlock];
 }
 
 - (instancetype)initWithBlock:(JFFetchingClosureBlock)block
@@ -408,6 +543,16 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
+	_failureBlock = failureBlock;
+	_internalFailureBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
 	
 	return self;
 }
@@ -441,6 +586,16 @@ NS_ASSUME_NONNULL_BEGIN
 	_failureBlock = failureBlock;
 	_finallyBlock = finallyBlock;
 	_internalFailureBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
+	_successBlock = successBlock;
+	
+	return self;
+}
+
+- (instancetype)initWithSuccessBlock:(JFSuccessBlock)successBlock finallyBlock:(JFBlock)finallyBlock
+{
+	self = [super init];
+	
 	_internalSuccessBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	

@@ -126,6 +126,13 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 + (instancetype)newWithBlock:(JFBlock)block;
 
 /**
+ * A convenient constructor that initializes a new instance of this class using the given block.
+ * @param block The block to execute.
+ * @return A new instance of this class.
+ */
++ (instancetype)onExecute:(JFBlock)block;
+
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
@@ -216,6 +223,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 + (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
+
+/**
  * A convenient constructor that initializes a new instance of this class with the given success block.
  * @param successBlock The block to use on success.
  * @return A new instance of this class.
@@ -240,6 +255,85 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 + (instancetype)newWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)newWithSuccessBlock:(JFBlock)successBlock finallyBlock:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class using the given block.
+ * @param block The block to execute.
+ * @return A new instance of this class.
+ */
++ (instancetype)onExecute:(JFFailableClosureBlock)block;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to execute on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param successBlock The block to execute on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFBlock)successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param successBlock The block to execute on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(JFBlock)successBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given success block.
+ * @param successBlock The block to execute on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(JFBlock)successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to execute on success.
+ * @param failureBlock The block to execute on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(JFBlock)successBlock onFailure:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to execute on success.
+ * @param failureBlock The block to execute on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(JFBlock)successBlock onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to execute on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(JFBlock)successBlock then:(JFBlock)finallyBlock;
+
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
@@ -257,6 +351,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
  * @return This instance.
  */
 - (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes this instance with the given success block.
@@ -281,6 +383,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
  * @return This instance.
  */
 - (instancetype)initWithSuccessBlock:(JFBlock)successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(JFBlock)successBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods
@@ -406,6 +516,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 + (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)newWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
+
+/**
  * A convenient constructor that initializes a new instance of this class with the given success block.
  * @param successBlock The block to use on success.
  * @return A new instance of this class.
@@ -430,6 +548,85 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 + (instancetype)newWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock;
 
 /**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to use on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)newWithSuccessBlock:(void (^)(ResultType result))successBlock finallyBlock:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given block.
+ * @param block The block to execute.
+ * @return A new instance of this class.
+ */
++ (instancetype)onExecute:(void (^)(BOOL succeeded, ResultType _Nullable result, NSError* _Nullable error))block;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given failure block.
+ * @param failureBlock The block to execute on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param successBlock The block to execute on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(void (^)(ResultType result))successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param successBlock The block to execute on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock onSuccess:(void (^)(ResultType result))successBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param failureBlock The block to execute on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given success block.
+ * @param successBlock The block to execute on success.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(void (^)(ResultType result))successBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to execute on success.
+ * @param failureBlock The block to execute on failure.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(void (^)(ResultType result))successBlock onFailure:(JFFailureBlock)failureBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with both the given success and failure blocks.
+ * @param successBlock The block to execute on success.
+ * @param failureBlock The block to execute on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(void (^)(ResultType result))successBlock onFailure:(JFFailureBlock)failureBlock then:(JFBlock)finallyBlock;
+
+/**
+ * A convenient constructor that initializes a new instance of this class with the given success block.
+ * @param successBlock The block to execute on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return A new instance of this class.
+ */
++ (instancetype)onSuccess:(void (^)(ResultType result))successBlock then:(JFBlock)finallyBlock;
+
+/**
  * NOT AVAILABLE
  */
 - (instancetype)init NS_UNAVAILABLE;
@@ -447,6 +644,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
  * @return This instance.
  */
 - (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given failure block.
+ * @param failureBlock The block to use on failure.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithFailureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes this instance with the given success block.
@@ -471,6 +676,14 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
  * @return This instance.
  */
 - (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock failureBlock:(JFFailureBlock)failureBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes this instance with the given success block.
+ * @param successBlock The block to use on success.
+ * @param finallyBlock The block to execute at the end, in any case.
+ * @return This instance.
+ */
+- (instancetype)initWithSuccessBlock:(void (^)(ResultType result))successBlock finallyBlock:(JFBlock)finallyBlock NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods
