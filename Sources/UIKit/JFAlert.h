@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This class is used to wrap up in a single interface all the alert types available both on iOS and macOS.
  */
-DEPRECATED_ATTRIBUTE
 @interface JFAlert : NSObject
 
 // =================================================================================================
@@ -226,7 +225,6 @@ DEPRECATED_ATTRIBUTE
 /**
  * A collection of methods that are used to notify the alert delegate when the alert itself is being presented or dismissed.
  */
-DEPRECATED_ATTRIBUTE
 @protocol JFAlertDelegate <NSObject>
 
 // =================================================================================================
@@ -269,7 +267,6 @@ DEPRECATED_ATTRIBUTE
 /**
  * An object that associated the alert button title with an action to be executed when the button is clicked or tapped.
  */
-DEPRECATED_ATTRIBUTE
 @interface JFAlertButton : NSObject
 
 // =================================================================================================

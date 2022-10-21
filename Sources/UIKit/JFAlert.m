@@ -65,8 +65,11 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 #if JF_IOS
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 @property (strong, nonatomic, nullable) UIActionSheet* actionSheet;
 @property (strong, nonatomic, nullable) UIAlertView* alertView;
+#pragma GCC diagnostic pop
 #elif JF_MACOS
 @property (strong, nonatomic, nullable) NSAlert* alertView;
 #endif
@@ -114,10 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlert
-#pragma GCC diagnostic pop
 
 // =================================================================================================
 // MARK: Properties - Attributes
@@ -274,7 +274,10 @@ NS_ASSUME_NONNULL_BEGIN
 	if(self.alertView)
 	{
 #if JF_IOS
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		UIAlertView* alertView = self.alertView;
+#pragma GCC diagnostic pop
 		NSInteger buttonIndex = (button ? index : [alertView cancelButtonIndex]);
 		[self alert:alertView clickedButtonAtIndex:buttonIndex];
 		[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
@@ -311,7 +314,10 @@ NS_ASSUME_NONNULL_BEGIN
 #if JF_IOS
 	else if(self.actionSheet)
 	{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		UIActionSheet* actionSheet = self.actionSheet;
+#pragma GCC diagnostic pop
 		NSInteger buttonIndex = (button ? index : [actionSheet cancelButtonIndex]);
 		[self alert:actionSheet clickedButtonAtIndex:buttonIndex];
 		[actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
@@ -345,7 +351,10 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	self.presentCompletion = completion;
 	
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:self.title delegate:self cancelButtonTitle:cancelButton.title destructiveButtonTitle:destructiveButton.title otherButtonTitles:nil];
+#pragma GCC diagnostic pop
 	
 	for(NSUInteger i = 0; i < [otherButtons count]; i++)
 	{
@@ -385,7 +394,10 @@ NS_ASSUME_NONNULL_BEGIN
 	self.presentCompletion = completion;
 	
 #if JF_IOS
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:self.title message:self.message delegate:self cancelButtonTitle:cancelButton.title otherButtonTitles:nil];
+#pragma GCC diagnostic pop
 #elif JF_MACOS
 	NSAlert* alertView = [NSAlert new];
 	alertView.informativeText = self.message;
@@ -630,12 +642,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if JF_IOS
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
+
 // =================================================================================================
 // MARK: Methods (UIActionSheetDelegate)
 // =================================================================================================
-
-#	pragma GCC diagnostic push
-#	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -662,14 +675,9 @@ NS_ASSUME_NONNULL_BEGIN
 	[self willPresentAlert:actionSheet];
 }
 
-#	pragma GCC diagnostic pop
-
 // =================================================================================================
 // MARK: Methods (UIAlertViewDelegate)
 // =================================================================================================
-
-#	pragma GCC diagnostic push
-#	pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -696,7 +704,7 @@ NS_ASSUME_NONNULL_BEGIN
 	[self willPresentAlert:alertView];
 }
 
-#	pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 
 #endif
 
@@ -705,10 +713,7 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-implementations"
 @implementation JFAlertButton
-#pragma GCC diagnostic pop
 
 // =================================================================================================
 // MARK: Properties - Data
