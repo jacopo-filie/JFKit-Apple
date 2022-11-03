@@ -36,10 +36,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+// =================================================================================================
+// MARK: Blocks
+// =================================================================================================
+
+/**
+ * A block to operate on values in the object.
+ * @param index The index of the current value.
+ * @param value The current value.
+ * @return Return `YES` to stop the enumeration, `NO` to continue with the next value.
+ */
+typedef BOOL (^JFJSONArrayEnumerationBlock)(NSUInteger index, id<JFJSONValue> value);
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
 /**
  * The `JFJSONArray` class is a kind of JSON node that associates sorted integer keys, called indexes, with JSON values.
  */
-@interface JFJSONArray : NSObject <JFJSONNode>
+@interface JFJSONArray : NSObject <JFJSONNode, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -338,6 +353,44 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The value associated with the given index.
  */
 - (id<JFJSONValue> _Nullable)valueAtIndex:(NSUInteger)index;
+
+// =================================================================================================
+// MARK: Methods - Enumeration
+// =================================================================================================
+
+/**
+ * Applies a given block to the values in the JSON array at the specified indexes, with options specifying how the enumeration is
+ * performed.
+ * @param indexes The indexes of the values over which to enumerate.
+ * @param options Enumeration options.
+ * @param block A block to operate on values in the JSON array.
+ */
+- (void)enumerateValuesAtIndexes:(NSIndexSet*)indexes options:(NSEnumerationOptions)options usingBlock:(JFJSONArrayEnumerationBlock)block;
+
+/**
+ * Applies a given block to the values in the JSON array.
+ * @param block A block to operate on values in the JSON array.
+ */
+- (void)enumerateValuesUsingBlock:(JFJSONArrayEnumerationBlock)block;
+
+/**
+ * Applies a given block to the values in the JSON array, with options specifying how the enumeration is performed.
+ * @param options Enumeration options.
+ * @param block A block to operate on values in the JSON array.
+ */
+- (void)enumerateValuesWithOptions:(NSEnumerationOptions)options usingBlock:(JFJSONArrayEnumerationBlock)block;
+
+/**
+ * Returns an enumerator that lets you access each value in the JSON array, in reverse order.
+ * @return An enumerator that lets you access each value in the JSON array, in reverse order.
+ */
+- (NSEnumerator<id<JFJSONValue>>*)reverseValueEnumerator;
+
+/**
+ * Returns an enumerator that lets you access each value in the JSON array.
+ * @return An enumerator that lets you access each value in the JSON array, in order, starting with the element at index 0.
+ */
+- (NSEnumerator<id<JFJSONValue>>*)valueEnumerator;
 
 // =================================================================================================
 // MARK: Methods - Subscripting

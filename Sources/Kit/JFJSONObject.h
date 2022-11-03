@@ -36,10 +36,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+// =================================================================================================
+// MARK: Blocks
+// =================================================================================================
+
+/**
+ * A block to operate on entries in the object.
+ * @param key The key of the current entry.
+ * @param value The value of the current entry.
+ * @return Return `YES` to stop the enumeration, `NO` to continue with the next entry.
+ */
+typedef BOOL (^JFJSONObjectEnumerationBlock)(NSString* key, id<JFJSONValue> value);
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
 /**
  * The `JFJSONObject` class is a kind of JSON node that associates string keys with JSON values.
  */
-@interface JFJSONObject : NSObject <JFJSONNode>
+@interface JFJSONObject : NSObject <JFJSONNode, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -278,6 +293,35 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The value associated with the given key.
  */
 - (id<JFJSONValue> _Nullable)valueForKey:(NSString*)key;
+
+// =================================================================================================
+// MARK: Methods - Enumeration
+// =================================================================================================
+
+/**
+ * Applies a given block to the entries of the JSON object.
+ * @param block A block to operate on entries in the JSON object.
+ */
+- (void)enumerateKeysAndValuesUsingBlock:(JFJSONObjectEnumerationBlock)block;
+
+/**
+ * Applies a given block to the entries of the JSON object, with options specifying how the enumeration is performed.
+ * @param options Enumeration options.
+ * @param block A block to operate on entries in the JSON object.
+ */
+- (void)enumerateKeysAndValuesWithOptions:(NSEnumerationOptions)options usingBlock:(JFJSONObjectEnumerationBlock)block;
+
+/**
+ * Provides an enumerator to access the keys in the JSON object.
+ * @return An enumerator to access the keys in the JSON object.
+ */
+- (NSEnumerator<NSString*>*)keyEnumerator;
+
+/**
+ * Provides an enumerator to access the values in the JSON object.
+ * @return An enumerator to access the values in the JSON object.
+ */
+- (NSEnumerator<id<JFJSONValue>>*)valueEnumerator;
 
 // =================================================================================================
 // MARK: Methods - Subscripting

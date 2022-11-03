@@ -24,11 +24,8 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <XCTest/XCTest.h>
-
-#import "JFJSONArray.h"
-#import "JFJSONObject.h"
-#import "JFJSONSerializer.h"
+@import JFKit;
+@import XCTest;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -537,6 +534,208 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	[jsonObject setValue:value forKey:key];
 	XCTAssertEqual(jsonObject.count, 1);
 	XCTAssertEqual([jsonObject valueForKey:key], value);
+}
+
+- (void)testFastEnumeration
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	NSCountedSet<NSString*>* allKeys = [NSCountedSet<NSString*> setWithCapacity:count];
+	NSCountedSet<NSNumber*>* allValues = [NSCountedSet<NSNumber*> setWithCapacity:count];
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSString* key = JFStringFromNSUInteger(index);
+		NSUInteger value = arc4random() % 100;
+		NSNumber* object = @(value);
+		[jsonObject setNumber:object forKey:key];
+		[allKeys addObject:key];
+		[allValues addObject:object];
+		if(value % 2 == 0) {
+			sum += value;
+		}
+	}
+	
+	XCTAssertEqual(jsonObject.count, count);
+	XCTAssertFalse(allKeys.count == 0);
+	XCTAssertFalse(allValues.count == 0);
+	
+	NSUInteger enumeratedSum = 0;
+	for(NSString* key in jsonObject)
+	{
+		NSNumber* number = [jsonObject numberForKey:key];
+		XCTAssertNotNil(number);
+		
+		[allKeys removeObject:key];
+		[allValues removeObject:number];
+		
+		NSUInteger value = [number unsignedIntegerValue];
+		if(value % 2 == 0) {
+			enumeratedSum += value;
+		}
+	}
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	XCTAssertTrue(allKeys.count == 0);
+	XCTAssertTrue(allValues.count == 0);
+}
+
+- (void)testEnumerateKeysAndValuesUsingBlock
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	NSCountedSet<NSString*>* allKeys = [NSCountedSet<NSString*> setWithCapacity:count];
+	NSCountedSet<NSNumber*>* allValues = [NSCountedSet<NSNumber*> setWithCapacity:count];
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSString* key = JFStringFromNSUInteger(index);
+		NSUInteger value = arc4random() % 100;
+		NSNumber* object = @(value);
+		[jsonObject setNumber:object forKey:key];
+		[allKeys addObject:key];
+		[allValues addObject:object];
+		if(value % 2 == 0) {
+			sum += value;
+		}
+	}
+	
+	XCTAssertEqual(jsonObject.count, count);
+	XCTAssertFalse(allKeys.count == 0);
+	XCTAssertFalse(allValues.count == 0);
+	
+	NSUInteger __block enumeratedSum = 0;
+	[jsonObject enumerateKeysAndValuesUsingBlock:^BOOL (NSString* key, id<JFJSONValue> number) {
+		XCTAssertTrue([number isKindOfClass:NSNumber.class]);
+		XCTAssertEqual([jsonObject numberForKey:key], number);
+		
+		[allKeys removeObject:key];
+		[allValues removeObject:(NSNumber*)number];
+		
+		NSUInteger value = [(NSNumber*)number unsignedIntegerValue];
+		if(value % 2 == 0) {
+			enumeratedSum += value;
+		}
+		return NO;
+	}];
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	XCTAssertTrue(allKeys.count == 0);
+	XCTAssertTrue(allValues.count == 0);
+}
+
+- (void)testEnumerateKeysAndValuesWithOptions
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	NSCountedSet<NSString*>* allKeys = [NSCountedSet<NSString*> setWithCapacity:count];
+	NSCountedSet<NSNumber*>* allValues = [NSCountedSet<NSNumber*> setWithCapacity:count];
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSString* key = JFStringFromNSUInteger(index);
+		NSUInteger value = arc4random() % 100;
+		NSNumber* object = @(value);
+		[jsonObject setNumber:object forKey:key];
+		[allKeys addObject:key];
+		[allValues addObject:object];
+		if(value % 2 == 0) {
+			sum += value;
+		}
+	}
+	
+	XCTAssertEqual(jsonObject.count, count);
+	XCTAssertFalse(allKeys.count == 0);
+	XCTAssertFalse(allValues.count == 0);
+	
+	NSUInteger __block enumeratedSum = 0;
+	[jsonObject enumerateKeysAndValuesWithOptions:0 usingBlock:^BOOL (NSString* key, id<JFJSONValue> number) {
+		XCTAssertTrue([number isKindOfClass:NSNumber.class]);
+		XCTAssertEqual([jsonObject numberForKey:key], number);
+		
+		[allKeys removeObject:key];
+		[allValues removeObject:(NSNumber*)number];
+		
+		NSUInteger value = [(NSNumber*)number unsignedIntegerValue];
+		if(value % 2 == 0) {
+			enumeratedSum += value;
+		}
+		return NO;
+	}];
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	XCTAssertTrue(allKeys.count == 0);
+	XCTAssertTrue(allValues.count == 0);
+}
+
+- (void)testKeyEnumerator
+{
+	NSUInteger count = 10;
+	
+	NSCountedSet<NSString*>* allKeys = [NSCountedSet<NSString*> setWithCapacity:count];
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSString* key = JFStringFromNSUInteger(index);
+		[jsonObject setNullForKey:key];
+		[allKeys addObject:key];
+	}
+	
+	XCTAssertEqual(jsonObject.count, count);
+	XCTAssertFalse(allKeys.count == 0);
+	
+	NSEnumerator<NSString*>* enumerator = jsonObject.keyEnumerator;
+	NSString* key;
+	while(key = [enumerator nextObject])
+		[allKeys removeObject:key];
+	
+	XCTAssertTrue(allKeys.count == 0);
+}
+
+- (void)testValueEnumerator
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	NSCountedSet<NSNumber*>* allValues = [NSCountedSet<NSNumber*> setWithCapacity:count];
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSString* key = JFStringFromNSUInteger(index);
+		NSUInteger value = arc4random() % 100;
+		NSNumber* object = @(value);
+		[jsonObject setNumber:object forKey:key];
+		[allValues addObject:object];
+		if(value % 2 == 0) {
+			sum += value;
+		}
+	}
+	
+	XCTAssertEqual(jsonObject.count, count);
+	XCTAssertFalse(allValues.count == 0);
+	
+	NSUInteger enumeratedSum = 0;
+	NSEnumerator<id<JFJSONValue>>* enumerator = jsonObject.valueEnumerator;
+	NSNumber* object;
+	while(object = (NSNumber*)[enumerator nextObject])
+	{
+		NSUInteger value = [object unsignedIntegerValue];
+		[allValues removeObject:object];
+		if(value % 2 == 0) {
+			enumeratedSum += value;
+		}
+	}
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	XCTAssertTrue(allValues.count == 0);
 }
 
 - (void)testObjectForKeyedSubscript

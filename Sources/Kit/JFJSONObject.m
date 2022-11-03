@@ -428,6 +428,34 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - Enumeration
+// =================================================================================================
+
+- (void)enumerateKeysAndValuesUsingBlock:(JFJSONObjectEnumerationBlock)block
+{
+	[self.map enumerateKeysAndObjectsUsingBlock:^(NSString* key, id<JFJSONValue> value, BOOL* stop) {
+		*stop = block(key, value);
+	}];
+}
+
+- (void)enumerateKeysAndValuesWithOptions:(NSEnumerationOptions)options usingBlock:(JFJSONObjectEnumerationBlock)block
+{
+	[self.map enumerateKeysAndObjectsWithOptions:options usingBlock:^(NSString* key, id<JFJSONValue> value, BOOL* stop) {
+		*stop = block(key, value);
+	}];
+}
+
+- (NSEnumerator<NSString*>*)keyEnumerator
+{
+	return [self.map keyEnumerator];
+}
+
+- (NSEnumerator<id<JFJSONValue>>*)valueEnumerator
+{
+	return [self.map objectEnumerator];
+}
+
+// =================================================================================================
 // MARK: Methods - Subscripting
 // =================================================================================================
 
@@ -439,6 +467,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setObject:(id<JFJSONValue> _Nullable)object forKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	[self setValue:object forKey:key];
+}
+
+// =================================================================================================
+// MARK: Methods (NSFastEnumeration)
+// =================================================================================================
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState*)state objects:(__unsafe_unretained id _Nullable [])buffer count:(NSUInteger)len
+{
+	return [self.map countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 @end

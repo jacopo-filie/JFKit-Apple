@@ -24,11 +24,8 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <XCTest/XCTest.h>
-
-#import "JFJSONArray.h"
-#import "JFJSONObject.h"
-#import "JFJSONSerializer.h"
+@import JFKit;
+@import XCTest;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -599,6 +596,186 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
 }
 
+- (void)testFastEnumeration
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger enumeratedSum = 0;
+	NSMutableArray<NSNumber*>* enumeratedObjects = [NSMutableArray<NSNumber*> arrayWithCapacity:count];
+	for(id<JFJSONValue> object in jsonArray)
+	{
+		[enumeratedObjects addObject:(NSNumber*)object];
+		enumeratedSum += [(NSNumber*)object unsignedIntegerValue];
+	}
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		XCTAssertEqual([enumeratedObjects objectAtIndex:index], [jsonArray valueAtIndex:index]);
+	}
+}
+
+- (void)testEnumerateValuesAtIndexes
+{
+	NSUInteger count = 10;
+	NSRange range = NSMakeRange(3, 5);
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		if(!NSLocationInRange(index, range))
+		{
+			[jsonArray addNull];
+			continue;
+		}
+		
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger __block enumeratedSum = 0;
+	NSIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:range];
+	[jsonArray enumerateValuesAtIndexes:indexes options:0 usingBlock:^BOOL (NSUInteger index, id<JFJSONValue> value) {
+		XCTAssertTrue(NSLocationInRange(index, range));
+		XCTAssertTrue([value isKindOfClass:NSNumber.class]);
+		enumeratedSum += [(NSNumber*)value unsignedIntegerValue];
+		return NO;
+	}];
+	
+	XCTAssertEqual(enumeratedSum, sum);
+}
+
+- (void)testEnumerateValuesUsingBlock
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger __block enumeratedSum = 0;
+	[jsonArray enumerateValuesUsingBlock:^BOOL (NSUInteger index, id<JFJSONValue> value) {
+		XCTAssertTrue(index < count);
+		enumeratedSum += [(NSNumber*)value unsignedIntegerValue];
+		return NO;
+	}];
+	
+	XCTAssertEqual(enumeratedSum, sum);
+}
+
+- (void)testEnumerateValuesWithOptions
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger __block enumeratedSum = 0;
+	[jsonArray enumerateValuesWithOptions:0 usingBlock:^BOOL (NSUInteger index, id<JFJSONValue> value) {
+		XCTAssertTrue(index < count);
+		enumeratedSum += [(NSNumber*)value unsignedIntegerValue];
+		return NO;
+	}];
+	
+	XCTAssertEqual(enumeratedSum, sum);
+}
+
+- (void)testReverseValueEnumerator
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger enumeratedSum = 0;
+	NSMutableArray<NSNumber*>* enumeratedObjects = [NSMutableArray<NSNumber*> arrayWithCapacity:count];
+	NSNumber* object;
+	NSEnumerator<id<JFJSONValue>>* enumerator = jsonArray.reverseValueEnumerator;
+	while(object = (NSNumber*)[enumerator nextObject])
+	{
+		[enumeratedObjects insertObject:object atIndex:0];
+		enumeratedSum += [object unsignedIntegerValue];
+	}
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		XCTAssertEqual([enumeratedObjects objectAtIndex:index], [jsonArray valueAtIndex:index]);
+	}
+}
+
+- (void)testValueEnumerator
+{
+	NSUInteger count = 10;
+	NSUInteger sum = 0;
+	
+	JFJSONArray* jsonArray = [self newJSONArray];
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		NSUInteger value = arc4random() % 100;
+		[jsonArray addNumber:@(value)];
+		sum += value;
+	}
+	
+	XCTAssertEqual(jsonArray.count, count);
+	
+	NSUInteger enumeratedSum = 0;
+	NSMutableArray<NSNumber*>* enumeratedObjects = [NSMutableArray<NSNumber*> arrayWithCapacity:count];
+	NSEnumerator<id<JFJSONValue>>* enumerator = jsonArray.valueEnumerator;
+	NSNumber* value;
+	while(value = (NSNumber*)[enumerator nextObject])
+	{
+		[enumeratedObjects addObject:value];
+		enumeratedSum += [value unsignedIntegerValue];
+	}
+	
+	XCTAssertEqual(enumeratedSum, sum);
+	
+	for(NSUInteger index = 0; index < count; index++)
+	{
+		XCTAssertEqual([enumeratedObjects objectAtIndex:index], [jsonArray valueAtIndex:index]);
+	}
+}
 
 - (void)testObjectAtIndexedSubscript
 {

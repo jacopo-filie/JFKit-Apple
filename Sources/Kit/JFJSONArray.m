@@ -475,6 +475,41 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - Enumeration
+// =================================================================================================
+
+- (void)enumerateValuesAtIndexes:(NSIndexSet*)indexes options:(NSEnumerationOptions)options usingBlock:(JFJSONArrayEnumerationBlock)block
+{
+	[self.list enumerateObjectsAtIndexes:indexes options:options usingBlock:^(id<JFJSONValue> value, NSUInteger index, BOOL* stop) {
+		*stop = block(index, value);
+	}];
+}
+
+- (void)enumerateValuesUsingBlock:(JFJSONArrayEnumerationBlock)block
+{
+	[self.list enumerateObjectsUsingBlock:^(id<JFJSONValue> value, NSUInteger index, BOOL* stop) {
+		*stop = block(index, value);
+	}];
+}
+
+- (void)enumerateValuesWithOptions:(NSEnumerationOptions)options usingBlock:(JFJSONArrayEnumerationBlock)block
+{
+	[self.list enumerateObjectsWithOptions:options usingBlock:^(id<JFJSONValue> value, NSUInteger index, BOOL* stop) {
+		*stop = block(index, value);
+	}];
+}
+
+- (NSEnumerator<id<JFJSONValue>>*)reverseValueEnumerator
+{
+	return [self.list reverseObjectEnumerator];
+}
+
+- (NSEnumerator<id<JFJSONValue>>*)valueEnumerator
+{
+	return [self.list objectEnumerator];
+}
+
+// =================================================================================================
 // MARK: Methods - Subscripting
 // =================================================================================================
 
@@ -486,6 +521,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setObject:(id<JFJSONValue>)object atIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	[self replaceWithValue:object atIndex:index];
+}
+
+// =================================================================================================
+// MARK: Methods (NSFastEnumeration)
+// =================================================================================================
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState*)state objects:(__unsafe_unretained id _Nullable [])buffer count:(NSUInteger)len
+{
+	return [self.list countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 @end
