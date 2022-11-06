@@ -144,6 +144,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype _Nullable)initWithString:(NSString*)string;
 
 // =================================================================================================
+// MARK: Methods - Comparison
+// =================================================================================================
+
+/**
+ * Compares the receiving JSON object to another JSON object.
+ * @discussion Two JSON objects have equal contents if they each hold the same number of entries and, for a given key, the corresponding values in each JSON object satisfy the `isEqual:` test.
+ * @param other A JSON object to compare.
+ * @return Returns `YES` if the JSON objects are equal, `NO` otherwise.
+ */
+- (BOOL)isEqualToJSONObject:(JFJSONObject*)other;
+
+// =================================================================================================
 // MARK: Methods - Data (Arrays)
 // =================================================================================================
 

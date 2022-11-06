@@ -332,6 +332,22 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqualObjects(jsonArray.arrayValue, self.array);
 }
 
+- (void)testIsEqual
+{
+	JFJSONArray* jsonArray = [self newJSONArray];
+	JFJSONArray* jsonArray2 = [self newJSONArray];
+	XCTAssertEqualObjects(jsonArray, jsonArray2);
+	XCTAssertEqualObjects(jsonArray2, jsonArray);
+
+	[jsonArray addNull];
+	XCTAssertNotEqualObjects(jsonArray, jsonArray2);
+	XCTAssertNotEqualObjects(jsonArray2, jsonArray);
+
+	[jsonArray2 addNull];
+	XCTAssertEqualObjects(jsonArray, jsonArray2);
+	XCTAssertEqualObjects(jsonArray2, jsonArray);
+}
+
 - (void)testAddArray
 {
 	JFJSONArray* jsonArray = [self newJSONArray];

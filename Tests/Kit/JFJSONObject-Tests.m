@@ -370,6 +370,24 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqualObjects(jsonObject.dictionaryValue, self.dictionary);
 }
 
+- (void)testIsEqual
+{
+	NSString* key = @"Key";
+	
+	JFJSONObject* jsonObject = [self newJSONObject];
+	JFJSONObject* jsonObject2 = [self newJSONObject];
+	XCTAssertEqualObjects(jsonObject, jsonObject2);
+	XCTAssertEqualObjects(jsonObject2, jsonObject);
+	
+	[jsonObject setNullForKey:key];
+	XCTAssertNotEqualObjects(jsonObject, jsonObject2);
+	XCTAssertNotEqualObjects(jsonObject2, jsonObject);
+	
+	[jsonObject2 setNullForKey:key];
+	XCTAssertEqualObjects(jsonObject, jsonObject2);
+	XCTAssertEqualObjects(jsonObject2, jsonObject);
+}
+
 - (void)testArrayForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];

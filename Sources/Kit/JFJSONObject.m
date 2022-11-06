@@ -264,6 +264,28 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods - Comparison
+// =================================================================================================
+
+- (NSUInteger)hash
+{
+	return self.map.hash;
+}
+
+- (BOOL)isEqual:(id _Nullable)object
+{
+	if(!object || ![object isKindOfClass:self.class])
+		return NO;
+	
+	return [self isEqualToJSONObject:(JFJSONObject*)object];
+}
+
+- (BOOL)isEqualToJSONObject:(JFJSONObject*)other
+{
+	return [self.map isEqualToDictionary:other.map];
+}
+
+// =================================================================================================
 // MARK: Methods - Data
 // =================================================================================================
 
