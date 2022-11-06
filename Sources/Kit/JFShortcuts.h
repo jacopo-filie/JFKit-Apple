@@ -50,35 +50,31 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros - Memory
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
-
 /**
  * Creates a new strong reference variable of the same type of `_var`; the name of this variable is composed by appending the parameter `_suffix` to the word `strong`.
  * @param _var The variable to convert to a strong reference variable.
  * @param _suffix The suffix component of the new reference variable name.
  */
-#	define JFStrongify(_var, _suffix) __typeof(_var) __strong strong ## _suffix = _var
+#define JFStrongify(_var, _suffix) __typeof(_var) __strong strong ## _suffix = _var
 
 /**
  * Creates a new strong reference variable of the same type of `weakSelf`, called `strongSelf`.
  * @warning You should use this macro only if you already used the macro `JFWeakifySelf` in the same scope.
  */
-#	define JFStrongifySelf JFStrongify(weakSelf, Self)
+#define JFStrongifySelf JFStrongify(weakSelf, Self)
 
 /**
  * Creates a new weak reference variable of the same type of `_var`; the name of this variable is composed by appending the parameter `_suffix` to the word `weak`.
  * @param _var The variable to convert to a weak reference variable.
  * @param _suffix The suffix component of the new reference variable name.
  */
-#	define JFWeakify(_var, _suffix) __typeof(_var) __weak weak ## _suffix = _var
+#define JFWeakify(_var, _suffix) __typeof(_var) __weak weak ## _suffix = _var
 
 /**
  * Creates a new weak reference variable of the same type of `self`, called `weakSelf`.
  * @warning You should always use this macro before using the macro `JFStrongifySelf` in the same scope.
  */
-#	define JFWeakifySelf JFWeakify(self, Self)
-
-#endif
+#define JFWeakifySelf JFWeakify(self, Self)
 
 // =================================================================================================
 // MARK: Macros - Shortcuts

@@ -41,13 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define CleanRegistryDelay kJFObjectIdentifierLegacyImplementationCleanRegistryDelay
 #define LegacyRegistry NSMutableDictionary<Reference*, NSNumber*>
+#define Reference JFWeakReference<id<NSObject>>
 #define Registry NSMapTable<id<NSObject>, NSNumber*>
-
-#if JF_WEAK_ENABLED
-#	define Reference JFWeakReference<id<NSObject>>
-#else
-#	define Reference JFUnsafeReference<id<NSObject>>
-#endif
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
@@ -389,12 +384,7 @@ API_AVAILABLE(ios(8.0), macos(10.8))
 	if(!needsCleanRegistry)
 		return;
 	
-#if JF_WEAK_ENABLED
 	JFWeakifySelf;
-#else
-	__typeof(self) __strong weakSelf = self;
-#endif
-	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(CleanRegistryDelay * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[weakSelf cleanRegistryIfNeeded];
 	});

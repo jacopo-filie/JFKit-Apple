@@ -859,11 +859,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 @implementation JFKitLogger
 
-#if JF_WEAK_ENABLED
 static id<JFKitLoggerDelegate> __weak _delegate;
-#else
-static id<JFKitLoggerDelegate> __unsafe_unretained _delegate;
-#endif
 
 + (id<JFKitLoggerDelegate> _Nullable)delegate
 {

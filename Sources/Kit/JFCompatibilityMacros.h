@@ -80,24 +80,4 @@
 
 #endif
 
-// =================================================================================================
-// MARK: Features
-// =================================================================================================
-
-#if JF_WEAK_ENABLED
-
-/**
- * An alias for the `weak` property attribute.
- */
-#	define JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY weak
-
-#else
-
-/**
- * An alias for the `unsafe_unretained` property attribute.
- */
-#	define JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY unsafe_unretained
-
-#endif
-
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

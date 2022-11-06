@@ -146,18 +146,10 @@ typedef NS_ENUM(NSInteger, JFStateMachineError) {
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
 /**
  * The delegate of the state machine.
  */
 @property (weak, nonatomic, readonly, nullable) id<JFStateMachineDelegate> delegate;
-#else
-/**
- * The delegate of the state machine.
- * @warning Remember to use `-clearDelegate` to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
- */
-@property (unsafe_unretained, nonatomic, readonly, nullable) id<JFStateMachineDelegate> delegate;
-#endif
 
 // =================================================================================================
 // MARK: Properties - State

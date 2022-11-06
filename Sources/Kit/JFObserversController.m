@@ -41,11 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Macros - Types
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
-#	define Reference JFWeakReference
-#else
-#	define Reference JFUnsafeReference
-#endif
+#define Reference JFWeakReference
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
@@ -111,12 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		_needsCleanUp = needsCleanUp;
 		
-#if JF_WEAK_ENABLED
 		JFWeakifySelf;
-#else
-		__typeof(self) __strong weakSelf = self;
-#endif
-		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 			[weakSelf cleanUpIfNeeded];
 		});

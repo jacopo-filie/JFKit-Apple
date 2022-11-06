@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY, nonatomic, readwrite, nullable) id<JFStateMachineDelegate> delegate;
+@property (weak, nonatomic, readwrite, nullable) id<JFStateMachineDelegate> delegate;
 
 // =================================================================================================
 // MARK: Properties - State
@@ -221,16 +221,10 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	JFAsynchronousBlockOperation* __block operation = nil;
 	
-#if JF_WEAK_ENABLED
 	JFWeakifySelf;
-#else
-	__typeof(self) __strong strongSelf = self;
-#endif
-	
 	operation = [[JFAsynchronousBlockOperation alloc] initWithExecutionBlock:^{
 		shouldSkipIsCancelledCheckOnCompletion = YES;
 		
-#if JF_WEAK_ENABLED
 		JFStrongifySelf;
 		if(!strongSelf)
 		{
@@ -238,7 +232,6 @@ NS_ASSUME_NONNULL_BEGIN
 			[operation finish];
 			return;
 		}
-#endif
 		
 		id<JFStateMachineDelegate> delegate = strongSelf.delegate;
 		if(!delegate)
@@ -279,9 +272,7 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 		
 		JFFailableClosure* closure = [JFFailableClosure newWithBlock:^(BOOL succeeded, NSError* _Nullable error) {
-#if JF_WEAK_ENABLED
 			JFStrongifySelf;
-#endif
 			if(strongSelf)
 			{
 				JFState endingState = (succeeded ? [strongSelf endingStateForSucceededTransition:transition.transition] : [strongSelf endingStateForFailedTransition:transition.transition]);

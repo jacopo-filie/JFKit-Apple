@@ -512,18 +512,10 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
 /**
  * The delegate of the kit logger.
  */
 @property (class, weak, nullable) id<JFKitLoggerDelegate> delegate;
-#else
-/**
- * The delegate of the kit logger.
- * @warning Remember to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
- */
-@property (class, unsafe_unretained, nullable) id<JFKitLoggerDelegate> delegate;
-#endif
 
 @end
 

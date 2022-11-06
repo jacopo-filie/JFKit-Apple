@@ -88,18 +88,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
 /**
  * The delegate of the alert.
  */
 @property (weak, nonatomic, nullable) id<JFAlertDelegate> delegate;
-#else
-/**
- * The delegate of the alert.
- * @warning Remember to unset the delegate when it is not available anymore because it may become a dangling pointer otherwise.
- */
-@property (unsafe_unretained, nonatomic, nullable) id<JFAlertDelegate> delegate;
-#endif
 
 // =================================================================================================
 // MARK: Properties - User interface

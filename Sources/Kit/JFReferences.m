@@ -46,9 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Memory
 // =================================================================================================
 
-#	if JF_WEAK_ENABLED
 @property (weak, nonatomic, nullable) ObjectType weakObject;
-#	endif
 
 // =================================================================================================
 // MARK: Methods - Notifications
@@ -70,9 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 @synthesize object = _object;
-#	if JF_WEAK_ENABLED
 @synthesize weakObject = _weakObject;
-#	endif
 
 // =================================================================================================
 // MARK: Properties (Accessors) - Memory
@@ -82,10 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	@synchronized(self)
 	{
-#	if JF_WEAK_ENABLED
 		if(!_object)
 			_object = self.weakObject;
-#	endif
 		return _object;
 	}
 }
@@ -98,9 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		_object = object;
 		
-#	if JF_WEAK_ENABLED
 		self.weakObject = object;
-#	endif
 		
 		if(shouldUpdateNotification)
 		{
@@ -162,16 +154,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifiedDidReceiveMemoryWarning:(NSNotification*)notification
 {
-#	if JF_WEAK_ENABLED
 	// `weakObject` is set to `object` in the `setObject:` method, so we must hold the object here in a local variable before resetting the instance properties, otherwise the object will be lost before having a chance to restore it on the next call to the `object` method.
 	id object = self.object;
-#	endif
-	
 	self.object = nil;
-	
-#	if JF_WEAK_ENABLED
 	self.weakObject = object;
-#	endif
 }
 
 // =================================================================================================
@@ -191,66 +177,6 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
 
-#if !JF_WEAK_ENABLED
-@implementation JFUnsafeReference
-
-// =================================================================================================
-// MARK: Properties - Memory
-// =================================================================================================
-
-@synthesize object = _object;
-
-// =================================================================================================
-// MARK: Lifecycle
-// =================================================================================================
-
-+ (instancetype)referenceWithObject:(id _Nullable)object
-{
-	JFUnsafeReference* retObj = [[JFUnsafeReference alloc] init];
-	retObj.object = object;
-	return retObj;
-}
-
-// =================================================================================================
-// MARK: Methods - Identity
-// =================================================================================================
-
-- (NSUInteger)hash
-{
-	id object = self.object;
-	if([object conformsToProtocol:@protocol(NSObject)])
-		return ((id<NSObject>)object).hash;
-	
-	return ClassName.hash;
-}
-
-- (BOOL)isEqual:(id _Nullable)object
-{
-	if(!object || ![object isKindOfClass:self.class])
-		return NO;
-	
-	JFUnsafeReference* other = object;
-	return JFAreObjectsEqual(self.object, other.object);
-}
-
-// =================================================================================================
-// MARK: Methods (NSCopying)
-// =================================================================================================
-
-- (id)copyWithZone:(NSZone* _Nullable)zone
-{
-	JFUnsafeReference* retObj = [[[self class] allocWithZone:zone] init];
-	retObj.object = self.object;
-	return retObj;
-}
-
-@end
-#endif
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
-#if JF_WEAK_ENABLED
 @implementation JFWeakReference
 
 // =================================================================================================
@@ -304,7 +230,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
-#endif
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

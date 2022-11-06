@@ -306,21 +306,14 @@ API_AVAILABLE(ios(10.0), macos(10.12))
 	
 	JFErrorFactory* errorFactory = self.class.errorFactory;
 	
-#if JF_WEAK_ENABLED
 	JFWeakifySelf;
-#else
-	__typeof(self) __strong strongSelf = self;
-#endif
-	
 	[self.serialQueue addOperationWithBlock:^{
-#if JF_WEAK_ENABLED
 		JFStrongifySelf;
 		if(!strongSelf)
 		{
 			[closure executeWithError:[errorFactory errorWithCode:JFPersistentContainerErrorDeallocated]];
 			return;
 		}
-#endif
 		
 		NSURL* url = [strongSelf.class.defaultDirectoryURL URLByAppendingPathComponent:[strongSelf.name.stringByDeletingPathExtension stringByAppendingPathExtension:@"sqlite"]];
 		if(!url)

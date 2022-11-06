@@ -57,18 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-#if JF_WEAK_ENABLED
 /**
  * The owner of the executor.
  */
 @property (weak, nonatomic, readonly, nullable) OwnerType owner;
-#else
-/**
- * The owner of the executor.
- * @warning Remember to use `-clearOwner` to unset the owner when it is not available anymore because it may become a dangling pointer otherwise.
- */
-@property (unsafe_unretained, nonatomic, readonly, nullable) OwnerType owner;
-#endif
 
 // =================================================================================================
 // MARK: Lifecycle

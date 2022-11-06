@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (JF_WEAK_OR_UNSAFE_UNRETAINED_PROPERTY, nonatomic, readwrite, nullable) OwnerType owner;
+@property (weak, nonatomic, readwrite, nullable) OwnerType owner;
 
 // =================================================================================================
 // MARK: Properties - Service
@@ -132,17 +132,11 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	BOOL __block executed = NO;
 	
-#if JF_WEAK_ENABLED
 	JFWeakify(self.owner, Owner);
-#else
-	__typeof(self) __strong strongOwner = self.owner;
-#endif
 	NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
 		executed = YES;
 		
-#if JF_WEAK_ENABLED
 		JFStrongify(weakOwner, Owner);
-#endif
 		if(strongOwner)
 		{
 			block(strongOwner);
