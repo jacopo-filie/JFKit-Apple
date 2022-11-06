@@ -305,7 +305,7 @@ NSInteger const JFVersionComponentNotValid = -1;
 	return self.string.hash;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id _Nullable)object
 {
 	if(!object || ![object isKindOfClass:self.class])
 		return NO;

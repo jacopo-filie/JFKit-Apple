@@ -147,7 +147,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return ClassName.hash;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id _Nullable)object
 {
 	if(!object || ![object isKindOfClass:self.class])
 		return NO;
@@ -224,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return ClassName.hash;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id _Nullable)object
 {
 	if(!object || ![object isKindOfClass:self.class])
 		return NO;
@@ -283,7 +283,7 @@ NS_ASSUME_NONNULL_BEGIN
 	return ClassName.hash;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id _Nullable)object
 {
 	if(!object || ![object isKindOfClass:self.class])
 		return NO;
