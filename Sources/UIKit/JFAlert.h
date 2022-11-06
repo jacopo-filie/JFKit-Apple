@@ -24,15 +24,13 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFUIKit/JFPreprocessorMacros.h>
+@import JFKit;
 
 #if JF_MACOS
 @import Cocoa;
 #else
 @import UIKit;
 #endif
-
-@import JFKit;
 
 @class JFAlertButton;
 

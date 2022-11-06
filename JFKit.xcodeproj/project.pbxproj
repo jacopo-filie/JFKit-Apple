@@ -80,7 +80,6 @@
 		4E7E6ABF25F4ECE30045E201 /* JFOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E6914F3205895DD00074DDD /* JFOverlayController.m */; };
 		4E7E6AC025F4ECE30045E201 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53A67D200CC4B2001EEBFD /* JFWindowController.m */; };
 		4E7E6AC525F4ECE30045E201 /* UIButton+JFUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E62747520424914007BCE81 /* UIButton+JFUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E7E6AC725F4ECE30045E201 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7E6ACA25F4ECE30045E201 /* JFSliderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EEC977C21CBBD9300A9C138 /* JFSliderController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7E6ACB25F4ECE30045E201 /* JFTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E503E32214C5B5E0030496B /* JFTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7E6ACC25F4ECE30045E201 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -224,7 +223,6 @@
 		4EFCAE6C25F583F800D508C0 /* JFAlertsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E78298521CD27DD0009A752 /* JFAlertsController.m */; };
 		4EFCAE6F25F583F800D508C0 /* JFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E515E182004FAD0008D3234 /* JFAppDelegate.m */; };
 		4EFCAE7325F583F800D508C0 /* JFWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E53A67D200CC4B2001EEBFD /* JFWindowController.m */; };
-		4EFCAE7825F583F800D508C0 /* JFPreprocessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EFCAE7B25F583F800D508C0 /* JFAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E04E65D21CCF9AC00479981 /* JFAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EFCAE7F25F583F800D508C0 /* JFWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E53A67E200CC4B2001EEBFD /* JFWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EFCAE8025F583F800D508C0 /* JFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E515E172004FAD0008D3234 /* JFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -508,6 +506,7 @@
 				4E0932CA21D1C52B0010E261 /* JFJSONSerializer.h */,
 				4E0932CB21D1C52B0010E261 /* JFJSONSerializer.m */,
 				4E8BCC9921D1183700D77BE3 /* JFJSONValue.h */,
+				4ECFE39C1FD8C78D004EEACE /* JFKit.h */,
 				4ECA37A121D063C3009BDA18 /* JFKitLogger.h */,
 				4EB0624F24E26ECE006B1B98 /* JFLazy.h */,
 				4EB0625324E26ECE006B1B98 /* JFLazy.m */,
@@ -528,6 +527,7 @@
 				4EB0625624E26ECE006B1B98 /* JFParameterizedLazy.m */,
 				4E415F261FF6D4B200C252E3 /* JFPersistentContainer.h */,
 				4E415F251FF6D4B200C252E3 /* JFPersistentContainer.m */,
+				4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */,
 				4EC2586E1FEF294600179CC7 /* JFReferences.h */,
 				4EC2586D1FEF294600179CC7 /* JFReferences.m */,
 				4EF2C7B91FF1178300311EB5 /* JFShortcuts.h */,
@@ -569,6 +569,7 @@
 				4EEC977D21CBBD9300A9C138 /* JFSliderController.m */,
 				4E503E32214C5B5E0030496B /* JFTableViewCell.h */,
 				4E503E33214C5B5E0030496B /* JFTableViewCell.m */,
+				4E7E6B1225F4EE4F0045E201 /* JFUIKit.h */,
 				4E53A67E200CC4B2001EEBFD /* JFWindowController.h */,
 				4E53A67D200CC4B2001EEBFD /* JFWindowController.m */,
 				4E62747520424914007BCE81 /* UIButton+JFUIKit.h */,
@@ -661,9 +662,6 @@
 			children = (
 				4E0BF89E1FE08B400050114D /* Info-Tests.plist */,
 				4ECFE39D1FD8C78D004EEACE /* Info.plist */,
-				4ECFE39C1FD8C78D004EEACE /* JFKit.h */,
-				4E0BF89B1FE076770050114D /* JFPreprocessorMacros.h */,
-				4E7E6B1225F4EE4F0045E201 /* JFUIKit.h */,
 				4E6B219325F0A025005BC9BD /* Target.xcconfig */,
 				4E6B219425F0A03A005BC9BD /* Version.xcconfig */,
 			);
@@ -686,7 +684,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E7E6AC525F4ECE30045E201 /* UIButton+JFUIKit.h in Headers */,
-				4E7E6AC725F4ECE30045E201 /* JFPreprocessorMacros.h in Headers */,
 				4E7E6ACA25F4ECE30045E201 /* JFSliderController.h in Headers */,
 				4E7E6ACB25F4ECE30045E201 /* JFTableViewCell.h in Headers */,
 				4E7E6ACC25F4ECE30045E201 /* JFAlert.h in Headers */,
@@ -803,7 +800,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EFCAE7825F583F800D508C0 /* JFPreprocessorMacros.h in Headers */,
 				4EFCAE7B25F583F800D508C0 /* JFAlert.h in Headers */,
 				4EFCAE7F25F583F800D508C0 /* JFWindowController.h in Headers */,
 				4EFCAE8025F583F800D508C0 /* JFAppDelegate.h in Headers */,
