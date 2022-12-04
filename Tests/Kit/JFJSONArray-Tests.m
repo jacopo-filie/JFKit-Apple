@@ -596,6 +596,30 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
 }
 
+- (void)testCopy
+{
+	JFJSONArray* jsonArray = [self newJSONArray];
+	[jsonArray addNull];
+	[jsonArray addNumber:@0];
+	[jsonArray addString:@""];
+	[jsonArray addArray:[self newJSONArray]];
+	[jsonArray addObject:[self newJSONObject]];
+	
+	XCTAssertEqual(jsonArray.count, 5);
+	
+	JFJSONArray* copiedJSONArray = [jsonArray copy];
+	XCTAssertEqualObjects(jsonArray, copiedJSONArray);
+	
+	JFJSONObject* jsonObject = [copiedJSONArray objectAtIndex:4];
+	XCTAssertNotNil(jsonObject);
+	
+	[jsonObject setNullForKey:@""];
+	XCTAssertNotEqualObjects(jsonArray, copiedJSONArray);
+	
+	[jsonObject removeValueForKey:@""];
+	XCTAssertEqualObjects(jsonArray, copiedJSONArray);
+}
+
 - (void)testFastEnumeration
 {
 	NSUInteger count = 10;

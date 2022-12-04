@@ -54,7 +54,7 @@ typedef BOOL (^JFJSONArrayEnumerationBlock)(NSUInteger index, id<JFJSONValue> va
 /**
  * The `JFJSONArray` class is a kind of JSON node that associates sorted integer keys, called indexes, with JSON values.
  */
-@interface JFJSONArray : NSObject <JFJSONNode, NSFastEnumeration>
+@interface JFJSONArray : NSObject <JFJSONNode, NSCopying, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data

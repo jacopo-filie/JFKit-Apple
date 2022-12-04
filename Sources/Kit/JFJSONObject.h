@@ -54,7 +54,7 @@ typedef BOOL (^JFJSONObjectEnumerationBlock)(NSString* key, id<JFJSONValue> valu
 /**
  * The `JFJSONObject` class is a kind of JSON node that associates string keys with JSON values.
  */
-@interface JFJSONObject : NSObject <JFJSONNode, NSFastEnumeration>
+@interface JFJSONObject : NSObject <JFJSONNode, NSCopying, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data

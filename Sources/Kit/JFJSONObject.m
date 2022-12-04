@@ -470,6 +470,31 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 // =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* _Nullable)zone
+{
+	JFJSONObject* retObj = [self.class new];
+	NSMutableDictionary<NSString*, id<JFJSONValue>>* map = retObj.map;
+	[self enumerateKeysAndValuesUsingBlock:^BOOL(NSString* key, id<JFJSONValue> value) {
+		if([value isKindOfClass:JFJSONArray.class]) {
+			[map setObject:[(JFJSONArray*)value copy] forKey:key];
+		} else if([value isKindOfClass:JFJSONObject.class]) {
+			[map setObject:[(JFJSONObject*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSNull.class]) {
+			[map setObject:[(NSNull*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSNumber.class]) {
+			[map setObject:[(NSNumber*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSString.class]) {
+			[map setObject:[(NSString*)value copy] forKey:key];
+		}
+		return NO;
+	}];
+	return retObj;
+}
+
+// =================================================================================================
 // MARK: Methods (NSFastEnumeration)
 // =================================================================================================
 
