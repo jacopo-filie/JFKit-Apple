@@ -408,6 +408,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return ([self valueForKey:key] != nil);
 }
 
+- (void)removeAllValues
+{
+	[self.map removeAllObjects];
+}
+
 - (void)removeValueForKey:(NSString*)key
 {
 	[self setValue:nil forKey:key];

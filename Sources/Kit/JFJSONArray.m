@@ -457,6 +457,11 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.list insertObject:value atIndex:index];
 }
 
+- (void)removeAllValues
+{
+	[self.list removeAllObjects];
+}
+
 - (void)removeValueAtIndex:(NSUInteger)index
 {
 	[self.list removeObjectAtIndex:index];

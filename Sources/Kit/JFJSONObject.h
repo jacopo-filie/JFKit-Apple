@@ -275,6 +275,11 @@ typedef BOOL (^JFJSONObjectEnumerationBlock)(NSString* key, id<JFJSONValue> valu
 - (BOOL)hasValueForKey:(NSString*)key;
 
 /**
+ * Removes all the stored values.
+ */
+- (void)removeAllValues;
+
+/**
  * Removes the currently stored value for the given key; if no value is currently stored for the given key, it does nothing.
  * @param key The key of the association.
  */

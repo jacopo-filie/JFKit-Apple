@@ -335,6 +335,11 @@ typedef BOOL (^JFJSONArrayEnumerationBlock)(NSUInteger index, id<JFJSONValue> va
 - (void)insertValue:(id<JFJSONValue>)value atIndex:(NSUInteger)index;
 
 /**
+ * Removes all the stored values.
+ */
+- (void)removeAllValues;
+
+/**
  * Removes the stored value for the given index; if no value is currently stored for the given index, it does nothing.
  * @param index The index of the association.
  */

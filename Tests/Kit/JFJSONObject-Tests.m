@@ -504,6 +504,19 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertTrue([jsonObject hasValueForKey:key]);
 }
 
+- (void)testRemoveAllValues
+{
+	JFJSONObject* jsonObject = [self newJSONObject];
+	
+	[jsonObject setNullForKey:@"0"];
+	[jsonObject setNullForKey:@"1"];
+	[jsonObject setNullForKey:@"2"];
+	XCTAssertEqual(jsonObject.count, 3);
+	
+	[jsonObject removeAllValues];
+	XCTAssertEqual(jsonObject.count, 0);
+}
+
 - (void)testRemoveValueForKey
 {
 	JFJSONObject* jsonObject = [self newJSONObject];

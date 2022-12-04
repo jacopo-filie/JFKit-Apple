@@ -566,6 +566,19 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
 }
 
+- (void)testRemoveAllValues
+{
+	JFJSONArray* jsonArray = [self newJSONArray];
+	
+	[jsonArray addNull];
+	[jsonArray addNull];
+	[jsonArray addNull];
+	XCTAssertEqual(jsonArray.count, 3);
+
+	[jsonArray removeAllValues];
+	XCTAssertEqual(jsonArray.count, 0);
+}
+
 - (void)testRemoveValueAtIndex
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
