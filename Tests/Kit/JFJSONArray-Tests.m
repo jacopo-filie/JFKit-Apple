@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2019-2022 Jacopo Filié
+//	Copyright © 2019-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -566,6 +566,19 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
 }
 
+- (void)testRemoveAllValues
+{
+	JFJSONArray* jsonArray = [self newJSONArray];
+	
+	[jsonArray addNull];
+	[jsonArray addNull];
+	[jsonArray addNull];
+	XCTAssertEqual(jsonArray.count, 3);
+
+	[jsonArray removeAllValues];
+	XCTAssertEqual(jsonArray.count, 0);
+}
+
 - (void)testRemoveValueAtIndex
 {
 	JFJSONArray* jsonArray = [self newJSONArray];
@@ -594,6 +607,30 @@ API_AVAILABLE(ios(8.0), macos(10.7))
 	[jsonArray addValue:value];
 	XCTAssertEqual(jsonArray.count, 1);
 	XCTAssertEqual([jsonArray valueAtIndex:0], value);
+}
+
+- (void)testCopy
+{
+	JFJSONArray* jsonArray = [self newJSONArray];
+	[jsonArray addNull];
+	[jsonArray addNumber:@0];
+	[jsonArray addString:@""];
+	[jsonArray addArray:[self newJSONArray]];
+	[jsonArray addObject:[self newJSONObject]];
+	
+	XCTAssertEqual(jsonArray.count, 5);
+	
+	JFJSONArray* copiedJSONArray = [jsonArray copy];
+	XCTAssertEqualObjects(jsonArray, copiedJSONArray);
+	
+	JFJSONObject* jsonObject = [copiedJSONArray objectAtIndex:4];
+	XCTAssertNotNil(jsonObject);
+	
+	[jsonObject setNullForKey:@""];
+	XCTAssertNotEqualObjects(jsonArray, copiedJSONArray);
+	
+	[jsonObject removeValueForKey:@""];
+	XCTAssertEqualObjects(jsonArray, copiedJSONArray);
 }
 
 - (void)testFastEnumeration

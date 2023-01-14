@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2018-2022 Jacopo Filié
+//	Copyright © 2018-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ typedef BOOL (^JFJSONObjectEnumerationBlock)(NSString* key, id<JFJSONValue> valu
 /**
  * The `JFJSONObject` class is a kind of JSON node that associates string keys with JSON values.
  */
-@interface JFJSONObject : NSObject <JFJSONNode, NSFastEnumeration>
+@interface JFJSONObject : NSObject <JFJSONNode, NSCopying, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -273,6 +273,11 @@ typedef BOOL (^JFJSONObjectEnumerationBlock)(NSString* key, id<JFJSONValue> valu
  * @return `YES` if the associated value exists, `NO` otherwise.
  */
 - (BOOL)hasValueForKey:(NSString*)key;
+
+/**
+ * Removes all the stored values.
+ */
+- (void)removeAllValues;
 
 /**
  * Removes the currently stored value for the given key; if no value is currently stored for the given key, it does nothing.

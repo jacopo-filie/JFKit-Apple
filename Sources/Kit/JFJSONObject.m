@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2018-2022 Jacopo Filié
+//	Copyright © 2018-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -408,6 +408,11 @@ NS_ASSUME_NONNULL_BEGIN
 	return ([self valueForKey:key] != nil);
 }
 
+- (void)removeAllValues
+{
+	[self.map removeAllObjects];
+}
+
 - (void)removeValueForKey:(NSString*)key
 {
 	[self setValue:nil forKey:key];
@@ -467,6 +472,31 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setObject:(id<JFJSONValue> _Nullable)object forKeyedSubscript:(NSString*)key API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	[self setValue:object forKey:key];
+}
+
+// =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* _Nullable)zone
+{
+	JFJSONObject* retObj = [self.class new];
+	NSMutableDictionary<NSString*, id<JFJSONValue>>* map = retObj.map;
+	[self enumerateKeysAndValuesUsingBlock:^BOOL(NSString* key, id<JFJSONValue> value) {
+		if([value isKindOfClass:JFJSONArray.class]) {
+			[map setObject:[(JFJSONArray*)value copy] forKey:key];
+		} else if([value isKindOfClass:JFJSONObject.class]) {
+			[map setObject:[(JFJSONObject*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSNull.class]) {
+			[map setObject:[(NSNull*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSNumber.class]) {
+			[map setObject:[(NSNumber*)value copy] forKey:key];
+		} else if([value isKindOfClass:NSString.class]) {
+			[map setObject:[(NSString*)value copy] forKey:key];
+		}
+		return NO;
+	}];
+	return retObj;
 }
 
 // =================================================================================================

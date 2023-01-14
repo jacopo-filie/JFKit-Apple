@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2022 Jacopo Filié
+//	Copyright © 2015-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)executeOnQueue:(NSOperationQueue*)queue
 {
 	JFBlock block = self.block;
-
+	
 	[queue addOperationWithBlock:^{
 		block();
 	}];
@@ -261,7 +261,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = failureBlock;
-
+	
 	return self;
 }
 
@@ -271,6 +271,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFailableClosure newSuccessBlockForFinallyBlock:finallyBlock];
 	
 	return self;
 }
@@ -314,6 +315,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	self = [super init];
 	
+	_internalFailureBlock = [JFFailableClosure newFailureBlockForFinallyBlock:finallyBlock];
 	_internalSuccessBlock = [JFFailableClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
@@ -417,11 +419,23 @@ NS_ASSUME_NONNULL_BEGIN
 	};
 }
 
++ (JFFailureBlock)newFailureBlockForFinallyBlock:(JFBlock)block
+{
+	return ^(NSError* error) {
+		block();
+	};
+}
+
 + (JFBlock)newSuccessBlockForClosureBlock:(JFFailableClosureBlock)block
 {
 	return ^{
 		block(YES, nil);
 	};
+}
+
++ (JFBlock)newSuccessBlockForFinallyBlock:(JFBlock)block
+{
+	return block;
 }
 
 @end
@@ -553,6 +567,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_failureBlock = failureBlock;
 	_internalFailureBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toFailureBlock:failureBlock];
+	_internalSuccessBlock = [JFFetchingClosure newSuccessBlockForFinallyBlock:finallyBlock];
 	
 	return self;
 }
@@ -596,6 +611,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	self = [super init];
 	
+	_internalFailureBlock = [JFFetchingClosure newFailureBlockForFinallyBlock:finallyBlock];
 	_internalSuccessBlock = [JFFetchingClosure appendFinallyBlock:finallyBlock toSuccessBlock:successBlock];
 	_successBlock = successBlock;
 	
@@ -699,10 +715,24 @@ NS_ASSUME_NONNULL_BEGIN
 	};
 }
 
++ (JFFailureBlock)newFailureBlockForFinallyBlock:(JFBlock)block
+{
+	return ^(NSError* error) {
+		block();
+	};
+}
+
 + (JFSuccessBlock)newSuccessBlockForClosureBlock:(JFFetchingClosureBlock)block
 {
 	return ^(id result) {
 		block(YES, result, nil);
+	};
+}
+
++ (JFSuccessBlock)newSuccessBlockForFinallyBlock:(JFBlock)block
+{
+	return ^(id result) {
+		block();
 	};
 }
 

@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2018-2022 Jacopo Filié
+//	Copyright © 2018-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ typedef BOOL (^JFJSONArrayEnumerationBlock)(NSUInteger index, id<JFJSONValue> va
 /**
  * The `JFJSONArray` class is a kind of JSON node that associates sorted integer keys, called indexes, with JSON values.
  */
-@interface JFJSONArray : NSObject <JFJSONNode, NSFastEnumeration>
+@interface JFJSONArray : NSObject <JFJSONNode, NSCopying, NSFastEnumeration>
 
 // =================================================================================================
 // MARK: Properties - Data
@@ -333,6 +333,11 @@ typedef BOOL (^JFJSONArrayEnumerationBlock)(NSUInteger index, id<JFJSONValue> va
  * @param index The index of the association.
  */
 - (void)insertValue:(id<JFJSONValue>)value atIndex:(NSUInteger)index;
+
+/**
+ * Removes all the stored values.
+ */
+- (void)removeAllValues;
 
 /**
  * Removes the stored value for the given index; if no value is currently stored for the given index, it does nothing.

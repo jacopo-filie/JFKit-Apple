@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2018-2022 Jacopo Filié
+//	Copyright © 2018-2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -457,6 +457,11 @@ NS_ASSUME_NONNULL_BEGIN
 		[self.list insertObject:value atIndex:index];
 }
 
+- (void)removeAllValues
+{
+	[self.list removeAllObjects];
+}
+
 - (void)removeValueAtIndex:(NSUInteger)index
 {
 	[self.list removeObjectAtIndex:index];
@@ -521,6 +526,30 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setObject:(id<JFJSONValue>)object atIndexedSubscript:(NSUInteger)index API_AVAILABLE(ios(8.0), macos(10.8))
 {
 	[self replaceWithValue:object atIndex:index];
+}
+
+// =================================================================================================
+// MARK: Methods (NSCopying)
+// =================================================================================================
+
+- (id)copyWithZone:(NSZone* _Nullable)zone
+{
+	JFJSONArray* retObj = [self.class new];
+	NSMutableArray<id<JFJSONValue>>* list = retObj.list;
+	for(id<JFJSONValue> value in self.list) {
+		if([value isKindOfClass:JFJSONArray.class]) {
+			[list addObject:[(JFJSONArray*)value copy]];
+		} else if([value isKindOfClass:JFJSONObject.class]) {
+			[list addObject:[(JFJSONObject*)value copy]];
+		} else if([value isKindOfClass:NSNull.class]) {
+			[list addObject:[(NSNull*)value copy]];
+		} else if([value isKindOfClass:NSNumber.class]) {
+			[list addObject:[(NSNumber*)value copy]];
+		} else if([value isKindOfClass:NSString.class]) {
+			[list addObject:[(NSString*)value copy]];
+		}
+	}
+	return retObj;
 }
 
 // =================================================================================================
