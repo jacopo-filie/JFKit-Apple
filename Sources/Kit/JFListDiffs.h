@@ -1,7 +1,7 @@
 //
 //	The MIT License (MIT)
 //
-//	Copyright © 2015-2023 Jacopo Filié
+//	Copyright © 2023 Jacopo Filié
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,71 +24,54 @@
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFKit/JFPreprocessorMacros.h>
+@import Foundation;
+
+@protocol JFListDiffsDataSource;
+@protocol JFListDiffsDispatcher;
+@protocol JFListDiffsResult;
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#if JF_IOS
-#	import <Foundation/Foundation.h>
-#endif
-
-#if JF_MACOS
-#	import <Cocoa/Cocoa.h>
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//! Project version number for JFKit.
-FOUNDATION_EXPORT double JFKitVersionNumber;
+@interface JFListDiffs : NSObject
 
-//! Project version string for JFKit.
-FOUNDATION_EXPORT const unsigned char JFKitVersionString[];
++ (id<JFListDiffsResult>)calculateDiff:(id<JFListDiffsDataSource>)dataSource;
++ (id<JFListDiffsResult>)calculateDiff:(id<JFListDiffsDataSource>)dataSource withMovesDetection:(BOOL)shouldDetectMoves;
+
+@end
+
+@protocol JFListDiffsDataSource
+
+- (NSUInteger)getNewListSize;
+- (NSUInteger)getOldListSize;
+- (BOOL)isContentOfOldItem:(NSUInteger)oldItemIndex equalToContentOfNewItem:(NSUInteger)newItemIndex;
+- (BOOL)isOldItem:(NSUInteger)oldItemIndex equalToNewItem:(NSUInteger)newItemIndex;
+
+@end
+
+@protocol JFListDiffsDispatcher
+
+- (void)onItemMovedFromIndex:(NSUInteger)oldIndex toIndex:(NSUInteger)newIndex;
+- (void)onItemsInserted:(NSRange)range;
+- (void)onItemsRemoved:(NSRange)range;
+- (void)onItemsUpdated:(NSRange)range;
+
+@end
+
+@protocol JFListDiffsResult
+
+- (void)dispatchUpdates:(id<JFListDiffsDispatcher>)dispatcher;
+- (NSUInteger)getNewIndexFromOldIndex:(NSUInteger)oldIndex;
+- (NSUInteger)getOldIndexFromNewIndex:(NSUInteger)newIndex;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-#import <JFKit/JFAsynchronousBlockOperation.h>
-#import <JFKit/JFAsynchronousOperation.h>
-#import <JFKit/JFBlocks.h>
-#import <JFKit/JFBlockWrapper.h>
-#import <JFKit/JFByteStream.h>
-#import <JFKit/JFClosures.h>
-#import <JFKit/JFColors.h>
-#import <JFKit/JFCompatibilityMacros.h>
-#import <JFKit/JFCompletions.h>
-#import <JFKit/JFConnectionMachine.h>
-#import <JFKit/JFError.h>
-#import <JFKit/JFErrorFactory.h>
-#import <JFKit/JFExecutor.h>
-#import <JFKit/JFHook.h>
-#import <JFKit/JFImages.h>
-#import <JFKit/JFJSONArray.h>
-#import <JFKit/JFJSONNode.h>
-#import <JFKit/JFJSONObject.h>
-#import <JFKit/JFJSONSerializationAdapter.h>
-#import <JFKit/JFJSONSerializer.h>
-#import <JFKit/JFJSONValue.h>
-#import <JFKit/JFKitLogger.h>
-#import <JFKit/JFLazy.h>
-#import <JFKit/JFListDiffs.h>
-#import <JFKit/JFLogger.h>
-#import <JFKit/JFMath.h>
-#import <JFKit/JFObjectIdentifier.h>
-#import <JFKit/JFObserversController.h>
-#import <JFKit/JFPair.h>
-#import <JFKit/JFParameterizedLazy.h>
-#import <JFKit/JFPersistentContainer.h>
-#import <JFKit/JFReferences.h>
-#import <JFKit/JFShortcuts.h>
-#import <JFKit/JFStateMachine.h>
-#import <JFKit/JFStrings.h>
-#import <JFKit/JFSwitchMachine.h>
-#import <JFKit/JFTimerHandler.h>
-#import <JFKit/JFUtilities.h>
-#import <JFKit/JFVersion.h>
-
-#if JF_IOS
-#	import <JFKit/JFImageWrapper.h>
-#	import <JFKit/JFOptional.h>
-#endif
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
