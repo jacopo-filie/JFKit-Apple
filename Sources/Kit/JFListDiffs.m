@@ -121,42 +121,14 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 		}
 	}
 	
-	NSLog(@"===== DISTANCE MATRIX START");
-	for(NSUInteger row = 0; row < rows; row++) {
-		NSMutableString* string = [NSMutableString stringWithString:@"["];
-		for(NSUInteger column = 0; column < columns; column++) {
-			if(column > 0) {
-				[string appendString:@", "];
-			}
-			[string appendFormat:@"%@", JFStringFromNSUInteger(distanceMatrix[row][column])];
-		}
-		[string appendString:@"]"];
-		NSLog(@"%@", string);
-	}
-	NSLog(@"===== DISTANCE MATRIX END");
+	[JFListDiffs logDistanceMatrix:distanceMatrix rows:rows columns:columns];
+	[JFListDiffs logOperationMatrix:operationMatrix rows:rows columns:columns];
 	
-	NSLog(@"===== OPERATION MATRIX START");
-	for(NSUInteger row = 0; row < rows; row++) {
-		NSMutableString* string = [NSMutableString stringWithString:@"["];
-		for(NSUInteger column = 0; column < columns; column++) {
-			if(column > 0) {
-				[string appendString:@", "];
-			}
-			if((row == 0) || (column == 0)) {
-				[string appendFormat:@"%@", JFStringFromNSUInteger(operationMatrix[row][column])];
-			} else {
-				[string appendFormat:@"%@", [JFListDiffs stringFromEditOperationType:operationMatrix[row][column]]];
-			}
-		}
-		[string appendString:@"]"];
-		NSLog(@"%@", string);
-	}
-	NSLog(@"===== OPERATION MATRIX END");
+	NSMutableArray<JFListDiffsEditOperation*>* operations = [NSMutableArray<JFListDiffsEditOperation*> array];
 	
 	[JFListDiffs tearDownMatrix:distanceMatrix rows:rows];
 	[JFListDiffs tearDownMatrix:operationMatrix rows:rows];
 	
-	NSMutableArray<JFListDiffsEditOperation*>* operations = [NSMutableArray<JFListDiffsEditOperation*> array];
 	[operations addObject:[[JFListDiffsEditOperation alloc] initReplaceOperationAtIndex:0 count:MIN(newSize, oldSize)]];
 	
 	if(oldSize > newSize) {
@@ -166,21 +138,6 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 	}
 	
 	return [[JFListDiffsResultConcrete alloc] initWithOperations:[operations copy]];
-}
-
-+ (NSString*)stringFromEditOperationType:(JFListDiffsEditOperationType)type
-{
-	static NSDictionary<NSNumber*, NSString*>* pairs;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		pairs = @{
-			@(JFListDiffsOperationTypeDelete): @"D",
-			@(JFListDiffsOperationTypeInsert): @"I",
-			@(JFListDiffsOperationTypeMove): @"M",
-			@(JFListDiffsOperationTypeReplace): @"R"
-		};
-	});
-	return pairs[@(type)] ?: @"-";
 }
 
 //- (NSInteger)levenshteinDistanceBetween:(NSString *)source and:(NSString *)target
@@ -264,6 +221,59 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 	}
 	
 	free(matrix);
+}
+
++ (void)logDistanceMatrix:(NSUInteger**)matrix rows:(NSUInteger)rows columns:(NSUInteger)columns
+{
+	NSLog(@"===== DISTANCE MATRIX START");
+	for(NSUInteger row = 0; row < rows; row++) {
+		NSMutableString* string = [NSMutableString stringWithString:@"["];
+		for(NSUInteger column = 0; column < columns; column++) {
+			if(column > 0) {
+				[string appendString:@", "];
+			}
+			[string appendFormat:@"%@", JFStringFromNSUInteger(matrix[row][column])];
+		}
+		[string appendString:@"]"];
+		NSLog(@"%@", string);
+	}
+	NSLog(@"===== DISTANCE MATRIX END");
+}
+
++ (void)logOperationMatrix:(NSUInteger**)matrix rows:(NSUInteger)rows columns:(NSUInteger)columns
+{
+	NSLog(@"===== OPERATION MATRIX START");
+	for(NSUInteger row = 0; row < rows; row++) {
+		NSMutableString* string = [NSMutableString stringWithString:@"["];
+		for(NSUInteger column = 0; column < columns; column++) {
+			if(column > 0) {
+				[string appendString:@", "];
+			}
+			if((row == 0) || (column == 0)) {
+				[string appendFormat:@"%@", JFStringFromNSUInteger(matrix[row][column])];
+			} else {
+				[string appendFormat:@"%@", [JFListDiffs stringFromEditOperationType:matrix[row][column]]];
+			}
+		}
+		[string appendString:@"]"];
+		NSLog(@"%@", string);
+	}
+	NSLog(@"===== OPERATION MATRIX END");
+}
+
++ (NSString*)stringFromEditOperationType:(JFListDiffsEditOperationType)type
+{
+	static NSDictionary<NSNumber*, NSString*>* pairs;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		pairs = @{
+			@(JFListDiffsOperationTypeDelete): @"D",
+			@(JFListDiffsOperationTypeInsert): @"I",
+			@(JFListDiffsOperationTypeMove): @"M",
+			@(JFListDiffsOperationTypeReplace): @"R"
+		};
+	});
+	return pairs[@(type)] ?: @"-";
 }
 
 @end
