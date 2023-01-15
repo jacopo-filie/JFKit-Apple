@@ -25,6 +25,7 @@
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 #import "JFListDiffs.h"
+#import "JFStrings.h"
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -34,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 {
+	JFListDiffsOperationTypeNone,
 	JFListDiffsOperationTypeDelete,
 	JFListDiffsOperationTypeInsert,
 	JFListDiffsOperationTypeMove,
@@ -75,7 +77,7 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 {
 	NSUInteger newSize = [dataSource getNewListSize];
 	NSUInteger oldSize = [dataSource getOldListSize];
-
+	
 	if(newSize == 0) {
 		return [[JFListDiffsResultConcrete alloc] initWithOperations:@[[[JFListDiffsEditOperation alloc] initDeleteOperationAtIndex:0 count:oldSize]]];
 	}
@@ -84,33 +86,79 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 		return [[JFListDiffsResultConcrete alloc] initWithOperations:@[[[JFListDiffsEditOperation alloc] initInsertOperationAtIndex:0 count:newSize]]];
 	}
 	
-//	NSUInteger rows = oldSize + 1;
-//	NSUInteger columns = newSize + 1;
-//
-//	NSUInteger** distanceMatrix = [JFListDiffs setUpDistanceMatrixWithRows:rows andColumns:columns];
-//
-//	for(NSUInteger row = 1; row < rows; row++) {
-//		NSUInteger previousRow = row - 1;
-//		for(NSUInteger column = 1; column < columns; column++) {
-//			NSUInteger previousColumn = column - 1;
-//			if([dataSource isOldItem:previousRow equalToNewItem:previousColumn]) {
-//				// no change
-//				distanceMatrix[row][column] = distanceMatrix[previousRow][previousColumn];
-//			} else {
-//				NSUInteger deleteCost = distanceMatrix[previousRow][column] + 1;
-//				NSUInteger insertCost = distanceMatrix[row][previousColumn] + 1;
-//				NSUInteger replaceCost = distanceMatrix[previousRow][previousColumn] + 1;
-//			}
-//
-//
-//		}
-//	}
-//
-//	[JFListDiffs tearDownDistanceMatrix:distanceMatrix rows:rows];
+	NSUInteger rows = oldSize + 1;
+	NSUInteger columns = newSize + 1;
+	
+	NSUInteger** distanceMatrix = [JFListDiffs setUpDistanceMatrixWithRows:rows andColumns:columns];
+	NSUInteger** operationMatrix = [JFListDiffs setUpOperationMatrixWithRows:rows andColumns:columns];
+	
+	for(NSUInteger row = 1; row < rows; row++) {
+		NSUInteger previousRow = row - 1;
+		for(NSUInteger column = 1; column < columns; column++) {
+			NSUInteger previousColumn = column - 1;
+			if([dataSource isOldItem:previousRow equalToNewItem:previousColumn]) {
+				// no change
+				distanceMatrix[row][column] = distanceMatrix[previousRow][previousColumn];
+			} else {
+				NSUInteger deleteCost = distanceMatrix[previousRow][column] + 1;
+				NSUInteger insertCost = distanceMatrix[row][previousColumn] + 1;
+				NSUInteger replaceCost = distanceMatrix[previousRow][previousColumn] + 1;
+				
+				if(replaceCost <= MIN(deleteCost, insertCost)) {
+					// substitution
+					distanceMatrix[row][column] = replaceCost;
+					operationMatrix[row][column] = JFListDiffsOperationTypeReplace;
+				} else if(deleteCost <= MIN(insertCost, replaceCost)) {
+					// deletion
+					distanceMatrix[row][column] = deleteCost;
+					operationMatrix[row][column] = JFListDiffsOperationTypeDelete;
+				} else {
+					// insertion
+					distanceMatrix[row][column] = insertCost;
+					operationMatrix[row][column] = JFListDiffsOperationTypeInsert;
+				}
+			}
+		}
+	}
+	
+	NSLog(@"===== DISTANCE MATRIX START");
+	for(NSUInteger row = 0; row < rows; row++) {
+		NSMutableString* string = [NSMutableString stringWithString:@"["];
+		for(NSUInteger column = 0; column < columns; column++) {
+			if(column > 0) {
+				[string appendString:@", "];
+			}
+			[string appendFormat:@"%@", JFStringFromNSUInteger(distanceMatrix[row][column])];
+		}
+		[string appendString:@"]"];
+		NSLog(@"%@", string);
+	}
+	NSLog(@"===== DISTANCE MATRIX END");
+	
+	NSLog(@"===== OPERATION MATRIX START");
+	for(NSUInteger row = 0; row < rows; row++) {
+		NSMutableString* string = [NSMutableString stringWithString:@"["];
+		for(NSUInteger column = 0; column < columns; column++) {
+			if(column > 0) {
+				[string appendString:@", "];
+			}
+			if((row == 0) || (column == 0)) {
+				[string appendFormat:@"%@", JFStringFromNSUInteger(operationMatrix[row][column])];
+			} else {
+				[string appendFormat:@"%@", [JFListDiffs stringFromEditOperationType:operationMatrix[row][column]]];
+			}
+		}
+		[string appendString:@"]"];
+		NSLog(@"%@", string);
+	}
+	NSLog(@"===== OPERATION MATRIX END");
+	
+	[JFListDiffs tearDownMatrix:distanceMatrix rows:rows];
+	[JFListDiffs tearDownMatrix:operationMatrix rows:rows];
 	
 	NSMutableArray<JFListDiffsEditOperation*>* operations = [NSMutableArray<JFListDiffsEditOperation*> array];
 	[operations addObject:[[JFListDiffsEditOperation alloc] initReplaceOperationAtIndex:0 count:MIN(newSize, oldSize)]];
-
+	
 	if(oldSize > newSize) {
 		[operations addObject:[[JFListDiffsEditOperation alloc] initDeleteOperationAtIndex:newSize count:(oldSize - newSize)]];
 	} else if(oldSize < newSize) {
@@ -118,6 +166,21 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 	}
 	
 	return [[JFListDiffsResultConcrete alloc] initWithOperations:[operations copy]];
+}
+
++ (NSString*)stringFromEditOperationType:(JFListDiffsEditOperationType)type
+{
+	static NSDictionary<NSNumber*, NSString*>* pairs;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		pairs = @{
+			@(JFListDiffsOperationTypeDelete): @"D",
+			@(JFListDiffsOperationTypeInsert): @"I",
+			@(JFListDiffsOperationTypeMove): @"M",
+			@(JFListDiffsOperationTypeReplace): @"R"
+		};
+	});
+	return pairs[@(type)] ?: @"-";
 }
 
 //- (NSInteger)levenshteinDistanceBetween:(NSString *)source and:(NSString *)target
@@ -151,21 +214,50 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 
 + (NSUInteger**)setUpDistanceMatrixWithRows:(NSUInteger)rows andColumns:(NSUInteger)columns
 {
-	NSUInteger** matrix = (NSUInteger**)malloc(rows * sizeof(NSUInteger*));
+	NSUInteger** matrix = [JFListDiffs setUpMatrixWithRows:rows andColumns:columns defaultValue:0];
 	
-	for(NSUInteger row = 0; row < rows; row++) {
-		matrix[row] = (NSUInteger*)malloc(columns * sizeof(NSUInteger));
+	for(NSUInteger row = 1; row < rows; row++) {
 		matrix[row][0] = row;
 	}
 	
 	for(NSUInteger column = 1; column < columns; column++) {
 		matrix[0][column] = column;
 	}
-
+	
 	return matrix;
 }
 
-+ (void)tearDownDistanceMatrix:(NSUInteger**)matrix rows:(NSUInteger)rows
++ (NSUInteger**)setUpOperationMatrixWithRows:(NSUInteger)rows andColumns:(NSUInteger)columns
+{
+	NSUInteger** matrix = [JFListDiffs setUpMatrixWithRows:rows andColumns:columns defaultValue:JFListDiffsOperationTypeNone];
+	matrix[0][0] = 0;
+	
+	for(NSUInteger row = 1; row < rows; row++) {
+		matrix[row][0] = row;
+	}
+	
+	for(NSUInteger column = 1; column < columns; column++) {
+		matrix[0][column] = column;
+	}
+	
+	return matrix;
+}
+
++ (NSUInteger**)setUpMatrixWithRows:(NSUInteger)rows andColumns:(NSUInteger)columns defaultValue:(NSUInteger)defVal
+{
+	NSUInteger** matrix = (NSUInteger**)malloc(rows * sizeof(NSUInteger*));
+	
+	for(NSUInteger row = 0; row < rows; row++) {
+		matrix[row] = (NSUInteger*)malloc(columns * sizeof(NSUInteger));
+		for(NSUInteger column = 0; column < columns; column++) {
+			matrix[row][column] = defVal;
+		}
+	}
+	
+	return matrix;
+}
+
++ (void)tearDownMatrix:(NSUInteger**)matrix rows:(NSUInteger)rows
 {
 	for(NSUInteger i = 0; i < rows; i++) {
 		free(matrix[i]);
