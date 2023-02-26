@@ -52,23 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nullable) JFLoggerSubclass* logger;
 
-// =================================================================================================
-// MARK: Methods - Tests
-// =================================================================================================
-
-- (void)setUp;
-- (void)tearDown;
-- (void)testHashtagsLogging;
-- (void)testLowPriorityLogging;
-- (void)testOnlyConsoleLogging;
-- (void)testSimpleLogging;
-
-// =================================================================================================
-// MARK: Methods - Utilities
-// =================================================================================================
-
-- (NSArray*)readTestLogFileLines;
-
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -100,19 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)tearDown
 {
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
-	// Checks if the test log file still exists and deletes it if necessary.
-	NSURL* fileURL = [[[self.logger class] defaultDirectoryURL] URLByAppendingPathComponent:self.logger.fileName];
-	if([fileManager fileExistsAtPath:fileURL.path])
-	{
-		NSError* error = nil;
-		BOOL succeeded = [fileManager removeItemAtURL:fileURL error:&error];
-		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
-		XCTAssert(succeeded, @"Failed to delete the test file at URL '%@'%@.", [fileURL absoluteString], errorString);
-	}
-	
-	// Destroys the logger.
+	[self deleteTestLogFile];
 	self.logger = nil;
 	
 	[super tearDown];
@@ -147,6 +118,42 @@ NS_ASSUME_NONNULL_BEGIN
 	XCTAssert(([lines count] == 1), @"The test log file should have 1 line because the destination was only the console.\n");
 }
 
+- (void)testPerformance
+{
+	JFLogger* logger = self.logger;
+	
+	JFLoggerOutput output = JFLoggerOutputAll;
+	if(output & JFLoggerOutputFile) {
+		[self deleteTestLogFile];
+	}
+	
+	int __block executedCycles = 0;
+	int numberOfThreads = 100;
+	int linesPerThread = 100;
+	
+	[self measureBlock:^{
+		[logger log:[NSString stringWithFormat:@"Started logger performance test. [cycle = '%d']", ++executedCycles] output:JFLoggerOutputConsole severity:JFLoggerSeverityEmergency];
+		NSOperationQueue* queue = JFCreateConcurrentOperationQueue(nil);
+		queue.suspended = YES;
+		for(int i = 0; i < numberOfThreads; i++) {
+			[queue addOperationWithBlock:^{
+				for(int j = 0; j < linesPerThread; j++) {
+					[logger log:[NSString stringWithFormat:@"Thread %d wrote %d lines. [cycle = '%d']", i + 1, j + 1, executedCycles] output:output severity:JFLoggerSeverityEmergency];
+				}
+			}];
+		}
+		queue.suspended = NO;
+		[queue waitUntilAllOperationsAreFinished];
+		[logger log:[NSString stringWithFormat:@"Finished logger performance test. [cycle = '%d']", executedCycles] output:JFLoggerOutputConsole severity:JFLoggerSeverityEmergency];
+	}];
+	
+	if(output & JFLoggerOutputFile) {
+		NSUInteger expectedCount = numberOfThreads * linesPerThread * executedCycles;
+		NSUInteger count = [self readTestLogFileLines].count;
+		XCTAssert((count == expectedCount), @"The test log file should have %@ lines, not %@!\n", JFStringFromNSUInteger(expectedCount), JFStringFromNSUInteger(count));
+	}
+}
+
 - (void)testSimpleLogging
 {
 	NSString* logMessage = MethodName;
@@ -161,20 +168,31 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Methods - Utilities
 // =================================================================================================
 
+- (void)deleteTestLogFile
+{
+	NSFileManager* fileManager = NSFileManager.defaultManager;
+	NSURL* fileURL = [[[self.logger class] defaultDirectoryURL] URLByAppendingPathComponent:self.logger.fileName];
+	if([fileManager fileExistsAtPath:fileURL.path]) {
+		NSError* error = nil;
+		BOOL succeeded = [fileManager removeItemAtURL:fileURL error:&error];
+		XCTAssert(succeeded, @"Failed to delete the test file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
+	}
+}
+
 - (NSArray*)readTestLogFileLines
 {
 	NSError* error = nil;
 	NSURL* fileURL = [[[self.logger class] defaultDirectoryURL] URLByAppendingPathComponent:self.logger.fileName];
 	NSString* fileContent = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
-	NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
-	XCTAssert(fileContent, @"Failed to read result from the test log file at URL '%@'%@.", [fileURL absoluteString], errorString);
+	XCTAssert(fileContent, @"Failed to read result from the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	
 	NSMutableArray* retObj = [[fileContent componentsSeparatedByString:@"\n"] mutableCopy];
-	XCTAssert(retObj, @"Failed to get the lines of the test log file at URL '%@'%@.", [fileURL absoluteString], errorString);
+	XCTAssert(retObj, @"Failed to get the lines of the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	
-	NSString* lastLine = [retObj lastObject];
-	if(lastLine && [lastLine isEqualToString:JFEmptyString])
+	NSString* lastLine = retObj.lastObject;
+	if(lastLine && [lastLine isEqualToString:JFEmptyString]) {
 		[retObj removeLastObject];
+	}
 	
 	return retObj;
 }
