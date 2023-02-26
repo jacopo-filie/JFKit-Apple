@@ -67,34 +67,6 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 @property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegatesController;
 
-// =================================================================================================
-// MARK: Methods - Data
-// =================================================================================================
-
-- (NSString*)dateStringFromDate:(NSDate*)date;
-- (NSString*)timeStringFromDate:(NSDate*)date;
-
-// =================================================================================================
-// MARK: Methods - File system
-// =================================================================================================
-
-- (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate;
-- (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate;
-
-// =================================================================================================
-// MARK: Methods - Service
-// =================================================================================================
-
-- (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate;
-- (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate;
-
-// =================================================================================================
-// MARK: Methods - Utilities
-// =================================================================================================
-
-- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
-- (NSInteger)weekOfMonthFromDate:(NSDate*)date;
-
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
