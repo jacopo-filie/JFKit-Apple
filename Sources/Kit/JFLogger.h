@@ -485,6 +485,72 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // MARK: -
 
 /**
+ * Use the `JFLoggerSettings` class to set up a logger with custom options, like the text format or the location of the log file.
+ */
+@interface JFLoggerSettings : NSObject
+
+// =================================================================================================
+// MARK: Properties - File system
+// =================================================================================================
+
+/**
+ * The base name of the log files. Suffixes will be appended to it (before the extension).
+ * The default value is `Log.log`.
+ */
+@property (strong, nonatomic, null_resettable) NSString* fileName;
+
+/**
+ * The folder at which the log files will be located.
+ * @discussion
+ * The default folder is platform-dependent: on iOS it's located at path `Library/Application Support/Logs`; on macOS it's located at path `Library/Application Support/<bundle identifier>/Logs`.
+ */
+@property (strong, nonatomic, null_resettable) NSURL* folder;
+
+/**
+ * The used log file will be changed after each rotation cycle, overwriting old existing files if needed.
+ * The default value is `JFLoggerRotationNone`.
+ */
+@property (assign, nonatomic) JFLoggerRotation rotation;
+
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+/**
+ * The formatter to use when converting current date to string.
+ * This is used only if `textFormat` contains the value `JFLoggerFormatDate`.
+ */
+@property (strong, nonatomic, null_resettable) NSDateFormatter* dateFormatter;
+
+/**
+ * The format string of each log written on file. The following constants can be used to retrieve specific values:
+ * @code
+ *   JFLoggerFormatDate      = the current date;
+ *   JFLoggerFormatMessage   = the message to log;
+ *   JFLoggerFormatProcessID = the ID of the running process;
+ *   JFLoggerFormatSeverity  = the severity of the message;
+ *   JFLoggerFormatThreadID  = the ID of the running thread;
+ *   JFLoggerFormatTime      = the current time;
+ * @endcode
+ * For example, the default format is composed like this:
+ * @code
+ *   NSString* format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+ * @endcode
+ */
+@property (strong, nonatomic, null_resettable) NSString* textFormat;
+
+/**
+ * The formatter to use when converting current time to string.
+ * This is used only if `textFormat` contains the value `JFLoggerFormatTime`.
+ */
+@property (strong, nonatomic, null_resettable) NSDateFormatter* timeFormatter;
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+/**
  * The protocol that the delegates of the logger must implement.
  */
 @protocol JFLoggerDelegate <NSObject>

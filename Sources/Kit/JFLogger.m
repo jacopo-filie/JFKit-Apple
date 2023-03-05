@@ -824,6 +824,170 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFLoggerSettings
+
+// =================================================================================================
+// MARK: Properties - File system
+// =================================================================================================
+
+@synthesize fileName = _fileName;
+@synthesize folder = _folder;
+@synthesize rotation = _rotation;
+
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+@synthesize dateFormatter = _dateFormatter;
+@synthesize textFormat = _textFormat;
+@synthesize timeFormatter = _timeFormatter;
+
+// =================================================================================================
+// MARK: Properties (Accessors) - File system
+// =================================================================================================
+
+- (NSString*)fileName
+{
+	NSString* retObj = _fileName;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultFileName];
+		_fileName = retObj;
+	}
+	return retObj;
+}
+
+- (void)setFileName:(NSString* _Nullable)fileName
+{
+	_fileName = fileName;
+}
+
+- (NSURL*)folder
+{
+	NSURL* retObj = _folder;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultFolder];
+		_folder = retObj;
+	}
+	return retObj;
+}
+
+- (void)setFolder:(NSURL* _Nullable)folder
+{
+	_folder = folder;
+}
+
+// =================================================================================================
+// MARK: Properties (Accessors) - Log format
+// =================================================================================================
+
+- (NSDateFormatter*)dateFormatter
+{
+	NSDateFormatter* retObj = _dateFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultDateFormatter];
+		_dateFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setDateFormatter:(NSDateFormatter* _Nullable)dateFormatter
+{
+	_dateFormatter = dateFormatter;
+}
+
+- (NSString*)textFormat
+{
+	NSString* retObj = _textFormat;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultTextFormat];
+		_textFormat = retObj;
+	}
+	return retObj;
+}
+
+- (void)setTextFormat:(NSString* _Nullable)format
+{
+	_textFormat = format;
+}
+
+- (NSDateFormatter*)timeFormatter
+{
+	NSDateFormatter* retObj = _timeFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultTimeFormatter];
+		_timeFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setTimeFormatter:(NSDateFormatter* _Nullable)timeFormatter
+{
+	_timeFormatter = timeFormatter;
+}
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
+
+- (instancetype)init
+{
+	self = [super init];
+	_rotation = JFLoggerRotationNone;
+	return self;
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (NSDateFormatter*)newDefaultDateFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = @"yyyy/MM/dd";
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
++ (NSString*)newDefaultFileName
+{
+	return @"Logs.log";
+}
+
++ (NSURL*)newDefaultFolder
+{
+	NSError* error = nil;
+	NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+	NSAssert(url, @"Failed to get URL of application support folder. [error = '%@']", error.description);
+	
+#if JF_MACOS
+	NSString* domain = AppInfoIdentifier;
+	NSAssert(domain, @"Bundle identifier not found!");
+	url = [url URLByAppendingPathComponent:domain];
+#endif
+	
+	return [url URLByAppendingPathComponent:@"Logs"];
+}
+
++ (NSString*)newDefaultTextFormat
+{
+	return [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+}
+
++ (NSDateFormatter*)newDefaultTimeFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = @"HH:mm:ss.SSSZ";
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
