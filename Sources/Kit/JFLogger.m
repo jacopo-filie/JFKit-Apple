@@ -76,6 +76,15 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 @implementation JFLogger
 
 // =================================================================================================
+// MARK: Fields
+// =================================================================================================
+
+{
+	pthread_mutex_t _filtersMutex;
+	pthread_mutex_t _writerMutex;
+}
+
+// =================================================================================================
 // MARK: Properties - File system
 // =================================================================================================
 
@@ -116,8 +125,52 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 }
 
 // =================================================================================================
+// MARK: Properties (Accessors) - Filters
+// =================================================================================================
+
+- (JFLoggerOutput)outputFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	JFLoggerOutput retVal = _outputFilter;
+	[self unlockMutex:mutex];
+	return retVal;
+}
+
+- (void)setOutputFilter:(JFLoggerOutput)outputFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	_outputFilter = outputFilter;
+	[self unlockMutex:mutex];
+}
+
+- (JFLoggerSeverity)severityFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	JFLoggerSeverity retVal = _severityFilter;
+	[self unlockMutex:mutex];
+	return retVal;
+}
+
+- (void)setSeverityFilter:(JFLoggerSeverity)severityFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	_severityFilter = severityFilter;
+	[self unlockMutex:mutex];
+}
+
+// =================================================================================================
 // MARK: Lifecycle
 // =================================================================================================
+
+- (void)dealloc
+{
+	[self destroyMutex:&_filtersMutex];
+	[self destroyMutex:&_writerMutex];
+}
 
 - (instancetype)init
 {
@@ -146,6 +199,9 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 #else
 	_severityFilter = JFLoggerSeverityInfo;
 #endif
+	
+	[self initializeMutex:&_filtersMutex];
+	[self initializeMutex:&_writerMutex];
 	
 	return self;
 }
@@ -387,6 +443,51 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 }
 
 // =================================================================================================
+// MARK: Methods - Locks
+// =================================================================================================
+
+- (void)destroyMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_destroy(lock) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)initializeMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_init(lock, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_lock(lock) != 0) {
+		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (NSString*)nameOfMutex:(pthread_mutex_t*)lock
+{
+	if(lock == &_filtersMutex) {
+		return @"filters mutex";
+	}
+	
+	if(lock == &_writerMutex) {
+		return @"writer mutex";
+	}
+	
+	return @"unknown mutex";
+}
+
+- (void)unlockMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_unlock(lock) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+// =================================================================================================
 // MARK: Methods - Observers
 // =================================================================================================
 
@@ -411,12 +512,17 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
+	pthread_mutex_t* filtersMutex = &_filtersMutex;
+	[self lockMutex:filtersMutex];
+	JFLoggerOutput outputFilter = _outputFilter;
+	JFLoggerSeverity severityFilter = _severityFilter;
+	[self unlockMutex:filtersMutex];
+	
 	// Filters by severity.
-	if(severity > self.severityFilter)
+	if(severity > severityFilter)
 		return;
 	
 	// Filters by output.
-	JFLoggerOutput outputFilter = self.outputFilter;
 	BOOL shouldLogToConsole = (output & JFLoggerOutputConsole) && (outputFilter & JFLoggerOutputConsole);
 	BOOL shouldLogToDelegates = (output & JFLoggerOutputDelegates) && (outputFilter & JFLoggerOutputDelegates);
 	BOOL shouldLogToFile = (output & JFLoggerOutputFile) && (outputFilter & JFLoggerOutputFile);
@@ -431,13 +537,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Prepares the current date.
 	NSDate* currentDate = NSDate.date;
 	
-	NSString* textFormat;
-	NSArray<NSString*>* textFormatActiveValues;
-	@synchronized(self)
-	{
-		textFormat = self.textFormat;
-		textFormatActiveValues = self.textFormatActiveValues;
-	}
+	NSString* textFormat = self.textFormat;
+	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
 	
 	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
 	
@@ -472,6 +573,9 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Prepares the log string.
 	NSString* logMessage = JFStringByReplacingKeysInFormat(textFormat, values);
 	
+	pthread_mutex_t* writerMutex = &_writerMutex;
+	[self lockMutex:writerMutex];
+	
 	// Logs to console if needed.
 	if(shouldLogToConsole) {
 		[self logToConsole:logMessage currentDate:currentDate];
@@ -488,6 +592,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			[delegate logger:self logMessage:logMessage currentDate:currentDate];
 		} async:YES];
 	}
+	
+	[self unlockMutex:writerMutex];
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
@@ -502,9 +608,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate
 {
-	@synchronized(self) {
-		fprintf(stderr, "%s", message.UTF8String);
-	}
+	fprintf(stderr, "%s", message.UTF8String);
 }
 
 - (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate
@@ -520,32 +624,29 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	NSURL* fileURL = [self fileURLForDate:currentDate];
 	
-	@synchronized(self)
+	// Tries to append the data to the log file (NSFileHandle is NOT thread safe).
+	if(![self createFileAtURL:fileURL currentDate:currentDate])
 	{
-		// Tries to append the data to the log file (NSFileHandle is NOT thread safe).
-		if(![self createFileAtURL:fileURL currentDate:currentDate])
-		{
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
-			return;
-		}
-		
-		// Opens the file.
-		NSError* error = nil;
-		NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
-		if(!fileHandle)
-		{
-			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
-			return;
-		}
-		
-		// Goes to the end of the file, appends the new message and closes the file.
-		[fileHandle seekToEndOfFile];
-		[fileHandle writeData:data];
-		[fileHandle closeFile];
+		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
+		return;
 	}
+	
+	// Opens the file.
+	NSError* error = nil;
+	NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
+	if(!fileHandle)
+	{
+		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
+		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+		[self logToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
+		return;
+	}
+	
+	// Goes to the end of the file, appends the new message and closes the file.
+	[fileHandle seekToEndOfFile];
+	[fileHandle writeData:data];
+	[fileHandle closeFile];
 }
 
 // =================================================================================================
