@@ -191,8 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)deleteTestLogFile
 {
 	NSFileManager* fileManager = NSFileManager.defaultManager;
-	JFLogger* logger = self.logger;
-	NSURL* fileURL = [logger.folder URLByAppendingPathComponent:logger.fileName];
+	NSURL* fileURL = self.logger.currentFile;
 	if([fileManager fileExistsAtPath:fileURL.path]) {
 		NSError* error = nil;
 		BOOL succeeded = [fileManager removeItemAtURL:fileURL error:&error];
@@ -203,8 +202,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray*)readTestLogFileLines
 {
 	NSError* error = nil;
-	JFLogger* logger = self.logger;
-	NSURL* fileURL = [logger.folder URLByAppendingPathComponent:logger.fileName];
+	NSURL* fileURL = self.logger.currentFile;
 	NSString* fileContent = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
 	XCTAssert(fileContent, @"Failed to read result from the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	

@@ -275,6 +275,11 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // =================================================================================================
 
 /**
+ * The log file that is being used in this moment. It may change if the rotation of log files is active.
+ */
+@property (strong, nonatomic, readonly) NSURL* currentFile;
+
+/**
  * The base name of the log files. Suffixes will be appended to it (before the extension).
  * @see JFLoggerSettings.fileName
  */
