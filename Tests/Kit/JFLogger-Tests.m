@@ -91,29 +91,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testHashtagsLogging
 {
-	NSString* logMessage = MethodName;
-	[self.logger log:logMessage severity:JFLoggerSeverityEmergency tags:(JFLoggerTagsDeveloper | JFLoggerTagsMarker)];
-	NSArray* lines = [self readTestLogFileLines];
-	NSString* result = [lines firstObject];
-	NSString* expectedMessage = [logMessage stringByAppendingString:@" #Developer #Marker"];
+	NSString* message = MethodName;
+	[self.logger log:message severity:JFLoggerSeverityEmergency tags:(JFLoggerTagsDeveloper | JFLoggerTagsMarker)];
+	NSString* result = [self readTestLogFileLines].firstObject;
+	NSString* expectedMessage = [message stringByAppendingString:@" #Developer #Marker"];
 	NSRange range = [result rangeOfString:expectedMessage options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
 	XCTAssert((range.location != NSNotFound), @"The logged text differs from the message passed to the logger.\n");
 }
 
 - (void)testLowPriorityLogging
 {
-	NSString* logMessage = MethodName;
-	[self.logger log:logMessage severity:JFLoggerSeverityEmergency]; // Needed to create the file.
-	[self.logger log:logMessage severity:JFLoggerSeverityDebug];
+	NSString* message = MethodName;
+	JFLogger* logger = self.logger;
+	[logger log:message severity:JFLoggerSeverityEmergency]; // Needed to create the file.
+	[logger log:message severity:JFLoggerSeverityDebug];
 	NSArray* lines = [self readTestLogFileLines];
 	XCTAssert(([lines count] == 1), @"The test log file should have 1 line because the message priority was too low.\n");
 }
 
 - (void)testOnlyConsoleLogging
 {
-	NSString* logMessage = MethodName;
-	[self.logger log:logMessage output:JFLoggerOutputFile severity:JFLoggerSeverityEmergency]; // Needed to create the file.
-	[self.logger log:logMessage output:JFLoggerOutputConsole severity:JFLoggerSeverityEmergency];
+	NSString* message = MethodName;
+	JFLogger* logger = self.logger;
+	[logger log:message output:JFLoggerOutputFile severity:JFLoggerSeverityEmergency]; // Needed to create the file.
+	[logger log:message output:JFLoggerOutputConsole severity:JFLoggerSeverityEmergency];
 	NSArray* lines = [self readTestLogFileLines];
 	XCTAssert(([lines count] == 1), @"The test log file should have 1 line because the destination was only the console.\n");
 }
@@ -156,11 +157,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testSimpleLogging
 {
-	NSString* logMessage = MethodName;
-	[self.logger log:logMessage severity:JFLoggerSeverityEmergency];
-	NSArray* lines = [self readTestLogFileLines];
-	NSString* result = [lines firstObject];
-	NSRange range = [result rangeOfString:logMessage options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
+	NSString* message = MethodName;
+	[self.logger log:message severity:JFLoggerSeverityEmergency];
+	NSString* result = [self readTestLogFileLines].firstObject;
+	NSRange range = [result rangeOfString:message options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
 	XCTAssert((range.location != NSNotFound), @"The logged text differs from the message passed to the logger.\n");
 }
 
