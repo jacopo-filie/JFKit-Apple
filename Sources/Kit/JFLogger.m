@@ -40,6 +40,19 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
+// MARK: Types
+// =================================================================================================
+
+typedef struct {
+	BOOL isConsoleEnabled;
+	BOOL isDelegatesEnabled;
+	BOOL isFileEnabled;
+} JFLoggerEnabledOutputs;
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+// =================================================================================================
 // MARK: Constants
 // =================================================================================================
 
@@ -420,75 +433,82 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self unlockMutex:filtersMutex];
 	
 	// Filters by severity.
-	if(severity > severityFilter)
+	if(severity > severityFilter) {
 		return;
+	}
 	
 	// Filters by output.
-	BOOL shouldLogToConsole = (output & JFLoggerOutputConsole) && (outputFilter & JFLoggerOutputConsole);
-	BOOL shouldLogToDelegates = (output & JFLoggerOutputDelegates) && (outputFilter & JFLoggerOutputDelegates);
-	BOOL shouldLogToFile = (output & JFLoggerOutputFile) && (outputFilter & JFLoggerOutputFile);
-	if(!shouldLogToConsole && !shouldLogToDelegates && !shouldLogToFile)
+	JFLoggerEnabledOutputs outputs = [JFLogger intersectOutput:output withFilter:outputFilter];
+	if(!outputs.isConsoleEnabled && !outputs.isDelegatesEnabled && !outputs.isFileEnabled) {
 		return;
+	}
 	
 	// Appends tags.
 	NSString* tagsString = [JFLogger stringFromTags:tags];
-	if(!JFStringIsNullOrEmpty(tagsString))
+	if(!JFStringIsNullOrEmpty(tagsString)) {
 		message = [message stringByAppendingFormat:@" %@", tagsString];
+	}
 	
 	// Prepares the current date.
 	NSDate* currentDate = NSDate.date;
 	
-	NSString* textFormat = self.textFormat;
 	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
 	
 	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
 	
 	// Converts the severity level to string.
-	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity])
+	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity]) {
 		[values setObject:[JFLogger stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
+	}
 	
 	// Gets the current process ID.
-	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID])
+	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID]) {
 		[values setObject:JFStringFromInt(ProcessInfo.processIdentifier) forKey:JFLoggerFormatProcessID];
+	}
 	
 	// Gets the current thread ID.
-	if([textFormatActiveValues containsObject:JFLoggerFormatThreadID])
+	if([textFormatActiveValues containsObject:JFLoggerFormatThreadID]) {
 		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
+	}
 	
 	// Gets the current date.
-	if([textFormatActiveValues containsObject:JFLoggerFormatDate])
+	if([textFormatActiveValues containsObject:JFLoggerFormatDate]) {
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateFormatter] forKey:JFLoggerFormatDate];
+	}
 	
 	// Gets the current date and time.
-	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime])
+	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime]) {
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateTimeFormatter] forKey:JFLoggerFormatDateTime];
+	}
 	
 	// Gets the current time.
-	if([textFormatActiveValues containsObject:JFLoggerFormatTime])
+	if([textFormatActiveValues containsObject:JFLoggerFormatTime]) {
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
+	}
 	
 	// Gets the message.
-	if([textFormatActiveValues containsObject:JFLoggerFormatMessage])
+	if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
 		[values setObject:message forKey:JFLoggerFormatMessage];
+	}
 	
 	// Prepares the log string.
-	NSString* logMessage = JFStringByReplacingKeysInFormat(textFormat, values);
+	NSString* logMessage = JFStringByReplacingKeysInFormat(self.textFormat, values);
 	
 	pthread_mutex_t* writerMutex = &_writerMutex;
 	[self lockMutex:writerMutex];
 	
 	// Logs to console if needed.
-	if(shouldLogToConsole) {
+	if(outputs.isConsoleEnabled) {
 		[self logToConsole:logMessage currentDate:currentDate];
 	}
 	
 	// Logs to file if needed.
-	if(shouldLogToFile)
+	if(outputs.isFileEnabled) {
 		[self logToFile:logMessage currentDate:currentDate];
+	}
 	
 	// Forwards the log message to the registered delegates if needed.
-	if(shouldLogToDelegates)
-	{
+	if(outputs.isDelegatesEnabled) {
 		[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
 			[delegate logger:self logMessage:logMessage currentDate:currentDate];
 		} async:YES];
@@ -629,6 +649,15 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			return 0;
 		}
 	}
+}
+
++ (JFLoggerEnabledOutputs)intersectOutput:(JFLoggerOutput)output withFilter:(JFLoggerOutput)filter
+{
+	JFLoggerEnabledOutputs retVal;
+	retVal.isConsoleEnabled = (output & JFLoggerOutputConsole) && (filter & JFLoggerOutputConsole);
+	retVal.isDelegatesEnabled = (output & JFLoggerOutputDelegates) && (filter & JFLoggerOutputDelegates);
+	retVal.isFileEnabled = (output & JFLoggerOutputFile) && (filter & JFLoggerOutputFile);
+	return retVal;
 }
 
 + (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
