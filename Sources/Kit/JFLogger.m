@@ -66,7 +66,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegatesController;
+@property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegates;
 
 @end
 
@@ -113,7 +113,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize delegatesController = _delegatesController;
+@synthesize delegates = _delegates;
 
 // =================================================================================================
 // MARK: Properties (Accessors) - File system
@@ -185,7 +185,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	_dateFormatter = settings.dateFormatter;
 	_dateTimeFormatter = settings.dateTimeFormatter;
-	_delegatesController = [JFObserversController<JFLoggerDelegate> new];
+	_delegates = [JFObserversController<JFLoggerDelegate> new];
 	_fileName = [settings.fileName copy];
 	_folder = settings.folder;
 	_outputFilter = JFLoggerOutputAll;
@@ -394,12 +394,12 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)addDelegate:(id<JFLoggerDelegate>)delegate
 {
-	[self.delegatesController addObserver:delegate];
+	[self.delegates addObserver:delegate];
 }
 
 - (void)removeDelegate:(id<JFLoggerDelegate>)delegate
 {
-	[self.delegatesController removeObserver:delegate];
+	[self.delegates removeObserver:delegate];
 }
 
 // =================================================================================================
@@ -489,7 +489,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Forwards the log message to the registered delegates if needed.
 	if(shouldLogToDelegates)
 	{
-		[self.delegatesController notifyObservers:^(id<JFLoggerDelegate> delegate) {
+		[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
 			[delegate logger:self logMessage:logMessage currentDate:currentDate];
 		} async:YES];
 	}
