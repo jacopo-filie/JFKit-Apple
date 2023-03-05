@@ -210,28 +210,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Methods - Data
 // =================================================================================================
 
-- (NSString*)dateStringFromDate:(NSDate*)date
-{
-	return [self stringFromDate:date formatter:self.dateFormatter];
-}
-
-- (NSString*)dateTimeStringFromDate:(NSDate*)date
-{
-	return [self stringFromDate:date formatter:self.dateTimeFormatter];
-}
-
-- (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
-{
-#if JF_IOS || JF_ARCH64
-	return [formatter stringFromDate:date];
-#else
-	// On macOS, only the 64-bit architecture implementation of NSDateFormatter is thread-safe.
-	@synchronized(formatter) {
-		return [formatter stringFromDate:date];
-	}
-#endif
-}
-
 - (NSURL*)fileURLForDate:(NSDate*)date
 {
 	NSURL* folderURL = self.folder;
@@ -255,11 +233,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	}
 	
 	return [folderURL URLByAppendingPathComponent:fileName];
-}
-
-- (NSString*)timeStringFromDate:(NSDate*)date
-{
-	return [self stringFromDate:date formatter:self.timeFormatter];
 }
 
 // =================================================================================================
@@ -484,15 +457,15 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Gets the current date.
 	if([textFormatActiveValues containsObject:JFLoggerFormatDate])
-		[values setObject:[self dateStringFromDate:currentDate] forKey:JFLoggerFormatDate];
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateFormatter] forKey:JFLoggerFormatDate];
 	
 	// Gets the current date and time.
 	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime])
-		[values setObject:[self dateTimeStringFromDate:currentDate] forKey:JFLoggerFormatDateTime];
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateTimeFormatter] forKey:JFLoggerFormatDateTime];
 	
 	// Gets the current time.
 	if([textFormatActiveValues containsObject:JFLoggerFormatTime])
-		[values setObject:[self timeStringFromDate:currentDate] forKey:JFLoggerFormatTime];
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
 	
 	// Gets the message.
 	if([textFormatActiveValues containsObject:JFLoggerFormatMessage])
@@ -656,6 +629,18 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			return 0;
 		}
 	}
+}
+
++ (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
+{
+#if JF_IOS || JF_ARCH64
+	return [formatter stringFromDate:date];
+#else
+	// On macOS, only the 64-bit architecture implementation of NSDateFormatter is thread-safe.
+	@synchronized(formatter) {
+		return [formatter stringFromDate:date];
+	}
+#endif
 }
 
 + (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
