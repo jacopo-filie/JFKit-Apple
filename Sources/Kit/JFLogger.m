@@ -56,10 +56,10 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @interface JFLogger (/* Private */)
 
 // =================================================================================================
-// MARK: Properties - Data
+// MARK: Properties - Log format
 // =================================================================================================
 
-@property (strong, null_resettable) NSArray<NSString*>* requestedFormatValues;
+@property (strong, nonatomic, readonly) NSArray<NSString*>* textFormatActiveValues;
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -75,22 +75,28 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @implementation JFLogger
 
 // =================================================================================================
-// MARK: Properties - Data
-// =================================================================================================
-
-@synthesize dateFormatter = _dateFormatter;
-@synthesize format = _format;
-@synthesize outputFilter = _outputFilter;
-@synthesize requestedFormatValues = _requestedFormatValues;
-@synthesize severityFilter = _severityFilter;
-@synthesize timeFormatter = _timeFormatter;
-
-// =================================================================================================
 // MARK: Properties - File system
 // =================================================================================================
 
 @synthesize fileName = _fileName;
+@synthesize folder = _folder;
 @synthesize rotation = _rotation;
+
+// =================================================================================================
+// MARK: Properties - Filters
+// =================================================================================================
+
+@synthesize outputFilter = _outputFilter;
+@synthesize severityFilter = _severityFilter;
+
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+@synthesize dateFormatter = _dateFormatter;
+@synthesize textFormat = _textFormat;
+@synthesize textFormatActiveValues = _textFormatActiveValues;
+@synthesize timeFormatter = _timeFormatter;
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -99,162 +105,30 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @synthesize delegatesController = _delegatesController;
 
 // =================================================================================================
-// MARK: Properties (Accessors) - Data
-// =================================================================================================
-
-+ (NSURL*)defaultDirectoryURL
-{
-	static NSURL* retObj = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		NSError* error = nil;
-		NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
-		
-#if JF_MACOS
-		NSString* domain = AppInfoIdentifier;
-		NSAssert(domain, @"Bundle identifier not found!");
-		url = [url URLByAppendingPathComponent:domain];
-#endif
-		
-		retObj = [url URLByAppendingPathComponent:@"Logs"];
-	});
-	return retObj;
-}
-
-- (NSDateFormatter*)dateFormatter
-{
-	@synchronized(self)
-	{
-		if(!_dateFormatter)
-		{
-			NSDateFormatter* dateFormatter = [NSDateFormatter new];
-			dateFormatter.dateFormat = @"yyyy/MM/dd";
-			dateFormatter.locale = [NSLocale currentLocale];
-			dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
-			_dateFormatter = dateFormatter;
-		}
-		return _dateFormatter;
-	}
-}
-
-- (void)setDateFormatter:(NSDateFormatter* _Nullable)dateFormatter
-{
-	@synchronized(self)
-	{
-		_dateFormatter = dateFormatter;
-	}
-}
-
-- (NSString*)format
-{
-	@synchronized(self)
-	{
-		if(!_format)
-			_format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
-		return [_format copy];
-	}
-}
-
-- (void)setFormat:(NSString* _Nullable)format
-{
-	@synchronized(self)
-	{
-		_format = [format copy];
-		self.requestedFormatValues = nil;
-	}
-}
-
-- (NSArray<NSString*>*)requestedFormatValues
-{
-	@synchronized(self)
-	{
-		if(!_requestedFormatValues)
-		{
-			static NSArray<NSString*>* possibleValues = nil;
-			if(!possibleValues)
-				possibleValues = @[JFLoggerFormatDate, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
-			
-			NSString* format = self.format;
-			
-			NSMutableArray* requestedValues = [NSMutableArray arrayWithCapacity:possibleValues.count];
-			for(NSString* value in possibleValues)
-			{
-				if([format rangeOfString:value].location != NSNotFound)
-					[requestedValues addObject:value];
-			}
-			
-			_requestedFormatValues = [requestedValues copy];
-		}
-		return _requestedFormatValues;
-	}
-}
-
-- (void)setRequestedFormatValues:(NSArray<NSString*>* _Nullable)requestedFormatValues
-{
-	@synchronized(self)
-	{
-		_requestedFormatValues = requestedFormatValues;
-	}
-}
-
-- (NSDateFormatter*)timeFormatter
-{
-	@synchronized(self)
-	{
-		if(!_timeFormatter)
-		{
-			NSDateFormatter* timeFormatter = [NSDateFormatter new];
-			timeFormatter.dateFormat = @"HH:mm:ss.SSSZ";
-			timeFormatter.locale = [NSLocale currentLocale];
-			timeFormatter.timeZone = [NSTimeZone defaultTimeZone];
-			_timeFormatter = timeFormatter;
-		}
-		return _timeFormatter;
-	}
-}
-
-- (void)setTimeFormatter:(NSDateFormatter* _Nullable)timeFormatter
-{
-	@synchronized(self)
-	{
-		_timeFormatter = timeFormatter;
-	}
-}
-
-// =================================================================================================
-// MARK: Properties (Accessors) - File system
-// =================================================================================================
-
-- (NSString*)fileName
-{
-	@synchronized(self)
-	{
-		if(!_fileName)
-			_fileName = @"Log.log";
-		return [_fileName copy];
-	}
-}
-
-- (void)setFileName:(NSString* _Nullable)fileName
-{
-	@synchronized(self)
-	{
-		_fileName = [fileName copy];
-	}
-}
-
-// =================================================================================================
 // MARK: Lifecycle
 // =================================================================================================
 
 - (instancetype)init
 {
+	return [self initWithSettings:[JFLoggerSettings new]];
+}
+
+- (instancetype)initWithSettings:(JFLoggerSettings*)settings
+{
 	self = [super init];
 	
+	NSString* textFormat = [settings.textFormat copy];
+	
+	_dateFormatter = settings.dateFormatter;
 	_delegatesController = [JFObserversController<JFLoggerDelegate> new];
+	_fileName = [settings.fileName copy];
+	_folder = settings.folder;
 	_outputFilter = JFLoggerOutputAll;
-	_rotation = JFLoggerRotationNone;
+	_rotation = settings.rotation;
+	_textFormat = textFormat;
+	_textFormatActiveValues = [JFLogger activeValuesForTextFormat:textFormat];
+	_timeFormatter = settings.timeFormatter;
+	
 #if DEBUG
 	_severityFilter = JFLoggerSeverityDebug;
 #else
@@ -359,7 +233,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (NSURL*)fileURLForDate:(NSDate*)date
 {
-	NSURL* folderURL = [self.class defaultDirectoryURL];
+	NSURL* folderURL = self.folder;
 	NSString* fileName = self.fileName;
 	
 	JFLoggerRotation rotation = self.rotation;
@@ -540,42 +414,42 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	// Prepares the current date.
 	NSDate* currentDate = NSDate.date;
 	
-	NSString* format;
-	NSArray<NSString*>* requestedFormatValues;
+	NSString* textFormat;
+	NSArray<NSString*>* textFormatActiveValues;
 	@synchronized(self)
 	{
-		format = self.format;
-		requestedFormatValues = self.requestedFormatValues;
+		textFormat = self.textFormat;
+		textFormatActiveValues = self.textFormatActiveValues;
 	}
 	
-	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:requestedFormatValues.count];
+	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
 	
 	// Converts the severity level to string.
-	if([requestedFormatValues containsObject:JFLoggerFormatSeverity])
+	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity])
 		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
 	
 	// Gets the current process ID.
-	if([requestedFormatValues containsObject:JFLoggerFormatProcessID])
+	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID])
 		[values setObject:JFStringFromInt(ProcessInfo.processIdentifier) forKey:JFLoggerFormatProcessID];
 	
 	// Gets the current thread ID.
-	if([requestedFormatValues containsObject:JFLoggerFormatThreadID])
+	if([textFormatActiveValues containsObject:JFLoggerFormatThreadID])
 		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
 	
 	// Gets the current date.
-	if([requestedFormatValues containsObject:JFLoggerFormatDate])
+	if([textFormatActiveValues containsObject:JFLoggerFormatDate])
 		[values setObject:[self dateStringFromDate:currentDate] forKey:JFLoggerFormatDate];
 	
 	// Gets the current time.
-	if([requestedFormatValues containsObject:JFLoggerFormatTime])
+	if([textFormatActiveValues containsObject:JFLoggerFormatTime])
 		[values setObject:[self timeStringFromDate:currentDate] forKey:JFLoggerFormatTime];
 	
 	// Gets the message.
-	if([requestedFormatValues containsObject:JFLoggerFormatMessage])
+	if([textFormatActiveValues containsObject:JFLoggerFormatMessage])
 		[values setObject:message forKey:JFLoggerFormatMessage];
 	
 	// Prepares the log string.
-	NSString* logMessage = JFStringByReplacingKeysInFormat(format, values);
+	NSString* logMessage = JFStringByReplacingKeysInFormat(textFormat, values);
 	
 	// Logs to console if needed.
 	if(shouldLogToConsole) {
@@ -700,6 +574,18 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 // =================================================================================================
 // MARK: Methods - Utilities
 // =================================================================================================
+
++ (NSArray<NSString*>*)activeValuesForTextFormat:(NSString*)logFormat
+{
+	NSArray<NSString*>* values = @[JFLoggerFormatDate, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
+	NSMutableArray<NSString*>* retObj = [NSMutableArray<NSString*> arrayWithCapacity:values.count];
+	for(NSString* value in values) {
+		if([logFormat rangeOfString:value].location != NSNotFound) {
+			[retObj addObject:value];
+		}
+	}
+	return [retObj copy];
+}
 
 + (NSCalendarUnit)calendarComponentForRotation:(JFLoggerRotation)rotation
 {

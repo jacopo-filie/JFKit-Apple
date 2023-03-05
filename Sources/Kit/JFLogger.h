@@ -26,6 +26,7 @@
 
 @import Foundation;
 
+@class JFLoggerSettings;
 @protocol JFKitLoggerDelegate;
 @protocol JFLoggerDelegate;
 
@@ -265,35 +266,30 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 @interface JFLogger : NSObject
 
 // =================================================================================================
-// MARK: Properties - Data
+// MARK: Properties - File system
 // =================================================================================================
 
 /**
- * Creates the default directory for the log files on the current platform. This method returns a platform-dependent `NSURL` at which the log files will be located or are currently located. The default directory is located at path `Library/Application Support/Logs` on iOS and `Library/Application Support/<bundle identifier>/Logs` on macOS.
+ * The base name of the log files. Suffixes will be appended to it (before the extension).
+ * @see JFLoggerSettings.fileName
  */
-@property (class, strong, readonly) NSURL* defaultDirectoryURL;
+@property (strong, nonatomic, readonly) NSString* fileName;
 
 /**
- * The formatter to use when converting current date to string.
+ * The folder at which the log files will be located.
+ * @see JFLoggerSettings.folder
  */
-@property (strong, null_resettable) NSDateFormatter* dateFormatter;
+@property (strong, nonatomic, readonly) NSURL* folder;
 
 /**
- * The format string of each log written on file. The following constants can be used to retrieve specific values:
- * @code
- *   JFLoggerFormatDate      = the current date;
- *   JFLoggerFormatMessage   = the message to log;
- *   JFLoggerFormatProcessID = the ID of the running process;
- *   JFLoggerFormatSeverity  = the severity of the message;
- *   JFLoggerFormatThreadID  = the ID of the running thread;
- *   JFLoggerFormatTime      = the current time;
- * @endcode
- * For example, the default format is composed like this:
- * @code
- *   NSString* format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
- * @endcode
+ * The used log file will be changed after each rotation cycle, overwriting old existing files if needed.
+ * @see JFLoggerSettings.rotation
  */
-@property (copy, null_resettable) NSString* format;
+@property (assign, nonatomic, readonly) JFLoggerRotation rotation;
+
+// =================================================================================================
+// MARK: Properties - Filters
+// =================================================================================================
 
 /**
  * Messages will be logged only if their selected output passes this filter.
@@ -307,26 +303,44 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  */
 @property (assign) JFLoggerSeverity severityFilter;
 
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+/**
+ * The formatter to use when converting current date to string.
+ * @see JFLoggerSettings.dateFormatter
+ */
+@property (strong, nonatomic, readonly) NSDateFormatter* dateFormatter;
+
+/**
+ * The format string of each log written on file.
+ * @see JFLoggerSettings.textFormat
+ */
+@property (strong, nonatomic, readonly) NSString* textFormat;
+
 /**
  * The formatter to use when converting current time to string.
+ * @see JFLoggerSettings.timeFormatter
  */
-@property (strong, null_resettable) NSDateFormatter* timeFormatter;
+@property (strong, nonatomic, readonly) NSDateFormatter* timeFormatter;
 
 // =================================================================================================
-// MARK: Properties - File system
+// MARK: Lifecycle
 // =================================================================================================
 
 /**
- * The base name of the log files. Suffixes will be appended to it (before the extension).
- * The default value is `Log.log`.
+ * Initializes a new logger instance with the default settings.
+ * @return A new instance of this class.
  */
-@property (copy, null_resettable) NSString* fileName;
+- (instancetype)init;
 
 /**
- * The used log file will be changed after each rotation cycle, overwriting old existing files if needed.
- * The default value is `JFLoggerRotationNone`.
+ * Initializes a new logger instance with the given settings.
+ * @param settings The settings to use to customize the behavior of the logger.
+ * @return A new instance of this class.
  */
-@property (assign) JFLoggerRotation rotation;
+- (instancetype)initWithSettings:(JFLoggerSettings*)settings NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
 // MARK: Methods - Data

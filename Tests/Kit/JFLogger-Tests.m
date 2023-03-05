@@ -37,20 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-@interface JFLoggerSubclass : JFLogger
-
-@end
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
 @interface JFLogger_Tests : XCTestCase
 
 // =================================================================================================
-// MARK: Properties - Tests
+// MARK: Properties
 // =================================================================================================
 
-@property (strong, nonatomic, nullable) JFLoggerSubclass* logger;
+@property (strong, readonly) NSURL* folder;
+@property (strong, nonatomic, nullable) JFLogger* logger;
 
 @end
 
@@ -60,10 +54,35 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation JFLogger_Tests
 
 // =================================================================================================
-// MARK: Properties - Tests
+// MARK: Properties
 // =================================================================================================
 
+@synthesize folder = _folder;
 @synthesize logger = _logger;
+
+// =================================================================================================
+// MARK: Properties (Accessors)
+// =================================================================================================
+
+- (NSURL*)folder
+{
+	static NSURL* retObj = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSError* error = nil;
+		NSURL* url = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
+		
+#if JF_MACOS
+		NSString* domain = [ClassBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
+		NSAssert(domain, @"Bundle identifier not found!");
+		url = [url URLByAppendingPathComponent:domain];
+#endif
+		
+		retObj = [url URLByAppendingPathComponent:@"Logs"];
+	});
+	return retObj;
+}
 
 // =================================================================================================
 // MARK: Methods - Tests
@@ -73,10 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
 {
 	[super setUp];
 	
-	// Creates the logger with the test log file.
-	JFLoggerSubclass* logger = [[JFLoggerSubclass alloc] init];
+	JFLoggerSettings* settings = [JFLoggerSettings new];
+	settings.fileName = @"Test.log";
+	settings.folder = self.folder;
+	JFLogger* logger = [[JFLogger alloc] initWithSettings:settings];
 	XCTAssert(logger, @"Failed to create the test logger.");
-	logger.fileName = @"Test.log";
 	logger.severityFilter = JFLoggerSeverityInfo;
 	self.logger = logger;
 }
@@ -171,7 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)deleteTestLogFile
 {
 	NSFileManager* fileManager = NSFileManager.defaultManager;
-	NSURL* fileURL = [[[self.logger class] defaultDirectoryURL] URLByAppendingPathComponent:self.logger.fileName];
+	JFLogger* logger = self.logger;
+	NSURL* fileURL = [logger.folder URLByAppendingPathComponent:logger.fileName];
 	if([fileManager fileExistsAtPath:fileURL.path]) {
 		NSError* error = nil;
 		BOOL succeeded = [fileManager removeItemAtURL:fileURL error:&error];
@@ -182,7 +203,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray*)readTestLogFileLines
 {
 	NSError* error = nil;
-	NSURL* fileURL = [[[self.logger class] defaultDirectoryURL] URLByAppendingPathComponent:self.logger.fileName];
+	JFLogger* logger = self.logger;
+	NSURL* fileURL = [logger.folder URLByAppendingPathComponent:logger.fileName];
 	NSString* fileContent = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
 	XCTAssert(fileContent, @"Failed to read result from the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	
@@ -194,37 +216,6 @@ NS_ASSUME_NONNULL_BEGIN
 		[retObj removeLastObject];
 	}
 	
-	return retObj;
-}
-
-@end
-
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// MARK: -
-
-@implementation JFLoggerSubclass
-
-// =================================================================================================
-// MARK: Properties (Accessors) - Data
-// =================================================================================================
-
-+ (NSURL*)defaultDirectoryURL
-{
-	static NSURL* retObj = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		NSError* error = nil;
-		NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
-		
-#if JF_MACOS
-		NSString* domain = [ClassBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
-		NSAssert(domain, @"Bundle identifier not found!");
-		url = [url URLByAppendingPathComponent:domain];
-#endif
-		
-		retObj = [url URLByAppendingPathComponent:@"Logs"];
-	});
 	return retObj;
 }
 
