@@ -41,32 +41,37 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 /**
- * The date component of the logger format string.
+ * The date component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatDate;
 
 /**
- * The message component of the logger format string.
+ * The date and time components of the logger text format string.
+ */
+FOUNDATION_EXPORT NSString* const JFLoggerFormatDateTime;
+
+/**
+ * The message component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatMessage;
 
 /**
- * The process ID component of the logger format string.
+ * The process ID component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatProcessID;
 
 /**
- * The severity component of the logger format string.
+ * The severity component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatSeverity;
 
 /**
- * The thread ID component of the logger format string.
+ * The thread ID component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatThreadID;
 
 /**
- * The time component of the logger format string.
+ * The time component of the logger text format string.
  */
 FOUNDATION_EXPORT NSString* const JFLoggerFormatTime;
 
@@ -314,6 +319,12 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 @property (strong, nonatomic, readonly) NSDateFormatter* dateFormatter;
 
 /**
+ * The formatter to use when converting current date and time to string.
+ * @see JFLoggerSettings.dateTimeFormatter
+ */
+@property (strong, nonatomic, readonly) NSDateFormatter* dateTimeFormatter;
+
+/**
  * The format string of each log written on file.
  * @see JFLoggerSettings.textFormat
  */
@@ -532,14 +543,21 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 
 /**
  * The formatter to use when converting current date to string.
- * This is used only if `textFormat` contains the value `JFLoggerFormatDate`.
+ * This is used only if the text format contains the component `JFLoggerFormatDate`.
  */
 @property (strong, nonatomic, null_resettable) NSDateFormatter* dateFormatter;
+
+/**
+ * The formatter to use when converting current date and time to string.
+ * This is used only if the text format contains the component `JFLoggerFormatDateTime`.
+ */
+@property (strong, nonatomic, null_resettable) NSDateFormatter* dateTimeFormatter;
 
 /**
  * The format string of each log written on file. The following constants can be used to retrieve specific values:
  * @code
  *   JFLoggerFormatDate      = the current date;
+ *   JFLoggerFormatDateTime  = the current date and time;
  *   JFLoggerFormatMessage   = the message to log;
  *   JFLoggerFormatProcessID = the ID of the running process;
  *   JFLoggerFormatSeverity  = the severity of the message;
@@ -548,14 +566,14 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @endcode
  * For example, the default format is composed like this:
  * @code
- *   NSString* format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+ *   NSString* format = [NSString stringWithFormat:@"%@ [%@:%@] %@\n", JFLoggerFormatDateTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
  * @endcode
  */
 @property (strong, nonatomic, null_resettable) NSString* textFormat;
 
 /**
  * The formatter to use when converting current time to string.
- * This is used only if `textFormat` contains the value `JFLoggerFormatTime`.
+ * This is used only if the text format contains the component `JFLoggerFormatTime`.
  */
 @property (strong, nonatomic, null_resettable) NSDateFormatter* timeFormatter;
 

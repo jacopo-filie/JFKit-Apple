@@ -44,11 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 
 NSString* const JFLoggerFormatDate = @"%1$@";
-NSString* const JFLoggerFormatMessage = @"%2$@";
-NSString* const JFLoggerFormatProcessID = @"%3$@";
-NSString* const JFLoggerFormatSeverity = @"%4$@";
-NSString* const JFLoggerFormatThreadID = @"%5$@";
-NSString* const JFLoggerFormatTime = @"%6$@";
+NSString* const JFLoggerFormatDateTime = @"%2$@";
+NSString* const JFLoggerFormatMessage = @"%3$@";
+NSString* const JFLoggerFormatProcessID = @"%4$@";
+NSString* const JFLoggerFormatSeverity = @"%5$@";
+NSString* const JFLoggerFormatThreadID = @"%6$@";
+NSString* const JFLoggerFormatTime = @"%7$@";
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
@@ -94,6 +95,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 // =================================================================================================
 
 @synthesize dateFormatter = _dateFormatter;
+@synthesize dateTimeFormatter = _dateTimeFormatter;
 @synthesize textFormat = _textFormat;
 @synthesize textFormatActiveValues = _textFormatActiveValues;
 @synthesize timeFormatter = _timeFormatter;
@@ -120,6 +122,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	NSString* textFormat = [settings.textFormat copy];
 	
 	_dateFormatter = settings.dateFormatter;
+	_dateTimeFormatter = settings.dateTimeFormatter;
 	_delegatesController = [JFObserversController<JFLoggerDelegate> new];
 	_fileName = [settings.fileName copy];
 	_folder = settings.folder;
@@ -207,6 +210,11 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 - (NSString*)dateStringFromDate:(NSDate*)date
 {
 	return [self stringFromDate:date formatter:self.dateFormatter];
+}
+
+- (NSString*)dateTimeStringFromDate:(NSDate*)date
+{
+	return [self stringFromDate:date formatter:self.dateTimeFormatter];
 }
 
 - (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
@@ -440,6 +448,10 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	if([textFormatActiveValues containsObject:JFLoggerFormatDate])
 		[values setObject:[self dateStringFromDate:currentDate] forKey:JFLoggerFormatDate];
 	
+	// Gets the current date and time.
+	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime])
+		[values setObject:[self dateTimeStringFromDate:currentDate] forKey:JFLoggerFormatDateTime];
+	
 	// Gets the current time.
 	if([textFormatActiveValues containsObject:JFLoggerFormatTime])
 		[values setObject:[self timeStringFromDate:currentDate] forKey:JFLoggerFormatTime];
@@ -577,7 +589,7 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 + (NSArray<NSString*>*)activeValuesForTextFormat:(NSString*)logFormat
 {
-	NSArray<NSString*>* values = @[JFLoggerFormatDate, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
+	NSArray<NSString*>* values = @[JFLoggerFormatDate, JFLoggerFormatDateTime, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
 	NSMutableArray<NSString*>* retObj = [NSMutableArray<NSString*> arrayWithCapacity:values.count];
 	for(NSString* value in values) {
 		if([logFormat rangeOfString:value].location != NSNotFound) {
@@ -727,6 +739,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 // =================================================================================================
 
 @synthesize dateFormatter = _dateFormatter;
+@synthesize dateTimeFormatter = _dateTimeFormatter;
 @synthesize textFormat = _textFormat;
 @synthesize timeFormatter = _timeFormatter;
 
@@ -783,6 +796,21 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 	_dateFormatter = dateFormatter;
 }
 
+- (NSDateFormatter*)dateTimeFormatter
+{
+	NSDateFormatter* retObj = _dateTimeFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultDateTimeFormatter];
+		_dateTimeFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setDateTimeFormatter:(NSDateFormatter* _Nullable)dateTimeFormatter
+{
+	_dateTimeFormatter = dateTimeFormatter;
+}
+
 - (NSString*)textFormat
 {
 	NSString* retObj = _textFormat;
@@ -828,10 +856,24 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 // MARK: Methods - Utilities
 // =================================================================================================
 
++ (NSString*)newDefaultDateFormat
+{
+	return @"yyyy/MM/dd";
+}
+
 + (NSDateFormatter*)newDefaultDateFormatter
 {
 	NSDateFormatter* retObj = [NSDateFormatter new];
-	retObj.dateFormat = @"yyyy/MM/dd";
+	retObj.dateFormat = [JFLoggerSettings newDefaultDateFormat];
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
++ (NSDateFormatter*)newDefaultDateTimeFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = [NSString stringWithFormat:@"%@ %@", [JFLoggerSettings newDefaultDateFormat], [JFLoggerSettings newDefaultTimeFormat]];
 	retObj.locale = [NSLocale currentLocale];
 	retObj.timeZone = [NSTimeZone defaultTimeZone];
 	return retObj;
@@ -859,13 +901,18 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 
 + (NSString*)newDefaultTextFormat
 {
-	return [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+	return [NSString stringWithFormat:@"%@ [%@:%@] %@\n", JFLoggerFormatDateTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+}
+
++ (NSString*)newDefaultTimeFormat
+{
+	return @"HH:mm:ss.SSSZ";
 }
 
 + (NSDateFormatter*)newDefaultTimeFormatter
 {
 	NSDateFormatter* retObj = [NSDateFormatter new];
-	retObj.dateFormat = @"HH:mm:ss.SSSZ";
+	retObj.dateFormat = [JFLoggerSettings newDefaultTimeFormat];
 	retObj.locale = [NSLocale currentLocale];
 	retObj.timeZone = [NSTimeZone defaultTimeZone];
 	return retObj;
