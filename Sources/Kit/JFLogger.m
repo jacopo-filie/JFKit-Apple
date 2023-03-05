@@ -210,68 +210,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Methods - Data
 // =================================================================================================
 
-+ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
-{
-	switch(severity)
-	{
-		case JFLoggerSeverityAlert:
-			return @"Alert";
-		case JFLoggerSeverityCritical:
-			return @"Critical";
-		case JFLoggerSeverityDebug:
-			return @"Debug";
-		case JFLoggerSeverityEmergency:
-			return @"Emergency";
-		case JFLoggerSeverityError:
-			return @"Error";
-		case JFLoggerSeverityInfo:
-			return @"Info";
-		case JFLoggerSeverityNotice:
-			return @"Notice";
-		case JFLoggerSeverityWarning:
-			return @"Warning";
-	}
-}
-
-+ (NSString*)stringFromTags:(JFLoggerTags)tags
-{
-	if(tags == JFLoggerTagsNone)
-		return JFEmptyString;
-	
-	// Prepares the temporary buffer.
-	NSMutableArray* tagStrings = [NSMutableArray arrayWithCapacity:13];
-	
-	// Inserts each requested hashtag.
-	if(tags & JFLoggerTagsAttention)
-		[tagStrings addObject:@"#Attention"];
-	if(tags & JFLoggerTagsClue)
-		[tagStrings addObject:@"#Clue"];
-	if(tags & JFLoggerTagsComment)
-		[tagStrings addObject:@"#Comment"];
-	if(tags & JFLoggerTagsCritical)
-		[tagStrings addObject:@"#Critical"];
-	if(tags & JFLoggerTagsDeveloper)
-		[tagStrings addObject:@"#Developer"];
-	if(tags & JFLoggerTagsError)
-		[tagStrings addObject:@"#Error"];
-	if(tags & JFLoggerTagsFileSystem)
-		[tagStrings addObject:@"#FileSystem"];
-	if(tags & JFLoggerTagsHardware)
-		[tagStrings addObject:@"#Hardware"];
-	if(tags & JFLoggerTagsMarker)
-		[tagStrings addObject:@"#Marker"];
-	if(tags & JFLoggerTagsNetwork)
-		[tagStrings addObject:@"#Network"];
-	if(tags & JFLoggerTagsSecurity)
-		[tagStrings addObject:@"#Security"];
-	if(tags & JFLoggerTagsSystem)
-		[tagStrings addObject:@"#System"];
-	if(tags & JFLoggerTagsUser)
-		[tagStrings addObject:@"#User"];
-	
-	return [tagStrings componentsJoinedByString:@" "];
-}
-
 - (NSString*)dateStringFromDate:(NSDate*)date
 {
 	return [self stringFromDate:date formatter:self.dateFormatter];
@@ -292,16 +230,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		return [formatter stringFromDate:date];
 	}
 #endif
-}
-
-- (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
-{
-	return [self.class stringFromSeverity:severity];
-}
-
-- (NSString*)stringFromTags:(JFLoggerTags)tags
-{
-	return [self.class stringFromTags:tags];
 }
 
 - (NSURL*)fileURLForDate:(NSDate*)date
@@ -353,7 +281,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		if(!attributes)
 		{
 			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 			[self logToConsole:[NSString stringWithFormat:@"%@: could not read attributes of log file at path '%@'%@. The existing file will be considered still valid. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
 			return YES;
 		}
@@ -362,7 +290,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		NSDate* creationDate = [attributes objectForKey:NSFileCreationDate];
 		if(!creationDate)
 		{
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 			[self logToConsole:[NSString stringWithFormat:@"%@: could not read creation date of log file at path '%@'. The existing file will be considered still valid. %@", ClassName, filePath, tagsString] currentDate:currentDate];
 			return YES;
 		}
@@ -383,7 +311,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error])
 			{
 				NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-				NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+				NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 				[self logToConsole:[NSString stringWithFormat:@"%@: could not create logs folder at path '%@'%@. %@", ClassName, folderPath, errorString, tagsString] currentDate:currentDate];
 				return NO;
 			}
@@ -395,7 +323,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	if(![NSData.data writeToFile:filePath options:NSDataWritingAtomic error:&error])
 	{
 		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 		[self logToConsole:[NSString stringWithFormat:@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
 		return fileExists;
 	}
@@ -530,7 +458,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		return;
 	
 	// Appends tags.
-	NSString* tagsString = [self stringFromTags:tags];
+	NSString* tagsString = [JFLogger stringFromTags:tags];
 	if(!JFStringIsNullOrEmpty(tagsString))
 		message = [message stringByAppendingFormat:@" %@", tagsString];
 	
@@ -544,7 +472,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Converts the severity level to string.
 	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity])
-		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
+		[values setObject:[JFLogger stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
 	
 	// Gets the current process ID.
 	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID])
@@ -617,7 +545,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
 	if(!data)
 	{
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsUser)];
+		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsUser)];
 		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create data from log message '%@'. %@", ClassName, message, tagsString] currentDate:currentDate];
 		return;
 	}
@@ -627,7 +555,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Tries to append the data to the log file (NSFileHandle is NOT thread safe).
 	if(![self createFileAtURL:fileURL currentDate:currentDate])
 	{
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
 		return;
 	}
@@ -638,7 +566,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	if(!fileHandle)
 	{
 		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
+		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
 		[self logToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
 		return;
 	}
@@ -730,6 +658,88 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	}
 }
 
++ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
+{
+	switch(severity) {
+		case JFLoggerSeverityAlert: {
+			return @"Alert";
+		}
+		case JFLoggerSeverityCritical: {
+			return @"Critical";
+		}
+		case JFLoggerSeverityDebug: {
+			return @"Debug";
+		}
+		case JFLoggerSeverityEmergency: {
+			return @"Emergency";
+		}
+		case JFLoggerSeverityError: {
+			return @"Error";
+		}
+		case JFLoggerSeverityInfo: {
+			return @"Info";
+		}
+		case JFLoggerSeverityNotice: {
+			return @"Notice";
+		}
+		case JFLoggerSeverityWarning: {
+			return @"Warning";
+		}
+	}
+}
+
++ (NSString*)stringFromTags:(JFLoggerTags)tags
+{
+	if(tags == JFLoggerTagsNone) {
+		return JFEmptyString;
+	}
+	
+	// Prepares the temporary buffer.
+	NSMutableArray* tagStrings = [NSMutableArray arrayWithCapacity:13];
+	
+	// Inserts each requested hashtag.
+	if(tags & JFLoggerTagsAttention) {
+		[tagStrings addObject:@"#Attention"];
+	}
+	if(tags & JFLoggerTagsClue) {
+		[tagStrings addObject:@"#Clue"];
+	}
+	if(tags & JFLoggerTagsComment) {
+		[tagStrings addObject:@"#Comment"];
+	}
+	if(tags & JFLoggerTagsCritical) {
+		[tagStrings addObject:@"#Critical"];
+	}
+	if(tags & JFLoggerTagsDeveloper) {
+		[tagStrings addObject:@"#Developer"];
+	}
+	if(tags & JFLoggerTagsError) {
+		[tagStrings addObject:@"#Error"];
+	}
+	if(tags & JFLoggerTagsFileSystem) {
+		[tagStrings addObject:@"#FileSystem"];
+	}
+	if(tags & JFLoggerTagsHardware) {
+		[tagStrings addObject:@"#Hardware"];
+	}
+	if(tags & JFLoggerTagsMarker) {
+		[tagStrings addObject:@"#Marker"];
+	}
+	if(tags & JFLoggerTagsNetwork) {
+		[tagStrings addObject:@"#Network"];
+	}
+	if(tags & JFLoggerTagsSecurity) {
+		[tagStrings addObject:@"#Security"];
+	}
+	if(tags & JFLoggerTagsSystem) {
+		[tagStrings addObject:@"#System"];
+	}
+	if(tags & JFLoggerTagsUser) {
+		[tagStrings addObject:@"#User"];
+	}
+	
+	return [tagStrings componentsJoinedByString:@" "];
+}
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

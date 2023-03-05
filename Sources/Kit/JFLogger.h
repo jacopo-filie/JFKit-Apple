@@ -359,22 +359,8 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 - (instancetype)initWithSettings:(JFLoggerSettings*)settings NS_DESIGNATED_INITIALIZER;
 
 // =================================================================================================
-// MARK: Methods - Data
+// MARK: Methods - File system
 // =================================================================================================
-
-/**
- * Returns a string containing the given severity level.
- * @param severity The severity level to convert to string.
- * @return A string containing the given severity level.
- */
-+ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
-
-/**
- * Returns a string containing all the given tags, sorted alphabetically.
- * @param tags The tags to convert to string.
- * @return A string containing all the given tags, sorted alphabetically.
- */
-+ (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 /**
  * Returns the URL of the log file used for the given date.
@@ -382,20 +368,6 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @return The log file URL.
  */
 - (NSURL*)fileURLForDate:(NSDate*)date;
-
-/**
- * Returns a string containing the given severity level. This method simply calls the method `+stringFromSeverity:` of this class.
- * @param severity The severity level to convert to string.
- * @return A string containing the given severity level.
- */
-- (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
-
-/**
- * Returns a string containing all the given tags, sorted alphabetically. This method simply calls the method `+stringFromTags:` of this class.
- * @param tags The tags to convert to string.
- * @return A string containing all the given tags, sorted alphabetically.
- */
-- (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 // =================================================================================================
 // MARK: Methods - Observers
@@ -508,6 +480,24 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @param tags The tags assigned to the given message.
  */
 - (void)logWarning:(NSString*)message tags:(JFLoggerTags)tags;
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
+/**
+ * Returns a string describing the given severity level.
+ * @param severity The severity level to be described.
+ * @return A string describing the given severity level.
+ */
++ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity;
+
+/**
+ * Returns a string containing all the given tags, sorted alphabetically and concatenated.
+ * @param tags The tags to concatenate into a string.
+ * @return A string containing all the given tags, sorted alphabetically and concatenated.
+ */
++ (NSString*)stringFromTags:(JFLoggerTags)tags;
 
 @end
 
