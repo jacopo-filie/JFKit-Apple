@@ -337,25 +337,14 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
 {
-	// NSDateFormatter is thread safe only in iOS 7.0 or later and on macOS 10.9 or later. On macOS, only the 64-bit architecture implementation is thread safe.
-	
-#if JF_IOS
-	BOOL threadSafe = YES;
+#if JF_IOS || JF_ARCH64
+	return [formatter stringFromDate:date];
 #else
-	BOOL threadSafe = NO;
-#	if JF_ARCH64
-	if(@available(macOS 10.9, *))
-		threadSafe = YES;
-#	endif
-#endif
-	
-	if(threadSafe)
-		return [formatter stringFromDate:date];
-	
-	@synchronized(formatter)
-	{
+	// On macOS, only the 64-bit architecture implementation of NSDateFormatter is thread-safe.
+	@synchronized(formatter) {
 		return [formatter stringFromDate:date];
 	}
+#endif
 }
 
 - (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
@@ -373,49 +362,21 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	NSURL* folderURL = [self.class defaultDirectoryURL];
 	NSString* fileName = self.fileName;
 	
-	NSCalendarUnit component = 0;
-	BOOL shouldAppendSuffix = YES;
-	BOOL shouldUseWeekOfMonth = NO;
-	
-	switch(self.rotation)
-	{
-		case JFLoggerRotationHour:
-		{
-			component = NSCalendarUnitHour;
-			break;
-		}
-		case JFLoggerRotationDay:
-		{
-			component = NSCalendarUnitDay;
-			break;
-		}
-		case JFLoggerRotationWeek:
-		{
-			if(@available(macOS 10.7, *))
-				component = NSCalendarUnitWeekOfMonth;
-			else
-				shouldUseWeekOfMonth = YES;
-			break;
-		}
-		case JFLoggerRotationMonth:
-		{
-			component = NSCalendarUnitMonth;
-			break;
-		}
-		default:
-		{
-			shouldAppendSuffix = NO;
-			break;
-		}
+	JFLoggerRotation rotation = self.rotation;
+	if(rotation == JFLoggerRotationNone) {
+		return [folderURL URLByAppendingPathComponent:fileName];
 	}
 	
-	if(shouldAppendSuffix)
-	{
-		NSString* extension = fileName.pathExtension;
-		NSInteger suffix = (shouldUseWeekOfMonth ? [self weekOfMonthFromDate:date] : [self component:component fromDate:date]);
-		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@", JFStringFromNSInteger(suffix)];
-		if(!JFStringIsNullOrEmpty(extension))
-			fileName = [fileName stringByAppendingPathExtension:extension];
+	NSCalendarUnit component = [JFLogger calendarComponentForRotation:rotation];
+	if(component == 0) {
+		return [folderURL URLByAppendingPathComponent:fileName];
+	}
+	
+	NSString* extension = fileName.pathExtension;
+	NSInteger suffix = [NSCalendar.currentCalendar component:component fromDate:date];
+	fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@", JFStringFromNSInteger(suffix)];
+	if(!JFStringIsNullOrEmpty(extension)) {
+		fileName = [fileName stringByAppendingPathExtension:extension];
 	}
 	
 	return [folderURL URLByAppendingPathComponent:fileName];
@@ -503,33 +464,34 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	NSDateComponents* creationDateComponents = [calendar components:components fromDate:creationDate];
 	NSDateComponents* currentDateComponents = [calendar components:components fromDate:currentDate];
 	
-	if((creationDateComponents.era != currentDateComponents.era) || (creationDateComponents.year != currentDateComponents.year))
+	if((creationDateComponents.era != currentDateComponents.era) || (creationDateComponents.year != currentDateComponents.year)) {
 		return NO;
+	}
 	
-	switch(self.rotation)
-	{
-		case JFLoggerRotationHour:
-		{
-			if(creationDateComponents.hour != currentDateComponents.hour)
+	switch(self.rotation) {
+		case JFLoggerRotationHour: {
+			if(creationDateComponents.hour != currentDateComponents.hour) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationDay:
-		{
-			if(creationDateComponents.day != currentDateComponents.day)
+		case JFLoggerRotationDay: {
+			if(creationDateComponents.day != currentDateComponents.day) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationWeek:
-		{
-			if([self weekOfMonthFromDate:creationDate] != [self weekOfMonthFromDate:currentDate])
+		case JFLoggerRotationWeek: {
+			if(creationDateComponents.weekOfMonth != currentDateComponents.weekOfMonth) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationMonth:
-		{
-			if(creationDateComponents.month != currentDateComponents.month)
+		case JFLoggerRotationMonth: {
+			if(creationDateComponents.month != currentDateComponents.month) {
 				return NO;
+			}
 		}
-		default:
+		default: {
 			return YES;
+		}
 	}
 }
 
@@ -592,22 +554,9 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	if([requestedFormatValues containsObject:JFLoggerFormatSeverity])
 		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
 	
-	// Gets the current process ID. On macOS, NSProcessInfo is thread-safe only on 10.7 or later.
+	// Gets the current process ID.
 	if([requestedFormatValues containsObject:JFLoggerFormatProcessID])
-	{
-		NSProcessInfo* processInfo = ProcessInfo;
-		int processID;
-		if(@available(macOS 10.7, *))
-			processID = processInfo.processIdentifier;
-		else
-		{
-			@synchronized(processInfo)
-			{
-				processID = processInfo.processIdentifier;
-			}
-		}
-		[values setObject:JFStringFromInt(processID) forKey:JFLoggerFormatProcessID];
-	}
+		[values setObject:JFStringFromInt(ProcessInfo.processIdentifier) forKey:JFLoggerFormatProcessID];
 	
 	// Gets the current thread ID.
 	if([requestedFormatValues containsObject:JFLoggerFormatThreadID])
@@ -752,58 +701,25 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date
++ (NSCalendarUnit)calendarComponentForRotation:(JFLoggerRotation)rotation
 {
-	NSCalendar* calendar = [NSCalendar currentCalendar];
-	
-	if(@available(macOS 10.9, *))
-		return [calendar component:component fromDate:date];
-	
-	NSDateComponents* components = [calendar components:component fromDate:date];
-	switch(component)
-	{
-		case NSCalendarUnitDay:
-			return components.day;
-		case NSCalendarUnitHour:
-			return components.hour;
-		case NSCalendarUnitMonth:
-			return components.month;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-		case NSWeekCalendarUnit:
-			return components.week;
-#pragma clang diagnostic pop
-		default:
-		{
-			if(@available(macOS 10.7, *))
-			{
-				if(component == NSCalendarUnitWeekOfMonth)
-					return components.weekOfMonth;
-			}
-			break;
+	switch(rotation) {
+		case JFLoggerRotationHour: {
+			return NSCalendarUnitHour;
+		}
+		case JFLoggerRotationDay: {
+			return NSCalendarUnitDay;
+		}
+		case JFLoggerRotationWeek: {
+			return NSCalendarUnitWeekOfMonth;
+		}
+		case JFLoggerRotationMonth: {
+			return NSCalendarUnitMonth;
+		}
+		default: {
+			return 0;
 		}
 	}
-	
-	return -1;
-}
-
-- (NSInteger)weekOfMonthFromDate:(NSDate*)date
-{
-	if(@available(macOS 10.7, *))
-		return [self component:NSCalendarUnitWeekOfMonth fromDate:date];
-	
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-	NSCalendarUnit component = NSWeekCalendarUnit;
-#pragma clang diagnostic pop
-	
-	NSInteger retVal = [self component:component fromDate:date];
-	
-	NSRange range = [NSCalendar.currentCalendar rangeOfUnit:component inUnit:NSCalendarUnitMonth forDate:date];
-	if(range.location == NSNotFound)
-		return -1;
-	
-	return (retVal - range.location + 1);
 }
 
 @end
