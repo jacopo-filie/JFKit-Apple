@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 	dispatch_once(&onceToken, ^{
 		NSError* error = nil;
 		NSURL* url = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
+		NSAssert(url, @"Failed to load application support directory. [error = '%@']", error);
 		
 #if JF_MACOS
 		NSString* domain = [ClassBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
