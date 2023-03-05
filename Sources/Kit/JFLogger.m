@@ -578,15 +578,6 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	// Prepares the current date.
 	NSDate* currentDate = NSDate.date;
 	
-	// Logs to console if needed.
-	if(shouldLogToConsole)
-	{
-		[self logToConsole:message currentDate:currentDate];
-		if(!shouldLogToDelegates && !shouldLogToFile)
-			return;
-	}
-	
-	
 	NSString* format;
 	NSArray<NSString*>* requestedFormatValues;
 	@synchronized(self)
@@ -637,6 +628,11 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 	// Prepares the log string.
 	NSString* logMessage = JFStringByReplacingKeysInFormat(format, values);
 	
+	// Logs to console if needed.
+	if(shouldLogToConsole) {
+		[self logToConsole:logMessage currentDate:currentDate];
+	}
+	
 	// Logs to file if needed.
 	if(shouldLogToFile)
 		[self logToFile:logMessage currentDate:currentDate];
@@ -662,11 +658,8 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate
 {
-	@synchronized(self)
-	{
-		// FIX: strangely enough, it appears that 'NSLog' is not thread-safe as documented. I have
-		// seen logs overlapping each other in the console but not inside the file.
-		NSLog(@"%@", message);
+	@synchronized(self) {
+		fprintf(stderr, "%s", message.UTF8String);
 	}
 }
 

@@ -292,7 +292,6 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  * @code
  *   NSString* format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
  * @endcode
- * @warning Due to the implementation details, log to console ignores this property and uses the platform-dependent default format string.
  */
 @property (copy, null_resettable) NSString* format;
 
