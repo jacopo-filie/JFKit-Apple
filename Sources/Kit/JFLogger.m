@@ -268,7 +268,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		{
 			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
 			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not read attributes of log file at path '%@'%@. The existing file will be considered still valid. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
+			[self logTextToConsole:[NSString stringWithFormat:@"%@: could not read attributes of log file at path '%@'%@. The existing file will be considered still valid. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
 			return YES;
 		}
 		
@@ -277,7 +277,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		if(!creationDate)
 		{
 			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not read creation date of log file at path '%@'. The existing file will be considered still valid. %@", ClassName, filePath, tagsString] currentDate:currentDate];
+			[self logTextToConsole:[NSString stringWithFormat:@"%@: could not read creation date of log file at path '%@'. The existing file will be considered still valid. %@", ClassName, filePath, tagsString] currentDate:currentDate];
 			return YES;
 		}
 		
@@ -298,7 +298,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			{
 				NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
 				NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-				[self logToConsole:[NSString stringWithFormat:@"%@: could not create logs folder at path '%@'%@. %@", ClassName, folderPath, errorString, tagsString] currentDate:currentDate];
+				[self logTextToConsole:[NSString stringWithFormat:@"%@: could not create logs folder at path '%@'%@. %@", ClassName, folderPath, errorString, tagsString] currentDate:currentDate];
 				return NO;
 			}
 		}
@@ -310,7 +310,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	{
 		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
 		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
+		[self logTextToConsole:[NSString stringWithFormat:@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
 		return fileExists;
 	}
 	
@@ -491,26 +491,26 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:message forKey:JFLoggerFormatMessage];
 	}
 	
-	// Prepares the log string.
-	NSString* logMessage = JFStringByReplacingKeysInFormat(self.textFormat, values);
+	// Prepares the log text.
+	NSString* text = JFStringByReplacingKeysInFormat(self.textFormat, values);
 	
 	pthread_mutex_t* writerMutex = &_writerMutex;
 	[self lockMutex:writerMutex];
 	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
-		[self logToConsole:logMessage currentDate:currentDate];
+		[self logTextToConsole:text currentDate:currentDate];
 	}
 	
 	// Logs to file if needed.
 	if(outputs.isFileEnabled) {
-		[self logToFile:logMessage currentDate:currentDate];
+		[self logTextToFile:text currentDate:currentDate];
 	}
 	
 	// Forwards the log message to the registered delegates if needed.
 	if(outputs.isDelegatesEnabled) {
 		[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
-			[delegate logger:self logMessage:logMessage currentDate:currentDate];
+			[delegate logger:self logText:text currentDate:currentDate];
 		} async:YES];
 	}
 	
@@ -527,19 +527,19 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self log:message output:JFLoggerOutputAll severity:severity tags:tags];
 }
 
-- (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logTextToConsole:(NSString*)message currentDate:(NSDate*)currentDate
 {
 	fprintf(stderr, "%s", message.UTF8String);
 }
 
-- (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logTextToFile:(NSString*)message currentDate:(NSDate*)currentDate
 {
 	// Prepares the data to be written.
 	NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
 	if(!data)
 	{
 		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsUser)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create data from log message '%@'. %@", ClassName, message, tagsString] currentDate:currentDate];
+		[self logTextToConsole:[NSString stringWithFormat:@"%@: failed to create data from log message '%@'. %@", ClassName, message, tagsString] currentDate:currentDate];
 		return;
 	}
 	
@@ -549,7 +549,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	if(![self createFileAtURL:fileURL currentDate:currentDate])
 	{
 		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
+		[self logTextToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
 		return;
 	}
 	
@@ -560,7 +560,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	{
 		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
 		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
+		[self logTextToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
 		return;
 	}
 	

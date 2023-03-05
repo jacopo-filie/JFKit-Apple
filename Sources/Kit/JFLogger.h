@@ -587,11 +587,11 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 /**
  * Sends the delegate the formatted log message, passing also the reference current date associated with it.
  * @param sender The logger instance.
- * @param message The formatted message.
- * @param date The date associated with the log message.
- * @warning The parameter `message` is not the original string given to the logger, it's the result of the composition of the format string (see parameter `format`) and the available values.
+ * @param text The log text.
+ * @param date The date associated with the log text.
+ * @warning The parameter `text` is not the original string given to the logger, it's the result of the composition of the text format string (see parameter `textFormat`) and the available components.
  */
-- (void)logger:(JFLogger*)sender logMessage:(NSString*)message currentDate:(NSDate*)date;
+- (void)logger:(JFLogger*)sender logText:(NSString*)text currentDate:(NSDate*)date;
 
 @end
 
