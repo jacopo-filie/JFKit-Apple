@@ -93,8 +93,11 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // =================================================================================================
 
 {
+	pthread_mutex_t _consoleWriterMutex;
+	pthread_mutex_t _delegatesWriterMutex;
+	pthread_mutex_t _fileWriterMutex;
 	pthread_mutex_t _filtersMutex;
-	pthread_mutex_t _writerMutex;
+	pthread_mutex_t _textCompositionMutex;
 }
 
 // =================================================================================================
@@ -181,8 +184,11 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)dealloc
 {
+	[self destroyMutex:&_consoleWriterMutex];
+	[self destroyMutex:&_delegatesWriterMutex];
+	[self destroyMutex:&_fileWriterMutex];
 	[self destroyMutex:&_filtersMutex];
-	[self destroyMutex:&_writerMutex];
+	[self destroyMutex:&_textCompositionMutex];
 }
 
 - (instancetype)init
@@ -213,9 +219,12 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	_severityFilter = JFLoggerSeverityInfo;
 #endif
 	
+	[self initializeMutex:&_consoleWriterMutex];
+	[self initializeMutex:&_delegatesWriterMutex];
+	[self initializeMutex:&_fileWriterMutex];
 	[self initializeMutex:&_filtersMutex];
-	[self initializeMutex:&_writerMutex];
-	
+	[self initializeMutex:&_textCompositionMutex];
+
 	return self;
 }
 
@@ -383,12 +392,24 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (NSString*)nameOfMutex:(pthread_mutex_t*)lock
 {
+	if(lock == &_consoleWriterMutex) {
+		return @"console writer mutex";
+	}
+	
+	if(lock == &_delegatesWriterMutex) {
+		return @"delegates writer mutex";
+	}
+	
+	if(lock == &_fileWriterMutex) {
+		return @"file writer mutex";
+	}
+	
 	if(lock == &_filtersMutex) {
 		return @"filters mutex";
 	}
 	
-	if(lock == &_writerMutex) {
-		return @"writer mutex";
+	if(lock == &_textCompositionMutex) {
+		return @"text composition mutex";
 	}
 	
 	return @"unknown mutex";
@@ -472,8 +493,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:message forKey:JFLoggerFormatMessage];
 	}
 	
-	pthread_mutex_t* writerMutex = &_writerMutex;
-	[self lockMutex:writerMutex];
+	pthread_mutex_t* textCompositionMutex = &_textCompositionMutex;
+	[self lockMutex:textCompositionMutex];
 	
 	// Prepares the current date.
 	NSDate* currentDate = NSDate.date;
@@ -496,24 +517,36 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Prepares the log text.
 	NSString* text = JFStringByReplacingKeysInFormat(self.textFormat, values);
 	
+	pthread_mutex_t* consoleWriterMutex = &_consoleWriterMutex;
+	[self lockMutex:consoleWriterMutex];
+	[self unlockMutex:textCompositionMutex];
+	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
 		[self logTextToConsole:text currentDate:currentDate];
 	}
+	
+	pthread_mutex_t* fileWriterMutex = &_fileWriterMutex;
+	[self lockMutex:fileWriterMutex];
+	[self unlockMutex:consoleWriterMutex];
 	
 	// Logs to file if needed.
 	if(outputs.isFileEnabled) {
 		[self logTextToFile:text currentDate:currentDate];
 	}
 	
+	pthread_mutex_t* delegatesWriterMutex = &_delegatesWriterMutex;
+	[self lockMutex:delegatesWriterMutex];
+	[self unlockMutex:fileWriterMutex];
+	
 	// Forwards the log message to the registered delegates if needed.
 	if(outputs.isDelegatesEnabled) {
 		[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
 			[delegate logger:self logText:text currentDate:currentDate];
-		} async:YES];
+		}];
 	}
 	
-	[self unlockMutex:writerMutex];
+	[self unlockMutex:delegatesWriterMutex];
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
