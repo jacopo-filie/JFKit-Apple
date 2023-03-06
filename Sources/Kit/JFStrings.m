@@ -74,36 +74,37 @@ BOOL JFStringIsNullOrEmpty(NSString* _Nullable string)
 
 NSString* JFStringByReplacingKeysInFormat(NSString* format, NSDictionary<NSString*, NSString*>* values)
 {
-	if(values.count == 0)
+	if(values.count == 0) {
 		return [format copy];
+	}
 	
-	NSMutableString* retObj = [NSMutableString stringWithCapacity:format.length];
+	NSMutableString* retObj = [NSMutableString stringWithCapacity:(2 * format.length)];
 	
 	NSScanner* scanner = [NSScanner scannerWithString:format];
 	scanner.charactersToBeSkipped = nil;
 	
 	NSString* string = nil;
-	while(![scanner isAtEnd])
-	{
-		if([scanner scanUpToString:@"%" intoString:&string])
+	while(![scanner isAtEnd]) {
+		if([scanner scanUpToString:@"%" intoString:&string]) {
 			[retObj appendString:string];
+		}
 		
-		if([scanner isAtEnd])
-			break;
-		
-		BOOL isFalsePositive = YES;
-		for(NSString* key in values.allKeys)
-		{
-			if(![scanner scanString:key intoString:nil])
-				continue;
-			
-			isFalsePositive = NO;
-			[retObj appendString:[values objectForKey:key]];
+		if([scanner isAtEnd]) {
 			break;
 		}
 		
-		if(isFalsePositive && [scanner scanString:@"%" intoString:&string])
+		BOOL __block isFalsePositive = YES;
+		[values enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* value, BOOL* stop) {
+			if([scanner scanString:key intoString:nil]) {
+				isFalsePositive = NO;
+				[retObj appendString:value];
+				*stop = YES;
+			}
+		}];
+		
+		if(isFalsePositive && [scanner scanString:@"%" intoString:&string]) {
 			[retObj appendString:string];
+		}
 	}
 	
 	return [retObj copy];
