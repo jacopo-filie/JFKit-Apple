@@ -449,11 +449,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		message = [message stringByAppendingFormat:@" %@", tagsString];
 	}
 	
-	// Prepares the current date.
-	NSDate* currentDate = NSDate.date;
-	
 	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
-	
 	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
 	
 	// Converts the severity level to string.
@@ -471,6 +467,17 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
 	}
 	
+	// Gets the message.
+	if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
+		[values setObject:message forKey:JFLoggerFormatMessage];
+	}
+	
+	pthread_mutex_t* writerMutex = &_writerMutex;
+	[self lockMutex:writerMutex];
+	
+	// Prepares the current date.
+	NSDate* currentDate = NSDate.date;
+	
 	// Gets the current date.
 	if([textFormatActiveValues containsObject:JFLoggerFormatDate]) {
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateFormatter] forKey:JFLoggerFormatDate];
@@ -486,16 +493,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
 	}
 	
-	// Gets the message.
-	if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
-		[values setObject:message forKey:JFLoggerFormatMessage];
-	}
-	
 	// Prepares the log text.
 	NSString* text = JFStringByReplacingKeysInFormat(self.textFormat, values);
-	
-	pthread_mutex_t* writerMutex = &_writerMutex;
-	[self lockMutex:writerMutex];
 	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
