@@ -224,7 +224,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self initializeMutex:&_fileWriterMutex];
 	[self initializeMutex:&_filtersMutex];
 	[self initializeMutex:&_textCompositionMutex];
-
+	
 	return self;
 }
 
@@ -541,9 +541,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Forwards the log message to the registered delegates if needed.
 	if(outputs.isDelegatesEnabled) {
-		[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
-			[delegate logger:self logText:text currentDate:currentDate];
-		}];
+		[self logTextToDelegates:text currentDate:currentDate];
 	}
 	
 	[self unlockMutex:delegatesWriterMutex];
@@ -559,9 +557,16 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self log:message output:JFLoggerOutputAll severity:severity tags:tags];
 }
 
-- (void)logTextToConsole:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logTextToConsole:(NSString*)text currentDate:(NSDate*)currentDate
 {
-	fprintf(stderr, "%s", message.UTF8String);
+	fprintf(stderr, "%s", text.UTF8String);
+}
+
+- (void)logTextToDelegates:(NSString*)text currentDate:(NSDate*)currentDate
+{
+	[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
+		[delegate logger:self logText:text currentDate:currentDate];
+	}];
 }
 
 - (void)logTextToFile:(NSString*)message currentDate:(NSDate*)currentDate
