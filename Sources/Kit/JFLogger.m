@@ -509,7 +509,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
-		[self logTextToConsole:text currentDate:currentDate];
+		[self logTextToConsole:text];
 	}
 	
 	pthread_mutex_t* fileWriterMutex = &_fileWriterMutex;
@@ -543,7 +543,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self log:message output:JFLoggerOutputAll severity:severity tags:tags];
 }
 
-- (void)logTextToConsole:(NSString*)text currentDate:(NSDate*)currentDate
+- (void)logTextToConsole:(NSString*)text
 {
 	fprintf(stderr, "%s", text.UTF8String);
 }
