@@ -263,51 +263,40 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate
 {
-	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSFileManager* fileManager = NSFileManager.defaultManager;
 	NSString* filePath = fileURL.path;
 	
 	// Checks if the log file exists.
 	BOOL fileExists = [fileManager fileExistsAtPath:filePath];
-	if(fileExists)
-	{
+	if(fileExists) {
 		// Reads the creation date of the existing log file and check if it's still valid. If the file attributes are not readable, it assumes that the log file is still valid.
 		NSError* error = nil;
 		NSDictionary* attributes = [fileManager attributesOfItemAtPath:filePath error:&error];
-		if(!attributes)
-		{
-			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logTextToConsole:[NSString stringWithFormat:@"%@: could not read attributes of log file at path '%@'%@. The existing file will be considered still valid. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
+		if(!attributes) {
+			NSLog(@"%@: could not read attributes of log file. The existing file will still be considered valid. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 			return YES;
 		}
 		
 		// If the creation date is not found, it assumes that the log file is still valid.
 		NSDate* creationDate = [attributes objectForKey:NSFileCreationDate];
-		if(!creationDate)
-		{
-			NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logTextToConsole:[NSString stringWithFormat:@"%@: could not read creation date of log file at path '%@'. The existing file will be considered still valid. %@", ClassName, filePath, tagsString] currentDate:currentDate];
+		if(!creationDate) {
+			NSLog(@"%@: could not read creation date of log file. The existing file will still be considered valid. [path = '%@'] %@", ClassName, filePath, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 			return YES;
 		}
 		
 		// If the log file is not valid anymore, it goes on with the method and replaces it with a new empty one.
-		if([self validateFileCreationDate:creationDate currentDate:currentDate])
+		if([self validateFileComparingCreationDate:creationDate withCurrentDate:currentDate]) {
 			return YES;
-	}
-	else
-	{
+		}
+	} else {
 		NSString* folderPath = filePath.stringByDeletingLastPathComponent;
 		
 		// Checks if the parent folder of the log file exists.
-		if(![fileManager fileExistsAtPath:folderPath])
-		{
+		if(![fileManager fileExistsAtPath:folderPath]) {
 			// Creates the parent folder.
 			NSError* error = nil;
-			if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error])
-			{
-				NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-				NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-				[self logTextToConsole:[NSString stringWithFormat:@"%@: could not create logs folder at path '%@'%@. %@", ClassName, folderPath, errorString, tagsString] currentDate:currentDate];
+			if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+				NSLog(@"%@: could not create logs folder. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 				return NO;
 			}
 		}
@@ -315,20 +304,17 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Creates the empty log file.
 	NSError* error = nil;
-	if(![NSData.data writeToFile:filePath options:NSDataWritingAtomic error:&error])
-	{
-		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
-		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logTextToConsole:[NSString stringWithFormat:@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
+	if(![NSData.data writeToFile:filePath options:NSDataWritingAtomic error:&error]) {
+		NSLog(@"%@: could not create log file. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 		return fileExists;
 	}
 	
 	return YES;
 }
 
-- (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate
+- (BOOL)validateFileComparingCreationDate:(NSDate*)creationDate withCurrentDate:(NSDate*)currentDate
 {
-	NSCalendar* calendar = [NSCalendar currentCalendar];
+	NSCalendar* calendar = NSCalendar.currentCalendar;
 	NSCalendarUnit components = (NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour);
 	
 	NSDateComponents* creationDateComponents = [calendar components:components fromDate:creationDate];
@@ -372,21 +358,21 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 - (void)destroyMutex:(pthread_mutex_t*)lock
 {
 	if(pthread_mutex_destroy(lock) != 0) {
-		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
 - (void)initializeMutex:(pthread_mutex_t*)lock
 {
 	if(pthread_mutex_init(lock, NULL) != 0) {
-		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
 - (void)lockMutex:(pthread_mutex_t*)lock
 {
 	if(pthread_mutex_lock(lock) != 0) {
-		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -418,7 +404,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 - (void)unlockMutex:(pthread_mutex_t*)lock
 {
 	if(pthread_mutex_unlock(lock) != 0) {
-		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [self.class stringFromTags:JFLoggerTagsCritical]);
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -569,35 +555,29 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	}];
 }
 
-- (void)logTextToFile:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logTextToFile:(NSString*)text currentDate:(NSDate*)currentDate
 {
 	// Prepares the data to be written.
-	NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
-	if(!data)
-	{
-		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsUser)];
-		[self logTextToConsole:[NSString stringWithFormat:@"%@: failed to create data from log message '%@'. %@", ClassName, message, tagsString] currentDate:currentDate];
+	NSData* data = [text dataUsingEncoding:NSUTF8StringEncoding];
+	if(!data) {
+		NSLog(@"%@: failed to prepare data from log text. [text = '%@'] %@", ClassName, text, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsUser)]);
 		return;
 	}
 	
+	// Gets the URL of the log file.
 	NSURL* fileURL = [self fileURLForDate:currentDate];
 	
-	// Tries to append the data to the log file (NSFileHandle is NOT thread safe).
-	if(![self createFileAtURL:fileURL currentDate:currentDate])
-	{
-		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logTextToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
+	// Tries to append the data to the log file.
+	if(![self createFileAtURL:fileURL currentDate:currentDate]) {
+		NSLog(@"%@: failed to create the log file. [text = '%@', path = '%@'] %@", ClassName, text, fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 		return;
 	}
 	
 	// Opens the file.
 	NSError* error = nil;
 	NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
-	if(!fileHandle)
-	{
-		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-		NSString* tagsString = [JFLogger stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logTextToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
+	if(!fileHandle) {
+		NSLog(@"%@: failed to open the log file. [text = '%@'; path = '%@'; error = '%@'] %@", ClassName, text, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 		return;
 	}
 	
@@ -1096,3 +1076,4 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
