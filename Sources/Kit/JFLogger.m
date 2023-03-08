@@ -263,24 +263,14 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate
 {
-	NSFileManager* fileManager = NSFileManager.defaultManager;
-	NSString* filePath = fileURL.path;
-	
-	// Checks if the log file exists.
-	BOOL fileExists = [fileManager fileExistsAtPath:filePath];
-	if(fileExists) {
+	// Checks if the log file is reachable.
+	NSError* error = nil;
+	BOOL isReachable = [fileURL checkResourceIsReachableAndReturnError:&error];
+	if(isReachable) {
 		// Reads the creation date of the existing log file and check if it's still valid. If the file attributes are not readable, it assumes that the log file is still valid.
-		NSError* error = nil;
-		NSDictionary* attributes = [fileManager attributesOfItemAtPath:filePath error:&error];
-		if(!attributes) {
-			NSLog(@"%@: could not read attributes of log file. The existing file will still be considered valid. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
-			return YES;
-		}
-		
-		// If the creation date is not found, it assumes that the log file is still valid.
-		NSDate* creationDate = [attributes objectForKey:NSFileCreationDate];
-		if(!creationDate) {
-			NSLog(@"%@: could not read creation date of log file. The existing file will still be considered valid. [path = '%@'] %@", ClassName, filePath, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		NSDate* creationDate = nil;
+		if(![fileURL getResourceValue:&creationDate forKey:NSURLCreationDateKey error:&error]) {
+			NSLog(@"%@: could not read creation date of log file. The existing file will still be considered valid. [path = '%@'] %@", ClassName, fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 			return YES;
 		}
 		
@@ -289,24 +279,31 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 			return YES;
 		}
 	} else {
-		NSString* folderPath = filePath.stringByDeletingLastPathComponent;
+		NSLog(@"%@: log file is not reachable. Checking parent folder. [path = '%@'; error = '%@'] %@", ClassName, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsAttention | JFLoggerTagsFileSystem)]);
 		
-		// Checks if the parent folder of the log file exists.
-		if(![fileManager fileExistsAtPath:folderPath]) {
+		// Checks if the parent folder is reachable.
+		NSURL* folderURL = fileURL.URLByDeletingLastPathComponent;
+		if([folderURL checkResourceIsReachableAndReturnError:&error]) {
+			NSLog(@"%@: logs folder is reachable. Creating log file. [path = '%@'] %@", ClassName, folderURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+		} else {
+			NSLog(@"%@: logs folder is not reachable. Creating it. [path = '%@'; error = '%@'] %@", ClassName, folderURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsAttention | JFLoggerTagsFileSystem)]);
+			
 			// Creates the parent folder.
-			NSError* error = nil;
-			if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error]) {
-				NSLog(@"%@: could not create logs folder. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+			if([NSFileManager.defaultManager createDirectoryAtURL:folderURL withIntermediateDirectories:YES attributes:nil error:&error]) {
+				NSLog(@"%@: logs folder created. Creating log file. [path = '%@'] %@", ClassName, folderURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+			} else {
+				NSLog(@"%@: could not create logs folder. [path = '%@'; error = '%@'] %@", ClassName, folderURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 				return NO;
 			}
 		}
 	}
 	
 	// Creates the empty log file.
-	NSError* error = nil;
-	if(![NSData.data writeToFile:filePath options:NSDataWritingAtomic error:&error]) {
-		NSLog(@"%@: could not create log file. [path = '%@'; error = '%@'] %@", ClassName, filePath, error, [self.class stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
-		return fileExists;
+	if([NSData.data writeToURL:fileURL options:NSDataWritingAtomic error:&error]) {
+		NSLog(@"%@: log file %@. [path = '%@'] %@", ClassName, (isReachable ? @"overwritten" : @"created"), fileURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+	} else {
+		NSLog(@"%@: could not create log file. [path = '%@'; error = '%@'] %@", ClassName, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		return isReachable;
 	}
 	
 	return YES;
