@@ -95,6 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 	JFLoggerSettings* settings = [JFLoggerSettings new];
 	settings.fileName = @"Test.log";
 	settings.folder = self.folder;
+	settings.rotation = JFLoggerRotationDay;
 	JFLogger* logger = [[JFLogger alloc] initWithSettings:settings];
 	XCTAssert(logger, @"Failed to create the test logger.");
 	logger.severityFilter = JFLoggerSeverityInfo;
