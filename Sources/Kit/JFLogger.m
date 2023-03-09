@@ -40,15 +40,29 @@ NS_ASSUME_NONNULL_BEGIN
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 // =================================================================================================
+// MARK: Types
+// =================================================================================================
+
+typedef struct {
+	BOOL isConsoleEnabled;
+	BOOL isDelegatesEnabled;
+	BOOL isFileEnabled;
+} JFLoggerEnabledOutputs;
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+// =================================================================================================
 // MARK: Constants
 // =================================================================================================
 
 NSString* const JFLoggerFormatDate = @"%1$@";
-NSString* const JFLoggerFormatMessage = @"%2$@";
-NSString* const JFLoggerFormatProcessID = @"%3$@";
-NSString* const JFLoggerFormatSeverity = @"%4$@";
-NSString* const JFLoggerFormatThreadID = @"%5$@";
-NSString* const JFLoggerFormatTime = @"%6$@";
+NSString* const JFLoggerFormatDateTime = @"%2$@";
+NSString* const JFLoggerFormatMessage = @"%3$@";
+NSString* const JFLoggerFormatProcessID = @"%4$@";
+NSString* const JFLoggerFormatSeverity = @"%5$@";
+NSString* const JFLoggerFormatThreadID = @"%6$@";
+NSString* const JFLoggerFormatTime = @"%7$@";
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // MARK: -
@@ -56,44 +70,16 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @interface JFLogger (/* Private */)
 
 // =================================================================================================
-// MARK: Properties - Data
+// MARK: Properties - Log format
 // =================================================================================================
 
-@property (strong, null_resettable) NSArray<NSString*>* requestedFormatValues;
+@property (strong, nonatomic, readonly) NSArray<NSString*>* textFormatActiveValues;
 
 // =================================================================================================
 // MARK: Properties - Observers
 // =================================================================================================
 
-@property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegatesController;
-
-// =================================================================================================
-// MARK: Methods - Data
-// =================================================================================================
-
-- (NSString*)dateStringFromDate:(NSDate*)date;
-- (NSString*)timeStringFromDate:(NSDate*)date;
-
-// =================================================================================================
-// MARK: Methods - File system
-// =================================================================================================
-
-- (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate;
-- (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate;
-
-// =================================================================================================
-// MARK: Methods - Service
-// =================================================================================================
-
-- (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate;
-- (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate;
-
-// =================================================================================================
-// MARK: Methods - Utilities
-// =================================================================================================
-
-- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date;
-- (NSInteger)weekOfMonthFromDate:(NSDate*)date;
+@property (strong, nonatomic, readonly) JFObserversController<JFLoggerDelegate>* delegates;
 
 @end
 
@@ -103,191 +89,141 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 @implementation JFLogger
 
 // =================================================================================================
-// MARK: Properties - Data
+// MARK: Fields
 // =================================================================================================
 
-@synthesize dateFormatter = _dateFormatter;
-@synthesize format = _format;
-@synthesize outputFilter = _outputFilter;
-@synthesize requestedFormatValues = _requestedFormatValues;
-@synthesize severityFilter = _severityFilter;
-@synthesize timeFormatter = _timeFormatter;
+{
+	pthread_mutex_t _consoleWriterMutex;
+	pthread_mutex_t _delegatesWriterMutex;
+	pthread_mutex_t _fileWriterMutex;
+	pthread_mutex_t _filtersMutex;
+	pthread_mutex_t _textCompositionMutex;
+}
 
 // =================================================================================================
 // MARK: Properties - File system
 // =================================================================================================
 
 @synthesize fileName = _fileName;
+@synthesize folder = _folder;
 @synthesize rotation = _rotation;
+
+// =================================================================================================
+// MARK: Properties - Filters
+// =================================================================================================
+
+@synthesize outputFilter = _outputFilter;
+@synthesize severityFilter = _severityFilter;
+
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+@synthesize dateFormatter = _dateFormatter;
+@synthesize dateTimeFormatter = _dateTimeFormatter;
+@synthesize textFormat = _textFormat;
+@synthesize textFormatActiveValues = _textFormatActiveValues;
+@synthesize timeFormatter = _timeFormatter;
 
 // =================================================================================================
 // MARK: Properties - Observers
 // =================================================================================================
 
-@synthesize delegatesController = _delegatesController;
-
-// =================================================================================================
-// MARK: Properties (Accessors) - Data
-// =================================================================================================
-
-+ (NSURL*)defaultDirectoryURL
-{
-	static NSURL* retObj = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		NSError* error = nil;
-		NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-		NSAssert(url, @"Failed to load application support directory due to error '%@'.", error.description);
-		
-#if JF_MACOS
-		NSString* domain = AppInfoIdentifier;
-		NSAssert(domain, @"Bundle identifier not found!");
-		url = [url URLByAppendingPathComponent:domain];
-#endif
-		
-		retObj = [url URLByAppendingPathComponent:@"Logs"];
-	});
-	return retObj;
-}
-
-- (NSDateFormatter*)dateFormatter
-{
-	@synchronized(self)
-	{
-		if(!_dateFormatter)
-		{
-			NSDateFormatter* dateFormatter = [NSDateFormatter new];
-			dateFormatter.dateFormat = @"yyyy/MM/dd";
-			dateFormatter.locale = [NSLocale currentLocale];
-			dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
-			_dateFormatter = dateFormatter;
-		}
-		return _dateFormatter;
-	}
-}
-
-- (void)setDateFormatter:(NSDateFormatter* _Nullable)dateFormatter
-{
-	@synchronized(self)
-	{
-		_dateFormatter = dateFormatter;
-	}
-}
-
-- (NSString*)format
-{
-	@synchronized(self)
-	{
-		if(!_format)
-			_format = [NSString stringWithFormat:@"%@ %@ [%@:%@] %@\n", JFLoggerFormatDate, JFLoggerFormatTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
-		return [_format copy];
-	}
-}
-
-- (void)setFormat:(NSString* _Nullable)format
-{
-	@synchronized(self)
-	{
-		_format = [format copy];
-		self.requestedFormatValues = nil;
-	}
-}
-
-- (NSArray<NSString*>*)requestedFormatValues
-{
-	@synchronized(self)
-	{
-		if(!_requestedFormatValues)
-		{
-			static NSArray<NSString*>* possibleValues = nil;
-			if(!possibleValues)
-				possibleValues = @[JFLoggerFormatDate, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
-			
-			NSString* format = self.format;
-			
-			NSMutableArray* requestedValues = [NSMutableArray arrayWithCapacity:possibleValues.count];
-			for(NSString* value in possibleValues)
-			{
-				if([format rangeOfString:value].location != NSNotFound)
-					[requestedValues addObject:value];
-			}
-			
-			_requestedFormatValues = [requestedValues copy];
-		}
-		return _requestedFormatValues;
-	}
-}
-
-- (void)setRequestedFormatValues:(NSArray<NSString*>* _Nullable)requestedFormatValues
-{
-	@synchronized(self)
-	{
-		_requestedFormatValues = requestedFormatValues;
-	}
-}
-
-- (NSDateFormatter*)timeFormatter
-{
-	@synchronized(self)
-	{
-		if(!_timeFormatter)
-		{
-			NSDateFormatter* timeFormatter = [NSDateFormatter new];
-			timeFormatter.dateFormat = @"HH:mm:ss.SSSZ";
-			timeFormatter.locale = [NSLocale currentLocale];
-			timeFormatter.timeZone = [NSTimeZone defaultTimeZone];
-			_timeFormatter = timeFormatter;
-		}
-		return _timeFormatter;
-	}
-}
-
-- (void)setTimeFormatter:(NSDateFormatter* _Nullable)timeFormatter
-{
-	@synchronized(self)
-	{
-		_timeFormatter = timeFormatter;
-	}
-}
+@synthesize delegates = _delegates;
 
 // =================================================================================================
 // MARK: Properties (Accessors) - File system
 // =================================================================================================
 
-- (NSString*)fileName
+- (NSURL*)currentFile
 {
-	@synchronized(self)
-	{
-		if(!_fileName)
-			_fileName = @"Log.log";
-		return [_fileName copy];
-	}
+	return [self fileURLForDate:NSDate.date];
 }
 
-- (void)setFileName:(NSString* _Nullable)fileName
+// =================================================================================================
+// MARK: Properties (Accessors) - Filters
+// =================================================================================================
+
+- (JFLoggerOutput)outputFilter
 {
-	@synchronized(self)
-	{
-		_fileName = [fileName copy];
-	}
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	JFLoggerOutput retVal = _outputFilter;
+	[self unlockMutex:mutex];
+	return retVal;
+}
+
+- (void)setOutputFilter:(JFLoggerOutput)outputFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	_outputFilter = outputFilter;
+	[self unlockMutex:mutex];
+}
+
+- (JFLoggerSeverity)severityFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	JFLoggerSeverity retVal = _severityFilter;
+	[self unlockMutex:mutex];
+	return retVal;
+}
+
+- (void)setSeverityFilter:(JFLoggerSeverity)severityFilter
+{
+	pthread_mutex_t* mutex = &_filtersMutex;
+	[self lockMutex:mutex];
+	_severityFilter = severityFilter;
+	[self unlockMutex:mutex];
 }
 
 // =================================================================================================
 // MARK: Lifecycle
 // =================================================================================================
 
+- (void)dealloc
+{
+	[self destroyMutex:&_consoleWriterMutex];
+	[self destroyMutex:&_delegatesWriterMutex];
+	[self destroyMutex:&_fileWriterMutex];
+	[self destroyMutex:&_filtersMutex];
+	[self destroyMutex:&_textCompositionMutex];
+}
+
 - (instancetype)init
+{
+	return [self initWithSettings:[JFLoggerSettings new]];
+}
+
+- (instancetype)initWithSettings:(JFLoggerSettings*)settings
 {
 	self = [super init];
 	
-	_delegatesController = [JFObserversController<JFLoggerDelegate> new];
+	NSString* textFormat = [settings.textFormat copy];
+	
+	_dateFormatter = settings.dateFormatter;
+	_dateTimeFormatter = settings.dateTimeFormatter;
+	_delegates = [JFObserversController<JFLoggerDelegate> new];
+	_fileName = [settings.fileName copy];
+	_folder = settings.folder;
 	_outputFilter = JFLoggerOutputAll;
-	_rotation = JFLoggerRotationNone;
+	_rotation = settings.rotation;
+	_textFormat = textFormat;
+	_textFormatActiveValues = [JFLogger activeValuesForTextFormat:textFormat];
+	_timeFormatter = settings.timeFormatter;
+	
 #if DEBUG
 	_severityFilter = JFLoggerSeverityDebug;
 #else
 	_severityFilter = JFLoggerSeverityInfo;
 #endif
+	
+	[self initializeMutex:&_consoleWriterMutex];
+	[self initializeMutex:&_delegatesWriterMutex];
+	[self initializeMutex:&_fileWriterMutex];
+	[self initializeMutex:&_filtersMutex];
+	[self initializeMutex:&_textCompositionMutex];
 	
 	return self;
 }
@@ -296,162 +232,29 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 // MARK: Methods - Data
 // =================================================================================================
 
-+ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
-{
-	switch(severity)
-	{
-		case JFLoggerSeverityAlert:
-			return @"Alert";
-		case JFLoggerSeverityCritical:
-			return @"Critical";
-		case JFLoggerSeverityDebug:
-			return @"Debug";
-		case JFLoggerSeverityEmergency:
-			return @"Emergency";
-		case JFLoggerSeverityError:
-			return @"Error";
-		case JFLoggerSeverityInfo:
-			return @"Info";
-		case JFLoggerSeverityNotice:
-			return @"Notice";
-		case JFLoggerSeverityWarning:
-			return @"Warning";
-	}
-}
-
-+ (NSString*)stringFromTags:(JFLoggerTags)tags
-{
-	if(tags == JFLoggerTagsNone)
-		return JFEmptyString;
-	
-	// Prepares the temporary buffer.
-	NSMutableArray* tagStrings = [NSMutableArray arrayWithCapacity:13];
-	
-	// Inserts each requested hashtag.
-	if(tags & JFLoggerTagsAttention)
-		[tagStrings addObject:@"#Attention"];
-	if(tags & JFLoggerTagsClue)
-		[tagStrings addObject:@"#Clue"];
-	if(tags & JFLoggerTagsComment)
-		[tagStrings addObject:@"#Comment"];
-	if(tags & JFLoggerTagsCritical)
-		[tagStrings addObject:@"#Critical"];
-	if(tags & JFLoggerTagsDeveloper)
-		[tagStrings addObject:@"#Developer"];
-	if(tags & JFLoggerTagsError)
-		[tagStrings addObject:@"#Error"];
-	if(tags & JFLoggerTagsFileSystem)
-		[tagStrings addObject:@"#FileSystem"];
-	if(tags & JFLoggerTagsHardware)
-		[tagStrings addObject:@"#Hardware"];
-	if(tags & JFLoggerTagsMarker)
-		[tagStrings addObject:@"#Marker"];
-	if(tags & JFLoggerTagsNetwork)
-		[tagStrings addObject:@"#Network"];
-	if(tags & JFLoggerTagsSecurity)
-		[tagStrings addObject:@"#Security"];
-	if(tags & JFLoggerTagsSystem)
-		[tagStrings addObject:@"#System"];
-	if(tags & JFLoggerTagsUser)
-		[tagStrings addObject:@"#User"];
-	
-	return [tagStrings componentsJoinedByString:@" "];
-}
-
-- (NSString*)dateStringFromDate:(NSDate*)date
-{
-	return [self stringFromDate:date formatter:self.dateFormatter];
-}
-
-- (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
-{
-	// NSDateFormatter is thread safe only in iOS 7.0 or later and on macOS 10.9 or later. On macOS, only the 64-bit architecture implementation is thread safe.
-	
-#if JF_IOS
-	BOOL threadSafe = YES;
-#else
-	BOOL threadSafe = NO;
-#	if JF_ARCH64
-	if(@available(macOS 10.9, *))
-		threadSafe = YES;
-#	endif
-#endif
-	
-	if(threadSafe)
-		return [formatter stringFromDate:date];
-	
-	@synchronized(formatter)
-	{
-		return [formatter stringFromDate:date];
-	}
-}
-
-- (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
-{
-	return [self.class stringFromSeverity:severity];
-}
-
-- (NSString*)stringFromTags:(JFLoggerTags)tags
-{
-	return [self.class stringFromTags:tags];
-}
-
 - (NSURL*)fileURLForDate:(NSDate*)date
 {
-	NSURL* folderURL = [self.class defaultDirectoryURL];
+	NSURL* folderURL = self.folder;
 	NSString* fileName = self.fileName;
 	
-	NSCalendarUnit component = 0;
-	BOOL shouldAppendSuffix = YES;
-	BOOL shouldUseWeekOfMonth = NO;
-	
-	switch(self.rotation)
-	{
-		case JFLoggerRotationHour:
-		{
-			component = NSCalendarUnitHour;
-			break;
-		}
-		case JFLoggerRotationDay:
-		{
-			component = NSCalendarUnitDay;
-			break;
-		}
-		case JFLoggerRotationWeek:
-		{
-			if(@available(macOS 10.7, *))
-				component = NSCalendarUnitWeekOfMonth;
-			else
-				shouldUseWeekOfMonth = YES;
-			break;
-		}
-		case JFLoggerRotationMonth:
-		{
-			component = NSCalendarUnitMonth;
-			break;
-		}
-		default:
-		{
-			shouldAppendSuffix = NO;
-			break;
-		}
+	JFLoggerRotation rotation = self.rotation;
+	if(rotation == JFLoggerRotationNone) {
+		return [folderURL URLByAppendingPathComponent:fileName];
 	}
 	
-	if(shouldAppendSuffix)
-	{
-		NSString* extension = fileName.pathExtension;
-		NSInteger suffix = (shouldUseWeekOfMonth ? [self weekOfMonthFromDate:date] : [self component:component fromDate:date]);
-		fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@", JFStringFromNSInteger(suffix)];
-		if(!JFStringIsNullOrEmpty(extension))
-			fileName = [fileName stringByAppendingPathExtension:extension];
+	NSCalendarUnit component = [JFLogger calendarComponentForRotation:rotation];
+	if(component == 0) {
+		return [folderURL URLByAppendingPathComponent:fileName];
+	}
+	
+	NSString* extension = fileName.pathExtension;
+	NSInteger suffix = [NSCalendar.currentCalendar component:component fromDate:date];
+	fileName = [fileName.stringByDeletingPathExtension stringByAppendingFormat:@"-%@", JFStringFromNSInteger(suffix)];
+	if(!JFStringIsNullOrEmpty(extension)) {
+		fileName = [fileName stringByAppendingPathExtension:extension];
 	}
 	
 	return [folderURL URLByAppendingPathComponent:fileName];
-}
-
-- (NSString*)timeStringFromDate:(NSDate*)date
-{
-	return [self stringFromDate:date formatter:self.timeFormatter];
 }
 
 // =================================================================================================
@@ -460,104 +263,145 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (BOOL)createFileAtURL:(NSURL*)fileURL currentDate:(NSDate*)currentDate
 {
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	NSString* filePath = fileURL.path;
-	
-	// Checks if the log file exists.
-	BOOL fileExists = [fileManager fileExistsAtPath:filePath];
-	if(fileExists)
-	{
+	// Checks if the log file is reachable.
+	NSError* error = nil;
+	BOOL isReachable = [fileURL checkResourceIsReachableAndReturnError:&error];
+	if(isReachable) {
 		// Reads the creation date of the existing log file and check if it's still valid. If the file attributes are not readable, it assumes that the log file is still valid.
-		NSError* error = nil;
-		NSDictionary* attributes = [fileManager attributesOfItemAtPath:filePath error:&error];
-		if(!attributes)
-		{
-			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not read attributes of log file at path '%@'%@. The existing file will be considered still valid. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
-			return YES;
-		}
-		
-		// If the creation date is not found, it assumes that the log file is still valid.
-		NSDate* creationDate = [attributes objectForKey:NSFileCreationDate];
-		if(!creationDate)
-		{
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not read creation date of log file at path '%@'. The existing file will be considered still valid. %@", ClassName, filePath, tagsString] currentDate:currentDate];
+		NSDate* creationDate = nil;
+		if(![fileURL getResourceValue:&creationDate forKey:NSURLCreationDateKey error:&error]) {
+			NSLog(@"%@: could not read creation date of log file. The existing file will still be considered valid. [path = '%@'] %@", ClassName, fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 			return YES;
 		}
 		
 		// If the log file is not valid anymore, it goes on with the method and replaces it with a new empty one.
-		if([self validateFileCreationDate:creationDate currentDate:currentDate])
+		if([self validateFileComparingCreationDate:creationDate withCurrentDate:currentDate]) {
 			return YES;
-	}
-	else
-	{
-		NSString* folderPath = filePath.stringByDeletingLastPathComponent;
+		}
+	} else {
+		NSLog(@"%@: log file is not reachable. Checking parent folder. [path = '%@'; error = '%@'] %@", ClassName, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsAttention | JFLoggerTagsFileSystem)]);
 		
-		// Checks if the parent folder of the log file exists.
-		if(![fileManager fileExistsAtPath:folderPath])
-		{
+		// Checks if the parent folder is reachable.
+		NSURL* folderURL = fileURL.URLByDeletingLastPathComponent;
+		if([folderURL checkResourceIsReachableAndReturnError:&error]) {
+			NSLog(@"%@: logs folder is reachable. Creating log file. [path = '%@'] %@", ClassName, folderURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+		} else {
+			NSLog(@"%@: logs folder is not reachable. Creating it. [path = '%@'; error = '%@'] %@", ClassName, folderURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsAttention | JFLoggerTagsFileSystem)]);
+			
 			// Creates the parent folder.
-			NSError* error = nil;
-			if(![fileManager createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error])
-			{
-				NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-				NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-				[self logToConsole:[NSString stringWithFormat:@"%@: could not create logs folder at path '%@'%@. %@", ClassName, folderPath, errorString, tagsString] currentDate:currentDate];
+			if([NSFileManager.defaultManager createDirectoryAtURL:folderURL withIntermediateDirectories:YES attributes:nil error:&error]) {
+				NSLog(@"%@: logs folder created. Creating log file. [path = '%@'] %@", ClassName, folderURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+			} else {
+				NSLog(@"%@: could not create logs folder. [path = '%@'; error = '%@'] %@", ClassName, folderURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 				return NO;
 			}
 		}
 	}
 	
 	// Creates the empty log file.
-	NSError* error = nil;
-	if(![NSData.data writeToFile:filePath options:NSDataWritingAtomic error:&error])
-	{
-		NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", [error description]] : JFEmptyString);
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: could not create log file at path '%@'%@. %@", ClassName, filePath, errorString, tagsString] currentDate:currentDate];
-		return fileExists;
+	if([NSData.data writeToURL:fileURL options:NSDataWritingAtomic error:&error]) {
+		NSLog(@"%@: log file %@. [path = '%@'] %@", ClassName, (isReachable ? @"overwritten" : @"created"), fileURL.path, [JFLogger stringFromTags:JFLoggerTagsFileSystem]);
+	} else {
+		NSLog(@"%@: could not create log file. [path = '%@'; error = '%@'] %@", ClassName, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		return isReachable;
 	}
 	
 	return YES;
 }
 
-- (BOOL)validateFileCreationDate:(NSDate*)creationDate currentDate:(NSDate*)currentDate
+- (BOOL)validateFileComparingCreationDate:(NSDate*)creationDate withCurrentDate:(NSDate*)currentDate
 {
-	NSCalendar* calendar = [NSCalendar currentCalendar];
+	NSCalendar* calendar = NSCalendar.currentCalendar;
 	NSCalendarUnit components = (NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour);
 	
 	NSDateComponents* creationDateComponents = [calendar components:components fromDate:creationDate];
 	NSDateComponents* currentDateComponents = [calendar components:components fromDate:currentDate];
 	
-	if((creationDateComponents.era != currentDateComponents.era) || (creationDateComponents.year != currentDateComponents.year))
+	if((creationDateComponents.era != currentDateComponents.era) || (creationDateComponents.year != currentDateComponents.year)) {
 		return NO;
+	}
 	
-	switch(self.rotation)
-	{
-		case JFLoggerRotationHour:
-		{
-			if(creationDateComponents.hour != currentDateComponents.hour)
+	switch(self.rotation) {
+		case JFLoggerRotationHour: {
+			if(creationDateComponents.hour != currentDateComponents.hour) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationDay:
-		{
-			if(creationDateComponents.day != currentDateComponents.day)
+		case JFLoggerRotationDay: {
+			if(creationDateComponents.day != currentDateComponents.day) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationWeek:
-		{
-			if([self weekOfMonthFromDate:creationDate] != [self weekOfMonthFromDate:currentDate])
+		case JFLoggerRotationWeek: {
+			if(creationDateComponents.weekOfMonth != currentDateComponents.weekOfMonth) {
 				return NO;
+			}
 		}
-		case JFLoggerRotationMonth:
-		{
-			if(creationDateComponents.month != currentDateComponents.month)
+		case JFLoggerRotationMonth: {
+			if(creationDateComponents.month != currentDateComponents.month) {
 				return NO;
+			}
 		}
-		default:
+		default: {
 			return YES;
+		}
+	}
+}
+
+// =================================================================================================
+// MARK: Methods - Locks
+// =================================================================================================
+
+- (void)destroyMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_destroy(lock) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)initializeMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_init(lock, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_lock(lock) != 0) {
+		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (NSString*)nameOfMutex:(pthread_mutex_t*)lock
+{
+	if(lock == &_consoleWriterMutex) {
+		return @"console writer mutex";
+	}
+	
+	if(lock == &_delegatesWriterMutex) {
+		return @"delegates writer mutex";
+	}
+	
+	if(lock == &_fileWriterMutex) {
+		return @"file writer mutex";
+	}
+	
+	if(lock == &_filtersMutex) {
+		return @"filters mutex";
+	}
+	
+	if(lock == &_textCompositionMutex) {
+		return @"text composition mutex";
+	}
+	
+	return @"unknown mutex";
+}
+
+- (void)unlockMutex:(pthread_mutex_t*)lock
+{
+	if(pthread_mutex_unlock(lock) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -567,12 +411,12 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (void)addDelegate:(id<JFLoggerDelegate>)delegate
 {
-	[self.delegatesController addObserver:delegate];
+	[self.delegates addObserver:delegate];
 }
 
 - (void)removeDelegate:(id<JFLoggerDelegate>)delegate
 {
-	[self.delegatesController removeObserver:delegate];
+	[self.delegates removeObserver:delegate];
 }
 
 // =================================================================================================
@@ -581,162 +425,210 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
 {
-	[self log:message output:output severity:severity tags:JFLoggerTagsNone];
+	[self logAll:@[message] output:output severity:severity tags:JFLoggerTagsNone];
 }
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	// Filters by severity.
-	if(severity > self.severityFilter)
-		return;
-	
-	// Filters by output.
-	JFLoggerOutput outputFilter = self.outputFilter;
-	BOOL shouldLogToConsole = (output & JFLoggerOutputConsole) && (outputFilter & JFLoggerOutputConsole);
-	BOOL shouldLogToDelegates = (output & JFLoggerOutputDelegates) && (outputFilter & JFLoggerOutputDelegates);
-	BOOL shouldLogToFile = (output & JFLoggerOutputFile) && (outputFilter & JFLoggerOutputFile);
-	if(!shouldLogToConsole && !shouldLogToDelegates && !shouldLogToFile)
-		return;
-	
-	// Appends tags.
-	NSString* tagsString = [self stringFromTags:tags];
-	if(!JFStringIsNullOrEmpty(tagsString))
-		message = [message stringByAppendingFormat:@" %@", tagsString];
-	
-	// Prepares the current date.
-	NSDate* currentDate = NSDate.date;
-	
-	// Logs to console if needed.
-	if(shouldLogToConsole)
-	{
-		[self logToConsole:message currentDate:currentDate];
-		if(!shouldLogToDelegates && !shouldLogToFile)
-			return;
-	}
-	
-	
-	NSString* format;
-	NSArray<NSString*>* requestedFormatValues;
-	@synchronized(self)
-	{
-		format = self.format;
-		requestedFormatValues = self.requestedFormatValues;
-	}
-	
-	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:requestedFormatValues.count];
-	
-	// Converts the severity level to string.
-	if([requestedFormatValues containsObject:JFLoggerFormatSeverity])
-		[values setObject:[self stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
-	
-	// Gets the current process ID. On macOS, NSProcessInfo is thread-safe only on 10.7 or later.
-	if([requestedFormatValues containsObject:JFLoggerFormatProcessID])
-	{
-		NSProcessInfo* processInfo = ProcessInfo;
-		int processID;
-		if(@available(macOS 10.7, *))
-			processID = processInfo.processIdentifier;
-		else
-		{
-			@synchronized(processInfo)
-			{
-				processID = processInfo.processIdentifier;
-			}
-		}
-		[values setObject:JFStringFromInt(processID) forKey:JFLoggerFormatProcessID];
-	}
-	
-	// Gets the current thread ID.
-	if([requestedFormatValues containsObject:JFLoggerFormatThreadID])
-		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
-	
-	// Gets the current date.
-	if([requestedFormatValues containsObject:JFLoggerFormatDate])
-		[values setObject:[self dateStringFromDate:currentDate] forKey:JFLoggerFormatDate];
-	
-	// Gets the current time.
-	if([requestedFormatValues containsObject:JFLoggerFormatTime])
-		[values setObject:[self timeStringFromDate:currentDate] forKey:JFLoggerFormatTime];
-	
-	// Gets the message.
-	if([requestedFormatValues containsObject:JFLoggerFormatMessage])
-		[values setObject:message forKey:JFLoggerFormatMessage];
-	
-	// Prepares the log string.
-	NSString* logMessage = JFStringByReplacingKeysInFormat(format, values);
-	
-	// Logs to file if needed.
-	if(shouldLogToFile)
-		[self logToFile:logMessage currentDate:currentDate];
-	
-	// Forwards the log message to the registered delegates if needed.
-	if(shouldLogToDelegates)
-	{
-		[self.delegatesController notifyObservers:^(id<JFLoggerDelegate> delegate) {
-			[delegate logger:self logMessage:logMessage currentDate:currentDate];
-		} async:YES];
-	}
+	[self logAll:@[message] output:output severity:severity tags:tags];
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
 {
-	[self log:message output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
+	[self logAll:@[message] output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
 }
 
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	[self log:message output:JFLoggerOutputAll severity:severity tags:tags];
+	[self logAll:@[message] output:JFLoggerOutputAll severity:severity tags:tags];
 }
 
-- (void)logToConsole:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
 {
-	@synchronized(self)
-	{
-		// FIX: strangely enough, it appears that 'NSLog' is not thread-safe as documented. I have
-		// seen logs overlapping each other in the console but not inside the file.
-		NSLog(@"%@", message);
-	}
+	[self logAll:messages output:output severity:severity tags:JFLoggerTagsNone];
 }
 
-- (void)logToFile:(NSString*)message currentDate:(NSDate*)currentDate
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	// Prepares the data to be written.
-	NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
-	if(!data)
-	{
-		NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsUser)];
-		[self logToConsole:[NSString stringWithFormat:@"%@: failed to create data from log message '%@'. %@", ClassName, message, tagsString] currentDate:currentDate];
+	pthread_mutex_t* filtersMutex = &_filtersMutex;
+	[self lockMutex:filtersMutex];
+	JFLoggerOutput outputFilter = _outputFilter;
+	JFLoggerSeverity severityFilter = _severityFilter;
+	[self unlockMutex:filtersMutex];
+	
+	// Filters by severity.
+	if(severity > severityFilter) {
 		return;
 	}
 	
+	// Filters by output.
+	JFLoggerEnabledOutputs outputs = [JFLogger intersectOutput:output withFilter:outputFilter];
+	if(!outputs.isConsoleEnabled && !outputs.isDelegatesEnabled && !outputs.isFileEnabled) {
+		return;
+	}
+	
+	// Prepares tags.
+	NSString* tagsString = [JFLogger stringFromTags:tags];
+	
+	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
+	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
+	
+	// Converts the severity level to string.
+	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity]) {
+		[values setObject:[JFLogger stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
+	}
+	
+	// Gets the current process ID.
+	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID]) {
+		[values setObject:JFStringFromInt(ProcessInfo.processIdentifier) forKey:JFLoggerFormatProcessID];
+	}
+	
+	// Gets the current thread ID.
+	if([textFormatActiveValues containsObject:JFLoggerFormatThreadID]) {
+		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
+	}
+	
+	// Prepares a buffer for log texts.
+	NSMutableArray<NSString*>* texts = [NSMutableArray<NSString*> arrayWithCapacity:messages.count];
+	
+	// From now on we must remain in critical section (even though in various sections) to assure
+	// the timestamp is properly ordered and prevent threads from writing at the same time.
+	pthread_mutex_t* textCompositionMutex = &_textCompositionMutex;
+	[self lockMutex:textCompositionMutex];
+	
+	// Prepares the current date.
+	NSDate* currentDate = NSDate.date;
+	
+	// Gets the current date.
+	if([textFormatActiveValues containsObject:JFLoggerFormatDate]) {
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateFormatter] forKey:JFLoggerFormatDate];
+	}
+	
+	// Gets the current date and time.
+	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime]) {
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateTimeFormatter] forKey:JFLoggerFormatDateTime];
+	}
+	
+	// Gets the current time.
+	if([textFormatActiveValues containsObject:JFLoggerFormatTime]) {
+		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
+	}
+	
+	NSString* textFormat = self.textFormat;
+	for(NSString* message in messages) {
+		// Gets the message, appending tags if needed.
+		if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
+			[values setObject:(JFStringIsNullOrEmpty(tagsString) ? message : [message stringByAppendingFormat:@" %@", tagsString]) forKey:JFLoggerFormatMessage];
+		} else {
+			[values removeObjectForKey:JFLoggerFormatMessage];
+		}
+		
+		// Prepares the log text.
+		[texts addObject:JFStringByReplacingKeysInFormat(textFormat, values)];
+	}
+	
+	pthread_mutex_t* consoleWriterMutex = &_consoleWriterMutex;
+	[self lockMutex:consoleWriterMutex];
+	[self unlockMutex:textCompositionMutex];
+	
+	// Logs to console if needed.
+	if(outputs.isConsoleEnabled) {
+		[self logTextsToConsole:texts];
+	}
+	
+	pthread_mutex_t* fileWriterMutex = &_fileWriterMutex;
+	[self lockMutex:fileWriterMutex];
+	[self unlockMutex:consoleWriterMutex];
+	
+	// Logs to file if needed.
+	if(outputs.isFileEnabled) {
+		[self logTextsToFile:texts currentDate:currentDate];
+	}
+	
+	pthread_mutex_t* delegatesWriterMutex = &_delegatesWriterMutex;
+	[self lockMutex:delegatesWriterMutex];
+	[self unlockMutex:fileWriterMutex];
+	
+	// Forwards the log message to the registered delegates if needed.
+	if(outputs.isDelegatesEnabled) {
+		[self logTextsToDelegates:texts currentDate:currentDate];
+	}
+	
+	[self unlockMutex:delegatesWriterMutex];
+}
+
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity
+{
+	[self logAll:messages output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
+}
+
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
+{
+	[self logAll:messages output:JFLoggerOutputAll severity:severity tags:tags];
+}
+
+- (void)logTextsToConsole:(NSArray<NSString*>*)texts
+{
+	if(texts.count == 0) {
+		return;
+	}
+	
+	for(NSString* text in texts) {
+		fprintf(stderr, "%s", text.UTF8String);
+	}
+}
+
+- (void)logTextsToDelegates:(NSArray<NSString*>*)texts currentDate:(NSDate*)currentDate
+{
+	if(texts.count == 0) {
+		return;
+	}
+	
+	[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
+		for(NSString* text in texts) {
+			[delegate logger:self logText:text currentDate:currentDate];
+		}
+	}];
+}
+
+- (void)logTextsToFile:(NSArray<NSString*>*)texts currentDate:(NSDate*)currentDate
+{
+	if(texts.count == 0) {
+		return;
+	}
+	
+	// Gets the URL of the log file.
 	NSURL* fileURL = [self fileURLForDate:currentDate];
 	
-	@synchronized(self)
-	{
-		// Tries to append the data to the log file (NSFileHandle is NOT thread safe).
-		if(![self createFileAtURL:fileURL currentDate:currentDate])
-		{
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: failed to create the log file at path '%@'. %@", ClassName, fileURL.path, tagsString] currentDate:currentDate];
-			return;
-		}
-		
-		// Opens the file.
-		NSError* error = nil;
-		NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
-		if(!fileHandle)
-		{
-			NSString* errorString = (error ? [NSString stringWithFormat:@" due to error '%@'", error.description] : JFEmptyString);
-			NSString* tagsString = [self stringFromTags:(JFLoggerTags)(JFLoggerTagsError | JFLoggerTagsFileSystem)];
-			[self logToConsole:[NSString stringWithFormat:@"%@: could not open the log file at path '%@'%@. %@", ClassName, fileURL.path, errorString, tagsString] currentDate:currentDate];
-			return;
-		}
-		
-		// Goes to the end of the file, appends the new message and closes the file.
-		[fileHandle seekToEndOfFile];
-		[fileHandle writeData:data];
-		[fileHandle closeFile];
+	// Tries to append the data to the log file.
+	if(![self createFileAtURL:fileURL currentDate:currentDate]) {
+		NSLog(@"%@: failed to create the log file. [texts = '%@', path = '%@'] %@", ClassName, [JFLogger stringFromTexts:texts], fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		return;
 	}
+	
+	// Opens the file.
+	NSError* error = nil;
+	NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
+	if(!fileHandle) {
+		NSLog(@"%@: failed to open the log file. [texts = '%@'; path = '%@'; error = '%@'] %@", ClassName, [JFLogger stringFromTexts:texts], fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		return;
+	}
+	
+	// Goes to the end of the file.
+	[fileHandle seekToEndOfFile];
+	
+	// Appends the new messages.
+	for(NSString* text in texts) {
+		NSData* data = [text dataUsingEncoding:NSUTF8StringEncoding];
+		if(data) {
+			[fileHandle writeData:data];
+		} else {
+			NSLog(@"%@: failed to prepare data from log text. [text = '%@'] %@", ClassName, text, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsUser)]);
+		}
+	}
+	
+	// Closes the file.
+	[fileHandle closeFile];
 }
 
 // =================================================================================================
@@ -787,58 +679,153 @@ NSString* const JFLoggerFormatTime = @"%6$@";
 // MARK: Methods - Utilities
 // =================================================================================================
 
-- (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate*)date
++ (NSArray<NSString*>*)activeValuesForTextFormat:(NSString*)logFormat
 {
-	NSCalendar* calendar = [NSCalendar currentCalendar];
-	
-	if(@available(macOS 10.9, *))
-		return [calendar component:component fromDate:date];
-	
-	NSDateComponents* components = [calendar components:component fromDate:date];
-	switch(component)
-	{
-		case NSCalendarUnitDay:
-			return components.day;
-		case NSCalendarUnitHour:
-			return components.hour;
-		case NSCalendarUnitMonth:
-			return components.month;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-		case NSWeekCalendarUnit:
-			return components.week;
-#pragma clang diagnostic pop
-		default:
-		{
-			if(@available(macOS 10.7, *))
-			{
-				if(component == NSCalendarUnitWeekOfMonth)
-					return components.weekOfMonth;
-			}
-			break;
+	NSArray<NSString*>* values = @[JFLoggerFormatDate, JFLoggerFormatDateTime, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
+	NSMutableArray<NSString*>* retObj = [NSMutableArray<NSString*> arrayWithCapacity:values.count];
+	for(NSString* value in values) {
+		if([logFormat rangeOfString:value].location != NSNotFound) {
+			[retObj addObject:value];
 		}
 	}
-	
-	return -1;
+	return [retObj copy];
 }
 
-- (NSInteger)weekOfMonthFromDate:(NSDate*)date
++ (NSCalendarUnit)calendarComponentForRotation:(JFLoggerRotation)rotation
 {
-	if(@available(macOS 10.7, *))
-		return [self component:NSCalendarUnitWeekOfMonth fromDate:date];
+	switch(rotation) {
+		case JFLoggerRotationHour: {
+			return NSCalendarUnitHour;
+		}
+		case JFLoggerRotationDay: {
+			return NSCalendarUnitDay;
+		}
+		case JFLoggerRotationWeek: {
+			return NSCalendarUnitWeekOfMonth;
+		}
+		case JFLoggerRotationMonth: {
+			return NSCalendarUnitMonth;
+		}
+		default: {
+			return 0;
+		}
+	}
+}
+
++ (JFLoggerEnabledOutputs)intersectOutput:(JFLoggerOutput)output withFilter:(JFLoggerOutput)filter
+{
+	JFLoggerEnabledOutputs retVal;
+	retVal.isConsoleEnabled = (output & JFLoggerOutputConsole) && (filter & JFLoggerOutputConsole);
+	retVal.isDelegatesEnabled = (output & JFLoggerOutputDelegates) && (filter & JFLoggerOutputDelegates);
+	retVal.isFileEnabled = (output & JFLoggerOutputFile) && (filter & JFLoggerOutputFile);
+	return retVal;
+}
+
++ (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
+{
+#if JF_IOS || JF_ARCH64
+	return [formatter stringFromDate:date];
+#else
+	// On macOS, only the 64-bit architecture implementation of NSDateFormatter is thread-safe.
+	@synchronized(formatter) {
+		return [formatter stringFromDate:date];
+	}
+#endif
+}
+
++ (NSString*)stringFromSeverity:(JFLoggerSeverity)severity
+{
+	switch(severity) {
+		case JFLoggerSeverityAlert: {
+			return @"Alert";
+		}
+		case JFLoggerSeverityCritical: {
+			return @"Critical";
+		}
+		case JFLoggerSeverityDebug: {
+			return @"Debug";
+		}
+		case JFLoggerSeverityEmergency: {
+			return @"Emergency";
+		}
+		case JFLoggerSeverityError: {
+			return @"Error";
+		}
+		case JFLoggerSeverityInfo: {
+			return @"Info";
+		}
+		case JFLoggerSeverityNotice: {
+			return @"Notice";
+		}
+		case JFLoggerSeverityWarning: {
+			return @"Warning";
+		}
+	}
+}
+
++ (NSString*)stringFromTags:(JFLoggerTags)tags
+{
+	if(tags == JFLoggerTagsNone) {
+		return JFEmptyString;
+	}
 	
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-	NSCalendarUnit component = NSWeekCalendarUnit;
-#pragma clang diagnostic pop
+	// Prepares the temporary buffer.
+	NSMutableArray* tagStrings = [NSMutableArray arrayWithCapacity:13];
 	
-	NSInteger retVal = [self component:component fromDate:date];
+	// Inserts each requested hashtag.
+	if(tags & JFLoggerTagsAttention) {
+		[tagStrings addObject:@"#Attention"];
+	}
+	if(tags & JFLoggerTagsClue) {
+		[tagStrings addObject:@"#Clue"];
+	}
+	if(tags & JFLoggerTagsComment) {
+		[tagStrings addObject:@"#Comment"];
+	}
+	if(tags & JFLoggerTagsCritical) {
+		[tagStrings addObject:@"#Critical"];
+	}
+	if(tags & JFLoggerTagsDeveloper) {
+		[tagStrings addObject:@"#Developer"];
+	}
+	if(tags & JFLoggerTagsError) {
+		[tagStrings addObject:@"#Error"];
+	}
+	if(tags & JFLoggerTagsFileSystem) {
+		[tagStrings addObject:@"#FileSystem"];
+	}
+	if(tags & JFLoggerTagsHardware) {
+		[tagStrings addObject:@"#Hardware"];
+	}
+	if(tags & JFLoggerTagsMarker) {
+		[tagStrings addObject:@"#Marker"];
+	}
+	if(tags & JFLoggerTagsNetwork) {
+		[tagStrings addObject:@"#Network"];
+	}
+	if(tags & JFLoggerTagsSecurity) {
+		[tagStrings addObject:@"#Security"];
+	}
+	if(tags & JFLoggerTagsSystem) {
+		[tagStrings addObject:@"#System"];
+	}
+	if(tags & JFLoggerTagsUser) {
+		[tagStrings addObject:@"#User"];
+	}
 	
-	NSRange range = [NSCalendar.currentCalendar rangeOfUnit:component inUnit:NSCalendarUnitMonth forDate:date];
-	if(range.location == NSNotFound)
-		return -1;
+	return [tagStrings componentsJoinedByString:@" "];
+}
+
++ (NSString*)stringFromTexts:(NSArray<NSString*>*)texts
+{
+	if(texts.count == 0) {
+		return @"";
+	}
 	
-	return (retVal - range.location + 1);
+	NSMutableString* retObj = [NSMutableString stringWithString:@"'"];
+	[retObj appendString:[texts componentsJoinedByString:@"', '"]];
+	[retObj appendString:@"'"];
+	return retObj;
 }
 
 @end
@@ -943,7 +930,207 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// MARK: -
+
+@implementation JFLoggerSettings
+
+// =================================================================================================
+// MARK: Properties - File system
+// =================================================================================================
+
+@synthesize fileName = _fileName;
+@synthesize folder = _folder;
+@synthesize rotation = _rotation;
+
+// =================================================================================================
+// MARK: Properties - Log format
+// =================================================================================================
+
+@synthesize dateFormatter = _dateFormatter;
+@synthesize dateTimeFormatter = _dateTimeFormatter;
+@synthesize textFormat = _textFormat;
+@synthesize timeFormatter = _timeFormatter;
+
+// =================================================================================================
+// MARK: Properties (Accessors) - File system
+// =================================================================================================
+
+- (NSString*)fileName
+{
+	NSString* retObj = _fileName;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultFileName];
+		_fileName = retObj;
+	}
+	return retObj;
+}
+
+- (void)setFileName:(NSString* _Nullable)fileName
+{
+	_fileName = fileName;
+}
+
+- (NSURL*)folder
+{
+	NSURL* retObj = _folder;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultFolder];
+		_folder = retObj;
+	}
+	return retObj;
+}
+
+- (void)setFolder:(NSURL* _Nullable)folder
+{
+	_folder = folder;
+}
+
+// =================================================================================================
+// MARK: Properties (Accessors) - Log format
+// =================================================================================================
+
+- (NSDateFormatter*)dateFormatter
+{
+	NSDateFormatter* retObj = _dateFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultDateFormatter];
+		_dateFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setDateFormatter:(NSDateFormatter* _Nullable)dateFormatter
+{
+	_dateFormatter = dateFormatter;
+}
+
+- (NSDateFormatter*)dateTimeFormatter
+{
+	NSDateFormatter* retObj = _dateTimeFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultDateTimeFormatter];
+		_dateTimeFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setDateTimeFormatter:(NSDateFormatter* _Nullable)dateTimeFormatter
+{
+	_dateTimeFormatter = dateTimeFormatter;
+}
+
+- (NSString*)textFormat
+{
+	NSString* retObj = _textFormat;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultTextFormat];
+		_textFormat = retObj;
+	}
+	return retObj;
+}
+
+- (void)setTextFormat:(NSString* _Nullable)format
+{
+	_textFormat = format;
+}
+
+- (NSDateFormatter*)timeFormatter
+{
+	NSDateFormatter* retObj = _timeFormatter;
+	if(!retObj) {
+		retObj = [JFLoggerSettings newDefaultTimeFormatter];
+		_timeFormatter = retObj;
+	}
+	return retObj;
+}
+
+- (void)setTimeFormatter:(NSDateFormatter* _Nullable)timeFormatter
+{
+	_timeFormatter = timeFormatter;
+}
+
+// =================================================================================================
+// MARK: Lifecycle
+// =================================================================================================
+
+- (instancetype)init
+{
+	self = [super init];
+	_rotation = JFLoggerRotationNone;
+	return self;
+}
+
+// =================================================================================================
+// MARK: Methods - Utilities
+// =================================================================================================
+
++ (NSString*)newDefaultDateFormat
+{
+	return @"yyyy/MM/dd";
+}
+
++ (NSDateFormatter*)newDefaultDateFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = [JFLoggerSettings newDefaultDateFormat];
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
++ (NSDateFormatter*)newDefaultDateTimeFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = [NSString stringWithFormat:@"%@ %@", [JFLoggerSettings newDefaultDateFormat], [JFLoggerSettings newDefaultTimeFormat]];
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
++ (NSString*)newDefaultFileName
+{
+	return @"Logs.log";
+}
+
++ (NSURL*)newDefaultFolder
+{
+	NSError* error = nil;
+	NSURL* url = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+	NSAssert(url, @"Failed to get URL of application support folder. [error = '%@']", error.description);
+	
+#if JF_MACOS
+	NSString* domain = AppInfoIdentifier;
+	NSAssert(domain, @"Bundle identifier not found!");
+	url = [url URLByAppendingPathComponent:domain];
+#endif
+	
+	return [url URLByAppendingPathComponent:@"Logs"];
+}
+
++ (NSString*)newDefaultTextFormat
+{
+	return [NSString stringWithFormat:@"%@ [%@:%@] %@\n", JFLoggerFormatDateTime, JFLoggerFormatProcessID, JFLoggerFormatThreadID, JFLoggerFormatMessage];
+}
+
++ (NSString*)newDefaultTimeFormat
+{
+	return @"HH:mm:ss.SSSZ";
+}
+
++ (NSDateFormatter*)newDefaultTimeFormatter
+{
+	NSDateFormatter* retObj = [NSDateFormatter new];
+	retObj.dateFormat = [JFLoggerSettings newDefaultTimeFormat];
+	retObj.locale = [NSLocale currentLocale];
+	retObj.timeZone = [NSTimeZone defaultTimeZone];
+	return retObj;
+}
+
+@end
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 NS_ASSUME_NONNULL_END
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
