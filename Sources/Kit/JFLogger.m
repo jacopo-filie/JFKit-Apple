@@ -425,10 +425,30 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
 {
-	[self log:message output:output severity:severity tags:JFLoggerTagsNone];
+	[self logAll:@[message] output:output severity:severity tags:JFLoggerTagsNone];
 }
 
 - (void)log:(NSString*)message output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
+{
+	[self logAll:@[message] output:output severity:severity tags:tags];
+}
+
+- (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
+{
+	[self logAll:@[message] output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
+}
+
+- (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
+{
+	[self logAll:@[message] output:JFLoggerOutputAll severity:severity tags:tags];
+}
+
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
+{
+	[self logAll:messages output:output severity:severity tags:JFLoggerTagsNone];
+}
+
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
 	pthread_mutex_t* filtersMutex = &_filtersMutex;
 	[self lockMutex:filtersMutex];
@@ -447,11 +467,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		return;
 	}
 	
-	// Appends tags.
+	// Prepares tags.
 	NSString* tagsString = [JFLogger stringFromTags:tags];
-	if(!JFStringIsNullOrEmpty(tagsString)) {
-		message = [message stringByAppendingFormat:@" %@", tagsString];
-	}
 	
 	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
 	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
@@ -471,11 +488,11 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
 	}
 	
-	// Gets the message.
-	if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
-		[values setObject:message forKey:JFLoggerFormatMessage];
-	}
+	// Prepares a buffer for log texts.
+	NSMutableArray<NSString*>* texts = [NSMutableArray<NSString*> arrayWithCapacity:messages.count];
 	
+	// From now on we must remain in critical section (even though in various sections) to assure
+	// the timestamp is properly ordered and prevent threads from writing at the same time.
 	pthread_mutex_t* textCompositionMutex = &_textCompositionMutex;
 	[self lockMutex:textCompositionMutex];
 	
@@ -497,8 +514,18 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
 	}
 	
-	// Prepares the log text.
-	NSString* text = JFStringByReplacingKeysInFormat(self.textFormat, values);
+	NSString* textFormat = self.textFormat;
+	for(NSString* message in messages) {
+		// Gets the message, appending tags if needed.
+		if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
+			[values setObject:(JFStringIsNullOrEmpty(tagsString) ? message : [message stringByAppendingFormat:@" %@", tagsString]) forKey:JFLoggerFormatMessage];
+		} else {
+			[values removeObjectForKey:JFLoggerFormatMessage];
+		}
+		
+		// Prepares the log text.
+		[texts addObject:JFStringByReplacingKeysInFormat(textFormat, values)];
+	}
 	
 	pthread_mutex_t* consoleWriterMutex = &_consoleWriterMutex;
 	[self lockMutex:consoleWriterMutex];
@@ -506,7 +533,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
-		[self logTextToConsole:text];
+		[self logTextsToConsole:texts];
 	}
 	
 	pthread_mutex_t* fileWriterMutex = &_fileWriterMutex;
@@ -515,7 +542,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Logs to file if needed.
 	if(outputs.isFileEnabled) {
-		[self logTextToFile:text currentDate:currentDate];
+		[self logTextsToFile:texts currentDate:currentDate];
 	}
 	
 	pthread_mutex_t* delegatesWriterMutex = &_delegatesWriterMutex;
@@ -524,40 +551,49 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Forwards the log message to the registered delegates if needed.
 	if(outputs.isDelegatesEnabled) {
-		[self logTextToDelegates:text currentDate:currentDate];
+		[self logTextsToDelegates:texts currentDate:currentDate];
 	}
 	
 	[self unlockMutex:delegatesWriterMutex];
 }
 
-- (void)log:(NSString*)message severity:(JFLoggerSeverity)severity
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity
 {
-	[self log:message output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
+	[self logAll:messages output:JFLoggerOutputAll severity:severity tags:JFLoggerTagsNone];
 }
 
-- (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	[self log:message output:JFLoggerOutputAll severity:severity tags:tags];
+	[self logAll:messages output:JFLoggerOutputAll severity:severity tags:tags];
 }
 
-- (void)logTextToConsole:(NSString*)text
+- (void)logTextsToConsole:(NSArray<NSString*>*)texts
 {
-	fprintf(stderr, "%s", text.UTF8String);
+	if(texts.count == 0) {
+		return;
+	}
+	
+	for(NSString* text in texts) {
+		fprintf(stderr, "%s", text.UTF8String);
+	}
 }
 
-- (void)logTextToDelegates:(NSString*)text currentDate:(NSDate*)currentDate
+- (void)logTextsToDelegates:(NSArray<NSString*>*)texts currentDate:(NSDate*)currentDate
 {
+	if(texts.count == 0) {
+		return;
+	}
+	
 	[self.delegates notifyObservers:^(id<JFLoggerDelegate> delegate) {
-		[delegate logger:self logText:text currentDate:currentDate];
+		for(NSString* text in texts) {
+			[delegate logger:self logText:text currentDate:currentDate];
+		}
 	}];
 }
 
-- (void)logTextToFile:(NSString*)text currentDate:(NSDate*)currentDate
+- (void)logTextsToFile:(NSArray<NSString*>*)texts currentDate:(NSDate*)currentDate
 {
-	// Prepares the data to be written.
-	NSData* data = [text dataUsingEncoding:NSUTF8StringEncoding];
-	if(!data) {
-		NSLog(@"%@: failed to prepare data from log text. [text = '%@'] %@", ClassName, text, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsUser)]);
+	if(texts.count == 0) {
 		return;
 	}
 	
@@ -566,7 +602,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	// Tries to append the data to the log file.
 	if(![self createFileAtURL:fileURL currentDate:currentDate]) {
-		NSLog(@"%@: failed to create the log file. [text = '%@', path = '%@'] %@", ClassName, text, fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		NSLog(@"%@: failed to create the log file. [texts = '%@', path = '%@'] %@", ClassName, [JFLogger stringFromTexts:texts], fileURL.path, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 		return;
 	}
 	
@@ -574,13 +610,24 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	NSError* error = nil;
 	NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
 	if(!fileHandle) {
-		NSLog(@"%@: failed to open the log file. [text = '%@'; path = '%@'; error = '%@'] %@", ClassName, text, fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
+		NSLog(@"%@: failed to open the log file. [texts = '%@'; path = '%@'; error = '%@'] %@", ClassName, [JFLogger stringFromTexts:texts], fileURL.path, error, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsFileSystem)]);
 		return;
 	}
 	
-	// Goes to the end of the file, appends the new message and closes the file.
+	// Goes to the end of the file.
 	[fileHandle seekToEndOfFile];
-	[fileHandle writeData:data];
+	
+	// Appends the new messages.
+	for(NSString* text in texts) {
+		NSData* data = [text dataUsingEncoding:NSUTF8StringEncoding];
+		if(data) {
+			[fileHandle writeData:data];
+		} else {
+			NSLog(@"%@: failed to prepare data from log text. [text = '%@'] %@", ClassName, text, [JFLogger stringFromTags:(JFLoggerTagsError | JFLoggerTagsUser)]);
+		}
+	}
+	
+	// Closes the file.
 	[fileHandle closeFile];
 }
 
@@ -768,6 +815,19 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	
 	return [tagStrings componentsJoinedByString:@" "];
 }
+
++ (NSString*)stringFromTexts:(NSArray<NSString*>*)texts
+{
+	if(texts.count == 0) {
+		return @"";
+	}
+	
+	NSMutableString* retObj = [NSMutableString stringWithString:@"'"];
+	[retObj appendString:[texts componentsJoinedByString:@"', '"]];
+	[retObj appendString:@"'"];
+	return retObj;
+}
+
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

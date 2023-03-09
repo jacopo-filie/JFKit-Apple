@@ -421,6 +421,38 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
  */
 - (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
 
+/**
+ * Logs the given messages to the selected outputs, assigning them the given severity level.
+ * @param messages The strings to log.
+ * @param output The destinations where the messages are to be logged.
+ * @param severity The severity level of the given messages.
+ */
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity;
+
+/**
+ * Logs the given messages to the selected outputs, assigning them the given severity level and appending them the given tags.
+ * @param messages The strings to log.
+ * @param output The destinations where the messages are to be logged.
+ * @param severity The severity level of the given messages.
+ * @param tags The tags assigned to the given messages.
+ */
+- (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
+
+/**
+ * Logs the given messages to all available outputs, assigning them the given severity level.
+ * @param messages The strings to log.
+ * @param severity The severity level of the given messages.
+ */
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity;
+
+/**
+ * Logs the given messages to all available outputs, assigning them the given severity level and appending them the given tags.
+ * @param messages The strings to log.
+ * @param severity The severity level of the given messages.
+ * @param tags The tags assigned to the given messages.
+ */
+- (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
+
 // =================================================================================================
 // MARK: Methods - Service (Convenience)
 // =================================================================================================

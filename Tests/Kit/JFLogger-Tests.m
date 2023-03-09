@@ -178,11 +178,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testSimpleLogging
 {
+	JFLogger* logger = self.logger;
 	NSString* message = MethodName;
-	[self.logger log:message severity:JFLoggerSeverityEmergency];
-	NSString* result = [self readTestLogFileLines].firstObject;
+	[logger log:message severity:JFLoggerSeverityEmergency];
+	NSArray<NSString*>* lines = [self readTestLogFileLines];
+	NSUInteger count = lines.count;
+	XCTAssert((count == 1), @"The test log file should have 1 line, not %@!\n", JFStringFromNSUInteger(count));
+	NSString* result = lines.firstObject;
 	NSRange range = [result rangeOfString:message options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch)];
 	XCTAssert((range.location != NSNotFound), @"The logged text differs from the message passed to the logger.\n");
+	[logger logAll:@[message, message] severity:JFLoggerSeverityEmergency];
+	lines = [self readTestLogFileLines];
+	count = lines.count;
+	XCTAssert((count == 3), @"The test log file should have 3 lines, not %@!\n", JFStringFromNSUInteger(count));
 }
 
 // =================================================================================================
@@ -200,14 +208,14 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
-- (NSArray*)readTestLogFileLines
+- (NSArray<NSString*>*)readTestLogFileLines
 {
 	NSError* error = nil;
 	NSURL* fileURL = self.logger.currentFile;
 	NSString* fileContent = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
 	XCTAssert(fileContent, @"Failed to read result from the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	
-	NSMutableArray* retObj = [[fileContent componentsSeparatedByString:@"\n"] mutableCopy];
+	NSMutableArray<NSString*>* retObj = [[fileContent componentsSeparatedByString:@"\n"] mutableCopy];
 	XCTAssert(retObj, @"Failed to get the lines of the test log file. [url = '%@'; error = '%@']", fileURL.absoluteString, error);
 	
 	NSString* lastLine = retObj.lastObject;
