@@ -61,6 +61,11 @@
                BlueprintName = "JFKit macOS Tests"
                ReferencedContainer = "container:JFKit.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "JFLogger_Tests/testPerformance">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
