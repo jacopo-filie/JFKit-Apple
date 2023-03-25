@@ -79,7 +79,7 @@ typedef NS_ENUM(UInt8, JFListDiffsEditOperationType)
 	NSUInteger oldSize = [dataSource getOldListSize];
 	
 	if(newSize == 0) {
-		return [[JFListDiffsResultConcrete alloc] initWithOperations:@[[[JFListDiffsEditOperation alloc] initDeleteOperationAtIndex:0 count:oldSize]]];
+		return [[JFListDiffsResultConcrete alloc] initWithOperations:((oldSize == 0) ? @[] : @[[[JFListDiffsEditOperation alloc] initDeleteOperationAtIndex:0 count:oldSize]])];
 	}
 	
 	if(oldSize == 0) {
