@@ -109,7 +109,7 @@ typedef NS_OPTIONS(UInt8, JFLoggerOutput)
 };
 
 /**
- * A list of available time interval rotation values that is used to divide the logged messages in multiple files, based on the currently active time interval. Specific log files are created only when needed; for example, if rotation is set to `day` and file name is set to `Log.log`, the log file called `Log-5.log` will be created (or overwritten if already existing) only on the fifth day of each month.
+ * A list of available time interval rotation values that is used to divide the logged messages in multiple files, based on the currently active time interval. Specific log files are created only when needed; for example, if rotation is set to `day` and file name is set to `Logs.log`, the log file called `Logs-5.log` will be created (or overwritten if already existing) only on the fifth day of each month.
  */
 typedef NS_ENUM(UInt8, JFLoggerRotation)
 {
@@ -547,7 +547,7 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 
 /**
  * The base name of the log files. Suffixes will be appended to it (before the extension).
- * The default value is `Log.log`.
+ * The default value is `Logs.log`.
  */
 @property (strong, nonatomic, null_resettable) NSString* fileName;
 
