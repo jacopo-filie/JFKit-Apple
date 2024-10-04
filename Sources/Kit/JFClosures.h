@@ -110,7 +110,7 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 @property (strong, nonatomic, readonly) JFBlock block;
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 /**
@@ -200,7 +200,7 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 @property (strong, nonatomic, readonly, nullable) JFBlock successBlock;
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 /**
@@ -493,7 +493,7 @@ typedef void (^JFFetchingClosureBlock)(BOOL succeeded, id _Nullable result, NSEr
 @property (strong, nonatomic, readonly, nullable) void (^successBlock)(ResultType result);
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 /**

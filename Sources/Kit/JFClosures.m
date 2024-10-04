@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize block = _block;
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)newWithBlock:(JFBlock)block
@@ -161,7 +161,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize successBlock = _successBlock;
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)newWithBlock:(JFFailableClosureBlock)block
@@ -457,7 +457,7 @@ NS_ASSUME_NONNULL_BEGIN
 @synthesize successBlock = _successBlock;
 
 // =================================================================================================
-// MARK: Lifetime
+// MARK: Lifecycle
 // =================================================================================================
 
 + (instancetype)newWithBlock:(JFFetchingClosureBlock)block
