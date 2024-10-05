@@ -555,11 +555,17 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
 	}
 	
+	NSString* (^appendTags)(NSString*) = JFStringIsNullOrEmpty(tagsString) ? ^NSString* (NSString* message) {
+		return message;
+	} : ^NSString* (NSString* message) {
+		return [message stringByAppendingFormat:@" %@", tagsString];
+	};
+	
 	NSString* textFormat = self.textFormat;
 	for(NSString* message in messages) {
 		// Gets the message, appending tags if needed.
 		if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
-			[values setObject:(JFStringIsNullOrEmpty(tagsString) ? message : [message stringByAppendingFormat:@" %@", tagsString]) forKey:JFLoggerFormatMessage];
+			[values setObject:appendTags(message) forKey:JFLoggerFormatMessage];
 		} else {
 			[values removeObjectForKey:JFLoggerFormatMessage];
 		}
