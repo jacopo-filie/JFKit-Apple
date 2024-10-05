@@ -349,59 +349,59 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Locks
+// MARK: Methods - Mutexes
 // =================================================================================================
 
-- (void)destroyMutex:(pthread_mutex_t*)lock
+- (void)destroyMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_destroy(lock) != 0) {
-		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_destroy(mutex) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (void)initializeMutex:(pthread_mutex_t*)lock
+- (void)initializeMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_init(lock, NULL) != 0) {
-		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_init(mutex, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (void)lockMutex:(pthread_mutex_t*)lock
+- (void)lockMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_lock(lock) != 0) {
-		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_lock(mutex) != 0) {
+		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (NSString*)nameOfMutex:(pthread_mutex_t*)lock
+- (NSString*)nameOfMutex:(pthread_mutex_t*)mutex
 {
-	if(lock == &_consoleWriterMutex) {
+	if(mutex == &_consoleWriterMutex) {
 		return @"console writer mutex";
 	}
 	
-	if(lock == &_delegatesWriterMutex) {
+	if(mutex == &_delegatesWriterMutex) {
 		return @"delegates writer mutex";
 	}
 	
-	if(lock == &_fileWriterMutex) {
+	if(mutex == &_fileWriterMutex) {
 		return @"file writer mutex";
 	}
 	
-	if(lock == &_filtersMutex) {
+	if(mutex == &_filtersMutex) {
 		return @"filters mutex";
 	}
 	
-	if(lock == &_textCompositionMutex) {
+	if(mutex == &_textCompositionMutex) {
 		return @"text composition mutex";
 	}
 	
 	return @"unknown mutex";
 }
 
-- (void)unlockMutex:(pthread_mutex_t*)lock
+- (void)unlockMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_unlock(lock) != 0) {
-		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_unlock(mutex) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
