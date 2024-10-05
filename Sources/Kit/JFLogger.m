@@ -119,6 +119,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Properties - Log format
 // =================================================================================================
 
+@synthesize consoleType = _consoleType;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize dateTimeFormatter = _dateTimeFormatter;
 @synthesize textFormat = _textFormat;
@@ -946,6 +947,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 // MARK: Properties - Log format
 // =================================================================================================
 
+@synthesize consoleType = _consoleType;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize dateTimeFormatter = _dateTimeFormatter;
 @synthesize textFormat = _textFormat;
@@ -1056,6 +1058,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 - (instancetype)init
 {
 	self = [super init];
+	_consoleType = JFLoggerConsoleTypeDefault;
 	_rotation = JFLoggerRotationNone;
 	return self;
 }
