@@ -838,8 +838,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 @property (class, strong, nonatomic, readonly) JFLogger* logger;
 
-+ (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
-
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -851,16 +849,14 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 
 + (id<JFKitLoggerDelegate> _Nullable)delegate
 {
-	@synchronized(self)
-	{
+	@synchronized(self) {
 		return _delegate;
 	}
 }
 
 + (void)setDelegate:(id<JFKitLoggerDelegate> _Nullable)delegate
 {
-	@synchronized(self)
-	{
+	@synchronized(self) {
 		_delegate = delegate;
 	}
 }
@@ -879,8 +875,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 + (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
 	id<JFKitLoggerDelegate> delegate = self.delegate;
-	if(delegate)
-	{
+	if(delegate) {
 		[delegate log:message severity:severity tags:tags];
 		return;
 	}
