@@ -96,7 +96,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	pthread_mutex_t _consoleWriterMutex;
 	pthread_mutex_t _delegatesWriterMutex;
 	pthread_mutex_t _fileWriterMutex;
-	pthread_mutex_t _filtersMutex;
+	pthread_rwlock_t _filtersRWLock;
 	pthread_mutex_t _textCompositionMutex;
 }
 
@@ -147,36 +147,36 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (JFLoggerOutput)outputFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsReader:rwLock];
 	JFLoggerOutput retVal = _outputFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 	return retVal;
 }
 
 - (void)setOutputFilter:(JFLoggerOutput)outputFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsWriter:rwLock];
 	_outputFilter = outputFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 }
 
 - (JFLoggerSeverity)severityFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsReader:rwLock];
 	JFLoggerSeverity retVal = _severityFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 	return retVal;
 }
 
 - (void)setSeverityFilter:(JFLoggerSeverity)severityFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsWriter:rwLock];
 	_severityFilter = severityFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 }
 
 // =================================================================================================
@@ -188,7 +188,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self destroyMutex:&_consoleWriterMutex];
 	[self destroyMutex:&_delegatesWriterMutex];
 	[self destroyMutex:&_fileWriterMutex];
-	[self destroyMutex:&_filtersMutex];
+	[self destroyRWLock:&_filtersRWLock];
 	[self destroyMutex:&_textCompositionMutex];
 }
 
@@ -223,7 +223,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self initializeMutex:&_consoleWriterMutex];
 	[self initializeMutex:&_delegatesWriterMutex];
 	[self initializeMutex:&_fileWriterMutex];
-	[self initializeMutex:&_filtersMutex];
+	[self initializeRWLock:&_filtersRWLock];
 	[self initializeMutex:&_textCompositionMutex];
 	
 	return self;
@@ -360,6 +360,13 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	}
 }
 
+- (void)destroyRWLock:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_destroy(rwLock) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
 - (void)initializeMutex:(pthread_mutex_t*)mutex
 {
 	if(pthread_mutex_init(mutex, NULL) != 0) {
@@ -367,10 +374,31 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	}
 }
 
+- (void)initializeRWLock:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_init(rwLock, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
 - (void)lockMutex:(pthread_mutex_t*)mutex
 {
 	if(pthread_mutex_lock(mutex) != 0) {
 		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockRWLockAsReader:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_rdlock(rwLock) != 0) {
+		NSLog(@"%@: failed to lock %@ as reader. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockRWLockAsWriter:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_wrlock(rwLock) != 0) {
+		NSLog(@"%@: failed to lock %@ as writer. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -388,10 +416,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 		return @"file writer mutex";
 	}
 	
-	if(mutex == &_filtersMutex) {
-		return @"filters mutex";
-	}
-	
 	if(mutex == &_textCompositionMutex) {
 		return @"text composition mutex";
 	}
@@ -399,10 +423,26 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	return @"unknown mutex";
 }
 
+- (NSString*)nameOfRWLock:(pthread_rwlock_t*)rwLock
+{
+	if(rwLock == &_filtersRWLock) {
+		return @"filters rwLock";
+	}
+	
+	return @"unknown rwLock";
+}
+
 - (void)unlockMutex:(pthread_mutex_t*)mutex
 {
 	if(pthread_mutex_unlock(mutex) != 0) {
 		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)unlockRWLock:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_unlock(rwLock) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -451,11 +491,11 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	pthread_mutex_t* filtersMutex = &_filtersMutex;
-	[self lockMutex:filtersMutex];
+	pthread_rwlock_t* filtersRWLock = &_filtersRWLock;
+	[self lockRWLockAsReader:filtersRWLock];
 	JFLoggerOutput outputFilter = _outputFilter;
 	JFLoggerSeverity severityFilter = _severityFilter;
-	[self unlockMutex:filtersMutex];
+	[self unlockRWLock:filtersRWLock];
 	
 	// Filters by severity.
 	if(severity > severityFilter) {
