@@ -491,19 +491,8 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	pthread_rwlock_t* filtersRWLock = &_filtersRWLock;
-	[self lockRWLockAsReader:filtersRWLock];
-	JFLoggerOutput outputFilter = _outputFilter;
-	JFLoggerSeverity severityFilter = _severityFilter;
-	[self unlockRWLock:filtersRWLock];
-	
-	// Filters by severity.
-	if(severity > severityFilter) {
-		return;
-	}
-	
-	// Filters by output.
-	JFLoggerEnabledOutputs outputs = [JFLogger intersectOutput:output withFilter:outputFilter];
+	// Filters by output and severity.
+	JFLoggerEnabledOutputs outputs = [self verifyEnabledOutputsForOutput:output severity:severity];
 	if(!outputs.isConsoleEnabled && !outputs.isDelegatesEnabled && !outputs.isFileEnabled) {
 		return;
 	}
@@ -873,6 +862,21 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[retObj appendString:[texts componentsJoinedByString:@"', '"]];
 	[retObj appendString:@"'"];
 	return retObj;
+}
+
+- (JFLoggerEnabledOutputs)verifyEnabledOutputsForOutput:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
+{
+	pthread_rwlock_t* filtersRWLock = &_filtersRWLock;
+	[self lockRWLockAsReader:filtersRWLock];
+	JFLoggerOutput outputFilter = _outputFilter;
+	JFLoggerSeverity severityFilter = _severityFilter;
+	[self unlockRWLock:filtersRWLock];
+	
+	if(severity > severityFilter) {
+		return (JFLoggerEnabledOutputs){NO, NO, NO};
+	} else {
+		return [JFLogger intersectOutput:output withFilter:outputFilter];
+	}
 }
 
 @end
