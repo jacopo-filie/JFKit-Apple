@@ -73,7 +73,14 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Properties - Log format
 // =================================================================================================
 
-@property (strong, nonatomic, readonly) NSArray<NSString*>* textFormatActiveValues;
+@property (strong, nonatomic, readonly) void (^setDateValueBlock)(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date);
+@property (strong, nonatomic, readonly) void (^setDateTimeValueBlock)(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date);
+@property (strong, nonatomic, readonly) void (^setMessageValueBlock)(NSMutableDictionary<NSString*, NSString*>* values, NSString* message, NSString* tags);
+@property (strong, nonatomic, readonly) void (^setProcessIDValueBlock)(NSMutableDictionary<NSString*, NSString*>* values);
+@property (strong, nonatomic, readonly) void (^setSeverityValueBlock)(NSMutableDictionary<NSString*, NSString*>* values, JFLoggerSeverity severity);
+@property (strong, nonatomic, readonly) void (^setThreadIDValueBlock)(NSMutableDictionary<NSString*, NSString*>* values);
+@property (strong, nonatomic, readonly) void (^setTimeValueBlock)(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date);
+@property (strong, nonatomic, readonly) NSArray<NSString*>* textFormatRecognizedKeys;
 
 // =================================================================================================
 // MARK: Properties - Observers
@@ -96,7 +103,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	pthread_mutex_t _consoleWriterMutex;
 	pthread_mutex_t _delegatesWriterMutex;
 	pthread_mutex_t _fileWriterMutex;
-	pthread_mutex_t _filtersMutex;
+	pthread_rwlock_t _filtersRWLock;
 	pthread_mutex_t _textCompositionMutex;
 }
 
@@ -119,10 +126,18 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Properties - Log format
 // =================================================================================================
 
+@synthesize consoleType = _consoleType;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize dateTimeFormatter = _dateTimeFormatter;
+@synthesize setDateValueBlock = _setDateValueBlock;
+@synthesize setDateTimeValueBlock = _setDateTimeValueBlock;
+@synthesize setMessageValueBlock = _setMessageValueBlock;
+@synthesize setProcessIDValueBlock = _setProcessIDValueBlock;
+@synthesize setSeverityValueBlock = _setSeverityValueBlock;
+@synthesize setThreadIDValueBlock = _setThreadIDValueBlock;
+@synthesize setTimeValueBlock = _setTimeValueBlock;
 @synthesize textFormat = _textFormat;
-@synthesize textFormatActiveValues = _textFormatActiveValues;
+@synthesize textFormatRecognizedKeys = _textFormatRecognizedKeys;
 @synthesize timeFormatter = _timeFormatter;
 
 // =================================================================================================
@@ -146,36 +161,36 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (JFLoggerOutput)outputFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsReader:rwLock];
 	JFLoggerOutput retVal = _outputFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 	return retVal;
 }
 
 - (void)setOutputFilter:(JFLoggerOutput)outputFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsWriter:rwLock];
 	_outputFilter = outputFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 }
 
 - (JFLoggerSeverity)severityFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsReader:rwLock];
 	JFLoggerSeverity retVal = _severityFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 	return retVal;
 }
 
 - (void)setSeverityFilter:(JFLoggerSeverity)severityFilter
 {
-	pthread_mutex_t* mutex = &_filtersMutex;
-	[self lockMutex:mutex];
+	pthread_rwlock_t* rwLock = &_filtersRWLock;
+	[self lockRWLockAsWriter:rwLock];
 	_severityFilter = severityFilter;
-	[self unlockMutex:mutex];
+	[self unlockRWLock:rwLock];
 }
 
 // =================================================================================================
@@ -187,7 +202,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	[self destroyMutex:&_consoleWriterMutex];
 	[self destroyMutex:&_delegatesWriterMutex];
 	[self destroyMutex:&_fileWriterMutex];
-	[self destroyMutex:&_filtersMutex];
+	[self destroyRWLock:&_filtersRWLock];
 	[self destroyMutex:&_textCompositionMutex];
 }
 
@@ -201,7 +216,9 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	self = [super init];
 	
 	NSString* textFormat = [settings.textFormat copy];
+	NSArray<NSString*>* textFormatRecognizedKeys = [JFLogger recognizeKeysInTextFormat:textFormat];
 	
+	_consoleType = settings.consoleType;
 	_dateFormatter = settings.dateFormatter;
 	_dateTimeFormatter = settings.dateTimeFormatter;
 	_delegates = [JFObserversController<JFLoggerDelegate> new];
@@ -210,7 +227,7 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	_outputFilter = JFLoggerOutputAll;
 	_rotation = settings.rotation;
 	_textFormat = textFormat;
-	_textFormatActiveValues = [JFLogger activeValuesForTextFormat:textFormat];
+	_textFormatRecognizedKeys = textFormatRecognizedKeys;
 	_timeFormatter = settings.timeFormatter;
 	
 #if DEBUG
@@ -219,10 +236,40 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	_severityFilter = JFLoggerSeverityInfo;
 #endif
 	
+	_setDateValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatDate] ? ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {
+		values[JFLoggerFormatDate] = [JFLogger stringFromDate:date formatter:self.dateFormatter];
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {};
+	
+	_setDateTimeValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatDateTime] ? ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {
+		values[JFLoggerFormatDateTime] = [JFLogger stringFromDate:date formatter:self.dateTimeFormatter];
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {};
+	
+	_setMessageValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatMessage] ? ^(NSMutableDictionary<NSString*, NSString*>* values, NSString* message, NSString* tags) {
+		values[JFLoggerFormatMessage] = JFStringIsNullOrEmpty(tags) ? message : [message stringByAppendingFormat:@" %@", tags];
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values, NSString* message, NSString* tags) {};
+
+	NSString* processID = [textFormatRecognizedKeys containsObject:JFLoggerFormatProcessID] ? JFStringFromInt(ProcessInfo.processIdentifier) : nil;
+	_setProcessIDValueBlock = JFStringIsNullOrEmpty(processID) ? ^(NSMutableDictionary<NSString*, NSString*>* values) {} : ^(NSMutableDictionary<NSString*, NSString*>* values) {
+		values[JFLoggerFormatProcessID] = processID;
+	};
+	
+	_setSeverityValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatSeverity] ? ^(NSMutableDictionary<NSString*, NSString*>* values, JFLoggerSeverity severity) {
+		values[JFLoggerFormatSeverity] = [JFLogger stringFromSeverity:severity];
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values, JFLoggerSeverity severity) {};
+	
+	_setThreadIDValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatThreadID] ? ^(NSMutableDictionary<NSString*, NSString*>* values) {
+		values[JFLoggerFormatThreadID] = JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self()));
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values) {};
+	
+	_setTimeValueBlock = [textFormatRecognizedKeys containsObject:JFLoggerFormatTime] ? ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {
+		values[JFLoggerFormatTime] = [JFLogger stringFromDate:date formatter:self.timeFormatter];
+	} : ^(NSMutableDictionary<NSString*, NSString*>* values, NSDate* date) {};
+
+
 	[self initializeMutex:&_consoleWriterMutex];
 	[self initializeMutex:&_delegatesWriterMutex];
 	[self initializeMutex:&_fileWriterMutex];
-	[self initializeMutex:&_filtersMutex];
+	[self initializeRWLock:&_filtersRWLock];
 	[self initializeMutex:&_textCompositionMutex];
 	
 	return self;
@@ -349,59 +396,99 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 }
 
 // =================================================================================================
-// MARK: Methods - Locks
+// MARK: Methods - Mutexes
 // =================================================================================================
 
-- (void)destroyMutex:(pthread_mutex_t*)lock
+- (void)destroyMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_destroy(lock) != 0) {
-		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_destroy(mutex) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (void)initializeMutex:(pthread_mutex_t*)lock
+- (void)destroyRWLock:(pthread_rwlock_t*)rwLock
 {
-	if(pthread_mutex_init(lock, NULL) != 0) {
-		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_rwlock_destroy(rwLock) != 0) {
+		NSLog(@"%@: failed to destroy %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (void)lockMutex:(pthread_mutex_t*)lock
+- (void)initializeMutex:(pthread_mutex_t*)mutex
 {
-	if(pthread_mutex_lock(lock) != 0) {
-		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(pthread_mutex_init(mutex, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
-- (NSString*)nameOfMutex:(pthread_mutex_t*)lock
+- (void)initializeRWLock:(pthread_rwlock_t*)rwLock
 {
-	if(lock == &_consoleWriterMutex) {
+	if(pthread_rwlock_init(rwLock, NULL) != 0) {
+		NSLog(@"%@: failed to initialize %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockMutex:(pthread_mutex_t*)mutex
+{
+	if(pthread_mutex_lock(mutex) != 0) {
+		NSLog(@"%@: failed to lock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockRWLockAsReader:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_rdlock(rwLock) != 0) {
+		NSLog(@"%@: failed to lock %@ as reader. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)lockRWLockAsWriter:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_wrlock(rwLock) != 0) {
+		NSLog(@"%@: failed to lock %@ as writer. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (NSString*)nameOfMutex:(pthread_mutex_t*)mutex
+{
+	if(mutex == &_consoleWriterMutex) {
 		return @"console writer mutex";
 	}
 	
-	if(lock == &_delegatesWriterMutex) {
+	if(mutex == &_delegatesWriterMutex) {
 		return @"delegates writer mutex";
 	}
 	
-	if(lock == &_fileWriterMutex) {
+	if(mutex == &_fileWriterMutex) {
 		return @"file writer mutex";
 	}
 	
-	if(lock == &_filtersMutex) {
-		return @"filters mutex";
-	}
-	
-	if(lock == &_textCompositionMutex) {
+	if(mutex == &_textCompositionMutex) {
 		return @"text composition mutex";
 	}
 	
 	return @"unknown mutex";
 }
 
-- (void)unlockMutex:(pthread_mutex_t*)lock
+- (NSString*)nameOfRWLock:(pthread_rwlock_t*)rwLock
 {
-	if(pthread_mutex_unlock(lock) != 0) {
-		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:lock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	if(rwLock == &_filtersRWLock) {
+		return @"filters rwLock";
+	}
+	
+	return @"unknown rwLock";
+}
+
+- (void)unlockMutex:(pthread_mutex_t*)mutex
+{
+	if(pthread_mutex_unlock(mutex) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfMutex:mutex], [JFLogger stringFromTags:JFLoggerTagsCritical]);
+	}
+}
+
+- (void)unlockRWLock:(pthread_rwlock_t*)rwLock
+{
+	if(pthread_rwlock_unlock(rwLock) != 0) {
+		NSLog(@"%@: failed to unlock %@. %@", ClassName, [self nameOfRWLock:rwLock], [JFLogger stringFromTags:JFLoggerTagsCritical]);
 	}
 }
 
@@ -450,90 +537,68 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 
 - (void)logAll:(NSArray<NSString*>*)messages output:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
-	pthread_mutex_t* filtersMutex = &_filtersMutex;
-	[self lockMutex:filtersMutex];
-	JFLoggerOutput outputFilter = _outputFilter;
-	JFLoggerSeverity severityFilter = _severityFilter;
-	[self unlockMutex:filtersMutex];
-	
-	// Filters by severity.
-	if(severity > severityFilter) {
-		return;
-	}
-	
-	// Filters by output.
-	JFLoggerEnabledOutputs outputs = [JFLogger intersectOutput:output withFilter:outputFilter];
+	// Filters by output and severity.
+	JFLoggerEnabledOutputs outputs = [self verifyEnabledOutputsForOutput:output severity:severity];
 	if(!outputs.isConsoleEnabled && !outputs.isDelegatesEnabled && !outputs.isFileEnabled) {
 		return;
 	}
 	
+	JFLoggerConsoleType consoleType = self.consoleType;
+	BOOL shouldGenerateMetadata = outputs.isDelegatesEnabled || outputs.isFileEnabled || (consoleType == JFLoggerConsoleTypeCustom);
+	
 	// Prepares tags.
 	NSString* tagsString = [JFLogger stringFromTags:tags];
 	
-	NSArray<NSString*>* textFormatActiveValues = self.textFormatActiveValues;
-	NSMutableDictionary<NSString*, NSString*>* values = [NSMutableDictionary dictionaryWithCapacity:textFormatActiveValues.count];
-	
-	// Converts the severity level to string.
-	if([textFormatActiveValues containsObject:JFLoggerFormatSeverity]) {
-		[values setObject:[JFLogger stringFromSeverity:severity] forKey:JFLoggerFormatSeverity];
+	NSMutableArray<NSString*>* texts = nil;
+	NSMutableDictionary<NSString*, NSString*>* values = nil;
+	if(shouldGenerateMetadata) {
+		values = [NSMutableDictionary dictionaryWithCapacity:self.textFormatRecognizedKeys.count];
+		
+		// Prepares thread-safe values.
+		self.setSeverityValueBlock(values, severity);
+		self.setProcessIDValueBlock(values);
+		self.setThreadIDValueBlock(values);
+		
+		// Prepares a buffer for log texts.
+		texts = [NSMutableArray<NSString*> arrayWithCapacity:messages.count];
 	}
-	
-	// Gets the current process ID.
-	if([textFormatActiveValues containsObject:JFLoggerFormatProcessID]) {
-		[values setObject:JFStringFromInt(ProcessInfo.processIdentifier) forKey:JFLoggerFormatProcessID];
-	}
-	
-	// Gets the current thread ID.
-	if([textFormatActiveValues containsObject:JFLoggerFormatThreadID]) {
-		[values setObject:JFStringFromUnsignedInt(pthread_mach_thread_np(pthread_self())) forKey:JFLoggerFormatThreadID];
-	}
-	
-	// Prepares a buffer for log texts.
-	NSMutableArray<NSString*>* texts = [NSMutableArray<NSString*> arrayWithCapacity:messages.count];
 	
 	// From now on we must remain in critical section (even though in various sections) to assure
 	// the timestamp is properly ordered and prevent threads from writing at the same time.
 	pthread_mutex_t* textCompositionMutex = &_textCompositionMutex;
 	[self lockMutex:textCompositionMutex];
 	
-	// Prepares the current date.
-	NSDate* currentDate = NSDate.date;
-	
-	// Gets the current date.
-	if([textFormatActiveValues containsObject:JFLoggerFormatDate]) {
-		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateFormatter] forKey:JFLoggerFormatDate];
-	}
-	
-	// Gets the current date and time.
-	if([textFormatActiveValues containsObject:JFLoggerFormatDateTime]) {
-		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.dateTimeFormatter] forKey:JFLoggerFormatDateTime];
-	}
-	
-	// Gets the current time.
-	if([textFormatActiveValues containsObject:JFLoggerFormatTime]) {
-		[values setObject:[JFLogger stringFromDate:currentDate formatter:self.timeFormatter] forKey:JFLoggerFormatTime];
-	}
-	
-	NSString* textFormat = self.textFormat;
-	for(NSString* message in messages) {
-		// Gets the message, appending tags if needed.
-		if([textFormatActiveValues containsObject:JFLoggerFormatMessage]) {
-			[values setObject:(JFStringIsNullOrEmpty(tagsString) ? message : [message stringByAppendingFormat:@" %@", tagsString]) forKey:JFLoggerFormatMessage];
-		} else {
-			[values removeObjectForKey:JFLoggerFormatMessage];
-		}
+	NSDate* currentDate = nil;
+	if(shouldGenerateMetadata) {
+		// Sets the current date.
+		currentDate = NSDate.date;
+		self.setDateValueBlock(values, currentDate);
+		self.setDateTimeValueBlock(values, currentDate);
+		self.setTimeValueBlock(values, currentDate);
 		
-		// Prepares the log text.
-		[texts addObject:JFStringByReplacingKeysInFormat(textFormat, values)];
+		// Composes each log text.
+		NSString* textFormat = self.textFormat;
+		for(NSString* message in messages) {
+			self.setMessageValueBlock(values, message, tagsString);
+			[texts addObject:JFStringByReplacingKeysInFormat(textFormat, values)];
+		}
 	}
-	
+
 	pthread_mutex_t* consoleWriterMutex = &_consoleWriterMutex;
 	[self lockMutex:consoleWriterMutex];
 	[self unlockMutex:textCompositionMutex];
 	
 	// Logs to console if needed.
 	if(outputs.isConsoleEnabled) {
-		[self logTextsToConsole:texts];
+		if(consoleType == JFLoggerConsoleTypeCustom) {
+			[self logTextsToCustomConsole:texts];
+		} else {
+			[self logMessagesToDefaultConsole:messages tags:tagsString];
+		}
+		if(!outputs.isDelegatesEnabled && !outputs.isFileEnabled) {
+			[self unlockMutex:consoleWriterMutex];
+			return;
+		}
 	}
 	
 	pthread_mutex_t* fileWriterMutex = &_fileWriterMutex;
@@ -543,6 +608,10 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	// Logs to file if needed.
 	if(outputs.isFileEnabled) {
 		[self logTextsToFile:texts currentDate:currentDate];
+		if(!outputs.isDelegatesEnabled) {
+			[self unlockMutex:fileWriterMutex];
+			return;
+		}
 	}
 	
 	pthread_mutex_t* delegatesWriterMutex = &_delegatesWriterMutex;
@@ -565,6 +634,34 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 - (void)logAll:(NSArray<NSString*>*)messages severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
 	[self logAll:messages output:JFLoggerOutputAll severity:severity tags:tags];
+}
+
+- (void)logMessagesToDefaultConsole:(NSArray<NSString*>*)messages tags:(NSString*)tags
+{
+	if(messages.count == 0) {
+		return;
+	}
+	
+	if(JFStringIsNullOrEmpty(tags)) {
+		for(NSString* message in messages) {
+			NSLog(@"%@", message);
+		}
+	} else {
+		for(NSString* message in messages) {
+			NSLog(@"%@ %@", message, tags);
+		}
+	}
+}
+
+- (void)logTextsToCustomConsole:(NSArray<NSString*>*)texts
+{
+	if(texts.count == 0) {
+		return;
+	}
+	
+	for(NSString* text in texts) {
+		fprintf(stderr, "%s", text.UTF8String);
+	}
 }
 
 - (void)logTextsToConsole:(NSArray<NSString*>*)texts
@@ -679,18 +776,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 // MARK: Methods - Utilities
 // =================================================================================================
 
-+ (NSArray<NSString*>*)activeValuesForTextFormat:(NSString*)logFormat
-{
-	NSArray<NSString*>* values = @[JFLoggerFormatDate, JFLoggerFormatDateTime, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
-	NSMutableArray<NSString*>* retObj = [NSMutableArray<NSString*> arrayWithCapacity:values.count];
-	for(NSString* value in values) {
-		if([logFormat rangeOfString:value].location != NSNotFound) {
-			[retObj addObject:value];
-		}
-	}
-	return [retObj copy];
-}
-
 + (NSCalendarUnit)calendarComponentForRotation:(JFLoggerRotation)rotation
 {
 	switch(rotation) {
@@ -719,6 +804,18 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	retVal.isDelegatesEnabled = (output & JFLoggerOutputDelegates) && (filter & JFLoggerOutputDelegates);
 	retVal.isFileEnabled = (output & JFLoggerOutputFile) && (filter & JFLoggerOutputFile);
 	return retVal;
+}
+
++ (NSArray<NSString*>*)recognizeKeysInTextFormat:(NSString*)textFormat
+{
+	NSArray<NSString*>* keys = @[JFLoggerFormatDate, JFLoggerFormatDateTime, JFLoggerFormatMessage, JFLoggerFormatProcessID, JFLoggerFormatSeverity, JFLoggerFormatThreadID, JFLoggerFormatTime];
+	NSMutableArray<NSString*>* retObj = [NSMutableArray<NSString*> arrayWithCapacity:keys.count];
+	for(NSString* key in keys) {
+		if([textFormat rangeOfString:key].location != NSNotFound) {
+			[retObj addObject:key];
+		}
+	}
+	return [retObj copy];
 }
 
 + (NSString*)stringFromDate:(NSDate*)date formatter:(NSDateFormatter*)formatter
@@ -828,6 +925,21 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 	return retObj;
 }
 
+- (JFLoggerEnabledOutputs)verifyEnabledOutputsForOutput:(JFLoggerOutput)output severity:(JFLoggerSeverity)severity
+{
+	pthread_rwlock_t* filtersRWLock = &_filtersRWLock;
+	[self lockRWLockAsReader:filtersRWLock];
+	JFLoggerOutput outputFilter = _outputFilter;
+	JFLoggerSeverity severityFilter = _severityFilter;
+	[self unlockRWLock:filtersRWLock];
+	
+	if(severity > severityFilter) {
+		return (JFLoggerEnabledOutputs){NO, NO, NO};
+	} else {
+		return [JFLogger intersectOutput:output withFilter:outputFilter];
+	}
+}
+
 @end
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -836,8 +948,6 @@ NSString* const JFLoggerFormatTime = @"%7$@";
 @interface JFKitLogger (/* Private */)
 
 @property (class, strong, nonatomic, readonly) JFLogger* logger;
-
-+ (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags;
 
 @end
 
@@ -850,16 +960,14 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 
 + (id<JFKitLoggerDelegate> _Nullable)delegate
 {
-	@synchronized(self)
-	{
+	@synchronized(self) {
 		return _delegate;
 	}
 }
 
 + (void)setDelegate:(id<JFKitLoggerDelegate> _Nullable)delegate
 {
-	@synchronized(self)
-	{
+	@synchronized(self) {
 		_delegate = delegate;
 	}
 }
@@ -878,8 +986,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 + (void)log:(NSString*)message severity:(JFLoggerSeverity)severity tags:(JFLoggerTags)tags
 {
 	id<JFKitLoggerDelegate> delegate = self.delegate;
-	if(delegate)
-	{
+	if(delegate) {
 		[delegate log:message severity:severity tags:tags];
 		return;
 	}
@@ -946,6 +1053,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 // MARK: Properties - Log format
 // =================================================================================================
 
+@synthesize consoleType = _consoleType;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize dateTimeFormatter = _dateTimeFormatter;
 @synthesize textFormat = _textFormat;
@@ -1056,6 +1164,7 @@ static id<JFKitLoggerDelegate> __weak _delegate;
 - (instancetype)init
 {
 	self = [super init];
+	_consoleType = JFLoggerConsoleTypeDefault;
 	_rotation = JFLoggerRotationNone;
 	return self;
 }

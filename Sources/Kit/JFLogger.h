@@ -83,6 +83,25 @@ FOUNDATION_EXPORT NSString* const JFLoggerFormatTime;
 // =================================================================================================
 
 /**
+ * A list of available console types that represent which function should be used when printing to the console.
+ */
+typedef NS_OPTIONS(UInt8, JFLoggerConsoleType)
+{
+	/**
+	 * Prints the message to the console using `NSLog()`.
+	 * This is the most compatible type to use with the Xcode console view.
+	 * @warning This type does not use the given `textFormat`, it only prints the original message and the associated tags.
+	 */
+	JFLoggerConsoleTypeDefault = 1 << 0,
+	
+	/**
+	 * Prints the message to the console using `fprintf()`.
+	 * Slightly faster than `NSLog()`; it loses some compatibility with the Xcode console view.
+	 */
+	JFLoggerConsoleTypeCustom = 1 << 1,
+};
+
+/**
  * A list of available output flags that represent where the log message should be written to.
  */
 typedef NS_OPTIONS(UInt8, JFLoggerOutput)
@@ -316,6 +335,12 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // =================================================================================================
 // MARK: Properties - Log format
 // =================================================================================================
+
+/**
+ * The type of console logger to use.
+ * @see JFLoggerSettings.consoleType
+ */
+@property (assign, nonatomic, readonly) JFLoggerConsoleType consoleType;
 
 /**
  * The formatter to use when converting current date to string.
@@ -567,6 +592,12 @@ typedef NS_OPTIONS(UInt16, JFLoggerTags)
 // =================================================================================================
 // MARK: Properties - Log format
 // =================================================================================================
+
+/**
+ * The type of console logger to use.
+ * The default value is `JFLoggerConsoleTypeDefault`.
+ */
+@property (assign, nonatomic) JFLoggerConsoleType consoleType;
 
 /**
  * The formatter to use when converting current date to string.
